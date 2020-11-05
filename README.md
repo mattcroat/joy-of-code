@@ -1,4 +1,4 @@
-# Joy of Code
+# 🎨 Joy of Code
 
 Joy of Code is focused on creating web development content.
 
