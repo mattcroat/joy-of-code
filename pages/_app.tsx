@@ -1,7 +1,22 @@
-import '../styles/globals.css'
+import { ThemeProvider, CSSReset, Heading, Text, Code } from '@chakra-ui/core'
+import { MDXProvider } from '@mdx-js/react'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+const components = {
+  h1: Heading,
+  h2: Heading,
+  p: Text,
+  code: Code,
 }
 
-export default MyApp
+const App = ({ Component, pageProps }) => {
+  return (
+    <MDXProvider components={components}>
+      <ThemeProvider>
+        <CSSReset />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </MDXProvider>
+  )
+}
+
+export default App
