@@ -9,7 +9,7 @@ const components = {
   code: Code,
 }
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <MDXProvider components={components}>
       <ThemeProvider>
