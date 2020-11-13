@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import Navbar from '@/components/Navbar'
+import Navigation from '@/components/Navigation'
 
 const Home = (): JSX.Element => (
   <>
@@ -8,7 +8,7 @@ const Home = (): JSX.Element => (
       <title>Joy of Code</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <Navbar />
+    <Navigation />
   </>
 )
 
