@@ -1,11 +1,4 @@
-import {
-  ThemeProvider,
-  ColorModeProvider,
-  CSSReset,
-  Heading,
-  Text,
-  Code,
-} from '@chakra-ui/core'
+import { ChakraProvider, Heading, Text, Code } from '@chakra-ui/react'
 import { MDXProvider } from '@mdx-js/react'
 
 import type { AppProps } from 'next/app'
@@ -18,14 +11,11 @@ const components = {
 }
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => (
-  <ThemeProvider>
-    <ColorModeProvider value="dark">
-      <MDXProvider components={components}>
-        <CSSReset />
-        <Component {...pageProps} />
-      </MDXProvider>
-    </ColorModeProvider>
-  </ThemeProvider>
+  <ChakraProvider>
+    <MDXProvider components={components}>
+      <Component {...pageProps} />
+    </MDXProvider>
+  </ChakraProvider>
 )
 
 export default App
