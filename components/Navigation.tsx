@@ -1,4 +1,4 @@
-import { Box, Heading, List, ListItem } from '@chakra-ui/core'
+import { Box, Heading, List, ListItem } from '@chakra-ui/react'
 import {
   faCss3Alt,
   faHtml5,
