@@ -1,20 +1,15 @@
-import { ChakraProvider, Heading, Text, Code } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { MDXProvider } from '@mdx-js/react'
 
 import type { AppProps } from 'next/app'
 
-import theme from '@/styles/theme'
+import MDXComponents from '@/components/MDXComponents'
 
-const components = {
-  h1: Heading,
-  h2: Heading,
-  p: Text,
-  code: Code,
-}
+import theme from '@/styles/theme'
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => (
   <ChakraProvider theme={theme}>
-    <MDXProvider components={components}>
+    <MDXProvider components={MDXComponents}>
       <Component {...pageProps} />
     </MDXProvider>
   </ChakraProvider>
