@@ -1,7 +1,7 @@
 import {
   Box,
-  Heading,
   IconButton,
+  Link,
   List,
   ListItem,
   useColorMode,
@@ -15,6 +15,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 import { faBrush, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import NextLink from 'next/link'
 
 const Navigation = (): JSX.Element => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -45,46 +46,56 @@ const Navigation = (): JSX.Element => {
       borderColor={borderColor}
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
-        <Heading my={8}>
-          <Box color={primaryColor}>
-            <FontAwesomeIcon icon={faBrush} size="sm" />
-          </Box>
-        </Heading>
-        <ListItem mt={8}>
-          <Box color={mutedColor} _hover={hoverStyle}>
-            <FontAwesomeIcon icon={faReact} size="2x" />
-          </Box>
+        <ListItem my={8}>
+          <NextLink href="/test" passHref>
+            <Link color={primaryColor}>
+              <FontAwesomeIcon icon={faBrush} size="2x" />
+            </Link>
+          </NextLink>
         </ListItem>
         <ListItem mt={8}>
-          <Box color={mutedColor} _hover={hoverStyle}>
-            <FontAwesomeIcon icon={faJs} size="2x" />
-          </Box>
+          <NextLink href="/react" passHref>
+            <Link color={mutedColor} _hover={hoverStyle}>
+              <FontAwesomeIcon icon={faReact} size="2x" />
+            </Link>
+          </NextLink>
         </ListItem>
         <ListItem mt={8}>
-          <Box color={mutedColor} _hover={hoverStyle}>
-            <FontAwesomeIcon icon={faHtml5} size="2x" />
-          </Box>
+          <NextLink href="/javascript" passHref>
+            <Link color={mutedColor} _hover={hoverStyle}>
+              <FontAwesomeIcon icon={faJs} size="2x" />
+            </Link>
+          </NextLink>
         </ListItem>
         <ListItem mt={8}>
-          <Box color={mutedColor} _hover={hoverStyle}>
-            <FontAwesomeIcon icon={faCss3Alt} size="2x" />
-          </Box>
+          <NextLink href="/html" passHref>
+            <Link color={mutedColor} _hover={hoverStyle}>
+              <FontAwesomeIcon icon={faHtml5} size="2x" />
+            </Link>
+          </NextLink>
+        </ListItem>
+        <ListItem mt={8}>
+          <NextLink href="/css" passHref>
+            <Link color={mutedColor} _hover={hoverStyle}>
+              <FontAwesomeIcon icon={faCss3Alt} size="2x" />
+            </Link>
+          </NextLink>
         </ListItem>
         <ListItem mt="auto" mb={8}>
-          <Box color={mutedColor} _hover={hoverStyle}>
-            <IconButton
-              aria-label="Toggle dark mode"
-              bg={bgColor}
-              icon={
-                colorMode === 'dark' ? (
-                  <FontAwesomeIcon icon={faSun} size="2x" />
-                ) : (
-                  <FontAwesomeIcon icon={faMoon} size="2x" />
-                )
-              }
-              onClick={toggleColorMode}
-            />
-          </Box>
+          <IconButton
+            _hover={hoverStyle}
+            aria-label="Toggle dark mode"
+            bg={bgColor}
+            color={mutedColor}
+            icon={
+              colorMode === 'dark' ? (
+                <FontAwesomeIcon icon={faSun} size="2x" />
+              ) : (
+                <FontAwesomeIcon icon={faMoon} size="2x" />
+              )
+            }
+            onClick={toggleColorMode}
+          />
         </ListItem>
       </List>
     </Box>
