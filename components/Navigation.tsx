@@ -8,9 +8,6 @@ import {
 import { faBrush, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const wheat = 'hsl(40, 76%, 84%)'
-const muted = 'hsl(220, 8%, 44%)'
-
 const Navigation = (): JSX.Element => (
   <Box
     as="nav"
@@ -28,22 +25,64 @@ const Navigation = (): JSX.Element => (
   >
     <List h="100%" d="flex" flexDir="column" alignItems="center">
       <Heading my={8}>
-        <FontAwesomeIcon icon={faBrush} color={wheat} size="1x" />
+        <Box color="orange.200">
+          <FontAwesomeIcon icon={faBrush} size="sm" />
+        </Box>
       </Heading>
       <ListItem mt={8}>
-        <FontAwesomeIcon icon={faReact} color={muted} size="2x" />
+        <Box
+          color="gray.600"
+          _hover={{
+            color: 'orange.200',
+            transform: 'scale(1.1)',
+          }}
+        >
+          <FontAwesomeIcon icon={faReact} size="2x" />
+        </Box>
       </ListItem>
       <ListItem mt={8}>
-        <FontAwesomeIcon icon={faJs} color={muted} size="2x" />
+        <Box
+          color="gray.600"
+          _hover={{
+            color: 'orange.200',
+            transform: 'scale(1.1)',
+          }}
+        >
+          <FontAwesomeIcon icon={faJs} size="2x" />
+        </Box>
       </ListItem>
       <ListItem mt={8}>
-        <FontAwesomeIcon icon={faHtml5} color={muted} size="2x" />
+        <Box
+          color="gray.600"
+          _hover={{
+            color: 'orange.200',
+            transform: 'scale(1.1)',
+          }}
+        >
+          <FontAwesomeIcon icon={faHtml5} size="2x" />
+        </Box>
       </ListItem>
       <ListItem mt={8}>
-        <FontAwesomeIcon icon={faCss3Alt} color={muted} size="2x" fixedWidth />
+        <Box
+          color="gray.600"
+          _hover={{
+            color: 'orange.200',
+            transform: 'scale(1.1)',
+          }}
+        >
+          <FontAwesomeIcon icon={faCss3Alt} size="2x" fixedWidth />
+        </Box>
       </ListItem>
       <ListItem mt="auto" mb={8}>
-        <FontAwesomeIcon icon={faSun} color={muted} size="2x" />
+        <Box
+          color="gray.600"
+          _hover={{
+            color: 'orange.200',
+            transform: 'scale(1.1)',
+          }}
+        >
+          <FontAwesomeIcon icon={faSun} size="2x" />
+        </Box>
       </ListItem>
     </List>
   </Box>
