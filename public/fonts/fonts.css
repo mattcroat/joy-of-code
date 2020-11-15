@@ -1,0 +1,34 @@
+/* Inter */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./Inter/Inter-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: bold;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./Inter/Inter-700.woff2') format('woff2');
+}
+
+/* Libre Baskerville */
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./LibreBaskerville/LibreBaskerville-Regular.woff2') format('woff2');
+}
+
+/* Mononoki */
+@font-face {
+  font-family: 'Mononoki';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./Mononoki/mononoki-Regular.woff2') format('woff2');
+}
