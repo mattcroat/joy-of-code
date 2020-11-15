@@ -67,13 +67,14 @@ const Navigation = (): JSX.Element => {
         </ListItem>
         <ListItem mt={8}>
           <Box color={mutedColor} _hover={hoverStyle}>
-            <FontAwesomeIcon icon={faCss3Alt} size="2x" fixedWidth />
+            <FontAwesomeIcon icon={faCss3Alt} size="2x" />
           </Box>
         </ListItem>
         <ListItem mt="auto" mb={8}>
           <Box color={mutedColor} _hover={hoverStyle}>
             <IconButton
               aria-label="Toggle dark mode"
+              bg={bgColor}
               icon={
                 colorMode === 'dark' ? (
                   <FontAwesomeIcon icon={faSun} size="2x" />
@@ -82,7 +83,6 @@ const Navigation = (): JSX.Element => {
                 )
               }
               onClick={toggleColorMode}
-              bg={bgColor}
             />
           </Box>
         </ListItem>
