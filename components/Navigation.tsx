@@ -21,6 +21,13 @@ const Navigation = (): JSX.Element => {
 
   const bgColor = useColorModeValue('white', 'gray.800')
   const borderColor = useColorModeValue('gray.100', 'gray.900')
+  const primaryColor = 'orange.200'
+  const mutedColor = 'gray.600'
+
+  const hoverStyle = {
+    transition: 'color .5s ease',
+    color: primaryColor,
+  }
 
   return (
     <Box
@@ -39,47 +46,32 @@ const Navigation = (): JSX.Element => {
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <Heading my={8}>
-          <Box color="orange.200">
+          <Box color={primaryColor}>
             <FontAwesomeIcon icon={faBrush} size="sm" />
           </Box>
         </Heading>
         <ListItem mt={8}>
-          <Box
-            color="gray.600"
-            _hover={{ transition: 'color .5s ease', color: 'orange.200' }}
-          >
+          <Box color={mutedColor} _hover={hoverStyle}>
             <FontAwesomeIcon icon={faReact} size="2x" />
           </Box>
         </ListItem>
         <ListItem mt={8}>
-          <Box
-            color="gray.600"
-            _hover={{ transition: 'color .5s ease', color: 'orange.200' }}
-          >
+          <Box color={mutedColor} _hover={hoverStyle}>
             <FontAwesomeIcon icon={faJs} size="2x" />
           </Box>
         </ListItem>
         <ListItem mt={8}>
-          <Box
-            color="gray.600"
-            _hover={{ transition: 'color .5s ease', color: 'orange.200' }}
-          >
+          <Box color={mutedColor} _hover={hoverStyle}>
             <FontAwesomeIcon icon={faHtml5} size="2x" />
           </Box>
         </ListItem>
         <ListItem mt={8}>
-          <Box
-            color="gray.600"
-            _hover={{ transition: 'color .5s ease', color: 'orange.200' }}
-          >
+          <Box color={mutedColor} _hover={hoverStyle}>
             <FontAwesomeIcon icon={faCss3Alt} size="2x" fixedWidth />
           </Box>
         </ListItem>
         <ListItem mt="auto" mb={8}>
-          <Box
-            color="gray.600"
-            _hover={{ transition: 'color .5s ease', color: 'orange.200' }}
-          >
+          <Box color={mutedColor} _hover={hoverStyle}>
             <IconButton
               aria-label="Toggle dark mode"
               icon={
