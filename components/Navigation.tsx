@@ -23,7 +23,7 @@ const Navigation = (): JSX.Element => {
   const bgColor = useColorModeValue('white', 'gray.800')
   const borderColor = useColorModeValue('gray.100', 'gray.900')
   const primaryColor = 'orange.200'
-  const mutedColor = 'gray.600'
+  const mutedColor = 'gray.400'
 
   const hoverStyle = {
     transition: 'color .5s ease',
