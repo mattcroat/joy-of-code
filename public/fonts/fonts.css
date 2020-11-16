@@ -9,19 +9,18 @@
 
 @font-face {
   font-family: 'Inter';
-  font-style: bold;
+  font-style: normal;
   font-weight: 700;
   font-display: swap;
   src: url('./Inter/Inter-Bold.woff2') format('woff2');
 }
 
-/* Libre Baskerville */
 @font-face {
-  font-family: 'Libre Baskerville';
+  font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 900;
   font-display: swap;
-  src: url('./LibreBaskerville/LibreBaskerville-Regular.woff2') format('woff2');
+  src: url('./Inter/Inter-Black.woff2') format('woff2');
 }
 
 /* Mononoki */
