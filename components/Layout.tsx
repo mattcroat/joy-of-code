@@ -18,7 +18,7 @@ const Layout = ({
       <title>{title}</title>
     </Head>
     <Navigation />
-    <Box as="main" ml="80px" mt={8} px={8}>
+    <Box as="main" ml="80px" mt={8}>
       {children}
     </Box>
   </>
