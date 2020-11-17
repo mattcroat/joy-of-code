@@ -8,7 +8,6 @@ import renderToString from 'next-mdx-remote/render-to-string'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import Layout from '@/components/Layout'
-import MDXComponents from '@/components/MDXComponents'
 
 import { postsPath, postFilePaths } from '@/utils/posts'
 
@@ -29,7 +28,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { content, data } = matter(source)
 
-  const MDXSource = await renderToString(content, { MDXComponents })
+  const MDXSource = await renderToString(content)
 
   return {
     props: {
@@ -40,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 const PostPage = ({ MDXSource, frontMatter }): JSX.Element => {
-  const content = hydrate(MDXSource, { MDXComponents })
+  const content = hydrate(MDXSource)
 
   return <Layout title={frontMatter.title}>{content}</Layout>
 }
