@@ -6,13 +6,6 @@ const theme = extendTheme({
     heading: 'Inter, sans-serif',
     mono: 'Mononoki, monospace',
   },
-  components: {
-    Heading: {
-      baseStyle: {
-        fontWeight: '700',
-      },
-    },
-  },
   config: {
     useSystemColorMode: true,
     initialColorMode: 'dark',
