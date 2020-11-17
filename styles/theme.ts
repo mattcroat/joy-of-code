@@ -9,7 +9,7 @@ const theme = extendTheme({
   components: {
     Heading: {
       baseStyle: {
-        fontWeight: '900',
+        fontWeight: '700',
       },
     },
   },
