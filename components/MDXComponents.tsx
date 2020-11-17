@@ -1,40 +1,36 @@
 import { Divider, Heading, Text } from '@chakra-ui/react'
 
-interface Children {
-  children: string
+interface Props {
+  children?: string
 }
 
-const MainHeading = (children: Children): JSX.Element => {
-  return (
-    <Heading
-      as="h1"
-      fontWeight="700"
-      color="gray.400"
-      letterSpacing="-1px"
-      {...children}
-    />
-  )
-}
+const MainHeading = (props: Props): JSX.Element => (
+  <Heading
+    as="h1"
+    fontWeight="700"
+    color="gray.400"
+    letterSpacing="-1px"
+    {...props}
+  />
+)
 
-const SecondaryHeading = (children: Children): JSX.Element => {
-  return (
-    <Heading
-      as="h2"
-      fontWeight="700"
-      color="gray.400"
-      letterSpacing="-1px"
-      {...children}
-    />
-  )
-}
+const SecondaryHeading = (props: Props): JSX.Element => (
+  <Heading
+    as="h2"
+    fontWeight="700"
+    color="gray.400"
+    letterSpacing="-1px"
+    {...props}
+  />
+)
 
-const BodyText = (children: Children): JSX.Element => {
-  return <Text fontSize={20} lineHeight="1.6" mt={4} {...children} />
-}
+const BodyText = (props: Props): JSX.Element => (
+  <Text fontSize={20} lineHeight="1.6" mt={4} {...props} />
+)
 
-const Separator = (children: Children): JSX.Element => {
-  return <Divider h="2px" w="20px" bg="gray.400" mt={4} {...children} />
-}
+const Separator = (props: Props): JSX.Element => (
+  <Divider h="2px" w="20px" bg="gray.400" mt={4} {...props} />
+)
 
 const MDXComponents = {
   h1: MainHeading,
