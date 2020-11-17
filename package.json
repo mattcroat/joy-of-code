@@ -18,7 +18,9 @@
     "@mdx-js/react": "^1.6.21",
     "@next/mdx": "^10.0.1",
     "framer-motion": "^2.9.4",
+    "gray-matter": "^4.0.2",
     "next": "9.5.5",
+    "next-mdx-remote": "^1.0.0",
     "react": "16.14.0",
     "react-dom": "16.14.0"
   },
