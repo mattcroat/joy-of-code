@@ -20,6 +20,6 @@
       "@/utils/*": ["utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["types/**/*", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
