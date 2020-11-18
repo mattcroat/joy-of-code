@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 import matter from 'gray-matter'
+import rehypePrism from '@mapbox/rehype-prism'
 import hydrate from 'next-mdx-remote/hydrate'
 import renderToString from 'next-mdx-remote/render-to-string'
 
@@ -28,7 +29,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { content, data } = matter(source)
 
-  const MDXSource = await renderToString(content)
+  const MDXSource = await renderToString(content, {
+    mdxOptions: {
+      rehypePlugins: [rehypePrism],
+    },
+  })
 
   return {
     props: {
