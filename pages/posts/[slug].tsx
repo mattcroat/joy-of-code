@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
+import { Box } from '@chakra-ui/react'
 import matter from 'gray-matter'
 import rehypePrism from '@mapbox/rehype-prism'
 import hydrate from 'next-mdx-remote/hydrate'
@@ -46,7 +47,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const PostPage = ({ MDXSource, frontMatter }): JSX.Element => {
   const content = hydrate(MDXSource)
 
-  return <Layout title={frontMatter.title}>{content}</Layout>
+  return (
+    <Layout title={frontMatter.title}>
+      <Box width="90ch" mx="auto">
+        {content}
+      </Box>
+    </Layout>
+  )
 }
 
 export default PostPage
