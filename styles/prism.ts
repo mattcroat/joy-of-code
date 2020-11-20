@@ -1,5 +1,6 @@
-import { theme } from '@chakra-ui/react'
 import { css } from '@emotion/react'
+
+import theme from '@/styles/theme'
 
 const prismBaseTheme = css`
   code {
@@ -12,6 +13,7 @@ const prismBaseTheme = css`
     background-color: none;
     font-family: ${theme.fonts.mono};
     font-size: ${theme.fontSizes.xl};
+    font-weight: ${theme.fontWeights.bold};
     text-align: left;
     word-spacing: normal;
     word-break: normal;
