@@ -9,20 +9,15 @@ const prismBaseTheme = css`
   code[class*='language-'],
   pre[class*='language-'] {
     color: ${theme.colors.gray[800]};
-    background: none;
+    background-color: none;
     font-family: ${theme.fonts.mono};
-    font-size: ${theme.fontSizes[2]};
+    font-size: ${theme.fontSizes.xl};
     text-align: left;
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
-    line-height: ${theme.lineHeights[2]};
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
+    line-height: ${theme.lineHeights.tall};
     tab-size: 4;
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
     hyphens: none;
     width: 100%;
   }
@@ -42,15 +37,12 @@ const prismBaseTheme = css`
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background: ${theme.colors.gray[50]};
-    border: 1px solid ${theme.colors.gray[200]};
-    border-radius: ${theme.radii.lg};
+    background-color: ${theme.colors.gray[50]};
   }
 
   /* inline code */
   :not(pre) > code[class*='language-'] {
     padding: 0.1em;
-    border-radius: 0.3em;
     white-space: normal;
   }
 
@@ -58,11 +50,11 @@ const prismBaseTheme = css`
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: slategray;
+    color: hsl(210, 12.6%, 50.2%);
   }
 
   .token.punctuation {
-    color: #999;
+    color: hsl(0, 0%, 60%);
   }
 
   .token.namespace {
@@ -76,7 +68,7 @@ const prismBaseTheme = css`
   .token.constant,
   .token.symbol,
   .token.deleted {
-    color: #905;
+    color: hsl(326.7, 100%, 30%);
   }
 
   .token.selector,
@@ -85,7 +77,7 @@ const prismBaseTheme = css`
   .token.char,
   .token.builtin,
   .token.inserted {
-    color: #690;
+    color: hsl(80, 100%, 30%);
   }
 
   .token.operator,
@@ -93,24 +85,24 @@ const prismBaseTheme = css`
   .token.url,
   .language-css .token.string,
   .style .token.string {
-    color: #9a6e3a;
+    color: hsl(33, 45%, 42%);
   }
 
   .token.atrule,
   .token.attr-value,
   .token.keyword {
-    color: #07a;
+    color: hsl(198, 100%, 33%);
   }
 
   .token.function,
   .token.class-name {
-    color: #dd4a68;
+    color: hsl(348, 68%, 58%);
   }
 
   .token.regex,
   .token.important,
   .token.variable {
-    color: #e90;
+    color: hsl(39, 100%, 47%);
   }
 
   .token.important,
@@ -140,7 +132,7 @@ const prismBaseTheme = css`
   .remark-code-title {
     padding: ${theme.space[2]} ${theme.space[4]};
     font-family: ${theme.fonts.mono};
-    background: ${theme.colors.gray[200]};
+    background-color: ${theme.colors.gray[200]};
     color: ${theme.colors.gray[800]};
     border: 1px solid ${theme.colors.gray[200]};
     border-top-left-radius: ${theme.radii.lg};
@@ -162,68 +154,68 @@ export const prismDarkTheme = css`
   ${prismBaseTheme};
 
   :not(pre) > code[class*='language-'] {
-    background: #011627;
+    background-color: hsl(207, 95%, 8%);
   }
 
   .token.attr-name {
-    color: rgb(173, 219, 103);
+    color: hsl(84, 62%, 63%);
     font-style: italic;
   }
 
   .token.comment {
-    color: rgb(128, 147, 147);
+    color: hsl(180, 8%, 54%);
   }
 
   .token.string,
   .token.url {
-    color: rgb(173, 219, 103);
+    color: hsl(84, 62%, 63%);
   }
 
   .token.variable {
-    color: rgb(214, 222, 235);
+    color: hsl(217, 34%, 88%);
   }
 
   .token.number {
-    color: rgb(247, 140, 108);
+    color: hsl(14, 90%, 70%);
   }
 
   .token.builtin,
   .token.char,
   .token.constant,
   .token.function {
-    color: rgb(130, 170, 255);
+    color: hsl(221, 100%, 75%);
   }
 
   .token.punctuation {
-    color: rgb(199, 146, 234);
+    color: hsl(276, 68%, 75%);
   }
 
   .token.selector,
   .token.doctype {
-    color: rgb(199, 146, 234);
+    color: hsl(276, 68%, 75%);
     font-style: 'italic';
   }
 
   .token.class-name {
-    color: rgb(255, 203, 139);
+    color: hsl(33, 100%, 77%);
   }
 
   .token.tag,
   .token.operator,
   .token.keyword {
-    color: #ffa7c4;
+    color: hsl(340, 100%, 83%);
   }
 
   .token.boolean {
-    color: rgb(255, 88, 116);
+    color: hsl(340, 100%, 83%);
   }
 
   .token.property {
-    color: rgb(128, 203, 196);
+    color: hsl(174, 42%, 65%);
   }
 
   .token.namespace {
-    color: rgb(178, 204, 214);
+    color: hsl(197, 31%, 77%);
   }
 
   code[class*='language-'],
@@ -233,8 +225,7 @@ export const prismDarkTheme = css`
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background: ${theme.colors.gray[800]};
-    border: 1px solid ${theme.colors.gray[700]};
+    background-color: ${theme.colors.gray[900]};
   }
 
   .mdx-marker {
@@ -242,9 +233,8 @@ export const prismDarkTheme = css`
   }
 
   .remark-code-title {
-    background: ${theme.colors.gray[700]};
+    background-color: ${theme.colors.gray[700]};
     color: ${theme.colors.gray[100]};
-    border: 1px solid ${theme.colors.gray[700]};
   }
 `
 
@@ -258,8 +248,7 @@ export const prismLightTheme = css`
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background: ${theme.colors.gray[50]};
-    border: 1px solid ${theme.colors.gray[200]};
+    background-color: ${theme.colors.gray[50]};
   }
 
   .mdx-marker {
