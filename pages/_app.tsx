@@ -1,16 +1,21 @@
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
+import { ReactNode } from 'react'
+
 import { ChakraProvider, useColorMode } from '@chakra-ui/react'
 import { Global, css } from '@emotion/react'
 import { MDXProvider } from '@mdx-js/react'
-
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
 
 import MDXComponents from '@/components/MDXComponents'
 
 import { prismDarkTheme, prismLightTheme } from '@/styles/prism'
 import theme from '@/styles/theme'
 
-const GlobalStyle = ({ children }) => {
+interface GlobalStyleProps {
+  children: ReactNode
+}
+
+const GlobalStyle = ({ children }: GlobalStyleProps) => {
   const { colorMode } = useColorMode()
 
   return (
