@@ -1,7 +1,7 @@
-import { Box } from '@chakra-ui/react'
-import { ReactNode } from 'react'
 import Head from 'next/head'
+import { ReactNode } from 'react'
 
+import Main from '@/components/Main'
 import Navigation from '@/components/Navigation'
 
 interface LayoutProps {
@@ -18,9 +18,7 @@ const Layout = ({
       <title>{title}</title>
     </Head>
     <Navigation />
-    <Box as="main" ml="80px" mt={8}>
-      {children}
-    </Box>
+    <Main>{children}</Main>
   </>
 )
 
