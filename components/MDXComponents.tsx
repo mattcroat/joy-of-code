@@ -25,7 +25,7 @@ const SecondaryHeading = (props: Props): JSX.Element => (
 )
 
 const BodyText = (props: Props): JSX.Element => (
-  <Text fontSize={20} lineHeight="1.6" mt={4} {...props} />
+  <Text fontSize={20} lineHeight="1.6" my={8} {...props} />
 )
 
 const Separator = (props: Props): JSX.Element => (
