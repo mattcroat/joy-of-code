@@ -1,10 +1,10 @@
-/* Inter */
+/* inter */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('./Inter/Inter-Regular.woff2') format('woff2');
+  src: url('./inter/Inter-Regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -12,7 +12,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('./Inter/Inter-Bold.woff2') format('woff2');
+  src: url('./inter/Inter-Bold.woff2') format('woff2');
 }
 
 @font-face {
@@ -20,14 +20,22 @@
   font-style: normal;
   font-weight: 900;
   font-display: swap;
-  src: url('./Inter/Inter-Black.woff2') format('woff2');
+  src: url('./inter/Inter-Black.woff2') format('woff2');
 }
 
-/* Mononoki */
+/* mononoki */
 @font-face {
   font-family: 'Mononoki';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('./Mononoki/mononoki-Regular.woff2') format('woff2');
+  src: url('./mononoki/mononoki-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Mononoki';
+  font-style: bold;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./mononoki/mononoki-Bold.woff2') format('woff2');
 }
