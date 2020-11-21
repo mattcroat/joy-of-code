@@ -23,7 +23,8 @@
     "next": "9.5.5",
     "next-mdx-remote": "^1.0.0",
     "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "react-dom": "16.14.0",
+    "remark-code-titles": "^0.1.1"
   },
   "devDependencies": {
     "@types/mdx-js__react": "^1.5.3",
