@@ -1,9 +1,15 @@
-import Head from 'next/head'
-import { ReactNode } from 'react'
+// ui components
+import { SlideFade } from '@/components/Transitions'
 
+// next
+import Head from 'next/head'
+
+// components
 import Main from '@/components/Main'
 import Navigation from '@/components/Navigation'
 
+// types
+import { ReactNode } from 'react'
 interface LayoutProps {
   children?: ReactNode
   title?: string
@@ -17,8 +23,12 @@ const Layout = ({
     <Head>
       <title>{title}</title>
     </Head>
+
     <Navigation />
-    <Main>{children}</Main>
+
+    <SlideFade>
+      <Main>{children}</Main>
+    </SlideFade>
   </>
 )
 
