@@ -26,7 +26,7 @@ const prismBaseTheme = css`
 
   /* code blocks */
   pre[class*='language-'] {
-    padding-top: ${theme.space[4]};
+    padding-top: ${theme.space[8]};
     padding-bottom: ${theme.space[4]};
     padding-left: ${theme.space[4]};
     padding-right: ${theme.space[4]};
@@ -119,6 +119,23 @@ const prismBaseTheme = css`
   .token.entity {
     cursor: help;
   }
+
+  .remark-code-title {
+    max-width: max-content;
+    transform: translate(-20px, 20px);
+    font-family: ${theme.fonts.mono};
+    font-size: ${theme.fontSizes.lg};
+    font-weight: 600;
+    background: ${theme.colors.orange[200]};
+    color: ${theme.colors.orange[900]};
+    padding: ${theme.space[2]} ${theme.space[4]};
+    border-radius: ${theme.radii.base};
+    box-shadow: ${theme.shadows.lg};
+  }
+
+  .remark-code-title + pre {
+    margin-top: 0;
+  }
 `
 
 export const prismDarkTheme = css`
@@ -134,7 +151,7 @@ export const prismDarkTheme = css`
     background-color: ${theme.colors.gray[800]};
     box-shadow: ${theme.shadows.lg};
     border: 1px solid ${theme.colors.gray[900]};
-    border-radius: 4px;
+    border-radius: ${theme.radii.base};
   }
 `
 
@@ -151,6 +168,6 @@ export const prismLightTheme = css`
     background-color: ${theme.colors.gray[50]};
     box-shadow: ${theme.shadows.lg};
     border: 1px solid ${theme.colors.gray[100]};
-    border-radius: 4px;
+    border-radius: ${theme.radii.base};
   }
 `
