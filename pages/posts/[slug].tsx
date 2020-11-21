@@ -1,17 +1,27 @@
+// ui components
+import { Box } from '@chakra-ui/react'
+
+// filesystem
 import fs from 'fs'
 import path from 'path'
 
-import { Box } from '@chakra-ui/react'
+// mdx sauce
 import matter from 'gray-matter'
-import rehypePrism from '@mapbox/rehype-prism'
 import hydrate from 'next-mdx-remote/hydrate'
 import renderToString from 'next-mdx-remote/render-to-string'
 
-import { GetStaticPaths, GetStaticProps } from 'next'
+// mdx plugins
+import rehypePrism from '@mapbox/rehype-prism'
+import codeTitle from 'remark-code-titles'
 
+// components
 import Layout from '@/components/Layout'
 
+// utils
 import { postsPath, postFilePaths } from '@/utils/posts'
+
+// types
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 interface PostPageProps {
   MDXSource: {
@@ -25,6 +35,7 @@ interface PostPageProps {
   }
 }
 
+// generate paths at build-time
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = postFilePaths
     .map((path) => path.replace(/\.mdx?$/, ''))
@@ -36,6 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
+// grab and process mdx post by the slug "posts/[slug]"
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postFilePath = path.join(postsPath, `${params?.slug}.mdx`)
   const source = fs.readFileSync(postFilePath)
