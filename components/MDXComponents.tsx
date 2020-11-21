@@ -7,8 +7,10 @@ interface Props {
 const MainHeading = (props: Props): JSX.Element => (
   <Heading
     as="h1"
+    fontSize="6xl"
     fontWeight="700"
     color="gray.400"
+    lineHeight="normal"
     letterSpacing="-1px"
     {...props}
   />
@@ -29,7 +31,7 @@ const BodyText = (props: Props): JSX.Element => (
 )
 
 const Separator = (props: Props): JSX.Element => (
-  <Divider h="2px" w="20px" bg="gray.400" mt={4} {...props} />
+  <Divider h="4px" w="40px" bg="gray.400" mt={4} {...props} />
 )
 
 const MDXComponents = {
