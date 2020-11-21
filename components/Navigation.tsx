@@ -7,12 +7,7 @@ import {
   useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react'
-import {
-  faCss3Alt,
-  faHtml5,
-  faJs,
-  faReact,
-} from '@fortawesome/free-brands-svg-icons'
+import { faHtml5, faJs, faReact } from '@fortawesome/free-brands-svg-icons'
 import { faBrush, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NextLink from 'next/link'
@@ -53,6 +48,15 @@ const Navigation = (): JSX.Element => {
             </Link>
           </NextLink>
         </ListItem>
+
+        <ListItem mt={8}>
+          <NextLink href="/html-css" passHref>
+            <Link color={mutedColor} _hover={hoverStyle}>
+              <FontAwesomeIcon icon={faHtml5} size="2x" />
+            </Link>
+          </NextLink>
+        </ListItem>
+
         <ListItem mt={8}>
           <NextLink href="/react" passHref>
             <Link color={mutedColor} _hover={hoverStyle}>
@@ -60,6 +64,7 @@ const Navigation = (): JSX.Element => {
             </Link>
           </NextLink>
         </ListItem>
+
         <ListItem mt={8}>
           <NextLink href="/javascript" passHref>
             <Link color={mutedColor} _hover={hoverStyle}>
@@ -67,20 +72,7 @@ const Navigation = (): JSX.Element => {
             </Link>
           </NextLink>
         </ListItem>
-        <ListItem mt={8}>
-          <NextLink href="/html" passHref>
-            <Link color={mutedColor} _hover={hoverStyle}>
-              <FontAwesomeIcon icon={faHtml5} size="2x" />
-            </Link>
-          </NextLink>
-        </ListItem>
-        <ListItem mt={8}>
-          <NextLink href="/css" passHref>
-            <Link color={mutedColor} _hover={hoverStyle}>
-              <FontAwesomeIcon icon={faCss3Alt} size="2x" />
-            </Link>
-          </NextLink>
-        </ListItem>
+
         <ListItem mt="auto" mb={8}>
           <IconButton
             _hover={hoverStyle}
