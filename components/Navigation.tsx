@@ -42,7 +42,7 @@ const Navigation = (): JSX.Element => {
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <ListItem my={8}>
-          <NextLink href="/" passHref>
+          <NextLink href="/" as="/" passHref>
             <Link color={primaryColor}>
               <FontAwesomeIcon icon={faBrush} size="2x" />
             </Link>
@@ -50,7 +50,7 @@ const Navigation = (): JSX.Element => {
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink href="/html-css" passHref>
+          <NextLink href="/html-css" as="/html-css" passHref>
             <Link color={mutedColor} _hover={hoverStyle}>
               <FontAwesomeIcon icon={faHtml5} size="2x" />
             </Link>
@@ -58,7 +58,7 @@ const Navigation = (): JSX.Element => {
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink href="/react" passHref>
+          <NextLink href="/react" as="/react" passHref>
             <Link color={mutedColor} _hover={hoverStyle}>
               <FontAwesomeIcon icon={faReact} size="2x" />
             </Link>
@@ -66,7 +66,7 @@ const Navigation = (): JSX.Element => {
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink href="/javascript" passHref>
+          <NextLink href="/javascript" as="/javascript" passHref>
             <Link color={mutedColor} _hover={hoverStyle}>
               <FontAwesomeIcon icon={faJs} size="2x" />
             </Link>
