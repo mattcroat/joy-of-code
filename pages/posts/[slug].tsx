@@ -13,6 +13,18 @@ import Layout from '@/components/Layout'
 
 import { postsPath, postFilePaths } from '@/utils/posts'
 
+interface PostPageProps {
+  MDXSource: {
+    compiledSource: string
+    renderedOutput: string
+    scope?: unknown
+  }
+  frontMatter: {
+    title: string
+    description: string
+  }
+}
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = postFilePaths
     .map((path) => path.replace(/\.mdx?$/, ''))
@@ -44,7 +56,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-const PostPage = ({ MDXSource, frontMatter }): JSX.Element => {
+const PostPage = ({ MDXSource, frontMatter }: PostPageProps): JSX.Element => {
   const content = hydrate(MDXSource)
 
   return (
