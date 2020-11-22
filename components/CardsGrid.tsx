@@ -1,13 +1,15 @@
 // ui components
-import { SimpleGrid } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 
 // components
 import PostCard from '@/components/PostCard'
 
 const CardsGrid = (): JSX.Element => (
-  <SimpleGrid minChildWidth="480px" spacing={8}>
-    <PostCard />
-  </SimpleGrid>
+  <Grid gap={8} templateColumns="repeat(auto-fit, minmax(480px, 480px))">
+    <PostCard theme="js" title="What are Closures in JavaScript" />
+    <PostCard theme="react" title="React Hooks" />
+    <PostCard theme="web" title="Why Accessibility Matters" />
+  </Grid>
 )
 
 export default CardsGrid
