@@ -25,7 +25,7 @@ const Tilt = ({ children }: TiltProps): JSX.Element => {
     y.set(e.clientY - rect.top)
   }
 
-  const handleMouseLeave = () => {
+  const handleMouseOut = () => {
     rotateX.set(0)
     rotateY.set(0)
   }
@@ -33,16 +33,16 @@ const Tilt = ({ children }: TiltProps): JSX.Element => {
   return (
     <motion.div
       style={{
-        width: 480,
-        height: 280,
+        height: '100%',
+        width: '100%',
         rotateX: rotateX,
         rotateY: rotateY,
         perspective: 1000,
         cursor: 'pointer',
-        transition: 'all 0.1s linear',
+        transition: 'transform 0.1s linear',
       }}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseOut={handleMouseOut}
     >
       {children}
     </motion.div>
