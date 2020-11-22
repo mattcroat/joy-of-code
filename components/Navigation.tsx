@@ -50,9 +50,9 @@ const Navigation = (): JSX.Element => {
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink href="/html-css" as="/html-css" passHref>
+          <NextLink href="/javascript" as="/javascript" passHref>
             <Link color={mutedColor} _hover={hoverStyle}>
-              <FontAwesomeIcon icon={faHtml5} size="2x" />
+              <FontAwesomeIcon icon={faJs} size="2x" />
             </Link>
           </NextLink>
         </ListItem>
@@ -66,9 +66,9 @@ const Navigation = (): JSX.Element => {
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink href="/javascript" as="/javascript" passHref>
+          <NextLink href="/web" as="/web" passHref>
             <Link color={mutedColor} _hover={hoverStyle}>
-              <FontAwesomeIcon icon={faJs} size="2x" />
+              <FontAwesomeIcon icon={faHtml5} size="2x" />
             </Link>
           </NextLink>
         </ListItem>
