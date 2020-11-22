@@ -7,8 +7,8 @@ import { ReactNode } from 'react'
 
 // types
 interface LinkProps {
-  as: string
-  color: string
+  as?: string
+  color?: string
   children: ReactNode
   hover?: {
     transition: string
