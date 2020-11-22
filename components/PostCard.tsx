@@ -2,15 +2,16 @@
 import { Box, Heading } from '@chakra-ui/react'
 
 // components
+import Link from '@/components/Link'
 import Tilt from '@/components/Tilt'
 
 // types
-interface CardProps {
+interface PostCardProps {
   theme: string
   title: string
 }
 
-interface CardTheme {
+interface PostCardTheme {
   [key: string]: {
     bg: string
     color: string
@@ -18,7 +19,7 @@ interface CardTheme {
 }
 
 // card theme
-const cardTheme: CardTheme = {
+const postCardTheme: PostCardTheme = {
   js: {
     bg: 'radial-gradient(circle, #FAF089, #ECC94B 100%)',
     color: 'black',
@@ -33,34 +34,34 @@ const cardTheme: CardTheme = {
   },
 }
 
-const Card = ({ theme, title }: CardProps): JSX.Element => (
+const PostCard = ({ theme, title }: PostCardProps): JSX.Element => (
   <Tilt>
-    <Box
-      position="relative"
-      h="280px"
-      maxW="480px"
-      bg={cardTheme[theme].bg}
-      border="1px"
-      borderColor="gray.900"
-      borderRadius="base"
-      boxShadow="lg"
-      overflow="hidden"
-    >
-      <Heading
-        as="h2"
-        maxW="380px"
-        position="absolute"
-        bottom={4}
-        left={4}
-        fontSize="3rem"
-        lineHeight="1"
-        color={cardTheme[theme].color}
-        letterSpacing="-2px"
+    <Link href="/posts/test" as="/posts/test">
+      <Box
+        position="relative"
+        h="280px"
+        maxW="480px"
+        bg={postCardTheme[theme].bg}
+        borderRadius="base"
+        boxShadow="lg"
+        overflow="hidden"
       >
-        {title}
-      </Heading>
-    </Box>
+        <Heading
+          as="h2"
+          maxW="380px"
+          position="absolute"
+          bottom={4}
+          left={4}
+          fontSize="3rem"
+          lineHeight="1"
+          color={postCardTheme[theme].color}
+          letterSpacing="-2px"
+        >
+          {title}
+        </Heading>
+      </Box>
+    </Link>
   </Tilt>
 )
 
-export default Card
+export default PostCard
