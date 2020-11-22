@@ -4,31 +4,60 @@ import { Box, Heading } from '@chakra-ui/react'
 // components
 import Tilt from '@/components/Tilt'
 
-const Card = (): JSX.Element => (
+// types
+interface CardProps {
+  theme: string
+  title: string
+}
+
+interface CardTheme {
+  [key: string]: {
+    bg: string
+    color: string
+  }
+}
+
+// card theme
+const cardTheme: CardTheme = {
+  js: {
+    bg: 'radial-gradient(circle, #FAF089, #ECC94B 100%)',
+    color: 'black',
+  },
+  react: {
+    bg: 'radial-gradient(circle, #4299e1, #2b6cb0 100%)',
+    color: 'white',
+  },
+  web: {
+    bg: 'radial-gradient(circle, #FBD38D, #ED8936 100%)',
+    color: 'black',
+  },
+}
+
+const Card = ({ theme, title }: CardProps): JSX.Element => (
   <Tilt>
     <Box
       position="relative"
       h="280px"
       maxW="480px"
-      bg="linear-gradient(45deg, magenta, wheat)"
+      bg={cardTheme[theme].bg}
       border="1px"
       borderColor="gray.900"
-      borderRadius="4px"
+      borderRadius="base"
       boxShadow="lg"
       overflow="hidden"
     >
       <Heading
         as="h2"
+        maxW="380px"
         position="absolute"
         bottom={4}
         left={4}
-        fontSize="4rem"
+        fontSize="3rem"
         lineHeight="1"
-        color="white"
+        color={cardTheme[theme].color}
         letterSpacing="-2px"
-        textShadow="4px 4px 0 rebeccapurple"
       >
-        What are Closures in JavaScript?
+        {title}
       </Heading>
     </Box>
   </Tilt>
