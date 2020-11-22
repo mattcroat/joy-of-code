@@ -1,7 +1,6 @@
 import {
   Box,
   IconButton,
-  Link,
   List,
   ListItem,
   useColorMode,
@@ -10,7 +9,8 @@ import {
 import { faHtml5, faJs, faReact } from '@fortawesome/free-brands-svg-icons'
 import { faBrush, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import NextLink from 'next/link'
+
+import Link from '@/components/Link'
 
 const Navigation = (): JSX.Element => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -42,35 +42,32 @@ const Navigation = (): JSX.Element => {
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <ListItem my={8}>
-          <NextLink href="/" as="/" passHref>
-            <Link color={primaryColor}>
-              <FontAwesomeIcon icon={faBrush} size="2x" />
-            </Link>
-          </NextLink>
+          <Link href="/" as="/" color={primaryColor}>
+            <FontAwesomeIcon icon={faBrush} size="2x" />
+          </Link>
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink href="/javascript" as="/javascript" passHref>
-            <Link color={mutedColor} _hover={hoverStyle}>
-              <FontAwesomeIcon icon={faJs} size="2x" />
-            </Link>
-          </NextLink>
+          <Link
+            href="/javascript"
+            as="/javascript"
+            color={mutedColor}
+            hover={hoverStyle}
+          >
+            <FontAwesomeIcon icon={faJs} size="2x" />
+          </Link>
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink href="/react" as="/react" passHref>
-            <Link color={mutedColor} _hover={hoverStyle}>
-              <FontAwesomeIcon icon={faReact} size="2x" />
-            </Link>
-          </NextLink>
+          <Link href="/react" as="/react" color={mutedColor} hover={hoverStyle}>
+            <FontAwesomeIcon icon={faReact} size="2x" />
+          </Link>
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink href="/web" as="/web" passHref>
-            <Link color={mutedColor} _hover={hoverStyle}>
-              <FontAwesomeIcon icon={faHtml5} size="2x" />
-            </Link>
-          </NextLink>
+          <Link href="/web" as="/web" color={mutedColor} hover={hoverStyle}>
+            <FontAwesomeIcon icon={faHtml5} size="2x" />
+          </Link>
         </ListItem>
 
         <ListItem mt="auto" mb={8}>
