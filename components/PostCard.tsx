@@ -39,8 +39,8 @@ const PostCard = ({ theme, title }: PostCardProps): JSX.Element => (
     <Link href="/posts/test" as="/posts/test">
       <Box
         position="relative"
-        h="280px"
-        maxW="480px"
+        h="240px"
+        maxW="400px"
         bg={postCardTheme[theme].bg}
         borderRadius="base"
         boxShadow="lg"
