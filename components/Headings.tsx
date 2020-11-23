@@ -8,7 +8,14 @@ interface HeadingProps {
 }
 
 const Divider = (): JSX.Element => (
-  <ChakraDivider h="4px" w="40px" mt={2} mb={4} bg="gray.600" />
+  <ChakraDivider
+    h="4px"
+    w="40px"
+    bg="gray.600"
+    mt={2}
+    mb={4}
+    borderBottom="none"
+  />
 )
 
 export const MainHeading = ({

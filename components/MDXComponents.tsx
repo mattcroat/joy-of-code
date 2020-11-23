@@ -32,7 +32,14 @@ const BodyText = (props: Props): JSX.Element => (
 )
 
 const Divider = (props: Props): JSX.Element => (
-  <ChakraDivider h="4px" w="40px" bg="gray.600" mt={4} {...props} />
+  <ChakraDivider
+    h="4px"
+    w="40px"
+    bg="gray.600"
+    mt={4}
+    borderBottom="none"
+    {...props}
+  />
 )
 
 const MDXComponents = {
