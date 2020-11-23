@@ -1,52 +1,17 @@
-import { Divider as ChakraDivider, Heading, Text } from '@chakra-ui/react'
-
-interface Props {
-  children?: string
-}
-
-const MainHeading = (props: Props): JSX.Element => (
-  <Heading
-    as="h1"
-    maxW="480px"
-    fontSize="5xl"
-    fontWeight="700"
-    color="gray.400"
-    lineHeight="normal"
-    letterSpacing="-1px"
-    {...props}
-  />
-)
-
-const SecondaryHeading = (props: Props): JSX.Element => (
-  <Heading
-    as="h2"
-    fontWeight="700"
-    color="gray.400"
-    letterSpacing="-1px"
-    {...props}
-  />
-)
-
-const BodyText = (props: Props): JSX.Element => (
-  <Text fontSize={20} lineHeight="1.6" my={8} {...props} />
-)
-
-const Divider = (props: Props): JSX.Element => (
-  <ChakraDivider
-    h="4px"
-    w="40px"
-    bg="gray.600"
-    mt={4}
-    borderBottom="none"
-    {...props}
-  />
-)
+import {
+  Divider,
+  Link,
+  Text,
+  MainHeading,
+  SecondaryHeading,
+} from '@/components/UIComponents'
 
 const MDXComponents = {
+  a: Link,
   h1: MainHeading,
   h2: SecondaryHeading,
-  p: BodyText,
   hr: Divider,
+  p: Text,
 }
 
 export default MDXComponents
