@@ -121,8 +121,10 @@ const prismBaseTheme = css`
   }
 
   .remark-code-title {
+    position: relative;
+    z-index: -1;
     max-width: max-content;
-    transform: translate(-20px, 20px);
+    transform: translate(20px, 4px);
     font-family: ${theme.fonts.mono};
     font-size: ${theme.fontSizes.lg};
     font-weight: 600;
