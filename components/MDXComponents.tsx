@@ -7,7 +7,8 @@ interface Props {
 const MainHeading = (props: Props): JSX.Element => (
   <Heading
     as="h1"
-    fontSize="6xl"
+    maxW="480px"
+    fontSize="5xl"
     fontWeight="700"
     color="gray.400"
     lineHeight="normal"
