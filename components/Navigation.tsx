@@ -42,7 +42,7 @@ const Navigation = (): JSX.Element => {
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <ListItem my={8}>
-          <Link href="/" as="/" color={primaryColor}>
+          <Link href="/" color={primaryColor}>
             <FontAwesomeIcon icon={faBrush} size="2x" />
           </Link>
         </ListItem>

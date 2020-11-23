@@ -7,7 +7,6 @@ import { ReactNode } from 'react'
 
 // types
 interface LinkProps {
-  as?: string
   color?: string
   children: ReactNode
   hover?: {
@@ -17,8 +16,8 @@ interface LinkProps {
   href: string
 }
 
-const Link = ({ as, color, children, hover, href }: LinkProps): JSX.Element => (
-  <NextLink href={href} as={as} passHref>
+const Link = ({ color, children, hover, href }: LinkProps): JSX.Element => (
+  <NextLink href={href} passHref>
     <ChakraLink color={color} _hover={hover}>
       {children}
     </ChakraLink>

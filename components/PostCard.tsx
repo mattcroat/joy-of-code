@@ -36,7 +36,7 @@ const postCardTheme: PostCardTheme = {
 
 const PostCard = ({ theme, title }: PostCardProps): JSX.Element => (
   <Tilt>
-    <Link href="/posts/test" as="/posts/test">
+    <Link href="/posts/test">
       <Box
         position="relative"
         h="240px"
