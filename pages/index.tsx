@@ -2,15 +2,26 @@
 import { Box } from '@chakra-ui/react'
 
 // components
-import { MainHeading } from '@/components/Headings'
+import { MainHeading, SecondaryHeading } from '@/components/Headings'
 import Layout from '@/components/Layout'
 import CardsGrid from '@/components/CardsGrid'
 
 const IndexPage = (): JSX.Element => (
-  <Layout title="Joy of Code | Index">
+  <Layout title="Joy of Code | ☕ Freshly Brewed Web Development Content">
     <Box px={16}>
-      <MainHeading title="Posts" />
-      <CardsGrid />
+      <Box>
+        <MainHeading title="Welcome Friend 👋" />
+      </Box>
+
+      <Box mt={12}>
+        <SecondaryHeading title="Latest" withDivider />
+        <CardsGrid />
+      </Box>
+
+      <Box mt={12}>
+        <SecondaryHeading title="Previously" withDivider />
+        <CardsGrid />
+      </Box>
     </Box>
   </Layout>
 )
