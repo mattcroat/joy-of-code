@@ -74,7 +74,7 @@ const PostPage = ({ MDXSource, frontMatter }: PostPageProps): JSX.Element => {
 
   return (
     <Layout title={frontMatter.title}>
-      <Box width="90ch" mx="auto">
+      <Box width="80ch" mx="auto">
         {content}
       </Box>
     </Layout>
