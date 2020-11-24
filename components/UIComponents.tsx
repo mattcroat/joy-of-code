@@ -39,7 +39,7 @@ export const MainHeading = ({
     <ChakraHeading
       as="h1"
       maxW="480px"
-      fontSize="5xl"
+      fontSize={['4xl', '5xl']}
       color="gray.400"
       lineHeight="normal"
       letterSpacing="-1px"
@@ -58,7 +58,7 @@ export const SecondaryHeading = ({
     <ChakraHeading
       as="h2"
       maxW="480px"
-      fontSize="4xl"
+      fontSize={['3xl', '4xl']}
       color="gray.400"
       letterSpacing="-1px"
     >

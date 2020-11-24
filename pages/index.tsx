@@ -8,17 +8,17 @@ import { MainHeading, SecondaryHeading } from '@/components/UIComponents'
 
 const IndexPage = (): JSX.Element => (
   <Layout title="Joy of Code | ☕ Freshly Brewed Web Development Content">
-    <Box px={16}>
+    <Box px={[8, 16]}>
       <Box>
         <MainHeading>Welcome Friend 👋</MainHeading>
       </Box>
 
-      <Box mt={12}>
+      <Box mt={9}>
         <SecondaryHeading withDivider>Latest</SecondaryHeading>
         <CardsGrid />
       </Box>
 
-      <Box mt={12} mb={12}>
+      <Box my={14}>
         <SecondaryHeading withDivider>Previously</SecondaryHeading>
         <CardsGrid />
       </Box>

@@ -39,6 +39,7 @@ const Navigation = (): JSX.Element => {
       boxShadow="lg"
       borderRight="2px"
       borderColor={borderColor}
+      display={['none', 'block']}
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <ListItem my={8}>

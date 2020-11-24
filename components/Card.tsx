@@ -20,7 +20,7 @@ const Card = ({ theme, title }: CardProps): JSX.Element => (
     <Link href="/posts/test">
       <Box
         position="relative"
-        h="240px"
+        h={['200px', '240px']}
         maxW="400px"
         bg={cardTheme[theme].bg}
         borderRadius="base"
@@ -41,7 +41,7 @@ const Card = ({ theme, title }: CardProps): JSX.Element => (
           position="absolute"
           bottom={4}
           left={4}
-          fontSize="3rem"
+          fontSize={['4xl', '5xl']}
           lineHeight="1"
           color={cardTheme[theme].color}
           letterSpacing="-2px"
