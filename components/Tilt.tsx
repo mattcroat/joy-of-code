@@ -2,7 +2,7 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 
 // types
-import { MouseEvent, ReactNode } from 'react'
+import { PointerEvent, ReactNode } from 'react'
 
 interface TiltProps {
   children: ReactNode
@@ -17,7 +17,7 @@ const Tilt = ({ children }: TiltProps): JSX.Element => {
   const rotateX = useTransform(y, [0, 400], [10, -10])
   const rotateY = useTransform(x, [0, 400], [-10, 10])
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handlePointerMove = (e: PointerEvent) => {
     const rect = (e.target as HTMLInputElement).getBoundingClientRect()
 
     // x, y position within the element
@@ -25,7 +25,7 @@ const Tilt = ({ children }: TiltProps): JSX.Element => {
     y.set(e.clientY - rect.top)
   }
 
-  const handleMouseOut = () => {
+  const handlePointerOut = () => {
     rotateX.set(0)
     rotateY.set(0)
   }
@@ -41,8 +41,8 @@ const Tilt = ({ children }: TiltProps): JSX.Element => {
         cursor: 'pointer',
         transition: 'transform 0.1s linear',
       }}
-      onMouseMove={handleMouseMove}
-      onMouseOut={handleMouseOut}
+      onPointerMove={handlePointerMove}
+      onPointerOut={handlePointerOut}
     >
       {children}
     </motion.div>
