@@ -1,5 +1,7 @@
 // ui components
 import {
+  Box as ChakraBox,
+  Code as ChakraCode,
   Divider as ChakraDivider,
   Heading as ChakraHeading,
   Link as ChakraLink,
@@ -16,6 +18,16 @@ interface HeadingProps {
 
 interface TextProps {
   children: ReactNode
+  href: string
+}
+
+interface CodeProps {
+  children: ReactNode
+}
+
+interface ImageProps {
+  alt: string
+  src: string
 }
 
 // divider
@@ -74,6 +86,25 @@ export const Text = ({ children }: TextProps): JSX.Element => (
   </ChakraText>
 )
 
-export const Link = ({ children }: TextProps): JSX.Element => (
-  <ChakraLink color="orange.200">{children}</ChakraLink>
+export const Link = ({ children, href }: TextProps): JSX.Element => (
+  <ChakraLink
+    color="orange.200"
+    href={href}
+    rel="noreferrer noopener"
+    target="_blank"
+  >
+    {children}
+  </ChakraLink>
+)
+
+export const Code = ({ children }: CodeProps): JSX.Element => (
+  <ChakraCode bg="orange.200" color="orange.900" fontSize="inherit">
+    {children}
+  </ChakraCode>
+)
+
+export const Image = ({ alt, src }: ImageProps): JSX.Element => (
+  <ChakraBox mx={[null, -24]}>
+    <img alt={alt} src={src} />
+  </ChakraBox>
 )
