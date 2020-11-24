@@ -59,13 +59,13 @@ const Navigation = (): JSX.Element => {
         </ListItem>
 
         <ListItem mt={8}>
-          <Link href="/react" as="/react" color={mutedColor} hover={hoverStyle}>
+          <Link href="/react" color={mutedColor} hover={hoverStyle}>
             <FontAwesomeIcon icon={faReact} size="2x" />
           </Link>
         </ListItem>
 
         <ListItem mt={8}>
-          <Link href="/web" as="/web" color={mutedColor} hover={hoverStyle}>
+          <Link href="/web" color={mutedColor} hover={hoverStyle}>
             <FontAwesomeIcon icon={faHtml5} size="2x" />
           </Link>
         </ListItem>
