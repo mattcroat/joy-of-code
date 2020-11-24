@@ -39,7 +39,7 @@ const Navigation = (): JSX.Element => {
       boxShadow="lg"
       borderRight="2px"
       borderColor={borderColor}
-      display={['none', 'block']}
+      display={{ base: 'none', lg: 'block' }}
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <ListItem my={8}>
@@ -49,12 +49,7 @@ const Navigation = (): JSX.Element => {
         </ListItem>
 
         <ListItem mt={8}>
-          <Link
-            href="/javascript"
-            as="/javascript"
-            color={mutedColor}
-            hover={hoverStyle}
-          >
+          <Link href="/javascript" color={mutedColor} hover={hoverStyle}>
             <FontAwesomeIcon icon={faJs} size="2x" />
           </Link>
         </ListItem>

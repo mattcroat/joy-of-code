@@ -104,7 +104,7 @@ export const Code = ({ children }: CodeProps): JSX.Element => (
 )
 
 export const Image = ({ alt, src }: ImageProps): JSX.Element => (
-  <ChakraBox mx={[null, -24]}>
+  <ChakraBox mx={{ xl: '-24' }}>
     <img alt={alt} src={src} />
   </ChakraBox>
 )

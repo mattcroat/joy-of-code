@@ -37,7 +37,7 @@ const Card = ({ theme, title }: CardProps): JSX.Element => (
         </Box>
         <Heading
           as="h3"
-          maxW="380px"
+          maxW={['280px', '380px']}
           position="absolute"
           bottom={4}
           left={4}

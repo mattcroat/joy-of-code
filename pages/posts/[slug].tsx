@@ -74,7 +74,7 @@ const PostPage = ({ MDXSource, frontMatter }: PostPageProps): JSX.Element => {
 
   return (
     <Layout title={frontMatter.title}>
-      <Box w={[null, '90ch']} mx="auto" px={[8, null]}>
+      <Box w={{ lg: '90ch' }} mx="auto" px={[8, null]}>
         {content}
       </Box>
     </Layout>
