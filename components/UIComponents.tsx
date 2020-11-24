@@ -5,6 +5,8 @@ import {
   Divider as ChakraDivider,
   Heading as ChakraHeading,
   Link as ChakraLink,
+  List as ChakraList,
+  ListItem as ChakraListItem,
   Text as ChakraText,
 } from '@chakra-ui/react'
 
@@ -28,6 +30,10 @@ interface CodeProps {
 interface ImageProps {
   alt: string
   src: string
+}
+
+interface ListProps {
+  children: ReactNode
 }
 
 // divider
@@ -107,4 +113,20 @@ export const Image = ({ alt, src }: ImageProps): JSX.Element => (
   <ChakraBox mx={{ xl: '-24' }}>
     <img alt={alt} src={src} />
   </ChakraBox>
+)
+
+export const List = ({ children }: ListProps): JSX.Element => (
+  <ChakraList listStyleType="disc" fontSize={20} pl={4} mb={8} mt={2} ml={2}>
+    {children}
+  </ChakraList>
+)
+
+export const ListOrdered = ({ children }: ListProps): JSX.Element => (
+  <ChakraList listStyleType="decimal" fontSize={20} pl={4} mb={8} mt={2} ml={2}>
+    {children}
+  </ChakraList>
+)
+
+export const ListItem = ({ children }: ListProps): JSX.Element => (
+  <ChakraListItem mb={2}>{children}</ChakraListItem>
 )

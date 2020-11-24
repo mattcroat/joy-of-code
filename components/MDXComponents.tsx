@@ -3,6 +3,9 @@ import {
   Divider,
   Image,
   Link,
+  List,
+  ListOrdered,
+  ListItem,
   Text,
   MainHeading,
   SecondaryHeading,
@@ -16,6 +19,9 @@ const MDXComponents = {
   img: Image,
   inlineCode: Code,
   p: Text,
+  ul: List,
+  ol: ListOrdered,
+  li: ListItem,
 }
 
 export default MDXComponents
