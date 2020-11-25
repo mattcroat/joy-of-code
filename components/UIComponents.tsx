@@ -110,7 +110,9 @@ export const Code = ({ children }: CodeProps): JSX.Element => (
 )
 
 export const Image = ({ alt, src }: ImageProps): JSX.Element => (
-  <ChakraBox mx={{ xl: '-24' }}>
+  // should probably use https://github.com/remarkjs/remark-unwrap-images
+  // and use next/image
+  <ChakraBox as="span" d="block" mx={{ xl: '-24' }}>
     <img alt={alt} src={src} />
   </ChakraBox>
 )
