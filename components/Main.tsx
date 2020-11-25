@@ -1,14 +1,20 @@
+// ui components
 import { Box } from '@chakra-ui/react'
 import { ReactNode } from 'react'
+
+// components
+import { Slide } from '@/components/Transitions'
 
 interface MainProps {
   children: ReactNode
 }
 
 const Main = ({ children }: MainProps): JSX.Element => (
-  <Box as="main" ml={{ lg: '80px' }} mt={8}>
-    {children}
-  </Box>
+  <Slide>
+    <Box as="main" ml={{ lg: '80px' }} pt={8}>
+      {children}
+    </Box>
+  </Slide>
 )
 
 export default Main
