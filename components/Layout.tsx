@@ -1,6 +1,3 @@
-// ui components
-import { SlideFade } from '@/components/Transitions'
-
 // next
 import Head from 'next/head'
 
@@ -26,9 +23,7 @@ const Layout = ({
 
     <Navigation />
 
-    <SlideFade>
-      <Main>{children}</Main>
-    </SlideFade>
+    <Main>{children}</Main>
   </>
 )
 
