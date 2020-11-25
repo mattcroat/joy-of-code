@@ -1,6 +1,7 @@
 // ui components
 import { Box, Heading } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { motion } from 'framer-motion'
 
 // components
 import Link from '@/components/Link'
@@ -15,10 +16,21 @@ interface CardProps {
   title: string
 }
 
+// custom motion components
+const MotionBox = motion.custom(Box)
+
+// variants
+const cardVariant = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+  },
+}
+
 const Card = ({ theme, title }: CardProps): JSX.Element => (
   <Tilt>
     <Link href="/posts/test">
-      <Box
+      <MotionBox
         position="relative"
         h={['200px', '240px']}
         maxW="400px"
@@ -26,6 +38,7 @@ const Card = ({ theme, title }: CardProps): JSX.Element => (
         borderRadius="base"
         boxShadow="lg"
         overflow="hidden"
+        variants={cardVariant}
       >
         <Box
           position="absolute"
@@ -37,7 +50,7 @@ const Card = ({ theme, title }: CardProps): JSX.Element => (
         </Box>
         <Heading
           as="h3"
-          maxW={['280px', '380px']}
+          maxW="280px"
           position="absolute"
           bottom={4}
           left={4}
@@ -48,7 +61,7 @@ const Card = ({ theme, title }: CardProps): JSX.Element => (
         >
           {title}
         </Heading>
-      </Box>
+      </MotionBox>
     </Link>
   </Tilt>
 )
