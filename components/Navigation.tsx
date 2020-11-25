@@ -1,3 +1,4 @@
+// ui components
 import {
   Box,
   IconButton,
@@ -10,7 +11,9 @@ import { faHtml5, faJs, faReact } from '@fortawesome/free-brands-svg-icons'
 import { faBrush, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+// components
 import Link from '@/components/Link'
+import { Slide } from '@/components/Transitions'
 
 const Navigation = (): JSX.Element => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -26,64 +29,65 @@ const Navigation = (): JSX.Element => {
   }
 
   return (
-    <Box
-      as="nav"
-      h="100vh"
-      maxW="80px"
-      minW="80px"
-      pos="fixed"
-      top={0}
-      left={0}
-      px={4}
-      bg={bgColor}
-      boxShadow="lg"
-      borderRight="2px"
-      borderColor={borderColor}
-      display={{ base: 'none', lg: 'block' }}
-    >
-      <List h="100%" d="flex" flexDir="column" alignItems="center">
-        <ListItem my={8}>
-          <Link href="/" color={primaryColor}>
-            <FontAwesomeIcon icon={faBrush} size="2x" />
-          </Link>
-        </ListItem>
+    <Slide right>
+      <Box
+        as="nav"
+        h="100vh"
+        maxW="80px"
+        minW="80px"
+        pos="fixed"
+        top={0}
+        left={0}
+        bg={bgColor}
+        boxShadow="lg"
+        borderRight="2px"
+        borderColor={borderColor}
+        display={{ base: 'none', lg: 'block' }}
+      >
+        <List h="100%" d="flex" flexDir="column" alignItems="center">
+          <ListItem my={8}>
+            <Link href="/" color={primaryColor}>
+              <FontAwesomeIcon icon={faBrush} size="2x" />
+            </Link>
+          </ListItem>
 
-        <ListItem mt={8}>
-          <Link href="/javascript" color={mutedColor} hover={hoverStyle}>
-            <FontAwesomeIcon icon={faJs} size="2x" />
-          </Link>
-        </ListItem>
+          <ListItem mt={8}>
+            <Link href="/javascript" color={mutedColor} hover={hoverStyle}>
+              <FontAwesomeIcon icon={faJs} size="2x" />
+            </Link>
+          </ListItem>
 
-        <ListItem mt={8}>
-          <Link href="/react" color={mutedColor} hover={hoverStyle}>
-            <FontAwesomeIcon icon={faReact} size="2x" />
-          </Link>
-        </ListItem>
+          <ListItem mt={8}>
+            <Link href="/react" color={mutedColor} hover={hoverStyle}>
+              <FontAwesomeIcon icon={faReact} size="2x" />
+            </Link>
+          </ListItem>
 
-        <ListItem mt={8}>
-          <Link href="/web" color={mutedColor} hover={hoverStyle}>
-            <FontAwesomeIcon icon={faHtml5} size="2x" />
-          </Link>
-        </ListItem>
+          <ListItem mt={8}>
+            <Link href="/web" color={mutedColor} hover={hoverStyle}>
+              <FontAwesomeIcon icon={faHtml5} size="2x" />
+            </Link>
+          </ListItem>
 
-        <ListItem mt="auto" mb={8}>
-          <IconButton
-            _hover={hoverStyle}
-            aria-label="Toggle dark mode"
-            bg={bgColor}
-            color={mutedColor}
-            icon={
-              colorMode === 'dark' ? (
-                <FontAwesomeIcon icon={faSun} size="2x" />
-              ) : (
-                <FontAwesomeIcon icon={faMoon} size="2x" />
-              )
-            }
-            onClick={toggleColorMode}
-          />
-        </ListItem>
-      </List>
-    </Box>
+          <ListItem mt="auto" mb={8}>
+            <IconButton
+              _hover={hoverStyle}
+              aria-label="Toggle dark mode"
+              bg={bgColor}
+              color={mutedColor}
+              icon={
+                colorMode === 'dark' ? (
+                  <FontAwesomeIcon icon={faSun} size="2x" />
+                ) : (
+                  <FontAwesomeIcon icon={faMoon} size="2x" />
+                )
+              }
+              onClick={toggleColorMode}
+            />
+          </ListItem>
+        </List>
+      </Box>
+    </Slide>
   )
 }
 
