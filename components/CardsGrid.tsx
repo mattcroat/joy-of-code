@@ -27,7 +27,7 @@ const CardsGrid = (): JSX.Element => (
     initial="hidden"
     variants={cardsGridVariant}
   >
-    <Card theme="js" title="Super Long JavaScript Card Title" />
+    <Card theme="js" title="JavaScript Card Title" />
     <Card theme="react" title="React Card Title" />
     <Card theme="web" title="Web Card Title" />
   </MotionGrid>
