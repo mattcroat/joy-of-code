@@ -29,7 +29,7 @@ const cardVariant = {
 
 const Card = ({ theme, title }: CardProps): JSX.Element => (
   <Tilt>
-    <Link href="/posts/test">
+    <Link href="/posts/javascript-post-title">
       <MotionBox
         position="relative"
         h={['200px', '240px']}
