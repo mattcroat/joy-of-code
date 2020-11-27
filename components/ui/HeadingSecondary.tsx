@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { Heading as ChakraHeading } from '@chakra-ui/react'
 
 import { Divider } from '@/components/ui'
@@ -7,7 +8,7 @@ interface Props {
   withDivider?: boolean
 }
 
-const HeadingSecondary: React.FC<Props> = ({ children, withDivider }) => (
+const HeadingSecondary: FC<Props> = ({ children, withDivider }) => (
   <>
     <ChakraHeading
       as="h2"

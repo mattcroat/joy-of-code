@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import { Divider as ChakraDivider } from '@chakra-ui/react'
 
-const Divider: React.FC = () => (
+const Divider: FC = () => (
   <ChakraDivider
     h="4px"
     w="40px"

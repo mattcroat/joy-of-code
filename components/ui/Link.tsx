@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { Link as ChakraLink } from '@chakra-ui/react'
 
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
   href: string
 }
 
-const Link: React.FC<Props> = ({ children, href }) => (
+const Link: FC<Props> = ({ children, href }) => (
   <ChakraLink
     color="orange.200"
     href={href}

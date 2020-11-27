@@ -1,6 +1,6 @@
+import { FC, ReactNode } from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { ReactNode } from 'react'
 
 import { ChakraProvider, useColorMode } from '@chakra-ui/react'
 import { Global, css } from '@emotion/react'
@@ -30,7 +30,7 @@ const GlobalStyle = ({ children }: GlobalStyleProps) => {
   )
 }
 
-const App = ({ Component, pageProps }: AppProps): JSX.Element => (
+const App: FC<AppProps> = ({ Component, pageProps }) => (
   <ChakraProvider theme={theme}>
     <MDXProvider components={MDXComponents}>
       <GlobalStyle>

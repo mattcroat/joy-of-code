@@ -1,18 +1,13 @@
-// ui components
+import { FC } from 'react'
 import { Box } from '@chakra-ui/react'
-
-// components
-import CardsGrid from '@/components/ui/CardsGrid'
-import { Layout } from '@/components/layout'
-import { MainHeading } from '@/components/ui/UIComponents'
-
-// utils
-import { getPosts } from '@/utils/posts'
-
-// types
 import { GetStaticProps } from 'next'
 
-interface IndexPageProps {
+import { Layout } from '@/components/layout'
+import { CardsGrid, HeadingPrimary } from '@/components/ui'
+
+import { getPosts } from '@/utils/posts'
+
+interface Props {
   posts: {
     title: string
     description: string
@@ -31,11 +26,11 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-const IndexPage = ({ posts }: IndexPageProps): JSX.Element => (
+const IndexPage: FC<Props> = ({ posts }) => (
   <Layout title="Joy of Code | ☕ Freshly Brewed Web Development Content">
     <Box px={[8, 16]}>
       <Box>
-        <MainHeading>Welcome Friend 👋</MainHeading>
+        <HeadingPrimary>Welcome Friend 👋</HeadingPrimary>
       </Box>
 
       <Box my={10}>
