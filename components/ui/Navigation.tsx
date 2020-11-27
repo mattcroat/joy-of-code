@@ -1,4 +1,4 @@
-// ui components
+import { FC } from 'react'
 import {
   Box,
   IconButton,
@@ -11,11 +11,10 @@ import { faHtml5, faJs, faReact } from '@fortawesome/free-brands-svg-icons'
 import { faBrush, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-// components
-import Link from '@/components/ui/Link'
-import { Slide } from '@/components/motion/Transitions'
+import { Slide } from '@/components/motion'
+import { NextLink } from '@/components/ui'
 
-const Navigation = (): JSX.Element => {
+const Navigation: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   const bgColor = useColorModeValue('white', 'gray.800')
@@ -46,27 +45,27 @@ const Navigation = (): JSX.Element => {
       >
         <List h="100%" d="flex" flexDir="column" alignItems="center">
           <ListItem my={8}>
-            <Link href="/" color={primaryColor}>
+            <NextLink href="/" color={primaryColor}>
               <FontAwesomeIcon icon={faBrush} size="2x" />
-            </Link>
+            </NextLink>
           </ListItem>
 
           <ListItem mt={8}>
-            <Link href="/javascript" color={mutedColor} hover={hoverStyle}>
+            <NextLink href="/javascript" color={mutedColor} hover={hoverStyle}>
               <FontAwesomeIcon icon={faJs} size="2x" />
-            </Link>
+            </NextLink>
           </ListItem>
 
           <ListItem mt={8}>
-            <Link href="/react" color={mutedColor} hover={hoverStyle}>
+            <NextLink href="/react" color={mutedColor} hover={hoverStyle}>
               <FontAwesomeIcon icon={faReact} size="2x" />
-            </Link>
+            </NextLink>
           </ListItem>
 
           <ListItem mt={8}>
-            <Link href="/web" color={mutedColor} hover={hoverStyle}>
+            <NextLink href="/web" color={mutedColor} hover={hoverStyle}>
               <FontAwesomeIcon icon={faHtml5} size="2x" />
-            </Link>
+            </NextLink>
           </ListItem>
 
           <ListItem mt="auto" mb={8}>

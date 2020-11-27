@@ -1,14 +1,11 @@
-// ui components
+import { FC, PointerEvent, ReactNode } from 'react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 
-// types
-import { PointerEvent, ReactNode } from 'react'
-
-interface TiltProps {
+interface Props {
   children: ReactNode
 }
 
-const Tilt = ({ children }: TiltProps): JSX.Element => {
+const Tilt: FC<Props> = ({ children }) => {
   const x = useMotionValue(200)
   const y = useMotionValue(200)
 

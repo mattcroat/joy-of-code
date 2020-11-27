@@ -1,15 +1,11 @@
-// ui components
+import { FC, ReactNode } from 'react'
 import { motion } from 'framer-motion'
 
-// types
-import { ReactNode } from 'react'
-
-interface SlideProps {
+interface Props {
   children: ReactNode
   right?: boolean
 }
 
-// variants
 const slideVariants = {
   hidden: { opacity: 0, y: -100 },
   visible: {
@@ -34,7 +30,7 @@ const slideRightVariants = {
   },
 }
 
-export const Slide = ({ children, right }: SlideProps): JSX.Element => (
+const Slide: FC<Props> = ({ children, right }) => (
   <motion.div
     initial="hidden"
     animate="visible"
@@ -43,3 +39,5 @@ export const Slide = ({ children, right }: SlideProps): JSX.Element => (
     {children}
   </motion.div>
 )
+
+export default Slide

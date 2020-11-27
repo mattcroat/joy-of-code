@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react'
 
 // components
 import CardsGrid from '@/components/ui/CardsGrid'
-import Layout from '@/components/layout/Layout'
+import { Layout } from '@/components/layout'
 import { MainHeading } from '@/components/ui/UIComponents'
 
 // utils

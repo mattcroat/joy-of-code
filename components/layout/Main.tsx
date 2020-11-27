@@ -1,15 +1,13 @@
-// ui components
+import { FC, ReactNode } from 'react'
 import { Box } from '@chakra-ui/react'
-import { ReactNode } from 'react'
 
-// components
-import { Slide } from '@/components/motion/Transitions'
+import { Slide } from '@/components/motion'
 
-interface MainProps {
+interface Props {
   children: ReactNode
 }
 
-const Main = ({ children }: MainProps): JSX.Element => (
+const Main: FC<Props> = ({ children }) => (
   <Slide>
     <Box as="main" ml={{ lg: '80px' }} pt={8}>
       {children}

@@ -1,12 +1,10 @@
-// ui components
+import { FC } from 'react'
 import { Grid } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-// components
-import Card from '@/components/ui/Card'
+import { Card } from '@/components/ui'
 
-// types
-interface CardsGridProps {
+interface Props {
   posts: {
     title: string
     description: string
@@ -16,10 +14,8 @@ interface CardsGridProps {
   }[]
 }
 
-// motion components
 const MotionGrid = motion.custom(Grid)
 
-// variants
 const cardsGridVariant = {
   hidden: { opacity: 0 },
   show: {
@@ -30,7 +26,7 @@ const cardsGridVariant = {
   },
 }
 
-const CardsGrid = ({ posts }: CardsGridProps): JSX.Element => (
+const CardsGrid: FC<Props> = ({ posts }) => (
   <MotionGrid
     gap={8}
     templateColumns={{ md: 'repeat(auto-fit, minmax(400px, 400px))' }}

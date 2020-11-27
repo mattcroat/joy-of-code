@@ -1,21 +1,15 @@
-// next
+import { FC, ReactNode } from 'react'
 import Head from 'next/head'
 
-// components
-import Main from '@/components/layout/Main'
-import Navigation from '@/components/ui/Navigation'
+import { Main } from '@/components/layout'
+import { Navigation } from '@/components/ui'
 
-// types
-import { ReactNode } from 'react'
-interface LayoutProps {
+interface Props {
   children?: ReactNode
   title?: string
 }
 
-const Layout = ({
-  children,
-  title = 'Joy of Code',
-}: LayoutProps): JSX.Element => (
+const Layout: FC<Props> = ({ children, title = 'Joy of Code' }) => (
   <>
     <Head>
       <title>{title}</title>

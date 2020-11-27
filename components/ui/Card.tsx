@@ -1,26 +1,21 @@
-// ui components
+import { FC } from 'react'
 import { Box, Heading } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from 'framer-motion'
 
-// components
-import Link from '@/components/ui/Link'
-import Tilt from '@/components/motion/Tilt'
+import { Tilt } from '@/components/motion'
+import { NextLink } from '@/components/ui'
 
-// styles
 import cardTheme from '@/styles/card'
 
-// types
-interface CardProps {
+interface Props {
   theme: string
   title: string
   slug: string
 }
 
-// custom motion components
 const MotionBox = motion.custom(Box)
 
-// variants
 const cardVariant = {
   hidden: { opacity: 0 },
   show: {
@@ -28,9 +23,9 @@ const cardVariant = {
   },
 }
 
-const Card = ({ theme, title, slug }: CardProps): JSX.Element => (
+const Card: FC<Props> = ({ theme, title, slug }) => (
   <Tilt>
-    <Link href={`/posts/${slug}`}>
+    <NextLink href={`/posts/${slug}`}>
       <MotionBox
         position="relative"
         maxW="400px"
@@ -63,7 +58,7 @@ const Card = ({ theme, title, slug }: CardProps): JSX.Element => (
           {title}
         </Heading>
       </MotionBox>
-    </Link>
+    </NextLink>
   </Tilt>
 )
 

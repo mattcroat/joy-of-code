@@ -1,27 +1,19 @@
-// ui components
 import { Link as ChakraLink } from '@chakra-ui/react'
 
-// next
-import NextLink from 'next/link'
-import { ReactNode } from 'react'
-
-// types
-interface LinkProps {
-  color?: string
-  children: ReactNode
-  hover?: {
-    transition: string
-    color: string
-  }
+interface Props {
+  children: React.ReactNode
   href: string
 }
 
-const Link = ({ color, children, hover, href }: LinkProps): JSX.Element => (
-  <NextLink href={href} passHref>
-    <ChakraLink color={color} _hover={hover}>
-      {children}
-    </ChakraLink>
-  </NextLink>
+const Link: React.FC<Props> = ({ children, href }) => (
+  <ChakraLink
+    color="orange.200"
+    href={href}
+    rel="noreferrer noopener"
+    target="_blank"
+  >
+    {children}
+  </ChakraLink>
 )
 
 export default Link
