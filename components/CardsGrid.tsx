@@ -5,6 +5,17 @@ import { motion } from 'framer-motion'
 // components
 import Card from '@/components/Card'
 
+// types
+interface CardsGridProps {
+  posts: {
+    title: string
+    description: string
+    published: string
+    category: string
+    slug: string
+  }[]
+}
+
 // motion components
 const MotionGrid = motion.custom(Grid)
 
@@ -19,7 +30,7 @@ const cardsGridVariant = {
   },
 }
 
-const CardsGrid = (): JSX.Element => (
+const CardsGrid = ({ posts }: CardsGridProps): JSX.Element => (
   <MotionGrid
     gap={8}
     templateColumns={{ md: 'repeat(auto-fit, minmax(400px, 400px))' }}
@@ -27,9 +38,9 @@ const CardsGrid = (): JSX.Element => (
     initial="hidden"
     variants={cardsGridVariant}
   >
-    <Card theme="js" title="JavaScript Card Title" />
-    <Card theme="react" title="React Card Title" />
-    <Card theme="web" title="Web Card Title" />
+    {posts.map(({ category, title, slug }) => (
+      <Card key={slug} theme={category} title={title} slug={slug} />
+    ))}
   </MotionGrid>
 )
 
