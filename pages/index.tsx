@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react'
 // components
 import CardsGrid from '@/components/CardsGrid'
 import Layout from '@/components/Layout'
-import { MainHeading, SecondaryHeading } from '@/components/UIComponents'
+import { MainHeading } from '@/components/UIComponents'
 
 // utils
 import { getPosts } from '@/utils/posts'
@@ -17,8 +17,9 @@ interface IndexPageProps {
     title: string
     description: string
     published: string
-    category: string[]
-  }
+    category: string
+    slug: string
+  }[]
 }
 
 // get posts metadata
@@ -37,14 +38,8 @@ const IndexPage = ({ posts }: IndexPageProps): JSX.Element => (
         <MainHeading>Welcome Friend 👋</MainHeading>
       </Box>
 
-      <Box mt={9}>
-        <SecondaryHeading withDivider>Latest</SecondaryHeading>
-        <CardsGrid />
-      </Box>
-
-      <Box my={14}>
-        <SecondaryHeading withDivider>Previously</SecondaryHeading>
-        <CardsGrid />
+      <Box my={10}>
+        <CardsGrid posts={posts} />
       </Box>
     </Box>
   </Layout>
