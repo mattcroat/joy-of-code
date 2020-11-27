@@ -14,6 +14,7 @@ import cardTheme from '@/styles/card'
 interface CardProps {
   theme: string
   title: string
+  slug: string
 }
 
 // custom motion components
@@ -27,13 +28,13 @@ const cardVariant = {
   },
 }
 
-const Card = ({ theme, title }: CardProps): JSX.Element => (
+const Card = ({ theme, title, slug }: CardProps): JSX.Element => (
   <Tilt>
-    <Link href="/posts/javascript-post-title">
+    <Link href={`/posts/${slug}`}>
       <MotionBox
         position="relative"
-        h={['200px', '240px']}
         maxW="400px"
+        h={['200px', '240px']}
         bg={cardTheme[theme].bg}
         borderRadius="base"
         boxShadow="lg"
