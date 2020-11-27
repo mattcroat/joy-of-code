@@ -9,7 +9,7 @@ import {
   Text,
   MainHeading,
   SecondaryHeading,
-} from '@/components/UIComponents'
+} from '@/components/ui/UIComponents'
 
 const MDXComponents = {
   a: Link,

@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 // components
-import { Slide } from '@/components/Transitions'
+import { Slide } from '@/components/motion/Transitions'
 
 interface MainProps {
   children: ReactNode

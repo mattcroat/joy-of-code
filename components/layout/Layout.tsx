@@ -2,8 +2,8 @@
 import Head from 'next/head'
 
 // components
-import Main from '@/components/Main'
-import Navigation from '@/components/Navigation'
+import Main from '@/components/layout/Main'
+import Navigation from '@/components/ui/Navigation'
 
 // types
 import { ReactNode } from 'react'

@@ -6,7 +6,7 @@ import { ChakraProvider, useColorMode } from '@chakra-ui/react'
 import { Global, css } from '@emotion/react'
 import { MDXProvider } from '@mdx-js/react'
 
-import MDXComponents from '@/components/MDXComponents'
+import MDXComponents from '@/components/ui/MDXComponents'
 
 import { prismDarkTheme, prismLightTheme } from '@/styles/prism'
 import theme from '@/styles/theme'

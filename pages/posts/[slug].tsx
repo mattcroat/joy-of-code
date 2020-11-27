@@ -15,7 +15,7 @@ import rehypePrism from '@mapbox/rehype-prism'
 import codeTitle from 'remark-code-titles'
 
 // components
-import Layout from '@/components/Layout'
+import Layout from '@/components/layout/Layout'
 
 // utils
 import { postsPath, postFilePaths } from '@/utils/posts'

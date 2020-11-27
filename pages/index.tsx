@@ -2,9 +2,9 @@
 import { Box } from '@chakra-ui/react'
 
 // components
-import CardsGrid from '@/components/CardsGrid'
-import Layout from '@/components/Layout'
-import { MainHeading } from '@/components/UIComponents'
+import CardsGrid from '@/components/ui/CardsGrid'
+import Layout from '@/components/layout/Layout'
+import { MainHeading } from '@/components/ui/UIComponents'
 
 // utils
 import { getPosts } from '@/utils/posts'

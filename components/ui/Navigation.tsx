@@ -12,8 +12,8 @@ import { faBrush, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // components
-import Link from '@/components/Link'
-import { Slide } from '@/components/Transitions'
+import Link from '@/components/ui/Link'
+import { Slide } from '@/components/motion/Transitions'
 
 const Navigation = (): JSX.Element => {
   const { colorMode, toggleColorMode } = useColorMode()

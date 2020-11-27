@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from 'framer-motion'
 
 // components
-import Link from '@/components/Link'
-import Tilt from '@/components/Tilt'
+import Link from '@/components/ui/Link'
+import Tilt from '@/components/motion/Tilt'
 
 // styles
 import cardTheme from '@/styles/card'

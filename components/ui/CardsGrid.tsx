@@ -3,7 +3,7 @@ import { Grid } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 // components
-import Card from '@/components/Card'
+import Card from '@/components/ui/Card'
 
 // types
 interface CardsGridProps {
