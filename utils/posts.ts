@@ -16,6 +16,7 @@ export const getPosts = postFilePaths.map((slug) => {
 
   const fileContents = fs.readFileSync(postPath, 'utf-8')
   const { data: frontMatter } = matter(fileContents)
+  frontMatter.slug = slug.replace(/\.mdx?$/, '')
 
   return frontMatter
 })
