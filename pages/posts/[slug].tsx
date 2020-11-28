@@ -1,7 +1,6 @@
-// ui components
+import { FC } from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { Box } from '@chakra-ui/react'
-
-// filesystem
 import fs from 'fs'
 import path from 'path'
 
@@ -14,16 +13,11 @@ import renderToString from 'next-mdx-remote/render-to-string'
 import rehypePrism from '@mapbox/rehype-prism'
 import codeTitle from 'remark-code-titles'
 
-// components
 import { Layout } from '@/components/layout'
 
-// utils
 import { postsPath, postFilePaths } from '@/utils/posts'
 
-// types
-import { GetStaticPaths, GetStaticProps } from 'next'
-
-interface PostPageProps {
+interface Props {
   MDXSource: {
     compiledSource: string
     renderedOutput: string
@@ -69,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-const PostPage = ({ MDXSource, frontMatter }: PostPageProps): JSX.Element => {
+const PostPage: FC<Props> = ({ MDXSource, frontMatter }) => {
   const content = hydrate(MDXSource)
 
   return (
