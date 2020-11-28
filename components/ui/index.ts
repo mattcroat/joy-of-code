@@ -2,6 +2,7 @@ import Card from '@/components/ui/Card'
 import CardsGrid from '@/components/ui/CardsGrid'
 import Code from '@/components/ui/Code'
 import Divider from '@/components/ui/Divider'
+import Emoji from '@/components/ui/Emoji'
 import HeadingPrimary from '@/components/ui/HeadingPrimary'
 import HeadingSecondary from '@/components/ui/HeadingSecondary'
 import Image from '@/components/ui/Image'
@@ -19,6 +20,7 @@ export {
   CardsGrid,
   Code,
   Divider,
+  Emoji,
   HeadingPrimary,
   HeadingSecondary,
   Image,
