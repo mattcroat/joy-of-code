@@ -17,7 +17,7 @@ interface CardTheme {
 }
 
 const cardTheme: CardTheme = {
-  js: {
+  JavaScript: {
     bg: `radial-gradient(
       circle,
       ${chakraTheme.colors.yellow[200]},
@@ -26,7 +26,7 @@ const cardTheme: CardTheme = {
     color: `${chakraTheme.colors.black}`,
     icon: faJs,
   },
-  react: {
+  React: {
     bg: `radial-gradient(
       circle,
       ${chakraTheme.colors.blue[400]},
@@ -35,7 +35,7 @@ const cardTheme: CardTheme = {
     color: `${chakraTheme.colors.white}`,
     icon: faReact,
   },
-  web: {
+  Web: {
     bg: `radial-gradient(
       circle,
       ${chakraTheme.colors.orange[200]},
