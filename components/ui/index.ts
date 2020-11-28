@@ -1,5 +1,6 @@
 import Card from '@/components/ui/Card'
 import CardsGrid from '@/components/ui/CardsGrid'
+import Category from '@/components/ui/Category'
 import Code from '@/components/ui/Code'
 import Divider from '@/components/ui/Divider'
 import Emoji from '@/components/ui/Emoji'
@@ -18,6 +19,7 @@ import Text from '@/components/ui/Text'
 export {
   Card,
   CardsGrid,
+  Category,
   Code,
   Divider,
   Emoji,
