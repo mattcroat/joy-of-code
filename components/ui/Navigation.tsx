@@ -51,19 +51,31 @@ const Navigation: FC = () => {
           </ListItem>
 
           <ListItem mt={8}>
-            <NextLink href="/javascript" color={mutedColor} hover={hoverStyle}>
+            <NextLink
+              href="/category/javascript"
+              color={mutedColor}
+              hover={hoverStyle}
+            >
               <FontAwesomeIcon icon={faJs} size="2x" />
             </NextLink>
           </ListItem>
 
           <ListItem mt={8}>
-            <NextLink href="/react" color={mutedColor} hover={hoverStyle}>
+            <NextLink
+              href="/category/react"
+              color={mutedColor}
+              hover={hoverStyle}
+            >
               <FontAwesomeIcon icon={faReact} size="2x" />
             </NextLink>
           </ListItem>
 
           <ListItem mt={8}>
-            <NextLink href="/web" color={mutedColor} hover={hoverStyle}>
+            <NextLink
+              href="/category/web"
+              color={mutedColor}
+              hover={hoverStyle}
+            >
               <FontAwesomeIcon icon={faHtml5} size="2x" />
             </NextLink>
           </ListItem>
