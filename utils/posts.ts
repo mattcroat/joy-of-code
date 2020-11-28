@@ -1,9 +1,6 @@
-// node
 import fs from 'fs'
-import path from 'path'
-
-// mdx
 import matter from 'gray-matter'
+import path from 'path'
 
 export const postsPath = path.join(process.cwd(), 'posts')
 
