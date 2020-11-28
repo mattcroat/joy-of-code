@@ -17,3 +17,11 @@ export const getPosts = postFilePaths.map((slug) => {
 
   return frontMatter
 })
+
+export const capitalize = (word: string): string =>
+  `${word.charAt(0).toUpperCase()}${word.slice(1)}`
+
+export const formatTitle = (title: string): string => {
+  if (title === 'javascript') return 'JavaScript'
+  return capitalize(title)
+}
