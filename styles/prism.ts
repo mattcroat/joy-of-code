@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-import theme from '@/styles/theme'
+import chakraTheme from '@/styles/theme'
 
 const prismBaseTheme = css`
   code {
@@ -9,16 +9,16 @@ const prismBaseTheme = css`
 
   code[class*='language-'],
   pre[class*='language-'] {
-    color: ${theme.colors.gray[800]};
+    color: ${chakraTheme.colors.gray[800]};
     background-color: none;
-    font-family: ${theme.fonts.mono};
-    font-size: ${theme.fontSizes.xl};
-    font-weight: ${theme.fontWeights.bold};
+    font-family: ${chakraTheme.fonts.mono};
+    font-size: ${chakraTheme.fontSizes.xl};
+    font-weight: ${chakraTheme.fontWeights.bold};
     text-align: left;
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
-    line-height: ${theme.lineHeights.tall};
+    line-height: ${chakraTheme.lineHeights.tall};
     tab-size: 4;
     hyphens: none;
     width: 100%;
@@ -26,11 +26,11 @@ const prismBaseTheme = css`
 
   /* code blocks */
   pre[class*='language-'] {
-    padding-top: ${theme.space[8]};
-    padding-bottom: ${theme.space[4]};
-    padding-left: ${theme.space[4]};
-    padding-right: ${theme.space[4]};
-    margin: ${theme.space[6]} 0;
+    padding-top: ${chakraTheme.space[8]};
+    padding-bottom: ${chakraTheme.space[4]};
+    padding-left: ${chakraTheme.space[4]};
+    padding-right: ${chakraTheme.space[4]};
+    margin: ${chakraTheme.space[6]} 0;
     overflow: auto;
     min-width: 100%;
     font-size: 0.9rem;
@@ -39,7 +39,7 @@ const prismBaseTheme = css`
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background-color: ${theme.colors.gray[50]};
+    background-color: ${chakraTheme.colors.gray[50]};
   }
 
   /* inline code */
@@ -56,7 +56,7 @@ const prismBaseTheme = css`
   }
 
   .token.punctuation {
-    color: ${theme.colors.blue[100]};
+    color: ${chakraTheme.colors.blue[100]};
   }
 
   .token.namespace {
@@ -79,7 +79,7 @@ const prismBaseTheme = css`
   .token.char,
   .token.builtin,
   .token.inserted {
-    color: ${theme.colors.red[200]};
+    color: ${chakraTheme.colors.red[200]};
   }
 
   .token.operator,
@@ -87,18 +87,18 @@ const prismBaseTheme = css`
   .token.url,
   .language-css .token.string,
   .style .token.string {
-    color: ${theme.colors.red[200]};
+    color: ${chakraTheme.colors.red[200]};
   }
 
   .token.atrule,
   .token.attr-value,
   .token.keyword {
-    color: ${theme.colors.orange[200]};
+    color: ${chakraTheme.colors.orange[200]};
   }
 
   .token.function,
   .token.class-name {
-    color: ${theme.colors.blue[200]};
+    color: ${chakraTheme.colors.blue[200]};
   }
 
   .token.regex,
@@ -125,14 +125,14 @@ const prismBaseTheme = css`
     z-index: -1;
     max-width: max-content;
     transform: translate(20px, 4px);
-    font-family: ${theme.fonts.mono};
-    font-size: ${theme.fontSizes.lg};
+    font-family: ${chakraTheme.fonts.mono};
+    font-size: ${chakraTheme.fontSizes.lg};
     font-weight: 600;
-    background: ${theme.colors.orange[200]};
-    color: ${theme.colors.orange[900]};
-    padding: ${theme.space[2]} ${theme.space[4]};
-    border-radius: ${theme.radii.base};
-    box-shadow: ${theme.shadows.lg};
+    background: ${chakraTheme.colors.orange[200]};
+    color: ${chakraTheme.colors.orange[900]};
+    padding: ${chakraTheme.space[2]} ${chakraTheme.space[4]};
+    border-radius: ${chakraTheme.radii.base};
+    box-shadow: ${chakraTheme.shadows.lg};
   }
 
   .remark-code-title + pre {
@@ -145,15 +145,15 @@ export const prismDarkTheme = css`
 
   code[class*='language-'],
   pre[class*='language-'] {
-    color: ${theme.colors.gray[50]};
+    color: ${chakraTheme.colors.gray[50]};
   }
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background-color: ${theme.colors.gray[800]};
-    box-shadow: ${theme.shadows.lg};
-    border: 1px solid ${theme.colors.gray[900]};
-    border-radius: ${theme.radii.base};
+    background-color: ${chakraTheme.colors.gray[800]};
+    box-shadow: ${chakraTheme.shadows.lg};
+    border: 1px solid ${chakraTheme.colors.gray[900]};
+    border-radius: ${chakraTheme.radii.base};
   }
 `
 
@@ -162,14 +162,14 @@ export const prismLightTheme = css`
 
   code[class*='language-'],
   pre[class*='language-'] {
-    color: ${theme.colors.gray[800]};
+    color: ${chakraTheme.colors.gray[800]};
   }
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background-color: ${theme.colors.gray[50]};
-    box-shadow: ${theme.shadows.lg};
-    border: 1px solid ${theme.colors.gray[100]};
-    border-radius: ${theme.radii.base};
+    background-color: ${chakraTheme.colors.gray[50]};
+    box-shadow: ${chakraTheme.shadows.lg};
+    border: 1px solid ${chakraTheme.colors.gray[100]};
+    border-radius: ${chakraTheme.radii.base};
   }
 `

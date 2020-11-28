@@ -9,7 +9,7 @@ import { MDXProvider } from '@mdx-js/react'
 import MDXComponents from '@/components/ui/MDXComponents'
 
 import { prismDarkTheme, prismLightTheme } from '@/styles/prism'
-import theme from '@/styles/theme'
+import chakraTheme from '@/styles/theme'
 
 interface GlobalStyleProps {
   children: ReactNode
@@ -31,7 +31,7 @@ const GlobalStyle = ({ children }: GlobalStyleProps) => {
 }
 
 const App: FC<AppProps> = ({ Component, pageProps }) => (
-  <ChakraProvider theme={theme}>
+  <ChakraProvider theme={chakraTheme}>
     <MDXProvider components={MDXComponents}>
       <GlobalStyle>
         <Head>
