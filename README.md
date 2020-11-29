@@ -6,6 +6,8 @@ Joy of Code is focused on creating web development content that respects your ti
 
 # Setup
 
+These are the required steps for setting up a local, and production development environment. You can also contribute just using GitHub.
+
 ## 🔧 Development
 
 👉 **Clone project**
