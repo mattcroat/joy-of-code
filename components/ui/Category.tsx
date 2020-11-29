@@ -13,14 +13,15 @@ interface Props {
     category: string
     slug: string
   }[]
+  title: string
 }
 
-const Category: FC<Props> = ({ category, posts }) => {
+const Category: FC<Props> = ({ category, posts, title }) => {
   return (
     <Layout title={`Joy of Code | ${category}`}>
       <Box px={[8, 16]}>
         <Box>
-          <HeadingPrimary withDivider>{category}</HeadingPrimary>
+          <HeadingPrimary withDivider>{title}</HeadingPrimary>
         </Box>
 
         <Box my={10}>

@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 const CategoryPage: FC<Props> = ({ category, posts }) => (
-  <Category category={category} posts={posts} />
+  <Category category={category} posts={posts} title={category} />
 )
 
 export default CategoryPage
