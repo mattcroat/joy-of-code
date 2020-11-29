@@ -15,6 +15,7 @@ import MDXComponents from '@/components/ui/MDXComponents'
 import Navigation from '@/components/ui/Navigation'
 import NextLink from '@/components/ui/NextLink'
 import Text from '@/components/ui/Text'
+import ThemeToggle from '@/components/ui/ThemeToggle'
 
 export {
   Card,
@@ -34,4 +35,5 @@ export {
   Navigation,
   NextLink,
   Text,
+  ThemeToggle,
 }
