@@ -4,39 +4,39 @@
 
 ## Joy of Code is Focused on Creating Web Development Content
 
-### 🔧 Dev
+### 🔧 Development
 
-👉 Clone project
+👉 **Clone project**
 
 ```shell
 git clone https://github.com/mattcroat/joy-of-code.git
 ```
 
-👉 Install dependencies
+👉 **Install dependencies**
 
 ```shell
 npm i
 ```
 
-👉 Start dev server
+👉 **Start dev server**
 
 ```shell
 npm run dev
 ```
 
-👉 Open
+👉 **Open**
 
 [http://localhost:3000](http://localhost:3000)
 
 ### 📦 Production
 
-👉 Build
+👉 **Build**
 
 ```shell
 npm run build
 ```
 
-👉 Run in production mode
+👉 **Run in production mode**
 
 ```shell
 npm run start
