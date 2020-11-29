@@ -1,10 +1,12 @@
 # 🖌 Joy of Code
 
+Joy of Code is focused on creating web development content that respects your time.
+
 ![Joy of Code](https://i.imgur.com/Oot9c8Z.png)
 
-## Joy of Code is Focused on Creating Web Development Content
+# Setup
 
-### 🔧 Development
+## 🔧 Development
 
 👉 **Clone project**
 
@@ -24,11 +26,7 @@ npm i
 npm run dev
 ```
 
-👉 **Open**
-
-[http://localhost:3000](http://localhost:3000)
-
-### 📦 Production
+## 📦 Production
 
 👉 **Build**
 
