@@ -172,4 +172,36 @@ export const prismLightTheme = css`
     border: 1px solid ${chakraTheme.colors.gray[100]};
     border-radius: ${chakraTheme.radii.base};
   }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.keyword {
+    color: ${chakraTheme.colors.orange[500]};
+  }
+
+  .token.punctuation {
+    color: ${chakraTheme.colors.blue[400]};
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.inserted {
+    color: ${chakraTheme.colors.red[500]};
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string {
+    color: ${chakraTheme.colors.red[500]};
+  }
+
+  .token.function,
+  .token.class-name {
+    color: ${chakraTheme.colors.blue[500]};
+  }
 `
