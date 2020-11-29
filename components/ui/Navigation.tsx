@@ -1,30 +1,20 @@
 import { FC } from 'react'
-import {
-  Box,
-  IconButton,
-  List,
-  ListItem,
-  useColorMode,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Box, List, ListItem, useColorMode } from '@chakra-ui/react'
 import { faHtml5, faJs, faReact } from '@fortawesome/free-brands-svg-icons'
-import { faBrush, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
+import { faBrush } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { Slide } from '@/components/motion'
-import { NextLink } from '@/components/ui'
+import { NextLink, ThemeToggle } from '@/components/ui'
+
+import { bgColor, borderColor, mutedColor, primaryColor } from '@/styles/colors'
 
 const Navigation: FC = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
-
-  const bgColor = useColorModeValue('white', 'gray.800')
-  const borderColor = useColorModeValue('gray.100', 'gray.900')
-  const primaryColor = 'orange.200'
-  const mutedColor = 'gray.400'
+  const { colorMode } = useColorMode()
 
   const hoverStyle = {
     transition: 'color .5s ease',
-    color: primaryColor,
+    color: primaryColor[colorMode],
   }
 
   return (
@@ -37,15 +27,15 @@ const Navigation: FC = () => {
         pos="fixed"
         top={0}
         left={0}
-        bg={bgColor}
+        bg={bgColor[colorMode]}
         boxShadow="lg"
         borderRight="2px"
-        borderColor={borderColor}
+        borderColor={borderColor[colorMode]}
         display={{ base: 'none', lg: 'block' }}
       >
         <List h="100%" d="flex" flexDir="column" alignItems="center">
           <ListItem my={8}>
-            <NextLink href="/" color={primaryColor}>
+            <NextLink href="/" color={primaryColor[colorMode]}>
               <FontAwesomeIcon icon={faBrush} size="2x" />
             </NextLink>
           </ListItem>
@@ -53,7 +43,7 @@ const Navigation: FC = () => {
           <ListItem mt={8}>
             <NextLink
               href="/category/javascript"
-              color={mutedColor}
+              color={mutedColor[colorMode]}
               hover={hoverStyle}
             >
               <FontAwesomeIcon icon={faJs} size="2x" />
@@ -63,7 +53,7 @@ const Navigation: FC = () => {
           <ListItem mt={8}>
             <NextLink
               href="/category/react"
-              color={mutedColor}
+              color={mutedColor[colorMode]}
               hover={hoverStyle}
             >
               <FontAwesomeIcon icon={faReact} size="2x" />
@@ -73,7 +63,7 @@ const Navigation: FC = () => {
           <ListItem mt={8}>
             <NextLink
               href="/category/web"
-              color={mutedColor}
+              color={mutedColor[colorMode]}
               hover={hoverStyle}
             >
               <FontAwesomeIcon icon={faHtml5} size="2x" />
@@ -81,20 +71,7 @@ const Navigation: FC = () => {
           </ListItem>
 
           <ListItem mt="auto" mb={8}>
-            <IconButton
-              _hover={hoverStyle}
-              aria-label="Toggle dark mode"
-              bg={bgColor}
-              color={mutedColor}
-              icon={
-                colorMode === 'dark' ? (
-                  <FontAwesomeIcon icon={faSun} size="2x" />
-                ) : (
-                  <FontAwesomeIcon icon={faMoon} size="2x" />
-                )
-              }
-              onClick={toggleColorMode}
-            />
+            <ThemeToggle />
           </ListItem>
         </List>
       </Box>
