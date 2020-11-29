@@ -36,7 +36,7 @@ const IndexPage: FC<Props> = ({ posts }) => (
         </HeadingPrimary>
       </Box>
 
-      <Box my={10}>
+      <Box my={12}>
         <CardsGrid posts={posts} />
       </Box>
     </Box>
