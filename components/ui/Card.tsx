@@ -38,9 +38,10 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
         <Box
           h="100%"
           w="100%"
-          bg={`${cardTheme[theme].bg}, url('cosmos.webp')`}
-          bgPos="0 10%"
+          bg={`${cardTheme[theme].bg}, url('nebula.webp')`}
+          bgPos="0 20%"
           bgBlendMode="color"
+          opacity="0.8"
           _after={{
             content: '" "',
             w: '100%',
@@ -52,7 +53,6 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
             opacity: 0.1,
             zIndex: 1,
           }}
-          style={{ filter: 'blur(4px)' }}
         ></Box>
         <Box
           position="absolute"
