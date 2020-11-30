@@ -12,6 +12,7 @@ import renderToString from 'next-mdx-remote/render-to-string'
 // mdx plugins
 import rehypePrism from '@mapbox/rehype-prism'
 import codeTitle from 'remark-code-titles'
+import unwrapImages from 'remark-unwrap-images'
 
 import { Layout } from '@/components/layout'
 
@@ -51,7 +52,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const MDXSource = await renderToString(content, {
     mdxOptions: {
       rehypePlugins: [rehypePrism],
-      remarkPlugins: [codeTitle],
+      remarkPlugins: [codeTitle, unwrapImages],
     },
   })
 
