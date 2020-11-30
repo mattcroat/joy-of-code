@@ -30,24 +30,30 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
         position="relative"
         maxW="400px"
         h={['200px', '240px']}
-        bg={`${cardTheme[theme].bg}, url('cosmos.webp')`}
-        bgBlendMode="color"
         borderRadius="base"
         boxShadow="lg"
         overflow="hidden"
         variants={cardVariant}
-        _after={{
-          content: '" "',
-          w: '100%',
-          h: '100%',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bg: 'gray.900',
-          opacity: 0.4,
-          zIndex: 1,
-        }}
       >
+        <Box
+          h="100%"
+          w="100%"
+          bg={`${cardTheme[theme].bg}, url('cosmos.webp')`}
+          bgPos="0 10%"
+          bgBlendMode="color"
+          _after={{
+            content: '" "',
+            w: '100%',
+            h: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bg: cardTheme[theme].bg,
+            opacity: 0.1,
+            zIndex: 1,
+          }}
+          style={{ filter: 'blur(4px)' }}
+        ></Box>
         <Box
           position="absolute"
           top={4}
