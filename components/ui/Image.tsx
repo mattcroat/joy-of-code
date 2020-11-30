@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Box as ChakraBox } from '@chakra-ui/react'
+import NextImage from 'next/image'
 
 interface Props {
   alt: string
@@ -7,10 +8,14 @@ interface Props {
 }
 
 const Image: FC<Props> = ({ alt, src }) => (
-  // should probably use https://github.com/remarkjs/remark-unwrap-images
-  // and use next/image
-  <ChakraBox as="span" d="block" mx={{ xl: '-24' }}>
-    <img alt={alt} src={src} />
+  <ChakraBox
+    position="relative"
+    h={{ base: '400px', lg: '600px' }}
+    w={{ xl: '140%' }}
+    mx={{ xl: '-20%' }}
+    my={{ sm: 8 }}
+  >
+    <NextImage alt={alt} src={src} layout="fill" objectFit="contain" />
   </ChakraBox>
 )
 
