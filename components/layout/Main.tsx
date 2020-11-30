@@ -9,7 +9,7 @@ interface Props {
 
 const Main: FC<Props> = ({ children }) => (
   <Slide>
-    <Box as="main" ml={{ lg: '80px' }} pt={6}>
+    <Box as="main" ml={{ sm: '80px' }} pt={6}>
       {children}
     </Box>
   </Slide>

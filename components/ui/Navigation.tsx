@@ -31,7 +31,7 @@ const Navigation: FC = () => {
         boxShadow="lg"
         borderRight="2px"
         borderColor={borderColor[colorMode]}
-        display={{ base: 'none', lg: 'block' }}
+        display={{ base: 'none', sm: 'block' }}
       >
         <List h="100%" d="flex" flexDir="column" alignItems="center">
           <ListItem my={8}>
