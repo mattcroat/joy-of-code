@@ -25,7 +25,8 @@
     "next-mdx-remote": "^1.0.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
-    "remark-code-titles": "^0.1.1"
+    "remark-code-titles": "^0.1.1",
+    "remark-unwrap-images": "^2.0.0"
   },
   "devDependencies": {
     "@types/mdx-js__react": "^1.5.3",
