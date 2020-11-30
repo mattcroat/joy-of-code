@@ -30,17 +30,30 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
         position="relative"
         maxW="400px"
         h={['200px', '240px']}
-        bg={cardTheme[theme].bg}
+        bg={`${cardTheme[theme].bg}, url('cosmos.webp')`}
+        bgBlendMode="color"
         borderRadius="base"
         boxShadow="lg"
         overflow="hidden"
         variants={cardVariant}
+        _after={{
+          content: '" "',
+          w: '100%',
+          h: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          bg: 'gray.900',
+          opacity: 0.4,
+          zIndex: 1,
+        }}
       >
         <Box
           position="absolute"
           top={4}
           right={4}
           color={cardTheme[theme].color}
+          zIndex="2"
         >
           <FontAwesomeIcon icon={cardTheme[theme].icon} size="2x" />
         </Box>
@@ -54,6 +67,7 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
           lineHeight="1"
           color={cardTheme[theme].color}
           letterSpacing="-2px"
+          zIndex="2"
         >
           {title}
         </Heading>

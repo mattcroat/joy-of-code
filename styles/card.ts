@@ -23,7 +23,7 @@ const cardTheme: CardTheme = {
       ${chakraTheme.colors.yellow[200]},
       ${chakraTheme.colors.yellow[400]} 100%
     )`,
-    color: `${chakraTheme.colors.black}`,
+    color: `${chakraTheme.colors.white}`,
     icon: faJs,
   },
   React: {
@@ -41,7 +41,7 @@ const cardTheme: CardTheme = {
       ${chakraTheme.colors.orange[200]},
       ${chakraTheme.colors.orange[400]} 100%
     )`,
-    color: `${chakraTheme.colors.black}`,
+    color: `${chakraTheme.colors.white}`,
     icon: faHtml5,
   },
 }
