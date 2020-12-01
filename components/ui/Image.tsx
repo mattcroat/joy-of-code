@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Box as ChakraBox } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import NextImage from 'next/image'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Image: FC<Props> = ({ alt, src }) => (
-  <ChakraBox
+  <Box
     position="relative"
     h={{ base: '400px', lg: '600px' }}
     w={{ xl: '140%' }}
@@ -16,7 +16,7 @@ const Image: FC<Props> = ({ alt, src }) => (
     my={{ sm: 8 }}
   >
     <NextImage alt={alt} src={src} layout="fill" objectFit="contain" />
-  </ChakraBox>
+  </Box>
 )
 
 export default Image

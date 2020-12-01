@@ -1,39 +1,32 @@
 import Card from '@/components/ui/Card'
 import CardsGrid from '@/components/ui/CardsGrid'
 import Category from '@/components/ui/Category'
-import Code from '@/components/ui/Code'
-import Divider from '@/components/ui/Divider'
+import InlineCode from '@/components/ui/Code'
 import Emoji from '@/components/ui/Emoji'
-import HeadingPrimary from '@/components/ui/HeadingPrimary'
-import HeadingSecondary from '@/components/ui/HeadingSecondary'
 import Image from '@/components/ui/Image'
-import Link from '@/components/ui/Link'
-import List from '@/components/ui/List'
-import ListItem from '@/components/ui/ListItem'
-import ListOrdered from '@/components/ui/ListOrdered'
+import CustomLink from '@/components/ui/Link'
+import { Olist, Ulist, Li } from '@/components/ui/List'
 import MDXComponents from '@/components/ui/MDXComponents'
 import Navigation from '@/components/ui/Navigation'
-import NextLink from '@/components/ui/NextLink'
-import Text from '@/components/ui/Text'
 import ThemeToggle from '@/components/ui/ThemeToggle'
+import { H1, H2, Hr, Paragraph } from '@/components/ui/Typography'
 
 export {
   Card,
   CardsGrid,
   Category,
-  Code,
-  Divider,
+  CustomLink,
   Emoji,
-  HeadingPrimary,
-  HeadingSecondary,
+  H1,
+  H2,
+  Hr,
   Image,
-  Link,
-  List,
-  ListItem,
-  ListOrdered,
+  InlineCode,
+  Li,
   MDXComponents,
   Navigation,
-  NextLink,
-  Text,
+  Olist,
+  Paragraph,
   ThemeToggle,
+  Ulist,
 }

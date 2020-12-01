@@ -4,7 +4,7 @@ import { faHtml5, faJs, faReact } from '@fortawesome/free-brands-svg-icons'
 import { faBrush } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { NextLink, ThemeToggle } from '@/components/ui'
+import { CustomLink, ThemeToggle } from '@/components/ui'
 
 import { bgColor, borderColor, mutedColor, primaryColor } from '@/styles/colors'
 
@@ -33,39 +33,42 @@ const Navigation: FC = () => {
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <ListItem my={8}>
-          <NextLink href="/" color={primaryColor[colorMode]}>
+          <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
             <FontAwesomeIcon icon={faBrush} size="2x" />
-          </NextLink>
+          </CustomLink>
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink
+          <CustomLink
             href="/category/javascript"
             color={mutedColor[colorMode]}
             hover={hoverStyle}
+            isInternal
           >
             <FontAwesomeIcon icon={faJs} size="2x" />
-          </NextLink>
+          </CustomLink>
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink
+          <CustomLink
             href="/category/react"
             color={mutedColor[colorMode]}
             hover={hoverStyle}
+            isInternal
           >
             <FontAwesomeIcon icon={faReact} size="2x" />
-          </NextLink>
+          </CustomLink>
         </ListItem>
 
         <ListItem mt={8}>
-          <NextLink
+          <CustomLink
             href="/category/web"
             color={mutedColor[colorMode]}
             hover={hoverStyle}
+            isInternal
           >
             <FontAwesomeIcon icon={faHtml5} size="2x" />
-          </NextLink>
+          </CustomLink>
         </ListItem>
 
         <ListItem mt="auto" mb={8}>

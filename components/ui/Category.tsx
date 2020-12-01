@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { Layout } from '@/components/layout'
-import { CardsGrid, HeadingPrimary } from '@/components/ui'
+import { CardsGrid, H1 } from '@/components/ui'
 
 interface Props {
   category: string
@@ -21,7 +21,7 @@ const Category: FC<Props> = ({ category, posts, title }) => {
     <Layout title={`Joy of Code | ${category}`}>
       <Box px={[8, 16]}>
         <Box>
-          <HeadingPrimary withDivider>{title}</HeadingPrimary>
+          <H1 withDivider>{title}</H1>
         </Box>
 
         <Box my={10}>

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from 'framer-motion'
 
 import { Tilt } from '@/components/motion'
-import { NextLink } from '@/components/ui'
+import { CustomLink } from '@/components/ui'
 
 import cardTheme from '@/styles/card'
 
@@ -25,7 +25,7 @@ const cardVariant = {
 
 const Card: FC<Props> = ({ theme, title, slug }) => (
   <Tilt>
-    <NextLink href={`/posts/${encodeURIComponent(slug)}`}>
+    <CustomLink href={`/posts/${encodeURIComponent(slug)}`} isInternal>
       <MotionBox
         position="relative"
         maxW="400px"
@@ -78,7 +78,7 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
           {title}
         </Heading>
       </MotionBox>
-    </NextLink>
+    </CustomLink>
   </Tilt>
 )
 

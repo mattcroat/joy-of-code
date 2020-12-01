@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react'
 import { GetStaticProps } from 'next'
 
 import { Layout } from '@/components/layout'
-import { CardsGrid, Emoji, HeadingPrimary } from '@/components/ui'
+import { CardsGrid, Emoji, H1 } from '@/components/ui'
 
 import { getPosts } from '@/utils/posts'
 
@@ -30,10 +30,10 @@ const IndexPage: FC<Props> = ({ posts }) => (
   <Layout title="Joy of Code | ☕ Freshly Brewed Web Development Content">
     <Box px={[8, 16]}>
       <Box>
-        <HeadingPrimary>
+        <H1>
           Welcome Friend
           <Emoji emoji="👋" label="Wave emoji" />
-        </HeadingPrimary>
+        </H1>
       </Box>
 
       <Box my={12}>
