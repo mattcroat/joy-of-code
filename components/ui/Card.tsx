@@ -25,7 +25,7 @@ const cardVariant = {
 
 const Card: FC<Props> = ({ theme, title, slug }) => (
   <Tilt>
-    <NextLink href={`/posts/${slug}`}>
+    <NextLink href={`/posts/${encodeURIComponent(slug)}`}>
       <MotionBox
         position="relative"
         maxW="400px"
@@ -38,7 +38,7 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
         <Box
           h="100%"
           w="100%"
-          bg={`${cardTheme[theme].bg}, url('nebula.webp')`}
+          bg={`${cardTheme[theme].bg}, url('/nebula.webp')`}
           bgPos="0 20%"
           bgBlendMode="color"
           opacity="0.8"
