@@ -1,6 +1,7 @@
 import Card from '@/components/ui/Card'
 import CardsGrid from '@/components/ui/CardsGrid'
 import Category from '@/components/ui/Category'
+import Contribute from '@/components/ui/Contribute'
 import InlineCode from '@/components/ui/Code'
 import Emoji from '@/components/ui/Emoji'
 import Image from '@/components/ui/Image'
@@ -17,6 +18,7 @@ export {
   CardsGrid,
   Category,
   CustomLink,
+  Contribute,
   Emoji,
   H1,
   H2,

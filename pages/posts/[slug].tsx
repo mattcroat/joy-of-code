@@ -15,6 +15,7 @@ import codeTitle from 'remark-code-titles'
 import unwrapImages from 'remark-unwrap-images'
 
 import { Layout } from '@/components/layout'
+import { Contribute } from '@/components/ui'
 
 import { postsPath, postFilePaths } from '@/utils/posts'
 
@@ -29,6 +30,9 @@ interface Props {
     description: string
   }
 }
+
+// mdx components
+const components = { Contribute }
 
 // generate paths at build-time
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -50,6 +54,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { content, data } = matter(source)
 
   const MDXSource = await renderToString(content, {
+    components: { components },
     mdxOptions: {
       rehypePlugins: [rehypePrism],
       remarkPlugins: [codeTitle, unwrapImages],
@@ -65,7 +70,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 const PostPage: FC<Props> = ({ MDXSource, frontMatter }) => {
-  const content = hydrate(MDXSource)
+  const content = hydrate(MDXSource, { components })
 
   return (
     <Layout title={frontMatter.title}>
