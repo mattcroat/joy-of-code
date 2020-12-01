@@ -1,15 +1,8 @@
-import {
-  CustomLink,
-  H1,
-  H2,
-  Hr,
-  Image,
-  InlineCode,
-  Li,
-  Olist,
-  Paragraph,
-  Ulist,
-} from '@/components/ui'
+import InlineCode from './Code'
+import Image from './Image'
+import CustomLink from './Link'
+import { Olist, Ulist, Li } from './List'
+import { H1, H2, Hr, Paragraph } from './Typography'
 
 const MDXComponents = {
   a: CustomLink,
