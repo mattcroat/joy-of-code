@@ -1,8 +1,9 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { Text as ChakraText } from '@chakra-ui/react'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
+  props: unknown
 }
 
 const Text: FC<Props> = ({ children }) => (

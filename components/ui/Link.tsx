@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { Link as ChakraLink, useColorMode } from '@chakra-ui/react'
 
 import { primaryColor } from '@/styles/colors'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
   href: string
 }
 

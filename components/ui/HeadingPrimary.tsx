@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { Heading as ChakraHeading, useColorMode } from '@chakra-ui/react'
 
 import { Divider } from '@/components/ui'
@@ -6,7 +6,7 @@ import { Divider } from '@/components/ui'
 import { mutedColor } from '@/styles/colors'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
   withDivider?: boolean
 }
 
