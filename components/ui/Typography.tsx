@@ -10,6 +10,7 @@ interface HeadingProps {
 
 interface ParagraphProps {
   children: ReactNode
+  spacing?: number
 }
 
 export const Hr: FC = () => (
@@ -55,8 +56,8 @@ export const H2: FC<HeadingProps> = ({ children, withDivider }) => {
   )
 }
 
-export const Paragraph: FC<ParagraphProps> = ({ children }) => (
-  <Text fontSize={20} lineHeight="1.6" my={8}>
+export const Paragraph: FC<ParagraphProps> = ({ children, spacing = 8 }) => (
+  <Text fontSize={20} lineHeight="1.6" my={spacing}>
     {children}
   </Text>
 )

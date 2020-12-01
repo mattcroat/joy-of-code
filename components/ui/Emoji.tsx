@@ -6,10 +6,11 @@ import { Wave } from '@/components/motion'
 interface Props {
   emoji: string
   label: string
+  spacing?: number
 }
 
-const Emoji: FC<Props> = ({ emoji, label }) => (
-  <Box d="inline-block" mx={4} aria-label={label} role="img">
+const Emoji: FC<Props> = ({ emoji, label, spacing = 4 }) => (
+  <Box d="inline-block" mx={spacing} aria-label={label} role="img">
     <Wave>{emoji}</Wave>
   </Box>
 )
