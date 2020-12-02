@@ -1,3 +1,5 @@
+import { Kbd } from '@chakra-ui/react'
+
 import {
   CustomLink,
   H1,
@@ -18,6 +20,7 @@ const MDXComponents = {
   hr: Hr,
   img: Image,
   inlineCode: InlineCode,
+  kbd: Kbd,
   p: Paragraph,
   ul: Ulist,
   ol: Olist,

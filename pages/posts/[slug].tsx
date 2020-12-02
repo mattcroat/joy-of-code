@@ -15,7 +15,7 @@ import codeTitle from 'remark-code-titles'
 import unwrapImages from 'remark-unwrap-images'
 
 import { Layout } from '@/components/layout'
-import { Contribute } from '@/components/ui'
+import { Credits } from '@/components/ui'
 
 import { postsPath, postFilePaths } from '@/utils/posts'
 
@@ -32,7 +32,7 @@ interface Props {
 }
 
 // mdx components
-const components = { Contribute }
+const components = { Credits }
 
 // generate paths at build-time
 export const getStaticPaths: GetStaticPaths = async () => {
