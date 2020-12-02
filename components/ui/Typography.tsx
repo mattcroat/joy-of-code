@@ -14,7 +14,7 @@ interface ParagraphProps {
 }
 
 export const Hr: FC = () => (
-  <Divider h="4px" w="40px" bg="gray.600" mt={2} mb={4} borderBottom="none" />
+  <Divider h="4px" w="40px" bg="gray.600" my={2} borderBottom="none" />
 )
 
 export const H1: FC<HeadingProps> = ({ children, withDivider }) => {
