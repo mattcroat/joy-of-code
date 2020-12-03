@@ -204,4 +204,9 @@ export const prismLightTheme = css`
   .token.class-name {
     color: ${chakraTheme.colors.blue[500]};
   }
+
+  .remark-code-title {
+    background: ${chakraTheme.colors.blue[100]};
+    color: ${chakraTheme.colors.blue[900]};
+  }
 `
