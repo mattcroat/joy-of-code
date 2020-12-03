@@ -8,10 +8,12 @@ import { MDXProvider } from '@mdx-js/react'
 
 import { MDXComponents } from '@/components/ui'
 
+import { selectionBg, selectionText } from '@/styles/colors'
 import { prismDarkTheme, prismLightTheme } from '@/styles/prism'
 import chakraTheme from '@/styles/theme'
 
 import 'focus-visible/dist/focus-visible'
+
 interface GlobalStyleProps {
   children: ReactNode
 }
@@ -24,6 +26,7 @@ const GlobalStyle = ({ children }: GlobalStyleProps) => {
       <Global
         styles={css`
           ${colorMode === 'dark' ? prismDarkTheme : prismLightTheme};
+
           ::selection {
             background-color: ${selectionBg[colorMode]};
             color: ${selectionText[colorMode]};
