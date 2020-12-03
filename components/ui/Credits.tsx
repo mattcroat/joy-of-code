@@ -27,6 +27,7 @@ const Credits: FC = () => {
         mb={{ base: 4, md: 0 }}
         p={4}
         borderRadius="base"
+        transition="background-color 0.2s, color 0.2s"
       >
         <Paragraph spacing={4}>
           Found a mistake? I encourage you to contribute on GitHub by{' '}
@@ -49,6 +50,7 @@ const Credits: FC = () => {
           color={aboutText[colorMode]}
           p={4}
           textAlign="center"
+          transition="background-color 0.2s, color 0.2s"
         >
           <H2>
             <Emoji emoji="☕" label="Coffee emoji" />

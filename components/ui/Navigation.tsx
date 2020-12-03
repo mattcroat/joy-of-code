@@ -30,6 +30,7 @@ const Navigation: FC = () => {
       borderRight="2px"
       borderColor={borderColor[colorMode]}
       display={{ base: 'none', sm: 'block' }}
+      transition="background-color 0.2s, border-color 0.2s"
     >
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <ListItem my={8}>
