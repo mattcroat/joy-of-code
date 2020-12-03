@@ -24,8 +24,8 @@ const cardVariant = {
 }
 
 const Card: FC<Props> = ({ theme, title, slug }) => (
-  <Tilt>
-    <CustomLink href={`/posts/${encodeURIComponent(slug)}`} isInternal>
+  <CustomLink href={`/posts/${encodeURIComponent(slug)}`} isInternal>
+    <Tilt>
       <MotionBox
         position="relative"
         maxW="400px"
@@ -78,8 +78,8 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
           {title}
         </Heading>
       </MotionBox>
-    </CustomLink>
-  </Tilt>
+    </Tilt>
+  </CustomLink>
 )
 
 export default Card
