@@ -19,6 +19,7 @@
     "@mdx-js/loader": "^1.6.21",
     "@mdx-js/react": "^1.6.21",
     "@next/mdx": "^10.0.1",
+    "focus-visible": "^5.2.0",
     "framer-motion": "^2.9.4",
     "gray-matter": "^4.0.2",
     "next": "^10.0.3",

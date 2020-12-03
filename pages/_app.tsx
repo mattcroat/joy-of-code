@@ -11,6 +11,7 @@ import { MDXComponents } from '@/components/ui'
 import { prismDarkTheme, prismLightTheme } from '@/styles/prism'
 import chakraTheme from '@/styles/theme'
 
+import 'focus-visible/dist/focus-visible'
 interface GlobalStyleProps {
   children: ReactNode
 }
