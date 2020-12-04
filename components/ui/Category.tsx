@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { Layout } from '@/components/layout'
-import { CardsGrid, H1 } from '@/components/ui'
+import { CardsGrid, Emoji, H1, Paragraph } from '@/components/ui'
 
 interface Props {
   category: string
@@ -23,6 +23,13 @@ const Category: FC<Props> = ({ category, posts, title }) => {
         <Box>
           <H1 withDivider>{title}</H1>
         </Box>
+
+        {posts.length < 1 && (
+          <Paragraph>
+            Nothing to see here...
+            <Emoji emoji="🕵️" label="Spy emoji" spacing={2} />
+          </Paragraph>
+        )}
 
         <Box my={10}>
           <CardsGrid posts={posts} />
