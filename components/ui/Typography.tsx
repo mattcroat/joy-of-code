@@ -24,7 +24,7 @@ export const H1: FC<HeadingProps> = ({ children, withDivider }) => {
     <>
       <Heading
         as="h1"
-        maxW="480px"
+        maxW="600px"
         fontSize={['4xl', '5xl']}
         color={mutedColor[colorMode]}
         lineHeight="normal"
@@ -44,7 +44,7 @@ export const H2: FC<HeadingProps> = ({ children, withDivider }) => {
     <>
       <Heading
         as="h2"
-        maxW="480px"
+        maxW="600px"
         fontSize={['3xl', '4xl']}
         color={primaryColor[colorMode]}
         letterSpacing="-1px"
