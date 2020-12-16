@@ -59,10 +59,8 @@ const Credits: FC = () => {
             About Myself
           </Box>
           <Paragraph spacing={0}>
-            <CustomLink href="https://mattcroat.netlify.app/">
-              I&apos;m Matija
-            </CustomLink>
-            , and I love sharing what I know in a simple, but practical way.
+            I&apos;m Matija , and I love sharing what I know in a simple, and
+            practical way.
           </Paragraph>
         </Box>
       </Box>
