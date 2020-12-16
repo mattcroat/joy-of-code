@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Box, List, ListItem, useColorMode } from '@chakra-ui/react'
 import { faHtml5, faJs, faReact } from '@fortawesome/free-brands-svg-icons'
-import { faBrush } from '@fortawesome/free-solid-svg-icons'
+import { faPaintBrush } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { CustomLink, ThemeToggle } from '@/components/ui'
@@ -35,7 +35,7 @@ const Navigation: FC = () => {
       <List h="100%" d="flex" flexDir="column" alignItems="center">
         <ListItem my={8}>
           <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
-            <FontAwesomeIcon icon={faBrush} size="2x" />
+            <FontAwesomeIcon icon={faPaintBrush} size="2x" fixedWidth />
           </CustomLink>
         </ListItem>
 
@@ -46,7 +46,7 @@ const Navigation: FC = () => {
             hover={hoverStyle}
             isInternal
           >
-            <FontAwesomeIcon icon={faJs} size="2x" />
+            <FontAwesomeIcon icon={faJs} size="2x" fixedWidth />
           </CustomLink>
         </ListItem>
 
@@ -57,7 +57,7 @@ const Navigation: FC = () => {
             hover={hoverStyle}
             isInternal
           >
-            <FontAwesomeIcon icon={faReact} size="2x" />
+            <FontAwesomeIcon icon={faReact} size="2x" fixedWidth />
           </CustomLink>
         </ListItem>
 
@@ -68,7 +68,7 @@ const Navigation: FC = () => {
             hover={hoverStyle}
             isInternal
           >
-            <FontAwesomeIcon icon={faHtml5} size="2x" />
+            <FontAwesomeIcon icon={faHtml5} size="2x" fixedWidth />
           </CustomLink>
         </ListItem>
 
