@@ -23,7 +23,6 @@ const ImageVariants = {
 const Image: FC<Props> = ({ alt, src }) => (
   <MotionBox
     position="relative"
-    h={{ base: '400px', lg: '600px' }}
     w={{ xl: '140%' }}
     mx={{ xl: '-20%' }}
     my={{ sm: 8 }}
@@ -31,7 +30,14 @@ const Image: FC<Props> = ({ alt, src }) => (
     animate="show"
     variants={ImageVariants}
   >
-    <NextImage alt={alt} src={src} layout="fill" objectFit="contain" />
+    <NextImage
+      height="540px"
+      width="1000px"
+      alt={alt}
+      src={src}
+      layout="responsive"
+      objectFit="contain"
+    />
   </MotionBox>
 )
 
