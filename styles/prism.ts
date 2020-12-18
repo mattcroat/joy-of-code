@@ -12,7 +12,6 @@ const prismBaseTheme = css`
     color: ${chakraTheme.colors.gray[800]};
     background-color: none;
     font-family: ${chakraTheme.fonts.mono};
-    font-size: ${chakraTheme.fontSizes.xl};
     font-weight: ${chakraTheme.fontWeights.bold};
     text-align: left;
     word-spacing: normal;
@@ -33,7 +32,6 @@ const prismBaseTheme = css`
     margin: ${chakraTheme.space[6]} 0;
     overflow: auto;
     min-width: 100%;
-    font-size: 0.9rem;
     white-space: nowrap;
   }
 
@@ -126,7 +124,6 @@ const prismBaseTheme = css`
     max-width: max-content;
     transform: translate(20px, 4px);
     font-family: ${chakraTheme.fonts.mono};
-    font-size: ${chakraTheme.fontSizes.lg};
     font-weight: 600;
     background: ${chakraTheme.colors.orange[200]};
     color: ${chakraTheme.colors.orange[900]};
