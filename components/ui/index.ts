@@ -2,7 +2,7 @@ import Card from '@/components/ui/Card'
 import CardsGrid from '@/components/ui/CardsGrid'
 import Category from '@/components/ui/Category'
 import Credits from '@/components/ui/Credits'
-import InlineCode from '@/components/ui/Code'
+import { CodeTitle, Pre, InlineCode } from '@/components/ui/Code'
 import Emoji from '@/components/ui/Emoji'
 import Image from '@/components/ui/Image'
 import CustomLink from '@/components/ui/Link'
@@ -17,6 +17,7 @@ export {
   Card,
   CardsGrid,
   Category,
+  CodeTitle,
   Credits,
   CustomLink,
   Emoji,
@@ -30,6 +31,7 @@ export {
   Navigation,
   Olist,
   Paragraph,
+  Pre,
   ThemeToggle,
   Ulist,
 }

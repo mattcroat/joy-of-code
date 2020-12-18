@@ -6,13 +6,27 @@ interface Props {
 }
 
 export const Olist: FC<Props> = ({ children }) => (
-  <List listStyleType="decimal" fontSize={20} pl={4} mb={8} mt={2} ml={2}>
+  <List
+    listStyleType="decimal"
+    fontSize={[16, 18, 20]}
+    pl={4}
+    mb={8}
+    mt={2}
+    ml={2}
+  >
     {children}
   </List>
 )
 
 export const Ulist: FC<Props> = ({ children }) => (
-  <List listStyleType="disc" fontSize={20} pl={4} mb={8} mt={2} ml={2}>
+  <List
+    listStyleType="disc"
+    fontSize={[16, 18, 20]}
+    pl={4}
+    mb={8}
+    mt={2}
+    ml={2}
+  >
     {children}
   </List>
 )

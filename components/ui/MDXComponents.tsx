@@ -1,6 +1,7 @@
 import { Kbd } from '@chakra-ui/react'
 
 import {
+  CodeTitle,
   CustomLink,
   H1,
   H2,
@@ -10,6 +11,7 @@ import {
   Li,
   Olist,
   Paragraph,
+  Pre,
   Ulist,
 } from '@/components/ui'
 
@@ -25,6 +27,8 @@ const MDXComponents = {
   ul: Ulist,
   ol: Olist,
   li: Li,
+  pre: Pre,
+  div: CodeTitle,
 }
 
 export default MDXComponents

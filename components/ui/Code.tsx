@@ -1,14 +1,27 @@
-import { FC, ReactNode } from 'react'
-import { Code } from '@chakra-ui/react'
+import { ReactNode } from 'react'
+import { Box, Code } from '@chakra-ui/react'
 
 interface Props {
   children: ReactNode
 }
 
-const InlineCode: FC<Props> = ({ children }) => (
-  <Code bg="orange.200" color="orange.900" fontSize="inherit">
-    {children}
-  </Code>
-)
+export function InlineCode(props: Props) {
+  return (
+    <Code
+      d="inline"
+      py="0.1rem"
+      bg="orange.200"
+      color="orange.900"
+      fontSize="inherit"
+      {...props}
+    />
+  )
+}
 
-export default InlineCode
+export function Pre(props: Props) {
+  return <Box as="pre" fontSize={[16, 18, 20]} {...props} />
+}
+
+export function CodeTitle(props: Props) {
+  return <Box fontSize={[16, 18, 20]} {...props} />
+}
