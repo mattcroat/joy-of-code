@@ -1,13 +1,15 @@
 ---
 title: Create a Coding Sandbox
-description: How to create a code sandbox from scratch
-published: '2020-12-15'
+description: How to create a coding sandbox from scratch
+published: '2020-12-18'
 category: 'JavaScript'
 ---
 
 # Create a Coding Sandbox
 
-Have you ever wondered how code editors like [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work? If so, we're going to make ours from scratch. If I got your curiosity, keep on reading. Follow along, or look at the source code available [here](https://github.com/mattcroat/javascript-sandbox) on GitHub.
+---
+
+Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work? If so, continue reading. You can code along, or look at the [source code](https://github.com/mattcroat/javascript-sandbox) on GitHub.
 
 ![JavaScript Sandbox](https://res.cloudinary.com/joyofcode/image/upload/v1608239608/create-a-coding-sandbox/sandbox.png)
 
@@ -20,32 +22,32 @@ Have you ever wondered how code editors like [Codepen](https://codepen.io/), [JS
 - Use of closures by writing a debounce function
 - Writing helper functions to make DOM (Document Object Model) manipulation easier
 - Displaying errors from the console in the UI (user interface)
-- Use regex to replace content
+- Regex replacement
 
 Let's start by playing detective 🔎, and examining Codepen's source code through the lens of our developer tools. This part is optional, as I only want to share my thought process with you.
 
-If you're in a new pen on Codepen, pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to bring up the developers tools and inspecting the right side column where the input is located, we notice something interesting. It's an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)! You can imagine an iframe as a separate page inside another page. By definition "it's a nested browsing context, embedding another HTML page into the current one."
+If you're in a new pen on Codepen, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to bring up the developers tools and inspecting the right side column. We notice something interesting. It's an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)! You can imagine an iframe as a separate page inside another page. By definition "it's a nested browsing context, embedding another HTML page into the current one."
 
 ![Codepen](https://res.cloudinary.com/joyofcode/image/upload/v1608239609/create-a-coding-sandbox/codepen.png)
 
-An iframe contains everything just like a regular page, but contained into it's own universe. This sounds like a fun place for a playground. Just by playing around on Codepen, and observing how the contents of the iframe change we can notice a couple of things.
+An iframe behaves just like a regular page, but contained into it's own microcosm. This sounds like the perfect spot for a playground. We can already make a couple of observations.
 
 ## Observations
 
 - The iframe behaves just like a regular page
-- The user inputs something (outside the iframe)
-- It gets displayed inside an iframe, as the final result
-- We can also execute JavaScript, and the console errors are logged to the screen
+- User inputs something on the left side (regular page)
+- Output displays on the right (iframe)
+- We can execute JavaScript
 
-Now, any input would do, and in my first playing around I just used a plain textarea. It just happens that these sites are using "fancy" textareas that do syntax highlighting and other things for you. You're going to find out that Codepen, and JSFiddle in particular use [CodeMirror](https://codemirror.net/). CodeSandbox on the other hand is a lot more involved, and it's basically an IDE (integrated development environment) inside your browser. It uses the [Monaco Editor](https://microsoft.github.io/monaco-editor/index.html) just like [VS Code](https://code.visualstudio.com/) does. That's what I decided to use for this project.
+Now, any input would do. It can be just a plain textarea. It just happens that these sites are using "fancy" textareas that do syntax highlighting and other things for you. Codepen, and JSFiddle for example use [CodeMirror](https://codemirror.net/). CodeSandbox on the other hand is a lot more involved, and it's basically an IDE (integrated development environment) inside your browser. It uses the [Monaco Editor](https://microsoft.github.io/monaco-editor/index.html) just like [VS Code](https://code.visualstudio.com/) does. That's what I decided to use for this project.
 
-From our observations, we can already start seeing how the pieces of the puzzle might come together. We first start with the basic ability of our user to input something, and display it inside an iframe. Before we do that, let's get the project set up. We won't need any bundlers, or build tools. The only thing I would advise is to get the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension for VS Code so you can start a development server because otherwise it won't work due to the limitations of using the file protocol. If you prefer using something else, go ahead.
+We won't need any bundlers, or build tools. The only thing I would advise is to get the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension for VS Code so you can start a development server because otherwise it won't work due to the limitations of using the file protocol. If you prefer using something else, go ahead.
 
 ## Getting Started
 
-That being said, start by creating a folder `js-sandbox` and inside creating a `src` folder and `index.html` file. Inside `src` create `src/app.js`, and `src/style.css`.
+That being said, start by creating a folder `js-sandbox`. Inside create another folder `src`, and a `index.html` file. Inside `src` create `src/app.js`, and `src/style.css`.
 
-Keep in mind that for Live Server to work it requires you to have a folder open inside VS Code. You can then start Live Server from `index.html` by pressing <kbd>F1</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> <kbd>P</kbd> to open your [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) and find "Open with Live Server". You can also right click on the file, or press the bottom right "Go Live" button.
+Keep in mind that for _Live Server_ to work it requires you to have a folder open inside VS Code. You can then start Live Server from `index.html` by pressing <kbd>F1</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> to open your [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) and find "Open with Live Server". You can also right click on the file, or press the bottom right "Go Live" button.
 
 ## Markup
 
@@ -77,11 +79,11 @@ Your `index.html` should look like this.
 </html>
 ```
 
-You might have noticed that instead of including our script in the `body`, we've done so in the `head`. This is possible due to `defer` property which waits for the page to load before running JavaScript.
+Notice that instead of including our script in the `body`, we've done so in the `head` of our document. This is possible due to the `defer` property which waits for the page to load before running JavaScript. Before we could also use the [DOMContentLoaded](https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event) event listener to make sure our JavaScript doesn't run before the DOM is loaded.
 
-In this case, we don't have to include it because modules use it by default. In the past we had to use a bundler such as [Webpack](https://webpack.js.org/), or [Parcel](https://parceljs.org/) to be able to understand and resolve dependencies from NPM packages, and to use the `import` syntax. That's no longer the case with browsers now natively supporting modules. In the future, instead of using bundlers in development, they're going to be an optimization step when shipping code to the browser, so the bundle size doesn't get out of hand on large projects.
+In this case, we don't have to include it because _modules_ use it by default. In the past we had to use a bundler such as [Webpack](https://webpack.js.org/), or [Parcel](https://parceljs.org/) to be able to understand and resolve dependencies from NPM packages, and to use the `import` syntax. That's no longer the case with browsers now natively supporting modules. In the future, instead of using bundlers in development, they're going to be an optimization step when shipping code to the browser.
 
-The donwside is that we need to repack older packages not using ES modules so they work. This is where [Skypack](https://www.skypack.dev/) comes in to bridge the gap. If you've heard about [Deno](https://deno.land/), it's the same how it deals with packages. The idea is to simply use a link to import the package which is smart enough to resolve the dependenices, and do the caching over a CDN (content delivery network) instead of having to do `npm i package` and dealing with `node_modules`.
+The downside is that we need to repack older packages not using ES modules so they work. This is where [Skypack](https://www.skypack.dev/) comes in to bridge the gap. If you've heard about the [Node](https://nodejs.org/en/) competitor [Deno](https://deno.land/), it's the same concept how it deals with packages. Instead of having to do `npm install package` and dealing with `node_modules` you simply use a url to import the package which is smart enough to resolve the dependenices, and do the caching over a CDN (content delivery network).
 
 ```html:example.html
 <button id="btn">Click</button>
@@ -92,18 +94,16 @@ The donwside is that we need to repack older packages not using ES modules so th
 </script>
 ```
 
-One thing worth noting is that `defer` only works with `src`, so unless it's a module, it won't work. If any of this is unfamiliar to you, take some time to research each subject, or find posts about it on here.
+One thing to note is that `defer` only works when you include `src`, or it's a module. If any of this is unfamiliar to you, take some time to research each subject, because modules are an important aspect of JavaScript.
 
 ## Styles
 
-I won't explain styling in great detail, to not make this a novel. If there's anything valuable to learn from, I'm going to leave comments. For the most part, it's a simple layout. Just paste and forget these styles in `style.css`
+For the most part, it's a simple layout. Just paste and forget these styles in `style.css` so we can focus on JavaScript.
 
 ```css:style.css
-/* Google Fonts imports */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
 
-/* CSS Variables */
 :root {
   --font-size: 1.25rem;
   --spacing: 2rem;
@@ -111,13 +111,12 @@ I won't explain styling in great detail, to not make this a novel. If there's an
   --mono: 'IBM Plex Mono', monospace;
 }
 
-/* CSS resets */
 * {
   margin: 0;
   padding: 0;
   /*
-    Tells the browser to account for any border and padding in the
-    values you specify for an element's width and height
+    uses any border and padding as part of the
+    element's width and height
   */
   box-sizing: border-box;
 }
@@ -150,10 +149,7 @@ h3 {
   height: 100%;
   min-width: 50vw;
   max-width: 100vw;
-  /*
-    Makes the element resize like a textarea,
-    and you can lock-in the axis
-  */
+  /* makes the element resize like a textarea */
   resize: horizontal;
   overflow: hidden;
 }
@@ -194,7 +190,7 @@ h3 {
 
 pre {
   font-family: var(--mono);
-  /* Changes how text is displayed in a pre */
+  /* changes how text is displayed in a pre */
   white-space: pre-wrap;
   word-wrap: break-word;
 }
@@ -203,7 +199,6 @@ pre {
   display: none;
 }
 
-/* Responsive */
 @media (max-width: 800px) {
   body {
     display: block;
@@ -231,30 +226,28 @@ pre {
 
 ## The Sandbox
 
-One more thing before we begin, inside `src` create `utility.js`. Here we're going to have our helper functions.
+Inside `src` create a `utility.js`. Here we're going to put our helper functions.
 
 ```js:utility.js
 export function getEl(id) {
-  // Returns element by id saving us a couple of keystrokes
+  // returns element by id
   return document.getElementById(id)
 }
 
 export function createEl(tag, content) {
   if (content) {
-    // Creates a nice API like createEl('h1,'Hello, World!')
-    // that yields <h1>Hello, World!</h1>
+    // creates a nice API like createEl('h1,'Hello, World!')
     const domEl = document.createElement(tag)
     domEl.innerText = content
 
     return domEl
   }
 
-  // If no content just return the element
   return document.createElement(tag)
 }
 ```
 
-We're set! Head back to `app.js` and let's get started. First let's do some imports, and grab some DOM elements.
+We're set! Head back to `app.js` and let's get started. First let's import the utilities, and grab the DOM elements.
 
 ```js:app.js
 import { createEl, getEl } from './utility.js'
@@ -267,15 +260,15 @@ const editorEl = getEl('editor')
 const sourceEl = getEl('source')
 ```
 
-The \*.js extension is required, if you worked with a framework before you might be surprised because your bundler would handle that.
+The \*_.js_ extension is required. If you work with a bundler like Webpack you don't have to since it handles that for you.
 
-Let's add a way to get the input and output it. We're using a textarea temporarily to focus on the main concept, instead of editor implementation. If you remember, the editor is just a fancy textarea anyhow.
+Let's add a way to get the input, and output it. We're using a textarea to focus on the main concept, instead of implementation.
 
-How do we modify the contents of an iframe? The easiest method is using `iframe.srcdoc` and changing it each update by adding an event listener on `keyup` to our textarea. This is how we're going to achieve the live update effect. Don't take my word on it, I highly encourage you to read the MDN docs on it.
+How do we modify the contents of an iframe? The easiest method is using the [srcdoc](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/srcdoc) method which specifies the content of an iframe. To achieve the live update effect, we're just going to attach a `keyup` event listener to our textarea.
 
 ```js:app.js
 function getCode() {
-  // This just returns the textarea content whenever invoked
+  // get contents of the textarea
   return editorEl.value
 }
 
@@ -312,40 +305,39 @@ function setIframeContent(code) {
     </html>
   `
 
-  // Set the iframe source to the new source
   iframeEl.srcdoc = source
 }
 
 
 function updateUI() {
-  // Each time we run updateUI() get what we typed
+  // get what we typed
   const code = getCode()
-  // Pass it to update the iframe
+  // pass it to update the iframe
   setIframeContent(code)
 }
 
-// I prefer this over having it inside the event listener
+// handler
 function handleKeyUp() {
   updateUI()
 }
 
-// Simple keyup listener
+// keyup listener
 editorEl.addEventListener('keyup', handleKeyUp)
 ```
 
-This is basically building our "template" to pass to the iframe. You can realize how easily this can be turned to something like Codepen. In this case we're going to focus on JavaScript. In reality you can pass HTML, CSS, JavaScript from different fields on each update.
+This is basically building our "template" to pass to the iframe. You can realize how easily you can make Codepen out of this. In this case we're going to focus on JavaScript. In reality you can pass HTML, CSS, and JavaScript from to it. In fact, I encourage you to stop what you're doing, and do it just to learn.
 
 Congrats! Try it out.
 
 ![Hello, World!](https://res.cloudinary.com/joyofcode/image/upload/v1608239608/create-a-coding-sandbox/hello-world.png)
 
-I included an empty `#app` div to have a simple mount point for tools like React, and Vue. My primary goal when creating this was not recreating Codepen, but have a simple tool to see transpiled JavaScript. You can repurpose this to anything you want, and I encourage you to do so! Even now, go ahead and try changing the contents of the body inside the iframe similar to how Codepen works, instead of the script as an exercise. 💪
+I included an empty div to have a simple mount point for frameworks like [React](https://reactjs.org/), and [Vue](https://vuejs.org/). My primary goal is to not recreate Codepen, but to dive deeper into how it works. You can repurpose this to anything you want.
 
-If you're cool, we can proceed. I mentioned something about transpiled code, but that might not mean anything to you. This is where [Babel](https://babeljs.io/) comes in. Babel is a JavaScript compiler that can take modern JavaScript syntax that might not be supported across browsers, and transpile or compile it to an older version of JavaScript. This enables us to write modern JavaScript today, and let Babel do the hard work. It's what every framework uses, and modern development wouldn't be possible without it.
+If you're cool, we can proceed. I mentioned something about transpiled code, but that might not mean anything to you. This is where [Babel](https://babeljs.io/) comes in. Babel is a JavaScript compiler that can take modern JavaScript syntax that might not be supported across browsers, and transpile (you might hear compile, it's interchangable) it to an older version of JavaScript. This enables us to write modern JavaScript today, and let Babel do the hard work. Modern development wouldn't be the same, or possible without it.
 
-Where Babel is also used for is transpiling React's JSX to what browsers can understand, and it has other presets, and plugins. The last part isn't important if you don't know React, but the more you know!
+Where Babel is also used for is transpiling [JSX](https://reactjs.org/docs/introducing-jsx.html) (JavaScript XML, used in place of HTML popularized by frameworks like React) to what browsers can understand, and it has other presets, and plugins. The last part isn't important if you don't know React.
 
-The text/babel type let's Babel know to process the code, and we have to include a special [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) to use modules.
+The _text/babel_ type let's Babel know to process the code, and we have to include a special [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) to use modules with Babel.
 
 ```js:example.js
 // ES6+ code
@@ -355,32 +347,32 @@ const banana = 'banana'
 var banana = 'banana'
 ```
 
-This is a boring example, but it gets a lot cooler when using syntactic sugar like classes, and seeing how it works under the hood! We're going to explore this in a moment, because we're also going to show the transpiled code. This is what gets me more excited than just making a Codepen clone. Let's learn how these things that we unknowingly use each day work.
+This is a boring example, but it gets a lot cooler when using [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) like _classes_, and seeing how it works under the hood! We're going to explore this in a moment, since we're going to implement it. This is what gets me more excited than just making another Codepen.
 
 ## Babel
 
-You might have noticed the [@babel/standalone](https://babeljs.io/docs/en/babel-standalone.html) import. This let's us use Babel client-side (in the browser). It's perfect for this project. We have to import at the top of `app.js` because iframes are sandboxed (pun intended) so we can't use the one that's inside.
+You might have noticed the [@babel/standalone](https://babeljs.io/docs/en/babel-standalone.html) import. This let's us use Babel client-side (in the browser). It's perfect for this project. We have to import the package inside the parent `app.js` because iframes are sandboxed (pun intended) so we can't use the one already declared.
 
 ```js:app.js
 import { transform } from 'https://cdn.skypack.dev/@babel/standalone'
 ```
 
-The regular import is just Babel, but we can destructure transform from it so we only use what we need
+The regular import is just `Babel`. We can destructure `transform` from it so we only use what we need.
 
 We're going to add a `transpileCode` function inside `updateUI` and also pass it `code` so we can work with it. You can place it anywhere.
 
 ```js:app.js
 function transpileCode(code) {
-  // The magic sauce used to transpile the code
+  // the magic sauce used to transpile the code
   const options = { presets: ['es2015-loose', 'react'] }
-  // Transform returns an object so we can destructure and rename it
+  // transform returns an object so we can destructure and rename it
   const { code: babelCode } = transform(code, options)
 
-  // Tt's going to append each time this runs,
-  //so  we need to clear it
+  // it's going to append each time
+  // so we need to clear it
   sourceEl.innerHTML = ''
 
-  // Using our DOM helpers we created earlier
+  // using our DOM helpers we created earlier
   const titleEl = createEl('h3', '📜 Source')
   const preEl = createEl('pre', babelCode)
 
@@ -403,54 +395,53 @@ function updateUI() {
 
 ![Transpiled code](https://res.cloudinary.com/joyofcode/image/upload/v1608239608/create-a-coding-sandbox/transpiled.png)
 
-[Pre](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) is just a useful tag to show preformatted text. We can also control how the text is formatted in CSS which I left notes on in `style.css`.
+[Pre](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) is just a useful tag to show preformatted text. We can also control how the text is formatted in CSS.
 
-Let's talk about Babel. We can pass different presets to Babel, telling it what version of JavaScript to target. In this case I'm using the _es2015-loose_ preset and _react_ for [JSX](https://reactjs.org/docs/introducing-jsx.html). The _loose_ in the preset means it's going to output code that's doesn't completely adhere to the JavaScript specification, but more like what a human would write making it more readable. If you just used destructuring for example, it would quickly saturate the output.
+We can pass different presets to Babel, telling it what version of JavaScript to target. In this case I'm using the _es2015-loose_ preset and _react_ for [JSX](https://reactjs.org/docs/introducing-jsx.html). The _loose_ in the preset means it's going to output code that's more human readable, and doesn't strictly adhere to the JavaScript specification. If you just used destructuring for example, it would quickly saturate the output.
 
-I encourage you to play around with this. These yearly presets have been deprecated for [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) which is the standard one now, but for the purposes of this project I'm not using it. You would just have to replace ~es2015-loose~ with ~env~.
+I encourage you to play around. These yearly presets have been deprecated for [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) which you should use in production. You would just have to replace ~es2015-loose~ with ~env~.
 
-The last part is the `transform` itself which accepts the input, options, and returns an object if you look at the docs.
+The last part is the `transform` itself which accepts the _input_, _options_, and returns an object.
 
 ```js:example.js
 const input = `const getMessage = () => 'Hello, World!'`
 const output = Babel.transform(input, { presets: ['env'] }).code
 ```
 
-There's also a [Babel REPL](https://babeljs.io/repl) you can use to play around. That's how I found out about the presets, because the docs aren't that clear to the uninitiated. I won't go into the minutia of how Babel does it's magic, unless you want to read about [ASTs](https://en.wikipedia.org/wiki/Abstract_syntax_tree), and because I only understand the concepts.
+There's also a [Babel REPL](https://babeljs.io/repl) you can use to play around. That's how I found out about the presets, because the docs aren't that clear to the uninitiated. I won't go into the minutia of how Babel works under the hood, unless you want to read about [ASTs](https://en.wikipedia.org/wiki/Abstract_syntax_tree), and because I only understand the concepts.
 
-## Using Regex to Remove Imports
+## Regex Replacement
 
-There's an issue created by choosing the ESM route. We can import NPM packages straight into our code, instead of appending them inside our iframe like Codepen would. That means they're also going to get transpiled. We can fix that by using regex to remove them before they get transpiled. You also might have noticed the "/_#**PURE**_/" text created by Babel. Since we only care about the educational aspect of this, we're going to remove it also.
+There's an issue created by choosing the ESM route. We can import NPM packages straight into our code, instead of appending them inside our iframe like Codepen would. That means they're also going to get transpiled. We can fix that by using regex to remove them before they get transpiled. You might have noticed the _/\*#\_\_PURE\_\_\*/_ string created by Babel. Since we only care about the transpiled output, we're also going to remove it.
 
-You don't need to understand regex. I know enough myself to be able to read it, since I rarely use it when I need it I just search for what I need and it works. First let's add some regex patterns at the top of `app.js`, right below where we grab the DOM elements.
+You don't need to understand regex. I know enough myself to be able to read it, since I rarely use it. When I need it I just search for what I need and it works out. First let's add some regex patterns at the top of `app.js`, right below where we grab the DOM elements.
 
 ```js:app.js
-// https://gist.github.com/manekinekko/7e58a17bc62a9be47172
 const importsMatchRegex = /import(?:["'\s]*([\w*{}\n\r\t, ]+)from\s*)?["'\s].*([@\w/_-]+)["'\s].*/g
 const stringMatchRegex = /\/\*#__PURE__\*\//g
 ```
 
-The imports regex just matches anything that starts with "import" and could be a default or named import spanning multiple lines. For the string regex we just target "/_#**PURE**_/" and the slashes are special characters so we escape them.
+The [imports regex](https://gist.github.com/manekinekko/7e58a17bc62a9be47172) just matches anything that starts with _import_ and could be a default or named import spanning multiple lines. For the string regex we just target the specified string and escape the special characters with slashes.
 
-Regex itself isn't hard, it's just hard to read. It's best to look for one yourself, because there might be edge cases you didn't think of.
+Regex itself isn't hard, it's just hard to read. If you need to use it, just look it up, because there might be edge cases you didn't think of.
 
-We need to adjust `transpileCode`. We're also going to add a `format` function above it that's going to abstract the regex replacement code so it looks neat. I don't look in advance to break code up like this, in fact it's spaghetti while I'm playing around, then I clean it up. This is a cooking show where I already baked the pie. Apologies for changing some variable names, if you've been coding along! 😄
+We need to update `transpileCode`. We're also going to add a `format` function above it that's going to abstract the regex replacement code so it looks neat. I don't look in advance to break code up like this. In fact it's spaghetti, before I decide to clean it up.
 
 ```js:app.js
-// This just makes for a nicer API to work with
+//makes for a nicer API to work with
 function format(string, regex, replacement = '') {
   return string.replace(regex, replacement).trim()
 }
 
 function transpileCode(code) {
-  // We need to remove the imports before it hits Babel transform
+  // remove the imports before transform
   const codeToTranspile = format(code, importsMatchRegex)
 
-  // Babel can do it's magic
+  // the babel sauce
   const options = { presets: ['es2015-loose', 'react'] }
   const { code: babelCode } = transform(codeToTranspile, options)
 
-  // Ignore /*#__PURE__*/ from transpiled output
+  // ignore /*#__PURE__*/ from transpiled output
   const transpiledCode = format(babelCode, stringMatchRegex)
 
   sourceEl.innerHTML = ''
@@ -466,9 +457,9 @@ Great, it works! Give it a try.
 
 ## Debounce
 
-So far so good, but if you open dev tools and look at the console you're going to notice an avalanche of output caused by our event listener. This is not a great user experience, like talking and being interrupted for not finishing your thought. We want to add a delay to the input. This is what's known as a debounce. Imagine typing something into a search field that queries an endpoint. You don't want to spam the endpoint with requests for each letter.
+So far so good, but if you open dev tools and look at the console you're going to notice an avalanche of output. This is not a great user experience. Imagine talking and being interrupted for not finishing your thought. We want to add a delay to the input. This is what's known as a debounce. Imagine typing something into a search field that queries an endpoint. You don't want to spam requests for each letter.
 
-Inside `utility.js` we're going to add our debounce function, and import it in `app.js`.
+Open `utility.js`, and add the `debounce` function — then import it in `app.js`.
 
 ```js:utility.js
 export function debounce(callback, delay) {
@@ -485,7 +476,9 @@ export function debounce(callback, delay) {
 import { createEl, debounce, getEl } from './utility.js'
 ```
 
-The debounce is just a `setTimeout` that accepts a _callback_ function to run after it's done, and a _delay_ in milliseconds. It returns a function that clears the previous `setTimeout`, and sets a new one. This is possible thanks to [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures). You might not even know, but you're using them without knowing. **A closure is when a function remembers it's outer state even after it runs and executes**. It happens without you thinking about it.
+The debounce is just a `setTimeout` that accepts a _callback_ function to run after it's done, and a _delay_ in milliseconds. It returns a function that clears the previous `setTimeout`, and sets a new one. This is possible due to [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
+
+**A closure is when a function remembers it's outer state even after it runs and executes**. It happens without you thinking about it.
 
 ```js:example.js
 const greet = () => console.log('Hello, World!')
@@ -498,6 +491,8 @@ document.addEventListener('click', debounce(greet, 1000))
 )
 ```
 
+You're using closures without knowing most of the time.
+
 Even if the functions runs, thanks to _closures_ it remembers the value of `timerId`, so it can clear it. Try it out yourself! The dev tools are a quick and easy way to get your hands dirty.
 
 Now we need to update our event listener.
@@ -506,13 +501,13 @@ Now we need to update our event listener.
 editorEl.addEventListener('keyup', debounce(handleKeyUp, 1000))
 ```
 
-## Sending Errors
+## Errors
 
-How do we display errors to our user? We clearly see them in the console. There's a couple of ways. In JavaScript we can rewrite anything, so we could do that for `console` by just redeclaring it, making it do our biding. Turns out, there's an easier method. We can use the [GlobalEventHandlers.onerror](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror) listener.
+How do we display errors to our user? We clearly see them in the console. There's a couple of ways. In JavaScript we can rewrite anything, so we could do that for `console` by just redeclaring it. Turns out, there's an easier method. We can use the [GlobalEventHandlers.onerror](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror) listener.
 
-It's just a regular listener that we can place on the window object, and listen for error messages. It's almost that easy! In our case we have to attach the listener inside our iframe, and somehow send them up to the parent. I had weird issues just using it on the parent itself where it would ignore certain types of errors, so that's how I came up with this solution. There's a handy [window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method for doing such.
+It's just a regular listener that we can place on the window object, and listen for error messages. It's almost that easy! In our case we have to attach the listener inside our iframe, and somehow send them up to the parent. I had weird issues just using it on the parent itself where it would ignore certain types of errors. There's a handy [window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method for doing such.
 
-Let's update `setIframeContent`. We're just going to add another script section at the end, because if our passed in code fails at any point it's not going to run so it needs to be separate. Everything else is the same as before, I just want to focus on this part.
+We're just going to add another script section at the end of `setIframeContent`. If our code fails at any point, it's not going to run. It needs to be separate. Everything else is the same as before.
 
 ```js:app.js
 function setIframeContent(code) {
@@ -534,9 +529,9 @@ function setIframeContent(code) {
 }
 ```
 
-Note that the event listener passes an event object which we can destructure and rename message from. We specify the sender by saying `window.parent` and the arguments are the message, and target origin URI if we want to require it, but `*` let's it be anything.
+Note that the event listener passes an event object which we can destructure and rename `event.message` from. We specify the sender by saying `window.parent` and the arguments are the _message_, and _target origin URI_ if we want to require it, but _\*_ let's it be anything.
 
-Great! Now we can listen for any message. Let's add a _message_ listener, after our _keyup_ listener. We're also going to need a `handleMessage`.
+Great! Now we can listen for any message. Let's add a `message` listener, after our `keyup` listener. We're also going to need a `handleMessage`.
 
 ```js:app.js
 function handleMessage({ data: errorMessage }) {
@@ -548,16 +543,16 @@ function handleMessage({ data: errorMessage }) {
 window.addEventListener('message', handleMessage)
 ```
 
-The response we get is `event.data` so we destructure it. We check if the message is a string meaning it's our error message because it could be anything, and mess up our output later
+The response we get is `event.data` so we destructure it. We check if `message` is a string, meaning it's our error message because it could be anything.
 
 We're going to send the error message to `logErrors`.
 
 ```js:app.js
 function logErrors(error) {
-  // We need to clear it  otherwise it's just going to keep on appending
+  // clear errors
   errorsEl.innerHTML = ''
 
-  // Creating our title and pre elements
+  // create title and pre element
   const titleEl = createEl('h3', '💩 Oops!')
   const preEl = createEl('pre', error)
 
@@ -597,7 +592,7 @@ The last thing left for us to do is replace our beautiful textarea with [Monaco 
 
 First we need to edit `index.html`.
 
-```diff
+```diff:index.html
 <div class="code">
 - <textarea id="editor" spellcheck="false"></textarea>
 + <div id="editor"></div>
@@ -607,13 +602,8 @@ First we need to edit `index.html`.
 Second, in `src` create `MonacoEditor.js`.
 
 ```js:MonacoEditor.js
-// Import Monaco Editor
 import * as monaco from 'https://cdn.skypack.dev/monaco-editor'
 
-// Before loading the editor, define a global MonacoEnvironment that
-// overwrites the default worker url location. HTML5 does not allow
-// cross-domain web workers, so we need to proxy the instantiation
-// of a web worker through a same-domain script.
 window.MonacoEnvironment = {
   getWorkerUrl: () => {
     return `
@@ -632,7 +622,7 @@ const editorOptions = {
   value: '',
   language: 'javascript',
   theme: 'vs-dark',
-  // automaticLayout checks if the editor resized
+  // checks if the editor resized to adjust
   automaticLayout: true,
   minimap: {
     enabled: false,
@@ -650,7 +640,7 @@ export const editor = monaco.editor.create(
 
 ```
 
-Before we add it to `app.js` let me explain some things. The Monaco Editor is the base that VS Code uses, you don't get a sidebar or anything fancy. That's Microsoft sauce on top of it. They also develop all these projects together. It uses [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) which lets us off-load heavy tasks to background threads since JavaScript runs on a single thread, but the browser doesn't have to. Fortunately, we don't have to think about that. I hope that clears up the `window.MonacoEnvironmentacoEnvironment` part.
+Before we add it to `app.js` let me explain some things. The Monaco Editor is the base that VS Code uses, you don't get a sidebar or anything fancy. That's Microsoft sauce on top of it. They also develop all these projects together. It uses [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) which lets us off-load heavy tasks to background threads since JavaScript runs on a single thread, but the browser doesn't have to. Fortunately, we don't have to think about that. I hope that clears up the `window.MonacoEnvironment` part.
 
 This is only a bit more convoluted because we're using a CDN. There's a great [monaco-editor-samples](https://github.com/microsoft/monaco-editor-samples) repository with different examples how to set up Monaco Editor for different environments. You can also explore the [Monaco Editor API](https://microsoft.github.io/monaco-editor/api/index.html).
 
@@ -660,7 +650,7 @@ With that out of the way, we can use our editor! Let's import it at the top insi
 import { editor } from './monacoEditor.js'
 
 function getCode() {
-  // Built-in method to get the input value
+  // built-in method to get the input value
   return editor.getValue()
 }
 ```
