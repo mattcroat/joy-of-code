@@ -21,13 +21,13 @@ const Category: FC<Props> = ({ category, posts, title }) => {
     <Layout title={`Joy of Code | ${category}`}>
       <Box px={[8, 16]}>
         <Box>
-          <H1 withDivider>{title}</H1>
+          <H1>{title}</H1>
         </Box>
 
         {posts.length < 1 && (
           <Paragraph>
             Nothing to see here...
-            <Emoji emoji="🕵️" label="Spy emoji" spacing={2} />
+            <Emoji emoji="🕵️" label="Spy emoji" spacing={2} animate />
           </Paragraph>
         )}
 

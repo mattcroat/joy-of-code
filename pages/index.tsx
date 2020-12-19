@@ -32,7 +32,7 @@ const IndexPage: FC<Props> = ({ posts }) => (
       <Box>
         <H1>
           Welcome Friend
-          <Emoji emoji="👋" label="Waving hand emoji" />
+          <Emoji emoji="👋" label="Waving hand emoji" animate />
         </H1>
       </Box>
 

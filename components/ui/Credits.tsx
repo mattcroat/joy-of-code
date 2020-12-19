@@ -39,6 +39,7 @@ export function Credits() {
             emoji="🥰"
             label="Smiling face with hearts emoji"
             spacing={1}
+            animate
           />
         </Paragraph>
       </Box>
@@ -52,7 +53,7 @@ export function Credits() {
           transition="background-color 0.2s, color 0.2s"
         >
           <H2>
-            <Emoji emoji="☕" label="Coffee emoji" />
+            <Emoji emoji="☕" label="Coffee emoji" animate />
           </H2>
           <Box as="h3" fontSize="2xl" py={2}>
             About Myself
