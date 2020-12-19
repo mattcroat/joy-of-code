@@ -1,10 +1,12 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { Link, useColorMode } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
 import { primaryColor } from '@/styles/colors'
 
-interface CustomLink {
+import { Emoji } from '@/components/ui'
+
+interface Props {
   color?: string
   children: ReactNode
   hover?: {
@@ -15,13 +17,13 @@ interface CustomLink {
   isInternal?: boolean
 }
 
-const CustomLink: FC<CustomLink> = ({
+export function CustomLink({
   color,
   children,
   hover,
   href,
   isInternal = false,
-}) => {
+}: Props) {
   const { colorMode } = useColorMode()
 
   if (isInternal) {
@@ -42,10 +44,9 @@ const CustomLink: FC<CustomLink> = ({
         rel="noreferrer noopener"
         target="_blank"
       >
+        <Emoji emoji="🔗" label="Link emoji" spacing={1} />
         {children}
       </Link>
     </NextLink>
   )
 }
-
-export default CustomLink
