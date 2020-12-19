@@ -408,13 +408,13 @@ const input = `const getMessage = () => 'Hello, World!'`
 const output = Babel.transform(input, { presets: ['env'] }).code
 ```
 
-There's also a [Babel REPL](https://babeljs.io/repl) you can use to play around. That's how I found out about the presets, because the docs aren't that clear to the uninitiated. I won't go into the minutia of how Babel works under the hood, unless you want to read about [ASTs](https://en.wikipedia.org/wiki/Abstract_syntax_tree), and because I only understand the concepts.
+There's also a [Babel REPL](https://babeljs.io/repl) you can use to play around. That's how I found out about the presets, because the docs aren't that clear to the uninitiated. I won't go into the minutia of how Babel works under the hood, unless you want to read about [ASTs](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (abstract syntax tree), and because I only understand the concepts.
 
 ## Regex Replacement
 
-There's an issue created by choosing the ESM route. We can import NPM packages straight into our code, instead of appending them inside our iframe like Codepen would. That means they're also going to get transpiled. We can fix that by using regex to remove them before they get transpiled. You might have noticed the _/\*#\_\_PURE\_\_\*/_ string created by Babel. Since we only care about the transpiled output, we're also going to remove it.
+We can import NPM packages straight into our code, instead of appending them as a script like Codepen would. That means they're also going to get transpiled. We can fix that by using _regex_ to remove them before they get transpiled. You might have noticed the _/\*#\_\_PURE\_\_\*/_ string created by Babel. Since we only care about the output, we're also going to remove it.
 
-You don't need to understand regex. I know enough myself to be able to read it, since I rarely use it. When I need it I just search for what I need and it works out. First let's add some regex patterns at the top of `app.js`, right below where we grab the DOM elements.
+You don't need to understand regex. I know enough myself to be able to read it, since I rarely use it. When I need it, I just search for what I'm looking for, and it works out. First let's add some regex patterns at the top of `app.js`, right below where we grab the DOM elements.
 
 ```js:app.js
 const importsMatchRegex = /import(?:["'\s]*([\w*{}\n\r\t, ]+)from\s*)?["'\s].*([@\w/_-]+)["'\s].*/g
@@ -423,12 +423,12 @@ const stringMatchRegex = /\/\*#__PURE__\*\//g
 
 The [imports regex](https://gist.github.com/manekinekko/7e58a17bc62a9be47172) just matches anything that starts with _import_ and could be a default or named import spanning multiple lines. For the string regex we just target the specified string and escape the special characters with slashes.
 
-Regex itself isn't hard, it's just hard to read. If you need to use it, just look it up, because there might be edge cases you didn't think of.
+Regex itself isn't hard, it's just hard to read. If you need to use it, just reach for a battle-tested one because there might be edge cases you didn't think of.
 
 We need to update `transpileCode`. We're also going to add a `format` function above it that's going to abstract the regex replacement code so it looks neat. I don't look in advance to break code up like this. In fact it's spaghetti, before I decide to clean it up.
 
 ```js:app.js
-//makes for a nicer API to work with
+// makes for a nicer API to work with
 function format(string, regex, replacement = '') {
   return string.replace(regex, replacement).trim()
 }
@@ -457,7 +457,7 @@ Great, it works! Give it a try.
 
 ## Debounce
 
-So far so good, but if you open dev tools and look at the console you're going to notice an avalanche of output. This is not a great user experience. Imagine talking and being interrupted for not finishing your thought. We want to add a delay to the input. This is what's known as a debounce. Imagine typing something into a search field that queries an endpoint. You don't want to spam requests for each letter.
+So far so good, but if we open dev tools and look at the console, there's an avalanche of output. This is not a great user experience. Imagine talking and being interrupted for not finishing your thought. We want to add a delay to the input. This is what's known as a _debounce_. Imagine typing something into a search field that queries an API endpoint. You don't want to spam requests for each typed letter.
 
 Open `utility.js`, and add the `debounce` function — then import it in `app.js`.
 
@@ -478,24 +478,25 @@ import { createEl, debounce, getEl } from './utility.js'
 
 The debounce is just a `setTimeout` that accepts a _callback_ function to run after it's done, and a _delay_ in milliseconds. It returns a function that clears the previous `setTimeout`, and sets a new one. This is possible due to [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
 
-**A closure is when a function remembers it's outer state even after it runs and executes**. It happens without you thinking about it.
+**A closure is when a function remembers it's outer state, even after execution**.
+
+You could say that "it closes over it". You're using closures in JavaScript without even knowing.
 
 ```js:example.js
 const greet = () => console.log('Hello, World!')
 
-// If we don't return the function we need to wrap it
+// if we don't return a function we need to wrap it
 document.addEventListener('click', () => debounce(greet, 1000))
 
-// We return a function so it's good
+// we return a function, so it's good
 document.addEventListener('click', debounce(greet, 1000))
-)
 ```
 
-You're using closures without knowing most of the time.
+Even if the functions runs, thanks to _closures_ it remembers the value of `timerId`, so it can clear it.
 
-Even if the functions runs, thanks to _closures_ it remembers the value of `timerId`, so it can clear it. Try it out yourself! The dev tools are a quick and easy way to get your hands dirty.
+Try it out yourself! The dev tools are a quick and easy way to get your hands dirty.
 
-Now we need to update our event listener.
+Let's update our event listener.
 
 ```js:app.js
 editorEl.addEventListener('keyup', debounce(handleKeyUp, 1000))
@@ -503,9 +504,21 @@ editorEl.addEventListener('keyup', debounce(handleKeyUp, 1000))
 
 ## Errors
 
-How do we display errors to our user? We clearly see them in the console. There's a couple of ways. In JavaScript we can rewrite anything, so we could do that for `console` by just redeclaring it. Turns out, there's an easier method. We can use the [GlobalEventHandlers.onerror](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror) listener.
+How do we display errors? We clearly see them in the console. There's a couple of ways. In JavaScript we can rewrite anything, so we could do that for `console` by just redeclaring it.
 
-It's just a regular listener that we can place on the window object, and listen for error messages. It's almost that easy! In our case we have to attach the listener inside our iframe, and somehow send them up to the parent. I had weird issues just using it on the parent itself where it would ignore certain types of errors. There's a handy [window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method for doing such.
+```js:example.js
+console.error = () => {
+  // ...
+}
+```
+
+This is ugly for many reasons, one of which is overwriting how console itself works.
+
+Fortunately, there's an easier method. We can use the [GlobalEventHandlers.onerror](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror) listener.
+
+It's just a regular listener that we can place on the _window object_, and listen for error messages. It's almost that easy! In our case we have to attach the listener inside our iframe, and somehow send them up to the parent.
+
+I had weird issues just using it on the parent itself where it would ignore certain types of errors. There's a handy [window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method for doing such.
 
 We're just going to add another script section at the end of `setIframeContent`. If our code fails at any point, it's not going to run. It needs to be separate. Everything else is the same as before.
 
@@ -529,7 +542,7 @@ function setIframeContent(code) {
 }
 ```
 
-Note that the event listener passes an event object which we can destructure and rename `event.message` from. We specify the sender by saying `window.parent` and the arguments are the _message_, and _target origin URI_ if we want to require it, but _\*_ let's it be anything.
+Note that the event listener passes an event object which we can destructure and rename `event.message` from. We specify the sender by saying `window.parent` and the arguments are the _message_, and _target origin URI_ if we want to require it, but the _\*_ symbol let's it be anything.
 
 Great! Now we can listen for any message. Let's add a `message` listener, after our `keyup` listener. We're also going to need a `handleMessage`.
 
@@ -566,7 +579,7 @@ function logErrors(error) {
 }
 ```
 
-One more thing, we need a way to show or hide our iframe, and errors depending if there's any. That's simple enough. There's already a class of _hidden_ in `style.css` that just sets `display: none`. We just need to add the JavaScript to `logErrors` and `setIframeContent`.
+One more thing. We need a way to show or hide our iframe, and errors depending if there's any. That's simple enough. There's already a class of `hidden` in `style.css` that just sets `display: none`. We just need to add the JavaScript.
 
 ```js:app.js
 function logErrors(error) {
@@ -602,8 +615,10 @@ First we need to edit `index.html`.
 Second, in `src` create `MonacoEditor.js`.
 
 ```js:MonacoEditor.js
+// import every named export
 import * as monaco from 'https://cdn.skypack.dev/monaco-editor'
 
+// web workers
 window.MonacoEnvironment = {
   getWorkerUrl: () => {
     return `
@@ -632,7 +647,6 @@ const editorOptions = {
   tabSize: 2,
 }
 
-// Export the editor with options
 export const editor = monaco.editor.create(
   document.getElementById('editor'),
   editorOptions
@@ -640,11 +654,11 @@ export const editor = monaco.editor.create(
 
 ```
 
-Before we add it to `app.js` let me explain some things. The Monaco Editor is the base that VS Code uses, you don't get a sidebar or anything fancy. That's Microsoft sauce on top of it. They also develop all these projects together. It uses [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) which lets us off-load heavy tasks to background threads since JavaScript runs on a single thread, but the browser doesn't have to. Fortunately, we don't have to think about that. I hope that clears up the `window.MonacoEnvironment` part.
+The Monaco Editor is the base that VS Code uses, you don't get a sidebar or anything fancy. That's Microsoft sauce on top of it. They also develop all these projects together. It uses [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) which lets us off-load heavy tasks to background threads since JavaScript runs on a single thread, but the browser isn't limited to that. Fortunately, we don't have to think about that. I hope that clears up the `window.MonacoEnvironment` part.
 
-This is only a bit more convoluted because we're using a CDN. There's a great [monaco-editor-samples](https://github.com/microsoft/monaco-editor-samples) repository with different examples how to set up Monaco Editor for different environments. You can also explore the [Monaco Editor API](https://microsoft.github.io/monaco-editor/api/index.html).
+This is only convoluted because we're using a CDN. There's a great [monaco-editor-samples](https://github.com/microsoft/monaco-editor-samples) repository with different examples how to set up Monaco Editor for different environments. You can also explore the [Monaco Editor API](https://microsoft.github.io/monaco-editor/api/index.html).
 
-With that out of the way, we can use our editor! Let's import it at the top inside `app.js`. We also need to update `getCode` to grab the input from the editor instead. We also need `codicon.ttf` which is the [codicon](https://microsoft.github.io/vscode-codicons/dist/codicon.html) icon font it uses. You can get it [here](https://github.com/microsoft/vscode-codicons/blob/master/dist/codicon.ttf) and place it in the root of your project.
+Import the editor at top of `app.js`. We also need to update `getCode` to grab the input from the editor instead. We also need `codicon.ttf` which is the [codicon](https://microsoft.github.io/vscode-codicons/dist/codicon.html) icon font it uses. You can get it [here](https://github.com/microsoft/vscode-codicons/blob/master/dist/codicon.ttf) and place it in the root of your project.
 
 ```js:app.js
 import { editor } from './monacoEditor.js'
@@ -668,6 +682,8 @@ That's it! Congrats 🎉
 
 ## Closing Thoughts
 
-Hope you learned something! There's a lot you could do from here on. You can add persistant storage using [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) so when you refresh the page it wouldn't reset. You would just need to save the input to local storage each time, and on page load check if it exists, then set the contents of the editor to use it. You could also move everything to a bundler if you wish so, or use a framework like React which I'm going to cover in another post.
+Hope you learned something! There's a lot you could do from here on. You can add persistant storage using [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) so when you refresh the page it wouldn't reset. You would just need to save the input to local storage each time, and on page load check if it exists, then set the contents of the editor to use it.
+
+You could also move everything to a bundler, or use a framework like React which I'm going to cover in another post.
 
 <Credits />
