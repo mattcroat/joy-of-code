@@ -23,5 +23,5 @@ export function Pre(props: Props) {
 }
 
 export function CodeTitle(props: Props) {
-  return <Box fontSize={[16, 18]} {...props} />
+  return <Box fontSize={[16, 16, 18]} {...props} />
 }
