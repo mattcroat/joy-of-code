@@ -1,11 +1,11 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { Divider, Heading, Text, useColorMode } from '@chakra-ui/react'
 
 import { mutedColor, primaryColor } from '@/styles/colors'
 
 interface HeadingProps {
   children: ReactNode
-  withDivider?: boolean
+  divider?: boolean
 }
 
 interface ParagraphProps {
@@ -13,11 +13,11 @@ interface ParagraphProps {
   spacing?: number
 }
 
-export const Hr: FC = () => (
-  <Divider h="4px" w="40px" bg="gray.600" my={2} borderBottom="none" />
-)
+export function Hr() {
+  return <Divider h="4px" w="40px" bg="gray.600" my={2} borderBottom="none" />
+}
 
-export const H1: FC<HeadingProps> = ({ children, withDivider }) => {
+export function H1({ divider = true, ...props }: HeadingProps) {
   const { colorMode } = useColorMode()
 
   return (
@@ -29,15 +29,14 @@ export const H1: FC<HeadingProps> = ({ children, withDivider }) => {
         color={mutedColor[colorMode]}
         lineHeight="normal"
         letterSpacing="-1px"
-      >
-        {children}
-      </Heading>
-      {withDivider && <Hr />}
+        {...props}
+      />
+      {divider && <Hr />}
     </>
   )
 }
 
-export const H2: FC<HeadingProps> = ({ children, withDivider }) => {
+export function H2({ divider = false, ...props }: HeadingProps) {
   const { colorMode } = useColorMode()
 
   return (
@@ -48,16 +47,15 @@ export const H2: FC<HeadingProps> = ({ children, withDivider }) => {
         fontSize={['2xl', '3xl', '4xl']}
         color={primaryColor[colorMode]}
         letterSpacing="-1px"
-      >
-        {children}
-      </Heading>
-      {withDivider && <Hr />}
+        {...props}
+      />
+      {divider && <Hr />}
     </>
   )
 }
 
-export const Paragraph: FC<ParagraphProps> = ({ children, spacing = 8 }) => (
-  <Text fontSize={[16, 18, 20]} lineHeight="1.6" my={spacing}>
-    {children}
-  </Text>
-)
+export function Paragraph({ spacing = 8, ...props }: ParagraphProps) {
+  return (
+    <Text fontSize={[16, 18, 20]} lineHeight="1.6" my={spacing} {...props} />
+  )
+}
