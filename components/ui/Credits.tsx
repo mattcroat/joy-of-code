@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Box, useColorMode } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 
@@ -12,14 +11,14 @@ import {
   contributeText,
 } from '@/styles/colors'
 
-const Credits: FC = () => {
+export function Credits() {
   const { colorMode } = useColorMode()
   const router = useRouter()
 
   const href = `https://github.com/mattcroat/joy-of-code/blob/main/posts/${router.query.slug}.mdx`
 
   return (
-    <Box d={{ md: 'flex' }} justifyContent="space-between" my={8}>
+    <Box d={{ md: 'flex' }} justifyContent="space-between" my={16}>
       <Box
         flexBasis="49%"
         bg={contributeBg[colorMode]}
@@ -67,5 +66,3 @@ const Credits: FC = () => {
     </Box>
   )
 }
-
-export default Credits
