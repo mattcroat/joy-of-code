@@ -23,15 +23,15 @@ export function Image({ alt, src }: Props) {
   return (
     <MotionBox
       position="relative"
-      w={{ xl: '140%' }}
-      mx={{ xl: '-20%' }}
+      w={{ xl: '120%' }}
+      mx={{ xl: '-10%' }}
       my={{ sm: 8 }}
       initial="hidden"
       animate="show"
       variants={ImageVariants}
     >
       <NextImage
-        height="540px"
+        height="600px"
         width="1000px"
         alt={alt}
         src={src}
