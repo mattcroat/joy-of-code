@@ -1,4 +1,2 @@
-import Layout from '@/components/layout/Layout'
-import Main from '@/components/layout/Main'
-
-export { Layout, Main }
+export { Layout } from '@/components/layout/Layout'
+export { Main } from '@/components/layout/Main'
