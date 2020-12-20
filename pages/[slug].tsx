@@ -1,25 +1,22 @@
-import { FC } from 'react'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import { Box } from '@chakra-ui/react'
 import fs from 'fs'
 import path from 'path'
 
-// mdx sauce
+// MDX sauce
 import matter from 'gray-matter'
 import hydrate from 'next-mdx-remote/hydrate'
 import renderToString from 'next-mdx-remote/render-to-string'
 
-// mdx plugins
+// MDX plugins
 import rehypePrism from '@mapbox/rehype-prism'
 import codeTitle from 'remark-code-titles'
 import unwrapImages from 'remark-unwrap-images'
 
-import { Layout } from '@/components/layout'
-import { Credits } from '@/components/ui'
+import { Post } from '@/components/screens'
+import { MDXComponents } from '@/components/ui'
 
 import { postsPath, postFilePaths } from '@/utils/posts'
 
-interface Props {
+interface Post {
   MDXSource: {
     compiledSource: string
     renderedOutput: string
@@ -31,11 +28,20 @@ interface Props {
   }
 }
 
-// mdx components
-const components = { Credits }
+interface Params {
+  params: {
+    slug: string
+  }
+}
+
+export default function PostPage({ MDXSource, frontMatter }: Post) {
+  const content = hydrate(MDXSource, { components: MDXComponents })
+
+  return <Post title={frontMatter.title} content={content} />
+}
 
 // generate paths at build-time
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   const paths = postFilePaths
     .map((path) => path.replace(/\.mdx?$/, ''))
     .map((slug) => ({ params: { slug } }))
@@ -46,20 +52,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-// grab and process mdx post by the slug "posts/[slug]"
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+// grab and process MDX post by the slug "posts/[slug]"
+export async function getStaticProps({ params }: Params) {
   const postFilePath = path.join(postsPath, `${params?.slug}.mdx`)
   const source = fs.readFileSync(postFilePath)
 
   const { content, data } = matter(source)
 
-  const MDXSource = await renderToString(content, {
-    components: { components },
-    mdxOptions: {
-      rehypePlugins: [rehypePrism],
-      remarkPlugins: [codeTitle, unwrapImages],
-    },
-  })
+  const mdxOptions = {
+    rehypePlugins: [rehypePrism],
+    remarkPlugins: [codeTitle, unwrapImages],
+  }
+
+  const MDXSource = await renderToString(content, { mdxOptions })
 
   return {
     props: {
@@ -68,17 +73,3 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   }
 }
-
-const PostPage: FC<Props> = ({ MDXSource, frontMatter }) => {
-  const content = hydrate(MDXSource, { components })
-
-  return (
-    <Layout title={frontMatter.title}>
-      <Box w={{ lg: '90ch' }} mx="auto" px={8}>
-        {content}
-      </Box>
-    </Layout>
-  )
-}
-
-export default PostPage
