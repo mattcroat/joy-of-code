@@ -7,7 +7,7 @@ import { Emoji } from '@/components/ui/Emoji'
 import Image from '@/components/ui/Image'
 import { CustomLink } from '@/components/ui/Link'
 import { Olist, Ulist, Li } from '@/components/ui/List'
-import Navigation from '@/components/ui/Navigation'
+import { Navigation } from '@/components/ui/Navigation'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 import { H1, H2, Hr, Paragraph } from '@/components/ui/Typography'
 

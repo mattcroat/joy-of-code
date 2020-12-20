@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { IconButton, useColorMode } from '@chakra-ui/react'
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { Icon } from '@/components/icons'
 
 import { bgColor, mutedColor, primaryColor } from '@/styles/colors'
 
@@ -13,12 +13,7 @@ const ThemeToggle: FC = () => {
     color: primaryColor[colorMode],
   }
 
-  const icon =
-    colorMode === 'dark' ? (
-      <FontAwesomeIcon icon={faSun} size="2x" />
-    ) : (
-      <FontAwesomeIcon icon={faMoon} size="2x" />
-    )
+  const icon = colorMode === 'dark' ? <Icon icon="sun" /> : <Icon icon="moon" />
 
   return (
     <IconButton

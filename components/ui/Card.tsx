@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { Box, Heading } from '@chakra-ui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from 'framer-motion'
 
+import { Icon } from '@/components/icons'
 import { Tilt } from '@/components/motion'
 import { CustomLink } from '@/components/ui'
 
@@ -61,7 +61,7 @@ const Card: FC<Props> = ({ theme, title, slug }) => (
           color={cardTheme[theme].color}
           zIndex="2"
         >
-          <FontAwesomeIcon icon={cardTheme[theme].icon} size="2x" />
+          <Icon icon={cardTheme[theme].icon} />
         </Box>
         <Heading
           as="h3"

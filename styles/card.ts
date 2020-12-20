@@ -1,10 +1,3 @@
-import {
-  faHtml5,
-  faJs,
-  faReact,
-  IconDefinition,
-} from '@fortawesome/free-brands-svg-icons'
-
 // custom extended Chakra UI theme
 import chakraTheme from '@/styles/theme'
 
@@ -12,7 +5,7 @@ interface CardTheme {
   [key: string]: {
     bg: string
     color: string
-    icon: IconDefinition
+    icon: 'js' | 'spider' | 'react' | 'paintBrush' | 'sun' | 'moon'
   }
 }
 
@@ -24,7 +17,7 @@ const cardTheme: CardTheme = {
       ${chakraTheme.colors.yellow[400]} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
-    icon: faJs,
+    icon: 'js',
   },
   React: {
     bg: `radial-gradient(
@@ -33,7 +26,7 @@ const cardTheme: CardTheme = {
       ${chakraTheme.colors.blue[600]} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
-    icon: faReact,
+    icon: 'react',
   },
   Web: {
     bg: `radial-gradient(
@@ -42,7 +35,7 @@ const cardTheme: CardTheme = {
       ${chakraTheme.colors.orange[400]} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
-    icon: faHtml5,
+    icon: 'spider',
   },
 }
 
