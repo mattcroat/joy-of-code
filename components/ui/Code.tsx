@@ -1,17 +1,21 @@
 import { ReactNode } from 'react'
-import { Box, Code } from '@chakra-ui/react'
+import { Box, Code, useColorMode } from '@chakra-ui/react'
+
+import { inlineCodeBg, inlineCodeText } from '@/styles/colors'
 
 interface Props {
   children: ReactNode
 }
 
 export function InlineCode(props: Props) {
+  const { colorMode } = useColorMode()
+
   return (
     <Code
       d="inline"
       py="0.1rem"
-      bg="orange.200"
-      color="orange.900"
+      bg={inlineCodeBg[colorMode]}
+      color={inlineCodeText[colorMode]}
       fontSize="inherit"
       {...props}
     />
