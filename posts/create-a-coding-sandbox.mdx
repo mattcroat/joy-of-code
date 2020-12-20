@@ -9,7 +9,7 @@ category: 'JavaScript'
 
 Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work? If so, continue reading. You can code along, or look at the [source code](https://github.com/mattcroat/javascript-sandbox) on GitHub.
 
-![JavaScript Sandbox](https://res.cloudinary.com/joyofcode/image/upload/v1608239608/create-a-coding-sandbox/sandbox.png)
+![JavaScript Sandbox](/images/create-a-coding-sandbox/sandbox.png)
 
 ## What You'll Learn
 
@@ -26,7 +26,7 @@ Let's start by playing detective 🔎, and examining Codepen's source code throu
 
 If you're in a new pen on Codepen, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to bring up the developers tools and inspecting the right side column. We notice something interesting. It's an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)! You can imagine an iframe as a separate page inside another page. By definition "it's a nested browsing context, embedding another HTML page into the current one."
 
-![Codepen](https://res.cloudinary.com/joyofcode/image/upload/v1608239609/create-a-coding-sandbox/codepen.png)
+![Codepen](/images/create-a-coding-sandbox/codepen.png)
 
 An iframe behaves just like a regular page, but contained into it's own microcosm. This sounds like the perfect spot for a playground. We can already make a couple of observations.
 
@@ -327,7 +327,7 @@ This is basically building our "template" to pass to the iframe. You can realize
 
 Congrats! Try it out.
 
-![Hello, World!](https://res.cloudinary.com/joyofcode/image/upload/v1608239608/create-a-coding-sandbox/hello-world.png)
+![Hello, World!](/images/create-a-coding-sandbox/hello-world.png)
 
 I included an empty div to have a simple mount point for frameworks like [React](https://reactjs.org/), and [Vue](https://vuejs.org/). My primary goal is to not recreate Codepen, but to dive deeper into how it works. You can repurpose this to anything you want.
 
@@ -391,7 +391,7 @@ function updateUI() {
 }
 ```
 
-![Transpiled code](https://res.cloudinary.com/joyofcode/image/upload/v1608239608/create-a-coding-sandbox/transpiled.png)
+![Transpiled code](/images/create-a-coding-sandbox/transpiled.png)
 
 [Pre](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) is just a useful tag to show preformatted text. We can also control how the text is formatted in CSS.
 
@@ -595,7 +595,7 @@ function setIframeContent(code) {
 
 That's it! We don't make mistakes, just happy little accidents.
 
-![Error message](https://res.cloudinary.com/joyofcode/image/upload/v1608239608/create-a-coding-sandbox/error.png)
+![Error message](/images/create-a-coding-sandbox/error.png)
 
 ## The Editor
 
@@ -674,7 +674,7 @@ import confetti from 'https://cdn.skypack.dev/canvas-confetti'
 document.onpointermove = confetti
 ```
 
-![Monaco Editor](https://res.cloudinary.com/joyofcode/image/upload/v1608239608/create-a-coding-sandbox/monaco.png)
+![Monaco Editor](/images/create-a-coding-sandbox/monaco.png)
 
 That's it! Congrats 🎉
 
