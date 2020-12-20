@@ -38,7 +38,7 @@ export function Navigation() {
 
         <ListItem mt={8}>
           <CustomLink
-            href="/category/javascript"
+            href="/javascript"
             color={mutedColor[colorMode]}
             hover={hoverStyle}
             isInternal
@@ -49,7 +49,7 @@ export function Navigation() {
 
         <ListItem mt={8}>
           <CustomLink
-            href="/category/react"
+            href="/react"
             color={mutedColor[colorMode]}
             hover={hoverStyle}
             isInternal
@@ -60,7 +60,7 @@ export function Navigation() {
 
         <ListItem mt={8}>
           <CustomLink
-            href="/category/web"
+            href="/web"
             color={mutedColor[colorMode]}
             hover={hoverStyle}
             isInternal
