@@ -1,11 +1,9 @@
-import { FC } from 'react'
 import { IconButton, useColorMode } from '@chakra-ui/react'
 
 import { Icon } from '@/components/icons'
-
 import { bgColor, mutedColor, primaryColor } from '@/styles/colors'
 
-const ThemeToggle: FC = () => {
+export function ThemeToggle() {
   const { colorMode, toggleColorMode } = useColorMode()
 
   const hoverStyle = {
@@ -26,5 +24,3 @@ const ThemeToggle: FC = () => {
     />
   )
 }
-
-export default ThemeToggle

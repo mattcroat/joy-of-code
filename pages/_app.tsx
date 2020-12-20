@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
@@ -12,13 +12,14 @@ import { selectionBg, selectionText } from '@/styles/colors'
 import { prismDarkTheme, prismLightTheme } from '@/styles/prism'
 import chakraTheme from '@/styles/theme'
 
+// hide Chakra UI outline borders around clickable components
 import 'focus-visible/dist/focus-visible'
 
 interface GlobalStyleProps {
   children: ReactNode
 }
 
-const GlobalStyle = ({ children }: GlobalStyleProps) => {
+function GlobalStyle({ children }: GlobalStyleProps) {
   const { colorMode } = useColorMode()
 
   return (
@@ -38,20 +39,20 @@ const GlobalStyle = ({ children }: GlobalStyleProps) => {
   )
 }
 
-const App: FC<AppProps> = ({ Component, pageProps }) => (
-  <ChakraProvider theme={chakraTheme}>
-    <MDXProvider components={MDXComponents}>
-      <GlobalStyle>
-        <Head>
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-        </Head>
-        <Component {...pageProps} />
-      </GlobalStyle>
-    </MDXProvider>
-  </ChakraProvider>
-)
-
-export default App
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ChakraProvider theme={chakraTheme}>
+      <MDXProvider components={MDXComponents}>
+        <GlobalStyle>
+          <Head>
+            <meta
+              name="viewport"
+              content="initial-scale=1.0, width=device-width"
+            />
+          </Head>
+          <Component {...pageProps} />
+        </GlobalStyle>
+      </MDXProvider>
+    </ChakraProvider>
+  )
+}

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import Head from 'next/head'
 
 import { Main } from '@/components/layout'
@@ -9,16 +9,16 @@ interface Props {
   title?: string
 }
 
-const Layout: FC<Props> = ({ children, title = 'Joy of Code' }) => (
-  <>
-    <Head>
-      <title>{title}</title>
-    </Head>
+export function Layout({ children, title = 'Joy of Code' }: Props) {
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
 
-    <Navigation />
+      <Navigation />
 
-    <Main>{children}</Main>
-  </>
-)
-
-export default Layout
+      <Main>{children}</Main>
+    </>
+  )
+}

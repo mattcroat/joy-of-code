@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Grid } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
@@ -26,18 +25,18 @@ const cardsGridVariant = {
   },
 }
 
-const CardsGrid: FC<Props> = ({ posts }) => (
-  <MotionGrid
-    gap={8}
-    templateColumns={{ md: 'repeat(auto-fit, minmax(400px, 400px))' }}
-    animate="show"
-    initial="hidden"
-    variants={cardsGridVariant}
-  >
-    {posts.map(({ category, title, slug }) => (
-      <Card key={slug} theme={category} title={title} slug={slug} />
-    ))}
-  </MotionGrid>
-)
-
-export default CardsGrid
+export function CardsGrid({ posts }: Props) {
+  return (
+    <MotionGrid
+      gap={8}
+      templateColumns={{ md: 'repeat(auto-fit, minmax(400px, 400px))' }}
+      animate="show"
+      initial="hidden"
+      variants={cardsGridVariant}
+    >
+      {posts.map(({ category, title, slug }) => (
+        <Card key={slug} theme={category} title={title} slug={slug} />
+      ))}
+    </MotionGrid>
+  )
+}

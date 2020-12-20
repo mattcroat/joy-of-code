@@ -2,6 +2,7 @@ import { Kbd } from '@chakra-ui/react'
 
 import {
   CodeTitle,
+  Credits,
   CustomLink,
   H1,
   H2,
@@ -15,7 +16,7 @@ import {
   Ulist,
 } from '@/components/ui'
 
-const MDXComponents = {
+export const MDXComponents = {
   a: CustomLink,
   h1: H1,
   h2: H2,
@@ -29,6 +30,5 @@ const MDXComponents = {
   li: Li,
   pre: Pre,
   div: CodeTitle,
+  Credits,
 }
-
-export default MDXComponents
