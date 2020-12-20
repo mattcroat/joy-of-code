@@ -1,2 +1,2 @@
-export { Layout } from '@/components/layout/Layout'
-export { Main } from '@/components/layout/Main'
+export { Layout } from './layout'
+export { Main } from './main'

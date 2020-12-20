@@ -2,7 +2,6 @@ import { Box, List, ListItem, useColorMode } from '@chakra-ui/react'
 
 import { Icon } from '@/components/icons'
 import { CustomLink, ThemeToggle } from '@/components/ui'
-
 import { bgColor, borderColor, mutedColor, primaryColor } from '@/styles/colors'
 
 export function Navigation() {

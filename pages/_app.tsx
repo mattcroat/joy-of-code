@@ -7,7 +7,6 @@ import { Global, css } from '@emotion/react'
 import { MDXProvider } from '@mdx-js/react'
 
 import { MDXComponents } from '@/components/ui'
-
 import { selectionBg, selectionText } from '@/styles/colors'
 import { prismDarkTheme, prismLightTheme } from '@/styles/prism'
 import chakraTheme from '@/styles/theme'

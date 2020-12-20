@@ -13,7 +13,6 @@ import unwrapImages from 'remark-unwrap-images'
 
 import { Post } from '@/components/screens'
 import { MDXComponents } from '@/components/ui'
-
 import { postsPath, postFilePaths } from '@/utils/posts'
 
 interface Post {

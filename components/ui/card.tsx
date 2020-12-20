@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { Icon } from '@/components/icons'
 import { Tilt } from '@/components/motion'
 import { CustomLink } from '@/components/ui'
-
 import cardTheme from '@/styles/card'
 
 interface Props {

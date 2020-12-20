@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 
 interface Props {
@@ -29,14 +29,14 @@ const slideRightVariants = {
   },
 }
 
-const Slide: FC<Props> = ({ children, right }) => (
-  <motion.div
-    initial="hidden"
-    animate="visible"
-    variants={!right ? slideVariants : slideRightVariants}
-  >
-    {children}
-  </motion.div>
-)
-
-export default Slide
+export function Slide({ children, right }: Props) {
+  return (
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={!right ? slideVariants : slideRightVariants}
+    >
+      {children}
+    </motion.div>
+  )
+}

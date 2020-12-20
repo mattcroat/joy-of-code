@@ -1,11 +1,11 @@
-import { FC, PointerEvent, ReactNode } from 'react'
+import { PointerEvent, ReactNode } from 'react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 
 interface Props {
   children: ReactNode
 }
 
-const Tilt: FC<Props> = ({ children }) => {
+export function Tilt({ children }: Props) {
   const x = useMotionValue(200)
   const y = useMotionValue(200)
 
@@ -45,5 +45,3 @@ const Tilt: FC<Props> = ({ children }) => {
     </motion.div>
   )
 }
-
-export default Tilt

@@ -2,9 +2,8 @@ import { ReactNode } from 'react'
 import { Link, useColorMode } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
-import { primaryColor } from '@/styles/colors'
-
 import { Emoji } from '@/components/ui'
+import { primaryColor } from '@/styles/colors'
 
 interface Props {
   color?: string

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 
 interface Props {
@@ -29,12 +29,12 @@ const waveVariants = {
   },
 }
 
-const Wave: FC<Props> = ({ children }) => (
-  <motion.div initial="hidden" animate="show" variants={showVariants}>
-    <motion.div animate="wave" variants={waveVariants}>
-      {children}
+export function Wave({ children }: Props) {
+  return (
+    <motion.div initial="hidden" animate="show" variants={showVariants}>
+      <motion.div animate="wave" variants={waveVariants}>
+        {children}
+      </motion.div>
     </motion.div>
-  </motion.div>
-)
-
-export default Wave
+  )
+}
