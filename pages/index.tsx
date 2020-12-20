@@ -1,10 +1,4 @@
-import { FC } from 'react'
-import { Box } from '@chakra-ui/react'
-import { GetStaticProps } from 'next'
-
-import { Layout } from '@/components/layout'
-import { CardsGrid, Emoji, H1 } from '@/components/ui'
-
+import { Home } from '@/components/screens'
 import { getPosts } from '@/utils/posts'
 
 interface Props {
@@ -17,30 +11,15 @@ interface Props {
   }[]
 }
 
+export default function IndexPage({ posts }: Props) {
+  return <Home posts={posts} />
+}
+
 // get posts metadata
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticProps() {
   return {
     props: {
       posts: getPosts,
     },
   }
 }
-
-const IndexPage: FC<Props> = ({ posts }) => (
-  <Layout title="Joy of Code | ☕ Freshly Brewed Web Development Content">
-    <Box px={[8, 16]}>
-      <Box>
-        <H1>
-          Welcome Friend
-          <Emoji emoji="👋" label="Waving hand emoji" animate />
-        </H1>
-      </Box>
-
-      <Box my={12}>
-        <CardsGrid posts={posts} />
-      </Box>
-    </Box>
-  </Layout>
-)
-
-export default IndexPage

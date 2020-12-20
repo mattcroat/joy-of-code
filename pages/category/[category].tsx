@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import { Category } from '@/components/ui'
+import { Category } from '@/components/screens'
 
 import { formatTitle, getPosts } from '@/utils/posts'
 

@@ -1,8 +1,7 @@
-import { FC } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { Layout } from '@/components/layout'
-import { CardsGrid, Emoji, H1, Paragraph } from '@/components/ui'
+import { CardsGrid, Emoji, H1 } from '@/components/ui'
 
 interface Props {
   category: string
@@ -16,7 +15,7 @@ interface Props {
   title: string
 }
 
-const Category: FC<Props> = ({ category, posts, title }) => {
+export function Category({ category, posts, title }: Props) {
   return (
     <Layout title={`Joy of Code | ${category}`}>
       <Box px={[8, 16]}>
@@ -25,10 +24,10 @@ const Category: FC<Props> = ({ category, posts, title }) => {
         </Box>
 
         {posts.length < 1 && (
-          <Paragraph>
+          <Box fontSize={[16, 18, 20]} my={8}>
             Nothing to see here...
             <Emoji emoji="🕵️" label="Spy emoji" spacing={2} animate />
-          </Paragraph>
+          </Box>
         )}
 
         <Box my={10}>
@@ -38,5 +37,3 @@ const Category: FC<Props> = ({ category, posts, title }) => {
     </Layout>
   )
 }
-
-export default Category
