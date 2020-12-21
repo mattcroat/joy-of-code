@@ -43,6 +43,8 @@ export function Pre({ children }: Props) {
     setTimeout(() => setIsCopied(false), 2000)
 
     const textareaEl = document.createElement('textarea')
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     textareaEl.value = preEl.current?.innerText
 
     // remove from the document flow
