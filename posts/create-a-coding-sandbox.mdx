@@ -9,7 +9,9 @@ category: 'JavaScript'
 
 Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work? If so, continue reading. You can code along, or look at the [source code](https://github.com/mattcroat/javascript-sandbox) on GitHub.
 
-![JavaScript Sandbox](/images/create-a-coding-sandbox/sandbox.png)
+<Iframe src="https://javascriptsandbox.netlify.app/" />
+
+Visit [JavaScript Sandbox](https://javascriptsandbox.netlify.app/)
 
 ## What You'll Learn
 
@@ -506,7 +508,7 @@ How do we display errors? We clearly see them in the console. There's a couple o
 
 ```js:example.js
 console.error = () => {
-  // ...
+  // hijack log to output to DOM element
 }
 ```
 

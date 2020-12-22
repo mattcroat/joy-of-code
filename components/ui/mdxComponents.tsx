@@ -8,6 +8,7 @@ import {
   H2,
   Hr,
   Image,
+  Iframe,
   InlineCode,
   Li,
   Olist,
@@ -31,4 +32,5 @@ export const MDXComponents = {
   pre: Pre,
   div: CodeTitle,
   Credits,
+  Iframe,
 }
