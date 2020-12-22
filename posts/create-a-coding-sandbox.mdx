@@ -9,7 +9,10 @@ category: 'JavaScript'
 
 Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work? If so, continue reading. You can code along, or look at the [source code](https://github.com/mattcroat/javascript-sandbox) on GitHub.
 
-<Iframe src="https://javascriptsandbox.netlify.app/" />
+<Iframe
+  title="JavaScript Sandbox"
+  src="https://javascriptsandbox.netlify.app/"
+/>
 
 Visit [JavaScript Sandbox](https://javascriptsandbox.netlify.app/)
 
@@ -94,7 +97,7 @@ The downside is that we need to repack older packages not using ES modules so th
 </script>
 ```
 
-One thing to note is that `defer` only works when you include `src`, or it's a module. If any of this is unfamiliar to you, take some time to research each subject, because modules are an important aspect of JavaScript.
+One thing to note is that `defer` only works when you include `src`, or if it's a module. If any of this is unfamiliar to you, take some time to research each subject, because modules are an important aspect of JavaScript.
 
 ## Styles
 
@@ -236,7 +239,7 @@ export function getEl(id) {
 
 export function createEl(tag, content) {
   if (content) {
-    // creates a nice API like createEl('h1,'Hello, World!')
+    // creates a nice API like createEl('h1, 'Hello, World!')
     const domEl = document.createElement(tag)
     domEl.innerText = content
 
@@ -325,17 +328,17 @@ function handleKeyUp() {
 editorEl.addEventListener('keyup', handleKeyUp)
 ```
 
-This is basically building our "template" to pass to the iframe. You can realize how easily you can make Codepen out of this. In this case we're going to focus on JavaScript. In reality you can pass HTML, CSS, and JavaScript from to it. In fact, I encourage you to stop what you're doing, and do it just to learn.
+This is basically building our "template" to pass to the iframe. You can realize how easily you can make Codepen out of this. In this case we're going to focus on JavaScript. In reality you can pass anything such as HTML, CSS, and JavaScript to it. In fact, I encourage you to stop what you're doing, and do it just to learn.
 
 Congrats! Try it out.
 
 ![Hello, World!](/images/create-a-coding-sandbox/hello-world.png)
 
-I included an empty div to have a simple mount point for frameworks like [React](https://reactjs.org/), and [Vue](https://vuejs.org/). My primary goal is to not recreate Codepen, but to dive deeper into how it works. You can repurpose this to anything you want.
+I included an empty div to have a mount point for frameworks like [React](https://reactjs.org/), and [Vue](https://vuejs.org/). My primary goal is to not recreate Codepen, but to dive deeper into how it works. You can repurpose this to anything you want.
 
 If you're cool, we can proceed. I mentioned something about transpiled code, but that might not mean anything to you. This is where [Babel](https://babeljs.io/) comes in. Babel is a JavaScript compiler that can take modern JavaScript syntax that might not be supported across browsers, and transpile (you might hear compile, it's interchangable) it to an older version of JavaScript. This enables us to write modern JavaScript today, and let Babel do the hard work. Modern development wouldn't be the same, or possible without it.
 
-Where Babel is also used for is transpiling [JSX](https://reactjs.org/docs/introducing-jsx.html) (JavaScript XML, used in place of HTML popularized by frameworks like React) to what browsers can understand, and it has other presets, and plugins. The last part isn't important if you don't know React.
+Where Babel is also useful, is transpiling [JSX](https://reactjs.org/docs/introducing-jsx.html) (JavaScript XML, used in place of HTML popularized by frameworks like React) to what browsers can understand, and it has other presets, and plugins. The last part isn't important if you don't know React.
 
 The _text/babel_ type let's Babel know to process the code, and we have to include a special [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) to use modules with Babel.
 
@@ -397,9 +400,9 @@ function updateUI() {
 
 [Pre](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) is just a useful tag to show preformatted text. We can also control how the text is formatted in CSS.
 
-We can pass different presets to Babel, telling it what version of JavaScript to target. In this case I'm using the _es2015-loose_ preset and _react_ for [JSX](https://reactjs.org/docs/introducing-jsx.html). The _loose_ in the preset means it's going to output code that's more human readable, and doesn't strictly adhere to the JavaScript specification. If you just used destructuring for example, it would quickly saturate the output.
+We can pass different presets to Babel, telling it what version of JavaScript to target. In this case I'm using the _es2015-loose_ preset and _react_ for [JSX](https://reactjs.org/docs/introducing-jsx.html). The _loose_ in the preset means it's going to output code that's more human readable, and doesn't strictly adhere to the JavaScript specification. If you just used [the destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) for example, it would quickly saturate the output.
 
-I encourage you to play around. These yearly presets have been deprecated for [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) which you should use in production. You would just have to replace ~es2015-loose~ with ~env~.
+I encourage you to play around. These yearly presets have been deprecated for [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) which you should use in production. You would just have to replace _es2015-loose_ with _env_.
 
 The last part is the `transform` itself which accepts the _input_, _options_, and returns an object.
 
@@ -508,7 +511,7 @@ How do we display errors? We clearly see them in the console. There's a couple o
 
 ```js:example.js
 console.error = () => {
-  // hijack log to output to DOM element
+  // hijack log to output to a DOM element
 }
 ```
 
@@ -516,9 +519,9 @@ This is ugly for many reasons, one of which is overwriting how console itself wo
 
 Fortunately, there's an easier method. We can use the [GlobalEventHandlers.onerror](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror) listener.
 
-It's just a regular listener that we can place on the _window object_, and listen for error messages. It's almost that easy! In our case we have to attach the listener inside our iframe, and somehow send them up to the parent.
+It's just a regular listener that we can place on the _window object_, and listen for error messages. It's almost that easy! In our case we have to attach the listener inside our iframe, and somehow send them up to the parent. There's a handy [window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method for doing such.
 
-I had weird issues just using it on the parent itself where it would ignore certain types of errors. There's a handy [window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method for doing such.
+If you're wondering, I had weird issues just using it on the parent itself where it would ignore certain types of errors.
 
 We're just going to add another script section at the end of `setIframeContent`. If our code fails at any point, it's not going to run. It needs to be separate. Everything else is the same as before.
 
@@ -654,7 +657,7 @@ export const editor = monaco.editor.create(
 
 ```
 
-The Monaco Editor is the base that VS Code uses, you don't get a sidebar or anything fancy. That's Microsoft sauce on top of it. They also develop all these projects together. It uses [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) which lets us off-load heavy tasks to background threads since JavaScript runs on a single thread, but the browser isn't limited to that. Fortunately, we don't have to think about that. I hope that clears up the `window.MonacoEnvironment` part.
+The Monaco Editor is the base that VS Code uses. You don't get a sidebar or anything fancy. That's Microsoft sauce on top of it. They also develop all these projects together. It uses [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) which lets us off-load heavy tasks to background threads since JavaScript runs on a single thread, but the browser isn't limited to that. Fortunately, we don't have to think about that. I hope that clears up the `window.MonacoEnvironment` part.
 
 This is only convoluted because we're using a CDN. There's a great [monaco-editor-samples](https://github.com/microsoft/monaco-editor-samples) repository with different examples how to set up Monaco Editor for different environments. You can also explore the [Monaco Editor API](https://microsoft.github.io/monaco-editor/api/index.html).
 
