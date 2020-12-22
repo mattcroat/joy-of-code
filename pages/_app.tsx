@@ -31,6 +31,10 @@ function GlobalStyle({ children }: GlobalStyleProps) {
             background-color: ${selectionBg[colorMode]};
             color: ${selectionText[colorMode]};
           }
+
+          body {
+            overflow-x: hidden;
+          }
         `}
       />
       {children}
