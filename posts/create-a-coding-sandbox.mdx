@@ -31,7 +31,12 @@ Let's start by playing detective 🔎, and examining Codepen's source code throu
 
 If you're in a new pen on Codepen, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to bring up the developers tools and inspecting the right side column. We notice something interesting. It's an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)! You can imagine an iframe as a separate page inside another page. By definition "it's a nested browsing context, embedding another HTML page into the current one."
 
-![Codepen](/images/create-a-coding-sandbox/codepen.png)
+<Image
+  height="745px"
+  width="1276px"
+  src="/images/create-a-coding-sandbox/codepen.png"
+  alt="Codepen"
+/>
 
 An iframe behaves just like a regular page, but contained into it's own microcosm. This sounds like the perfect spot for a playground. We can already make a couple of observations.
 
@@ -332,7 +337,12 @@ This is basically building our "template" to pass to the iframe. You can realize
 
 Congrats! Try it out.
 
-![Hello, World!](/images/create-a-coding-sandbox/hello-world.png)
+<Image
+  height="843px"
+  width="1300px"
+  src="/images/create-a-coding-sandbox/hello-world.png"
+  alt="Hello, World!"
+/>
 
 I included an empty div to have a mount point for frameworks like [React](https://reactjs.org/), and [Vue](https://vuejs.org/). My primary goal is to not recreate Codepen, but to dive deeper into how it works. You can repurpose this to anything you want.
 
@@ -396,7 +406,12 @@ function updateUI() {
 }
 ```
 
-![Transpiled code](/images/create-a-coding-sandbox/transpiled.png)
+<Image
+  height="1054px"
+  width="1922px"
+  src="/images/create-a-coding-sandbox/hello-world.png"
+  alt="Transpiled code"
+/>
 
 [Pre](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) is just a useful tag to show preformatted text. We can also control how the text is formatted in CSS.
 
@@ -417,7 +432,7 @@ There's also a [Babel REPL](https://babeljs.io/repl) you can use to play around.
 
 We can import NPM packages straight into our code, instead of appending them as a script like Codepen would. That means they're also going to get transpiled. We can fix that by using _regex_ to remove them before they get transpiled. You might have noticed the _/\*#\_\_PURE\_\_\*/_ string created by Babel. Since we only care about the output, we're also going to remove it.
 
-You don't need to understand regex. I know enough myself to be able to read it, since I rarely use it. When I need it, I just search for what I'm looking for, and it works out. First let's add some regex patterns at the top of `app.js`, right below where we grab the DOM elements.
+You don't need to understand regex, but if you want you can use [RegExr] to examine an expression. I know enough myself to be able to read it, since I rarely use it. When I need it, I just search for what I'm looking for, and it works out. First let's add some regex patterns at the top of `app.js`, right below where we grab the DOM elements.
 
 ```js:app.js
 const importsMatchRegex = /import(?:["'\s]*([\w*{}\n\r\t, ]+)from\s*)?["'\s].*([@\w/_-]+)["'\s].*/g
@@ -600,7 +615,12 @@ function setIframeContent(code) {
 
 That's it! We don't make mistakes, just happy little accidents.
 
-![Error message](/images/create-a-coding-sandbox/error.png)
+<Image
+  height="843px"
+  width="1300px"
+  src="/images/create-a-coding-sandbox/error.png"
+  alt="Error message"
+/>
 
 ## The Editor
 
@@ -679,7 +699,12 @@ import confetti from 'https://cdn.skypack.dev/canvas-confetti'
 document.onpointermove = confetti
 ```
 
-![Monaco Editor](/images/create-a-coding-sandbox/monaco.png)
+<Image
+  height="843px"
+  width="1300px"
+  src="/images/create-a-coding-sandbox/error.png"
+  alt="Monaco Editor"
+/>
 
 That's it! Congrats 🎉
 
