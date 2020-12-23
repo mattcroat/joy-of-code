@@ -22,7 +22,7 @@ export const MDXComponents = {
   h1: H1,
   h2: H2,
   hr: Hr,
-  img: Image,
+  Image,
   inlineCode: InlineCode,
   kbd: Kbd,
   p: Paragraph,
