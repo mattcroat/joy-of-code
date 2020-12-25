@@ -1,0 +1,645 @@
+---
+title: How to Think like a Developer
+description: How to develop problem solving skills
+published: '2020-12-24'
+category: 'Web'
+---
+
+# How to Think Like a Developer
+
+You've learned JavaScript. You learned your syntax, loops, and methods. You felt confidence watching, and listening to the reassuring voice of the person instructing you through everything, and held your hand through building a project. The voice is gone. It's silent. You open and stare at your empty code editor. What now?
+
+## What You'll Learn
+
+- Techniques to help you write code, and break down problems
+- What is CRUD
+- Explanation of state
+- You might build a todo list app on accident 😅
+
+If you feel lost, it's normal. The hardest part of coding is not knowing what you don't know. You might have heard well intentioned things such as _"just go work on projects"_. I can assure you, it's easier said than done. You might not know how to fit the pieces together yet, or where to start. My goal is to try and give you a starting point, and give you tools to solve problems so you don't feel stuck because you don't know what to do next, but because it requires thought and research to solve.
+
+## Breaking Down Problems
+
+How many times do we get overwhelmed by execution? I would say a lot, since we look at something, and instead of breaking it down into smaller pieces, we're just faced with this monolith that we think we possibly can't understand. We don't think of it as the sum of it's parts, but only see what's already there.
+
+A todo list is a simple create, read, update, delete ([CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)) application. It's the basis of everything. Think of any app out there, and it's just a todo list with more things.
+
+If I tasked you with making a todo list, _what is your first thought_?
+
+Your first impulse might be opening your editor and starting to code something up. That's a frequent mistake. Step back for a moment and think of the requirements.
+
+A todo list has all the right fundamentals. Regardless of language, or framework you're learning, it's a great barometer that shows you how it works.
+
+As I said earlier, it's easy to get flustered by details. Instead of thinking of everything at once, let's start with the minimum requirements.
+
+## Requirements
+
+- [ ] User input
+- [ ] Read the value
+- [ ] User action
+  - [ ] Create todo
+  - [ ] Update todo
+  - [ ] Delete todo
+
+That's it! Nothing crazy. Notice how we're missing the _read_ part of CRUD. We're just going to use an object, but we could read, and write to our todo items anywhere, such as local storage or a database.
+
+## Getting Started
+
+The best way of learning is through doing. You can use [Codepen](https://codepen.io/pen) to get started. Avoiding mental hurdles of having to open an editor, and having a quick way to hack on something is great, because it encourages us to play and learn.
+
+## The User Input
+
+Let's just add an input.
+
+```html:index.html
+<input id="input" placeholder="Add a todo" />
+```
+
+## Reading the Value
+
+Regardless of your knowledge, and experience. This might seem contrived, but say we don't know anything about the DOM (Document Object Model). The DOM might be a metaphor for something else. You might not even known how to select the element itself. Are we just stuck? No, we're just going to watch a course that's going to teach us everything, even if don't have to know everything. I'm joking! 😂
+
+We can just tell the search engine what we want. In this case _"How do I get the value from an input field in JavaScript?"_. You also don't have to be that verbose. The search engine isn't a human, just type in keywords such as _"JavaScript input value"_.
+
+```js:app.js
+const inputEl = document.getElementById('input')
+const inputValue = inputEl.value
+```
+
+This is going to open a world of knowledge to you. This kind of active learning, and problem solving is what makes knowledge stick, instead of just passively consuming content. Just as you practice anything, you need to practice reading documentation, and problem solving.
+
+> _“Talent is a pursued interest. Anything that you're willing to practice, you can do.”_ ― Bob Ross
+
+## Thinking in Data Structures
+
+How do we think about our code? We have all this confusion around logic, the DOM, displaying and updating the user interface in the browser. How do we keep track of the _state_, so that for example we can filter the todo list by which one is done, or not?
+
+State might be unfamiliar to you, if you're just starting out, but it's just a way of keeping our application data in one place.
+
+A state for our todo list might look like this:
+
+```js:example.js
+const todos = [
+  {
+    id: 1,
+    todo: 'Todo',
+    completed: false
+  },
+  {
+    id: 2,
+    todo: 'Todo',
+    completed: false
+  },
+  // ...
+]
+```
+
+As you can see, we can quickly model the state of our app. If we looped over this, we could show our todo list items, show or hide items based on `done`, reference the unique `id` to know which one to perform update, delete actions. You can think of it as the [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth). We can pretend this is our database, and perform CRUD operations on it.
+
+I want to put an emphasis on the chaos of creation. While we're working on something, it's tempting to want to break things into neat functions and wondering if what we're doing is right. You shouldn't. You have to keep in mind, tutorials aren't a real represenation how writing code looks like. That's why I'm going to try, and avoid doing that here. Focus on writing and making your code work first. You can improve it later.
+
+## Displaying Data
+
+Our HTML for the todo list might look something like:
+
+```html:index.html
+<div id="todo-list">
+  <li data-id="1">
+    <input type="checkbox" name="todo">
+    <label for="todo">Todo</label>
+  </li>
+  <li data-id="2">
+    <input type="checkbox" name="todo">
+    <label for="todo">Todo</label>
+  </li>
+</div>
+```
+
+[Data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) allows us to store extra information on HTML elements in the form of `data-*` where you could name it anything. It's a lot easier to reference when we're going to have to perform operations on our `todos` later. I would do the same for any _id_ elements we hook in with JavaScript. I prefer it over classes, because classes could change, and should be only used for styles.
+
+The next thing to do is loop over our todo list items and display them. We don't even need to think about the CRUD logic yet, but just knowing how our app should look like, before doing it in a programmatic way.
+
+```js:app.js
+const todosHTML = `
+  <ul>
+    ${todos.map(({ id, todo }) => {
+      return `
+        <li data-id="${id}">
+          <input type="checkbox" name="todo">
+          <label for="todo">${todo}</label>
+        </li>
+      `
+    }).join(' ')}
+  </ul>
+`
+```
+
+Instead of creating elements we're using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to keep it simple.
+
+If you feel shaky about any of this, then you just go fill in the gap what you don't understand. Here I'm just picking values I want being `id`, `todo` from the `todo` object. The `join` is required because `map` returns an array, which we need to turn into a string. For example `['Todo', 'Todo'].join(' ')` would return `'Todo Todo'`.
+
+The code is being executed by a machine, so we can think like one and trace the steps. It's always going to be consistent. The only surprise is going to be due to our misunderstanding of code execution. Use `console.log` for everything.
+
+This is a great approach in general, because instead of picturing it in our mind we can just look at it. We're not thinking about the entire app, we're going step by step.
+
+Here's how we grab the output, and display todos inside it:
+
+```js:app.js
+const todoListEl = document.getElementById('todo-list')
+
+const todosHTML = `
+  <ul>
+    ${todos.map(({id, todo}) => {
+      return `
+        <li data-id="${id}">
+          <input type="checkbox" name="todo">
+          <label for="todo">${todo}</label>
+        </li>
+      `
+    }).join(' ')}
+  </ul>
+`
+
+todoListEl.innerHTML = todosHTML
+```
+
+Great job! I hope everything so far makes sense.
+
+## Wishful Thinking
+
+Our state is the single source of truth, meaning when it changes, the user interface updates, and vice versa. I hope you realize how powerful this mental model is. Instead of thinking in the abstract, we just have a simple object that represents everything. Of course, we haven't added any of this logic yet.
+
+We could have something like this:
+
+```js:app.js
+function updateUI(todos) {
+  const todosHTML = `
+    <ul>
+      ${todos
+        .map(({ id, todo }) => {
+          return `
+          <li data-id="${id}">
+            <input type="checkbox" name="todo">
+            <label for="todo">${todo}</label>
+          </li>
+        `;
+        })
+        .join(' ')}
+    </ul>
+  `
+
+  todoListEl.innerHTML = todosHTML;
+}
+```
+
+This should be invoked when we make updates to our state. This is also known as "wishful thinking" or writing code with methods we wish existed, and writing them later.
+
+## Create
+
+We can use "wishful thinking", and imagine our own API:
+
+```js:app.js
+function addTodo() {
+  if (!inputEl.value) return
+
+  const todo = {
+    id: todos.length + 1,
+    todo: inputEl.value,
+    completed: false
+  }
+
+  todos.push(todo)
+  updateUI(todos)
+}
+```
+
+First we check if the input is empty, if so we don't do anything. We only have to grab the latest input value, and push the same formatted object to our list of `todos`. We get the `id` by looking at how many todos we have. After we modify our state, we pass whatever current `todos` are to `updateUI` to update the user interface.
+
+Let's add a button, so we can target it to trigger an `onclick` event when we add a todo:
+
+```html:index.html
+<button id="add-todo">Add Todo</button>
+```
+
+```js:app.js
+const addTodoBtnEl = document.getElementById('add-todo')
+addTodoBtnEl.addEventListener('click', addTodo)
+```
+
+## Update
+
+It's fine if you don't understand this one at first. It's not enough to just read something once, and think you get it. It takes deliberate effort to try it out yourself until you understand it.
+
+Since we're creating elements on the fly, it's not that straightforward to add event listeners to them. We have to add them after they've been created.
+
+We're going to use a concept named [event delagation](https://javascript.info/event-delegation). If you have a bunch of elements, and you attach an event listener for each one it could lead to a bad user experience. Instead, we just attach an event listener to the parent, and fire off events when they meet certain criteria.
+
+We can add an input, and an update button:
+
+```html:example.html
+<li data-id="1">
+  <input type="checkbox" name="todo">
+  <label for="todo">Todo</label>
+  <input placeholder="Update todo" data-input />
+  <button data-update>✏️</button>
+</li>
+```
+
+Our goal is to be able to click on the button, and grab the reference to the `id`, along with the value of the input that we can send to `updateTodo` that's going to accept `todoId` and `updatedTodoValue` as arguments so it updates our state and user interface.
+
+We already have a reference to our todo list container `todoListEl`. So it's fine to put the event listener there.
+
+Inside `updateUI`:
+
+```js:app.js
+function updateUI() {
+  todoListEl.removeEventListener('click', handleTodoClick)
+
+  const todosHTML = `
+    <ul>
+      ${todos
+        .map(({ id, todo }) => {
+          return `
+          <li data-id="${id}">
+            <input type="checkbox" name="todo">
+            <label for="todo">${todo}</label>
+            <input placeholder="Update todo" data-input />
+            <button data-update>✏️</button>
+          </li>
+        `;
+        })
+        .join(' ')}
+    </ul>
+  `
+
+  todoListEl.innerHTML = todosHTML
+
+  todoListEl.addEventListener('click', handleTodoClick)
+}
+```
+
+We added the input, and button as in the example with data attributes we can hook into. The event listener is going to invoke `handleTodoClick` so we can also use it to remove it at the top since we could get a memory leak.
+
+You can also use pseudo-code, or comments that describe what we want to do before we write code. In this case they may seem just like comments, but you can use this technique yourself.
+
+```js:app.js
+// keep in mind `event` gets passed from the listener
+// so we can destructure `target` prop from it
+function handleTodoClick({ target }) {
+  // grab the parent <li>
+  const parentEl = target.closest('li')
+  // grab the input
+  const inputEl = parentEl.querySelector('[data-input]')
+  // grab the button
+  const updateBtnEl = parentEl.querySelector('[data-update]')
+
+  // grab the id
+  // note: the unary plus operator converts a string to a number
+  const todoId = +parentEl.dataset.id
+
+  // attach an event listener to the button that's going to send
+  // todoId, updatedTodoValue to updateTodo
+  // note: if we don't wrap this in a function it's going to just
+  // run once and never again
+  updateBtnEl.addEventListener('click', () => updateTodo(todoId, inputEl.value))
+}
+
+```
+
+Take a stretch! Let it sink in. Another great advice is if you can't figure out something, take a break. Your brain is going to work on the problem in the background.
+
+I'm going to lead you through the thought process in the next part, so don't sweat if you just see a big blob of code.
+
+Let's write out our update function:
+
+```js:app.js
+function updateTodo(todoId, updatedTodoValue) {
+  return todos.map(todo  => {
+    if (todoId === todo.id) {
+      return {
+        ...todo,
+        todo: updatedTodoValue
+      }
+    }
+
+    return {
+      ...todo
+    }
+  })
+}
+```
+
+Let's break it down. To update a todo we need to know which todo we need to update, and pass it the content to replace the old todo.
+
+**Focus at the problem at hand. Take what you don't understand, and isolate it in a separate environment.**
+
+```js:example.js
+const todos = [
+  {
+    id: 1,
+    todo: 'Todo',
+    completed: false
+  },
+  {
+    id: 2,
+    todo: 'Todo',
+    completed: false
+  }
+]
+```
+
+How do we update this? We not only have to update the todo, but keep the _rest_. Let's just hardcode the `id` so we know it works.
+
+```js:example.js
+todos.map(todo => {
+  if (todo.id === 1) {
+    console.log(todo)
+  }
+})
+```
+
+Alright, we get our todo! Now we need to update the `todo` in our object:
+
+```js:example.js
+todos.map(todo => {
+  if (todo.id === 1) {
+    return {
+      todo: 'Edited todo'
+    }
+  }
+})
+```
+
+But notice the object structure changed:
+
+```js:example.js
+[
+  {
+    todo: 'Edited todo'
+  }
+]
+```
+
+What we have to do is keep the other keys on the todo object such as `id` and `completed`, and just modify the `todo` key:
+
+```js:example.js
+todos.map(todo => {
+  if (todo.id === 1) {
+    return {
+      ...todo,
+      todo: 'Edited todo'
+    }
+  }
+})
+```
+
+We can achieve this by using the [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
+
+```js:example.js
+[
+  {
+    id: 1,
+    todo: 'Edited todo',
+    completed: false
+  }
+]
+```
+
+The order of the keys you're going to see in the output is going to be sorted alphabetical. We're not done yet! You might have noticed in the output that our other todo item is `undefined`. It's a similar problem, we're not saying it to include the _rest_.
+
+```js:example.js
+todos.map(todo => {
+  if (todo.id === 1) {
+    return {
+      ...todo,
+      todo: 'Edited todo'
+    }
+  }
+
+  return {
+    ...todo
+  }
+})
+```
+
+In summary:
+
+- We loop over each `todo` item
+- Modify the one that matched our `id` and return it
+- Return the rest of the `todo` items
+
+To make it even more clear to someone else reading the code we could write it as:
+
+```js:example.js
+todos.map(todo => {
+  let editedTodo = {}
+
+  if (todo.id === 1) {
+    editedTodo = {
+      ...todo,
+      todo: 'Edited todo'
+    }
+  }
+
+  return {
+    ...todo,
+    ...editedTodo,
+  }
+})
+```
+
+Keep in mind, the order in which we return them is important!
+
+## Delete
+
+Great job! This part is going to be easy in comparison. We just need to pass in the `id`, _filter_ the todo items, and update the user interface.
+
+Let's update our "template" with a delete button:
+
+```js:app.js
+function updateUI() {
+  todoListEl.removeEventListener('click', handleTodoClick)
+
+  const todosHTML = `
+    <ul>
+      ${todos
+        .map(({ id, todo }) => {
+          return `
+          <li data-id="${id}">
+            <input type="checkbox" name="todo">
+            <label for="todo">${todo}</label>
+            <input placeholder="Update todo" data-input />
+            <button data-update>✏️</button>
+            <button data-delete>❌</button>
+          </li>
+        `;
+        })
+        .join(' ')}
+    </ul>
+  `
+
+  todoListEl.innerHTML = todosHTML;
+
+  todoListEl.addEventListener('click', handleTodoClick)
+```
+
+Let's also update `handleTodoClick` with a reference to `deleteBtnEl` and attaching an event listener that's going to invoke `deleteTodo`:
+
+```js:app.js
+function handleTodoClick({ target }) {
+  const parentEl = target.closest('li')
+  const inputEl = parentEl.querySelector('[data-input]')
+  const updateBtnEl = parentEl.querySelector('[data-update]')
+  const deleteBtnEl = parentEl.querySelector('[data-delete]')
+
+  const todoId = +parentEl.dataset.id
+
+  updateBtnEl.addEventListener('click', () => updateTodo(todoId, inputEl.value))
+  deleteBtnEl.addEventListener('click', () => deleteTodo(todoId))
+}
+```
+
+This is going to return everything that doesn't match the `id`:
+
+```js:app.js
+function deleteTodo(todoId) {
+  const filteredTodos = todos.filter((todo) => todoId !== todo.id)
+  todos = filteredTodos
+
+  updateUI()
+}
+```
+
+That's it! Here's everything so far:
+
+```html:index.html
+<input id="input" placeholder="Add a todo" />
+
+<button id="add-todo">Add Todo</button>
+
+<div id="todos"></div>
+```
+
+```js:app.js
+const inputEl = document.getElementById("input")
+const todoListEl = document.getElementById("todos")
+const addTodoBtnEl = document.getElementById("add-todo")
+
+let todos = [
+  {
+    id: 1,
+    todo: "Todo",
+    completed: false
+  },
+  {
+    id: 2,
+    todo: "Todo",
+    completed: false
+  }
+]
+
+function updateUI() {
+  todoListEl.removeEventListener('click', handleTodoClick)
+
+  const todosHTML = `
+  <ul>
+    ${todos
+      .map(({ id, todo }) => {
+        return `
+        <li data-id="${id}">
+          <input type="checkbox" name="todo">
+          <label for="todo">${todo}</label>
+          <input placeholder="Update todo" data-input />
+          <button data-update>✏️</button>
+          <button data-delete>❌</button>
+        </li>
+      `;
+      })
+      .join(" ")}
+  </ul>
+`;
+
+  todoListEl.innerHTML = todosHTML;
+
+  todoListEl.addEventListener('click', handleTodoClick)
+}
+
+function addTodo() {
+  if (!inputEl.value) return;
+
+  const todo = {
+    id: todos.length + 1,
+    todo: inputEl.value,
+    completed: false
+  };
+
+  todos.push(todo)
+
+  updateUI()
+}
+
+
+function updateTodo(todoId, updatedTodoValue) {
+  const updatedTodos = todos.map(todo => {
+    if (todoId === todo.id) {
+      return {
+        ...todo,
+        todo: updatedTodoValue
+      }
+    }
+
+    return {
+      ...todo
+    }
+  })
+
+  todos = updatedTodos
+
+  updateUI()
+}
+
+function deleteTodo(todoId) {
+  console.log(todoId)
+
+  const filteredTodos = todos.filter((todo) => todoId !== todo.id)
+  todos = filteredTodos
+
+  updateUI()
+}
+
+function handleTodoClick({ target }) {
+  const parentEl = target.closest('li')
+  const inputEl = parentEl.querySelector('[data-input]')
+  const updateBtnEl = parentEl.querySelector('[data-update]')
+  const deleteBtnEl = parentEl.querySelector('[data-delete]')
+
+  const todoId = +parentEl.dataset.id
+
+  updateBtnEl.addEventListener('click', () => updateTodo(todoId, inputEl.value))
+  deleteBtnEl.addEventListener('click', () => deleteTodo(todoId))
+}
+
+addTodoBtnEl.addEventListener("click", addTodo)
+
+updateUI()
+```
+
+## Closing Thoughts
+
+I love consuming content and learning, but excessive reliance on it can be counterproductive. They steal the "aha" moment from you, because when you just consume, you're not solidfying what you've learned. Your brain isn't nearly as active. It's not the same if I point a problem to you with a solution, and you encountering it and having to think about it and solve it.
+
+Spend more time practicing, reading documentation. If you observe a great athlete, they practice the same fundamentals each day. Don't think you understand something just because you watched it.
+
+Another great resource to practice logic is solving [code katas](https://www.codewars.com/). This is where you can practice writing pseudo-code. Don't spend hours on these, as the goal is to learn. You can look at solutions, if you're stuck. Start with the simplest ones, just to get warmed up before you work on a project. That boost in confidence is going to inspire you.
+
+If you aren't confident yet, then do it over and over again. Let me explain. You don't want to practice remembering syntax. You can look that up. Practice the steps in your mind, breaking things down into smaller tasks. Your code could look completely different, but if it works you should be proud.
+
+As a challenge you can display how many uncompleted todos are left, add the ability to filter by _active_, _completed_, and _all_. You could also learn the [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), so you can preserve them through page reload.
+
+Working on simple things exposes your weaknesses, and what you should learn. Don't set unrealistic goals for yourself, that's the best way to give up on a project. Even the most complicated piece of code starts with one line of code.
+
+It's how you get into the mindset of a developer.
+
+I wish you luck!
+
+<Credits />
