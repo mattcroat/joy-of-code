@@ -103,7 +103,7 @@ I want to put an emphasis on the chaos of creation. While we're working on somet
 Our HTML for the todo list might look something like:
 
 ```html:index.html
-<div id="todo-list">
+<div id="todos">
   <li data-id="1">
     <input type="checkbox" name="todo">
     <label for="todo">Todo</label>
@@ -145,7 +145,7 @@ This is a great approach in general, because instead of picturing it in our mind
 Here's how we grab the output, and display todos inside it:
 
 ```js:app.js
-const todoListEl = document.getElementById('todo-list')
+const todoListEl = document.getElementById('todos')
 
 const todosHTML = `
   <ul>
@@ -172,7 +172,7 @@ Our state is the single source of truth, meaning when it changes, the user inter
 We could have something like this:
 
 ```js:app.js
-function updateUI(todos) {
+function updateUI() {
   const todosHTML = `
     <ul>
       ${todos
@@ -209,7 +209,7 @@ function addTodo() {
   }
 
   todos.push(todo)
-  updateUI(todos)
+  updateUI()
 }
 ```
 
@@ -636,9 +636,7 @@ If you aren't confident yet, then do it over and over again. Let me explain. You
 
 As a challenge you can display how many uncompleted todos are left, add the ability to filter by _active_, _completed_, and _all_. You could also learn the [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), so you can preserve them through page reload.
 
-Working on simple things exposes your weaknesses, and what you should learn. Don't set unrealistic goals for yourself, that's the best way to give up on a project. Even the most complicated piece of code starts with one line of code.
-
-It's how you get into the mindset of a developer.
+Working on simple things exposes your weaknesses, and what you should learn. Even the most complicated piece of code starts with a single line of code. It's how you get into the mindset of a developer.
 
 I wish you luck!
 
