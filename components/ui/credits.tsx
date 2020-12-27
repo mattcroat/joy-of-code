@@ -57,8 +57,10 @@ export function Credits() {
             About Myself
           </Box>
           <Paragraph spacing={0}>
-            I&apos;m Matija , and I love sharing what I know in a simple, and
-            practical way.
+            <CustomLink href="https://github.com/mattcroat">
+              I&apos;m Matija
+            </CustomLink>
+            , and I love sharing what I know in a simple, and practical way.
           </Paragraph>
         </Box>
       </Box>
