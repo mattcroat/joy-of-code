@@ -7,7 +7,7 @@ category: 'Web'
 
 # How to Think Like a Developer
 
-You've learned JavaScript. You learned your syntax, loops, and methods. You felt confidence watching, and listening to the reassuring voice of the person instructing you through everything, and held your hand through building a project. The voice is gone. It's silent. You open and stare at your empty code editor. What now?
+You learned JavaScript. Maybe you watched a course. You felt confident in your abilities. The voice is gone. There's silence. You open your editor with a blank stare. You feel lost. What now?
 
 ## What You'll Learn
 
@@ -27,15 +27,6 @@ Don't compare yourself with the experience of someone else. It takes time and pr
 You might have heard well intentioned things such as _"just go work on projects"_. It's easier said than done. Where do you start?
 
 These are tools, and techniques for your mind to reason about code. I want to give you confidence. Instead of feeling stuck and frustrated, you're going to get excited about learning.
-
-## Where to Start
-
-If you don't know what project to work on, I'm going to share some resources here:
-
-- [JavaScript 30 ― Build 30 things in 30 Days](https://javascript30.com/)
-- [100+ Javascript Projects Ideas](https://github.com/romeojeremiah/javascript-projects-for-beginners)
-- [Practical JavaScript Project Ideas](https://simplestepscode.com/javascript-project-ideas/)
-- [Vanilla Web Projects](https://github.com/bradtraversy/vanillawebprojects)
 
 ## The Project
 
@@ -74,7 +65,12 @@ Avoiding mental hurdles of having to open an editor, and having a quick way to h
 Let's just add an input.
 
 ```html:index.html
-<input placeholder="Add a todo" data-input />
+<input
+  type="text"
+  class="todo-input"
+  placeholder="What needs to be done?"
+  data-input
+/>
 ```
 
 [Data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) allow us to store extra information on HTML elements in the form of `data-*` where _star_ could be named anything.
@@ -93,8 +89,13 @@ We can just tell the search engine what we want. In this case _"How do I select 
 
 You'll often find great [Stack Overflow](https://stackoverflow.com/) threads. The only caution is try finding a recent one since the language evolves. This is not just true for JavaScript.
 
+Select the input element:
+
 ```js:app.js
 const inputEl = document.querySelector('[data-add]')
+```
+
+```js:example.js
 const inputValue = inputEl.value
 ```
 
@@ -112,12 +113,12 @@ A state for our todos might look like this:
 let todos = [
   {
     id: 1,
-    todo: 'Todo',
+    todo: 'Refund Cyberpunk',
     completed: false
   },
   {
     id: 2,
-    todo: 'Todo',
+    todo: 'Pre-order KFConsole',
     completed: false
   }
 ]
@@ -134,14 +135,14 @@ It's easier to see how things should look first. After that it's easier to trans
 Our HTML for the todo list might look something like:
 
 ```html:index.html
-<div data-todos>
-  <li data-todo="1">
-    <input type="checkbox" />
-    <label data-label>Todo</label>
+<div class="todos" data-todos>
+  <li class="todo" data-todo="1">
+    <input class="todo-checkbox" type="checkbox" />
+    <label class="todo-label" data-todo-label>Refund Cyberpunk</label>
   </li>
-  <li data-todo="2">
-    <input type="checkbox" />
-    <label data-label>Todo</label>
+  <li class="todo" data-todo="2">
+    <input class="todo-checkbox" type="checkbox" />
+    <label class="todo-label" data-todo-label>Pre-order KFConsole</label>
   </li>
 </div>
 ```
@@ -157,9 +158,9 @@ const todosHTML = `
   <ul>
     ${todos.map(({ id, todo }) => {
       return `
-        <li data-todo="${id}">
-          <input type="checkbox">
-          <label data-label>${todo}</label>
+        <li class="todo" data-todo="${id}">
+          <input class="todo-checkbox" type="checkbox">
+          <label class="todo-label" data-todo-label>${todo}</label>
         </li>
       `
     }).join(' ')}
@@ -182,9 +183,9 @@ const todosHTML = `
   <ul>
     ${todos.map(({ id, todo }) => {
       return `
-        <li data-todo="${id}">
-          <input type="checkbox">
-          <label data-label>${todo}</label>
+        <li class="todo" data-todo="${id}">
+          <input class="todo-checkbox" type="checkbox">
+          <label class="todo-label" data-todo-label>${todo}</label>
         </li>
       `
     }).join(' ')}
@@ -215,9 +216,9 @@ function updateUI() {
       ${todos
         .map(({ id, todo }) => {
           return `
-          <li data-todo="${id}">
-            <input type="checkbox">
-            <label data-label>${todo}</label>
+          <li class="todo" data-todo="${id}">
+            <input class="todo-checkbox" type="checkbox">
+            <label class="todo-label" data-todo-label>${todo}</label>
           </li>
         `;
         })
@@ -236,8 +237,11 @@ Another great technique is writing [pseudocode](https://en.wikipedia.org/wiki/Ps
 ```js:app.js
 function addTodo() {
   // do nothing if input is empty
+
   // create a todo object with id, todo, completed
+
   // push the todo to todos
+
   // update the user interface
 }
 ```
@@ -263,16 +267,19 @@ function addTodo() {
 
 First we check if the input is empty, if so we don't do anything. We only have to grab the latest input value, and push the same formatted object to our list of `todos`. We get the `id` by looking at how many todos we have. After we modify our state, we pass whatever current `todos` are to `updateUI` to update the user interface.
 
-Let's add a button, so we can target it to trigger an `onclick` event when we add a todo:
+Let's make it so that our todo gets added when the user presses _enter_. We already have the reference to `inputEl`.
 
-```html:index.html
-<button data-add>Add Todo</button>
-```
+Let's add a `keypress` event listener:
 
 ```js:app.js
-const addTodoBtnEl = document.querySelector('[data-add]')
-addTodoBtnEl.addEventListener('click', addTodo)
+inputEl.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    addTodo()
+  }
+})
 ```
+
+That's it!
 
 ## Update
 
@@ -305,12 +312,12 @@ function updateUI() {
       ${todos
         .map(({ id, todo }) => {
           return `
-          <li data-todo="${id}">
-            <input type="checkbox">
-            <label data-label>${todo}</label>
+          <li class="todo" data-todo="${id}">
+            <input class="todo-checkbox" type="checkbox">
+            <label class="todo-label" data-todo-label>${todo}</label>
 
-            <input data-input style="display: none" />
-            <button data-update>Edit</button>
+            <input class="todo-update" style="display: none" data-update-input />
+            <button class="todo-update-toggle" data-update-btn>✏️</button>
           </li>
         `
         })
@@ -322,7 +329,7 @@ function updateUI() {
 }
 ```
 
-I'm adding inline styles temporarily. Later we're going to remove it in place of a stylsheet.
+I'm adding inline styles here for simplicity. In the final version they're located in the stylesheet for `.todo-update` styles.
 
 Our goal is to be able to click on the button, and grab the reference to the `id`, along with the value of the update input that we can send to `updateTodo` that's going to accept `todoId` and `updatedTodoValue` as arguments so it updates our state and user interface.
 
@@ -337,12 +344,12 @@ function updateUI() {
       ${todos
         .map(({ id, todo }) => {
           return `
-          <li data-todo="${id}">
-            <input type="checkbox">
-            <label data-label>${todo}</label>
+          <li class="todo" data-todo="${id}">
+            <input class="todo-checkbox" type="checkbox">
+            <label class="todo-label" data-todo-label>${todo}</label>
 
-            <input data-input style="display: none" />
-            <button data-update>✏️</button>
+            <input class="todo-update" style="display: none" data-update-input />
+            <button class="todo-update-toggle" data-update-btn>✏️</button>
           </li>
         `
         })
@@ -378,15 +385,19 @@ function updateUI() {
     const todoId = +parentEl.dataset.todo
 
     // query the label, input, button elements
-    const labelEl = parentEl.querySelector('[data-label]')
-    const inputEl = parentEl.querySelector('[data-input]')
-    const btnUpdateEl = parentEl.querySelector('[data-update]')
+    const labelEl = parentEl.querySelector('[data-todo-label]')
+    const inputEl = parentEl.querySelector('[data-update-input]')
+    const btnUpdateEl = parentEl.querySelector('[data-update-btn]')
 
     // when we click the pencil show the update input
     // and hide the todo label
     btnUpdateEl.onclick = () => {
       labelEl.style.display = 'none'
       inputEl.style.display = 'inline'
+
+      // places the cursor in the input
+      // for a greater user experience
+      inputEl.focus()
     }
 
     // update the todo label to match the change
@@ -437,12 +448,12 @@ Let's break it down. To update a todo item we need to know which todo we need to
 let todos = [
   {
     id: 1,
-    todo: 'Todo',
+    todo: 'Refund Cyberpunk',
     completed: false
   },
   {
     id: 2,
-    todo: 'Todo',
+    todo: 'Pre-order KFConsole',
     completed: false
   }
 ]
@@ -552,7 +563,7 @@ Keep in mind, the order in which we return them is important!
 
 ## Delete
 
-Great job! This part is going to be easy in comparison. We just need to pass in the `id`, _filter_ the todo items, and update the user interface.
+Great job! This part is going to be easy in comparison. We just need to pass in the `todoId`, _filter_ the todo items, and update the user interface.
 
 Let's update our "template" with a delete button:
 
@@ -564,14 +575,14 @@ function updateUI() {
       ${todos
         .map(({ id, todo }) => {
           return `
-          <li data-todo="${id}">
-            <input type="checkbox">
-            <label data-label>${todo}</label>
+          <li class="todo" data-todo="${id}">
+            <input class="todo-checkbox" type="checkbox">
+            <label class="todo-label" data-todo-label>${todo}</label>
 
-            <input data-input style="display: none" />
-            <button data-update>✏️</button>
+            <input class="todo-update" style="display: none" data-update-input />
+            <button class="todo-update-toggle" data-update-btn>✏️</button>
 
-            <button data-delete>❌</button>
+            <button class="todo-delete" data-delete-btn>❌</button>
           </li>
         `
         })
@@ -590,7 +601,7 @@ function updateUI() {
 
   todoListEl.onmouseover = ({ target }) => {
     // ...
-    const btnDeleteEl = parentEl.querySelector('[data-delete]')
+    const btnDeleteEl = parentEl.querySelector('[data-delete-btn]')
     btnDeleteEl.onclick = () => deleteTodo(todoId)
     // ...
   }
@@ -611,6 +622,15 @@ function deleteTodo(todoId) {
 We didn't have to write it out first. We used _"wishful thinking"_.
 
 Great job, we're done! 🎉
+
+## Projects
+
+If you don't have project ideas:
+
+- [JavaScript 30 ― Build 30 things in 30 Days](https://javascript30.com/)
+- [100+ Javascript Projects Ideas](https://github.com/romeojeremiah/javascript-projects-for-beginners)
+- [Practical JavaScript Project Ideas](https://simplestepscode.com/javascript-project-ideas/)
+- [Vanilla Web Projects](https://github.com/bradtraversy/vanillawebprojects)
 
 ## Reading Documentation
 
