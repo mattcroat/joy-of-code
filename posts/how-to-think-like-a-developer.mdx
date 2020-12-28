@@ -9,6 +9,14 @@ category: 'Web'
 
 You learned JavaScript. Maybe you watched a course. You felt confident in your abilities. The voice is gone. There's silence. You open your editor with a blank stare. You feel lost. What now?
 
+<Iframe
+  height="400px"
+  title="Vanilla Todo"
+  src="https://vanilla-todo-examples.netlify.app/05-final-version/"
+/>
+
+[Source code](https://github.com/JoysOfCode/vanilla-todo) on GitHub.
+
 ## What You'll Learn
 
 - Techniques to help you write code, and break down problems through a practical example of making a todo list
@@ -30,7 +38,7 @@ These are tools, and techniques for your mind to reason about code. I want to gi
 
 ## The Project
 
-I like the idea behind the [TodoMVC](http://todomvc.com/) project. We're going to create a similar todo app. The styles are going to be simple. They're included in the source code, so we can focus on what's important.
+I like the idea behind the [TodoMVC](http://todomvc.com/) project. We're going to create a similar todo app. The styles are going to be simple. They're included in the [source code](https://github.com/JoysOfCode/vanilla-todo), so we can focus on what's important.
 
 ## Breaking Down Problems
 
@@ -77,7 +85,7 @@ Let's just add an input.
 
 I prefer to use data attribute to hook into things with JavaScript over _id_ that should be unique, or _class_ because class names could change since they're used for styles.
 
-## Reading The Value
+## Reading the Value
 
 Say we don't know anything about the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) (Document Object Model). The DOM might be a metaphor for something else you're having trouble with. You might not even known how to _select_ the element itself.
 
@@ -101,7 +109,7 @@ const inputValue = inputEl.value
 
 You're actively learning, and problem solving just like you'd do on the job. This makes it stick.
 
-## Thinking In Data Structures
+## Thinking in Data Structures
 
 Looking at a problem might feel the same as looking at abstract art. There's confusion around how we display, and update the data based on some user action. It would be easier if we had a place to store the `state` of our app.
 
@@ -114,13 +122,13 @@ let todos = [
   {
     id: 1,
     todo: 'Refund Cyberpunk',
-    completed: false
+    completed: false,
   },
   {
     id: 2,
     todo: 'Pre-order KFConsole',
-    completed: false
-  }
+    completed: false,
+  },
 ]
 ```
 
@@ -128,7 +136,7 @@ We can quickly model the state of our app how we want. I hope you see how coding
 
 This is also known as having a [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth). You're going to hear this one a lot.
 
-## See How It Looks First
+## See How it Looks First
 
 It's easier to see how things should look first. After that it's easier to translate to code. I always do this first. When it's complete, you can remove it. This way you always have a reference to what you're doing.
 
@@ -136,20 +144,29 @@ Our HTML for the todo list might look something like:
 
 ```html:index.html
 <div class="todos" data-todos>
-  <li class="todo" data-todo="1">
-    <input class="todo-checkbox" type="checkbox" />
-    <label class="todo-label" data-todo-label>Refund Cyberpunk</label>
-  </li>
-  <li class="todo" data-todo="2">
-    <input class="todo-checkbox" type="checkbox" />
-    <label class="todo-label" data-todo-label>Pre-order KFConsole</label>
-  </li>
+  <ul>
+    <li class="todo" data-todo="1">
+      <input class="todo-checkbox" type="checkbox" />
+      <label class="todo-label" data-todo-label>Refund Cyberpunk</label>
+    </li>
+
+    <li class="todo" data-todo="2">
+      <input class="todo-checkbox" type="checkbox" />
+      <label class="todo-label" data-todo-label>Pre-order KFConsole</label>
+    </li>
+  </ul>
 </div>
 ```
 
 Note: I'm keeping the markup to a minimum. You should be more conscious when working on your own projects, so it's accessible.
 
 ## Displaying Todos
+
+<Iframe
+  height="400px"
+  title="Vanilla Todo"
+  src="https://vanilla-todo-examples.netlify.app/01-show-todos/"
+/>
 
 The next thing to do is loop over our todo list items and display them:
 
@@ -177,6 +194,7 @@ Always `console.log` things to see what they are.
 Here's how we grab the output, and display todos inside it:
 
 ```js:app.js
+const inputEl = document.querySelector('[data-input]')
 const todoListEl = document.querySelector('[data-todos]')
 
 const todosHTML = `
@@ -216,17 +234,17 @@ function updateUI() {
       ${todos
         .map(({ id, todo }) => {
           return `
-          <li class="todo" data-todo="${id}">
-            <input class="todo-checkbox" type="checkbox">
-            <label class="todo-label" data-todo-label>${todo}</label>
-          </li>
-        `;
+            <li class="todo" data-todo="${id}">
+              <input class="todo-checkbox" type="checkbox">
+              <label class="todo-label" data-todo-label>${todo}</label>
+            </li>
+          `
         })
         .join(' ')}
     </ul>
   `
 
-  todoListEl.innerHTML = todosHTML;
+  todoListEl.innerHTML = todosHTML
 }
 ```
 
@@ -248,6 +266,12 @@ function addTodo() {
 
 ## Create Todo
 
+<Iframe
+  height="400px"
+  title="Vanilla Todo"
+  src="https://vanilla-todo-examples.netlify.app/02-create-todo/"
+/>
+
 Let's implement it:
 
 ```js:app.js
@@ -261,6 +285,7 @@ function addTodo() {
   }
 
   todos.push(todo)
+
   updateUI()
 }
 ```
@@ -281,7 +306,13 @@ inputEl.addEventListener('keypress', (event) => {
 
 That's it!
 
-## Update
+## Update Todo
+
+<Iframe
+  height="400px"
+  title="Vanilla Todo"
+  src="https://vanilla-todo-examples.netlify.app/03-update-todo/"
+/>
 
 It's not enough to just read something once, and think you get it. It takes deliberate effort to try it out yourself until you understand it.
 
@@ -312,14 +343,14 @@ function updateUI() {
       ${todos
         .map(({ id, todo }) => {
           return `
-          <li class="todo" data-todo="${id}">
-            <input class="todo-checkbox" type="checkbox">
-            <label class="todo-label" data-todo-label>${todo}</label>
+            <li class="todo" data-todo="${id}">
+              <input class="todo-checkbox" type="checkbox">
+              <label class="todo-label" data-todo-label>${todo}</label>
 
-            <input class="todo-update" style="display: none" data-update-input />
-            <button class="todo-update-toggle" data-update-btn>✏️</button>
-          </li>
-        `
+              <input class="todo-update" style="display: none" data-update-input />
+              <button class="todo-update-toggle" data-update-btn>✏️</button>
+            </li>
+          `
         })
         .join(' ')}
     </ul>
@@ -561,7 +592,13 @@ todos.map(todo => {
 
 Keep in mind, the order in which we return them is important!
 
-## Delete
+## Delete Todo
+
+<Iframe
+  height="400px"
+  title="Vanilla Todo"
+  src="https://vanilla-todo-examples.netlify.app/04-delete-todo/"
+/>
 
 Great job! This part is going to be easy in comparison. We just need to pass in the `todoId`, _filter_ the todo items, and update the user interface.
 
@@ -623,9 +660,7 @@ We didn't have to write it out first. We used _"wishful thinking"_.
 
 Great job, we're done! 🎉
 
-## Projects
-
-If you don't have project ideas:
+## Finding Project Ideas
 
 - [JavaScript 30 ― Build 30 things in 30 Days](https://javascript30.com/)
 - [100+ Javascript Projects Ideas](https://github.com/romeojeremiah/javascript-projects-for-beginners)
@@ -654,11 +689,11 @@ This might look intidimating, but if we look at the examples we don't use half o
 
 ## Finding Help
 
-You're going to encounter code you don't understand all the time. Take what you don't understand, and research it. If you don't know what the piece of code is doing you can use [Discord](https://discord.com/). Here's a list of (awesome discord communities)(https://github.com/mhxion/awesome-discord-communities). You don't need to ask for permission to ask questions. Just be polite, and maybe read the guidelines of the server before you do.
+You're going to encounter code you don't understand all the time. Take what you don't understand, and research it. If you don't know what the piece of code is doing you can use [Discord](https://discord.com/). Here's a list of [awesome discord communities](https://github.com/mhxion/awesome-discord-communities). You don't need to ask for permission to ask questions. Just be polite, and maybe read the guidelines of the server before you do.
 
 ## Closing Thoughts
 
-**Don't think you understand something just because you watched it.**
+Don't think you understand something just because you watched it.
 
 If you don't understand something, practice doing it. Let me explain. You don't want to practice remembering syntax. You can look that up. Practice the steps in your mind. Breaking things down into managable chunks. Your code could look completely different, but if it works be proud.
 
