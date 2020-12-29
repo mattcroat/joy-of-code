@@ -7,14 +7,14 @@ category: 'JavaScript'
 
 # Create a Coding Sandbox
 
-Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work? If so, continue reading. You can code along, or look at the [source code](https://github.com/mattcroat/javascript-sandbox) on GitHub.
+Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work? So have I! Let me extend a personal invitation to code along 😄
 
 <Iframe
   title="JavaScript Sandbox"
   src="https://javascriptsandbox.netlify.app/"
 />
 
-Visit [JavaScript Sandbox](https://javascriptsandbox.netlify.app/)
+[JavaScript Sandbox](https://javascriptsandbox.netlify.app/) to see the working example. You can find the [source code](https://github.com/mattcroat/javascript-sandbox) on GitHub.
 
 ## What You'll Learn
 
@@ -157,6 +157,7 @@ h3 {
   height: 100%;
   min-width: 50vw;
   max-width: 100vw;
+  font-size: inherit;
   /* makes the element resize like a textarea */
   resize: horizontal;
   overflow: hidden;
@@ -232,6 +233,13 @@ pre {
 }
 ```
 
+That's it 😄 Notice we can resize the editor window using the bottom right triangle shape.
+
+<Iframe
+  title="JavaScript Sandbox"
+  src="https://javascript-sandbox-examples.netlify.app/01-starter/"
+/>
+
 ## The Sandbox
 
 Inside `src` create a `utility.js`. Here we're going to put our helper functions.
@@ -260,7 +268,6 @@ We're set! Head back to `app.js` and let's get started. First let's import the u
 ```js:app.js
 import { createEl, getEl } from './utility.js'
 
-const outputEl = getEl('output')
 const iframeEl = getEl('iframe')
 const errorsEl = getEl('errors')
 
@@ -335,13 +342,9 @@ editorEl.addEventListener('keyup', handleKeyUp)
 
 This is basically building our "template" to pass to the iframe. You can realize how easily you can make Codepen out of this. In this case we're going to focus on JavaScript. In reality you can pass anything such as HTML, CSS, and JavaScript to it. In fact, I encourage you to stop what you're doing, and do it just to learn.
 
-Congrats! Try it out.
-
-<Image
-  height="843px"
-  width="1300px"
-  src="/images/create-a-coding-sandbox/hello-world.png"
-  alt="Hello, World!"
+<Iframe
+  title="JavaScript Sandbox"
+  src="https://javascript-sandbox-examples.netlify.app/02-code-output/"
 />
 
 I included an empty div to have a mount point for frameworks like [React](https://reactjs.org/), and [Vue](https://vuejs.org/). My primary goal is to not recreate Codepen, but to dive deeper into how it works. You can repurpose this to anything you want.
@@ -406,13 +409,6 @@ function updateUI() {
 }
 ```
 
-<Image
-  height="1054px"
-  width="1922px"
-  src="/images/create-a-coding-sandbox/transpiled.png"
-  alt="Transpiled code"
-/>
-
 [Pre](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) is just a useful tag to show preformatted text. We can also control how the text is formatted in CSS.
 
 We can pass different presets to Babel, telling it what version of JavaScript to target. In this case I'm using the _es2015-loose_ preset and _react_ for [JSX](https://reactjs.org/docs/introducing-jsx.html). The _loose_ in the preset means it's going to output code that's more human readable, and doesn't strictly adhere to the JavaScript specification. If you just used [the destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) for example, it would quickly saturate the output.
@@ -471,7 +467,12 @@ function transpileCode(code) {
 }
 ```
 
-Great, it works! Give it a try.
+It was using prototypes 😱
+
+<Iframe
+  title="JavaScript Sandbox"
+  src="https://javascript-sandbox-examples.netlify.app/03-transpiled-output/"
+/>
 
 ## Debounce
 
@@ -519,6 +520,13 @@ Let's update our event listener.
 ```js:app.js
 editorEl.addEventListener('keyup', debounce(handleKeyUp, 1000))
 ```
+
+There should be a delay of one second 🙅‍♀️
+
+<Iframe
+  title="JavaScript Sandbox"
+  src="https://javascript-sandbox-examples.netlify.app/04-debounce-output/"
+/>
 
 ## Errors
 
@@ -613,13 +621,11 @@ function setIframeContent(code) {
 }
 ```
 
-That's it! We don't make mistakes, just happy little accidents.
+_We don't make mistakes, just happy little accidents._ — Bob Ross
 
-<Image
-  height="843px"
-  width="1300px"
-  src="/images/create-a-coding-sandbox/error.png"
-  alt="Error message"
+<Iframe
+  title="JavaScript Sandbox"
+  src="https://javascript-sandbox-examples.netlify.app/05-errors-output/"
 />
 
 ## The Editor
@@ -635,9 +641,9 @@ First we need to edit `index.html`.
 </div>
 ```
 
-Second, in `src` create `MonacoEditor.js`.
+Second, in `src` create `monacoEditor.js`.
 
-```js:MonacoEditor.js
+```js:monacoEditor.js
 // import every named export
 import * as monaco from 'https://cdn.skypack.dev/monaco-editor'
 
@@ -699,11 +705,9 @@ import confetti from 'https://cdn.skypack.dev/canvas-confetti'
 document.onpointermove = confetti
 ```
 
-<Image
-  height="843px"
-  width="1300px"
-  src="/images/create-a-coding-sandbox/error.png"
-  alt="Monaco Editor"
+<Iframe
+  title="JavaScript Sandbox"
+  src="https://javascript-sandbox-examples.netlify.app/06-monaco-editor/"
 />
 
 That's it! Congrats 🎉
