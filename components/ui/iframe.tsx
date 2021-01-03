@@ -1,7 +1,5 @@
 import { Box } from '@chakra-ui/react'
 
-import { Slide } from '@/components/motion'
-
 interface Props {
   height: string
   src: string
@@ -10,17 +8,15 @@ interface Props {
 
 export function Iframe({ height = '600px', src, title }: Props) {
   return (
-    <Slide>
-      <Box
-        as="iframe"
-        h={height}
-        w={{ base: '100%', xl: '120%' }}
-        mx={{ xl: '-10%' }}
-        my={{ sm: 8 }}
-        title={title}
-        src={src}
-        bg="white"
-      />
-    </Slide>
+    <Box
+      as="iframe"
+      h={height}
+      w={{ base: '100%', xl: '120%' }}
+      mx={{ xl: '-10%' }}
+      my={{ sm: 8 }}
+      title={title}
+      src={src}
+      bg="white"
+    />
   )
 }
