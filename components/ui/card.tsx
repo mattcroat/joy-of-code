@@ -64,7 +64,7 @@ export function Card({ theme, title, slug }: Props) {
           </Box>
           <Heading
             as="h3"
-            maxW="280px"
+            maxW="340px"
             position="absolute"
             bottom={4}
             left={4}
