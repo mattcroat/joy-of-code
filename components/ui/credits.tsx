@@ -1,7 +1,7 @@
 import { Box, useColorMode } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 
-import { CustomLink, Emoji, H2, Paragraph } from '@/components/ui'
+import { CustomLink, Emoji, Paragraph } from '@/components/ui'
 
 import {
   aboutBg,
@@ -50,9 +50,11 @@ export function Credits() {
           textAlign="center"
           transition="background-color 0.2s, color 0.2s"
         >
-          <H2>
-            <Emoji emoji="☕" label="Coffee emoji" />
-          </H2>
+          <Emoji
+            emoji="☕"
+            label="Coffee emoji"
+            fontSize={['2xl', '3xl', '4xl']}
+          />
           <Box as="h3" fontSize="2xl" py={2}>
             About Myself
           </Box>

@@ -7,11 +7,25 @@ interface Props {
   emoji: string
   label: string
   spacing?: number
+  [props: string]: any
 }
 
-export function Emoji({ animate = false, emoji, label, spacing = 4 }: Props) {
+export function Emoji({
+  animate = false,
+  emoji,
+  label,
+  spacing = 4,
+  ...props
+}: Props) {
   return (
-    <Box as="span" d="inline-block" mx={spacing} aria-label={label} role="img">
+    <Box
+      as="span"
+      d="inline-block"
+      mx={spacing}
+      aria-label={label}
+      role="img"
+      {...props}
+    >
       {animate ? <Wave>{emoji}</Wave> : emoji}
     </Box>
   )

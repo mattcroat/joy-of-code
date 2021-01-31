@@ -44,6 +44,8 @@ export function H2({ divider = false, ...props }: HeadingProps) {
       <Heading
         as="h2"
         maxW="600px"
+        mt={{ md: 20 }}
+        mb={{ md: 8 }}
         fontSize={['2xl', '3xl', '4xl']}
         color={primaryColor[colorMode]}
         letterSpacing="-1px"
