@@ -27,12 +27,15 @@ export function Card({ theme, title, slug }: Props) {
       <Tilt>
         <MotionBox
           position="relative"
-          maxW="400px"
+          maxW="480px"
           h={['200px', '240px']}
           borderRadius="base"
           boxShadow="lg"
           overflow="hidden"
           variants={cardVariant}
+          _hover={{
+            boxShadow: '2xl',
+          }}
         >
           <Box
             h="100%"
@@ -64,11 +67,11 @@ export function Card({ theme, title, slug }: Props) {
           </Box>
           <Heading
             as="h3"
-            maxW="340px"
+            maxW="80%"
             position="absolute"
             bottom={4}
             left={4}
-            fontSize={['4xl', '5xl']}
+            fontSize={['3xl', '4xl']}
             lineHeight="1"
             color={cardTheme[theme].color}
             letterSpacing="-2px"

@@ -2,7 +2,6 @@ import { ReactNode } from 'react'
 import { Link, useColorMode } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
-import { Emoji } from '@/components/ui'
 import { primaryColor } from '@/styles/colors'
 
 interface Props {
@@ -43,7 +42,6 @@ export function CustomLink({
         rel="noreferrer noopener"
         target="_blank"
       >
-        <Emoji emoji="🔗" label="Link emoji" spacing={1} />
         {children}
       </Link>
     </NextLink>

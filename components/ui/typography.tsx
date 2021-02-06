@@ -6,11 +6,13 @@ import { mutedColor, primaryColor } from '@/styles/colors'
 interface HeadingProps {
   children: ReactNode
   divider?: boolean
+  [key: string]: any
 }
 
 interface ParagraphProps {
   children: ReactNode
   spacing?: number
+  [key: string]: any
 }
 
 export function Hr() {

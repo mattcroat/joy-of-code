@@ -1,4 +1,4 @@
-import { Grid } from '@chakra-ui/react'
+import { SimpleGrid } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 import { Card } from '@/components/ui'
@@ -13,7 +13,7 @@ interface Props {
   }[]
 }
 
-const MotionGrid = motion.custom(Grid)
+const MotionGrid = motion.custom(SimpleGrid)
 
 const cardsGridVariant = {
   hidden: { opacity: 0 },
@@ -28,8 +28,8 @@ const cardsGridVariant = {
 export function CardsGrid({ posts }: Props) {
   return (
     <MotionGrid
-      gap={8}
-      templateColumns={{ md: 'repeat(auto-fit, minmax(400px, 400px))' }}
+      spacing={8}
+      minChildWidth={{ sm: '340px' }}
       animate="show"
       initial="hidden"
       variants={cardsGridVariant}
