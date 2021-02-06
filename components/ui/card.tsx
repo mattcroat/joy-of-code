@@ -23,7 +23,7 @@ const cardVariant = {
 
 export function Card({ theme, title, slug }: Props) {
   return (
-    <CustomLink href={`${encodeURIComponent(slug)}`} isInternal>
+    <CustomLink href={`/${encodeURIComponent(slug)}`} isInternal>
       <Tilt>
         <MotionBox
           position="relative"
