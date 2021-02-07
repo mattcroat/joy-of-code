@@ -10,7 +10,7 @@ interface Props {
 export function Main({ children }: Props) {
   return (
     <Slide>
-      <Box as="main" ml={{ sm: '80px' }} pt={6} transition="color 0.2s">
+      <Box as="main" ml={{ md: '80px' }} pt={6} transition="color 0.2s">
         {children}
       </Box>
     </Slide>

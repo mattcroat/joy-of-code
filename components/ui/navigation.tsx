@@ -13,65 +13,128 @@ export function Navigation() {
   }
 
   return (
-    <Box
-      as="nav"
-      h="100vh"
-      maxW="80px"
-      minW="80px"
-      pos="fixed"
-      top={0}
-      left={0}
-      bg={bgColor[colorMode]}
-      boxShadow="lg"
-      borderRight="2px"
-      borderColor={borderColor[colorMode]}
-      display={{ base: 'none', sm: 'block' }}
-      transition="background-color 0.2s, border-color 0.2s"
-    >
-      <List h="100%" d="flex" flexDir="column" alignItems="center">
-        <ListItem my={8}>
-          <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
-            <Icon icon="paintBrush" />
-          </CustomLink>
-        </ListItem>
+    <>
+      <Box
+        as="nav"
+        h="100vh"
+        maxW="80px"
+        minW="80px"
+        pos="fixed"
+        top={0}
+        left={0}
+        display={{ base: 'none', md: 'block' }}
+        bg={bgColor[colorMode]}
+        boxShadow="lg"
+        borderRight="2px"
+        borderColor={borderColor[colorMode]}
+        transition="background-color 0.2s, border-color 0.2s"
+      >
+        <List h="100%" d="flex" flexDir="column" alignItems="center">
+          <ListItem my={8}>
+            <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
+              <Icon icon="paintBrush" />
+            </CustomLink>
+          </ListItem>
 
-        <ListItem mt={8}>
-          <CustomLink
-            href="/javascript"
-            color={mutedColor[colorMode]}
-            hover={hoverStyle}
-            isInternal
-          >
-            <Icon icon="js" />
-          </CustomLink>
-        </ListItem>
+          <ListItem mt={8}>
+            <CustomLink
+              href="/javascript"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Icon icon="js" />
+            </CustomLink>
+          </ListItem>
 
-        <ListItem mt={8}>
-          <CustomLink
-            href="/react"
-            color={mutedColor[colorMode]}
-            hover={hoverStyle}
-            isInternal
-          >
-            <Icon icon="react" />
-          </CustomLink>
-        </ListItem>
+          <ListItem mt={8}>
+            <CustomLink
+              href="/react"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Icon icon="react" />
+            </CustomLink>
+          </ListItem>
 
-        <ListItem mt={8}>
-          <CustomLink
-            href="/web"
-            color={mutedColor[colorMode]}
-            hover={hoverStyle}
-            isInternal
-          >
-            <Icon icon="spider" />
-          </CustomLink>
-        </ListItem>
+          <ListItem mt={8}>
+            <CustomLink
+              href="/web"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Icon icon="spider" />
+            </CustomLink>
+          </ListItem>
 
-        <ListItem mt="auto" mb={8}>
-          <ThemeToggle />
-        </ListItem>
-      </List>
-    </Box>
+          <ListItem mt="auto" mb={8}>
+            <ThemeToggle />
+          </ListItem>
+        </List>
+      </Box>
+
+      <Box
+        as="nav"
+        w="100%"
+        pos="fixed"
+        left={0}
+        bottom={0}
+        display={{ base: 'block', md: 'none' }}
+        py={2}
+        bg={bgColor[colorMode]}
+        transition="background-color 0.2s, border-color 0.2s"
+        zIndex="1"
+        style={{
+          boxShadow: '0 -10px 10px hsla(0, 0%, 0%, 40%)',
+        }}
+      >
+        <List d="flex" justifyContent="space-around" alignItems="center">
+          <ListItem>
+            <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
+              <Icon icon="paintBrush" />
+            </CustomLink>
+          </ListItem>
+
+          <ListItem>
+            <CustomLink
+              href="/javascript"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Icon icon="js" />
+            </CustomLink>
+          </ListItem>
+
+          <ListItem>
+            <CustomLink
+              href="/react"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Icon icon="react" />
+            </CustomLink>
+          </ListItem>
+
+          <ListItem>
+            <CustomLink
+              href="/web"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Icon icon="spider" />
+            </CustomLink>
+          </ListItem>
+
+          <ListItem>
+            <ThemeToggle />
+          </ListItem>
+        </List>
+      </Box>
+    </>
   )
 }
