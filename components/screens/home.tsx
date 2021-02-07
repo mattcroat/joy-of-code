@@ -15,7 +15,7 @@ interface Props {
 
 export function Home({ posts }: Props) {
   return (
-    <Layout title="Joy of Code | ☕ Freshly Brewed Web Development Content">
+    <Layout>
       <Box px={[8, 16]}>
         <Box>
           <H1>
@@ -23,6 +23,13 @@ export function Home({ posts }: Props) {
             <Emoji emoji="👋" label="Waving hand emoji" animate />
           </H1>
         </Box>
+
+        {posts.length < 1 && (
+          <Box fontSize={[16, 18, 20]} my={8}>
+            Nothing to see here...
+            <Emoji emoji="🕵️" label="Spy emoji" spacing={2} animate />
+          </Box>
+        )}
 
         <Box my={12}>
           <CardsGrid posts={posts} />

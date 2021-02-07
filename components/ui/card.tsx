@@ -38,7 +38,7 @@ export function Card({ theme, title, slug }: Props) {
         >
           <Box
             h="100%"
-            bg={`${cardTheme[theme].bg}, url('/nebula.webp')`}
+            bg={`${cardTheme[theme].bg}, url('/images/nebula.webp')`}
             bgPos="0 20%"
             bgBlendMode="color"
           ></Box>
