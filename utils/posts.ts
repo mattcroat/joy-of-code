@@ -32,7 +32,7 @@ export const getPosts = postFilePaths.map((slug) => {
 
 export function getPostsByCategory(category: string) {
   const filteredPosts = getPosts.filter(
-    (post) => post.category.toLowerCase() === category
+    (post) => post.category.toLowerCase() === category.toLowerCase()
   )
 
   return filteredPosts
