@@ -1,5 +1,5 @@
 import { Category } from '@/components/screens'
-import { getPosts } from '@/utils/posts'
+import { getPostsByCategory, getSortedPosts } from '@/utils/posts'
 
 interface Props {
   category: string
@@ -13,18 +13,20 @@ interface Props {
 }
 
 export default function WebPage({ category, posts }: Props) {
+  if (!posts || posts.length < 1) {
+    return <h1>Could not retrieve posts.</h1>
+  }
+
   return <Category category={category} posts={posts} title={category} />
 }
 
 export async function getStaticProps() {
-  const filteredPosts = getPosts.filter(
-    (post) => post.category.toLowerCase() === 'web'
-  )
+  const filteredPosts = getPostsByCategory('web')
 
   return {
     props: {
       category: 'Web',
-      posts: filteredPosts,
+      posts: getSortedPosts(filteredPosts),
     },
   }
 }

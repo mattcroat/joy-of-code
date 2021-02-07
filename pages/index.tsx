@@ -1,5 +1,5 @@
 import { Home } from '@/components/screens'
-import { getPosts } from '@/utils/posts'
+import { getPosts, getSortedPosts } from '@/utils/posts'
 
 interface Props {
   posts: {
@@ -15,11 +15,10 @@ export default function IndexPage({ posts }: Props) {
   return <Home posts={posts} />
 }
 
-// get posts metadata
 export async function getStaticProps() {
   return {
     props: {
-      posts: getPosts,
+      posts: getSortedPosts(getPosts),
     },
   }
 }

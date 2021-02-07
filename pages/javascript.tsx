@@ -1,5 +1,5 @@
 import { Category } from '@/components/screens'
-import { getPosts } from '@/utils/posts'
+import { getPostsByCategory, getSortedPosts } from '@/utils/posts'
 
 interface Props {
   category: string
@@ -17,14 +17,12 @@ export default function JavaScriptPage({ category, posts }: Props) {
 }
 
 export async function getStaticProps() {
-  const filteredPosts = getPosts.filter(
-    (post) => post.category.toLowerCase() === 'javascript'
-  )
+  const filteredPosts = getPostsByCategory('JavaScript')
 
   return {
     props: {
       category: 'JavaScript',
-      posts: filteredPosts,
+      posts: getSortedPosts(filteredPosts),
     },
   }
 }
