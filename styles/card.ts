@@ -9,7 +9,7 @@ interface CardTheme {
   }
 }
 
-const cardTheme: CardTheme = {
+export const cardTheme: CardTheme = {
   JavaScript: {
     bg: `radial-gradient(
       circle,
@@ -38,5 +38,3 @@ const cardTheme: CardTheme = {
     icon: 'spider',
   },
 }
-
-export default cardTheme

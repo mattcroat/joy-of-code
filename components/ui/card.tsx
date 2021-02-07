@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Icon } from '@/components/icons'
 import { Tilt } from '@/components/motion'
 import { CustomLink } from '@/components/ui'
-import cardTheme from '@/styles/card'
+import { cardTheme } from '@/styles/card'
 
 interface Props {
   theme: string
@@ -12,49 +12,35 @@ interface Props {
   slug: string
 }
 
-const MotionBox = motion.custom(Box)
-
-const cardVariant = {
+const card = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
   },
 }
 
+const CardContainer = motion.custom(Box)
+
 export function Card({ theme, title, slug }: Props) {
   return (
     <CustomLink href={`/${encodeURIComponent(slug)}`} isInternal>
       <Tilt>
-        <MotionBox
+        <CardContainer
           position="relative"
-          maxW="480px"
           h={['200px', '240px']}
-          borderRadius="base"
+          borderRadius="lg"
           boxShadow="lg"
           overflow="hidden"
-          variants={cardVariant}
+          variants={card}
           _hover={{
             boxShadow: '2xl',
           }}
         >
           <Box
             h="100%"
-            w="100%"
             bg={`${cardTheme[theme].bg}, url('/nebula.webp')`}
             bgPos="0 20%"
             bgBlendMode="color"
-            opacity="0.8"
-            _after={{
-              content: '" "',
-              w: '100%',
-              h: '100%',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              bg: cardTheme[theme].bg,
-              opacity: 0.1,
-              zIndex: 1,
-            }}
           ></Box>
           <Box
             position="absolute"
@@ -76,10 +62,11 @@ export function Card({ theme, title, slug }: Props) {
             color={cardTheme[theme].color}
             letterSpacing="-2px"
             zIndex="2"
+            textShadow={`2px 2px hsla(0, 0%, 0%, 100%)`}
           >
             {title}
           </Heading>
-        </MotionBox>
+        </CardContainer>
       </Tilt>
     </CustomLink>
   )

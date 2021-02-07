@@ -13,9 +13,7 @@ interface Props {
   }[]
 }
 
-const MotionGrid = motion.custom(SimpleGrid)
-
-const cardsGridVariant = {
+const grid = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -25,18 +23,20 @@ const cardsGridVariant = {
   },
 }
 
+const GridContainer = motion.custom(SimpleGrid)
+
 export function CardsGrid({ posts }: Props) {
   return (
-    <MotionGrid
-      spacing={8}
+    <GridContainer
       minChildWidth={{ sm: '340px' }}
+      spacing={8}
       animate="show"
       initial="hidden"
-      variants={cardsGridVariant}
+      variants={grid}
     >
       {posts.map(({ category, title, slug }) => (
         <Card key={slug} theme={category} title={title} slug={slug} />
       ))}
-    </MotionGrid>
+    </GridContainer>
   )
 }
