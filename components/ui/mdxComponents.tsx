@@ -1,21 +1,22 @@
 import { Kbd } from '@chakra-ui/react'
 
+import { CodeBlock } from '@/root/components/ui/mdx/CodeBlock'
+import { CodeBlockTitle } from '@/root/components/ui/mdx/CodeBlock/CodeBlockTitle'
+import { InlineCode } from '@/root/components/ui/mdx/InlineCode'
+import { PostCredits } from '@/root/components/ui/mdx/PostCredits'
+import { Image } from '@/root/components/ui/mdx/Image'
+import { Iframe } from '@/root/components/ui/mdx/Iframe'
+
 import {
-  CodeTitle,
-  Credits,
   CustomLink,
   H1,
   H2,
   Hr,
-  Image,
-  Iframe,
-  InlineCode,
   Li,
   Olist,
   Paragraph,
-  Pre,
   Ulist,
-} from '@/components/ui'
+} from '@/root/components/ui'
 
 export const MDXComponents = {
   a: CustomLink,
@@ -29,8 +30,8 @@ export const MDXComponents = {
   ul: Ulist,
   ol: Olist,
   li: Li,
-  pre: Pre,
-  div: CodeTitle,
-  Credits,
+  pre: CodeBlock,
+  div: CodeBlockTitle,
+  PostCredits,
   Iframe,
 }

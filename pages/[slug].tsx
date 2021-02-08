@@ -11,9 +11,9 @@ import rehypePrism from '@mapbox/rehype-prism'
 import codeTitle from 'remark-code-titles'
 import unwrapImages from 'remark-unwrap-images'
 
-import { Post } from '@/components/screens'
-import { MDXComponents } from '@/components/ui'
-import { postsPath, postFilePaths } from '@/utils/posts'
+import { Post } from '@/root/components/screens/Post'
+import { MDXComponents } from '@/root/components/ui'
+import { postsPath, postFilePaths } from '@/root/utils/posts'
 
 interface Post {
   MDXSource: {

@@ -1,4 +1,4 @@
-import { Category } from '@/components/screens'
+import { Category } from '@/components/screens/Category'
 import { getPostsByCategory, getSortedPosts } from '@/utils/posts'
 
 interface Props {

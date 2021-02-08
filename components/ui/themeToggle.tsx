@@ -1,7 +1,7 @@
 import { IconButton, useColorMode } from '@chakra-ui/react'
 
-import { Icon } from '@/components/icons'
-import { bgColor, mutedColor, primaryColor } from '@/styles/colors'
+import { Icon } from '@/root/components/shared/Icon'
+import { bgColor, mutedColor, primaryColor } from '@/root/styles/colors'
 
 export function ThemeToggle() {
   const { colorMode, toggleColorMode } = useColorMode()

@@ -1,0 +1,1 @@
+export { PostCredits } from './PostCredits'
