@@ -28,7 +28,7 @@ const GridContainer = motion.custom(SimpleGrid)
 export function CardsGrid({ posts }: Props) {
   return (
     <GridContainer
-      minChildWidth={{ sm: '340px' }}
+      templateColumns="repeat(auto-fill, minmax(340px, 1fr))"
       spacing={8}
       animate="show"
       initial="hidden"

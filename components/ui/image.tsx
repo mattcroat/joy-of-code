@@ -9,12 +9,20 @@ interface Props {
   src: string
   alt: string
   inline: boolean
+  banner: boolean
 }
 
-export function Image({ height, width, src, alt, inline = false }: Props) {
-  if (inline) {
+export function Image({
+  height,
+  width,
+  src,
+  alt,
+  inline = false,
+  banner = false,
+}: Props) {
+  if (banner) {
     return (
-      <Box position="relative" my={{ sm: 8 }} bg="white">
+      <Box my={{ sm: 8 }} bg="white">
         <FadeIn>
           <NextImage
             height={height}
@@ -29,8 +37,24 @@ export function Image({ height, width, src, alt, inline = false }: Props) {
     )
   }
 
+  if (inline) {
+    return (
+      <Box my={{ sm: 8 }}>
+        <FadeIn>
+          <NextImage
+            height={height}
+            width={width}
+            alt={alt}
+            src={src}
+            layout="intrinsic"
+          />
+        </FadeIn>
+      </Box>
+    )
+  }
+
   return (
-    <Box position="relative" mx={{ xl: '-10%' }} my={{ sm: 8 }}>
+    <Box mx={{ xl: '-10%' }} my={{ sm: 8 }}>
       <FadeIn>
         <NextImage
           height={height}
