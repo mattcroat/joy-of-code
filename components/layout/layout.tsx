@@ -6,6 +6,7 @@ import { Seo } from '@/components/Seo'
 
 interface Props {
   children: ReactNode
+  [key: string]: any
 }
 
 export function Layout({ children, ...metadata }: Props) {
