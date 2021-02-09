@@ -1,7 +1,9 @@
 import { Box } from '@chakra-ui/react'
 
+import { Emoji } from '@/root/components/shared/Emoji'
 import { Layout } from '@/root/components/shared/Layout'
-import { CardsGrid, Emoji, H1 } from '@/root/components/ui'
+import { Title } from '@/root/components/shared/Typography'
+import { CardGrid } from '@/root/components/ui/CardGrid'
 
 interface Props {
   category: string
@@ -20,7 +22,7 @@ export function Category({ category, posts, title }: Props) {
     <Layout title={`Joy of Code | ${category}`}>
       <Box px={[8, 16]}>
         <Box>
-          <H1>{title}</H1>
+          <Title>{title}</Title>
         </Box>
 
         {posts.length < 1 && (
@@ -31,7 +33,7 @@ export function Category({ category, posts, title }: Props) {
         )}
 
         <Box my={10}>
-          <CardsGrid posts={posts} />
+          <CardGrid posts={posts} />
         </Box>
       </Box>
     </Layout>

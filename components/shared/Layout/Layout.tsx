@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 
-import { Navigation } from '@/root/components/ui'
 import { ChakraMotion } from '@/root/components/shared/ChakraMotion'
+import { Navigation } from '@/root/components/shared/Layout/Navigation'
 import { Seo } from '@/root/components/shared/Layout/Seo'
-import { slide } from '@/root/utils/variants'
+import { slide } from '@/root/utils/helpers/variants'
 
 interface Props {
   children: ReactNode

@@ -1,5 +1,5 @@
-import { Category } from '@/components/screens/Category'
-import { getPostsByCategory, getSortedPosts } from '@/utils/posts'
+import { Category } from '@/root/components/screens/Category'
+import { getPostsByCategory, getSortedPosts } from '@/root/utils/helpers/posts'
 
 interface Props {
   category: string

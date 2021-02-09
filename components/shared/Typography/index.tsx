@@ -1,7 +1,14 @@
 import { ReactNode } from 'react'
-import { Divider, Heading, Text, useColorMode } from '@chakra-ui/react'
+import {
+  Divider,
+  Heading,
+  List,
+  ListItem,
+  Text,
+  useColorMode,
+} from '@chakra-ui/react'
 
-import { mutedColor, primaryColor } from '@/styles/colors'
+import { mutedColor, primaryColor } from '@/root/styles/colors'
 
 interface HeadingProps {
   children: ReactNode
@@ -15,11 +22,15 @@ interface ParagraphProps {
   [key: string]: any
 }
 
-export function Hr() {
+interface ListProps {
+  children: ReactNode
+}
+
+export function Spacer() {
   return <Divider h="4px" w="40px" bg="gray.600" my={2} borderBottom="none" />
 }
 
-export function H1({ divider = true, ...props }: HeadingProps) {
+export function Title({ divider = true, ...props }: HeadingProps) {
   const { colorMode } = useColorMode()
 
   return (
@@ -33,12 +44,12 @@ export function H1({ divider = true, ...props }: HeadingProps) {
         letterSpacing="-1px"
         {...props}
       />
-      {divider && <Hr />}
+      {divider && <Spacer />}
     </>
   )
 }
 
-export function H2({ divider = false, ...props }: HeadingProps) {
+export function Subheading({ divider = false, ...props }: HeadingProps) {
   const { colorMode } = useColorMode()
 
   return (
@@ -53,7 +64,7 @@ export function H2({ divider = false, ...props }: HeadingProps) {
         letterSpacing="-1px"
         {...props}
       />
-      {divider && <Hr />}
+      {divider && <Spacer />}
     </>
   )
 }
@@ -62,4 +73,38 @@ export function Paragraph({ spacing = 8, ...props }: ParagraphProps) {
   return (
     <Text fontSize={[16, 18, 20]} lineHeight="1.6" my={spacing} {...props} />
   )
+}
+
+export function Olist({ children }: ListProps) {
+  return (
+    <List
+      listStyleType="decimal"
+      fontSize={[16, 18, 20]}
+      pl={4}
+      mb={8}
+      mt={2}
+      ml={2}
+    >
+      {children}
+    </List>
+  )
+}
+
+export function Ulist({ children }: ListProps) {
+  return (
+    <List
+      listStyleType="disc"
+      fontSize={[16, 18, 20]}
+      pl={4}
+      mb={8}
+      mt={2}
+      ml={2}
+    >
+      {children}
+    </List>
+  )
+}
+
+export function Li({ children }: ListProps) {
+  return <ListItem mb={2}>{children}</ListItem>
 }

@@ -1,5 +1,5 @@
 // custom extended Chakra UI theme
-import chakraTheme from '@/styles/theme'
+import chakraTheme from '@/root/styles/theme'
 
 interface CardTheme {
   [key: string]: {

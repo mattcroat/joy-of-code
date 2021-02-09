@@ -1,6 +1,6 @@
 import { Card } from './Card'
 import { ChakraMotionGrid } from '@/root/components/shared/ChakraMotion'
-import { fadeInStagger } from '@/root/utils/variants'
+import { fadeInStagger } from '@/root/utils/helpers/variants'
 
 interface Props {
   posts: {

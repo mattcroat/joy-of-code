@@ -1,8 +1,14 @@
 import { Box, List, ListItem, useColorMode } from '@chakra-ui/react'
 
-import { Icon } from '@/components/shared/Icon'
-import { CustomLink, ThemeToggle } from '@/components/ui'
-import { bgColor, borderColor, mutedColor, primaryColor } from '@/styles/colors'
+import { Icon } from '@/root/components/shared/Icon'
+import { CustomLink } from '@/root/components/shared/CustomLink'
+import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
+import {
+  bgColor,
+  borderColor,
+  mutedColor,
+  primaryColor,
+} from '@/root/styles/colors'
 
 export function Navigation() {
   const { colorMode } = useColorMode()

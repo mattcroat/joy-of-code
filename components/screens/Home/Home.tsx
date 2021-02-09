@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 
 import { Layout } from '@/root/components/shared/Layout'
-import { H1 } from '@/root/components/ui'
+import { Title } from '@/root/components/shared/Typography'
 import { CardGrid } from '@/root/components/ui/CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
 
@@ -20,10 +20,10 @@ export function Home({ posts }: Props) {
     <Layout>
       <Box px={[8, 16]}>
         <Box>
-          <H1>
+          <Title>
             Welcome Friend
             <Emoji emoji="👋" label="Waving hand emoji" animate />
-          </H1>
+          </Title>
         </Box>
 
         {posts.length < 1 && (

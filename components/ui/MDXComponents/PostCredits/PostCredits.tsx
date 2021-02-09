@@ -1,8 +1,9 @@
 import { Box, useColorMode } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 
-import { CustomLink, Paragraph } from '@/root/components/ui'
+import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Emoji } from '@/root/components/shared/Emoji'
+import { Paragraph } from '@/root/components/shared/Typography'
 
 import {
   aboutBg,

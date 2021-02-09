@@ -12,8 +12,8 @@ import codeTitle from 'remark-code-titles'
 import unwrapImages from 'remark-unwrap-images'
 
 import { Post } from '@/root/components/screens/Post'
-import { MDXComponents } from '@/root/components/ui'
-import { postsPath, postFilePaths } from '@/root/utils/posts'
+import { MDXComponents } from '@/root/components/ui/MDXComponents'
+import { postsPath, postFilePaths } from '@/root/utils/helpers/posts'
 
 interface Post {
   MDXSource: {

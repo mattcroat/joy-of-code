@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { emojiAppear, emojiWave } from '@/root/utils/variants'
+import { emojiAppear, emojiWave } from '@/root/utils/helpers/variants'
 
 interface Props {
   animate?: boolean

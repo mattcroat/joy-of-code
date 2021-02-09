@@ -1,11 +1,11 @@
 import { Box, Heading } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { CustomLink } from '@/root/components/ui'
+import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Tilt } from '@/root/components/shared/Tilt'
 import { Icon } from '@/root/components/shared/Icon'
 import { cardTheme } from '@/root/styles/card'
-import { fadeInQuick } from '@/root/utils/variants'
+import { fadeInQuick } from '@/root/utils/helpers/variants'
 
 interface Props {
   theme: string

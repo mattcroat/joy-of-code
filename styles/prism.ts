@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
-
-import chakraTheme from '@/styles/theme'
+import chakraTheme from '@/root/styles/theme'
 
 const prismBaseTheme = css`
   code {
