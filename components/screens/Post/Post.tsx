@@ -3,13 +3,22 @@ import { Box } from '@chakra-ui/react'
 import { Layout } from '@/root/components/shared/Layout'
 
 interface Props {
-  title: string
   content: JSX.Element
+  frontMatter: {
+    title: string
+    description: string
+    image: string
+  }
 }
 
-export function Post({ title, content }: Props) {
+export function Post({ content, frontMatter }: Props) {
   return (
-    <Layout title={title}>
+    <Layout
+      title={frontMatter.title}
+      description={frontMatter.description}
+      image={`https://joyofcode.xyz${frontMatter.image}`}
+      type="article"
+    >
       <Box w={{ lg: '90ch' }} mx="auto" px={8}>
         {content}
       </Box>

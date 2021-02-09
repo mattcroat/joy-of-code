@@ -24,6 +24,7 @@ interface Post {
   frontMatter: {
     title: string
     description: string
+    image: string
   }
 }
 
@@ -36,7 +37,7 @@ interface Params {
 export default function PostPage({ MDXSource, frontMatter }: Post) {
   const content = hydrate(MDXSource, { components: MDXComponents })
 
-  return <Post title={frontMatter.title} content={content} />
+  return <Post content={content} frontMatter={frontMatter} />
 }
 
 // generate paths at build-time
