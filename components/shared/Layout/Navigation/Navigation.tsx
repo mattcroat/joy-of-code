@@ -2,6 +2,7 @@ import { Box, List, ListItem, useColorMode } from '@chakra-ui/react'
 
 import { Icon } from '@/root/components/shared/Icon'
 import { CustomLink } from '@/root/components/shared/CustomLink'
+import { Delight } from '@/root/components/shared/Delight'
 import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
 import {
   bgColor,
@@ -9,11 +10,9 @@ import {
   mutedColor,
   primaryColor,
 } from '@/root/styles/colors'
-import { useSound } from '@/root/utils/hooks'
 
 export function Navigation() {
   const { colorMode } = useColorMode()
-  const playSound = useSound('/sfx/confirm.mp3')
 
   const hoverStyle = {
     transition: 'color .5s ease',
@@ -38,47 +37,57 @@ export function Navigation() {
         transition="background-color 0.2s, border-color 0.2s"
       >
         <List h="100%" d="flex" flexDir="column" alignItems="center">
-          <ListItem onClick={playSound} my={8}>
+          <ListItem my={8}>
             <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
-              <Icon icon="paintBrush" />
+              <Delight>
+                <Icon icon="paintBrush" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem onClick={playSound} mt={8}>
+          <ListItem mt={8}>
             <CustomLink
               href="/javascript"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="js" />
+              <Delight>
+                <Icon icon="js" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem onClick={playSound} mt={8}>
+          <ListItem mt={8}>
             <CustomLink
               href="/react"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="react" />
+              <Delight>
+                <Icon icon="react" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem onClick={playSound} mt={8}>
+          <ListItem mt={8}>
             <CustomLink
               href="/web"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="spider" />
+              <Delight>
+                <Icon icon="spider" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem onClick={playSound} mt="auto" mb={8}>
-            <ThemeToggle />
+          <ListItem mt="auto" mb={8}>
+            <Delight>
+              <ThemeToggle />
+            </Delight>
           </ListItem>
         </List>
       </Box>
@@ -99,47 +108,57 @@ export function Navigation() {
         }}
       >
         <List d="flex" justifyContent="space-around" alignItems="center">
-          <ListItem onClick={playSound}>
+          <ListItem>
             <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
-              <Icon icon="paintBrush" />
+              <Delight>
+                <Icon icon="paintBrush" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem onClick={playSound}>
+          <ListItem>
             <CustomLink
               href="/javascript"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="js" />
+              <Delight>
+                <Icon icon="js" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem onClick={playSound}>
+          <ListItem>
             <CustomLink
               href="/react"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="react" />
+              <Delight>
+                <Icon icon="react" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem onClick={playSound}>
+          <ListItem>
             <CustomLink
               href="/web"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="spider" />
+              <Delight>
+                <Icon icon="spider" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem onClick={playSound}>
-            <ThemeToggle />
+          <ListItem>
+            <Delight>
+              <ThemeToggle />
+            </Delight>
           </ListItem>
         </List>
       </Box>
