@@ -9,9 +9,11 @@ import {
   mutedColor,
   primaryColor,
 } from '@/root/styles/colors'
+import { useSound } from '@/root/utils/hooks'
 
 export function Navigation() {
   const { colorMode } = useColorMode()
+  const playSound = useSound('/sfx/confirm.mp3')
 
   const hoverStyle = {
     transition: 'color .5s ease',
@@ -36,13 +38,13 @@ export function Navigation() {
         transition="background-color 0.2s, border-color 0.2s"
       >
         <List h="100%" d="flex" flexDir="column" alignItems="center">
-          <ListItem my={8}>
+          <ListItem onClick={playSound} my={8}>
             <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
               <Icon icon="paintBrush" />
             </CustomLink>
           </ListItem>
 
-          <ListItem mt={8}>
+          <ListItem onClick={playSound} mt={8}>
             <CustomLink
               href="/javascript"
               color={mutedColor[colorMode]}
@@ -53,7 +55,7 @@ export function Navigation() {
             </CustomLink>
           </ListItem>
 
-          <ListItem mt={8}>
+          <ListItem onClick={playSound} mt={8}>
             <CustomLink
               href="/react"
               color={mutedColor[colorMode]}
@@ -64,7 +66,7 @@ export function Navigation() {
             </CustomLink>
           </ListItem>
 
-          <ListItem mt={8}>
+          <ListItem onClick={playSound} mt={8}>
             <CustomLink
               href="/web"
               color={mutedColor[colorMode]}
@@ -75,7 +77,7 @@ export function Navigation() {
             </CustomLink>
           </ListItem>
 
-          <ListItem mt="auto" mb={8}>
+          <ListItem onClick={playSound} mt="auto" mb={8}>
             <ThemeToggle />
           </ListItem>
         </List>
@@ -97,13 +99,13 @@ export function Navigation() {
         }}
       >
         <List d="flex" justifyContent="space-around" alignItems="center">
-          <ListItem>
+          <ListItem onClick={playSound}>
             <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
               <Icon icon="paintBrush" />
             </CustomLink>
           </ListItem>
 
-          <ListItem>
+          <ListItem onClick={playSound}>
             <CustomLink
               href="/javascript"
               color={mutedColor[colorMode]}
@@ -114,7 +116,7 @@ export function Navigation() {
             </CustomLink>
           </ListItem>
 
-          <ListItem>
+          <ListItem onClick={playSound}>
             <CustomLink
               href="/react"
               color={mutedColor[colorMode]}
@@ -125,7 +127,7 @@ export function Navigation() {
             </CustomLink>
           </ListItem>
 
-          <ListItem>
+          <ListItem onClick={playSound}>
             <CustomLink
               href="/web"
               color={mutedColor[colorMode]}
@@ -136,7 +138,7 @@ export function Navigation() {
             </CustomLink>
           </ListItem>
 
-          <ListItem>
+          <ListItem onClick={playSound}>
             <ThemeToggle />
           </ListItem>
         </List>
