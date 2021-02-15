@@ -84,11 +84,26 @@ export function Navigation() {
             </CustomLink>
           </ListItem>
 
-          <ListItem mt="auto" mb={8}>
-            <Delight>
-              <ThemeToggle />
-            </Delight>
-          </ListItem>
+          <Box mt="auto" mb={8}>
+            <ListItem>
+              <CustomLink
+                href="/feed/rss.xml"
+                color={mutedColor[colorMode]}
+                hover={hoverStyle}
+                isInternal
+              >
+                <Delight>
+                  <Icon icon="feed" />
+                </Delight>
+              </CustomLink>
+            </ListItem>
+
+            <ListItem mt={8}>
+              <Delight>
+                <ThemeToggle />
+              </Delight>
+            </ListItem>
+          </Box>
         </List>
       </Box>
 
@@ -151,6 +166,19 @@ export function Navigation() {
             >
               <Delight>
                 <Icon icon="spider" />
+              </Delight>
+            </CustomLink>
+          </ListItem>
+
+          <ListItem>
+            <CustomLink
+              href="/feed/rss.xml"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Delight>
+                <Icon icon="feed" />
               </Delight>
             </CustomLink>
           </ListItem>
