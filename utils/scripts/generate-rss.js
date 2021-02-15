@@ -28,6 +28,7 @@ async function generateRSSFeed() {
     })
   )
 
+  await fs.mkdir('./public/feed')
   await fs.writeFile('./public/feed/rss.xml', feed.xml({ indent: true }))
 }
 
