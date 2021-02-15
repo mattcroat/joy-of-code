@@ -5,8 +5,11 @@ const withMDX = require('@next/mdx')({
 module.exports = withMDX({
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   webpack: (config, { dev, isServer }) => {
+    if (isServer) {
+      require('./utils/scripts/generate-rss')
+    }
+
     // replace React with Preact in production build
-    // credit goes to https://leerob.io/blog/tailwind
     if (!dev && !isServer) {
       Object.assign(config.resolve.alias, {
         react: 'preact/compat',
