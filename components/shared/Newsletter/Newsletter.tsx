@@ -46,7 +46,7 @@ export function Newsletter({ ...props }) {
       </Box>
       <Box as="p" color="gray.400">
         If you hate email, you can use the&nbsp;
-        <CustomLink href="/" color={primaryColor[colorMode]}>
+        <CustomLink href="/feed/rss.xml" color={primaryColor[colorMode]}>
           RSS feed.
         </CustomLink>
       </Box>
@@ -55,17 +55,18 @@ export function Newsletter({ ...props }) {
         <Box my={4} pos="relative">
           <Input
             ref={inputEl}
+            type="email"
             aria-label="Email for newsletter"
             id="newsletter-email"
             name="newsletter-email"
-            type="email"
             placeholder="unix@chad.com"
             required
           />
           <Button
-            pos="absolute"
-            right={0}
             type="submit"
+            pos={{ sm: 'absolute' }}
+            right={0}
+            mt={{ base: 4, sm: 0 }}
             colorScheme="orange"
             zIndex={1}
           >
