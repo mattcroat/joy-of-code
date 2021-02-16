@@ -1,9 +1,11 @@
 import { Box } from '@chakra-ui/react'
 
 import { Layout } from '@/root/components/shared/Layout'
-import { Title } from '@/root/components/shared/Typography'
+import { Subheading, Title } from '@/root/components/shared/Typography'
 import { CardGrid } from '@/root/components/ui/CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
+
+import { Newsletter } from '../../shared/Newsletter'
 
 interface Props {
   posts: {
@@ -33,7 +35,13 @@ export function Home({ posts }: Props) {
           </Box>
         )}
 
+        <Newsletter maxW="500px" my={8} />
+
         <Box my={12}>
+          <Subheading mt={0}>
+            <Emoji emoji="🔥" label="Fire emoji" spacing={2} animate />
+            Latest
+          </Subheading>
           <CardGrid posts={posts} />
         </Box>
       </Box>

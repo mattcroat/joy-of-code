@@ -1,4 +1,5 @@
 import { CustomLink } from '@/root/components/shared/CustomLink'
+import { Newsletter } from '@/root/components/shared/Newsletter'
 import {
   Li,
   Olist,
@@ -32,4 +33,5 @@ export const MDXComponents = {
   div: CodeBlockTitle,
   PostCredits,
   Iframe,
+  Newsletter,
 }
