@@ -4,6 +4,19 @@ const path = require('path')
 const matter = require('gray-matter')
 const RSS = require('rss')
 
+const FEED_PATH = './public/feed'
+const RSS_PATH = `${FEED_PATH}/rss.xml`
+
+async function exists(path) {
+  try {
+    await fs.access(path)
+  } catch (error) {
+    return false
+  }
+
+  return true
+}
+
 async function generateRSSFeed() {
   const feed = new RSS({
     title: 'Joy of Code',
@@ -28,8 +41,12 @@ async function generateRSSFeed() {
     })
   )
 
-  await fs.mkdir('./public/feed')
-  await fs.writeFile('./public/feed/rss.xml', feed.xml({ indent: true }))
+  if (await !exists(FEED_PATH)) {
+    await fs.mkdir(FEED_PATH)
+    await fs.writeFile(RSS_PATH, feed.xml({ indent: true }))
+  } else {
+    await fs.writeFile(RSS_PATH, feed.xml({ indent: true }))
+  }
 }
 
 generateRSSFeed()
