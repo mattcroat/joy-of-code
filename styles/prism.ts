@@ -124,7 +124,7 @@ const prismBaseTheme = css`
     transform: translate(20px, 4px);
     font-family: ${chakraTheme.fonts.mono};
     font-weight: 600;
-    background: ${chakraTheme.colors.orange[200]};
+    background-color: ${chakraTheme.colors.orange[200]};
     color: ${chakraTheme.colors.orange[900]};
     padding: ${chakraTheme.space[2]} ${chakraTheme.space[4]};
     border-radius: ${chakraTheme.radii.base};
@@ -202,7 +202,7 @@ export const prismLightTheme = css`
   }
 
   .remark-code-title {
-    background: ${chakraTheme.colors.blue[100]};
+    background-color: ${chakraTheme.colors.blue[100]};
     color: ${chakraTheme.colors.blue[900]};
   }
 `
