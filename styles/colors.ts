@@ -2,6 +2,7 @@ export const bgColor = { light: 'white', dark: 'gray.800' }
 export const borderColor = { light: 'gray.100', dark: 'gray.900' }
 export const mutedColor = { light: 'gray.600', dark: 'gray.400' }
 export const primaryColor = { light: 'blue.600', dark: 'orange.200' }
+export const scrollbarColor = { light: '#2b6cb0', dark: '#fbd38d' }
 
 export const aboutBg = { light: 'gray.100', dark: 'gray.900' }
 export const aboutText = { light: 'gray.600', dark: 'gray.400' }
