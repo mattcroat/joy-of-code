@@ -6,7 +6,7 @@ import { ChakraProvider, useColorMode } from '@chakra-ui/react'
 import { Global, css } from '@emotion/react'
 import { MDXProvider } from '@mdx-js/react'
 
-import { MDXComponents } from '@/root/components/ui/MDXComponents'
+import { Navigation } from '@/root/components/shared/Layout/Navigation'
 import {
   scrollbarColor,
   selectionBg,
@@ -14,6 +14,7 @@ import {
 } from '@/root/styles/colors'
 import { prismDarkTheme, prismLightTheme } from '@/root/styles/prism'
 import chakraTheme from '@/root/styles/theme'
+import { MDXComponents } from '@/root/components/ui/MDXComponents'
 
 // hide Chakra UI outline borders around clickable components
 import 'focus-visible/dist/focus-visible'
@@ -74,6 +75,7 @@ export default function App({ Component, pageProps }: AppProps) {
               content="initial-scale=1.0, width=device-width"
             />
           </Head>
+          <Navigation />
           <Component {...pageProps} />
         </GlobalStyle>
       </MDXProvider>

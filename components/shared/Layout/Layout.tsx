@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 
 import { ChakraMotion } from '@/root/components/shared/ChakraMotion'
-import { Navigation } from '@/root/components/shared/Layout/Navigation'
 import { Seo } from '@/root/components/shared/Layout/Seo'
 import { slide } from '@/root/utils/helpers/variants'
 
@@ -14,9 +13,6 @@ export function Layout({ children, ...metadata }: Props) {
   return (
     <>
       <Seo {...metadata} />
-
-      <Navigation />
-
       <ChakraMotion
         as="main"
         ml={{ md: '80px' }}
