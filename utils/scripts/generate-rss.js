@@ -41,7 +41,9 @@ async function generateRSSFeed() {
     })
   )
 
-  if (await !exists(FEED_PATH)) {
+  const doesExist = await exists(FEED_PATH)
+
+  if (!doesExist) {
     await fs.mkdir(FEED_PATH)
     await fs.writeFile(RSS_PATH, feed.xml({ indent: true }))
   } else {
