@@ -15,7 +15,7 @@ interface Props {
 export function CardGrid({ posts }: Props) {
   return (
     <ChakraMotionGrid
-      templateColumns="repeat(auto-fill, minmax(340px, 1fr))"
+      templateColumns="repeat(auto-fill, minmax(auto, 420px))"
       spacing={8}
       animate="show"
       initial="hidden"
