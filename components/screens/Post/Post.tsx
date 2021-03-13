@@ -1,6 +1,8 @@
 import { Box } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
 
 import { Layout } from '@/root/components/shared/Layout'
+import { fadeInQuick } from '@/root/utils/helpers/variants'
 
 interface Props {
   content: JSX.Element
@@ -19,8 +21,16 @@ export function Post({ content, frontMatter }: Props) {
       image={`https://joyofcode.xyz${frontMatter.image}`}
       type="article"
     >
-      <Box w={{ lg: '90ch' }} mx="auto" px={8}>
-        {content}
+      <Box
+        w={{ lg: '90ch' }}
+        mx="auto"
+        px={8}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <motion.div initial="hidden" animate="show" variants={fadeInQuick}>
+          {content}
+        </motion.div>
       </Box>
     </Layout>
   )

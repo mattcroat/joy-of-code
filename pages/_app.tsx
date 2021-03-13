@@ -7,7 +7,11 @@ import { Global, css } from '@emotion/react'
 import { MDXProvider } from '@mdx-js/react'
 
 import { MDXComponents } from '@/root/components/ui/MDXComponents'
-import { selectionBg, selectionText } from '@/root/styles/colors'
+import {
+  scrollbarColor,
+  selectionBg,
+  selectionText,
+} from '@/root/styles/colors'
 import { prismDarkTheme, prismLightTheme } from '@/root/styles/prism'
 import chakraTheme from '@/root/styles/theme'
 
@@ -32,8 +36,25 @@ function GlobalStyle({ children }: GlobalStyleProps) {
             color: ${selectionText[colorMode]};
           }
 
+          html {
+            scrollbar-color: ${scrollbarColor[colorMode]} transparent;
+            scrollbar-width: thin;
+          }
+
           body {
             overflow-x: hidden;
+          }
+
+          ::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          ::-webkit-scrollbar-track {
+            background-color: none;
+          }
+
+          ::-webkit-scrollbar-thumb {
+            background-color: ${scrollbarColor[colorMode]};
           }
         `}
       />

@@ -2,6 +2,7 @@ import { Box, List, ListItem, useColorMode } from '@chakra-ui/react'
 
 import { Icon } from '@/root/components/shared/Icon'
 import { CustomLink } from '@/root/components/shared/CustomLink'
+import { Delight } from '@/root/components/shared/Delight'
 import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
 import {
   bgColor,
@@ -38,7 +39,9 @@ export function Navigation() {
         <List h="100%" d="flex" flexDir="column" alignItems="center">
           <ListItem my={8}>
             <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
-              <Icon icon="paintBrush" />
+              <Delight>
+                <Icon icon="paintBrush" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
@@ -49,7 +52,9 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="js" />
+              <Delight>
+                <Icon icon="js" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
@@ -60,7 +65,9 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="react" />
+              <Delight>
+                <Icon icon="react" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
@@ -71,13 +78,32 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="spider" />
+              <Delight>
+                <Icon icon="spider" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
-          <ListItem mt="auto" mb={8}>
-            <ThemeToggle />
-          </ListItem>
+          <Box mt="auto" mb={8}>
+            <ListItem>
+              <CustomLink
+                href="/feed/rss.xml"
+                color={mutedColor[colorMode]}
+                hover={hoverStyle}
+                isInternal
+              >
+                <Delight>
+                  <Icon icon="feed" />
+                </Delight>
+              </CustomLink>
+            </ListItem>
+
+            <ListItem mt={8}>
+              <Delight>
+                <ThemeToggle />
+              </Delight>
+            </ListItem>
+          </Box>
         </List>
       </Box>
 
@@ -99,7 +125,9 @@ export function Navigation() {
         <List d="flex" justifyContent="space-around" alignItems="center">
           <ListItem>
             <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
-              <Icon icon="paintBrush" />
+              <Delight>
+                <Icon icon="paintBrush" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
@@ -110,7 +138,9 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="js" />
+              <Delight>
+                <Icon icon="js" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
@@ -121,7 +151,9 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="react" />
+              <Delight>
+                <Icon icon="react" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
@@ -132,12 +164,29 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
-              <Icon icon="spider" />
+              <Delight>
+                <Icon icon="spider" />
+              </Delight>
             </CustomLink>
           </ListItem>
 
           <ListItem>
-            <ThemeToggle />
+            <CustomLink
+              href="/feed/rss.xml"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Delight>
+                <Icon icon="feed" />
+              </Delight>
+            </CustomLink>
+          </ListItem>
+
+          <ListItem>
+            <Delight>
+              <ThemeToggle />
+            </Delight>
           </ListItem>
         </List>
       </Box>

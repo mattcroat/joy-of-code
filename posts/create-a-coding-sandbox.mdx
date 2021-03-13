@@ -7,11 +7,9 @@ image: '/images/create-a-coding-sandbox/banner.webp'
 ---
 
 <Image
-  height="300px"
-  width="1000px"
   src="/images/create-a-coding-sandbox/banner.webp"
   alt="Person around abstract shapes"
-  banner
+  banner={true}
 />
 
 # Create a Coding Sandbox
@@ -726,5 +724,7 @@ That's it! Congrats 🎉
 Hope you learned something! There's a lot you could do from here on. You can add persistant storage using [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) so when you refresh the page it wouldn't reset. You would just need to save the input to local storage each time, and on page load check if it exists, then set the contents of the editor to use it.
 
 You could also move everything to a bundler, or use a framework like React which I'm going to cover in another post.
+
+<Newsletter />
 
 <PostCredits />

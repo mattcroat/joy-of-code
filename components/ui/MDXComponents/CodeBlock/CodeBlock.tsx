@@ -2,7 +2,7 @@ import { ReactNode, useRef, useState } from 'react'
 import { Button, Box, useColorMode } from '@chakra-ui/react'
 import Confetti from 'react-dom-confetti'
 
-import { bgColor } from '@/root/styles/colors'
+import { codeBg } from '@/root/styles/colors'
 
 interface Props {
   children: ReactNode
@@ -65,9 +65,9 @@ export function CodeBlock({ children, ...props }: Props) {
       <Box
         ref={preEl}
         as="pre"
-        bg={bgColor[colorMode]}
+        bg={codeBg[colorMode]}
         fontSize={[16, 18, 20]}
-        p={4}
+        p={6}
         pt={8}
         overflow="auto"
         boxShadow="lg"

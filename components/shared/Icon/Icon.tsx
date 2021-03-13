@@ -3,17 +3,18 @@ import { cloneElement } from 'react'
 import * as SVG from './Icons'
 
 interface Props {
-  icon: 'js' | 'spider' | 'react' | 'paintBrush' | 'sun' | 'moon'
+  icon: 'paintBrush' | 'js' | 'react' | 'spider' | 'sun' | 'moon' | 'feed'
   size?: number
 }
 
 const icons = {
-  js: <SVG.JsIcon />,
-  spider: <SVG.SpiderIcon />,
-  react: <SVG.ReactIcon />,
-  paintBrush: <SVG.PaintBrushIcon />,
-  sun: <SVG.SunIcon />,
-  moon: <SVG.MoonIcon />,
+  paintBrush: <SVG.PaintBrush />,
+  js: <SVG.JavaScriptLogo />,
+  react: <SVG.ReactLogo />,
+  spider: <SVG.Spider />,
+  sun: <SVG.Sun />,
+  moon: <SVG.Moon />,
+  feed: <SVG.Feed />,
 }
 
 export function Icon({ icon, size = 32 }: Props): JSX.Element | null {
