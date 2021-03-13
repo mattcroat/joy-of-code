@@ -73,13 +73,26 @@ export function Navigation() {
 
           <ListItem mt={8}>
             <CustomLink
-              href="/web"
+              href="/css"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
             >
               <Delight>
-                <Icon icon="spider" />
+                <Icon icon="swatch" />
+              </Delight>
+            </CustomLink>
+          </ListItem>
+
+          <ListItem mt={8}>
+            <CustomLink
+              href="/general"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Delight>
+                <Icon icon="bulb" />
               </Delight>
             </CustomLink>
           </ListItem>
@@ -159,13 +172,26 @@ export function Navigation() {
 
           <ListItem>
             <CustomLink
-              href="/web"
+              href="/css"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
             >
               <Delight>
-                <Icon icon="spider" />
+                <Icon icon="swatch" />
+              </Delight>
+            </CustomLink>
+          </ListItem>
+
+          <ListItem>
+            <CustomLink
+              href="/general"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+            >
+              <Delight>
+                <Icon icon="bulb" />
               </Delight>
             </CustomLink>
           </ListItem>

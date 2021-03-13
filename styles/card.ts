@@ -1,3 +1,4 @@
+import type { Icon } from '@/root/components/shared/Icon'
 // custom extended Chakra UI theme
 import chakraTheme from '@/root/styles/theme'
 
@@ -5,7 +6,7 @@ interface CardTheme {
   [key: string]: {
     bg: string
     color: string
-    icon: 'js' | 'spider' | 'react' | 'paintBrush' | 'sun' | 'moon'
+    icon: Icon
   }
 }
 
@@ -13,8 +14,8 @@ export const cardTheme: CardTheme = {
   JavaScript: {
     bg: `radial-gradient(
       circle,
-      ${chakraTheme.colors.yellow[200]},
-      ${chakraTheme.colors.yellow[400]} 100%
+      ${chakraTheme.colors.yellow[600]},
+      ${chakraTheme.colors.black} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
     icon: 'js',
@@ -22,19 +23,29 @@ export const cardTheme: CardTheme = {
   React: {
     bg: `radial-gradient(
       circle,
-      ${chakraTheme.colors.blue[400]},
-      ${chakraTheme.colors.blue[600]} 100%
+      ${chakraTheme.colors.blue[600]},
+      ${chakraTheme.colors.black} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
     icon: 'react',
   },
-  Web: {
+  CSS: {
     bg: `radial-gradient(
       circle,
-      ${chakraTheme.colors.orange[200]},
-      ${chakraTheme.colors.orange[400]} 100%
+      ${chakraTheme.colors.cyan[600]},
+      ${chakraTheme.colors.black} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
-    icon: 'spider',
+    icon: 'swatch',
+  },
+  General: {
+    bg: `radial-gradient(
+      circle,
+      ${chakraTheme.colors.orange[600]},
+      ${chakraTheme.colors.black} 100%
+
+    )`,
+    color: `${chakraTheme.colors.white}`,
+    icon: 'bulb',
   },
 }
