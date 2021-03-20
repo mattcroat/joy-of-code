@@ -1,0 +1,675 @@
+---
+title: Let Your CSS Flow Like Prose With Tailwind CSS
+description: Introduction to Tailwind CSS
+published: '2021-3-20'
+category: 'CSS'
+image: '/images/introduction-to-tailwind-css/shakespeare.webp'
+---
+
+<Image
+  src="/images/introduction-to-tailwind-css/shakespeare.webp"
+  alt="Shakespeare with sunglasses"
+  gif={true}
+/>
+
+# Let Your CSS Flow Like Prose With Tailwind CSS
+
+I love writing CSS. It's a satisfying feeling when you get into the flow, and assemble the pieces of a site like a puzzle. I understand not everyone might feel that way. Often it can feel like a frustrating, and daunting experience when you believe something is beyond understanding.
+
+The often solution is reaching for a popular CSS framework such as [Bootstrap](https://getbootstrap.com/), or [Materialize](https://materializecss.com/). While each have their pros, and cons — there's always friction that gets in the way of writing styles like naming, and context switching between files regardless if you're using a framework, or writing it yourself.
+
+Wouldn't it be nicer if writing styles could flow like prose?
+
+## What You'll Learn
+
+- What is Tailwind CSS
+- How it helps you be more creative, and productive
+- Utility-first approach
+- Why limitations are a good thing
+
+## What is Tailwind CSS?
+
+[Tailwind CSS](https://tailwindcss.com/) is a utility-first CSS framework. In other words, instead of having pre-made components like other frameworks, Tailwind only offers utility classes to build your site. For example `p-8` is the equivalent of `padding: 2rem /*32px*/`.
+
+Isn't this more work? You might ask what's the point. With traditional CSS frameworks, what you see is what you get. They barely offer utility classes beyond what makes up a component, so you still write your styles separately. Modifying the base styles is often a bad developer experience. Remember when you swore you'd never use `!important`? Reality is often disappointing.
+
+With Tailwind you can create unique looking sites, where the constraints you're given work in your favor since _"Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values. They make it easy to be consistent with color choices, spacing, typography, shadows, and everything else that makes up a well-engineered design system."_ and not some design system that works great for a tech company that made it.
+
+Writing styles with Tailwind is enjoyable because it removes that friction I mentioned at the start. It let's you rapidly prototype ideas since it's intuitive, and tied to your markup. It's limiting (in a positive way), but extensible.
+
+Enough talk, let's go through an example.
+
+## The Art of Writing CSS (The Beaten Path)
+
+We're going to create a simple card first using plain HTML, and CSS before we refactor to Tailwind. I'm going to start with a finished example you're welcome to recreate if you wish to feel the burn. You can use [Codepen](https://codepen.io/) if you don't feel like opening your editor. This is our finished card, with the source code.
+
+<Iframe
+  title="Simple Product Card"
+  src="https://codepen.io/mattcroat/embed/yLVmKXb?height=265&theme-id=dark&default-tab=html,result"
+/>
+
+You can copy the code, if you want to get practice refactoring it later.
+
+```html:index.html
+<div class="container">
+  <article class="card">
+    <div class="image-container">
+      <img
+        src="https://i.ibb.co/09nx6Jt/converse.webp"
+        alt="Converse sneakers"
+      />
+    </div>
+
+    <div class="item-details">
+      <h2 class="title">Converse Sneakers</h2>
+      <span class="description">High Top (Lemon Yellow)</span>
+      <span class="price">$60</span>
+    </div>
+
+    <div class="color-picker">
+      <span class="screen-reader-only">Colors available</span>
+
+      <button aria-label="Yellow" class="color-btn">
+        <div class="color-container">
+          <div class="color-first yellow"></div>
+          <div class="color-second white"></div>
+        </div>
+      </button>
+
+      <button aria-label="Red" class="color-btn">
+        <div class="color-container">
+          <div class="color-first red"></div>
+          <div class="color-second white"></div>
+        </div>
+      </button>
+
+      <button aria-label="Blue" class="color-btn">
+        <div class="color-container">
+          <div class="color-first blue"></div>
+          <div class="color-second white"></div>
+        </div>
+      </button>
+
+      <button aria-label="Black" class="color-btn">
+        <div class="color-container">
+          <div class="color-first black"></div>
+          <div class="color-second white"></div>
+        </div>
+      </button>
+    </div>
+
+    <div class="add-to-cart">
+      <button class="add-btn">
+        <p>Add to Cart</p>
+        <svg
+          class="plus-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
+        </svg>
+      </button>
+    </div>
+  </article>
+</div>
+```
+
+```css:styles.css
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+/* Reset */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables */
+
+:root {
+  --app-bg-color: hsl(220, 13%, 91%);
+  --card-bg-color: hsl(0, 0%, 100%);
+  --text-color: hsl(215, 28%, 17%);
+  --border: 1px solid hsl(220, 13%, 91%);
+}
+
+/* Container */
+
+.container {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  padding: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--app-bg-color);
+  color: var(--text-color);
+}
+
+/* Card */
+
+.card {
+  max-width: 24rem;
+  background-color: var(--card-bg-color);
+  border-radius: 0.25rem;
+  box-shadow: 0 10px 15px -3px hsla(0, 0%, 0%, 10%), 0 4px 6px -2px hsla(0, 0%, 0%, 5%);
+  overflow: hidden; /* for the image covering our border */
+}
+
+/* Content */
+
+.image-container img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.description {
+  font-weight: 300;
+}
+
+.price {
+  font-weight: 600;
+}
+
+/* Color picker */
+
+.color-picker {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
+
+.color-btn {
+  padding: 0.125rem;
+  background: none;
+  border: var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.color-container {
+  height: 1.5rem;
+  width: 1.5rem;
+  transform: rotate(-45deg);
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.color-first {
+  height: 50%;
+}
+
+.color-second {
+  height: 50%;
+}
+
+/* Add to Cart */
+
+.add-to-cart {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-top: var(--border);
+}
+
+.add-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 700;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  text-decoration: underline;
+}
+
+.plus-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+/* Utils */
+
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.yellow {
+  background-color: hsl(38, 92%, 50%);
+}
+
+.red {
+  background-color: hsl(0, 84%, 60%);
+}
+
+.blue {
+  background-color: hsl(217, 91%, 60%);
+}
+
+.black {
+  background-color: hsl(215, 28%, 17%);
+}
+
+.white {
+  background-color: hsl(0, 0%, 100%);
+}
+
+/* Media */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --app-bg-color: hsl(215, 28%, 17%);
+    --card-bg-color: hsl(217, 19%, 27%);
+    --text-color: hsl(210, 20%, 98%);
+    --border: 1px solid hsl(215, 14%, 34%);
+  }
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0;
+  }
+}
+```
+
+There's not much to the styles. We're using [Google Fonts](https://fonts.google.com/), [CSS custom properties (variables)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties), [Heroicons](https://heroicons.com/) for icons, and some media queries for dark mode support, and responsive as an excuse to demonstrate how it works with Tailwind (including hover styles).
+
+One thing I would like to mention, if you're wondering why for the color options we don't use a simple gradient — it's because of an issue with jagged edges when a color abruptly stops in a gradient causing banding.
+
+```css:example.css
+.gradient {
+  background: linear-gradient(145deg, black 50%, white 50%);
+}
+```
+
+<Image
+  height={417}
+  width={814}
+  src="/images/introduction-to-tailwind-css/banding.webp"
+  alt="Banding"
+  inline={true}
+/>
+
+It's a fixable problem, but I opted for this solution instead since it varies across browsers.
+
+## The Tailwind CSS Approach (Utility-first)
+
+I mentioned earlier how I enjoy writing CSS, but it doesn't mean I enjoy repetition. How many times do we write out the same things over again?
+
+I don't just mean things like defining flex (and stumbling through the options until we get it right). I'm talking about the tedious nature of coming up with class names (which leads to using metodologies like [BEM](http://getbem.com/introduction/) ), opening and closing brackets, semicolons.
+
+Sure, you could use [SASS](https://sass-lang.com/), or whatever you prefer. Truth be told, I rarely find use for it nowadays with CSS variables being a thing, and how everything is componetized if you're using a JavaScript framework.
+
+I'm not going to get into setting up Tailwind. If you want to use it in your project you can read the [installation steps](https://tailwindcss.com/docs/installation) from the documentation. Instead we're going to use [Tailwind Play](https://play.tailwindcss.com/) which is an official playground provided by the Tailwind team. It has everything set up. Once you open it, clear the example in the HTML file, so we can work from a blank slate.
+
+Let me briefly explain how Tailwind works.
+
+Tailwind uses a `tailwind.config.js` config file that uses [PostCSS](https://postcss.org/) under the hood that uses the `@tailwind` directive inside your CSS file at build-time to inject:
+
+- base (Tailwind base styles, CSS reset)
+- components (component classes)
+- utilities (utiliy classes)
+
+This is just an explanation of how it works. To set it up is straightforward, and doesn't require any configuration. This can lead to huge files, but Tailwind purges unused styles. If you're a visual learner, you should watch [Tailwind CSS: From Zero to Production](https://www.youtube.com/playlist?list=PL5f_mz_zU5eXWYDXHUDOLBE0scnuJofO0). It's completely free.
+
+Some people shrug their shoulders at resets, but when you're recreating a design I find you want the browser to be the vehicle, and not the driver. In most projects you only have to declare your headings, and paragraphs. You're going to rewrite the defaults anyhow, if you want consistency.
+
+Tailwind among other things also has support for dark mode, media queries, and plugins like [aspect ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio) that gives elements a fixed aspect ratio making it easy to use those features without thinking about implementation details.
+
+Let's refactor the earlier example to use Tailwind.
+
+## Writing CSS Like Shakespeare
+
+In the CSS section, we can import our font. Don't think it's anything magical. It's a normal CSS file.
+
+```css:styles.css
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+We can declare the font here like you would. Instead, let's modify the config instead. Tailwind by default doesn't come with everything enabled due to file size (Tailwind Play let's you so you can play around).
+
+That means we can also specify the base Tailwind colors we want to use. We can look at [available Tailwind colors](https://tailwindcss.com/docs/customizing-colors) for example, but we can also add our own under config.
+
+```js:tailwind.config.js
+const colors = require('tailwindcss/colors')
+
+module.exports = {
+  darkMode: 'media',
+  theme: {
+    color: {
+      white: colors.white,
+      gray: colors.gray,
+      yellow: colors.yellow,
+      red: colors.red,
+      blue: colors.blue,
+      black: colors.black,
+    },
+    fontFamily: {
+      serif: ['Montserrat', 'system-ui'],
+    },
+  },
+  variants: {},
+  plugins: [],
+}
+```
+
+You can copy the original HTML code if you wish to follow along. The nice thing is that we don't have to write any resets. We're going to start by replacing the classes with Tailwind. Let's start with the container.
+
+```html:index.html
+<div
+  class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0"
+>
+  <!-- ... -->
+</div>
+```
+
+Notice the helpful autocomplete feature when you type out Tailwind classes. This makes for such a nicer developer experience. If you're using VS Code I recommend you get [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss). If at any point you lose the suggestions, press <kbd>Ctrl</kbd> + <kbd>Spacebar</kbd>.
+
+The first thought you might have is that's a lot of markup. Once you shift how you think, you're not going to want to go back. I think it's wrong saying that a feature of Tailwind is not having to write CSS. It's the opposite. You write CSS, that's more terse.
+
+You're able to change things as you think, not having to switch to a separate file, and thinking about naming conventions. It let's you be more creative.
+
+Let's do the same for the card.
+
+```html:index.html
+<div
+  class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0"
+>
+  <article
+    class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700"
+  >
+    <!-- ... -->
+  </article>
+</div>
+```
+
+I used the same Tailwind values for the original example, so we would end up with the same result. We can even reduce the original size, because of the default styles in the case of the image. I'm going to include them regardless, so we can look at more of them.
+
+Notice how simple adding dark mode is with the `dark` variant, and the use of media queries. Tailwind uses a mobile first approach with the [default breakpoints](https://tailwindcss.com/docs/breakpoints) being `sm`, `md`, `lg`, `xl`, `2xl`.
+
+```html:index.html
+<div
+  class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0"
+>
+  <article
+    class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700"
+  >
+    <img
+      class="height-full w-full block object-cover"
+      src="https://i.ibb.co/09nx6Jt/converse.webp"
+      alt="Converse sneakers"
+    />
+    <!-- ... -->
+  </article>
+</div>
+```
+
+Let's style the details such as title, description, price.
+
+```html:index.html
+<div
+  class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0"
+>
+  <article
+    class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700"
+  >
+    <img
+      class="height-full w-full block object-cover"
+      src="https://i.ibb.co/09nx6Jt/converse.webp"
+      alt="Converse sneakers"
+    />
+
+    <div class="flex flex-col gap-0.5 mt-4 px-4">
+      <h2 class="text-lg font-semibold">Converse Sneakers</h2>
+      <span class="font-light">High Top (Lemon Yellow)</span>
+      <span class="font-semibold">$60</span>
+    </div>
+    <!-- ... -->
+  </article>
+</div>
+```
+
+Next up is the color picker.
+
+```html:index.html
+<div
+  class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0"
+>
+  <article
+    class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700"
+  >
+    <img
+      class="height-full w-full block object-cover"
+      src="https://i.ibb.co/09nx6Jt/converse.webp"
+      alt="Converse sneakers"
+    />
+
+    <div class="flex gap-4 mt-4 px-4">
+      <span class="sr-only">Colors available</span>
+
+      <button
+        aria-label="Yellow"
+        class="p-0.5 bg-white border border-gray-200 dark:border-gray-600 rounded-full cursor-pointer"
+      >
+        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
+          <div class="h-1/2 bg-yellow-500"></div>
+          <div class="h-1/2 white"></div>
+        </div>
+      </button>
+
+      <button
+        aria-label="Red"
+        class="p-0.5 bg-white border border-gray-200 dark:border-gray-600 rounded-full cursor-pointer"
+      >
+        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
+          <div class="h-1/2 bg-red-500"></div>
+          <div class="h-1/2 white"></div>
+        </div>
+      </button>
+
+      <button
+        aria-label="Blue"
+        class="p-0.5 bg-white border border-gray-200 dark:border-gray-600 rounded-full cursor-pointer"
+      >
+        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
+          <div class="h-1/2 bg-blue-500"></div>
+          <div class="h-1/2 white"></div>
+        </div>
+      </button>
+
+      <button
+        aria-label="Black"
+        class="p-0.5 bg-white border border-gray-200 dark:border-gray-600 rounded-full cursor-pointer"
+      >
+        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
+          <div class="h-1/2 bg-gray-800"></div>
+          <div class="h-1/2 white"></div>
+        </div>
+      </button>
+    </div>
+
+    <div class="mt-4 p-4 border-t border-gray-200 dark:border-gray-600">
+      <button
+        class="w-full flex justify-between items-center font-bold cursor-pointer hover:underline"
+      >
+        <p class="text-base">Add to Cart</p>
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
+        </svg>
+      </button>
+    </div>
+    <!-- ... -->
+  </article>
+</div>
+```
+
+"That's great, but it's a lot of repetition" you might be thinking. While you would be right, keep in mind when using a framework you often loop through some data you get. You would only have to change it in one place — if it was a component.
+
+There's other ways of extracting out classes (see the documentation), but it's not recommended as you get into the same predicament as writing regular styles. One helpful feature is to toggle word wrap in your editor.
+
+Let's finish everything with the "Add to cart" button.
+
+```html:index.html
+<div
+  class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0"
+>
+  <article
+    class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700"
+  >
+    <img
+      class="height-full w-full block object-cover"
+      src="https://i.ibb.co/09nx6Jt/converse.webp"
+      alt="Converse sneakers"
+    />
+
+    <div class="flex flex-col gap-0.5 mt-4 px-4">
+      <h2 class="text-lg font-semibold">Converse Sneakers</h2>
+      <span class="font-light">High Top (Lemon Yellow)</span>
+      <span class="font-semibold">$60</span>
+    </div>
+
+    <div class="flex gap-4 mt-4 px-4">
+      <span class="sr-only">Colors available</span>
+
+      <button
+        aria-label="Yellow"
+        class="p-0.5 bg-white border border-gray-200 dark:border-gray-600 rounded-full cursor-pointer"
+      >
+        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
+          <div class="h-1/2 bg-yellow-500"></div>
+          <div class="h-1/2 white"></div>
+        </div>
+      </button>
+
+      <button
+        aria-label="Red"
+        class="p-0.5 bg-white border border-gray-200 dark:border-gray-600 rounded-full cursor-pointer"
+      >
+        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
+          <div class="h-1/2 bg-red-500"></div>
+          <div class="h-1/2 white"></div>
+        </div>
+      </button>
+
+      <button
+        aria-label="Blue"
+        class="p-0.5 bg-white border border-gray-200 dark:border-gray-600 rounded-full cursor-pointer"
+      >
+        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
+          <div class="h-1/2 bg-blue-500"></div>
+          <div class="h-1/2 white"></div>
+        </div>
+      </button>
+
+      <button
+        aria-label="Black"
+        class="p-0.5 bg-white border border-gray-200 dark:border-gray-600 rounded-full cursor-pointer"
+      >
+        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
+          <div class="h-1/2 bg-gray-800"></div>
+          <div class="h-1/2 white"></div>
+        </div>
+      </button>
+    </div>
+
+    <div class="mt-4 p-4 border-t border-gray-200 dark:border-gray-600">
+      <button
+        class="w-full flex justify-between items-center font-bold cursor-pointer hover:underline"
+      >
+        <p class="text-base">Add to Cart</p>
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
+        </svg>
+      </button>
+    </div>
+  </article>
+</div>
+```
+
+There's more you can do with hover, focus, and other states. You can look at the [complete example](https://play.tailwindcss.com/oQkS7dsNlH) on Tailwind Play.
+
+## Dealing With Remembering
+
+Often people are overwhelmed with just the amount of regular CSS properties to remember. Tailwind requires you to understand CSS, unlike other frameworks which I love. You can have an easier time if you read the documentation, but I also recommend you dump the entire config file so you can reference it. This is done easily from the [configuration step](https://tailwindcss.com/docs/configuration).
+
+```jsx
+npx tailwindcss init tailwindcss-full-config.js --full
+```
+
+The real `tailwindcss.config.js` config is going to be used for your project, and you can use this one for reference.
+
+## Tailwind Components
+
+If you end up loving Tailwind, but still think it's a drag to create components from scratch there's free resources like [Tailwind Components](https://tailwindcomponents.com/).
+
+If you want access to official Tailwind components, you can look at the paid components from [Tailwind UI](https://tailwindui.com/) if you want to support the creators of Tailwind CSS.
+
+## Closing Thoughts
+
+Hope you give Tailwind a chance! You can use it for other things such as [rapid prototypes](https://en.wikipedia.org/wiki/Software_prototyping). It might not be your cup of tea, and that's fine. I just hope you at least give it a try, and keep an open mind.
+
+If you want to learn Tailwind CSS, I highly recommend watching [Tailwind CSS: From Zero to Production](https://www.youtube.com/playlist?list=PL5f_mz_zU5eXWYDXHUDOLBE0scnuJofO0) from the official [Tailwind Labs YouTube channel](https://www.youtube.com/tailwindlabs). You might learn other things about CSS in the process. Thank you for your time.
+
+<Newsletter />
+
+<PostCredits />
