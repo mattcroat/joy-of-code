@@ -67,7 +67,7 @@ const prismBaseTheme = css`
   .token.constant,
   .token.symbol,
   .token.deleted {
-    color: hsl(326.7, 100%, 30%);
+    color: hsl(9, 100%, 64%);
   }
 
   .token.selector,
