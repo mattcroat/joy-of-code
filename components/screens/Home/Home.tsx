@@ -20,7 +20,7 @@ interface Props {
 export function Home({ posts }: Props) {
   return (
     <Layout>
-      <Box px={[8, 16]}>
+      <Box maxW={{ sm: '60%', lg: '80%' }} mx="auto" px={{ base: 8, sm: 0 }}>
         <Box>
           <Title>
             Welcome Friend
@@ -35,9 +35,9 @@ export function Home({ posts }: Props) {
           </Box>
         )}
 
-        <Newsletter maxW="500px" my={8} />
+        <Newsletter maxW="420px" my={8} />
 
-        <Box my={12}>
+        <Box my={{ base: 8, md: 12 }}>
           <Subheading mt={0}>
             <Emoji emoji="🔥" label="Fire emoji" spacing={2} />
             Latest

@@ -22,9 +22,9 @@ export function Post({ content, frontMatter }: Props) {
       type="article"
     >
       <Box
-        w={{ lg: '90ch' }}
+        maxW="90ch"
         mx="auto"
-        px={8}
+        px={{ base: 8, lg: 0 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
