@@ -13,6 +13,7 @@ interface Props {
   }
   href: string
   isInternal?: boolean
+  openSeparateTab?: boolean
 }
 
 export function CustomLink({
@@ -21,13 +22,18 @@ export function CustomLink({
   hover,
   href,
   isInternal = false,
+  openSeparateTab = false,
 }: Props) {
   const { colorMode } = useColorMode()
 
   if (isInternal) {
     return (
       <NextLink href={href} passHref>
-        <Link color={color} _hover={hover}>
+        <Link
+          color={color}
+          _hover={hover}
+          target={openSeparateTab ? '_blank' : '_self'}
+        >
           {children}
         </Link>
       </NextLink>
