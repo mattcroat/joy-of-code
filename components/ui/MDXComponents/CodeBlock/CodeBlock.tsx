@@ -53,8 +53,8 @@ export function CodeBlock({ children, ...props }: Props) {
 
   return (
     <Box pos="relative" mb={8} {...props}>
-      <Box pos="absolute" top={8} right={4}>
-        <Box pos="absolute" right="10">
+      <Box pos="absolute" top={-9} right={4} zIndex={1}>
+        <Box pos="absolute" right={10}>
           <Confetti active={isCopied} config={config} />
         </Box>
         <Button userSelect="none" onClick={copyToClipboard}>
@@ -65,13 +65,14 @@ export function CodeBlock({ children, ...props }: Props) {
       <Box
         ref={preEl}
         as="pre"
+        pos="relative"
         bg={codeBg[colorMode]}
         fontSize={[16, 18, 20]}
         p={6}
-        pt={8}
         overflow="auto"
         boxShadow="lg"
         rounded="base"
+        zIndex={2}
       >
         {children}
       </Box>
