@@ -104,6 +104,7 @@ export function Navigation() {
                 color={mutedColor[colorMode]}
                 hover={hoverStyle}
                 isInternal
+                openSeparateTab
               >
                 <Delight>
                   <Icon icon="feed" />
@@ -202,6 +203,7 @@ export function Navigation() {
               color={mutedColor[colorMode]}
               hover={hoverStyle}
               isInternal
+              openSeparateTab
             >
               <Delight>
                 <Icon icon="feed" />
