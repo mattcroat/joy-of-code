@@ -39,7 +39,7 @@ export function Home({ posts }: Props) {
 
         <Box my={12}>
           <Subheading mt={0}>
-            <Emoji emoji="🔥" label="Fire emoji" spacing={2} animate />
+            <Emoji emoji="🔥" label="Fire emoji" spacing={2} />
             Latest
           </Subheading>
           <CardGrid posts={posts} />
