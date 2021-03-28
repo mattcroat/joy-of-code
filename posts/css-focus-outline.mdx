@@ -1,0 +1,134 @@
+---
+title: How to Style CSS Focus Outline
+description: How to style CSS focus outline, and importance of accessibility
+published: '2021-3-28'
+category: 'CSS'
+image: '/images/css-focus-outline/flowers.webp'
+---
+
+<Image src="/images/css-focus-outline/flowers.webp" alt="Flowers" gif={true} />
+
+# How to Style CSS Focus Outline
+
+Do you ignore focus styles because they're ugly? I'm going to explain why you shouldn't remove them, and show you how to style them to match your UI (user interface) instead.
+
+<Iframe
+  height={600}
+  title="Simple Product Card"
+  src="https://codepen.io/mattcroat/embed/oNBxKvb?height=600&theme-id=dark&default-tab=result"
+/>
+
+## What You'll Learn
+
+- How to style CSS focus outline
+- Importance of accessibility
+
+## Default Styles Don't Spark Joy
+
+Let's say you're presented with the design above. If you were to just <kbd>Tab</kbd> through, it's functional but we can agree it's not something to behold.
+
+<Image
+  height={502}
+  width={460}
+  src="/images/css-focus-outline/default.gif"
+  alt="Default styles"
+  inline={true}
+/>
+
+## Removing Focus Outline Is Bad For Accessibility
+
+You might be tempted to remove focus styles. There's only one problem. **It's terrible for accessibility**. [Focus outline](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus) provides visual feedback for users who can't use a mouse, or have visual impairment using <kbd>Tab</kbd> on their keyboard for navigation.
+
+```css:example.css
+/* 🚫 don't do this */
+:focus {
+  outline: none;
+}
+```
+
+<Image
+  height={502}
+  width={460}
+  src="/images/css-focus-outline/no-outline.gif"
+  alt="Outline set to none"
+  inline={true}
+/>
+
+Be mindful that impairment doesn't only refer to people with permanent disabilities. You can have temporary impairment due to injury so the number of people with impairments is higher than you might think.
+
+**It's our responsibility to make the web accessible for everyone**.
+
+## Outline Doesn't Work for Rounded Corners
+
+```css:example.css
+/* ⚠️ doesn't work for rounded corners */
+:focus {
+  outline: 3px solid hsla(220, 100%, 50%, 80%);
+}
+```
+
+<Image
+  height={502}
+  width={460}
+  src="/images/css-focus-outline/outline.gif"
+  alt="Using outline styles"
+  inline={true}
+/>
+
+There is no way of specifying a border radius for outline at the moment, other than some browser specific experimental features.
+
+## Using Border Causes Layout Shifts
+
+```css:example.css
+/* 🚫 don't do this */
+:focus {
+  outline: none;
+  border: 3px solid hsla(220, 100%, 50%, 80%);
+}
+```
+
+<Image
+  height={502}
+  width={460}
+  src="/images/css-focus-outline/border.gif"
+  alt="Using border styles"
+  inline={true}
+/>
+
+The layout shifts from the border cause our elements to jump around. It can probably be solved by setting a border on each element with no opacity, and then bring the opacity back on focus. I don't hate this idea, but it's not great.
+
+## Use Box Shadow
+
+```css:example.css
+/* ✅ do this */
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px hsla(220, 100%, 50%, 80%);
+}
+```
+
+<Image
+  height={502}
+  width={460}
+  src="/images/css-focus-outline/box-shadow.gif"
+  alt="Using box-shadow"
+  inline={true}
+/>
+
+This works for any focusable element. Not only does it take on the same rounded corners, but you can control other properties such as color, opacity, offset, and blur. You can [read more about box-shadow here](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow).
+
+Notice we're also able to animate the transition.
+
+```css:example.css
+.element {
+  transition: box-shadow 0.3s ease;
+}
+```
+
+## Closing Thoughts
+
+Accessibility is important. It's a large subject worth understanding. No one goes out of their way to create a bad user experience on purpose. If you're aware, and strive to make the web a better place — that's what counts.
+
+<Newsletter />
+
+<PostCredits />
