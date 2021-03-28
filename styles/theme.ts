@@ -7,8 +7,8 @@ const theme = extendTheme({
     mono: 'Mononoki, monospace',
   },
   config: {
-    useSystemColorMode: true,
     initialColorMode: 'dark',
+    useSystemColorMode: false,
   },
 })
 
