@@ -38,12 +38,18 @@ function GlobalStyle({ children }: GlobalStyleProps) {
           }
 
           html {
+            cursor: url('./images/cursor-default.webp'), default;
             scrollbar-color: ${scrollbarColor[colorMode]} transparent;
             scrollbar-width: thin;
           }
 
           body {
             overflow-x: hidden;
+          }
+
+          a,
+          button {
+            cursor: url('./images/cursor-pointer.webp'), pointer !important;
           }
 
           ::-webkit-scrollbar {

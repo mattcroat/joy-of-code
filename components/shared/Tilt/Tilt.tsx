@@ -35,7 +35,6 @@ export function Tilt({ children }: Props) {
         rotateX: rotateX,
         rotateY: rotateY,
         perspective: 1000,
-        cursor: 'pointer',
         transition: 'transform 0.1s linear',
       }}
       onPointerMove={handlePointerMove}
