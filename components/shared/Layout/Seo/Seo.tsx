@@ -9,8 +9,8 @@ export function Seo({ ...metadata }: Props) {
   const router = useRouter()
 
   const meta = {
-    title: 'Joy of Code | ☕ Freshly Brewed Web Development Content',
-    description: `Joy of Code is focused on creating web development content that respects your time.`,
+    title: 'Joy of Code',
+    description: `Web development content for humans.`,
     image: 'https://joyofcode.xyz/images/banner.webp',
     type: 'website',
     ...metadata,
