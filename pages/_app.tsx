@@ -4,7 +4,6 @@ import Head from 'next/head'
 
 import { ChakraProvider, useColorMode } from '@chakra-ui/react'
 import { Global, css } from '@emotion/react'
-import { MDXProvider } from '@mdx-js/react'
 
 import { Navigation } from '@/root/components/shared/Layout/Navigation'
 import {
@@ -14,7 +13,6 @@ import {
 } from '@/root/styles/colors'
 import { prismDarkTheme, prismLightTheme } from '@/root/styles/prism'
 import chakraTheme from '@/root/styles/theme'
-import { MDXComponents } from '@/root/components/ui/MDXComponents'
 
 // hide Chakra UI outline borders around clickable components
 import 'focus-visible/dist/focus-visible'
@@ -73,18 +71,16 @@ function GlobalStyle({ children }: GlobalStyleProps) {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={chakraTheme}>
-      <MDXProvider components={MDXComponents}>
-        <GlobalStyle>
-          <Head>
-            <meta
-              name="viewport"
-              content="initial-scale=1.0, width=device-width"
-            />
-          </Head>
-          <Navigation />
-          <Component {...pageProps} />
-        </GlobalStyle>
-      </MDXProvider>
+      <GlobalStyle>
+        <Head>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
+        <Navigation />
+        <Component {...pageProps} />
+      </GlobalStyle>
     </ChakraProvider>
   )
 }

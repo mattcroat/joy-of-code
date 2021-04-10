@@ -59,12 +59,13 @@ export async function getStaticProps({ params }: Params) {
 
   const { content, data } = matter(source)
 
-  const mdxOptions = {
-    rehypePlugins: [rehypePrism],
-    remarkPlugins: [codeTitle, unwrapImages],
-  }
-
-  const MDXSource = await renderToString(content, { mdxOptions })
+  const MDXSource = await renderToString(content, {
+    components: MDXComponents,
+    mdxOptions: {
+      rehypePlugins: [rehypePrism],
+      remarkPlugins: [codeTitle, unwrapImages],
+    },
+  })
 
   return {
     props: {
