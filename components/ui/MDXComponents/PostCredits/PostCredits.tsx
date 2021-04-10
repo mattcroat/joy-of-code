@@ -16,7 +16,7 @@ export function PostCredits() {
   const { colorMode } = useColorMode()
   const router = useRouter()
 
-  const href = `https://github.com/mattcroat/joy-of-code/blob/main/posts/${router.query.slug}.mdx`
+  const href = `https://github.com/mattcroat/joy-of-code/blob/main/posts/${router?.query?.slug}.mdx`
 
   return (
     <Box d={{ md: 'flex' }} justifyContent="space-between" my={16}>
