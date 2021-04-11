@@ -10,8 +10,8 @@ export function Seo({ ...metadata }: Props) {
 
   const meta = {
     title: 'Joy of Code',
-    description: `Web development content for humans.`,
-    image: 'https://joyofcode.xyz/images/banner.webp',
+    description: `Web development tutorials, and articles`,
+    image: 'https://joyofcode.xyz/images/og-image.webp',
     type: 'website',
     ...metadata,
   }
