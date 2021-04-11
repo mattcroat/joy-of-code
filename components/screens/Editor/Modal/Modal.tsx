@@ -35,7 +35,6 @@ export function Modal({ theme, title, modalOpen }: ModalProps) {
         bgRepeat="no-repeat"
         bgSize="cover"
         bgBlendMode="color"
-        border="4px solid white"
       >
         <Box
           as="span"

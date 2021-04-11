@@ -29,7 +29,6 @@ export function PostImage() {
           bgRepeat="no-repeat"
           bgSize="cover"
           bgBlendMode="color"
-          border="4px solid white"
         >
           <Box
             as="span"
