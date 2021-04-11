@@ -3,6 +3,9 @@ const withMDX = require('@next/mdx')({
 })
 
 module.exports = withMDX({
+  future: {
+    webpack5: true,
+  },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   webpack: (config, { dev, isServer }) => {
     if (isServer) {
