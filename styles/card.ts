@@ -14,7 +14,7 @@ export const cardTheme: CardTheme = {
   JavaScript: {
     bg: `radial-gradient(
       circle,
-      ${chakraTheme.colors.yellow[600]},
+      ${chakraTheme.colors.yellow[400]},
       ${chakraTheme.colors.black} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
@@ -23,7 +23,7 @@ export const cardTheme: CardTheme = {
   React: {
     bg: `radial-gradient(
       circle,
-      ${chakraTheme.colors.blue[600]},
+      ${chakraTheme.colors.blue[400]},
       ${chakraTheme.colors.black} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
@@ -32,7 +32,7 @@ export const cardTheme: CardTheme = {
   CSS: {
     bg: `radial-gradient(
       circle,
-      ${chakraTheme.colors.cyan[600]},
+      ${chakraTheme.colors.cyan[400]},
       ${chakraTheme.colors.black} 100%
     )`,
     color: `${chakraTheme.colors.white}`,
@@ -41,7 +41,7 @@ export const cardTheme: CardTheme = {
   General: {
     bg: `radial-gradient(
       circle,
-      ${chakraTheme.colors.orange[600]},
+      ${chakraTheme.colors.orange[400]},
       ${chakraTheme.colors.black} 100%
 
     )`,

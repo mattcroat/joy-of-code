@@ -36,12 +36,14 @@ function GlobalStyle({ children }: GlobalStyleProps) {
           }
 
           html {
+            height: 100%;
             cursor: url('./images/cursor-default.webp'), default;
             scrollbar-color: ${scrollbarColor[colorMode]} transparent;
             scrollbar-width: thin;
           }
 
           body {
+            height: 100%;
             overflow-x: hidden;
           }
 
