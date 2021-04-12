@@ -131,7 +131,7 @@ export function Navigation() {
         py={2}
         bg={bgColor[colorMode]}
         transition="background-color 0.2s, border-color 0.2s"
-        zIndex="1"
+        zIndex="3"
         style={{
           boxShadow: '0 -10px 10px hsla(0, 0%, 0%, 40%)',
         }}
