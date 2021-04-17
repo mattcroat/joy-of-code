@@ -1,12 +1,7 @@
-const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/,
-})
-
-module.exports = withMDX({
+module.exports = {
   future: {
     webpack5: true,
   },
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   webpack: (config, { dev, isServer }) => {
     if (isServer) {
       require('./utils/scripts/generate-rss')
@@ -23,4 +18,4 @@ module.exports = withMDX({
 
     return config
   },
-})
+}
