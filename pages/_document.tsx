@@ -12,7 +12,41 @@ class MyDocument extends Document {
             content="initial-scale=1.0, width=device-width"
           />
           <link rel="icon" href="/favicon.svg" />
-          <link rel="stylesheet" href="/fonts/fonts.css" />
+          <link
+            rel="preload"
+            href="/fonts/inter/Inter-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/inter/Inter-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/inter/Inter-Black.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/mononoki/mononoki-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/mononoki/mononoki-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />

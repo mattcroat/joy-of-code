@@ -29,6 +29,46 @@ function GlobalStyle({ children }: GlobalStyleProps) {
         styles={css`
           ${colorMode === 'dark' ? prismDarkTheme : prismLightTheme};
 
+          @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-display: optional;
+            src: url('./fonts/inter/Inter-Regular.woff2') format('woff2');
+          }
+
+          @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-display: optional;
+            src: url('./fonts/inter/Inter-Bold.woff2') format('woff2');
+          }
+
+          @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 900;
+            font-display: optional;
+            src: url('./fonts/inter/Inter-Black.woff2') format('woff2');
+          }
+
+          @font-face {
+            font-family: 'Mononoki';
+            font-style: normal;
+            font-weight: 400;
+            font-display: optional;
+            src: url('./fonts/mononoki/mononoki-Regular.woff2') format('woff2');
+          }
+
+          @font-face {
+            font-family: 'Mononoki';
+            font-style: bold;
+            font-weight: 700;
+            font-display: optional;
+            src: url('./fonts/mononoki/mononoki-Bold.woff2') format('woff2');
+          }
+
           ::selection {
             background-color: ${selectionBg[colorMode]};
             color: ${selectionText[colorMode]};
