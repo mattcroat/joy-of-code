@@ -56,7 +56,6 @@ export function PostImage() {
             lineHeight="1"
             letterSpacing="-2px"
             textShadow={`2px 2px 0 hsl(0 0% 0% / 100%)`}
-            textTransform="capitalize"
           >
             {title}
           </Box>
