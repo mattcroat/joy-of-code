@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 
 import { ChakraProvider, useColorMode } from '@chakra-ui/react'
 import { Global, css } from '@emotion/react'
@@ -113,6 +114,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={chakraTheme}>
       <GlobalStyle>
+        <Head>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
         <Navigation />
         <Component {...pageProps} />
       </GlobalStyle>
