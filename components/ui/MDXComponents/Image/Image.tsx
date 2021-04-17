@@ -17,8 +17,6 @@ export function Image({
   src,
   alt,
   inline = false,
-  banner = false,
-  gif = false,
 }: Props) {
   if (inline) {
     return (
@@ -28,36 +26,6 @@ export function Image({
           width={width}
           alt={alt}
           src={src}
-          layout="intrinsic"
-        />
-      </Box>
-    )
-  }
-
-  if (banner) {
-    return (
-      <Box my={{ sm: 8 }} bg="white">
-        <NextImage
-          height={height}
-          width={width}
-          alt={alt}
-          src={src}
-          objectFit="contain"
-          layout="intrinsic"
-        />
-      </Box>
-    )
-  }
-
-  if (gif) {
-    return (
-      <Box my={{ sm: 8 }}>
-        <NextImage
-          height={height}
-          width={width}
-          alt={alt}
-          src={src}
-          objectFit="cover"
           layout="intrinsic"
         />
       </Box>
