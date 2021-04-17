@@ -1,4 +1,10 @@
-import { Box, List, ListItem, useColorMode } from '@chakra-ui/react'
+import {
+  Box,
+  List,
+  ListItem,
+  useColorMode,
+  VisuallyHidden,
+} from '@chakra-ui/react'
 
 import { Icon } from '@/root/components/shared/Icon'
 import { CustomLink } from '@/root/components/shared/CustomLink'
@@ -39,6 +45,7 @@ export function Navigation() {
         <List h="100%" d="flex" flexDir="column" alignItems="center">
           <ListItem my={8}>
             <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
+              <VisuallyHidden>Home</VisuallyHidden>
               <Delight>
                 <Icon icon="paintBrush" />
               </Delight>
@@ -52,6 +59,7 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
+              <VisuallyHidden>JavaScript</VisuallyHidden>
               <Delight>
                 <Icon icon="js" />
               </Delight>
@@ -65,6 +73,7 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
+              <VisuallyHidden>React</VisuallyHidden>
               <Delight>
                 <Icon icon="react" />
               </Delight>
@@ -78,6 +87,7 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
+              <VisuallyHidden>CSS</VisuallyHidden>
               <Delight>
                 <Icon icon="swatch" />
               </Delight>
@@ -91,33 +101,33 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
+              <VisuallyHidden>General</VisuallyHidden>
               <Delight>
                 <Icon icon="bulb" />
               </Delight>
             </CustomLink>
           </ListItem>
 
-          <Box mt="auto" mb={8}>
-            <ListItem>
-              <CustomLink
-                href="/feed/rss.xml"
-                color={mutedColor[colorMode]}
-                hover={hoverStyle}
-                isInternal
-                openSeparateTab
-              >
-                <Delight>
-                  <Icon icon="feed" />
-                </Delight>
-              </CustomLink>
-            </ListItem>
+          <ListItem mt="auto" mb={8}>
+            <CustomLink
+              href="/feed/rss.xml"
+              color={mutedColor[colorMode]}
+              hover={hoverStyle}
+              isInternal
+              openSeparateTab
+            >
+              <VisuallyHidden>RSS feed</VisuallyHidden>
+              <Delight>
+                <Icon icon="feed" />
+              </Delight>
+            </CustomLink>
 
-            <ListItem mt={8}>
+            <Box mt={8}>
               <Delight>
                 <ThemeToggle />
               </Delight>
-            </ListItem>
-          </Box>
+            </Box>
+          </ListItem>
         </List>
       </Box>
 
@@ -139,6 +149,7 @@ export function Navigation() {
         <List d="flex" justifyContent="space-around" alignItems="center">
           <ListItem>
             <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
+              <VisuallyHidden>Home</VisuallyHidden>
               <Delight>
                 <Icon icon="paintBrush" />
               </Delight>
@@ -152,6 +163,7 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
+              <VisuallyHidden>JavaScript</VisuallyHidden>
               <Delight>
                 <Icon icon="js" />
               </Delight>
@@ -165,6 +177,7 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
+              <VisuallyHidden>React</VisuallyHidden>
               <Delight>
                 <Icon icon="react" />
               </Delight>
@@ -178,6 +191,7 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
+              <VisuallyHidden>CSS</VisuallyHidden>
               <Delight>
                 <Icon icon="swatch" />
               </Delight>
@@ -191,6 +205,7 @@ export function Navigation() {
               hover={hoverStyle}
               isInternal
             >
+              <VisuallyHidden>General</VisuallyHidden>
               <Delight>
                 <Icon icon="bulb" />
               </Delight>
@@ -205,6 +220,7 @@ export function Navigation() {
               isInternal
               openSeparateTab
             >
+              <VisuallyHidden>RSS feed</VisuallyHidden>
               <Delight>
                 <Icon icon="feed" />
               </Delight>

@@ -41,7 +41,7 @@ export function Newsletter({ ...props }) {
 
   return (
     <Box my={16} p={8} borderWidth={1} borderRadius={8} {...props}>
-      <Box as="h3" fontSize="2xl" fontWeight={700}>
+      <Box as="span" fontSize="2xl" fontWeight={700}>
         Subscribe for Updates
       </Box>
       <Box as="p" color="gray.400">
