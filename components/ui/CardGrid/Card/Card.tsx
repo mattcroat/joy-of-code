@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 import { CustomLink } from '@/root/components/shared/CustomLink'
@@ -50,13 +50,14 @@ export function Card({ theme, title, slug }: Props) {
           >
             <Icon icon={cardTheme[theme].icon} />
           </Box>
-          <Heading
-            as="h3"
+          <Box
+            as="span"
             maxW="80%"
             position="absolute"
             bottom={4}
             left={4}
             fontSize={['3xl', '4xl']}
+            fontWeight="bold"
             lineHeight="1"
             color={cardTheme[theme].color}
             letterSpacing="-2px"
@@ -64,7 +65,7 @@ export function Card({ theme, title, slug }: Props) {
             textShadow={`2px 2px hsla(0, 0%, 0%, 100%)`}
           >
             {title}
-          </Heading>
+          </Box>
         </CardContainer>
       </Tilt>
     </CustomLink>
