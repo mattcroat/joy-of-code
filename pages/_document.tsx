@@ -7,7 +7,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="icon" href="/favicon.svg" />
           <link
             rel="preload"
             href="/fonts/inter/Inter-Regular.woff2"
@@ -43,6 +42,25 @@ class MyDocument extends Document {
             type="font/woff2"
             crossOrigin="anonymous"
           />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href="/icons/favicon.svg" />
+          <link
+            href="/icons/favicon-16x16.png"
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+          />
+          <link
+            href="/icons/favicon-32x32.png"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+          />
+          <link
+            rel="apple-touch-icon"
+            href="/icons/apple-touch-icon.png"
+          ></link>
+          <meta name="theme-color" content="#fbd38d" />
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />

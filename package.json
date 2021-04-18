@@ -17,6 +17,7 @@
     "gray-matter": "^4.0.2",
     "next": "^10.0.3",
     "next-mdx-remote": "^1.0.0",
+    "next-pwa": "^5.2.12",
     "preact": "^10.5.12",
     "react": "16.14.0",
     "react-dom": "16.14.0",
