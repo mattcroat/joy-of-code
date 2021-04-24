@@ -20,21 +20,19 @@ interface Props {
 export function Category({ category, posts, title }: Props) {
   return (
     <Layout title={`Joy of Code | ${category}`}>
-      <Box px={[8, 16]}>
-        <Box>
-          <Title>{title}</Title>
-        </Box>
+      <Box>
+        <Title>{title}</Title>
+      </Box>
 
-        {posts.length < 1 && (
-          <Box fontSize={[16, 18, 20]} my={8}>
-            Nothing to see here...
-            <Emoji emoji="🕵️" label="Spy emoji" spacing={2} animate />
-          </Box>
-        )}
-
-        <Box my={10}>
-          <CardGrid posts={posts} />
+      {posts.length < 1 && (
+        <Box fontSize={[16, 18, 20]} my={8}>
+          Nothing to see here...
+          <Emoji emoji="🕵️" label="Spy emoji" spacing={2} animate />
         </Box>
+      )}
+
+      <Box my={10}>
+        <CardGrid posts={posts} />
       </Box>
     </Layout>
   )

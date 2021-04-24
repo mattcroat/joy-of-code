@@ -1,6 +1,5 @@
 import React from 'react'
 import { Box, FormControl, FormLabel, Input, Select } from '@chakra-ui/react'
-import { AnimatePresence } from 'framer-motion'
 
 import { Modal } from '@/root/components/screens/Editor/Modal'
 import { Icon } from '@/root/components/shared/Icon'
@@ -13,13 +12,11 @@ export function PostImage() {
 
   return (
     <>
-      <AnimatePresence>
-        {modalOpen && (
-          <Modal theme={theme} title={title} modalOpen={setModalOpen} />
-        )}
-      </AnimatePresence>
+      {modalOpen && (
+        <Modal theme={theme} title={title} modalOpen={setModalOpen} />
+      )}
 
-      <Box maxW="90ch" ml="80px" mx="auto" pt={8}>
+      <Box maxW="90ch" pl="80px" mx="auto" pt={8}>
         <Box
           onClick={() => setModalOpen(true)}
           pos="relative"

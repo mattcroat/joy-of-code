@@ -14,59 +14,57 @@ interface Props {
   slug: string
 }
 
-// the stagger doesn't work with ChakraMotion
-const CardContainer = motion.custom(Box)
-
 export function Card({ theme, title, slug }: Props) {
   const playSound = useSound('/sfx/page.mp3')
 
   return (
     <CustomLink href={`/${encodeURIComponent(slug)}`} isInternal>
       <Tilt>
-        <CardContainer
-          onClick={playSound}
-          position="relative"
-          h={['200px', '240px']}
-          borderRadius="lg"
-          boxShadow="lg"
-          overflow="hidden"
-          variants={fadeInQuick}
-          _hover={{
-            boxShadow: '2xl',
-          }}
-        >
+        <motion.div variants={fadeInQuick}>
           <Box
-            h="100%"
-            bg={`${cardTheme[theme].bg}, url('/images/nebula.webp')`}
-            bgPos="0 20%"
-            bgBlendMode="color"
-          ></Box>
-          <Box
-            position="absolute"
-            top={4}
-            right={4}
-            color={cardTheme[theme].color}
-            zIndex="2"
+            onClick={playSound}
+            position="relative"
+            h={['200px', '240px']}
+            borderRadius="lg"
+            boxShadow="lg"
+            overflow="hidden"
+            _hover={{
+              boxShadow: '2xl',
+            }}
           >
-            <Icon icon={cardTheme[theme].icon} />
+            <Box
+              h="100%"
+              bg={`${cardTheme[theme].bg}, url('/images/nebula.webp')`}
+              bgPos="0 20%"
+              bgBlendMode="color"
+            ></Box>
+            <Box
+              position="absolute"
+              top={4}
+              right={4}
+              color={cardTheme[theme].color}
+              zIndex="2"
+            >
+              <Icon icon={cardTheme[theme].icon} />
+            </Box>
+            <Box
+              as="span"
+              maxW="80%"
+              position="absolute"
+              bottom={4}
+              left={4}
+              fontSize={['3xl', '4xl']}
+              fontWeight="bold"
+              lineHeight="1"
+              color={cardTheme[theme].color}
+              letterSpacing="-2px"
+              zIndex="2"
+              textShadow={`2px 2px hsla(0, 0%, 0%, 100%)`}
+            >
+              {title}
+            </Box>
           </Box>
-          <Box
-            as="span"
-            maxW="80%"
-            position="absolute"
-            bottom={4}
-            left={4}
-            fontSize={['3xl', '4xl']}
-            fontWeight="bold"
-            lineHeight="1"
-            color={cardTheme[theme].color}
-            letterSpacing="-2px"
-            zIndex="2"
-            textShadow={`2px 2px hsla(0, 0%, 0%, 100%)`}
-          >
-            {title}
-          </Box>
-        </CardContainer>
+        </motion.div>
       </Tilt>
     </CustomLink>
   )

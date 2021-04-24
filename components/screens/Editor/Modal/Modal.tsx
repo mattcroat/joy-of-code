@@ -2,7 +2,6 @@ import React from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { Icon } from '@/root/components/shared/Icon'
-import { ChakraMotion } from '@/root/components/shared/ChakraMotion'
 import { cardTheme } from '@/root/styles/card'
 
 type ModalProps = {
@@ -13,9 +12,7 @@ type ModalProps = {
 
 export function Modal({ theme, title, modalOpen }: ModalProps) {
   return (
-    <ChakraMotion
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <Box
       onClick={() => modalOpen(false)}
       d="grid"
       placeItems="center"
@@ -25,7 +22,6 @@ export function Modal({ theme, title, modalOpen }: ModalProps) {
       bottom="0"
       bg="hsl(0 0% 0% / 80%)"
       zIndex="1"
-      opacity="0"
     >
       <Box
         pos="relative"
@@ -69,6 +65,6 @@ export function Modal({ theme, title, modalOpen }: ModalProps) {
           <Icon icon={cardTheme[theme].icon} size={64} />
         </Box>
       </Box>
-    </ChakraMotion>
+    </Box>
   )
 }
