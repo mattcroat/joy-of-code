@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-import { useSound } from '@/root/utils/hooks'
+import { playSound } from '@/root/utils/helpers/playSound'
 
 interface Props {
   children: React.ReactNode
@@ -9,11 +9,10 @@ interface Props {
 
 export function Delight({ children }: Props) {
   const [isPressed, setIsPressed] = React.useState(false)
-  const playSound = useSound('/sfx/confirm.mp3')
 
   function delight() {
     setIsPressed(!isPressed)
-    playSound()
+    playSound('confirm')
   }
 
   return (

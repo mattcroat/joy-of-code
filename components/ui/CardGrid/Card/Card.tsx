@@ -6,7 +6,7 @@ import { Tilt } from '@/root/components/shared/Tilt'
 import { Icon } from '@/root/components/shared/Icon'
 import { cardTheme } from '@/root/styles/card'
 import { fadeInQuick } from '@/root/utils/helpers/variants'
-import { useSound } from '@/root/utils/hooks'
+import { playSound } from '@/root/utils/helpers/playSound'
 
 interface Props {
   theme: string
@@ -15,14 +15,12 @@ interface Props {
 }
 
 export function Card({ theme, title, slug }: Props) {
-  const playSound = useSound('/sfx/page.mp3')
-
   return (
     <CustomLink href={`/${encodeURIComponent(slug)}`} isInternal>
       <Tilt>
         <motion.div variants={fadeInQuick}>
           <Box
-            onClick={playSound}
+            onClick={() => playSound('page')}
             position="relative"
             h={['200px', '240px']}
             borderRadius="lg"
