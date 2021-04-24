@@ -32,7 +32,7 @@ export function Home({ posts }: Props) {
         </Box>
       )}
 
-      <Box my={{ base: 8, md: 12 }}>
+      <Box py={{ base: 8, md: 12 }}>
         <Subheading mt={0}>
           <Emoji emoji="🔥" label="Fire emoji" spacing={2} />
           Latest

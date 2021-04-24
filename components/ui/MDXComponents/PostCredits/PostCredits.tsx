@@ -19,7 +19,7 @@ export function PostCredits() {
   const href = `https://github.com/mattcroat/joy-of-code/blob/main/posts/${router?.query?.slug}.mdx`
 
   return (
-    <Box d={{ md: 'flex' }} justifyContent="space-between" my={16}>
+    <Box d={{ md: 'flex' }} justifyContent="space-between" pb={12}>
       <Box
         flexBasis="49%"
         bg={contributeBg[colorMode]}
