@@ -5,7 +5,7 @@ import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Tilt } from '@/root/components/shared/Tilt'
 import { Icon } from '@/root/components/shared/Icon'
 import { cardTheme } from '@/root/styles/card'
-import { fadeInQuick } from '@/root/utils/helpers/variants'
+import { fadeIn } from '@/root/utils/helpers/variants'
 import { playSound } from '@/root/utils/helpers/playSound'
 
 interface Props {
@@ -18,7 +18,7 @@ export function Card({ theme, title, slug }: Props) {
   return (
     <CustomLink href={`/${encodeURIComponent(slug)}`} isInternal>
       <Tilt>
-        <motion.div variants={fadeInQuick}>
+        <motion.div variants={fadeIn}>
           <Box
             onClick={() => playSound('page')}
             position="relative"

@@ -9,28 +9,7 @@ export const slide = {
   },
 }
 
-export const slideRight = {
-  hidden: { opacity: 0, x: -100 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.6,
-    },
-  },
-}
-
 export const fadeIn = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      duration: 2,
-    },
-  },
-}
-
-export const fadeInQuick = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,

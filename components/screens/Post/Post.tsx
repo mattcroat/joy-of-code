@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Layout } from '@/root/components/shared/Layout'
 import { Newsletter } from '@/root/components/shared/Newsletter'
 import { PostCredits } from '@/root/components/ui/MDXComponents/PostCredits'
-import { fadeInQuick } from '@/root/utils/helpers/variants'
+import { fadeIn } from '@/root/utils/helpers/variants'
 
 interface Props {
   content: JSX.Element
@@ -30,7 +30,7 @@ export function Post({ content, frontMatter }: Props) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <motion.div initial="hidden" animate="show" variants={fadeInQuick}>
+        <motion.div initial="hidden" animate="show" variants={fadeIn}>
           {content}
           <Newsletter />
           <PostCredits />
