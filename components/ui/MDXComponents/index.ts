@@ -1,5 +1,4 @@
 import { CustomLink } from '@/root/components/shared/CustomLink'
-import { Newsletter } from '@/root/components/shared/Newsletter'
 import {
   Li,
   Olist,
@@ -15,7 +14,6 @@ import { InlineCode } from '@/root/components/ui/MDXComponents/InlineCode'
 import { Iframe } from '@/root/components/ui/MDXComponents/Iframe'
 import { Image } from '@/root/components/ui/MDXComponents/Image'
 import { Kbd } from '@/root/components/ui/MDXComponents/KeyboardKey'
-import { PostCredits } from '@/root/components/ui/MDXComponents/PostCredits'
 
 export const MDXComponents = {
   a: CustomLink,
@@ -31,7 +29,5 @@ export const MDXComponents = {
   li: Li,
   pre: CodeBlock,
   div: CodeBlockTitle,
-  PostCredits,
   Iframe,
-  Newsletter,
 }

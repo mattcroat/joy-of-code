@@ -2,6 +2,8 @@ import { Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 import { Layout } from '@/root/components/shared/Layout'
+import { Newsletter } from '@/root/components/shared/Newsletter'
+import { PostCredits } from '@/root/components/ui/MDXComponents/PostCredits'
 import { fadeInQuick } from '@/root/utils/helpers/variants'
 
 interface Props {
@@ -30,6 +32,8 @@ export function Post({ content, frontMatter }: Props) {
       >
         <motion.div initial="hidden" animate="show" variants={fadeInQuick}>
           {content}
+          <Newsletter />
+          <PostCredits />
         </motion.div>
       </Box>
     </Layout>
