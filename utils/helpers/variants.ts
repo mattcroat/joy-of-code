@@ -1,10 +1,9 @@
 export const slide = {
-  hidden: { opacity: 0, y: -100 },
+  hidden: { y: -100 },
   visible: {
-    opacity: 1,
     y: 0,
     transition: {
-      duration: 1,
+      duration: 0.6,
       ease: 'easeOut',
     },
   },
