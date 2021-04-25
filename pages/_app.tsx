@@ -42,7 +42,7 @@ function GlobalStyle({ children }: GlobalStyleProps) {
             font-family: 'Mononoki';
             font-style: bold;
             font-weight: 700;
-            font-display: optional;
+            font-display: swap;
             src: url('./fonts/mononoki/mononoki-Bold.woff2') format('woff2');
           }
 
