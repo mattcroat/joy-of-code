@@ -8,7 +8,7 @@ image: '/images/create-a-coding-sandbox/og-image.webp'
 
 # Create a Coding Sandbox
 
-Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work? So have I! Let me extend a personal invitation to code along 😄
+Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFiddle](https://jsfiddle.net/), or [CodeSandbox](https://codesandbox.io/) work?
 
 <Iframe
   title="JavaScript Sandbox"
@@ -16,6 +16,30 @@ Have you wondered how code editors such as [Codepen](https://codepen.io/), [JSFi
 />
 
 [JavaScript Sandbox](https://javascriptsandbox.netlify.app/) to see the working example. You can find the [source code](https://github.com/JoysOfCode/javascript-sandbox) on GitHub.
+
+**Note:** There's been a breaking change since I wrote this post regarding `@babel/standalone` that only requires a slight change. I decided not to update the source code, since I expect this to be reverted once the package issue gets resolved. These are the changes.
+
+```html:index.html
+<!-- Add @babel/standalone in your <head>...</head> -->
+<script
+  src="https://unpkg.com/@babel/standalone/babel.min.js"
+  defer
+></script>
+```
+
+```js:app.js
+// remove this line
+- import { transform } from 'https://cdn.skypack.dev/@babel/standalone'
+
+// replace this line
+- const { code: babelCode } = transform(codeToTranspile, options)
+// with window.Babel (I use window to make it clear where it's coming from)
++ const { code: babelCode } = window.Babel(codeToTranspile, options)
+
+// do the same for setIframeContent
+- <script src="https://cdn.skypack.dev/@babel/standalone" type="module"></script>
++ <script src="https://unpkg.com/@babel/standalone/babel.min.js" type="module"></script>
+```
 
 ## What You'll Learn
 
@@ -50,7 +74,7 @@ An iframe behaves just like a regular page, but contained into it's own microcos
 
 Now, any input would do. It can be just a plain textarea. It just happens that these sites are using "fancy" textareas that do syntax highlighting and other things for you. Codepen, and JSFiddle for example use [CodeMirror](https://codemirror.net/). CodeSandbox on the other hand is a lot more involved, and it's basically an IDE (integrated development environment) inside your browser. It uses the [Monaco Editor](https://microsoft.github.io/monaco-editor/index.html) just like [VS Code](https://code.visualstudio.com/) does. That's what I decided to use for this project.
 
-We won't need any bundlers, or build tools. The only thing I would advise is to get the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension for VS Code so you can start a development server because otherwise it won't work due to the limitations of using the file protocol. If you prefer using something else, go ahead.
+We won't need any bundlers, or build tools. **The only thing required is the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension for VS Code so you can start a development server because otherwise it won't work due to the limitations of using the file protocol.** If you prefer using something else, go ahead.
 
 ## Getting Started
 
