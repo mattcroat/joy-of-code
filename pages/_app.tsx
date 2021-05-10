@@ -13,6 +13,7 @@ import {
 } from '@/root/styles/colors'
 import { prismDarkTheme, prismLightTheme } from '@/root/styles/prism'
 import chakraTheme from '@/root/styles/theme'
+import { useAnalytics } from '@/root/utils/hooks/useAnalytics'
 
 // hide Chakra UI outline borders around clickable components
 import 'focus-visible/dist/focus-visible'
@@ -87,6 +88,8 @@ function GlobalStyle({ children }: GlobalStyleProps) {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
+  useAnalytics()
+
   return (
     <ChakraProvider theme={chakraTheme}>
       <GlobalStyle>
