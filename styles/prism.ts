@@ -11,7 +11,7 @@ const prismBaseTheme = css`
     color: ${chakraTheme.colors.gray[800]};
     background-color: none;
     font-family: ${chakraTheme.fonts.mono};
-    font-weight: ${chakraTheme.fontWeights.bold};
+    font-weight: ${chakraTheme.fontWeights.normal};
     text-align: left;
     word-spacing: normal;
     word-break: normal;
@@ -106,7 +106,7 @@ const prismBaseTheme = css`
 
   .token.important,
   .token.bold {
-    font-weight: bold;
+    font-weight: ${chakraTheme.fontWeights.bold};
   }
 
   .token.italic {
@@ -123,7 +123,7 @@ const prismBaseTheme = css`
     max-width: max-content;
     transform: translate(20px, 4px);
     font-family: ${chakraTheme.fonts.mono};
-    font-weight: 600;
+    font-weight: ${chakraTheme.fontWeights.semibold};
     background-color: ${chakraTheme.colors.orange[200]};
     color: ${chakraTheme.colors.orange[900]};
     padding: ${chakraTheme.space[2]} ${chakraTheme.space[4]};

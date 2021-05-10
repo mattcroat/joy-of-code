@@ -35,8 +35,16 @@ function GlobalStyle({ children }: GlobalStyleProps) {
             font-family: 'Inter';
             font-style: normal;
             font-weight: 400 700 900;
-            font-display: optional;
+            font-display: swap;
             src: url('./fonts/inter/Inter-Variable.woff2') format('woff2');
+          }
+
+          @font-face {
+            font-family: 'Mononoki';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('./fonts/mononoki/mononoki-Regular.woff2') format('woff2');
           }
 
           @font-face {
