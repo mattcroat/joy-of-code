@@ -1,21 +1,27 @@
 import { Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
+import { MDXRemote } from 'next-mdx-remote'
+import { MDXComponents } from '@/root/components/ui/MDXComponents'
+
 import { Layout } from '@/root/components/shared/Layout'
 import { Newsletter } from '@/root/components/shared/Newsletter'
 import { PostCredits } from '@/root/components/ui/MDXComponents/PostCredits'
 import { fadeIn } from '@/root/utils/helpers/variants'
 
-interface Props {
-  content: JSX.Element
+type PostProps = {
+  content: {
+    compiledSource: string
+    renderedOutput: string
+    scope?: any
+  }
   frontMatter: {
     title: string
     description: string
     image: string
   }
 }
-
-export function Post({ content, frontMatter }: Props) {
+export function Post({ content, frontMatter }: PostProps) {
   return (
     <Layout
       title={frontMatter.title}
@@ -31,7 +37,7 @@ export function Post({ content, frontMatter }: Props) {
         animate={{ opacity: 1 }}
       >
         <motion.div initial="hidden" animate="show" variants={fadeIn}>
-          {content}
+          <MDXRemote {...content} components={MDXComponents} />
           <Newsletter />
           <PostCredits />
         </motion.div>

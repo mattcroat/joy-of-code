@@ -3,8 +3,7 @@ import path from 'path'
 
 // MDX sauce
 import matter from 'gray-matter'
-import hydrate from 'next-mdx-remote/hydrate'
-import renderToString from 'next-mdx-remote/render-to-string'
+import { serialize } from 'next-mdx-remote/serialize'
 
 // MDX plugins
 import rehypePrism from '@mapbox/rehype-prism'
@@ -12,14 +11,13 @@ import codeTitle from 'remark-code-titles'
 import unwrapImages from 'remark-unwrap-images'
 
 import { Post } from '@/root/components/screens/Post'
-import { MDXComponents } from '@/root/components/ui/MDXComponents'
 import { postsPath, postFilePaths } from '@/root/utils/helpers/posts'
 
-interface Post {
-  MDXSource: {
+type PostProps = {
+  source: {
     compiledSource: string
     renderedOutput: string
-    scope?: unknown
+    scope?: any
   }
   frontMatter: {
     title: string
@@ -28,16 +26,14 @@ interface Post {
   }
 }
 
-interface Params {
+type Params = {
   params: {
     slug: string
   }
 }
 
-export default function PostPage({ MDXSource, frontMatter }: Post) {
-  const content = hydrate(MDXSource, { components: MDXComponents })
-
-  return <Post content={content} frontMatter={frontMatter} />
+export default function PostPage({ source, frontMatter }: PostProps) {
+  return <Post content={source} frontMatter={frontMatter} />
 }
 
 // generate paths at build-time
@@ -59,8 +55,7 @@ export async function getStaticProps({ params }: Params) {
 
   const { content, data } = matter(source)
 
-  const MDXSource = await renderToString(content, {
-    components: MDXComponents,
+  const MDXSource = await serialize(content, {
     mdxOptions: {
       rehypePlugins: [rehypePrism],
       remarkPlugins: [codeTitle, unwrapImages],
@@ -69,7 +64,7 @@ export async function getStaticProps({ params }: Params) {
 
   return {
     props: {
-      MDXSource,
+      source: MDXSource,
       frontMatter: data,
     },
   }
