@@ -15,3 +15,6 @@ export const selectionText = { light: '#1A365d', dark: '#652b19' }
 
 export const inlineCodeBg = { light: 'blue.200', dark: 'orange.200' }
 export const inlineCodeText = { light: 'blue.900', dark: 'orange.900' }
+
+export const quoteBorderColor = { light: '#2b6cb0', dark: '#fbd38d' }
+export const quoteBg = { light: '#f1f8ff', dark: '#272e3e' }

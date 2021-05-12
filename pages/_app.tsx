@@ -10,6 +10,8 @@ import {
   scrollbarColor,
   selectionBg,
   selectionText,
+  quoteBorderColor,
+  quoteBg,
 } from '@/root/styles/colors'
 import { prismDarkTheme, prismLightTheme } from '@/root/styles/prism'
 import chakraTheme from '@/root/styles/theme'
@@ -75,6 +77,12 @@ function GlobalStyle({ children }: GlobalStyleProps) {
           a,
           button {
             cursor: url('./images/cursor-pointer.webp'), pointer !important;
+          }
+
+          blockquote {
+            padding: 0.4rem 2rem;
+            border-left: 4px solid ${quoteBorderColor[colorMode]};
+            background-color: ${quoteBg[colorMode]};
           }
 
           ::-webkit-scrollbar {
