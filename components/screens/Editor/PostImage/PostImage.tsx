@@ -16,7 +16,7 @@ export function PostImage() {
         <Modal theme={theme} title={title} modalOpen={setModalOpen} />
       )}
 
-      <Box maxW="90ch" pl="80px" mx="auto" pt={8}>
+      <Box maxW="72ch" pl="80px" mx="auto" pt={8}>
         <Box
           onClick={() => setModalOpen(true)}
           pos="relative"

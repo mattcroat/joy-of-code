@@ -30,7 +30,7 @@ export function Post({ content, frontMatter }: PostProps) {
       type="article"
     >
       <Box
-        maxW="90ch"
+        maxW="72ch"
         mx="auto"
         px={{ base: 8, lg: 0 }}
         initial={{ opacity: 0 }}
