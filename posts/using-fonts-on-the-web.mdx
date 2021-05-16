@@ -27,8 +27,14 @@ Using fonts on the web can be complicated, and unwieldy if we don't understand t
 In the past we could only use a handful of fonts considered web-safe because they were guaranteed to be on each computer. Thanks to CSS, we can specify any font files to be downloaded, and used when someone opens our site. You probably used [Google Fonts](https://fonts.google.com/) — one of the most popular font providers. You only have to grab a link to a font, and include it in your site.
 
 ```html:example.html
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+  rel="stylesheet"
+/>
 ```
 
 The preconnect keyword is saying: **"Hey, we're going to talk to this resource for sure, so let's pick up the phone."** It's a hint to the browser to establish a connection as soon as possible (while it's loading your CSS file, it can resolve that URL).
@@ -53,17 +59,26 @@ Why not add some more weights, and fonts?
 
 ```html:example.html
 <!-- Inter -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
 
 <!-- Playfair Display -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
 ```
 
 We can reduce the amount of HTTP requests by requesting multiple fonts inside one request.
 
 ```html:example.html
 <!-- Inter, Playfair Display -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700|Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700|Playfair+Display:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
 ```
 
 Instead of including it in our HTML, we can also import it in our CSS using the **@import** syntax.
@@ -453,6 +468,8 @@ Google Fonts already serves variable fonts by default. You can look at the [comp
 />
 ```
 
+Notice how significantly smaller the size is at **~17 kB**, compared to **~98 kB per-weight** for the non-varible WOFF 2 version (we could save perhaps 30% if it was gzipped) — if we combined these weights it would barely come to **~54 kB.** We can do a lot more optimization on top of this.
+
 <Image
   height={552}
   width={701}
@@ -460,8 +477,6 @@ Google Fonts already serves variable fonts by default. You can look at the [comp
   alt="Dark Mode VF with a custom Darkmode axis"
   inline={true}
 />
-
-Notice how significantly smaller the size is at **~17 kB**, compared to **~98 kB per-weight** for the non-varible WOFF 2 version (we could save perhaps 30% if it was gzipped) — if we combined these weights it would barely come to **~54 kB.** We can do a lot more optimization on top of this.
 
 I also wanted to show going back to our preconnect section earlier — how there was no time spent connecting to the Google Fonts CDN, since the browser has already done that part.
 
@@ -560,13 +575,19 @@ pyftsubset \
 Speaking of Google fonts — **you can specify the variable font weight range, but also subset it using their API.**
 
 ```html:example.html
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900"
+  rel="stylesheet"
+/>
 ```
 
 You can specify a **text** parameter that is only going to include a font file that has those letters.
 
 ```html:example.html
-<link href="https://fonts.googleapis.com/css2?family=Inter&text=Hello,World!" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter&text=Hello,World!"
+  rel="stylesheet"
+/>
 ```
 
 Don't forget, you can also combine other parameters such as **display**. You can learn more if you read the [Google Fonts API docs](https://developers.google.com/fonts/docs/css2).

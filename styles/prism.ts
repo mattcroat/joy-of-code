@@ -3,7 +3,7 @@ import chakraTheme from '@/root/styles/theme'
 
 const prismBaseTheme = css`
   code {
-    white-space: pre-wrap;
+    white-space: pre;
   }
 
   code[class*='language-'],
