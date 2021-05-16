@@ -80,7 +80,8 @@ function GlobalStyle({ children }: GlobalStyleProps) {
           }
 
           blockquote {
-            padding: 0.4rem 2rem;
+            padding: 0.5rem 2rem;
+            margin: 1rem 0;
             border-left: 4px solid ${quoteBorderColor[colorMode]};
             background-color: ${quoteBg[colorMode]};
           }

@@ -7,7 +7,7 @@ interface Props {
 
 export function CodeBlockTitle({ children, ...props }: Props) {
   return (
-    <Box fontSize={[16, 16, 18]} {...props}>
+    <Box fontSize={16} {...props}>
       {children}
     </Box>
   )

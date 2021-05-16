@@ -12,7 +12,7 @@ interface Props {
 
 export function Layout({ children, ...metadata }: Props) {
   return (
-    <Box maxW={{ sm: '80%' }} mx="auto" px={{ base: 8, sm: 0 }}>
+    <Box maxW={{ sm: '80%' }} mx="auto" px={{ base: 4, sm: 0 }}>
       <Seo {...metadata} />
       <Box
         as="main"

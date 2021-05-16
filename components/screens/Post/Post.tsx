@@ -32,7 +32,6 @@ export function Post({ content, frontMatter }: PostProps) {
       <Box
         maxW="72ch"
         mx="auto"
-        px={{ base: 8, lg: 0 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >

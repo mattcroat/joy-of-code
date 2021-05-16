@@ -121,11 +121,11 @@ const prismBaseTheme = css`
     position: relative;
     z-index: -1;
     max-width: max-content;
-    transform: translate(20px, 4px);
+    top: 4px;
     font-family: ${chakraTheme.fonts.mono};
-    font-weight: ${chakraTheme.fontWeights.semibold};
-    background-color: ${chakraTheme.colors.orange[200]};
+    font-weight: ${chakraTheme.fontWeights.bold};
     color: ${chakraTheme.colors.orange[900]};
+    background-color: ${chakraTheme.colors.orange[200]};
     padding: ${chakraTheme.space[2]} ${chakraTheme.space[4]};
     border-radius: ${chakraTheme.radii.base};
     box-shadow: ${chakraTheme.shadows.lg};
