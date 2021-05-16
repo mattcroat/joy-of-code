@@ -8,7 +8,7 @@ image: '/images/using-fonts-on-the-web/og-image.webp'
 
 # Using Fonts on The Web
 
-Fonts can be complicated, and unwieldy if we don't understand the trade-offs we're making. I want to share what I learned about best practices when it comes to using fonts on the web — and show you some of the pitfalls you can avoid.
+Using fonts on the web can be complicated, and unwieldy if we don't understand the trade-offs we're making. I want to share what I learned about best practices when it comes to using fonts on the web — and show you some of the pitfalls you can avoid.
 
 ## What You're Going to Learn
 
@@ -24,18 +24,16 @@ Fonts can be complicated, and unwieldy if we don't understand the trade-offs we'
 
 ## Web Fonts
 
-In the past we could only use a handful of fonts considered web-safe because they were guaranteed to be on each computer. Thanks to CSS, we can specify any font files to be downloaded, and used when someone opens our site.
-
-[Google Fonts](https://fonts.google.com/) is one of the most popular font providers. You probably used it. You only have to grab a link to a font, and include it in your site. Let's use [Inter](https://fonts.google.com/specimen/inter?query=inter) — one of my favorite fonts through the rest of the examples.
+In the past we could only use a handful of fonts considered web-safe because they were guaranteed to be on each computer. Thanks to CSS, we can specify any font files to be downloaded, and used when someone opens our site. You probably used [Google Fonts](https://fonts.google.com/) — one of the most popular font providers. You only have to grab a link to a font, and include it in your site.
 
 ```html:example.html
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 ```
 
-The preconnect keyword is saying: **"Hey, we're going to talk to https://fonts.gstatic.com for sure, so let's pick up the phone."** It's a hint to the browser to establish a connection as soon as possible (while it's loading your CSS file, it can resolve that URL).
+The preconnect keyword is saying: **"Hey, we're going to talk to this resource for sure, so let's pick up the phone."** It's a hint to the browser to establish a connection as soon as possible (while it's loading your CSS file, it can resolve that URL).
 
-**It's only a suggestion to the browser, since browsers already try to anticipate what connections a page might need — so it might be ignored completely.**
+It's only a suggestion to the browser, since browsers already try to anticipate what connections a page might need — so it might be ignored completely.
 
 <Image
   height={838}
@@ -45,13 +43,11 @@ The preconnect keyword is saying: **"Hey, we're going to talk to https://fonts.g
   inline={true}
 />
 
-> "In each of these steps the browser sends a piece of data to a server, and the server sends back a response. That journey, from origin to destination and back, is called a round trip." — [Establish network connections early to improve perceived page speed](https://web.dev/preconnect-and-dns-prefetch/)
+> In each of these steps the browser sends a piece of data to a server, and the server sends back a response. That journey, from origin to destination and back, is called a round trip. — [Establish network connections early to improve perceived page speed](https://web.dev/preconnect-and-dns-prefetch/)
 
 Without preconnect, we would have to make a round trip when requesting a resource — when it's easier to open a phone line at page load.
 
-We load the https://fonts.googleapis.com/css2?family=Inter&display=swap stylesheet.
-
-This is an interesting stylesheet, because whatever parameters we pass — it gets generated on the fly. In this case we're saying: **"Give me the font Inter, with a weight of normal."** There's an interesting display property **swap** that says **"If the font hasn't loaded yet, swap it for another."** This is defined in **@font-face**.
+The stylesheet we load is interesting, because whatever parameters we pass — it gets generated on the fly. In this case we're saying: **"Give me the font Inter, with the default weight."** There's an interesting display property **swap** that says **"If the font hasn't loaded yet, swap it for another."** This is defined in **@font-face**.
 
 Why not add some more weights, and fonts?
 
@@ -63,14 +59,14 @@ Why not add some more weights, and fonts?
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 ```
 
-We can reduce the amount of HTTP requests by requesting multiple fonts inside one URL.
+We can reduce the amount of HTTP requests by requesting multiple fonts inside one request.
 
 ```html:example.html
 <!-- Inter, Playfair Display -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700|Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 ```
 
-Instead of including it in our HTML, we can import it in our CSS using the **@import** syntax.
+Instead of including it in our HTML, we can also import it in our CSS using the **@import** syntax.
 
 ```css:example.css
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
@@ -80,15 +76,7 @@ This is pure preference, and has no impact on performance. You can read [don't u
 
 ## Taking a Closer Look At The Google Fonts Stylesheet
 
-Let's take a look at the earlier [Google Fonts stylesheet](https://fonts.googleapis.com/css2?family=Inter&display=swap) 🧐.
-
-<Image
-  height={684}
-  width={749}
-  src="/images/using-fonts-on-the-web/font-faces.webp"
-  alt="Google Fonts stylesheet showing different font faces"
-  inline={true}
-/>
+I encourage you to open the [Google Fonts stylesheet](https://fonts.googleapis.com/css2?family=Inter&display=swap). I'm going to wait.
 
 **Whoa!** This might seem like a lot at first. Fortunately, we only have to look at one example to understand the rest.
 
@@ -113,9 +101,13 @@ Let's take a look at the earlier [Google Fonts stylesheet](https://fonts.googlea
 }
 ```
 
-I took some creative liberties to change the snippet for the purposes of explanation.
+I took some artistic liberties to change the snippet for the purposes of explanation.
 
-Can you imagine if a font you used included every possible letter, and symbol that exists? It's possible! 😱 **Instead of making our users download large fonts, we can declare a range from the font.** We use the **unicode-range** property to say: "**Hey, only load this font, if a character from this range is used**". This is useful in cases where:
+Can you imagine if a font you used included every possible letter, and symbol that exists? It's possible! 😱
+
+**Instead of making our users download large fonts, we can declare a range from the font.**
+
+We use the **unicode-range** property to say: "**Hey, only load this font, if a character from this range is used**". This is useful in cases where:
 
 - **You have localization** where you support multiple languages, but only load the language for the user that's used
 - You can also use this for **replacing a character from a different font**
@@ -136,11 +128,13 @@ h1 {
 
 Keep in mind if you're swapping characters using **unicode-range**, the **@font-face** order matters.
 
-You can learn more about some of these techniques by reading about [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/%40font-face/unicode-range), or [listen to a great explainer episode from The CSS podcast on @font-face](https://thecsspodcast.libsyn.com/040-the-css-podcast-font-face).
+You can learn more about some of these techniques by reading about [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/%40font-face/unicode-range) on MDN, or listen to a great [@font-face explainer episode from The CSS podcast](https://thecsspodcast.libsyn.com/040-the-css-podcast-font-face).
 
 ## What is Unicode Anyhow
 
-**Every language has what's known as a character set.** [Basic Latin](https://en.wikipedia.org/wiki/Latin-1_Supplement_%28Unicode_block%29) contains a [Unicode](https://en.wikipedia.org/wiki/Unicode) block of 128 characters for English, and other Western languages. I'm from [Croatia](https://en.wikipedia.org/wiki/Croatia), so we have other special characters such as "š, đ, č, ć, ž". These are included in [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A).
+**Every language has a character set.** [Basic Latin](https://en.wikipedia.org/wiki/Latin-1_Supplement_%28Unicode_block%29) contains a [Unicode](https://en.wikipedia.org/wiki/Unicode) block of 128 characters for English, and other Western languages.
+
+I'm from 🇭🇷 [Croatia](https://en.wikipedia.org/wiki/Croatia), so we have other special characters such as "š, đ, č, ć, ž". These are included in [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A).
 
 <Image
   height={575}
@@ -150,11 +144,11 @@ You can learn more about some of these techniques by reading about [unicode-rang
   inline={true}
 />
 
-**This shows the Basic Latin unicode range "U+0020-007F".**
+This shows the Basic Latin unicode range **U+0020-007F**.
 
 Unicode is a standard maintained by the [Unicode Consortium](https://en.wikipedia.org/wiki/Unicode_Consortium) that aims to solve the limitations of [ASCII](https://en.wikipedia.org/wiki/ASCII) by having a unique list of characters, and symbols ordered by number.
 
-For example, take the letter **A**. In Unicode this letter is represented as **U+0041**. These code points are written in hexadecimal, preceded by **U+**. If we used a [Hex to ASCII Text Converter](https://www.rapidtables.com/convert/number/hex-to-ascii.html) converter, we would get the same result.
+For example, take the letter **A**. In Unicode this letter is represented as **U+0041**. These code points are in hexadecimal — preceded by **U+**. If we used a [Hex to ASCII Text Converter](https://www.rapidtables.com/convert/number/hex-to-ascii.html) converter, we would get the same result.
 
 <Image
   height={425}
@@ -164,11 +158,11 @@ For example, take the letter **A**. In Unicode this letter is represented as **U
   inline={true}
 />
 
-We can see the [Basic Latin](https://unicode-table.com/en/blocks/basic-latin/) range more easily using a site like [Unicode Character Table](https://unicode-table.com/en/). You can read [Unicode, UTF8 & Character Sets: The Ultimate Guide](https://www.smashingmagazine.com/2012/06/all-about-unicode-utf8-character-sets/) if you want to learn more.
+We can see the [basic Latin](https://unicode-table.com/en/blocks/basic-latin/) range more easily using a site like [Unicode Character Table](https://unicode-table.com/en/). You can read [Unicode, UTF8 & Character Sets: The Ultimate Guide](https://www.smashingmagazine.com/2012/06/all-about-unicode-utf8-character-sets/) if you want to learn more.
 
 For the unicode range we can see it includes **U+0000-00FF** which is [Latin-1 Supplement](https://unicode-table.com/en/blocks/latin-1-supplement/), and some special characters such as **U+02DC** which is the [small tilde](https://unicode-table.com/en/02DC/) (~).
 
-**Phew!** That's a lot of explaining out of the way. Understanding this isn't just for sake of curiosity, because this is the foundation of everything we're going to talk about. I'm going to cover more on **@font-face** in the self-hosting section.
+**Phew!** That's a lot of explaining out of the way. Understanding this isn't just for sake of curiosity, because this is the foundation of everything we're going to cover next. I'm going to cover more on **@font-face** in the self-hosting section.
 
 First let's understand why do we even use hosted fonts in the first place, and reasons why you should self-host.
 
@@ -184,16 +178,16 @@ When transfering data we have to take distance into consideration. [CDN](https:/
   inline={true}
 />
 
-- **Server A** can cache it's files on **Server B** that's nearer to you
+- **Server A** can cache it's files on **Server B** that's closer to you
 - When you visit **Server A**, you hit **Server B** first which gives you the cached data
 - If there's an update, **Server A** is going to send fresh data to **Server B** to be cached for future visits
 - The initial load is going to be slower for the person who made the first request, but fast for subsequent visits
 
-If you remember — [https://fonts.gstatic.com](https://fonts.gstatic.com) is the CDN for Google Fonts. Because of this global content delivery network, when a user requests a font it can be served from the nearest cached location to your user.
+If you remember — [https://fonts.gstatic.com](https://fonts.gstatic.com) is the CDN for Google Fonts. Because of this global content delivery network, when a user requests a font it can be served from the nearest cached location.
 
 ## The Reason to Host Your Fonts
 
-The browser also has a [HTTP cache](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching). **It's a temporary storage for any assets you downloaded browsing other sites so future requests are served faster.**
+The browser also has a [HTTP cache](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching) — which serves as a temporary storage for any assets you downloaded browsing other sites so future requests are served faster.
 
 <Image
   height={425}
@@ -204,7 +198,7 @@ The browser also has a [HTTP cache](https://developer.mozilla.org/en-US/docs/Web
 />
 
 - A user visits https://joyofcode.xyz/
-- The request to https://fonts.gstatic.com/Inter.ttf is being made
+- The request to https://fonts.gstatic.com/Inter.ttf is made
 - Where the font is cached using the URL as the cache key
 
 <Image
@@ -233,11 +227,8 @@ For this reason, **browsers aren't using one big cache for everything anymore �
 />
 
 - User visits https://joyofcode.xyz/
-- Request to https://fonts.gstatic.com/Inter.ttf is being made
-- The cache key doesn't look the same
-- It consist of the top site you requested https://joyofcode.xyz/
-- The child site, or iframe making the request from https://joyofcode.xyz/
-- And the resource URL https://fonts.gstatic.com/Inter.ttf
+- Request to https://fonts.gstatic.com/Inter.ttf is made
+- The cache key consists of the **top site** (root of the site), **current-frame site** (children of the site, or iframe), and the **resource url**
 
 <Image
   height={425}
@@ -253,7 +244,7 @@ For this reason, **browsers aren't using one big cache for everything anymore �
 
 Because of this change **the recommended approach is to self-host your fonts if you want to benefit from caching**.
 
-I want to note that despite being the recommended approach going forward, it might not be worth it for everyone if you're using [variable fonts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide) (covered later) which Google Fonts serves by default for fonts that support it (foreshadowing 🕵) since the size of the font is almost irrelevant for normal use.
+I want to note that despite being the recommended approach going forward, it might not be worth it for everyone if you're using [variable fonts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide) which Google Fonts serves by default for fonts that support it (foreshadowing 🕵) since the size of the font is almost irrelevant for normal use.
 
 That being said, self-hosting opens up further possibilities to optimize, and have ownership of your content. We're going to cover that next.
 
@@ -265,7 +256,7 @@ Fonts come in many formats, but the most used ones on the web you're going to en
 - **Web Open Font Format** (woff)
 - **Web Open Font Format 2** (woff2)
 
-[TrueType](https://en.wikipedia.org/wiki/TrueType) was developed by Apple in the late 1980's, and is what's used on most computers. [Web Open Font Format](https://en.wikipedia.org/wiki/Web_Open_Font_Format) was made exclusivey for the web. It uses [OpenType](https://en.wikipedia.org/wiki/OpenType), or [TrueType](https://en.wikipedia.org/wiki/TrueType) fonts that are compressed for the web.
+[TrueType](https://en.wikipedia.org/wiki/TrueType) was developed by Apple in the late 1980s, and is what's used on most computers. [Web Open Font Format](https://en.wikipedia.org/wiki/Web_Open_Font_Format) uses [OpenType](https://en.wikipedia.org/wiki/OpenType), or [TrueType](https://en.wikipedia.org/wiki/TrueType) fonts that are compressed for the web.
 
 <Image
   height={243}
@@ -318,12 +309,12 @@ Assuming you have your font downloaded already which you can do from [Google Fon
 
 ```
 
-- `font-family` — is used to refer to the font, you can give it any name — such as "Banana".
-- `font-style` — can be normal, italic, oblique. Keep in mind you have to include an italic version of the font, otherwise never use it since it only makes the regular glyphs slanted creating a hideous font
-- `font-weight` — are numbers mapped to weight names: **100** (Thin), **200** (Extra Light), **300** (Light), **400** (Normal), **500** (Medium), **600** (Semi Bold), **700** (Bold), **800** (Extra Bold), **900** (Black)
-- `font-display` — determines how a font is displayed depending on if it's loaded, or not
+- **font-family** — is used to refer to the font, you can give it any name
+- **font-style** — can be **normal**, **italic**, **oblique** (keep in mind you have to include an italic version of the font, since it only makes the regular glyphs slanted, and hideous)
+- **font-weight** — are numbers mapped to weight names: **100** (Thin), **200** (Extra Light), **300** (Light), **400** (Normal), **500** (Medium), **600** (Semi Bold), **700** (Bold), **800** (Extra Bold), **900** (Black)
+- **font-display** — determines how a font is displayed depending on if it's loaded, or not
 
-The only thing left to do is serve the fonts which depends on your hosting. Treat them as any other static asset. In general, you want to place them in some public folder. I simply include mine in **public/fonts** for [Next.js](https://nextjs.org/). That way it's a relative path such as https://joyofcode.xyz/fonts/Inter.woff2 (I made those up).
+The only thing left to do is serve the fonts which depends on your hosting. Treat them as any other static asset. In general, you want to place them in some public folder. I simply include mine in **public/fonts** for [Next.js](https://nextjs.org/). That way it's a relative path, for example https://joyofcode.xyz/fonts/Inter.woff2.
 
 To use the font simply use it in your CSS, and include a fallback stack of system UI fonts:
 
@@ -342,11 +333,11 @@ Another fallback tip is that you should use a system UI font that resembles your
 
 ## Size Consideration
 
-The problem with using non-variable fonts is that you have to be careful with what you include. Including each font weight requires a separate file meaning an additional HTTP request (you can get around this by smashing fonts together into a single file), and declaring **@font-face** for each one.
+The problem with using non-variable fonts is that you have to be careful with what you include. Including each font weight requires a separate file meaning an additional HTTP request, and declaring **@font-face** for each one (you can get around this by smashing fonts together into a single file).
 
-For example if we wanted to use every weight of Inter, that's **9 HTTP request** in total. It gets worse — that's around **~1.8 MB** (assuming we're using WOFF 2, otherwise it's more than double). To put things into perspective, the regular weight of Inter is around **~90 kB**.
+For example if we wanted to use every weight of Inter, that's **9 HTTP request** in total. It gets worse — that's around **~1.8 MB** (assuming we're using **WOFF 2**, otherwise it's more than double). To put things into perspective, the regular weight of Inter is around **~98 kB**.
 
-How much is too much when it comes to sending data through the pipe? The bundle size of React is **~128 kB** before it's minified, and [gzipped](https://en.wikipedia.org/wiki/Gzip) being around **~42 kB**. Compare the misery score when compared to a single font file of a comparable size.
+How much is too much when it comes to sending data through the pipe? The bundle size of a framework such as React is **~128 kB** before it's minified, and [gzipped](https://en.wikipedia.org/wiki/Gzip) being around **~42 kB**. You don't want to ship React to display text.
 
 The more things you have to download, while having unreliable internet is a frustrating experience. Let's adress other issues this causes.
 
@@ -354,9 +345,9 @@ The more things you have to download, while having unreliable internet is a frus
 
 > A flash of unstyled content (FOUC, also flash of unstyled text) is an instance where a web page appears briefly with the browser's default styles prior to loading an external CSS stylesheet, due to the web browser engine rendering the page before all information is retrieved. The page corrects itself as soon as the style rules are loaded and applied; however, the shift may be distracting. Related problems include flash of invisible text (FOIT) and flash of faux text (FOFT). - [Flash of unstyled content (Wikipedia)](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)
 
-**I disabled the cache in the developer tools, and used a slow connection to simulate what you might experience.** I've noticed there's a lot of weird things that can go wrong, regardless of your network speed. The same can happen on a fast connection when a resources takes longer than expected, so it's not just people with slow unreliable internet.
+I disabled the cache in the developer tools, and used a slow connection to simulate what you might experience. I've noticed there's a lot of weird things that can go wrong, regardless of your network speed. The same can happen on a fast connection when a resources takes longer than expected, so it's not just people with slow unreliable internet.
 
-To exagerate the effect, I've defined a fallback for the font to be a serif font so it's more obvious:
+To exagerate the effect, I've defined the fallback to use a serif font so it's more obvious.
 
 ```css:example.css
 body {
@@ -374,7 +365,7 @@ We briefly went over **font-display** earlier, but this time let's explore it fu
   inline={true}
 />
 
-**Block gives the font a short block period, and an infinite swap period** — this means until the font is ready to use, it should use "invisible" text, and swap once it's ready. This creates a jarring user experience as you can see, and causes layout shifts.
+**Block gives the font a short block period, and an infinite swap period** — this means until the font is ready to use, it should use "invisible" text, and swap once it's ready. This creates a ugly user experience as you can see, and causes layout shifts.
 
 <Image
   height={440}
@@ -439,7 +430,7 @@ body {
   inline={true}
 />
 
-The variable font version of Inter has **weight**, and **slant** axis. The best part is that's it's a fraction of the size.
+The variable font version of Inter has **weight**, and **slant** axis. The best part is that's it's a fraction of the size. I like to think of variable fonts as being the SVG of fonts. If you ever wrote a media query that reduces the size of text for example, think how it snaps instead of being fluid. You can get that smooth transition with variable fonts.
 
 <Image
   height={450}
@@ -449,7 +440,7 @@ The variable font version of Inter has **weight**, and **slant** axis. The best 
   inline={true}
 />
 
-**This is an example of a custom axis** — meant to offset a light font looking thinner on a dark background by adjusting the grade which changes the weight of the font without changing it's width.
+**This is an example of a custom axis** — meant to offset a light font looking thin on a dark background by adjusting the grade which changes the weight of the font without changing it's width.
 
 You can play around with more examples on [Variable Fonts](https://v-fonts.com/) to understand what variable fonts can do. If you want to learn more [Introduction to variable fonts on the web](https://web.dev/variable-fonts/) has great explanations with graphics.
 
@@ -470,11 +461,11 @@ Google Fonts already serves variable fonts by default. You can look at the [comp
   inline={true}
 />
 
-Notice how significantly smaller the size is at **~17 kB**, compared **~98 kB per-weight** for the non-varible WOFF 2 version (we could save perhaps 30% if it was gzipped) — if we combined these weights it would barely come to **~54 kB.** We can do a lot more optimization on top of this.
+Notice how significantly smaller the size is at **~17 kB**, compared to **~98 kB per-weight** for the non-varible WOFF 2 version (we could save perhaps 30% if it was gzipped) — if we combined these weights it would barely come to **~54 kB.** We can do a lot more optimization on top of this.
 
 I also wanted to show going back to our preconnect section earlier — how there was no time spent connecting to the Google Fonts CDN, since the browser has already done that part.
 
-**Interestingly enough** — it serves a file for each weight when variable fonts promise us a single file. That's for a good reason. If we looked at the file size of a single file variable font — it's astronimical. For example the **TTF** version of Inter is **~800 kB**, and the **WOFF 2** version is around **~320 kB**. We're left with a couple of options:
+**Interestingly enough** — it serves a file for each weight when variable fonts promise us a single file. That's for a good reason. If we looked at the file size of a single file variable font — it's astronomical. For example the **TTF** version of Inter is **~800 kB**, and the **WOFF 2** version is around **~320 kB**. We're left with a couple of options:
 
 - Use Google Fonts if the font you want is supported
 - We can simply download, and use the variable font Google Fonts generates, for our own purpose
@@ -486,9 +477,7 @@ Remember our adventure into unicode?
 
 **The idea behind creating font subsets is simple — we can specify a unicode range to remove characters we don't need.**
 
-The problem with most online converters, and tools I tried is **they completeley strip out the variations from the variable font** in the process. I learned a lot from reading [Creating font subsets](https://markoskon.com/creating-font-subsets/).
-
-You can use [Wakamai Fondue](https://wakamaifondue.com/) to drop a font, and learn what it can do.
+The problem with most online converters, and tools I tried is **they completeley strip out the variations from the variable font** in the process. You can use [Wakamai Fondue](https://wakamaifondue.com/) to drop a font, and learn what it can do.
 
 <Image
   height={594}
@@ -497,8 +486,6 @@ You can use [Wakamai Fondue](https://wakamaifondue.com/) to drop a font, and lea
   alt="Shows everything the variable version of Inter includes"
   inline={true}
 />
-
-**Note:** I removed the font information section so I can get more into the screenshot. Yours might look different.
 
 At the time of writing this the only reliable method is having to use **pyftsubset** which is part of **fonttools** (which means having to use Python). There's some other JavaScript libraries such as **glyphhanger** that you can use — but they also require having those dependencies, and are just an abstraction on top. **glyphanger** is interesting because it can crawl your site, and create a tiny subset based on what characters you use. **Fortunately, it's simple** — even if you don't have any Python experience like me.
 
@@ -537,9 +524,9 @@ pyftsubset \
 The backwards slash let's us split text into multiple lines.
 
 - We specify our font — **Inter-Variable.ttf**
-- Then we give it an output name — **Inter-Variable-English.woff2**
+- Then we give the output a name — **Inter-Variable-English.woff2**
 - Specify the font format — **woff2**
-- Layout features let use provide [feature tags](https://docs.microsoft.com/en-us/typography/opentype/spec/featuretags) (for example **kern** let's us justify the space between glyphs, if you're familiar with ligatures — **liga** replaces a sequence of glyphs with a single glyph) — in this case the asterisk means you want everything
+- **Layout features** — [feature tags](https://docs.microsoft.com/en-us/typography/opentype/spec/featuretags) such as **kern** let's us justify the space between glyphs, **liga** replaces a sequence of glyphs with a single glyph, or we can specify everything with the asterisk
 - As a last step we give it the **Latin** unicode range
 
 <Image
@@ -552,7 +539,23 @@ The backwards slash let's us split text into multiple lines.
 
 The file size is around **~77 kB** before gzip compared to **~800 kB**. Keep in mind, **we're using the same Latin subset, with all font weights in a single file.** We can further optimize this to only use a English-subset, removing more characters.
 
-I highly recommend reading the article, because it's packed with information if you want to further customize such as creating multiple subsets like Google Fonts do.
+I highly recommend reading [Creating font subsets](https://markoskon.com/creating-font-subsets/) as it's packed with information if you want to further customize such as creating multiple subsets like Google Fonts.
+
+```shell:terminal
+pyftsubset \
+  Inter-Regular.ttf \
+  --output-file="Inter-Regular-Latin.woff2" \
+  --flavor="woff2" \
+  --layout-features="*" \
+  --unicodes="U+0000-00FF" &&
+
+pyftsubset \
+  Inter-Regular.ttf \
+  --output-file="Inter-Regular-Latin-Extended-A.woff2" \
+  --flavor="woff2" \
+  --layout-features="*" \
+  --unicodes="U+0100-017F"
+```
 
 Speaking of Google fonts — **you can specify the variable font weight range, but also subset it using their API.**
 
