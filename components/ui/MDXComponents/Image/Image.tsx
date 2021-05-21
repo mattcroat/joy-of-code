@@ -33,7 +33,7 @@ export function Image({
   }
 
   return (
-    <Box mx={{ xl: '-10%' }} my={{ sm: 8 }}>
+    <Box mx={{ xl: '-10%' }} my={{ sm: 8 }} textAlign="center">
       <NextImage
         height={height}
         width={width}

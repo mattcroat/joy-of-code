@@ -46,7 +46,6 @@ It's only a suggestion to the browser, since browsers already try to anticipate 
   width={772}
   src="/images/using-fonts-on-the-web/preconnect.webp"
   alt="A diagram showing fetching a resource with, and without preconnect"
-  inline={true}
 />
 
 > In each of these steps the browser sends a piece of data to a server, and the server sends back a response. That journey, from origin to destination and back, is called a round trip. — [Establish network connections early to improve perceived page speed](https://web.dev/preconnect-and-dns-prefetch/)
@@ -156,7 +155,6 @@ I'm from 🇭🇷 [Croatia](https://en.wikipedia.org/wiki/Croatia), so we have o
   width={994}
   src="/images/using-fonts-on-the-web/basic-latin.webp"
   alt="Basic Latin unicode range of characters"
-  inline={true}
 />
 
 This shows the Basic Latin unicode range **U+0020-007F**.
@@ -170,7 +168,6 @@ For example, take the letter **A**. In Unicode this letter is represented as **U
   width={772}
   src="/images/using-fonts-on-the-web/unicode.webp"
   alt="Diagram showing a breakdown of unicode for the letter A"
-  inline={true}
 />
 
 We can see the [basic Latin](https://unicode-table.com/en/blocks/basic-latin/) range more easily using a site like [Unicode Character Table](https://unicode-table.com/en/). You can read [Unicode, UTF8 & Character Sets: The Ultimate Guide](https://www.smashingmagazine.com/2012/06/all-about-unicode-utf8-character-sets/) if you want to learn more.
@@ -190,7 +187,6 @@ When transfering data we have to take distance into consideration. [CDN](https:/
   width={772}
   src="/images/using-fonts-on-the-web/cdn.webp"
   alt="Diagram of a content delivery network"
-  inline={true}
 />
 
 - **Server A** can cache it's files on **Server B** that's closer to you
@@ -209,7 +205,6 @@ The browser also has a [HTTP cache](https://developer.mozilla.org/en-US/docs/Web
   width={772}
   src="/images/using-fonts-on-the-web/shared-cache-a.webp"
   alt="Diagram of how a cache key gets generated in the shared cache"
-  inline={true}
 />
 
 - A user visits https://joyofcode.xyz/
@@ -221,7 +216,6 @@ The browser also has a [HTTP cache](https://developer.mozilla.org/en-US/docs/Web
   width={772}
   src="/images/using-fonts-on-the-web/shared-cache-b.webp"
   alt="Diagram of how a cached resource from visiting another site works on a different site using the shared cache"
-  inline={true}
 />
 
 - The same user visits https://lesscoolsite.xyz/ which request the same font
@@ -238,7 +232,6 @@ For this reason, **browsers aren't using one big cache for everything anymore �
   width={772}
   src="/images/using-fonts-on-the-web/single-cache-a.webp"
   alt="Diagram of how a per-site cache basis works"
-  inline={true}
 />
 
 - User visits https://joyofcode.xyz/
@@ -250,7 +243,6 @@ For this reason, **browsers aren't using one big cache for everything anymore �
   width={772}
   src="/images/using-fonts-on-the-web/single-cache-b.webp"
   alt="Diagram of how a per-site cache basis works when visiting another site"
-  inline={true}
 />
 
 - The same user visits https://lesscoolsite.xyz/
@@ -278,7 +270,6 @@ Fonts come in many formats, but the most used ones on the web you're going to en
   width={579}
   src="/images/using-fonts-on-the-web/size.webp"
   alt="Infographic showing the size difference between ttf, woff, and woff2"
-  inline={true}
 />
 
 This shows over a **100% reduction in file size**.
@@ -377,7 +368,6 @@ We briefly went over **font-display** earlier, but this time let's explore it fu
   width={810}
   src="/images/using-fonts-on-the-web/block.gif"
   alt="Shows invisible text until the font loads"
-  inline={true}
 />
 
 **Block gives the font a short block period, and an infinite swap period** — this means until the font is ready to use, it should use "invisible" text, and swap once it's ready. This creates a ugly user experience as you can see, and causes layout shifts.
@@ -387,7 +377,6 @@ We briefly went over **font-display** earlier, but this time let's explore it fu
   width={810}
   src="/images/using-fonts-on-the-web/swap.gif"
   alt="Shows how text gets swapped until the font is ready"
-  inline={true}
 />
 
 **Swap gives the font a zero second block period and an infinite swap period** — this means the browser uses the fallback font immediately, until the font is loaded. This is the one that Google Fonts uses by default. It's important to have visible text when you visit a site. It's not the perfect solution, but works great if you use a similar looking fallback font.
@@ -397,7 +386,6 @@ We briefly went over **font-display** earlier, but this time let's explore it fu
   width={810}
   src="/images/using-fonts-on-the-web/fallback.gif"
   alt="Shows how the fallback is going to be used if the font doesn't load in a reasonable time"
-  inline={true}
 />
 
 **Fallback gives the font face an extremely small block period (100 ms), and a short swap period (3 seconds)** — similar to swap, it loads the fallback immediately, if the font is not ready. However, if the font doesn't load in a reasonable time, the fallback is going to be used.
@@ -407,7 +395,6 @@ We briefly went over **font-display** earlier, but this time let's explore it fu
   width={810}
   src="/images/using-fonts-on-the-web/optional.gif"
   alt="Shows how there's a small amount of time for the font to load, without a swap period"
-  inline={true}
 />
 
 **Optional gives the font face an extremely small block period (100 ms), and a zero second swap period** — you should use this, if you aren't using a font that's important to how your site looks. Otherwise it's going to be a jarring experience.
@@ -442,7 +429,6 @@ body {
   width={800}
   src="/images/using-fonts-on-the-web/variable-fonts-axis.gif"
   alt="Shows weight, and slant axis for Inter"
-  inline={true}
 />
 
 The variable font version of Inter has **weight**, and **slant** axis. The best part is that's it's a fraction of the size. I like to think of variable fonts as being the SVG of fonts. If you ever wrote a media query that reduces the size of text for example, think how it snaps instead of being fluid. You can get that smooth transition with variable fonts.
@@ -452,7 +438,6 @@ The variable font version of Inter has **weight**, and **slant** axis. The best 
   width={865}
   src="/images/using-fonts-on-the-web/custom-axis.webp"
   alt="Dark Mode VF with a custom Darkmode axis"
-  inline={true}
 />
 
 **This is an example of a custom axis** — meant to offset a light font looking thin on a dark background by adjusting the grade which changes the weight of the font without changing it's width.
@@ -475,7 +460,6 @@ Notice how significantly smaller the size is at **~17 kB**, compared to **~98 kB
   width={701}
   src="/images/using-fonts-on-the-web/google-variable-fonts.webp"
   alt="Dark Mode VF with a custom Darkmode axis"
-  inline={true}
 />
 
 I also wanted to show going back to our preconnect section earlier — how there was no time spent connecting to the Google Fonts CDN, since the browser has already done that part.
@@ -499,7 +483,6 @@ The problem with most online converters, and tools I tried is **they completeley
   width={800}
   src="/images/using-fonts-on-the-web/inter-variable.webp"
   alt="Shows everything the variable version of Inter includes"
-  inline={true}
 />
 
 At the time of writing this the only reliable method is having to use **pyftsubset** which is part of **fonttools** (which means having to use Python). There's some other JavaScript libraries such as **glyphhanger** that you can use — but they also require having those dependencies, and are just an abstraction on top. **glyphanger** is interesting because it can crawl your site, and create a tiny subset based on what characters you use. **Fortunately, it's simple** — even if you don't have any Python experience like me.
@@ -549,7 +532,6 @@ The backwards slash let's us split text into multiple lines.
   width={800}
   src="/images/using-fonts-on-the-web/inter-variable-subset.webp"
   alt="Shows everything the subset variable version of Inter includes"
-  inline={true}
 />
 
 The file size is around **~77 kB** before gzip compared to **~800 kB**. Keep in mind, **we're using the same Latin subset, with all font weights in a single file.** We can further optimize this to only use a English-subset, removing more characters.
