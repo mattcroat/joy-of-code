@@ -424,21 +424,6 @@ export function Navigation() {
           </ListItem>
 
           <ListItem>
-            <CustomLink
-              href="/feed/rss.xml"
-              color={mutedColor[colorMode]}
-              hover={hoverStyle}
-              isInternal
-              openSeparateTab
-            >
-              <VisuallyHidden>RSS feed</VisuallyHidden>
-              <Delight>
-                <Icon icon="feed" />
-              </Delight>
-            </CustomLink>
-          </ListItem>
-
-          <ListItem>
             <Delight>
               <ThemeToggle />
             </Delight>
