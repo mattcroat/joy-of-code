@@ -18,3 +18,9 @@ export const inlineCodeText = { light: 'blue.900', dark: 'orange.900' }
 
 export const quoteBorderColor = { light: '#2b6cb0', dark: '#fbd38d' }
 export const quoteBg = { light: '#f1f8ff', dark: '#222937' }
+
+export const menuArrow = { light: 'gray.200', dark: 'gray.700' }
+export const menuBg = { light: 'white', dark: 'gray.700' }
+export const menuBorder = { light: 'gray.200', dark: 'gray.700' }
+export const menuText = { light: 'gray.800', dark: 'white' }
+export const menuTextBorder = { light: 'gray.200', dark: 'gray.600' }

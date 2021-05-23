@@ -11,6 +11,12 @@ export type Icon =
   | 'feed'
   | 'swatch'
   | 'bulb'
+  | 'more'
+  | 'figma'
+  | 'github'
+  | 'nextjs'
+  | 'typescript'
+  | 'newsletter'
 
 interface Props {
   icon: Icon
@@ -26,6 +32,12 @@ const icons = {
   feed: <SVG.Feed />,
   swatch: <SVG.Swatch />,
   bulb: <SVG.Bulb />,
+  more: <SVG.More />,
+  figma: <SVG.FigmaLogo />,
+  github: <SVG.GitHubLogo />,
+  nextjs: <SVG.NextJSLogo />,
+  typescript: <SVG.TypeScriptLogo />,
+  newsletter: <SVG.Newsletter />,
 }
 
 export function Icon({ icon, size = 32 }: Props): JSX.Element | null {
