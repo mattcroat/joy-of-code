@@ -9,12 +9,12 @@
     "start": "next start"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.0.0",
-    "@emotion/react": "^11.0.0",
-    "@emotion/styled": "^11.0.0",
+    "@chakra-ui/react": "^1.6.2",
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
     "@mapbox/rehype-prism": "^0.5.0",
     "focus-visible": "^5.2.0",
-    "framer-motion": "^2.9.4",
+    "framer-motion": "^4.1.17",
     "gray-matter": "^4.0.2",
     "next": "^10.0.3",
     "next-mdx-remote": "^3.0.0",
