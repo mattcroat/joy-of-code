@@ -63,6 +63,7 @@ export function PostImage() {
 
         <Box
           as="form"
+          // @ts-expect-error I'm going to figure it out later
           onSubmit={(event) => event.preventDefault()}
           d="flex"
           gridGap={4}
