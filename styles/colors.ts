@@ -24,3 +24,5 @@ export const menuBg = { light: 'white', dark: 'gray.700' }
 export const menuBorder = { light: 'gray.200', dark: 'gray.700' }
 export const menuText = { light: 'gray.800', dark: 'white' }
 export const menuTextBorder = { light: 'gray.200', dark: 'gray.600' }
+
+export const menuToggleColor = { light: '#000', dark: '#fff' }
