@@ -106,7 +106,7 @@ I encourage you to open the [Google Fonts stylesheet](https://fonts.googleapis.c
   /* link to font, and format so browser knows what to do */
   src: url(Inter.woff2) format('woff2');
   /* unicode characters to use */
-  :
+  unicode-range:
     U+0000-00FF, /* Basic Latin, and Latin-1 Supplement */
     U+0152-0153, /* Latin Extended-A */
     U+02BB-02BC, /* spacing modifier letters */
@@ -131,7 +131,7 @@ We use the **unicode-range** property to say: "**Hey, only load this font if a c
   font-family: 'Ampersand';
   src: url('FancyFont.woff2');
   /* only use the fancy font's ampersand */
-  : U+26;
+  unicode-range: U+26;
 }
 
 h1 {
@@ -140,9 +140,9 @@ h1 {
 }
 ```
 
-Keep in mind if you're swapping characters using ****, the **@font-face** order matters.
+Keep in mind if you're swapping characters using **unicode-range**, the **@font-face** order matters.
 
-You can learn more about some of these techniques by reading about [](https://developer.mozilla.org/en-US/docs/Web/CSS/%40font-face/unicode-range) on MDN, or listen to a great [@font-face explainer episode from The CSS podcast](https://thecsspodcast.libsyn.com/040-the-css-podcast-font-face).
+You can learn more about some of these techniques by reading about [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/%40font-face/unicode-range) on MDN, or listen to a great [@font-face explainer episode from The CSS podcast](https://thecsspodcast.libsyn.com/040-the-css-podcast-font-face).
 
 ## What is Unicode Anyhow
 
