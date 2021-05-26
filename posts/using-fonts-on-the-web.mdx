@@ -121,9 +121,9 @@ Can you imagine if a font you used included every possible letter, and symbol th
 
 **Instead of making our users download large fonts, we can declare a range from the font.**
 
-We use the **unicode-range** property to say: "**Hey, only load this font if a character from this range is used**". This is useful in cases where:
+We use the **unicode-range** property to say: "**Only load this font, if a character from this range is used**". This is useful in cases where:
 
-- **You have localization** where you support multiple languages, but only load the language the user is using.unicode-range
+- **You have localization** where you support multiple languages, but only load the language the user is using
 - You can also use this for **replacing a character from a different font**
 
 ```css:example.css
@@ -148,7 +148,7 @@ You can learn more about some of these techniques by reading about [unicode-rang
 
 **Every language has a character set.** [Basic Latin](https://en.wikipedia.org/wiki/Latin-1_Supplement_%28Unicode_block%29) contains a [Unicode](https://en.wikipedia.org/wiki/Unicode) block of 128 characters for English, and other Western languages.
 
-I'm from 🇭🇷 [Croatia](https://en.wikipedia.org/wiki/Croatia), so we have other special characters such as "š, đ, č, ć and ž". These are included in [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A).
+I'm from 🇭🇷 [Croatia](https://en.wikipedia.org/wiki/Croatia), so we have other special characters such as "š, đ, č, ć, ž". These are included in [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A).
 
 <Image
   height={575}
@@ -218,8 +218,8 @@ The browser also has a [HTTP cache](https://developer.mozilla.org/en-US/docs/Web
   alt="Diagram of how a cached resource from visiting another site works on a different site using the shared cache"
 />
 
-- The same user visits https://lesscoolsite.xyz/ which requests the same font
-- This hits the HTTP cache and uses the cached version
+- The same user visits https://lesscoolsite.xyz/ which request the same font
+- It hits the HTTP cache and uses the cached version
 
 However, the problem with this approach is:
 
@@ -257,7 +257,7 @@ That being said, self-hosting opens up further possibilities to optimize, and ha
 
 ## Hosting Your Fonts
 
-Fonts come in many formats, the most popular being:
+Fonts come in many formats, but the most used ones on the web you're going to encounter are:
 
 - **TrueType** (ttf)
 - **Web Open Font Format** (woff)
@@ -274,15 +274,15 @@ Fonts come in many formats, the most popular being:
 
 This shows over a **100% reduction in file size**.
 
-WOFF2 should always be used as it has a further **30% reduction in size** over WOFF.
+Having a **30% reduction in size for most cases over WOFF — WOFF 2 is what you should always use.**
 
-We're going to get into some [Command Line Interface (CLI)](https://en.wikipedia.org/wiki/Command-line_interface) tools later when it comes to optimizing, and converting fonts. You can already [convert non-variable fonts](https://onlinefontconverter.com/) online for an easy win.
+We're going to get into some [Command-line interface (CLI)](https://en.wikipedia.org/wiki/Command-line_interface) tools later when it comes to optimizing, and converting fonts. You can already [convert non-variable fonts](https://onlinefontconverter.com/) online for an easy win.
 
 ## @font-face
 
 I found [Google Webfonts Helper](https://google-webfonts-helper.herokuapp.com/fonts) to be great since it generates the styles for you, lets you specify the character sets, and gives you many formats.
 
-Assuming you have your font downloaded already which you can do from [Google Fonts](https://fonts.google.com/), [Font Squirrel](https://www.fontsquirrel.com/), or [DaFont](https://www.dafont.com/) - the simplest way to declare a font is:
+Assuming you have your font downloaded already which you can do from [Google Fonts](https://fonts.google.com/), [Font Squirrel](https://www.fontsquirrel.com/), or [DaFont](https://www.dafont.com/) the simplest way to declare a font is:
 
 ```css:example.css
 /* regular variant  */
@@ -316,9 +316,9 @@ Assuming you have your font downloaded already which you can do from [Google Fon
 ```
 
 - **font-family** — is used to refer to the font, you can give it any name
-- **font-style** — can be **normal**, **italic** or **oblique** (keep in mind you have to include an italic version of the font, since it only makes the regular glyphs slanted, and hideous)
-- **font-weight** — is the numeric weight of the font: **100** (Thin), **200** (Extra Light), **300** (Light), **400** (Normal), **500** (Medium), **600** (Semi Bold), **700** (Bold), **800** (Extra Bold), **900** (Black)
-- **font-display** — determines how a font is displayed depending on if it's loaded or not
+- **font-style** — can be **normal**, **italic**, **oblique** (keep in mind you have to include an italic version of the font, since it only makes the regular glyphs slanted, and hideous)
+- **font-weight** — are numbers mapped to weight names: **100** (Thin), **200** (Extra Light), **300** (Light), **400** (Normal), **500** (Medium), **600** (Semi Bold), **700** (Bold), **800** (Extra Bold), **900** (Black)
+- **font-display** — determines how a font is displayed depending on if it's loaded, or not
 
 The only thing left to do is serve the fonts which depends on your hosting. Treat them as any other static asset. In general, you want to place them in some public folder. I simply include mine in **public/fonts** for [Next.js](https://nextjs.org/). That way it's a relative path, for example https://joyofcode.xyz/fonts/Inter.woff2.
 
@@ -333,9 +333,9 @@ body {
 }
 ```
 
-I believe this was popularized by [GitHub](https://github.com/), but I don't know for sure. To be honest, in most cases I only include **serif** or **sans-serif** as the fallback, depending on the font type.
+I believe this was popularized by [GitHub](https://github.com/), but I don't know for sure. To be honest, in most cases I only include **serif**, or **sans-serif** as the fallback, depending on the font type.
 
-Another fallback tip is that you should use a system UI font that resembles your font as closely as possible due to [Flash Of Unstyled Content (FOUC)](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
+Another fallback tip is that you should use a system UI font that resembles your font as closely as possible due to [Flash of unstyled content (FOUC)](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
 
 ## Size Consideration
 
@@ -345,11 +345,11 @@ For example if we wanted to use every weight of Inter, that's **9 HTTP requests*
 
 How much is too much when it comes to sending data through the pipe? The bundle size of a framework such as React is **~128 kB** before it's minified, and [gzipped](https://en.wikipedia.org/wiki/Gzip) being around **~42 kB**. You don't want to ship React to display text.
 
-On bad internet, the more things you have to download the more frustrating the experience. Let's adress other issues this causes.
+The more things you have to download, while having unreliable internet is a frustrating experience. Let's adress other issues this causes.
 
 ## Flash of Unstyled Content
 
-> A *Flash Of Unstyled Content or Text* is an instance where a web page appears briefly with the browser's default styles prior to loading an external CSS stylesheet, due to the web browser engine rendering the page before all information is retrieved. The page corrects itself as soon as the style rules are loaded and applied; however, the shift may be distracting. Related problems include flash of invisible text (FOIT) and flash of faux text (FOFT). - [Flash of unstyled content (Wikipedia)](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)
+> A flash of unstyled content (FOUC, also flash of unstyled text) is an instance where a web page appears briefly with the browser's default styles prior to loading an external CSS stylesheet, due to the web browser engine rendering the page before all information is retrieved. The page corrects itself as soon as the style rules are loaded and applied; however, the shift may be distracting. Related problems include flash of invisible text (FOIT) and flash of faux text (FOFT). - [Flash of unstyled content (Wikipedia)](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)
 
 I disabled the cache in the developer tools, and used a slow connection to simulate what you might experience. I've noticed there's a lot of weird things that can go wrong, regardless of your network speed. The same can happen on a fast connection when a resources takes longer than expected, so it's not just people with slow unreliable internet.
 
@@ -361,7 +361,7 @@ body {
 }
 ```
 
-We briefly went over **font-display** earlier, but this time let's explore it further. The values range from **auto**, **block**, **swap**, **fallback**, and **optional**. By default it uses **auto** which leaves it up to the browser, and most browsers use **block**.
+We briefly went over **font-display** earlier, but this time let's explore it further. The values range from **auto**, **block**, **swap**, **fallback**, and **optional**. By default it uses **auto** which leaves it up to the browser, where most browsers use **block**.
 
 <Image
   height={440}
@@ -388,7 +388,7 @@ We briefly went over **font-display** earlier, but this time let's explore it fu
   alt="Shows how the fallback is going to be used if the font doesn't load in a reasonable time"
 />
 
-**Fallback gives the font face an extremely small block period (100 ms), and a short swap period (3 seconds)** — similar to swap, if the font is nor ready it loads the fallback immediately. However, if the font doesn't load in a reasonable time, the fallback is going to be used.
+**Fallback gives the font face an extremely small block period (100 ms), and a short swap period (3 seconds)** — similar to swap, if the font is not ready, it loads the fallback immediately. However, if the font doesn't load in a reasonable time, the fallback is going to be used.
 
 <Image
   height={471}
@@ -397,7 +397,7 @@ We briefly went over **font-display** earlier, but this time let's explore it fu
   alt="Shows how there's a small amount of time for the font to load, without a swap period"
 />
 
-**Optional gives the font face an extremely small block period (100 ms), and a zero second swap period** — you should use this with a font that's unimportant to how your site looks. Otherwise it's going to be a jarring experience.
+**Optional gives the font face an extremely small block period (100 ms), and a zero second swap period** — you should use this, if the font you're using is unimportant to how your site looks. Otherwise it's going to be a jarring experience.
 
 The conclusion is that there's no best option to use regardless what anyone says. You have to understand the trade-offs. To alleviate analysis paralysis, **swap** or **optional** should serve you well in most situations. You can read [Controlling Font Performance with font-display](https://developers.google.com/web/updates/2016/02/font-display) to learn more.
 
@@ -431,7 +431,7 @@ body {
   alt="Shows weight, and slant axis for Inter"
 />
 
-The variable font version of Inter has a **weight** and a **slant** axis. The best part is that's it's a fraction of the size. I like to think of variable fonts as being the SVG of fonts. If you ever wrote a media query that reduces the size of text for example, think how it snaps instead of being fluid. You can get that smooth transition with variable fonts.
+The variable font version of Inter has a **weight**, and **slant** axis. The best part is that's it's a fraction of the size. I like to think of variable fonts as being the SVG of fonts. If you ever wrote a media query that reduces the size of text for example, think how it snaps instead of being fluid. You can get that smooth transition with variable fonts.
 
 <Image
   height={450}
@@ -442,7 +442,7 @@ The variable font version of Inter has a **weight** and a **slant** axis. The be
 
 **This is an example of a custom axis** — meant to offset a light font looking thin on a dark background by adjusting the grade which changes the weight of the font without changing it's width.
 
-You can play around with more examples on [Variable Fonts](https://v-fonts.com/) to understand what variable fonts can do. If you want to learn more, this [introduction to variable fonts on the web](https://web.dev/variable-fonts/) has great explanations with graphics.
+You can play around with more examples on [Variable Fonts](https://v-fonts.com/), to understand what variable fonts can do. If you want to learn more, you can read [Introduction to variable fonts on the web](https://web.dev/variable-fonts/) that has great explanations with graphics.
 
 Google Fonts already serves variable fonts by default. You can look at the [complete list of Google variable fonts](https://fonts.google.com/variablefonts).
 
@@ -462,12 +462,12 @@ Notice how significantly smaller the size is at **~17 kB**, compared to **~98 kB
   alt="Dark Mode VF with a custom Darkmode axis"
 />
 
-I also wanted to show - going back to our preconnect section earlier - how there was no time spent connecting to the Google Fonts CDN, since the browser has already done that part.
+I also wanted to show going back to our preconnect section earlier — how there was no time spent connecting to the Google Fonts CDN, since the browser has already done that part.
 
 **Interestingly enough** — it serves a file for each weight when variable fonts promise us a single file. That's for a good reason. If we looked at the file size of a single file variable font — it's astronomical. For example the **TTF** version of Inter is **~800 kB**, and the **WOFF 2** version is around **~320 kB**. We're left with a couple of options:
 
 - Use Google Fonts if the font you want is supported
-- Download and use the variable font Google Fonts generates
+- Ddownload, and use the variable font Google Fonts generates
 - Decrease the size of the file by using a technique that's meant to subset the fonts decreasing the file size dramatically
 
 ## How to Subset Fonts
@@ -476,7 +476,7 @@ Remember our adventure into unicode?
 
 **The idea behind creating font subsets is simple — we can specify a unicode range to remove characters we don't need.**
 
-The problem with most online converters and tools I tried is **they completeley strip out the variations from the variable font** in the process. You can use [Wakamai Fondue](https://wakamaifondue.com/) to drop a font, and learn what it can do.
+The problem with most online converters, and tools I tried is **they completeley strip out the variations from the variable font** in the process. You can use [Wakamai Fondue](https://wakamaifondue.com/) to drop a font, and learn what it can do.
 
 <Image
   height={594}
@@ -485,7 +485,7 @@ The problem with most online converters and tools I tried is **they completeley 
   alt="Shows everything the variable version of Inter includes"
 />
 
-At the time of writing this the only reliable method is having to use **pyftsubset** which is part of **fonttools** (which means having to use Python). There's some other JavaScript libraries such as **glyphhanger** that you can use — but they also require having those dependencies, and are just an abstraction on top. **Glyphanger** is interesting because it can crawl your site, and create a tiny subset based on what characters you use. **Fortunately, it's simple** — even if you don't have any Python experience like me.
+At the time of writing this the only reliable method is having to use **pyftsubset** which is part of **fonttools** (which means having to use Python). There's some other JavaScript libraries such as **glyphhanger** that you can use — but they also require having those dependencies, and are just an abstraction on top. **glyphanger** is interesting because it can crawl your site, and create a tiny subset based on what characters you use. **Fortunately, it's simple** — even if you don't have any Python experience like me.
 
 Make sure you have Python installed, and **add it to your path** if you're on Windows (look at the installer options) — it comes with **pip** which is a package manager for Python like **npm** is for JavaScript. I'm using Linux, so I already have it. The same should be true for macOS. You can confirm by opening you terminal:
 
