@@ -3,9 +3,9 @@ import { Box, SimpleGrid, useColorMode } from '@chakra-ui/react'
 
 import { Icon } from '@/root/components/shared/Icon'
 import { CustomLink } from '@/root/components/shared/CustomLink'
-import { Delight } from '@/root/components/shared/Delight'
 import { MotionBox } from '@/root/components/shared/MotionBox'
 import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
+
 import {
   menuBg,
   menuText,
@@ -26,7 +26,7 @@ const menu = {
     },
   },
   closed: {
-    clipPath: 'circle(32px at 44px 93.8%)',
+    clipPath: 'circle(0px at 44px 93.8%)',
     transition: {
       delay: 0.4,
       type: 'spring',
@@ -70,6 +70,7 @@ export function NavigationMenu() {
       as="nav"
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
+      display={{ base: 'block', md: 'none' }}
       pos="fixed"
       top={0}
       right={0}
@@ -77,7 +78,6 @@ export function NavigationMenu() {
       left={0}
       pointerEvents="none"
       zIndex={1}
-      display={{ base: 'block', md: 'none' }}
     >
       <MotionBox
         variants={menu}
@@ -90,13 +90,15 @@ export function NavigationMenu() {
         zIndex={2}
       />
       <MotionBox
+        h="100%"
+        w="100%"
         variants={menuItems}
         pos="absolute"
         top={0}
         p={6}
         color={mutedColor[colorMode]}
         pointerEvents="auto"
-        zIndex={200}
+        zIndex={2}
       >
         <Box
           as="span"
@@ -114,9 +116,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/css" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="swatch" />
-                </Delight>
+                <Icon icon="swatch" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -130,9 +130,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/general" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="bulb" />
-                </Delight>
+                <Icon icon="bulb" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -146,9 +144,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/design" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="figma" />
-                </Delight>
+                <Icon icon="figma" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -162,9 +158,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/git" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="github" />
-                </Delight>
+                <Icon icon="github" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -178,9 +172,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/javascript" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="js" />
-                </Delight>
+                <Icon icon="js" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -194,9 +186,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/nextjs" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="nextjs" />
-                </Delight>
+                <Icon icon="nextjs" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -210,9 +200,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/react" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="react" />
-                </Delight>
+                <Icon icon="react" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -226,9 +214,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/typescript" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="typescript" />
-                </Delight>
+                <Icon icon="typescript" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -258,9 +244,7 @@ export function NavigationMenu() {
           <Box role="group">
             <CustomLink href="/newsletter" hover={hoverStyle} isInternal>
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="newsletter" />
-                </Delight>
+                <Icon icon="newsletter" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -279,9 +263,7 @@ export function NavigationMenu() {
               openSeparateTab
             >
               <Box d="flex" gridGap={4}>
-                <Delight>
-                  <Icon icon="feed" />
-                </Delight>
+                <Icon icon="feed" />
                 <Box
                   as="span"
                   color={menuText[colorMode]}
@@ -292,26 +274,21 @@ export function NavigationMenu() {
               </Box>
             </CustomLink>
           </Box>
+          <Box role="group">
+            <Box hover={hoverStyle}>
+              <ThemeToggle />
+              <Box
+                as="span"
+                d="inline-block"
+                ml={2}
+                color={menuText[colorMode]}
+                _groupHover={hoverStyle}
+              >
+                Theme
+              </Box>
+            </Box>
+          </Box>
         </SimpleGrid>
-
-        <Box
-          as="span"
-          d="block"
-          mt={8}
-          py={2}
-          color={primaryColor[colorMode]}
-          fontSize="2xl"
-          fontWeight={600}
-          borderBottom="1px solid"
-          borderColor={menuTextBorder[colorMode]}
-        >
-          Theme
-        </Box>
-        <Box mt={8}>
-          <Delight>
-            <ThemeToggle />
-          </Delight>
-        </Box>
       </MotionBox>
       <MenuToggle open={isOpen} toggle={setIsOpen} />
     </MotionBox>

@@ -1,7 +1,7 @@
 import { Box, useColorMode } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { menuToggleColor } from '@/root/styles/colors'
+import { menuBg, menuToggleColor } from '@/root/styles/colors'
 
 type MenuToggleProps = {
   open: boolean
@@ -23,6 +23,8 @@ function Path(props: any) {
 }
 
 export function MenuToggle({ open, toggle }: MenuToggleProps) {
+  const { colorMode } = useColorMode()
+
   return (
     <Box
       as="button"
@@ -31,7 +33,9 @@ export function MenuToggle({ open, toggle }: MenuToggleProps) {
       left={3}
       bottom={3}
       p={5}
+      bg={menuBg[colorMode]}
       borderRadius="50%"
+      boxShadow="md"
       pointerEvents="auto"
       zIndex={3}
     >
