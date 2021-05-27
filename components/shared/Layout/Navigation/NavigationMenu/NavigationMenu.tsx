@@ -1,8 +1,8 @@
-import React from 'react'
 import { Box, SimpleGrid, useColorMode } from '@chakra-ui/react'
+import React from 'react'
 
-import { Icon } from '@/root/components/shared/Icon'
 import { CustomLink } from '@/root/components/shared/CustomLink'
+import { Icon } from '@/root/components/shared/Icon'
 import { MotionBox } from '@/root/components/shared/MotionBox'
 import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
 
@@ -67,60 +67,60 @@ export function NavigationMenu() {
 
   return (
     <MotionBox
-      as="nav"
-      initial={false}
       animate={isOpen ? 'open' : 'closed'}
-      display={{ base: 'block', md: 'none' }}
-      pos="fixed"
-      top={0}
-      right={0}
+      as="nav"
       bottom={0}
+      display={{ base: 'block', md: 'none' }}
+      initial={false}
       left={0}
       pointerEvents="none"
+      pos="fixed"
+      right={0}
+      top={0}
       zIndex={1}
     >
       <MotionBox
-        variants={menu}
-        w="100%"
+        bg={menuBg[colorMode]}
+        bottom={0}
+        left={0}
         pos="absolute"
         top={0}
-        left={0}
-        bottom={0}
-        bg={menuBg[colorMode]}
+        variants={menu}
+        w="100%"
         zIndex={2}
       />
       <MotionBox
+        color={mutedColor[colorMode]}
         h="100%"
-        w="100%"
-        variants={menuItems}
+        p={6}
+        pointerEvents="auto"
         pos="absolute"
         top={0}
-        p={6}
-        color={mutedColor[colorMode]}
-        pointerEvents="auto"
+        variants={menuItems}
+        w="100%"
         zIndex={2}
       >
         <Box
           as="span"
-          d="block"
-          py={2}
-          fontSize="2xl"
-          color={primaryColor[colorMode]}
-          fontWeight={600}
           borderBottom="1px solid"
           borderColor={menuTextBorder[colorMode]}
+          color={primaryColor[colorMode]}
+          d="block"
+          fontSize="2xl"
+          fontWeight={600}
+          py={2}
         >
           Categories
         </Box>
-        <SimpleGrid columns={2} spacing={8} mt={8}>
+        <SimpleGrid columns={2} mt={8} spacing={8}>
           <Box role="group">
-            <CustomLink href="/css" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/css" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="swatch" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   CSS
                 </Box>
@@ -128,13 +128,13 @@ export function NavigationMenu() {
             </CustomLink>
           </Box>
           <Box role="group">
-            <CustomLink href="/general" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/general" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="bulb" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   General
                 </Box>
@@ -142,13 +142,13 @@ export function NavigationMenu() {
             </CustomLink>
           </Box>
           <Box role="group">
-            <CustomLink href="/design" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/design" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="figma" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   Figma
                 </Box>
@@ -156,13 +156,13 @@ export function NavigationMenu() {
             </CustomLink>
           </Box>
           <Box role="group">
-            <CustomLink href="/git" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/git" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="github" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   Git / GitHub
                 </Box>
@@ -170,13 +170,13 @@ export function NavigationMenu() {
             </CustomLink>
           </Box>
           <Box role="group">
-            <CustomLink href="/javascript" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/javascript" isInternal>
               <Box d="flex" gridGap={4}>
-                <Icon icon="js" />
+                <Icon icon="javascript" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   JavaScript
                 </Box>
@@ -184,13 +184,13 @@ export function NavigationMenu() {
             </CustomLink>
           </Box>
           <Box role="group">
-            <CustomLink href="/nextjs" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/next" isInternal>
               <Box d="flex" gridGap={4}>
-                <Icon icon="nextjs" />
+                <Icon icon="next" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   Next.js
                 </Box>
@@ -198,13 +198,13 @@ export function NavigationMenu() {
             </CustomLink>
           </Box>
           <Box role="group">
-            <CustomLink href="/react" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/react" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="react" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   React
                 </Box>
@@ -212,13 +212,13 @@ export function NavigationMenu() {
             </CustomLink>
           </Box>
           <Box role="group">
-            <CustomLink href="/typescript" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/typescript" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="typescript" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   TypeScript
                 </Box>
@@ -229,26 +229,26 @@ export function NavigationMenu() {
 
         <Box
           as="span"
-          d="block"
-          mt={8}
-          py={2}
-          color={primaryColor[colorMode]}
-          fontSize="2xl"
-          fontWeight={600}
           borderBottom="1px solid"
           borderColor={menuTextBorder[colorMode]}
+          color={primaryColor[colorMode]}
+          d="block"
+          fontSize="2xl"
+          fontWeight={600}
+          mt={8}
+          py={2}
         >
           Subscribe
         </Box>
-        <SimpleGrid columns={2} spacing={8} mt={8}>
+        <SimpleGrid columns={2} mt={8} spacing={8}>
           <Box role="group">
-            <CustomLink href="/newsletter" hover={hoverStyle} isInternal>
+            <CustomLink hover={hoverStyle} href="/newsletter" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="newsletter" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   Newsletter
                 </Box>
@@ -257,17 +257,17 @@ export function NavigationMenu() {
           </Box>
           <Box role="group">
             <CustomLink
-              href="/feed/rss.xml"
               hover={hoverStyle}
+              href="/feed/rss.xml"
               isInternal
               openSeparateTab
             >
               <Box d="flex" gridGap={4}>
                 <Icon icon="feed" />
                 <Box
+                  _groupHover={hoverStyle}
                   as="span"
                   color={menuText[colorMode]}
-                  _groupHover={hoverStyle}
                 >
                   RSS Feed
                 </Box>
@@ -278,11 +278,11 @@ export function NavigationMenu() {
             <Box hover={hoverStyle}>
               <ThemeToggle />
               <Box
+                _groupHover={hoverStyle}
                 as="span"
+                color={menuText[colorMode]}
                 d="inline-block"
                 ml={2}
-                color={menuText[colorMode]}
-                _groupHover={hoverStyle}
               >
                 Theme
               </Box>

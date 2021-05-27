@@ -8,13 +8,8 @@ import {
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { Icon } from '@/root/components/shared/Icon'
-import { CustomLink } from '@/root/components/shared/CustomLink'
-import { Delight } from '@/root/components/shared/Delight'
-import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
 import {
   bgColor,
-  borderColor,
   menuArrow,
   menuBg,
   menuBorder,
@@ -23,6 +18,10 @@ import {
   mutedColor,
   primaryColor,
 } from '@/root/styles/colors'
+import { CustomLink } from '@/root/components/shared/CustomLink'
+import { Delight } from '@/root/components/shared/Delight'
+import { Icon } from '@/root/components/shared/Icon'
+import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
 
 const variants = {
   hover: { display: 'block', opacity: 1 },
@@ -41,23 +40,21 @@ export function NavigationSidebar() {
     <>
       <Box
         as="nav"
+        bg={bgColor[colorMode]}
+        boxShadow="md"
+        display={{ base: 'none', md: 'block' }}
         h="100vh"
+        left={0}
         maxW="80px"
         minW="80px"
         pos="fixed"
         top={0}
-        left={0}
-        display={{ base: 'none', md: 'block' }}
-        bg={bgColor[colorMode]}
-        boxShadow="lg"
-        borderRight="2px"
-        borderColor={borderColor[colorMode]}
         transition="background-color 0.2s, border-color 0.2s"
         zIndex={3}
       >
-        <List h="100%" d="flex" flexDir="column" alignItems="center">
+        <List alignItems="center" d="flex" flexDir="column" h="100%">
           <ListItem my={8}>
-            <CustomLink href="/" color={primaryColor[colorMode]} isInternal>
+            <CustomLink color={primaryColor[colorMode]} href="/" isInternal>
               <VisuallyHidden>Home</VisuallyHidden>
               <Delight>
                 <Icon icon="paintBrush" />
@@ -67,23 +64,23 @@ export function NavigationSidebar() {
 
           <ListItem mt={8}>
             <CustomLink
-              href="/javascript"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
+              href="/javascript"
               isInternal
             >
               <VisuallyHidden>JavaScript</VisuallyHidden>
               <Delight>
-                <Icon icon="js" />
+                <Icon icon="javascript" />
               </Delight>
             </CustomLink>
           </ListItem>
 
           <ListItem mt={8}>
             <CustomLink
-              href="/react"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
+              href="/react"
               isInternal
             >
               <VisuallyHidden>React</VisuallyHidden>
@@ -95,9 +92,9 @@ export function NavigationSidebar() {
 
           <ListItem mt={8}>
             <CustomLink
-              href="/css"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
+              href="/css"
               isInternal
             >
               <VisuallyHidden>CSS</VisuallyHidden>
@@ -109,9 +106,9 @@ export function NavigationSidebar() {
 
           <ListItem mt={8}>
             <CustomLink
-              href="/general"
               color={mutedColor[colorMode]}
               hover={hoverStyle}
+              href="/general"
               isInternal
             >
               <VisuallyHidden>General</VisuallyHidden>
@@ -121,7 +118,7 @@ export function NavigationSidebar() {
             </CustomLink>
           </ListItem>
 
-          <ListItem mt={8} pos="relative" color={mutedColor[colorMode]}>
+          <ListItem color={mutedColor[colorMode]} mt={8} pos="relative">
             <motion.div initial="hidden" whileHover="hover">
               <VisuallyHidden>More</VisuallyHidden>
               <Box _hover={hoverStyle}>
@@ -129,18 +126,6 @@ export function NavigationSidebar() {
               </Box>
               <motion.div variants={variants}>
                 <Box
-                  w="max-content"
-                  pos="absolute"
-                  left={20}
-                  px={8}
-                  py={6}
-                  fontSize="lg"
-                  bg={menuBg[colorMode]}
-                  border="1px solid"
-                  borderColor={menuBorder[colorMode]}
-                  borderRadius="base"
-                  boxShadow="lg"
-                  style={{ transform: 'translateY(-50%)' }}
                   _before={{
                     content: '""',
                     pos: 'absolute',
@@ -150,24 +135,36 @@ export function NavigationSidebar() {
                     transform: 'translateX(-14%)',
                     zIndex: -1,
                   }}
+                  bg={menuBg[colorMode]}
+                  border="1px solid"
+                  borderColor={menuBorder[colorMode]}
+                  borderRadius="base"
+                  boxShadow="lg"
+                  fontSize="lg"
+                  left={20}
+                  pos="absolute"
+                  px={8}
+                  py={6}
+                  style={{ transform: 'translateY(-50%)' }}
+                  w="max-content"
                 >
                   <Box
-                    d="flex"
                     alignItems="center"
-                    height="100%"
-                    pos="absolute"
-                    top={0}
-                    left={0}
                     color={menuArrow[colorMode]}
+                    d="flex"
+                    height="100%"
+                    left={0}
+                    pos="absolute"
                     style={{ transform: 'translateX(-74%) translateY(-5%)' }}
+                    top={0}
                   >
                     <svg
-                      height="40"
-                      width="40"
-                      viewBox="0 0 20 20"
                       fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
+                      height="40"
                       style={{ transform: 'rotate(-90deg)' }}
+                      viewBox="0 0 20 20"
+                      width="40"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path d="M9 0l8.66 15H.34L9 0z" />
                     </svg>
@@ -176,21 +173,21 @@ export function NavigationSidebar() {
                   <Box>
                     <Box
                       as="span"
-                      d="block"
-                      py={2}
-                      fontSize="2xl"
-                      color={primaryColor[colorMode]}
-                      fontWeight={600}
                       borderBottom="1px solid"
                       borderColor={menuTextBorder[colorMode]}
+                      color={primaryColor[colorMode]}
+                      d="block"
+                      fontSize="2xl"
+                      fontWeight={600}
+                      py={2}
                     >
                       Categories
                     </Box>
-                    <SimpleGrid columns={3} spacing={8} mt={8}>
+                    <SimpleGrid columns={3} mt={8} spacing={8}>
                       <Box role="group">
                         <CustomLink
-                          href="/design"
                           hover={hoverStyle}
+                          href="/design"
                           isInternal
                         >
                           <Box d="flex" gridGap={4}>
@@ -198,9 +195,9 @@ export function NavigationSidebar() {
                               <Icon icon="figma" />
                             </Delight>
                             <Box
+                              _groupHover={hoverStyle}
                               as="span"
                               color={menuText[colorMode]}
-                              _groupHover={hoverStyle}
                             >
                               Figma
                             </Box>
@@ -208,15 +205,15 @@ export function NavigationSidebar() {
                         </CustomLink>
                       </Box>
                       <Box role="group">
-                        <CustomLink href="/git" hover={hoverStyle} isInternal>
+                        <CustomLink hover={hoverStyle} href="/git" isInternal>
                           <Box d="flex" gridGap={4}>
                             <Delight>
                               <Icon icon="github" />
                             </Delight>
                             <Box
+                              _groupHover={hoverStyle}
                               as="span"
                               color={menuText[colorMode]}
-                              _groupHover={hoverStyle}
                             >
                               Git / GitHub
                             </Box>
@@ -224,19 +221,15 @@ export function NavigationSidebar() {
                         </CustomLink>
                       </Box>
                       <Box role="group">
-                        <CustomLink
-                          href="/nextjs"
-                          hover={hoverStyle}
-                          isInternal
-                        >
+                        <CustomLink hover={hoverStyle} href="/next" isInternal>
                           <Box d="flex" gridGap={4}>
                             <Delight>
-                              <Icon icon="nextjs" />
+                              <Icon icon="next" />
                             </Delight>
                             <Box
+                              _groupHover={hoverStyle}
                               as="span"
                               color={menuText[colorMode]}
-                              _groupHover={hoverStyle}
                             >
                               Next.js
                             </Box>
@@ -245,8 +238,8 @@ export function NavigationSidebar() {
                       </Box>
                       <Box role="group">
                         <CustomLink
-                          href="/typescript"
                           hover={hoverStyle}
+                          href="/typescript"
                           isInternal
                         >
                           <Box d="flex" gridGap={4}>
@@ -254,9 +247,9 @@ export function NavigationSidebar() {
                               <Icon icon="typescript" />
                             </Delight>
                             <Box
+                              _groupHover={hoverStyle}
                               as="span"
                               color={menuText[colorMode]}
-                              _groupHover={hoverStyle}
                             >
                               TypeScript
                             </Box>
@@ -269,22 +262,22 @@ export function NavigationSidebar() {
                   <Box>
                     <Box
                       as="span"
-                      d="block"
-                      mt={8}
-                      py={2}
-                      color={primaryColor[colorMode]}
-                      fontSize="2xl"
-                      fontWeight={600}
                       borderBottom="1px solid"
                       borderColor={menuTextBorder[colorMode]}
+                      color={primaryColor[colorMode]}
+                      d="block"
+                      fontSize="2xl"
+                      fontWeight={600}
+                      mt={8}
+                      py={2}
                     >
                       Subscribe
                     </Box>
-                    <SimpleGrid columns={3} spacing={8} mt={8}>
+                    <SimpleGrid columns={3} mt={8} spacing={8}>
                       <Box role="group">
                         <CustomLink
-                          href="/newsletter"
                           hover={hoverStyle}
+                          href="/newsletter"
                           isInternal
                         >
                           <Box d="flex" gridGap={4}>
@@ -292,9 +285,9 @@ export function NavigationSidebar() {
                               <Icon icon="newsletter" />
                             </Delight>
                             <Box
+                              _groupHover={hoverStyle}
                               as="span"
                               color={menuText[colorMode]}
-                              _groupHover={hoverStyle}
                             >
                               Newsletter
                             </Box>
@@ -303,8 +296,8 @@ export function NavigationSidebar() {
                       </Box>
                       <Box role="group">
                         <CustomLink
-                          href="/feed/rss.xml"
                           hover={hoverStyle}
+                          href="/feed/rss.xml"
                           isInternal
                           openSeparateTab
                         >
@@ -313,9 +306,9 @@ export function NavigationSidebar() {
                               <Icon icon="feed" />
                             </Delight>
                             <Box
+                              _groupHover={hoverStyle}
                               as="span"
                               color={menuText[colorMode]}
-                              _groupHover={hoverStyle}
                             >
                               RSS Feed
                             </Box>
@@ -329,7 +322,7 @@ export function NavigationSidebar() {
             </motion.div>
           </ListItem>
 
-          <ListItem mt="auto" mb={8}>
+          <ListItem mb={8} mt="auto">
             <Box mt={8}>
               <Delight>
                 <ThemeToggle />
