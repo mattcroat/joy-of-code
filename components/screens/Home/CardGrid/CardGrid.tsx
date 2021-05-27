@@ -1,4 +1,4 @@
-import { Card } from '@/root/components/ui/CardGrid/Card'
+import { Card } from './Card'
 import { MotionSimpleGrid } from '@/root/components/shared/MotionBox'
 
 interface Props {

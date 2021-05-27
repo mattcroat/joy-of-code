@@ -1,9 +1,8 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Divider, Heading, useColorModeValue } from '@chakra-ui/react'
 
-import { Layout } from '@/root/components/shared/Layout'
-import { Subheading, Title } from '@/root/components/shared/Typography'
-import { CardGrid } from '@/root/components/ui/CardGrid'
+import { CardGrid } from './CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
+import { Layout } from '@/root/components/shared/Layout'
 
 interface Props {
   posts: {
@@ -19,24 +18,38 @@ export function Home({ posts }: Props) {
   return (
     <Layout>
       <Box>
-        <Title>
+        <Heading
+          as="h1"
+          color={useColorModeValue('gray.600', 'gray.400')}
+          fontSize={['3xl', '4xl', '5xl']}
+          letterSpacing="-1px"
+          lineHeight="normal"
+          maxW="600px"
+        >
           Welcome Friend
-          <Emoji emoji="👋" label="Waving hand emoji" animate />
-        </Title>
+          <Emoji animate emoji="👋" label="Waving hand emoji" />
+        </Heading>
+        <Divider bg="gray.600" borderBottom="none" h="4px" my={2} w="40px" />
       </Box>
 
       {posts.length < 1 && (
         <Box fontSize={[16, 18, 20]} my={8}>
           Nothing to see here...
-          <Emoji emoji="🕵️" label="Spy emoji" spacing={2} animate />
+          <Emoji animate emoji="🕵️" label="Spy emoji" spacing={2} />
         </Box>
       )}
 
       <Box py={{ base: 8, md: 12 }}>
-        <Subheading mt={0}>
-          <Emoji emoji="🔥" label="Fire emoji" spacing={2} />
+        <Heading
+          as="h2"
+          color={useColorModeValue('blue.600', 'orange.200')}
+          fontSize={['2xl', '3xl', '4xl']}
+          letterSpacing="-1px"
+          maxW="600px"
+          mb={8}
+        >
           Latest
-        </Subheading>
+        </Heading>
         <CardGrid posts={posts} />
       </Box>
     </Layout>

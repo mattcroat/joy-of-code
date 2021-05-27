@@ -1,5 +1,5 @@
-import { Home } from '@/root/components/screens/Home'
 import { getPosts, getSortedPosts } from '@/root/utils/helpers/posts'
+import { Home } from '@/root/components/screens/Home'
 
 interface Props {
   posts: {
