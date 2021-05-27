@@ -3,20 +3,20 @@ import { cloneElement } from 'react'
 import * as SVG from './Icons'
 
 export type Icon =
-  | 'paintBrush'
-  | 'js'
-  | 'react'
-  | 'sun'
-  | 'moon'
-  | 'feed'
-  | 'swatch'
   | 'bulb'
-  | 'more'
+  | 'feed'
   | 'figma'
   | 'github'
-  | 'nextjs'
-  | 'typescript'
+  | 'javascript'
+  | 'moon'
+  | 'more'
   | 'newsletter'
+  | 'next'
+  | 'paintBrush'
+  | 'react'
+  | 'sun'
+  | 'swatch'
+  | 'typescript'
 
 interface Props {
   icon: Icon
@@ -24,20 +24,20 @@ interface Props {
 }
 
 const icons = {
-  paintBrush: <SVG.PaintBrush />,
-  js: <SVG.JavaScriptLogo />,
-  react: <SVG.ReactLogo />,
-  sun: <SVG.Sun />,
-  moon: <SVG.Moon />,
-  feed: <SVG.Feed />,
-  swatch: <SVG.Swatch />,
   bulb: <SVG.Bulb />,
-  more: <SVG.More />,
+  feed: <SVG.Feed />,
   figma: <SVG.FigmaLogo />,
   github: <SVG.GitHubLogo />,
-  nextjs: <SVG.NextJSLogo />,
-  typescript: <SVG.TypeScriptLogo />,
+  javascript: <SVG.JavaScriptLogo />,
+  moon: <SVG.Moon />,
+  more: <SVG.More />,
   newsletter: <SVG.Newsletter />,
+  next: <SVG.NextLogo />,
+  paintBrush: <SVG.PaintBrush />,
+  react: <SVG.ReactLogo />,
+  sun: <SVG.Sun />,
+  swatch: <SVG.Swatch />,
+  typescript: <SVG.TypeScriptLogo />,
 }
 
 export function Icon({ icon, size = 32 }: Props): JSX.Element | null {
