@@ -35,6 +35,7 @@ export function Card({ category, title, slug }: Props) {
         position="relative"
         variants={cardVariants}
         whileHover={{ y: -10 }}
+        zIndex={0}
       >
         <Box bgImage={cardTheme[category].bg} bgPos="0 20%" h="100%"></Box>
         <Box
