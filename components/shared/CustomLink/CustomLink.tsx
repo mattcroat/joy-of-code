@@ -1,6 +1,6 @@
-import { ReactNode } from 'react'
 import { Link, useColorMode } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { ReactNode } from 'react'
 
 import { primaryColor } from '@/root/styles/colors'
 
@@ -14,6 +14,7 @@ interface Props {
   href: string
   isInternal?: boolean
   openSeparateTab?: boolean
+  prefetch?: undefined | boolean
 }
 
 export function CustomLink({
@@ -23,15 +24,16 @@ export function CustomLink({
   href,
   isInternal = false,
   openSeparateTab = false,
+  prefetch = undefined,
 }: Props) {
   const { colorMode } = useColorMode()
 
   if (isInternal) {
     return (
-      <NextLink href={href} passHref>
+      <NextLink href={href} passHref prefetch={prefetch}>
         <Link
-          color={color}
           _hover={hover}
+          color={color}
           target={openSeparateTab ? '_blank' : '_self'}
         >
           {children}

@@ -1,8 +1,5 @@
-import { SimpleGrid } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-
 import { Card } from '@/root/components/ui/CardGrid/Card'
-import { fadeInStagger } from '@/root/utils/helpers/variants'
+import { MotionSimpleGrid } from '@/root/components/shared/MotionBox'
 
 interface Props {
   posts: {
@@ -14,17 +11,28 @@ interface Props {
   }[]
 }
 
+const cardGridVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+}
+
 export function CardGrid({ posts }: Props) {
   return (
-    <motion.div animate="show" initial="hidden" variants={fadeInStagger}>
-      <SimpleGrid
-        templateColumns="repeat(auto-fill, minmax(auto, 420px))"
-        spacing={8}
-      >
-        {posts.map(({ category, title, slug }) => (
-          <Card key={slug} theme={category} title={title} slug={slug} />
-        ))}
-      </SimpleGrid>
-    </motion.div>
+    <MotionSimpleGrid
+      animate="show"
+      initial="hidden"
+      spacing={4}
+      templateColumns="repeat(auto-fill, minmax(auto, 420px))"
+      variants={cardGridVariants}
+    >
+      {posts.map(({ category, title, slug }) => (
+        <Card key={slug} category={category} slug={slug} title={title} />
+      ))}
+    </MotionSimpleGrid>
   )
 }

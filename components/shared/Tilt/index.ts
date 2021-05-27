@@ -1,1 +1,0 @@
-export { Tilt } from './Tilt'
