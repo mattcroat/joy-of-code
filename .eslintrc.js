@@ -19,6 +19,13 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/display-name': 0,
     'react/prop-types': 0,
+    'react/jsx-sort-props': [
+      'error',
+      {
+        ignoreCase: true,
+        reservedFirst: true,
+      },
+    ],
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
@@ -37,6 +44,16 @@ module.exports = {
       2,
       {
         allow: ['warn', 'error'],
+      },
+    ],
+    'sort-imports': [
+      'error',
+      {
+        ignoreCase: true,
+        ignoreDeclarationSort: false,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+        allowSeparatedGroups: true,
       },
     ],
   },
