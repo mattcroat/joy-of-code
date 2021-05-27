@@ -1,6 +1,5 @@
+import { chakraTheme } from '@/root/styles/chakraTheme'
 import type { Icon } from '@/root/components/shared/Icon'
-// custom extended Chakra UI theme
-import chakraTheme from '@/root/styles/theme'
 
 interface CardTheme {
   [key: string]: {
