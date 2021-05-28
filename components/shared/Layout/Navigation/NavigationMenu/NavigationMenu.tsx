@@ -1,22 +1,13 @@
-import { Box, SimpleGrid, useColorMode } from '@chakra-ui/react'
+import { Box, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 
 import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Icon } from '@/root/components/shared/Icon'
+import { MenuToggle } from './MenuToggle'
 import { MotionBox } from '@/root/components/shared/MotionBox'
 import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
 
-import {
-  menuBg,
-  menuText,
-  menuTextBorder,
-  mutedColor,
-  primaryColor,
-} from '@/root/styles/colors'
-
-import { MenuToggle } from './MenuToggle'
-
-const menu = {
+const menuVariants = {
   open: {
     clipPath: `circle(1000px at 44px 93.8%)`,
     transition: {
@@ -36,7 +27,7 @@ const menu = {
   },
 }
 
-const menuItems = {
+const menuItemsVariants = {
   open: {
     display: 'block',
     y: 0,
@@ -58,11 +49,16 @@ const menuItems = {
 
 export function NavigationMenu() {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
-  const { colorMode } = useColorMode()
+
+  const menuBackground = useColorModeValue('white', 'gray.700')
+  const menuTextBorderColor = useColorModeValue('gray.200', 'gray.600')
+  const menuTextColor = useColorModeValue('gray.800', 'gray.100')
+  const mutedColor = useColorModeValue('gray.600', 'gray.400')
+  const primaryColor = useColorModeValue('blue.600', 'orange.200')
 
   const hoverStyle = {
     transition: 'color .5s ease',
-    color: primaryColor[colorMode],
+    color: primaryColor,
   }
 
   return (
@@ -77,34 +73,32 @@ export function NavigationMenu() {
       pos="fixed"
       right={0}
       top={0}
-      zIndex={1}
+      zIndex={3}
     >
       <MotionBox
-        bg={menuBg[colorMode]}
+        bg={menuBackground}
         bottom={0}
         left={0}
         pos="absolute"
         top={0}
-        variants={menu}
+        variants={menuVariants}
         w="100%"
-        zIndex={2}
       />
       <MotionBox
-        color={mutedColor[colorMode]}
+        color={mutedColor}
         h="100%"
         p={6}
         pointerEvents="auto"
         pos="absolute"
         top={0}
-        variants={menuItems}
+        variants={menuItemsVariants}
         w="100%"
-        zIndex={2}
       >
         <Box
           as="span"
           borderBottom="1px solid"
-          borderColor={menuTextBorder[colorMode]}
-          color={primaryColor[colorMode]}
+          borderColor={menuTextBorderColor}
+          color={primaryColor}
           d="block"
           fontSize="2xl"
           fontWeight={600}
@@ -117,11 +111,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/css" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="swatch" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   CSS
                 </Box>
               </Box>
@@ -131,11 +121,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/general" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="bulb" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   General
                 </Box>
               </Box>
@@ -145,11 +131,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/design" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="figma" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   Figma
                 </Box>
               </Box>
@@ -159,11 +141,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/git" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="github" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   Git / GitHub
                 </Box>
               </Box>
@@ -173,11 +151,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/javascript" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="javascript" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   JavaScript
                 </Box>
               </Box>
@@ -187,11 +161,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/next" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="next" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   Next.js
                 </Box>
               </Box>
@@ -201,11 +171,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/react" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="react" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   React
                 </Box>
               </Box>
@@ -215,11 +181,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/typescript" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="typescript" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   TypeScript
                 </Box>
               </Box>
@@ -230,8 +192,8 @@ export function NavigationMenu() {
         <Box
           as="span"
           borderBottom="1px solid"
-          borderColor={menuTextBorder[colorMode]}
-          color={primaryColor[colorMode]}
+          borderColor={menuTextBorderColor}
+          color={primaryColor}
           d="block"
           fontSize="2xl"
           fontWeight={600}
@@ -245,11 +207,7 @@ export function NavigationMenu() {
             <CustomLink hover={hoverStyle} href="/newsletter" isInternal>
               <Box d="flex" gridGap={4}>
                 <Icon icon="newsletter" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   Newsletter
                 </Box>
               </Box>
@@ -264,11 +222,7 @@ export function NavigationMenu() {
             >
               <Box d="flex" gridGap={4}>
                 <Icon icon="feed" />
-                <Box
-                  _groupHover={hoverStyle}
-                  as="span"
-                  color={menuText[colorMode]}
-                >
+                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
                   RSS Feed
                 </Box>
               </Box>
@@ -280,7 +234,7 @@ export function NavigationMenu() {
               <Box
                 _groupHover={hoverStyle}
                 as="span"
-                color={menuText[colorMode]}
+                color={menuTextColor}
                 d="inline-block"
                 ml={2}
               >

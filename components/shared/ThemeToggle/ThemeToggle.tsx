@@ -1,10 +1,11 @@
-import { IconButton, useColorMode } from '@chakra-ui/react'
+import { IconButton, useColorMode, useColorModeValue } from '@chakra-ui/react'
 
 import { Icon } from '@/root/components/shared/Icon'
-import { mutedColor, primaryColor } from '@/root/styles/colors'
+import { primaryColor } from '@/root/styles/colors'
 
 export function ThemeToggle() {
   const { colorMode, toggleColorMode } = useColorMode()
+  const iconBackground = useColorModeValue('gray.600', 'gray.400')
 
   const hoverStyle = {
     transition: 'color .5s ease',
@@ -15,12 +16,12 @@ export function ThemeToggle() {
 
   return (
     <IconButton
-      aria-label="Toggle dark mode"
-      onClick={toggleColorMode}
-      icon={icon}
-      bg="none"
-      color={mutedColor[colorMode]}
       _hover={hoverStyle}
+      aria-label="Toggle dark mode"
+      bg="none"
+      color={iconBackground}
+      icon={icon}
+      onClick={toggleColorMode}
     />
   )
 }
