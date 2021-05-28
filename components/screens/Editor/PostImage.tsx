@@ -1,91 +1,95 @@
-import React from 'react'
 import { Box, FormControl, FormLabel, Input, Select } from '@chakra-ui/react'
+import React from 'react'
 
-import { Modal } from '@/root/components/screens/Editor/Modal'
+import { cardTheme } from '@/root/styles/cardTheme'
 import { Icon } from '@/root/components/shared/Icon'
-import { cardTheme } from '@/root/styles/card'
+import { Modal } from '@/root/components/screens/Editor/Modal'
 
 export function PostImage() {
   const [title, setTitle] = React.useState<string>('Placeholder')
-  const [theme, setTheme] = React.useState<string>('JavaScript')
+  const [category, setCategory] = React.useState<string>('JavaScript')
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
 
   return (
     <>
       {modalOpen && (
-        <Modal theme={theme} title={title} modalOpen={setModalOpen} />
+        <Modal category={category} modalOpen={setModalOpen} title={title} />
       )}
 
-      <Box maxW="72ch" pl="80px" mx="auto" pt={8}>
+      <Box maxW="72ch" mx="auto" pl="80px" pt={8}>
         <Box
-          onClick={() => setModalOpen(true)}
-          pos="relative"
-          h="340px"
-          mx="auto"
-          bg={`${cardTheme[theme].bg}, url('/images/nebula.webp')`}
+          bg={cardTheme[category].bg}
           bgRepeat="no-repeat"
           bgSize="cover"
-          bgBlendMode="color"
+          h="340px"
+          mx="auto"
+          onClick={() => setModalOpen(true)}
+          pos="relative"
         >
           <Box
             as="span"
-            pos="absolute"
-            top={8}
-            left={8}
-            px={4}
-            py={2}
+            bg="white"
+            color="gray.900"
             fontSize="md"
             fontWeight="bold"
+            left={8}
+            pos="absolute"
+            px={4}
+            py={2}
             textTransform="uppercase"
-            color="gray.900"
-            bg="white"
+            top={8}
           >
             Joy Of Code
           </Box>
           <Box
             as="span"
-            maxW="80%"
-            pos="absolute"
             bottom={8}
-            left={8}
             fontSize="6xl"
             fontWeight="bold"
-            lineHeight="1"
+            left={8}
             letterSpacing="-2px"
+            lineHeight="1"
+            maxW="80%"
+            pos="absolute"
             textShadow={`2px 2px 0 hsl(0 0% 0% / 100%)`}
           >
             {title}
           </Box>
-          <Box pos="absolute" top={8} right={8} color={cardTheme[theme].color}>
-            <Icon icon={cardTheme[theme].icon} size={40} />
+          <Box
+            color={cardTheme[category].color}
+            pos="absolute"
+            right={8}
+            top={8}
+          >
+            <Icon icon={cardTheme[category].icon} size={40} />
           </Box>
         </Box>
 
         <Box
           as="form"
-          // @ts-expect-error I'm going to figure it out later
-          onSubmit={(event) => event.preventDefault()}
           d="flex"
           gridGap={4}
           mt={4}
+          // @ts-expect-error I'm going to figure it out later
+          onSubmit={(event) => event.preventDefault()}
         >
           <FormControl id="title">
             <FormLabel htmlFor="title">Title</FormLabel>
             <Input
-              onChange={(event) => setTitle(event.target.value)}
-              value={title}
               id="title"
               name="title"
+              onChange={(event) => setTitle(event.target.value)}
               type="text"
+              value={title}
             />
           </FormControl>
 
-          <FormControl id="theme" flexBasis="200px">
+          <FormControl flexBasis="200px" id="theme">
             <FormLabel htmlFor="theme">Category</FormLabel>
             <Select
-              onChange={(event) => setTheme(event.target.value)}
               id="theme"
               name="theme"
+              onChange={(event) => setCategory(event.target.value)}
             >
               <option>JavaScript</option>
               <option>React</option>

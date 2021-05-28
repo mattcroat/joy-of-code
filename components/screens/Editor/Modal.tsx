@@ -1,68 +1,67 @@
-import React from 'react'
 import { Box } from '@chakra-ui/react'
+import React from 'react'
 
+import { cardTheme } from '@/root/styles/cardTheme'
 import { Icon } from '@/root/components/shared/Icon'
-import { cardTheme } from '@/root/styles/card'
 
 type ModalProps = {
-  theme: string
+  category: string
   title: string
   modalOpen: (arg: boolean) => void
 }
 
-export function Modal({ theme, title, modalOpen }: ModalProps) {
+export function Modal({ category, title, modalOpen }: ModalProps) {
   return (
     <Box
-      onClick={() => modalOpen(false)}
+      bg="hsl(0 0% 0% / 80%)"
+      bottom="0"
       d="grid"
+      onClick={() => modalOpen(false)}
       placeItems="center"
-      w="100%"
       pos="absolute"
       top="0"
-      bottom="0"
-      bg="hsl(0 0% 0% / 80%)"
+      w="100%"
       zIndex="1"
     >
       <Box
-        pos="relative"
-        h={630}
-        w={1200}
-        bg={`${cardTheme[theme].bg}, url('/images/nebula.webp')`}
+        bgImage={cardTheme[category].bg}
         bgRepeat="no-repeat"
         bgSize="cover"
-        bgBlendMode="color"
+        h={630}
+        pos="relative"
+        w={1200}
       >
         <Box
           as="span"
-          pos="absolute"
-          top={8}
-          left={8}
-          px={4}
-          py={2}
+          bg="white"
+          color="gray.900"
           fontSize="lg"
           fontWeight="bold"
+          left={8}
+          pos="absolute"
+          px={4}
+          py={2}
           textTransform="uppercase"
-          color="gray.900"
-          bg="white"
+          top={8}
         >
           Joy Of Code
         </Box>
         <Box
           as="span"
-          maxW="80%"
-          pos="absolute"
           bottom={8}
-          left={8}
           fontSize="8xl"
           fontWeight="bold"
-          lineHeight="1"
+          left={8}
           letterSpacing="-2px"
+          lineHeight="1"
+          maxW="80%"
+          pos="absolute"
           textShadow={`2px 2px 0 hsl(0 0% 0% / 100%)`}
         >
           {title}
         </Box>
-        <Box pos="absolute" top={8} right={8} color={cardTheme[theme].color}>
-          <Icon icon={cardTheme[theme].icon} size={64} />
+        <Box color={cardTheme[category].color} pos="absolute" right={8} top={8}>
+          <Icon icon={cardTheme[category].icon} size={64} />
         </Box>
       </Box>
     </Box>
