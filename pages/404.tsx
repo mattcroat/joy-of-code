@@ -7,6 +7,7 @@ import { Layout } from '@/root/components/shared/Layout'
 
 export default function NotFound() {
   const router = useRouter()
+  const primaryHeadingColor = useColorModeValue('gray.600', 'gray.400')
 
   React.useEffect(() => {
     setTimeout(() => router.replace('/'), 4000)
@@ -17,7 +18,7 @@ export default function NotFound() {
       <Box maxW={{ sm: '60%', lg: '80%' }} mx="auto" px={{ base: 8, sm: 0 }}>
         <Heading
           as="h1"
-          color={useColorModeValue('gray.600', 'gray.400')}
+          color={primaryHeadingColor}
           fontSize={['3xl', '4xl', '5xl']}
           letterSpacing="-1px"
           lineHeight="normal"

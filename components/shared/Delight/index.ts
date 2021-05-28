@@ -1,1 +1,0 @@
-export { Delight } from './Delight'

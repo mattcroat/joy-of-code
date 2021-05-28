@@ -15,11 +15,14 @@ interface Props {
 }
 
 export function Home({ posts }: Props) {
+  const primaryHeadingColor = useColorModeValue('gray.600', 'gray.400')
+  const secondaryHeadingColor = useColorModeValue('blue.600', 'orange.200')
+
   return (
     <Layout>
       <Heading
         as="h1"
-        color={useColorModeValue('gray.600', 'gray.400')}
+        color={primaryHeadingColor}
         fontSize={['3xl', '4xl', '5xl']}
         letterSpacing="-1px"
         lineHeight="normal"
@@ -41,7 +44,7 @@ export function Home({ posts }: Props) {
       <Box py={{ base: 8, md: 12 }}>
         <Heading
           as="h2"
-          color={useColorModeValue('blue.600', 'orange.200')}
+          color={secondaryHeadingColor}
           fontSize={['2xl', '3xl', '4xl']}
           letterSpacing="-1px"
           maxW="600px"

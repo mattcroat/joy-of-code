@@ -1,6 +1,6 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 
+import { MotionBox } from '@/root/components/shared/MotionBox'
 import { playSound } from '@/root/utils/helpers/playSound'
 
 interface Props {
@@ -16,8 +16,8 @@ export function Delight({ children }: Props) {
   }
 
   return (
-    <motion.div onClick={delight} animate={{ rotate: (isPressed && 360) || 0 }}>
+    <MotionBox animate={{ rotate: (isPressed && 360) || 0 }} onClick={delight}>
       {children}
-    </motion.div>
+    </MotionBox>
   )
 }

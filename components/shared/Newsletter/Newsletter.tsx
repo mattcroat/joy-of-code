@@ -1,16 +1,15 @@
-import React from 'react'
-import { Box, Button, Input, useColorMode } from '@chakra-ui/react'
+import { Box, Button, Input, useColorModeValue } from '@chakra-ui/react'
 import Confetti from 'react-dom-confetti'
+import React from 'react'
 
 import { CustomLink } from '@/root/components/shared/CustomLink'
-import { primaryColor } from '@/root/styles/colors'
 
 export function Newsletter({ ...props }) {
   const [isSubscribed, setIsSubscribed] = React.useState<boolean>(false)
   const [isError, setIsError] = React.useState<boolean>(false)
   const inputEl = React.useRef<HTMLInputElement>(null)
 
-  const { colorMode } = useColorMode()
+  const customLinkColor = useColorModeValue('blue.600', 'orange.200')
 
   async function subscribe(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
@@ -40,13 +39,13 @@ export function Newsletter({ ...props }) {
   }
 
   return (
-    <Box my={16} p={8} borderWidth={1} borderRadius={8} {...props}>
+    <Box borderRadius={8} borderWidth={1} my={16} p={8} {...props}>
       <Box as="span" fontSize="2xl" fontWeight={700}>
         Subscribe for Updates
       </Box>
       <Box as="p" color="gray.400">
         If you hate email, you can use the&nbsp;
-        <CustomLink href="/feed/rss.xml" color={primaryColor[colorMode]}>
+        <CustomLink color={customLinkColor} href="/feed/rss.xml">
           RSS feed.
         </CustomLink>
       </Box>
@@ -55,19 +54,19 @@ export function Newsletter({ ...props }) {
         <Box my={4} pos="relative">
           <Input
             ref={inputEl}
-            type="email"
             aria-label="Email for newsletter"
             id="newsletter-email"
             name="newsletter-email"
             placeholder="unix@chad.com"
             required
+            type="email"
           />
           <Button
-            type="submit"
+            colorScheme="orange"
+            mt={{ base: 4, sm: 0 }}
             pos={{ sm: 'absolute' }}
             right={0}
-            mt={{ base: 4, sm: 0 }}
-            colorScheme="orange"
+            type="submit"
             zIndex={1}
           >
             Subscribe
@@ -75,15 +74,15 @@ export function Newsletter({ ...props }) {
         </Box>
         <Box pos="relative">
           {isSubscribed && (
-            <Box as="p" mt={8} fontWeight="700">
+            <Box as="p" fontWeight="700" mt={8}>
               {`You're subscribed! 🎉`}
             </Box>
           )}
-          <Box pos="absolute" top={0} left={40}>
+          <Box left={40} pos="absolute" top={0}>
             <Confetti active={isSubscribed} />
           </Box>
           {isError && (
-            <Box as="p" mt={8} fontWeight="700">
+            <Box as="p" fontWeight="700" mt={8}>
               {'Oops! 💩 Something went wrong'}
             </Box>
           )}

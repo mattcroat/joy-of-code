@@ -17,11 +17,13 @@ interface Props {
 }
 
 export function Category({ category, posts, title }: Props) {
+  const primaryHeadingColor = useColorModeValue('gray.600', 'gray.400')
+
   return (
     <Layout title={`Joy of Code | ${category}`}>
       <Heading
         as="h1"
-        color={useColorModeValue('gray.600', 'gray.400')}
+        color={primaryHeadingColor}
         fontSize={['3xl', '4xl', '5xl']}
         letterSpacing="-1px"
         lineHeight="normal"

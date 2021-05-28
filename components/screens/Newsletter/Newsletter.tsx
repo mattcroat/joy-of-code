@@ -4,11 +4,13 @@ import { Layout } from '@/root/components/shared/Layout'
 import { Newsletter as MailingList } from '@/root/components/shared/Newsletter'
 
 export function Newsletter() {
+  const primaryHeadingColor = useColorModeValue('gray.600', 'gray.400')
+
   return (
     <Layout>
       <Heading
         as="h1"
-        color={useColorModeValue('gray.600', 'gray.400')}
+        color={primaryHeadingColor}
         fontSize={['3xl', '4xl', '5xl']}
         letterSpacing="-1px"
         lineHeight="normal"

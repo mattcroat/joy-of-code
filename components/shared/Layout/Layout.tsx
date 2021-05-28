@@ -1,13 +1,23 @@
-import { ReactNode } from 'react'
-import { motion } from 'framer-motion'
-
-import { Seo } from '@/root/components/shared/Layout/Seo'
-import { slide } from '@/root/utils/helpers/variants'
 import { Box } from '@chakra-ui/react'
+import { ReactNode } from 'react'
+
+import { MotionBox } from '@/root/components/shared/MotionBox'
+import { Seo } from '@/root/components/shared/Layout/Seo'
 
 interface Props {
   children: ReactNode
   [key: string]: any
+}
+
+const layoutVariants = {
+  hidden: { y: -50 },
+  visible: {
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
 }
 
 export function Layout({ children, ...metadata }: Props) {
@@ -20,9 +30,9 @@ export function Layout({ children, ...metadata }: Props) {
         pt={6}
         transition="background-color 2s"
       >
-        <motion.div initial="hidden" animate="visible" variants={slide}>
+        <MotionBox animate="visible" initial="hidden" variants={layoutVariants}>
           {children}
-        </motion.div>
+        </MotionBox>
       </Box>
     </Box>
   )
