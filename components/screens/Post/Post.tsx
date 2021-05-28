@@ -1,13 +1,10 @@
-import { Box } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-
+import { MDXComponents } from '@/root/components/mdx/MDXComponents'
 import { MDXRemote } from 'next-mdx-remote'
-import { MDXComponents } from '@/root/components/ui/MDXComponents'
 
 import { Layout } from '@/root/components/shared/Layout'
+import { MotionBox } from '@/root/components/shared/MotionBox'
 import { Newsletter } from '@/root/components/shared/Newsletter'
-import { PostCredits } from '@/root/components/ui/MDXComponents/PostCredits'
-import { fadeIn } from '@/root/utils/helpers/variants'
+import { PostCredits } from '@/root/components/mdx/MDXComponents/PostCredits'
 
 type PostProps = {
   content: {
@@ -21,26 +18,32 @@ type PostProps = {
     image: string
   }
 }
+
+const postVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+}
+
 export function Post({ content, frontMatter }: PostProps) {
   return (
     <Layout
-      title={frontMatter.title}
       description={frontMatter.description}
       image={`https://joyofcode.xyz${frontMatter.image}`}
+      title={frontMatter.title}
       type="article"
     >
-      <Box
+      <MotionBox
+        animate="show"
+        className="mdx-prose"
+        initial="hidden"
         maxW="72ch"
         mx="auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        variants={postVariants}
       >
-        <motion.div initial="hidden" animate="show" variants={fadeIn}>
-          <MDXRemote {...content} components={MDXComponents} />
-          <Newsletter />
-          <PostCredits />
-        </motion.div>
-      </Box>
+        <MDXRemote {...content} components={MDXComponents} />
+        <Newsletter />
+        <PostCredits />
+      </MotionBox>
     </Layout>
   )
 }

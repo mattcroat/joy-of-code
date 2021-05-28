@@ -10,13 +10,13 @@ export function Iframe({ height = '600px', src, title }: Props) {
   return (
     <Box
       as="iframe"
+      bg="white"
       h={height}
-      w={{ base: '100%', xl: '120%' }}
       mx={{ xl: '-10%' }}
       my={{ sm: 8 }}
-      title={title}
       src={src}
-      bg="white"
+      title={title}
+      w={{ base: '100%', xl: '120%' }}
     />
   )
 }

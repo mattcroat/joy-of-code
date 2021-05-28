@@ -1,8 +1,6 @@
-import { Link, useColorMode } from '@chakra-ui/react'
+import { Link, useColorModeValue } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
-
-import { primaryColor } from '@/root/styles/colors'
 
 interface Props {
   color?: string
@@ -26,7 +24,7 @@ export function CustomLink({
   openSeparateTab = false,
   prefetch = undefined,
 }: Props) {
-  const { colorMode } = useColorMode()
+  const linkColor = useColorModeValue('blue.600', 'orange.200')
 
   if (isInternal) {
     return (
@@ -45,7 +43,7 @@ export function CustomLink({
   return (
     <NextLink href={href} passHref>
       <Link
-        color={primaryColor[colorMode]}
+        color={linkColor}
         href={href}
         rel="noreferrer noopener"
         target="_blank"

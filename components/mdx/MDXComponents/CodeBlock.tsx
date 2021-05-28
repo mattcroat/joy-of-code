@@ -1,8 +1,6 @@
+import { Box, Button, useColorModeValue } from '@chakra-ui/react'
 import { ReactNode, useRef, useState } from 'react'
-import { Button, Box, useColorMode } from '@chakra-ui/react'
 import Confetti from 'react-dom-confetti'
-
-import { codeBg } from '@/root/styles/colors'
 
 interface Props {
   children: ReactNode
@@ -11,7 +9,7 @@ interface Props {
 export function CodeBlock({ children, ...props }: Props) {
   const [isCopied, setIsCopied] = useState<boolean>(false)
   const preEl = useRef<HTMLInputElement>(null)
-  const { colorMode } = useColorMode()
+  const codeBlockBackground = useColorModeValue('white', '#1f2735')
 
   const config = {
     duration: 2000,
@@ -52,12 +50,12 @@ export function CodeBlock({ children, ...props }: Props) {
   }
 
   return (
-    <Box pos="relative" mb={8} mx={{ base: -4, sm: -8 }} {...props}>
-      <Box pos="absolute" top={-9} right={4} zIndex={1}>
+    <Box mb={8} mx={{ base: -4, sm: -8 }} pos="relative" {...props}>
+      <Box pos="absolute" right={4} top={-9} zIndex={1}>
         <Box pos="absolute" right={10}>
           <Confetti active={isCopied} config={config} />
         </Box>
-        <Button userSelect="none" onClick={copyToClipboard}>
+        <Button onClick={copyToClipboard} userSelect="none">
           {isCopied ? '🎉 Copied!' : '📋 Copy'}
         </Button>
       </Box>
@@ -65,12 +63,12 @@ export function CodeBlock({ children, ...props }: Props) {
       <Box
         ref={preEl}
         as="pre"
-        pos="relative"
-        bg={codeBg[colorMode]}
-        fontSize={[16, 18]}
-        p={6}
-        overflow="auto"
+        bg={codeBlockBackground}
         boxShadow="lg"
+        fontSize={[16, 18]}
+        overflow="auto"
+        p={6}
+        pos="relative"
         rounded="base"
         zIndex={2}
       >

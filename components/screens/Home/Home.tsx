@@ -1,6 +1,6 @@
 import { Box, Divider, Heading, useColorModeValue } from '@chakra-ui/react'
 
-import { CardGrid } from './CardGrid'
+import { CardGrid } from '@/root/components/shared/CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
 import { Layout } from '@/root/components/shared/Layout'
 
@@ -17,20 +17,19 @@ interface Props {
 export function Home({ posts }: Props) {
   return (
     <Layout>
-      <Box>
-        <Heading
-          as="h1"
-          color={useColorModeValue('gray.600', 'gray.400')}
-          fontSize={['3xl', '4xl', '5xl']}
-          letterSpacing="-1px"
-          lineHeight="normal"
-          maxW="600px"
-        >
-          Welcome Friend
-          <Emoji animate emoji="👋" label="Waving hand emoji" />
-        </Heading>
-        <Divider bg="gray.600" borderBottom="none" h="4px" my={2} w="40px" />
-      </Box>
+      <Heading
+        as="h1"
+        color={useColorModeValue('gray.600', 'gray.400')}
+        fontSize={['3xl', '4xl', '5xl']}
+        letterSpacing="-1px"
+        lineHeight="normal"
+        maxW="600px"
+      >
+        Welcome Friend
+        <Emoji animate emoji="👋" label="Waving hand emoji" />
+      </Heading>
+
+      <Divider bg="gray.600" borderBottom="none" h="4px" my={2} w="40px" />
 
       {posts.length < 1 && (
         <Box fontSize={[16, 18, 20]} my={8}>

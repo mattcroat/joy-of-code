@@ -60,13 +60,6 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
             cursor: url('./images/cursor-pointer.webp'), pointer !important;
           }
 
-          blockquote {
-            padding: 0.5rem 2rem;
-            margin: 1rem 0;
-            border-left: 4px solid ${useColorModeValue('#2b6cb0', '#fbd38d')};
-            background-color: ${useColorModeValue('#f1f8ff', '#222937')};
-          }
-
           ::-webkit-scrollbar {
             width: 6px;
           }
@@ -79,16 +72,25 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
             background-color: ${useColorModeValue('#2b6cb0', '#fbd38d')};
           }
 
+          code {
+            background-color: ${useColorModeValue(
+              chakraTheme.colors.gray[600],
+              chakraTheme.colors.gray[700]
+            )};
+            color: ${chakraTheme.colors.gray[100]};
+            font-family: ${chakraTheme.fonts.Mononoki};
+            padding: ${chakraTheme.space[1]};
+          }
+
           code[class*='language-'],
           pre[class*='language-'] {
+            background-color: transparent;
             color: ${useColorModeValue(
               chakraTheme.colors.gray[800],
               chakraTheme.colors.gray[100]
             )};
-            font-family: ${chakraTheme.fonts.Mononoki};
-            font-weight: ${chakraTheme.fontWeights.normal};
+            padding: 0;
             line-height: ${chakraTheme.lineHeights.tall};
-            text-align: left;
           }
 
           .remark-code-title {

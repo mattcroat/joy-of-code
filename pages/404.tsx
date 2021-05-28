@@ -1,10 +1,9 @@
+import { Box, Divider, Heading, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
-import { Box } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
 import { Emoji } from '@/root/components/shared/Emoji'
 import { Layout } from '@/root/components/shared/Layout'
-import { Title } from '@/root/components/shared/Typography'
 
 export default function NotFound() {
   const router = useRouter()
@@ -16,10 +15,19 @@ export default function NotFound() {
   return (
     <Layout>
       <Box maxW={{ sm: '60%', lg: '80%' }} mx="auto" px={{ base: 8, sm: 0 }}>
-        <Title>
+        <Heading
+          as="h1"
+          color={useColorModeValue('gray.600', 'gray.400')}
+          fontSize={['3xl', '4xl', '5xl']}
+          letterSpacing="-1px"
+          lineHeight="normal"
+          maxW="600px"
+        >
           Oops!
-          <Emoji emoji="💩" label="Face screaming in fear emoji" animate />
-        </Title>
+          <Emoji animate emoji="💩" label="Face screaming in fear emoji" />
+        </Heading>
+
+        <Divider bg="gray.600" borderBottom="none" h="4px" my={2} w="40px" />
 
         <Box as="span" d="block" fontSize={[16, 18, 20]} my={8}>
           <strong>Page not found.</strong> Redirecting...

@@ -19,21 +19,21 @@ export function Seo({ ...metadata }: Props) {
   return (
     <Head>
       <title>{meta.title}</title>
-      <meta name="robots" content="index, follow" />
-      <meta name="description" content={meta.description} />
-      <meta property="og:title" content={meta.title} />
-      <meta property="og:type" content={meta.type} />
-      <meta property="og:image" content={meta.image} />
+      <meta content="index, follow" name="robots" />
+      <meta content={meta.description} name="description" />
+      <meta content={meta.title} property="og:title" />
+      <meta content={meta.type} property="og:type" />
+      <meta content={meta.image} property="og:image" />
       <meta
-        property="og:url"
         content={`https://joyofcode.xyz/${router.asPath}`}
+        property="og:url"
       />
-      <meta property="og:description" content={meta.description} />
-      <meta property="og:site_name" content="Joy of Code" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={meta.title} />
-      <meta name="twitter:description" content={meta.description} />
-      <meta name="twitter:image" content={meta.image} />
+      <meta content={meta.description} property="og:description" />
+      <meta content="Joy of Code" property="og:site_name" />
+      <meta content="summary_large_image" name="twitter:card" />
+      <meta content={meta.title} name="twitter:title" />
+      <meta content={meta.description} name="twitter:description" />
+      <meta content={meta.image} name="twitter:image" />
     </Head>
   )
 }

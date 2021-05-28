@@ -22,11 +22,11 @@ export function Image({
     return (
       <Box my={{ sm: 8 }}>
         <NextImage
-          height={height}
-          width={width}
           alt={alt}
-          src={src}
+          height={height}
           layout="intrinsic"
+          src={src}
+          width={width}
         />
       </Box>
     )
@@ -35,11 +35,11 @@ export function Image({
   return (
     <Box mx={{ xl: '-10%' }} my={{ sm: 8 }} textAlign="center">
       <NextImage
-        height={height}
-        width={width}
         alt={alt}
-        src={src}
+        height={height}
         layout="intrinsic"
+        src={src}
+        width={width}
       />
     </Box>
   )
