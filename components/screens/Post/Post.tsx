@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote'
 import { Layout } from '@/root/components/shared/Layout'
 import { MotionBox } from '@/root/components/shared/MotionBox'
 import { Newsletter } from '@/root/components/shared/Newsletter'
-import { PostCredits } from '@/root/components/mdx/MDXComponents/PostCredits'
+import { PostCredits } from '@/root/components/mdx/PostCredits'
 
 type PostProps = {
   content: {
