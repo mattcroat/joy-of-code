@@ -20,6 +20,11 @@ export const cardTheme: CardTheme = {
     color: `${chakraTheme.colors.white}`,
     icon: 'bulb',
   },
+  Git: {
+    bg: '/images/categories/git.webp',
+    color: `${chakraTheme.colors.white}`,
+    icon: 'github',
+  },
   JavaScript: {
     bg: '/images/categories/javascript.webp',
     color: `${chakraTheme.colors.white}`,
