@@ -7,8 +7,6 @@ interface ImageProps {
   src: string
   alt: string
   inline?: boolean
-  banner?: boolean
-  gif?: boolean
 }
 
 export function Image({
