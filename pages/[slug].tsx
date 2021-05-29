@@ -6,12 +6,12 @@ import matter from 'gray-matter'
 import { serialize } from 'next-mdx-remote/serialize'
 
 // MDX plugins
-import rehypePrism from '@mapbox/rehype-prism'
 import codeTitle from 'remark-code-titles'
+import rehypePrism from '@mapbox/rehype-prism'
 import unwrapImages from 'remark-unwrap-images'
 
+import { postFilePaths, postsPath } from '@/root/utils/helpers/posts'
 import { Post } from '@/root/components/screens/Post'
-import { postsPath, postFilePaths } from '@/root/utils/helpers/posts'
 
 type PostProps = {
   source: {
