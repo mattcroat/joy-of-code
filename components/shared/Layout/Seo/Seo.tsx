@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-interface Props {
+interface SeoProps {
   [key: string]: any
 }
 
-export function Seo({ ...metadata }: Props) {
+export function Seo({ ...metadata }: SeoProps) {
   const router = useRouter()
 
   const meta = {

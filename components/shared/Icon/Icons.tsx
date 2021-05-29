@@ -1,8 +1,8 @@
-interface Props {
+interface IconProps {
   size?: number
 }
 
-export function Bulb({ size }: Props) {
+export function Bulb({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -19,7 +19,7 @@ export function Bulb({ size }: Props) {
   )
 }
 
-export function Feed({ size }: Props) {
+export function Feed({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -36,7 +36,7 @@ export function Feed({ size }: Props) {
   )
 }
 
-export function FigmaLogo({ size }: Props) {
+export function FigmaLogo({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -53,7 +53,7 @@ export function FigmaLogo({ size }: Props) {
   )
 }
 
-export function GitHubLogo({ size }: Props) {
+export function GitHubLogo({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -70,7 +70,7 @@ export function GitHubLogo({ size }: Props) {
   )
 }
 
-export function JavaScriptLogo({ size }: Props) {
+export function JavaScriptLogo({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -87,7 +87,7 @@ export function JavaScriptLogo({ size }: Props) {
   )
 }
 
-export function Moon({ size }: Props) {
+export function Moon({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -104,7 +104,7 @@ export function Moon({ size }: Props) {
   )
 }
 
-export function More({ size }: Props) {
+export function More({ size }: IconProps) {
   return (
     <svg
       fill="none"
@@ -124,7 +124,7 @@ export function More({ size }: Props) {
   )
 }
 
-export function Newsletter({ size }: Props) {
+export function Newsletter({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -141,7 +141,7 @@ export function Newsletter({ size }: Props) {
   )
 }
 
-export function NextLogo({ size }: Props) {
+export function NextLogo({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -158,7 +158,7 @@ export function NextLogo({ size }: Props) {
   )
 }
 
-export function PaintBrush({ size }: Props) {
+export function PaintBrush({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -175,7 +175,7 @@ export function PaintBrush({ size }: Props) {
   )
 }
 
-export function ReactLogo({ size }: Props) {
+export function ReactLogo({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -192,7 +192,7 @@ export function ReactLogo({ size }: Props) {
   )
 }
 
-export function Sun({ size }: Props) {
+export function Sun({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -209,7 +209,7 @@ export function Sun({ size }: Props) {
   )
 }
 
-export function Swatch({ size }: Props) {
+export function Swatch({ size }: IconProps) {
   return (
     <svg
       height={size}
@@ -226,7 +226,7 @@ export function Swatch({ size }: Props) {
   )
 }
 
-export function TypeScriptLogo({ size }: Props) {
+export function TypeScriptLogo({ size }: IconProps) {
   return (
     <svg
       height={size}

@@ -1,12 +1,12 @@
 import { Box } from '@chakra-ui/react'
 
-interface Props {
+interface IframeProps {
   height: string
   src: string
   title: string
 }
 
-export function Iframe({ height = '600px', src, title }: Props) {
+export function Iframe({ height = '600px', src, title }: IframeProps) {
   return (
     <Box
       as="iframe"

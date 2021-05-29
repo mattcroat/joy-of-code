@@ -6,7 +6,7 @@ import { Icon } from '@/root/components/shared/Icon'
 import { MotionBox } from '@/root/components/shared/MotionBox'
 import { playSound } from '@/root/utils/helpers/playSound'
 
-interface Props {
+interface CardProps {
   category: string
   title: string
   slug: string
@@ -19,7 +19,7 @@ const cardVariants = {
   },
 }
 
-export function Card({ category, title, slug }: Props) {
+export function Card({ category, title, slug }: CardProps) {
   return (
     <CustomLink
       href={`/${encodeURIComponent(slug)}`}

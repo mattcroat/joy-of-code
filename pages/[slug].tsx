@@ -13,7 +13,7 @@ import unwrapImages from 'remark-unwrap-images'
 import { postFilePaths, postsPath } from '@/root/utils/helpers/posts'
 import { Post } from '@/root/components/screens/Post'
 
-type PostProps = {
+interface PostProps {
   source: {
     compiledSource: string
     renderedOutput: string
@@ -26,7 +26,7 @@ type PostProps = {
   }
 }
 
-type Params = {
+interface Params {
   params: {
     slug: string
   }

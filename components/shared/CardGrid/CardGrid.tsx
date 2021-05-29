@@ -1,7 +1,7 @@
 import { Card } from './Card'
 import { MotionSimpleGrid } from '@/root/components/shared/MotionBox'
 
-interface Props {
+interface CardGridProps {
   posts: {
     title: string
     description: string
@@ -21,7 +21,7 @@ const cardGridVariants = {
   },
 }
 
-export function CardGrid({ posts }: Props) {
+export function CardGrid({ posts }: CardGridProps) {
   return (
     <MotionSimpleGrid
       animate="show"

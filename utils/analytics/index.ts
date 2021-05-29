@@ -1,4 +1,4 @@
-type GTagEvent = {
+interface GTagEvent {
   action: string
   category: string
   label: string

@@ -2,11 +2,11 @@ import { Box, Button, useColorModeValue } from '@chakra-ui/react'
 import { ReactNode, useRef, useState } from 'react'
 import Confetti from 'react-dom-confetti'
 
-interface Props {
+interface CodeBlockProps {
   children: ReactNode
 }
 
-export function CodeBlock({ children, ...props }: Props) {
+export function CodeBlock({ children, ...props }: CodeBlockProps) {
   const [isCopied, setIsCopied] = useState<boolean>(false)
   const preEl = useRef<HTMLInputElement>(null)
   const codeBlockBackground = useColorModeValue('white', '#1f2735')

@@ -3,11 +3,11 @@ import React from 'react'
 import { MotionBox } from '@/root/components/shared/MotionBox'
 import { playSound } from '@/root/utils/helpers/playSound'
 
-interface Props {
+interface DelightProps {
   children: React.ReactNode
 }
 
-export function Delight({ children }: Props) {
+export function Delight({ children }: DelightProps) {
   const [isPressed, setIsPressed] = React.useState(false)
 
   function delight() {

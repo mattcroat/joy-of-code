@@ -4,7 +4,7 @@ import React from 'react'
 import { cardTheme } from '@/root/styles/cardTheme'
 import { Icon } from '@/root/components/shared/Icon'
 
-type ModalProps = {
+interface ModalProps {
   category: string
   title: string
   modalOpen: (arg: boolean) => void

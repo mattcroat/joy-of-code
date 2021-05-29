@@ -18,7 +18,7 @@ export type Icon =
   | 'swatch'
   | 'typescript'
 
-interface Props {
+interface IconProps {
   icon: Icon
   size?: number
 }
@@ -40,7 +40,7 @@ const icons = {
   typescript: <SVG.TypeScriptLogo />,
 }
 
-export function Icon({ icon, size = 32 }: Props): JSX.Element | null {
+export function Icon({ icon, size = 32 }: IconProps): JSX.Element | null {
   if (icon && icons[icon]) {
     return cloneElement(icons[icon], { size })
   }

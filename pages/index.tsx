@@ -1,7 +1,7 @@
 import { getPosts, getSortedPosts } from '@/root/utils/helpers/posts'
 import { Home } from '@/root/components/screens/Home'
 
-interface Props {
+interface PageProps {
   posts: {
     title: string
     description: string
@@ -11,7 +11,7 @@ interface Props {
   }[]
 }
 
-export default function IndexPage({ posts }: Props) {
+export default function IndexPage({ posts }: PageProps) {
   return <Home posts={posts} />
 }
 

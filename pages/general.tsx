@@ -1,7 +1,7 @@
 import { getPostsByCategory, getSortedPosts } from '@/root/utils/helpers/posts'
 import { Category } from '@/root/components/screens/Category'
 
-interface Props {
+interface PageProps {
   category: string
   posts: {
     title: string
@@ -12,7 +12,7 @@ interface Props {
   }[]
 }
 
-export default function GeneralPage({ category, posts }: Props) {
+export default function GeneralPage({ category, posts }: PageProps) {
   return <Category category={category} posts={posts} title={category} />
 }
 

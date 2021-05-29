@@ -4,7 +4,7 @@ import { CardGrid } from '@/root/components/shared/CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
 import { Layout } from '@/root/components/shared/Layout'
 
-interface Props {
+interface HomeProps {
   posts: {
     title: string
     description: string
@@ -14,7 +14,7 @@ interface Props {
   }[]
 }
 
-export function Home({ posts }: Props) {
+export function Home({ posts }: HomeProps) {
   const primaryHeadingColor = useColorModeValue('gray.600', 'gray.400')
   const secondaryHeadingColor = useColorModeValue('blue.600', 'orange.200')
 

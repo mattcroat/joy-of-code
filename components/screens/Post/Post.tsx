@@ -6,7 +6,7 @@ import { MotionBox } from '@/root/components/shared/MotionBox'
 import { Newsletter } from '@/root/components/shared/Newsletter'
 import { PostCredits } from '@/root/components/mdx/PostCredits'
 
-type PostProps = {
+interface PostProps {
   content: {
     compiledSource: string
     renderedOutput: string

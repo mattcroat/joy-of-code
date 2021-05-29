@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import { MotionBox } from '@/root/components/shared/MotionBox'
 import { Seo } from '@/root/components/shared/Layout/Seo'
 
-interface Props {
+interface LayoutProps {
   children: ReactNode
   [key: string]: any
 }
@@ -20,7 +20,7 @@ const layoutVariants = {
   },
 }
 
-export function Layout({ children, ...metadata }: Props) {
+export function Layout({ children, ...metadata }: LayoutProps) {
   return (
     <Box maxW={{ sm: '80%' }} mx="auto" px={{ base: 4, sm: 0 }}>
       <Seo {...metadata} />

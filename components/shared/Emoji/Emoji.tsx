@@ -2,6 +2,14 @@ import { Box } from '@chakra-ui/react'
 
 import { MotionBox } from '@/root/components/shared/MotionBox'
 
+interface EmojiProps {
+  animate?: boolean
+  emoji: string
+  label: string
+  spacing?: number
+  [props: string]: any
+}
+
 const emojiAppearVariants = {
   hidden: {
     opacity: 0,
@@ -26,21 +34,13 @@ const emojiWaveVariants = {
   },
 }
 
-interface Props {
-  animate?: boolean
-  emoji: string
-  label: string
-  spacing?: number
-  [props: string]: any
-}
-
 export function Emoji({
   animate = false,
   emoji,
   label,
   spacing = 4,
   ...props
-}: Props) {
+}: EmojiProps) {
   return (
     <Box
       aria-label={label}

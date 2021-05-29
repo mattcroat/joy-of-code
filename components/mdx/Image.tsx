@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import NextImage from 'next/image'
 
-interface Props {
+interface ImageProps {
   height?: number
   width?: number
   src: string
@@ -17,7 +17,7 @@ export function Image({
   src,
   alt,
   inline = false,
-}: Props) {
+}: ImageProps) {
   if (inline) {
     return (
       <Box my={{ sm: 8 }}>
