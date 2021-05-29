@@ -44,7 +44,9 @@ export function Modal({ category, title, modalOpen }: ModalProps) {
           textTransform="uppercase"
           top={8}
         >
-          Joy Of Code
+          <Box as="span" css={{ transform: 'translateY(2px)' }} d="block">
+            Joy Of Code
+          </Box>
         </Box>
         <Box
           as="span"

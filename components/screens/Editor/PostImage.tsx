@@ -5,9 +5,13 @@ import { cardTheme } from '@/root/styles/cardTheme'
 import { Icon } from '@/root/components/shared/Icon'
 import { Modal } from '@/root/components/screens/Editor/Modal'
 
+type FormEvent =
+  | React.FormEvent<HTMLDivElement>
+  | React.FormEvent<HTMLFormElement>
+
 export function PostImage() {
   const [title, setTitle] = React.useState<string>('Placeholder')
-  const [category, setCategory] = React.useState<string>('JavaScript')
+  const [category, setCategory] = React.useState<string>('CSS')
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
 
   return (
@@ -18,7 +22,7 @@ export function PostImage() {
 
       <Box maxW="72ch" mx="auto" pl="80px" pt={8}>
         <Box
-          bg={cardTheme[category].bg}
+          bgImage={cardTheme[category].bg}
           bgRepeat="no-repeat"
           bgSize="cover"
           h="340px"
@@ -39,7 +43,9 @@ export function PostImage() {
             textTransform="uppercase"
             top={8}
           >
-            Joy Of Code
+            <Box as="span" css={{ transform: 'translateY(2px)' }} d="block">
+              Joy Of Code
+            </Box>
           </Box>
           <Box
             as="span"
@@ -70,8 +76,7 @@ export function PostImage() {
           d="flex"
           gridGap={4}
           mt={4}
-          // @ts-expect-error I'm going to figure it out later
-          onSubmit={(event) => event.preventDefault()}
+          onSubmit={(event: FormEvent) => event.preventDefault()}
         >
           <FormControl id="title">
             <FormLabel htmlFor="title">Title</FormLabel>
@@ -91,10 +96,11 @@ export function PostImage() {
               name="theme"
               onChange={(event) => setCategory(event.target.value)}
             >
-              <option>JavaScript</option>
-              <option>React</option>
               <option>CSS</option>
               <option>General</option>
+              <option>Git</option>
+              <option>JavaScript</option>
+              <option>React</option>
             </Select>
           </FormControl>
         </Box>
