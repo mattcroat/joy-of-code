@@ -1,5 +1,6 @@
 import { Box, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
+import { useRouter } from 'next/router'
 
 import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Icon } from '@/root/components/shared/Icon'
@@ -49,6 +50,7 @@ const menuItemsVariants = {
 
 export function NavigationMenu() {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
+  const router = useRouter()
 
   const menuBackground = useColorModeValue('white', 'gray.700')
   const menuTextBorderColor = useColorModeValue('gray.200', 'gray.600')
@@ -60,6 +62,18 @@ export function NavigationMenu() {
     transition: 'color .5s ease',
     color: primaryColor,
   }
+
+  React.useEffect(() => {
+    if (!isOpen) return
+
+    const handleRouteChange = () => setIsOpen(!isOpen)
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return function cleanup() {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [isOpen, router.events])
 
   return (
     <MotionBox
