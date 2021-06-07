@@ -1,6 +1,6 @@
 ---
 title: Clean Git History Using Rebase
-description: How to keep your git history clean with rebase
+description: How to have a clean Git history using rebase
 published: '2021-6-7'
 category: 'Git'
 image: '/images/clean-git-history/og-image.webp'
@@ -8,7 +8,7 @@ image: '/images/clean-git-history/og-image.webp'
 
 # Clean Git History Using Rebase
 
-Recently I wrote about [how you should rethink your git commits](https://joyofcode.xyz/rethink-how-you-write-git-commits) where I explain the benefits of having a readable Git history.
+Recently I wrote about [how you should rethink your Git commits](https://joyofcode.xyz/rethink-how-you-write-git-commits) where I explain the benefits of having a readable Git history.
 
 I want to go a step further and show you how to have complete control over your Git history — rewrite it, keep a linear project history, and integrate upstream changes.
 
@@ -17,16 +17,16 @@ I want to go a step further and show you how to have complete control over your 
 - How to use `git rebase`
 - Have complete control of your Git history
 - How to keep your branch up to date with upstream
-- Difference between `git merge`, and `git rebase`
+- Difference between `git merge` and `git rebase`
 
 ## Before You Get Started
 
-I find most explanations confusing because they spend time explaining features instead of showing you how to use the feature.
+I find most explanations confusing because they spend time explaining features instead of showing you how to use the feature. That's why if possible, I encourage you to follow along.
 
-Visual learning is key to understanding and using these concepts. That's why if possible, I encourage you to follow along. Open a project, and initialize a Git repository:
+Initialize a Git repository inside an empty folder:
 
 ```shell:terminal
-# initialize new project
+# initialize new Git project
 git init
 
 # add everything
@@ -64,12 +64,12 @@ Git rebase specializes in integrating changes from one branch to another:
 
 ## Using Git Rebase to Rewrite History
 
-This is going to be a contrived example for sake of learning. We're not going to write actual code.
+This is a contrived example for sake of learning. We're not going to write actual code.
 
-We're asked to add a feature to display a list of Pokemon. The steps we're going to take are:
+We're tasked to add a feature to display a list of Pokemon. The steps required include:
 
-- Create a `feature/pokemon` branch
-- Add a `pokemon.js` and `styles.css` file
+- Creating a `feature/pokemon` branch
+- Adding a `pokemon.js` and `styles.css` file
 
 Create a feature branch:
 
@@ -77,7 +77,7 @@ Create a feature branch:
 git checkout -b feature/pokemon
 ```
 
-You terminal, and editor should indicate you're on the right branch:
+Your terminal and editor should indicate you're on the right branch:
 
 <Image
   height={1052}
@@ -92,15 +92,14 @@ Add the `pokemon.js` file:
 // Fetch, and display Pokemon
 ```
 
-Stage the file, and commit it:
+Stage and commit the file:
 
 ```shell:terminal
 git add pokemon.js
-
 git commit -m "feat: Fetch, and display Pokemon"
 ```
 
-Do the same for `styles.css` (write anything you want inside of it):
+Do the same for `styles.css`:
 
 ```css:styles.css
 /* Pokemon styles */
@@ -108,7 +107,6 @@ Do the same for `styles.css` (write anything you want inside of it):
 
 ```shell:terminal
 git add styles.css
-
 git commit -m "style: Add Pokemon styles"
 ```
 
@@ -119,11 +117,11 @@ git commit -m "style: Add Pokemon styles"
   alt="Shows first couple of commits"
 />
 
-At this stage we could do `git checkout main` and `git merge feature/pokemon` to merge the changes.
+At this stage, we could do `git checkout main` and `git merge feature/pokemon` to merge the changes.
 
 This would create an extra meaningless merge commit for us if we worked on a file from the main branch, or if the main branch was ahead in our history.
 
-Let's look at our Git log:
+Let's look at the Git log:
 
 ```shell:terminal
 git log --oneline
@@ -133,7 +131,7 @@ git log --oneline
 #3c03f44 Start of project
 ```
 
-After the changes:
+If we merged the changes:
 
 ```shell:terminal
 git log --oneline
@@ -143,9 +141,9 @@ git log --oneline
 #3c03f44 Start of project
 ```
 
-If you're playing around and make a mistake you can always do `git reset --hard fd9eb317` which would bring you back to the "style: Add Pokemon styles" commit in Git history.
+If you're playing around and make a mistake you can always do `git reset --hard fd9eb317` which would bring you back in Git history. Your commit hash would be different.
 
-After we're done merging the changes we would remove the branch with `git branch -d feature/pokemon` since we no longer need it (you will have to repeat the previous steps if you do it).
+After we're done merging the changes we should remove the branch with `git branch -d feature/pokemon` since we no longer need it (you will have to repeat the previous steps if you do it).
 
 <Image
   height={178}
@@ -157,32 +155,32 @@ After we're done merging the changes we would remove the branch with `git branch
 Instead of using merge, let us use **interactive rebase**. This gives us the ability to **alter**, and even **reorder** our commits if we wanted to:
 
 - **We don't have to include a bunch of random commits** into our Git history for a feature
-- Instead we can **squash** them into a single commit
+- Instead, we can **squash** them into a single commit
 
-Let's take a look at our log, so we understand what we want to accomplish:
+Let's take a look at the Git log so we understand what we want to accomplish:
 
 ```shell:terminal
 git log --oneline
 
-# c36072d (HEAD -> main) Add Pokemon styles
-# a3a28ed Fetch, and display Pokemon
+# c36072d (HEAD -> main) style: Add Pokemon styles
+# a3a28ed feat: Fetch, and display Pokemon
 # 3c03f44 Start of project
 ```
 
-Wouldn't it be nicer if we could have only one feature commit that adds Pokemon? This is possible with rebase.
+Wouldn't it be nicer if we could have only one feature commit that includes everything we have done? This is possible with rebase.
 
 ```shell:terminal
-# c36072d (HEAD -> main) Add Pokemon
+# c36072d (HEAD -> main) feat: Add Pokemon
 # 3c03f44 Start of project
 ```
 
-Let's go back to our branch `git checkout feature/pokemon` and start rebase:
+Let's go back to our branch using `git checkout feature/pokemon` and start the rebase:
 
 ```shell:terminal
 git rebase -i HEAD~2
 ```
 
-The `-i` command-line parameter means "run rebase in interactive mode". The `HEAD~2` specifies the last two commits from our Git history:
+The `-i` command-line parameter says: "run rebase in interactive mode". The `HEAD~2` specifies the last two commits in our Git history.
 
 <Image
   height={1052}
@@ -191,7 +189,7 @@ The `-i` command-line parameter means "run rebase in interactive mode". The `HEA
   alt="Shows rebase window"
 />
 
-You can ignore most of the output unless you want to read. The only thing that's important is our commits at the top.
+You can ignore most of the output unless you want to read it. What's important are our commits at the top.
 
 **The most useful to us is the ability to edit a commit message, reorder the commits, and squash commits into a single commit.**
 
@@ -202,14 +200,14 @@ Let's take a look at the top of the file:
 # pick 6b144c0 style: Add Pokemon styles
 ```
 
-**When squashing you leave the top commit alone.** For others we change "pick" to "squash", or use the abbreviation "s":
+**When squashing you leave the top commit alone.** We change "pick" to "squash" for others, or use the abbreviation:
 
 ```shell:terminal
 # pick 0970ca5 feat: Fetch, and display Pokemon
 # squash 6b144c0 style: Add Pokemon styles
 ```
 
-After you're done save the file and close it. Another file is going to open. This is where we change our commit message.
+After you're done save the file and close it. Another file is going to open. This is where we change the commit message.
 
 <Image
   height={1052}
@@ -227,9 +225,9 @@ We can delete most of it and enter our commit message. Close it after you're don
   alt="Shows rebase commit change"
 />
 
-We can also stop the rebase at any point with `git rebase --abort`. If we have conflicts, after resolving them we can use `git rebase --continue`.
+If we change our mind we can <kbd>Ctrl</kbd> + <kbd>C</kbd> to stop what we're doing. We can stop the rebase at any point with `git rebase --abort`. After resolving any conflicts we use `git rebase --continue`.
 
-We're still on the `feature/pokemon` branch, so let's `git checkout main` to the main branch.
+We are still on the `feature/pokemon` branch so let's `git checkout main`.
 
 <Image
   height={144}
@@ -251,7 +249,9 @@ git rebase feature/pokemon
   alt="Shows completed rebase on main branch"
 />
 
-That's it. Just as before we can delete our branch if we want. Note that if you're working with a remote branch you have to force push the changes with `git push -f <remote> <branch>` which is fine.
+That's it. Rebase is one of my favorite Git features. It's very powerful since it let's us have a Git History we can reason about.
+
+Note that if you're working with a remote branch and want to push changes you have to force push the changes with `git push -f` (**to your branch only**) which is fine if you read the next section. You can push your branch with `git push origin feature/pokemon`.
 
 ## When Not to Use Rebase
 
@@ -261,7 +261,9 @@ That's it. Just as before we can delete our branch if we want. Note that if you'
 
 ## Using Rebase to Keep Your Branch Up To Date
 
-Let's say we're working on our Pokemon feature. Our crack team of backend developers are working hard on implementing the API. Since it's not ready we had to use a mock API during the development of the feature. At one point our **feature branch** is going to get behind our main branch:
+Let's say we're working on the Pokemon feature. Our crack team of backend developers is working hard on implementing the API. Since it's not ready we had to use a mock API during the development of the feature.
+
+At one point our **feature branch** is going to get behind our main branch:
 
 <Image
   height={217}
@@ -269,6 +271,8 @@ Let's say we're working on our Pokemon feature. Our crack team of backend develo
   src="/images/clean-git-history/feature-behind-upstream.png"
   alt="Shows feature branch is behind upstream"
 />
+
+The above example shows how the "feat: Add Pokemon API" commit was pushed to our main branch meaning our feature branch is behind.
 
 ```shell:terminal
 git log --oneline
@@ -278,9 +282,13 @@ git log --oneline
 # 3c03f44 Start of project
 ```
 
-How do we base our changes on the latest commit? We could always merge the changes using `git pull` which is shorthand for `git fetch` followed by `git merge origin main`. This would leave a merge commit that's not useful to our history. We can use `git rebase` instead.
+How do we base our changes on the latest commit?
 
-Assuming we're on the `feature/pokemon` branch:
+- We could always merge the changes using `git pull` which is shorthand for `git fetch` followed by `git merge origin main`
+- This would leave a merge commit that's not useful to our history.
+- We can use `git rebase` instead
+
+If we're on the `feature/pokemon` branch we can do a manual rebase:
 
 ```shell:terminal
 git rebase main
@@ -302,10 +310,14 @@ git log --oneline
 # 3c03f44 Start of project
 ```
 
-From here we can do an interactive rebase and make further changes. After we're done we `git checkout main` and `git rebase feature/pokemon` followed by removing `git branch -d feature/pokemon`.
+We don't have to do anything else like we did with the interactive rebase. From here we can do an interactive rebase and make further changes to our feature branch.
+
+After we're done we have to switch to the main branch `git checkout main` and do a manual rebase `git rebase feature/pokemon` followed by removing the branch `git branch -d feature/pokemon`.
+
+If the branch is remote you have to remove it from GitHub.
 
 ## Closing Thoughts
 
-You can always go back in time if you make a mistake. That includes altering the Git history. It might appear your old commits are gone, but they're not. You can restore and even undo rebase with [git reflog](https://www.atlassian.com/git/tutorials/rewriting-history/git-reflog).
+You can always go back in time if you make a mistake. That includes altering the Git history. It might appear your old commits are gone, but they're not. You can restore and even undo rebase with [Git reflog](https://www.atlassian.com/git/tutorials/rewriting-history/git-reflog).
 
 Thank you for reading and have a nice day!
