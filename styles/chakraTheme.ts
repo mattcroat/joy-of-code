@@ -43,8 +43,7 @@ export const chakraTheme = extendTheme({
         p: {
           fontSize: [18, 20],
           lineHeight: '1.6',
-          my: 4,
-          hyphens: 'auto',
+          my: 8,
         },
         ul: {
           fontSize: [18, 20],
