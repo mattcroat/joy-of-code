@@ -287,7 +287,7 @@ git log --oneline
 How do we base our changes on the latest commit?
 
 - We could always merge the changes using `git pull` which is shorthand for `git fetch` followed by `git merge origin main`
-- This would leave a merge commit that's not useful to our history.
+- This would leave a merge commit that's not useful to our history
 - We can use `git rebase` instead
 
 If we're on the `feature/pokemon` branch we can do a manual rebase:
@@ -316,10 +316,10 @@ We don't have to do anything else like we did with the interactive rebase. From 
 
 After we're done we have to switch to the main branch `git checkout main` and do a manual rebase `git rebase feature/pokemon` followed by removing the branch `git branch -d feature/pokemon`.
 
-If the branch is remote you have to remove it from GitHub.
+If the branch is remote you also have to remove it from GitHub.
 
 ## Closing Thoughts
 
-You can always go back in time if you make a mistake. That includes altering the Git history. It might appear your old commits are gone, but they're not. You can restore and even undo rebase with [Git reflog](https://www.atlassian.com/git/tutorials/rewriting-history/git-reflog).
+You can always go back in time if you make a mistake. That includes altering the Git history. It only appears your old commits are gone. They're not. You can restore and even undo the rebase with [Git reflog](https://www.atlassian.com/git/tutorials/rewriting-history/git-reflog).
 
 Thank you for reading and have a nice day!
