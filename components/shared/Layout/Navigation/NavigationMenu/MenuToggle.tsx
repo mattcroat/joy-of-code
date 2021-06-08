@@ -29,6 +29,7 @@ export function MenuToggle({ open, toggle }: MenuToggleProps) {
 
   return (
     <Box
+      aria-label="Menu"
       as="button"
       bg={menuBackground}
       borderRadius="50%"
