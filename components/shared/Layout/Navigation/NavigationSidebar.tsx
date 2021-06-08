@@ -46,7 +46,6 @@ export function NavigationSidebar() {
         minW="80px"
         pos="fixed"
         top={0}
-        transition="background-color 0.2s, border-color 0.2s"
         zIndex={3}
       >
         <List alignItems="center" d="flex" flexDir="column" h="100%">
