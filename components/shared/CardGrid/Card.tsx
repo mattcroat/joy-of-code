@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/react'
+import NextImage from 'next/image'
 
 import { cardTheme } from '@/root/styles/cardTheme'
 import { CustomLink } from '@/root/components/shared/CustomLink'
@@ -37,7 +38,14 @@ export function Card({ category, title, slug }: CardProps) {
         whileHover={{ y: -10 }}
         zIndex={0}
       >
-        <Box bgImage={cardTheme[category].bg} bgPos="0 20%" h="100%"></Box>
+        <NextImage
+          alt={category}
+          height={240}
+          priority={true}
+          quality={20}
+          src={cardTheme[category].bg}
+          width={427}
+        />
         <Box
           color={cardTheme[category].color}
           position="absolute"
