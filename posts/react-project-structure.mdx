@@ -1,0 +1,422 @@
+---
+title: How to Structure Your React Projects
+description: I explain the ways to keep your React project tidy
+published: '2021-6-12'
+category: 'React'
+image: '/images/react-project-structure/og-image.webp'
+---
+
+# How to Structure Your React Projects
+
+There's no right way to structure React projects. I hope you take ideas you read here and decide if they make sense for you. I have some cool things to share with you.
+
+## What You're Going to Learn
+
+- How to structure a React project
+- Path aliases
+- Organizing imports
+- Creating a template
+
+## Use Path Aliases
+
+You've probably seen imports like:
+
+```js
+import { Component } from '../../Component'
+```
+
+Even with your editor being context aware of where you are and helping you with autocomplete suggestions finding the path can be a pain.
+
+This is why path aliases are awesome:
+
+```js
+import { Component } from '@/root/components/Component'
+```
+
+That's not a `node_modules` import you're seeing. It's a path alias resolved by the tooling around the framework. You could have paths to your components, styles and utils. I prefer to only have a root path to my project.
+
+If you're using [Create React App (CRA)](https://create-react-app.dev/) you can look into using [Create React App Configuration Override (CRACO)](https://www.npmjs.com/package/@craco/craco) package that let's you customize Create React App without having to [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject). You can set it up easily if you're using [Next.js](https://nextjs.org/), or [Vite](https://vitejs.dev/).
+
+Next.js example:
+
+```json:tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/root/*": ["./*"]
+    }
+  }
+}
+```
+
+If you're not using TypeScript the file is `jsconfig.json`. You can learn more about [absolute imports and module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases) for Next.js.
+
+Vite example:
+
+```json:tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@root/*": ["./*"]
+    }
+  }
+}
+```
+
+This is important so TypeScript doesn't complain about the path not existing and can provide autocompletion.
+
+```ts:vite.config.ts
+import { defineConfig } from 'vite'
+import path from 'path'
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@root': path.resolve(__dirname, ''),
+    },
+  },
+})
+```
+
+You can learn more from the [Vite docs](https://vitejs.dev/config/#resolve-alias).
+
+## Folder Structure
+
+I'm used to not having a `src` folder with Next.js. If you prefer that you can continue using that. That's your preference. This is framework agnostic so I'm not going to include required things for Next.js like the `pages`, or `public`.
+
+This is the default project structure:
+
+```shell:Structure
+root/
+├─ components/
+│  ├─ shared/
+├─ hooks/
+├─ lib/
+├─ styles/
+├─ types/
+├─ utils/
+│  ├─ helpers/
+│  ├─ scripts/
+```
+
+This makes your project structure easily scannable:
+
+- `components` are self-explanatory with the exception that they include a `shared` folder for shared components
+- `hooks` are where you keep reusable React hooks
+- `lib` is used to store third party code (e.g. client API for a CMS, analytics)
+- `styles` could hold anything related to styles even if you're using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) you could have some logic that switches card styles for example
+- `types` is where you keep your reusable TypeScript types (if it's used in a single component I don't include it here). If you're using a npm package without types you can add `index.d.ts` and do `declare module 'package-name` so TypeScript doesn't complain.
+- `utils` is where you keep utilities and scripts
+  - `helpers` are useful functions such as currency conversion
+  - `scripts` could be bash, or node.js scripts you can run
+
+If you have assets they should be included in an `assets`, or `static` folder. This includes things like images, fonts and the favicon.
+
+## Components
+
+Let's say we're creating an audio player component:
+
+```shell:Structure
+root/
+├─ components/
+│  ├─ AudioPlayer/
+│  │  ├─ AudioPlayer.tsx
+│  │  ├─ index.ts
+```
+
+The rules I abide by are:
+
+- Components should have capitalized names
+- Proper extension `tsx` for TypeScript and `jsx` if you're using React inside your component
+- Use named function exports for components
+- If the file is not a component it should use a `ts`, or `js` extension
+- Components should be organized together with other nested components
+- If nested components have their own nested components then they should also be in a separate folder
+- The amount of nested components should be kept low to three to not get out of hand
+
+I value semantics and clarity above everything else. You're not only saving your future self the trouble, but anyone else looking at your project.
+
+Let me explain why I've added both `index.ts` and `AudioPlayer.tsx` files:
+
+```tsx:AudioPlayer.tsx
+export function AudioPlayer() {
+  // ...
+}
+```
+
+```ts:index.ts
+export * from './AudioPlayer'
+```
+
+This is because of how we import the component:
+
+```tsx:App.tsx
+import { AudioPlayer } from '@/root/components/AudioPlayer'
+```
+
+This works because `index.ts` gets picked up as the default so we don't have to specify it.
+
+This avoids doing this:
+
+```tsx:App.tsx
+import { AudioPlayer } from '@/root/components/AudioPlayer/AudioPlayer'
+```
+
+Let's add a `AudioPlayerControls` component:
+
+```shell:Structure
+root/
+├─ components/
+│  ├─ AudioPlayer/
+│  │  ├─ AudioPlayer.tsx
+│  │  ├─ AudioPlayerControls.tsx
+│  │  ├─ index.ts
+```
+
+```tsx:AudioPlayerControls.tsx
+export function AudioPlayerControls() {
+  // ...
+}
+```
+
+```tsx:AudioPlayer.tsx
+import { AudioPlayerControls } from './AudioPlayerControls'
+
+export function AudioPlayer() {
+  return <AudioPlayerControls />
+}
+```
+
+We don't have to use a path alias since it's clear where it's coming from and makes future refactoring easier. If we added a shared component it's more clear:
+
+```tsx:AudioPlayer.tsx
+import { AudioPlayerControl } from './AudioPlayerControls'
+import { SharedComponent } from '@/root/components/shared/SharedComponent'
+
+export function AudioPlayer() {
+  return <AudioPlayerControls />
+}
+```
+
+Let's say our `AudioPlayerControls` component has a nested `VolumeControl` component.
+
+This would mean moving `AudioPlayerControls` into a separate folder:
+
+```shell:Structure
+root/
+├─ components/
+│  ├─ AudioPlayer/
+│  │  ├─ AudioPlayerControls/
+│  │  │  ├─ AudioPlayerControls.tsx
+│  │  │  ├─ index.ts
+│  │  │  ├─ VolumeControl.tsx
+│  │  ├─ AudioPlayer.tsx
+│  │  ├─ index.ts
+```
+
+Since we moved everything inside `AudioPlayerControls` folder to keep our imports clean:
+
+```ts:index.ts
+export * from './AudioPlayerControls'
+```
+
+We create the new component:
+
+```tsx:VolumeControl.tsx
+export default function VolumeControl() {
+  // ...
+}
+```
+
+Import the newly created component:
+
+```tsx:AudioPlayerControls.tsx
+import { VolumeControl } from './VolumeControl'
+
+export function AudioPlayerControls() {
+  return <VolumeControl />
+}
+```
+
+A good rule of thumb when writing a React component is making it as long as possible until it becomes unmanageable.
+
+You're going to know what to break into components when you see things repeating. This is going to save you a lot of problems down the line if you only abstract code when it makes sense.
+
+## Why Named Exports?
+
+The default export is the most commonly used one:
+
+```tsx
+export default function Component() {
+  // ...
+}
+```
+
+This is a named export:
+
+```tsx
+export function Component() {
+  // ...
+}
+```
+
+Why I prefer named exports comes down to how we use it to import our components.
+
+Importing a default export:
+
+```tsx
+import Component from './Component'
+```
+
+This poses multiple problems. Since the name of the import can be anything we can get into problems later when we refactor. Our autocomplete is also worse.
+
+Import a named export:
+
+```tsx
+import { Component } from './Component'
+```
+
+In our editor we get improved autocomplete from TypeScript on everything available from the component. Also it's less to type. We could have a default export and later decide to add more exports. This is more work.
+
+## Why Named Functions?
+
+Take this component for example:
+
+```tsx
+const Component = (props) => <h1>{props.greeting}</h1>
+```
+
+Anonymous arrow functions are great for inline functions and things like higher-order functions. I prefer to use it when it makes sense.
+
+The problem I have with this being used for components is you think it saves you time but it's more typing with less benefits.
+
+There's also the problem others point out that it shows as anonymous when you debug it.
+
+We often have to log out values to the console:
+
+```tsx
+const Component = (props) => {
+  console.log(props)
+  return <h1>{props.greeting}</h1>
+}
+```
+
+I'm going to give you a lazier reason. **It's more typing.**
+
+## Sorting Your Imports
+
+I sort imports in this order:
+
+1. npm imports
+2. Components
+3. Types
+4. Styles
+
+```tsx:index.tsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import { Component } from '@/root/shared/components/Component'
+import { AnotherComponent } from '@/root/components/AnotherComponent'
+
+import type { Types } from '@/root/types'
+
+import '@/root/styles/style.css'
+
+function App() {
+  return (
+    <>
+      <Component />
+      <AnotherComponent />
+    </>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('app'))
+```
+
+I only included styles if that's your jam. I don't use them since I often reach for things like [Tailwind CSS](https://tailwindcss.com/).
+
+## Imports And Props Sorting
+
+The reason why I sort things in alphabetical order is because it delegates some of the decision making I have to do and keeps the code organized.
+
+It's one less thing I have to think about. These are just simple rules you can add to your [ESLint](https://eslint.org/) config.
+
+Your ESLint config:
+
+```js:.eslintrc.js
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
+  env: {
+    es6: true,
+    browser: true,
+    jest: true,
+    node: true,
+  },
+  rules: {
+    // ...
+  }
+}
+```
+
+Props sorting rules:
+
+```js:.eslintrc.js
+rules: {
+  'react/jsx-sort-props': [
+    'error',
+    {
+      ignoreCase: true,
+      reservedFirst: true,
+    },
+  ]
+}
+```
+
+The only rules I added is to ignore the case of the component and to put reserved React props at the top. Learn more about [enforcing props alphabetical sorting](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-sort-props.md).
+
+Sort imports rules:
+
+```js:.eslintrc.js
+rules: {
+  'sort-imports': [
+    'error',
+    {
+      ignoreCase: true,
+      ignoreDeclarationSort: false,
+      ignoreMemberSort: false,
+      memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+      allowSeparatedGroups: true,
+    },
+  ],
+}
+```
+
+I wanted to be able to separate imports into groups so it wouldn't treat everything as one thing. You can learn more about [import sorting](https://eslint.org/docs/rules/sort-imports).
+
+You can combine these rules together of course. That's up to you.
+
+## Prettier
+
+Since I'm going over code organization I have to mention the opinionated code formatter [Prettier](https://prettier.io/). If you never used it start doing so. It's for the same reason I mentioned above. It delegates decision making.
+
+## Templates
+
+If you found a project setup you enjoy that's great. You can always create a repository on [GitHub](https://github.com/) from which you can clone your project from. It takes only a couple of steps.
+
+You can turn the repository into a template which is like cloning a repository, but gives you a clean project with no history. You can learn more on [creating a template repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-template-repository).
+
+## Closing Thoughts
+
+React is the most unopinionated framework with the most opinionated users. Hope you learned something useful. Have a great day!
