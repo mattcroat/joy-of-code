@@ -1,6 +1,6 @@
 ---
 title: How to Structure Your React Projects
-description: I explain the ways to keep your React project tidy
+description: Learn how to keep your React project organized
 published: '2021-6-12'
 category: 'React'
 image: '/images/react-project-structure/og-image.webp'
@@ -113,7 +113,7 @@ It makes your project structure easily scannable:
 - `hooks` are where you keep reusable React hooks
 - `lib` is where you store third party code (e.g., client API for a CMS, analytics)
 - `styles` could hold anything related to styles even if you're using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) you could have some logic (I use it for cards on the site)
-- `types` is where you keep your reusable TypeScript types (if used in a single component, I don't include it here) — if you're using a npm package without types, you can add `index.d.ts` and `declare module 'package-name` so TypeScript doesn't complain
+- `types` is where you keep your reusable TypeScript types (if used in a single component, I don't include it here) — if you're using a npm package without types, you can add `index.d.ts` and `declare module 'package-name'` so TypeScript doesn't complain
 - `utils` is where you keep utilities and scripts
   - `helpers` are helpful functions such as currency conversion
   - `scripts` could be Bash or Node scripts you can run
