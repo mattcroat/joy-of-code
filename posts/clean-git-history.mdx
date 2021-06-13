@@ -29,11 +29,8 @@ Initialize a Git repository inside an empty folder:
 # initialize new Git project
 git init
 
-# add everything
-git add .
-
-# add commit message
-git commit -m "Start of project"
+# add empty commit
+git commit --allow-empty -m "Start of project"
 
 # rename branch "master" to "main"
 git branch -m master main
