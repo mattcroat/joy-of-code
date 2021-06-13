@@ -116,7 +116,17 @@ export function NavigationSidebar() {
 
           <ListItem color={mutedColor} mt={8} pos="relative">
             <VisuallyHidden>More</VisuallyHidden>
-            <MotionBox initial="hidden" whileHover="hover">
+            <MotionBox
+              _focus={{
+                boxShadow: '0 0 0 3px rgba(66 153 225 / 60%)',
+                transition: 'all 0.15s ease-out',
+              }}
+              borderRadius="base"
+              initial="hidden"
+              outline="none"
+              tabIndex={0}
+              whileHover="hover"
+            >
               <Box _hover={hoverStyle}>
                 <Icon icon="more" />
               </Box>

@@ -30,7 +30,9 @@ export function CustomLink({
       <NextLink href={href} passHref {...props}>
         <Link
           _hover={hover}
+          borderRadius="base"
           color={color}
+          d="inline-block"
           target={openSeparateTab ? '_blank' : '_self'}
         >
           {children}
