@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import { pageview } from '@/root/utils/analytics'
+import { pageview } from '@/root/lib/analytics'
 
 function handleRouteChange(url: URL) {
   if (process.env.NODE_ENV !== 'production') return

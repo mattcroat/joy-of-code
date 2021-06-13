@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { chakraTheme } from '@/root/styles/chakraTheme'
 import { GlobalStyle } from '@/root/components/styles/GlobalStyle'
 import { Navigation } from '@/root/components/shared/Layout/Navigation'
-import { useAnalytics } from '@/root/utils/hooks/useAnalytics'
+import { useAnalytics } from '@/root/hooks/useAnalytics'
 
 // hide Chakra UI outline borders around clickable components
 import 'focus-visible/dist/focus-visible'

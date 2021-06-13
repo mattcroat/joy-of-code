@@ -2,7 +2,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document'
 import { ColorModeScript } from '@chakra-ui/react'
 
 import { chakraTheme } from '@/root/styles/chakraTheme'
-import { GA_TRACKING_ID } from '@/root/utils/analytics'
+import { GA_TRACKING_ID } from '@/root/lib/analytics'
 
 class MyDocument extends Document {
   render() {
