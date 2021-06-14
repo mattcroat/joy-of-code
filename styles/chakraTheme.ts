@@ -14,21 +14,21 @@ export const chakraTheme = extendTheme({
       '.mdx-prose': {
         h1: {
           _after: {
-            bg: 'gray.600',
+            bg: 'gray.700',
             borderBottom: 'none',
-            h: '4px',
+            h: '1px',
             content: "''",
             display: 'block',
-            mb: [8, 16],
-            mt: 2,
-            w: '40px',
+            mt: [4, 8],
           },
           color: colorMode === 'dark' ? 'gray.400' : 'gray.600',
-          fontSize: ['3xl', '4xl', '5xl'],
+          fontSize: ['3xl', '4xl', '6xl'],
           fontWeight: 900,
           letterSpacing: '-1px',
           lineHeight: 'normal',
           maxW: '600px',
+          my: [4, 8, 16],
+          textAlign: ['left', 'center'],
         },
         h2: {
           color: colorMode === 'dark' ? 'orange.200' : 'blue.600',
