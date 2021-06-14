@@ -118,7 +118,7 @@ export function NavigationSidebar() {
             <VisuallyHidden>More</VisuallyHidden>
             <MotionBox
               _focus={{
-                boxShadow: '0 0 0 3px rgba(66 153 225 / 60%)',
+                boxShadow: 'var(--chakra-shadows-outline)',
                 transition: 'all 0.15s ease-out',
               }}
               borderRadius="base"
