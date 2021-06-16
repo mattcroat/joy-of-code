@@ -5,9 +5,6 @@ module.exports = withPWA({
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',
   },
-  future: {
-    webpack5: true,
-  },
   webpack: (config, { dev, isServer }) => {
     if (isServer) {
       require('./utils/scripts/generate-rss')
