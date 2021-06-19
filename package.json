@@ -13,6 +13,7 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@mapbox/rehype-prism": "^0.6.0",
+    "@supabase/supabase-js": "^1.15.1",
     "focus-visible": "^5.2.0",
     "framer-motion": "^4.1.17",
     "gray-matter": "^4.0.3",
