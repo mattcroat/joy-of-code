@@ -6,6 +6,8 @@ import { MotionBox } from '@/root/components/shared/MotionBox'
 import { Newsletter } from '@/root/components/shared/Newsletter'
 import { PostCredits } from '@/root/components/mdx/PostCredits'
 
+import { useViewCount } from '@/root/hooks/useViewCount'
+
 interface PostProps {
   content: {
     compiledSource: string
@@ -13,9 +15,12 @@ interface PostProps {
     scope?: any
   }
   frontMatter: {
-    title: string
+    category: string
     description: string
     image: string
+    published: number
+    slug: string
+    title: string
   }
 }
 
@@ -25,6 +30,8 @@ const postVariants = {
 }
 
 export function Post({ content, frontMatter }: PostProps) {
+  useViewCount(frontMatter.slug)
+
   return (
     <Layout
       description={frontMatter.description}

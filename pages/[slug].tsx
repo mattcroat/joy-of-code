@@ -20,9 +20,12 @@ interface PostProps {
     scope?: any
   }
   frontMatter: {
-    title: string
+    category: string
     description: string
     image: string
+    published: number
+    slug: string
+    title: string
   }
 }
 
