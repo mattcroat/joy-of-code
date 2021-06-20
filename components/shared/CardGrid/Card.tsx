@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import NextImage from 'next/image'
+import Image from 'next/image'
 
 import { cardTheme } from '@/root/styles/cardTheme'
 import { CustomLink } from '@/root/components/shared/CustomLink'
@@ -42,13 +42,14 @@ export function Card({ category, title, slug }: CardProps) {
         whileHover={{ y: -10 }}
         zIndex={0}
       >
-        <NextImage
+        <Image
           alt={category}
-          height={240}
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+          layout="fill"
+          placeholder="blur"
           priority={true}
           quality={20}
           src={cardTheme[category].bg}
-          width={427}
         />
         <Box
           alignItems="center"
@@ -61,13 +62,14 @@ export function Card({ category, title, slug }: CardProps) {
           position="absolute"
           px={2}
           py={1}
+          textColor="gray.400"
           top={4}
         >
           <svg
-            height="20"
+            height="16"
             role="img"
             viewBox="0 0 576 512"
-            width="20"
+            width="16"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -75,7 +77,7 @@ export function Card({ category, title, slug }: CardProps) {
               fill="currentColor"
             ></path>
           </svg>
-          <Box as="span" transform="translateY(1px)">
+          <Box as="span" fontSize="sm" transform="translateY(1px)">
             {views}
           </Box>
         </Box>
