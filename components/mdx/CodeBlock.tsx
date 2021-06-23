@@ -22,7 +22,7 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
     perspective: '500px',
   }
 
-  function copyToClipboard() {
+  async function copyToClipboard() {
     setIsCopied(true)
     setTimeout(() => setIsCopied(false), 2000)
 
@@ -38,9 +38,8 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
       textareaEl.style.visibility = 'none'
       document.body.appendChild(textareaEl)
 
-      // select and copy
-      textareaEl.select()
-      document.execCommand('copy')
+      // copy code
+      await navigator.clipboard.writeText(textareaEl.value)
 
       // cleanup
       document.body.removeChild(textareaEl)
