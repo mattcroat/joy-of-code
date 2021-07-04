@@ -48,6 +48,8 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
             scrollbar-color: ${useColorModeValue('#2b6cb0', '#fbd38d')}
               transparent;
             scrollbar-width: thin;
+            scroll-behavior: smooth;
+            scroll-padding-top: ${chakraTheme.space[8]};
           }
 
           body {
