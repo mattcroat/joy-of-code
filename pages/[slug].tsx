@@ -7,7 +7,9 @@ import { serialize } from 'next-mdx-remote/serialize'
 
 // MDX plugins
 import codeTitle from 'remark-code-titles'
+import headings from 'remark-autolink-headings'
 import rehypePrism from '@mapbox/rehype-prism'
+import slug from 'remark-slug'
 import unwrapImages from 'remark-unwrap-images'
 
 import { postFilePaths, postsPath } from '@/root/utils/helpers/posts'
@@ -61,7 +63,7 @@ export async function getStaticProps({ params }: Params) {
   const MDXSource = await serialize(content, {
     mdxOptions: {
       rehypePlugins: [rehypePrism],
-      remarkPlugins: [codeTitle, unwrapImages],
+      remarkPlugins: [slug, headings, codeTitle, unwrapImages],
     },
   })
 
