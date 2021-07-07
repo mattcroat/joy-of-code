@@ -35,4 +35,9 @@ export const cardTheme: CardTheme = {
     color: `${chakraTheme.colors.white}`,
     icon: 'react',
   },
+  TypeScript: {
+    bg: '/images/categories/typescript.webp',
+    color: `${chakraTheme.colors.white}`,
+    icon: 'typescript',
+  },
 }
