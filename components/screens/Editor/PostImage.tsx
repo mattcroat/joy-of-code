@@ -101,6 +101,7 @@ export function PostImage() {
               <option>Git</option>
               <option>JavaScript</option>
               <option>React</option>
+              <option>TypeScript</option>
             </Select>
           </FormControl>
         </Box>
