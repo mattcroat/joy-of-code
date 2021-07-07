@@ -25,6 +25,8 @@ export function CustomLink({
 }: CustomLinkProps) {
   const linkColor = useColorModeValue('blue.600', 'orange.200')
 
+  const isWithinPage = href.startsWith('#')
+
   if (isInternal) {
     return (
       <NextLink href={href} passHref {...props}>
@@ -47,7 +49,7 @@ export function CustomLink({
         color={linkColor}
         href={href}
         rel="noreferrer noopener"
-        target="_blank"
+        target={isWithinPage ? '_self' : '_blank'}
       >
         {children}
       </Link>
