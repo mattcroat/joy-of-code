@@ -15,7 +15,7 @@ const images = imagesFilePaths
       <Image
         height={${dimensions.height}}
         width={${dimensions.width}}
-        src="/images/${images}/${fileName}"
+        src="/images/${directory}/${fileName}"
         alt="Description"
       />
     `
