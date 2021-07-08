@@ -1349,7 +1349,7 @@ We used an object type but it can be anything:
 ```ts:playground.ts
 type Pokemon = string[] | string
 
-function logPokemon(pokemon: string[] | string): Pokemon {
+function logPokemon(pokemon: Pokemon): Pokemon {
   if (Array.isArray(pokemon)) {
     return pokemon.map(pokemon => pokemon.toUpperCase())
   }
@@ -1368,7 +1368,7 @@ console.log(logPokemon()) // Please enter a Pokemon.
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigZ2AJwEs0BzAbQF0oAfXA4kgKEYDMBXNAY2EPSgBs4JeElRoAFGEQp0ALjpFSlGgoYBKeSJkYA3oygGohFlHEBBfPgCGIAHSEcF6yEnSxatVD2GfUfBGA2fAwpUXRbZCswVzCMTAA+KFDtW2A4AFUwSHwAYSscCHEPfUMAX2YfY1NQSDgTZLEsTGwAcjxFEhbPb18Df0DgpLdwtMzsvIKikoNy6b8AoIwWmH4IfOgINGAIfCgrWGG0WxbGWc50HDhV20EScVutMXEyFoAhNn4AI3yrIJaAGigLRyAAsrPhImgACY7AFAgDKAEc2IR8MBVi0KB4oAB6HFQF6vdIAGVeZnhZnSACU4cCABJmKkAWTMADkACIAURpgJa8IAiukAJJUgAqxM5mKgjHOaEu11u9yEj3Q4mWhAQVk4ILYXU8eKBMCFAGkzDk6ekTrL5RAbkIlcJDkV9fiVmsClBNttdvsVUcgA"
+  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigZ2AJwEs0BzAbQF0oAfXA4kgKEYDMBXNAY2EPSgBs4JeElRoAFGEQp0ALljSxASnkiZGAN6MoOqIRZRxAQXz4AhiAB0hHCfMhJi9EqVQtuj1HwRgbfBilRdEtkMzBHIIxMAD4oQPVLYDgAVTBIfABhMxwIcRdtXQBfZg99Q1BIOAN4sSxMbAByPCJSBtd3Tx1vX384pzRElLSITOzcpQKdYsmvHz8MBph+CDGoCDRgEagzBUjLBsZpznQcOGXLQRJxS7UxcTIGgCE2fgAjbLM-BoAaKAaMgAWZnwoTQABMRj8-gBlACObEI+GAywaFBcUAA9BioA9HskADKPIzQozJABKUP+AAkjGSALJGAByABEAKIU34NaEARWSAEkyQAVfGs1FQRjHNCnc6Xa5CW7ocSLQgIMycAFsNquLF-GB8gDSRgyVOSB0l0ogFyEcuE-Ty2uxSxWOTWGy2OwVAyAA"
 />
 
 Notice how we're using the same `Pokemon` type as the argument and the return value for `logPokemon`.
@@ -1798,7 +1798,7 @@ Using the `!` syntax after any expression is a type assertion that the value isn
 ```ts:playground.ts
 const formEl = document.getElementById('form')! as HTMLFormElement
 
-formEl.reset() // no checks ✅
+formEl.reset() // works ✅
 ```
 
 <Iframe
@@ -2087,7 +2087,7 @@ interface Pokemon {
   squirtle: Stats
 }
 
-pokemon[bulbasaur] // careful if this is what you want ⚠
+pokemon[bulbasaur] // careful if this is what you want ⚠️
 ```
 
 What you should do instead is make sure what you're passing is a **type literal**:
@@ -2100,7 +2100,7 @@ pokemon[bulbasaur] // correct ✅
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/MYewdgziA2CmB0w4EMBOAKAlAKGwSzABdZUAzZYWAAgGVDlCIqBvbK9qvAEwC4qwArgFsARiTYcAFgAc+g0eI5UG9YAGs5wsagnsusUrEixNCnQF9cBYmQrUACiDWwh4FrqoiB0EcgjIBVD46BggPYEk0IWQwfSDaekYPCABHATxUQjhgxLDLbFBIQippJxdwPkdnVzAqAF53JS8fPwD45k5eKgBGABoqGT4AFgBWfpUKDSohgE5+-UNjYZmqc17wyNRo2JI+Du4+ACZ+waoAZjnlQlUpkeOqBaMIE2mz1fWlVPTM7JZOvjOJ1k0yG42uk2GAA55gYni8AGwjVbYfKFCDFZq+fyBPjo1AEADm9SoAHJMa1AiSCuB0VQIlEYnE+CT6VtGSQScSWZttnEqXBil8MllqA0SUKfrBOX46TTCLhStVwABtcnY1AAXWwivKYGVrN5JC1OpqyolIq1QA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMpjmAzsg3gKGSOWABMAuZEAVwFsAjaQ4gCwAdKaGnjlMMEAa051GUZkVIQYEEFggju4gL758oSLEQoACgHtBEWnpB4JyetQA29OFjjUoldJizmELOFFpwQUp2gY2OZYAI7UwFBgVgqBrviq+AgmWGDIbAZGJpT6hsamALxmvJY2dg4BuCQUyACMADTI7JQALACsjfyIwsgtAJyNUjJysf3IyvXunt6+-pRVZJQATI3NyADMA3xgAj1tK8hDsvKt6+OTvGERUTHz1ZTrqxy9LZ073a0AHIPSx7EAbG1xgk1Mk5GlSrZ7I5KKkoKAAObIIoAckh5UcKKSKTSHi8Pj80EoKLxM0JUBRyOQJOmBP8WJiaSukWiKFRzJuEEpdmQYNSagyeRMAG10dCoABdfCCrIgYWkunQKUy-LCjmsqVAA"
 />
 
 I only made the type explicit so it's obvious. `const` is going to infer a **type literal**. We can also use the `as const` assertion.
@@ -2196,7 +2196,7 @@ logDate(new Date())
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwCIEMoFMAUAJjrgFyLZ6IA+iAzlAE4xhoCUiA3gFCJ+IxgiIiQFgGWSLjhDKuDj35LEEBHTjJcAOlRoReLVDgBVACoBhAMpMWeth2WP+vfgF9EuZHVxcXj1eIa2rr62kbGAA4RuIzmWN749nx+iK7cadwA9JmIAOSmABLGiABSxgAyiAAMAIyIAExV9XWNpFVVbVWIAOIAsqYA1E3twuYAogBypgBKAIKVY8bTAPIACmOzE4iWxr29Y9OIpgCS+2y53Lpy+NdJ3Fk5uY3NALRVAOxvNaat7Z1a7SqAC0LlcSPgwLgAO4UcH2IA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwCIEMoFMAUAJjrgFyLZ6IA+iAzlAE4xhoCUiA3gFCJ+IxgiIiQFgGWSLjhDKuDj35LEEBHTjJcAOlRoReLVDgBVACoBhAMpMWeth2WP+vfgF9EuZHVxcXj1eIa2rr62kbGAA4RuIzmWN749nx+iK7cadwA9JmIAOSmABLGiABSxgAyiAAMAIyIAExV9XWNpFVVbVWIAOIAsqYA1E3twuYAogBypgBKAIKVY8bTAPIACmOzE4iWxr29Y9OIpgCS+2y53Lpy+Nf23Fk5+QAWIAA01XUlIMgNTS0d7U6PX6FyuJHwYFwAHcKOD7EA"
 />
 
 If you remember from a previous example there's a distinction between the constructor `new Date()` that returns an `object` and function `Date()` that returns a `string`.
@@ -3188,8 +3188,8 @@ If we poke around **lib.es2015.core.d.ts** more we can find the types that descr
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/24-array-es5-interface.png"
-  alt="es5 interface"
+  src="/images/typescript-fundamentals/24-array-constructor.png"
+  alt="Array constructor"
 />
 
 If we look at **lib.es5.d.ts** it looks like something we would expect. You can double-click on it or <kbd>Alt</kbd> + <kbd>Click</kbd> on the type definition to open it.
@@ -3197,8 +3197,8 @@ If we look at **lib.es5.d.ts** it looks like something we would expect. You can 
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/25-array-constructor.png"
-  alt="Array constructor"
+  src="/images/typescript-fundamentals/25-array-es5-interface.png"
+  alt="es5 interface"
 />
 
 This has the properties we would expect like `length`, `pop`, `push`, `map` and more.
@@ -3258,7 +3258,10 @@ This is the first lesson to not get overwhelmed. Just read the error calmly.
 
 We can read TypeScript errors like sentences with **because** inbetween:
 
-> Element implicitly has an 'any' type because expression of type 'string' can't be used to index type ... **because** no index signature with a parameter of type 'string' was found on type ...
+```json:error
+Element implicitly has an 'any' type because expression of type 'string' can't be used to index type ...
+  because no index signature with a parameter of type 'string' was found on type ...
+```
 
 This further you go down the chain the more specific the error is, so start from there.
 
