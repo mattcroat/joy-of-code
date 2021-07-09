@@ -8,20 +8,18 @@ image: '/images/typescript-fundamentals/og-image.webp'
 
 # TypeScript Fundamentals
 
-If you're learning TypeScript for the first time, or need a reminder this is the resource for you.
+If you're learning TypeScript for the first time or need a refresher this is the resource for you.
 
-The hardest part of TypeScript is interpreting what it wants from you and picking the right approach. Even if you understand how some features of TypeScript work it's not always obvious when you would use it.
+There's a lot of great resources out there for learning TypeScript, but I always felt they use abstract examples that are hard to relate to and don't explain how to help yourself to figure out types.
 
-There's a lot of great resources out there for learning TypeScript but I always felt they use abstract examples that are hard to relate to and don't explain how to help yourself figuring out types.
+That being said nothing can substitute the experience of using TypeScript in your project, so dust off an old JavaScript project or create a new one to learn from.
 
-That being said I urge you to try everything out and just dive in your own projects to learn. Nothing can substitute that experience. Use this as reference.
-
-_note: this one was a massive one to write so there might be more typos than usual — I plan to go over everything and improve it even more over time, so thank you for any contribution you might have!_
+_note: This one was a massive one to write so there might be more typos than usual — I plan to go over everything and improve it even more over time, so thank you for any contribution you might have._
 
 ## Table of Contents
 
 1.  [You're Already Using TypeScript](#youre-already-using-typescript)
-2.  [What is TypeScript?](#what-is-typescript)
+2.  [Why Should You Use TypeScript?](#why-should-you-use-typescript)
 3.  [Runtime and Compile Time](#runtime-and-compile-time)
 4.  [Gradual Adoption](#gradual-adoption)
 5.  [TypeScript Introduction Summary](#typescript-introduction-summary)
@@ -70,9 +68,7 @@ _note: this one was a massive one to write so there might be more typos than usu
 
 ## You're Already Using TypeScript
 
-Let's start from the basics.
-
-Have you ever wondered how autocomplete in your editor works?
+Have you asked yourself how code completion in your editor works?
 
 ```js:example.js
 const pokemon = ['Bulbasaur', 'Charmander', 'Squirtle']
@@ -85,7 +81,7 @@ const pokemon = ['Bulbasaur', 'Charmander', 'Squirtle']
   alt="Type on hover"
 />
 
-Not only does it infer `pokemon` to be an **array**, but an **array of strings**.
+The editor understands that `pokemon` is an **array** of strings.
 
 <Image
   height={768}
@@ -94,9 +90,9 @@ Not only does it infer `pokemon` to be an **array**, but an **array of strings**
   alt="Intellisense"
 />
 
-Since it can only be an array the [editor intellisense](https://code.visualstudio.com/docs/editor/intellisense) gives us array methods.
+Since `pokemon` is an **array** the [editor intellisense](https://code.visualstudio.com/docs/editor/intellisense) is smart enough to only show us **array** methods.
 
-Imagine for a moment not having this feature. You would have to remember and look every method up on the [MDN Web Docs](https://developer.mozilla.org/en-US/).
+Imagine not having this feature. You would have to remember and look every method up on the [MDN Web Docs](https://developer.mozilla.org/en-US/).
 
 <Image
   height={768}
@@ -105,18 +101,20 @@ Imagine for a moment not having this feature. You would have to remember and loo
   alt="Signature call"
 />
 
-We can also see the signature call of the method. It's like having the documentation in your editor. This is purely JavaScript enhanced by our editor!
+If we look at the `map` array method we can see it's **call signature** and description in the tooltip.
 
-You're already using TypeScript. This is the theme you're going to notice throughout. It's not just types — it's the entire developer experience.
+This is **JavaScript** — yet it's using **TypeScript** under the hood.
 
-We can add `@ts-check` to the top of our file to enable TypeScript checking:
+TypeScript isn't just about types. It's the entire developer experience it brings.
+
+We can add `@ts-check` to the top of our file to enable TypeScript checking in JavaScript.
 
 ```js:example.js
 // @ts-check
 
 const pokemon = ['Bulbasaur', 'Charmander', 'Squirtle']
 
-pokemon.push(1) // oops!
+pokemon.push(1) // oops! 🚫
 ```
 
 <Image
@@ -126,13 +124,9 @@ pokemon.push(1) // oops!
   alt="TypeScript error"
 />
 
-Since it infered the array to only contain strings it throws a type error because we're adding a number to it.
+The `pokemon` array contains only strings, so we get a type error when trying to assign `number` to `string`.
 
-We're going to learn later how this works. First let's answer our initial question.
-
-How does this work?
-
-**The VS Code editor uses TypeScript under the hood.** The same **TypeScript language server** is open source, so it's ported to other editors.
+The VS Code editor uses the **TypeScript language server** under the hood.
 
 <Image
   height={1052}
@@ -141,21 +135,15 @@ How does this work?
   alt="Built-in extensions"
 />
 
-If we look at the built-in extensions we can notice some usual suspects. Look, it's [Emmet](https://www.emmet.io/)!
+If we look at the built-in extensions, we can notice some usual suspects. Look, it's [Emmet](https://www.emmet.io/)!
 
-**The language server provides us with sophisticated features such as code completion, refactoring, syntax higlighting, and error and warnings.**
+The language server provides us with sophisticated features such as **code completion**, **refactoring**, **syntax highlighting**, and **error and warnings**.
 
-> The Language Server Protocol allows for decoupling language services from the editor so that the services may be contained within a general purpose language server. Any editor can inherit sophisticated support for many different languages by making use of existing language servers. Similarly, a programmer involved with the development of a new programming language can make services for that language available to existing editing tools. — [Language Server Protocol (Wikipedia)](https://en.wikipedia.org/wiki/Language_Server_Protocol).
+> The Language Server Protocol allows for decoupling language services from the editor so that the services may be contained within a general- purpose language server. Any editor can inherit sophisticated support for many different languages by making use of existing language servers. Similarly, a programmer involved with the development of a new programming language can make services for that language available to existing editing tools. — [Language Server Protocol (Wikipedia)](https://en.wikipedia.org/wiki/Language_Server_Protocol).
 
-The majority of web developers use [Visual Studio Code](https://code.visualstudio.com/) from [Microsoft](https://www.microsoft.com/en-us/). They also made [TypeScript](https://www.typescriptlang.org/), so it works out of the box.
+[Visual Studio Code](https://code.visualstudio.com/) and [TypeScript](https://www.typescriptlang.org/) are made by Microsoft, so that explains the tight integration. This doesn't mean you're left in the dark if you're using another editor like [WebStorm](https://www.jetbrains.com/webstorm/) or [Vim](https://www.vim.org/). The **TypeScript language server** is available as a plugin for those editors.
 
-If you're using [WebStorm](https://www.jetbrains.com/webstorm/) it also has great TypeScript support. You might have to get a plugin.
-
-If you're a [Vim](https://www.vim.org/) user you can also find TypeScript plugins. You're already using Vim, so you can figure it out.
-
-You can get the same support as you would in VS Code for any editor.
-
-What your editor can do for you goes beyond:
+Your editor already has some amazing features that get enhanced by TypeScript:
 
 - **Auto imports** (as you type imports get added)
 - **Code navigation** (definitions, lookup)
@@ -166,13 +154,11 @@ What your editor can do for you goes beyond:
 
 You can learn more in-depth if you read [documentation for the JavaScript language](https://code.visualstudio.com/docs/languages/javascript).
 
-VS Code is so incredible you can write a book about it while being intuitive and simple to use.
+## Why Should You Use TypeScript?
 
-## What is TypeScript?
+When writing JavaScript we don't get a lot of information before we run our code.
 
-**In JavaScript we don't get a lot of information before we run our code.**
-
-It's often the case we just hope it works. We run the code and squint at our console to read the error before we go back to our editor and fix it.
+There's no way for us to know if the code has errors until we see the result on the page and go back to our code editor to fix the mistake and rerun the code.
 
 ```js:example.js
 const pikachu = {
@@ -180,7 +166,7 @@ const pikachu = {
   weight: 60
 }
 
-pikachu.weigth // oops! undefined
+pikachu.weigth // oops! 🚫
 ```
 
 <Image
@@ -190,7 +176,11 @@ pikachu.weigth // oops! undefined
   alt="No checking"
 />
 
-We made a slight typo and got `undefined`. Our editor didn't warn us about this. Imagine this being an API and passing wrong arguments to a method.
+To prove my point I'm sure you barely noticed the mistake and had to look at what it was.
+
+The editor didn't warn us about mispelling `weight`.
+
+Imagine the same scenario with an API where you pass wrong arguments to a method. You just hope it works.
 
 ```js:example.js
 // @ts-check
@@ -200,7 +190,7 @@ const pikachu = {
   weight: 60
 }
 
-pikachu.weigth // Did you mean 'weight'?
+pikachu.weigth // 🤔 Did you mean 'weight'?
 ```
 
 <Image
@@ -210,7 +200,7 @@ pikachu.weigth // Did you mean 'weight'?
   alt="Checking"
 />
 
-This would be an error in TypeScript.
+The editor code completion already makes it harder to make such a mistake writing regular JavaScript because of the benefits we get from TypeScript under the hood. When we do there's nothing to warn us.
 
 <Image
   height={768}
@@ -219,26 +209,26 @@ This would be an error in TypeScript.
   alt="Quick fix"
 />
 
-Our editor is able to point out and fix the problem for using the quick fix feature.
+**Quick fix** can be useful in many situations.
 
 > The most common kinds of errors that programmers write can be described as type errors: a certain kind of value was used where a different kind of value was expected. This could be due to simple typos, a failure to understand the API surface of a library, incorrect assumptions about runtime behavior, or other errors. — [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 
 TypeScript only gives us information before we run the code. That's also known as **static type checking**.
 
-**Static type checking means your code is evaluated before it runs to ensure it's more predictable and works as expected.**
+**Static type checking** means your code is evaluated before it runs to ensure it works as expected.
 
-You should also keep that limitation in mind.
+That's also a limitation of TypeScript to keep in mind.
 
 ## Runtime and Compile Time
 
 > TypeScript is JavaScript’s runtime with a compile-time type checker. — [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html)
 
-- **Runtime** is when our JavaScript code gets executed
-- **Compile time** is when TypeScript code gets transpiled to JavaScript code
+- **Runtime** is when JavaScript code gets executed
+- **Compile time** is when TypeScript code gets compiled to JavaScript code
 
-**TypeScript only checks your code at compile time.** This means you can't ignore checks in your code to prevent the user from doing unexpected things.
+**TypeScript only checks your code at compile time.**
 
-We can't include TypeScript annotations in `.js` files, so we have to use the `.ts` extension.
+This means you can't rely on TypeScript for checks in your code such as user input.
 
 ```ts:example.ts
 const pokemon = []
@@ -247,15 +237,14 @@ function addPokemon(pokemonName: string) {
   pokemon.push(pokemonName)
 }
 
-addPokemon('Pikachu') // ['Pikachu'] 👍
-addPokemon(1) // Type 'number' not assignable to type 'string'. 🚫
+// ['Pikachu'] 👍
+addPokemon('Pikachu')
+
+// Type 'number' not assignable to type 'string'. 🚫
+addPokemon(1)
 ```
 
-We're just saying that the argument `pokemonName` should be of type `string`.
-
-Note that **we can run TypeScript code despite type errors** because those are not syntax errors. This also depends how strict your compiler settings are.
-
-Done! Right? Ship it. Actually...
+Despite the TypeScript error, we can run the TypeScript code because type errors aren't syntax errors.
 
 ```js:example.js
 const pokemon = []
@@ -264,11 +253,14 @@ function addPokemon(pokemonName) {
   pokemon.push(pokemonName)
 }
 
-addPokemon('Pikachu') // ['Pikachu']
-addPokemon(1) // ['Pikachu', 1]
+// ['Pikachu'] ✅
+addPokemon('Pikachu')
+
+// oops! 😳
+addPokemon(1)
 ```
 
-TypeScript didn't betray us. We forgot to put checks in place for our user.
+This is the compiled JavaScript code. TypeScript didn't betray us. We neglected to put checks and error validation in the code.
 
 ```ts:example.ts
 const pokemon = []
@@ -284,37 +276,40 @@ function addPokemon(pokemonName: string) {
   pokemon.push(pokemonName)
 }
 
-addPokemon(1) // Type 'number' not assignable to type 'string'. 🚫
+// Type 'number' not assignable to type 'string'. 🚫
+addPokemon(1)
 ```
 
 TypeScript doesn't change how JavaScript works.
 
 ## Gradual Adoption
 
-As you've seen in previous examples we can reap the benefits of TypeScript without using TypeScript directly.
+So far we've seen we can reap the benefits of TypeScript without using TypeScript directly.
 
-You can also leverage [JSDoc](https://jsdoc.app/) and TypeScript to add type annotations without using TypeScript and have self-documenting code. If that's something you're interested in. You can read more on [JSDoc support](https://jsdoc.app/) and look at the examples. I'm just going to focus on TypeScript.
+If you're on the fence about TypeScript but like using [JSDoc](https://jsdoc.app/) you can take advantage of TypeScript being built-in. You can use JSDoc for types and have self-documenting code that can outlive TypeScript. You can read more about [JSDoc support](https://code.visualstudio.com/Docs/languages/javascript#_jsdoc-support) for VS Code and look at the examples.
 
-Type checking can be strict as you would like. This prevents us from being overwhelmed and makes adding types a gradual adoption.
+That being said we can adjust how strict typechecking is when starting to use TypeScript so we don't get overwhelmed making adding types a gradual adoption.
 
-I'm going to explain more on configuring the TypeScript compiler later.
+If you decide on using TypeScript you don't have to rename everything at once but instead do it on a per-file basis.
 
 ## TypeScript Introduction Summary
 
 Let's get a clear picture of TypeScript 📸:
 
 - TypeScript is a **static type checker**
-- TypeScript is a **superset of JavaScript** (JavaScript program is also a valid TypeScript program)
-- TypeScript **preserves the runtime behavior of JavaScript** (TypeScript doesn't change how JavaScript works, it only adds rules how different kinds of values can be used)
+- TypeScript is a **superset of JavaScript** (this means that any JavaScript program is also a valid TypeScript program)
+- TypeScript **preserves the runtime behavior of JavaScript** (TypeScript doesn't change how JavaScript works)
 - TypesScript **compiles to JavaScript**
-- **Types get erased once it compiles to JavaScript** (things like browsers don't understand TypeScript)
-- TypeScript is a **gradual adoption**
+- **Types are gone once it compiles to JavaScript** (the browser or Node doesn't understand TypeScript)
+- Using TypeScript is a **gradual adoption**
 
 ## JavaScript Types
 
 _"You don't need TypeScript, we have TypeScript at home"._
 
-Have you ever heard a parent say something similar? 🤭
+True _scholars_ 🧐 among you with _keen intellect_ might observe that JavaScript already has **primitive types**.
+
+A **primitive type** is data that is not an object and has no methods.
 
 JavaScript has **7 primitive types**:
 
@@ -326,9 +321,7 @@ JavaScript has **7 primitive types**:
 - **symbol** (unique values)
 - **null** (points to a nonexistent object or address)
 
-**A primitive type is data that is not an object and has no methods.**
-
-JavaScript also has **primitive wrapper objects**:
+Alongside those **primitive types** there are **primitive wrapper objects**:
 
 - **String** (for the string primitive)
 - **Number** (for the number primitive)
@@ -336,14 +329,14 @@ JavaScript also has **primitive wrapper objects**:
 - **Boolean** (for the boolean primitive)
 - **Symbol** (for the symbol primitive)
 
-Let's clear up the difference between primitives and their object counterparts so you don't get confused between if you should use the lowercase `string`, or capitalized `String` as a type.
+Let's clear up the difference between **primitive types** and **primitive wrapper objects** so you don't get confused if you should use the lowercase `string` or capitalized `String` as a type.
 
 ```js:example.js
-// string primitive
-const stringPrimitive = 'Pikachu' // 'Pikachu'
+// 'Pikachu'
+const stringPrimitive = 'Pikachu'
 
-// string object
-const stringObject = new String('Pikachu') // String { 'Pikachu' }
+// String { 'Pikachu' }
+const stringObject = new String('Pikachu')
 ```
 
 <Image
@@ -353,38 +346,32 @@ const stringObject = new String('Pikachu') // String { 'Pikachu' }
   alt="Primitives"
 />
 
-**JavaScript converts primitives to their object counterparts behind the scenes so we can use their methods.** This is because methods like `.toUpperCase()` extend the `String` object.
+JavaScript converts **primitive types** to **primitive wrapper objects** behind the scenes so we can use their methods.
 
-The reason we don't use the object syntax is because it's more work to get the value and could give us unexpected results if we pass an object to something expecting a primitive value.
+This is because methods like `.toUpperCase` extend the `String` object.
 
-Don't confuse the `new String(value)` constructor with the function `String(value)` that performs type conversion to a primitive string.
+The reason we don't use **primitive wrapper objects** is because it's more work to get the value out of the object and we could get unexpected results if we pass an object to something expecting a primitive value.
 
-You see a frequent use of this when you need to convert a string to a number:
+That being said don't confuse the `new String` constructor with the function `String` that does type conversion.
 
 ```js:example.js
-const value = '1'
+const number = '42'
 
-// using the function syntax
-const number = Number(value) // 1
-
-// you can also use the unary plus operator
-const number = +value // 1
+const string = String(number) // '42'
 ```
 
-**Why should you use TypeScript?**
-
-We can use JavaScript primitive types as TypeScript types. Doesn't that mean we just end up writing more code? As we've learned TypeScript doesn't save us at runtime, so we have to put checks in place:
+As we've learned TypeScript doesn't save us at runtime, so we have to put checks in place.
 
 ```ts:example.ts
 function isString(value: string): boolean {
   return typeof value === 'string' ? true : false
 }
 
-isString('Pikachu') // true
-isString(1) // false
+isString('Pikachu') // true ✅
+isString(1) // false 🚫
 ```
 
-Why are we writing more code? Let's take `addPokemon` for example.
+Why are we writing more code?
 
 ```js:example.js
 const pokemon = []
@@ -398,16 +385,14 @@ addPokemon('Pikachu', new Date())
 
 Writing JavaScript we need to keep a lot of things in mind:
 
-- Is `addPokemon` callable?
-- Does it return anything?
-- What are the arguments?
-- What date format `added` accepts?
+- Is the function callable?
+- Does the function return anything?
+- What are the arguments of function?
+- What date format does the argument accept?
 
-Even if we look at the implementation we don't understand what type of date it expectes us to pass. This is when we turn to reading the documentation.
+Even if we look at the implementation we don't know what date format we should pass, so we turn to documentation.
 
-**TypeScript helps us prevent making those mistakes in the first place.** It let's us know we're accessing the right properties and passing the right arguments with code completion.
-
-With TypeScript we can define the **shape** and add **constrains**:
+TypeScript helps us prevent making those mistakes in the first place by knowing we are accessing the correct properties and passing the correct arguments alongside code completion.
 
 ```ts:example.ts
 const pokemon = []
@@ -417,7 +402,7 @@ function addPokemon(name: string, added: Date) {
 }
 ```
 
-We assign the argument `name` to type `string` and argument `added` to type `Date` which is just a custom built-in type.
+In the example the argument `name` is of type `string` and argument `added` is of type `Date` which is just a custom built-in type.
 
 <Image
   height={768}
@@ -426,10 +411,11 @@ We assign the argument `name` to type `string` and argument `added` to type `Dat
   alt="Code completion"
 />
 
-You can imagine how this can be useful when dealing with an API of a library. You don't have to constantly switch between some documentation and your code.
+This is extremely useful when dealing with a library API. The documentation lives in your editor.
 
 ```ts:example.ts
-addPokemon('Pikachu', Date()) // Type 'string' is not assignable to parameter of type 'Date'. 🚫
+// Type 'string' is not assignable to parameter of type 'Date'. 🚫
+addPokemon('Pikachu', Date())
 ```
 
 <Image
@@ -439,10 +425,11 @@ addPokemon('Pikachu', Date()) // Type 'string' is not assignable to parameter of
   alt="Date string"
 />
 
-TypeScript saves us from ourselves. The `Date()` function returns a `string`. We want the `new Date()` constructor that returns an object. That's what TypeScript is complaining about when it says it can't assign `string` to `Date`. The shape doesn't match because it's of type `object`.
+The `Date` function returns a `string` but we have to pass the `new Date` constructor that returns an object. The type doesn't match so TypeScript complains that you can't assign `string` to `Date`.
 
 ```ts:example.ts
-addPokemon('Pikachu', new Date()) // [{ name: 'Pikachu', added: Date... }] 👍
+// [{ name: 'Pikachu', added: Date... }] ✅
+addPokemon('Pikachu', new Date())
 ```
 
 <Image
@@ -452,24 +439,22 @@ addPokemon('Pikachu', new Date()) // [{ name: 'Pikachu', added: Date... }] 👍
   alt="Date constructor"
 />
 
-This is just to give you a taste and understanding of why you would use TypeScript.
-
-We're going to start learning about TypeScript and using it in practice.
+Let's start learning about TypeScript and using it in practice.
 
 ## TypeScript Playground
 
-To get started open the [TypeScript Playground](https://www.typescriptlang.org/play). It's a great way of seeing the transpiled JavaScript code and generated TypeScript types without having to set up anything.
+To get started open the [TypeScript Playground](https://www.typescriptlang.org/play).
 
-It's using the same [Monaco editor](https://microsoft.github.io/monaco-editor/) that powers VS Code, so you should feel at home.
+The playground is a great way of seeing the compiled JavaScript code and generated TypeScript types without having to set up anything and it's using the same [Monaco editor](https://microsoft.github.io/monaco-editor/) that powers VS Code, so you should feel at home.
 
-On the right side there's a couple of notable tabs:
+The right side of the editor has some useful tabs:
 
-- **.JS** is the compiled JavaScript output (the default target is ES2017 which is adjustable from the **TS Config** tab)
-- **.D.TS** are the generated types
-- **Errors** are like the error logs in your console
+- **.JS** shows the compiled JavaScript output (the default target is ES2017 which is adjustable from the **TS Config** tab)
+- **.D.TS** has the generated TypeScript types
+- **Errors** is like the error logs in your console
 - **Logs** show the output of your code
 
-You can press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to run the code. Another tip I have is to include `console.clear()` at the top so your logs stay readable.
+You can press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to run the code in the playground. Another tip I have is to include `console.clear()` at the top so your logs stay readable.
 
 ```ts:playground.ts
 console.log('TypeScript is awesome 💪')
@@ -484,24 +469,31 @@ If you can't see the right sidebar press the arrow icon in the top right.
 
 ## Type Inference
 
-TypeScript can infer types to provide type information:
+TypeScript can infer types to provide type information.
 
 ```ts:playground.ts
 let pokemon = 'Pikachu'
 
 pokemon = 'Charizard'
-pokemon.toUpperCase() // 'CHARIZARD' 👍
 
-pokemon = 1 // Type 'number' is not assignable to type 'string'. 🚫
-pokemon() // This expression is not callable. 🚫
+// 'CHARIZARD' ✅
+pokemon.toUpperCase()
+
+// Type 'number' is not assignable to type 'string'. 🚫
+pokemon = 1
+
+// This expression is not callable. 🚫
+pokemon()
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdhAvBA5ABQJZwCGAxgBYCuWAUFbAsmplgMKmEBOeAXhwCbV0kqAHRgYAVShQQ7ZoQDOIABQBKGoIYYIARlrwhKVUA"
+  src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdhAvBA5ABQJZwCGAxgBYCuWAUFbAsmplgMKmEBOeAXhwCbVUA9IOzMAEgEEASgEkAWtIAiWCIFByWvCSoAdGBgBVKFBDtmhAM4gAFAEoawiABUAnsewpyiAEYmVecxAoMJAW5ngA5iiEXqAQenGuINjmYJwo4VjaEIC8G4DVexr0qBgQAIz2Io6k-hAgAB5Q7CDmYUXVQZDEhMDA0aBZeQVaKLZAA"
 />
 
-If you hover over `pokemon` you can see TypeScript infered it as type `string`. Inspect the lines with errors. How great is this instant feedback in your editor?
+How great is this instant feedback in your editor?
+
+TypeScript can also infer the return type from a function. If we're not returning anything it's `void`.
 
 ```ts:playground.ts
 function returnPokemon() {
@@ -520,9 +512,7 @@ function logPokemon() {
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAJwKZRMsAFOBrVAWwQAoBKRAbwChEV1MkBybGPAQwgAsQnqBfatVCRYCRABs4Ac1wFiYclVqIICAM5wJqAHRTpJFm048mZAUA"
 />
 
-TypeScript can also infer the return type from a function. If we're not returning anything it's `void`.
-
-This is equivalent:
+It's encouraged to let TypeScript infer what it can but you can also be explicit.
 
 ```ts:playground.ts
 function returnPokemon(): string {
@@ -536,9 +526,7 @@ function logPokemon(): void {
 }
 ```
 
-It's encouraged to let TypeScript infer what it can. I personally prefer to be explicit on returns.
-
-Let's take a fetch API example:
+In the next example we're looking at the return type of a fetch API request.
 
 ```ts:playground.ts
 async function getPokemon(name: string) {
@@ -553,9 +541,7 @@ async function getPokemon(name: string) {
   src="https://www.typescriptlang.org/play?#code/IYZwngdgxgBAZgV2gFwJYHsIwOYFNkAK6A1rgLaYAUEwZuAXDCMgE6oTYCUMA3gFAwYUTMxgtcIAA4jcMALwxgAd2Cpk8fFAAWlAAZbkySSHoB6U9NLBJqAHTDT11KYBuAJgslymUwBIeNHQAvrqcAkIi6pbeWArKquriUjK2AFYgVGGC4sgILFjRFBB8QUA"
 />
 
-If you hover over `getPokemon` you can see TypeScript infered the return type as `Promise<any>`.
-
-For now it's only important we focus on `any`. It's an escape hatch when we don't know what the type is. We can type the JSON object from the API response. This let's us be more explicit about the type:
+If you hover over `getPokemon` you can see TypeScript infered the return type as `Promise<any>`. `any` is an escape hatch when we don't know what the type is.
 
 ```ts:playground.ts
 async function getPokemon(name: string): Promise<{ id: number, name: string }> {
@@ -565,7 +551,7 @@ async function getPokemon(name: string): Promise<{ id: number, name: string }> {
 }
 ```
 
-Now when we use it we get code completion since TypeScript knows what the values are. There's a lot more the API returns. This is just an example.
+Here we're more explicit about the return type with using the object type `{ id: number, name: string }`.
 
 ```ts:playground.ts
 async function getPokemon(name: string): Promise<{ id: number, name: string }> {
@@ -587,13 +573,13 @@ logPokemon()
   src="https://www.typescriptlang.org/play?#code/IYZwngdgxgBAZgV2gFwJYHsIwOYFNkAK6A1rgLaYAUEwZuAXDCMgE6oTYCUjBL6ZqELgA8AbxioAJowgIyAI1wsANDBp1GzNhxgBfAHwxRAKBgwomZjBa4QAB0u4YAXhjAA7sFTJ4+KAAtKAAN-ZGQ7EHoAeiiHUmA7VAA6CyiE1CiANwAmWJJyTCiAElF1XF0gzlNzSx84gqxXDy8fG3tHJIArECoqsxtkBBYseooIY11jY1BIWEQUDCwAG3RsIlIxyk4jaosIK0TiYACEFzdPbxx8dYbKAHJD4-8EO76a-fQl3CSV7EpxKSMR4nJJSVRlIGoI4gsp6KqTYy-G6bThAA"
 />
 
-Try the autocomplete on `pikachu.id` and `pikachu.name`. It's magic. 🪄
+Thanks to this slight change we get code completion for the `pikachu` object since TypeScript knows the type. It's magic. 🪄
 
-Don't sweat the details. We're going to go in-depth later and explore how to make this more organized by using other TypeScript features.
+We're going to go in-depth later and explore how to make this more organized by using other TypeScript features.
 
 ## Type Annotations
 
-We can explicitly add a type annotation to specify the type:
+**Type annotations** are an explicit way of specifying a type.
 
 ```ts:example.ts
 const pokemon: string = 'Pikachu'
@@ -601,12 +587,12 @@ const pokemon: string = 'Pikachu'
 
 ## Primitive Types
 
-TypeScript has the same basic primitive types:
+TypeScript has the same basic **primitive types**.
 
 ```ts:example.ts
 const pokemon: string = 'Pikachu'
-const id: number = 1
-const healthy: boolean = true
+const hp: number = 35
+const caught: boolean = true
 ```
 
 ## TypeScript Types
@@ -631,21 +617,24 @@ const apiResponse: any = {
   data: []
 }
 
-apiResponse.doesntExist // we don't get any warning 😱
+// we don't get any warning 😱
+apiResponse.doesntExist
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAhgBwJYCUCmEHgmgXPMATxgF4YBvAKBhgBM4o58BtAXUoF9LLFUMtIaAHS0QGMFACiADyTQgA"
+  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAhgBwJYCUCmEHgmgXPMATxgF4YBvAKBhgBM4o58BtAXUoF9LKB6HmAO5o64AOSwA5mlhwiguACcwSMBJiBeDcCMe5USoMWSGgB0tEBjBQAogA8k0GEA"
 />
 
-It's useful when:
+Using `any` is useful when:
 
-- You're working with some library that lacks types
-- You encounter a complex type from an API you don't feel like tackling right now
-- The API could change while you're writing the code
+- You're working with a library that lacks types
+- You have a complex API response you don't want to type
+- The API of the code you're writing could change
 
-**Don't let your editor bully you.** If you're the type of person that wants to focus on writing code I suggest instead of using `any` everywhere to include `// @ts-nocheck` at the top of your file. After you're done writing code turn typechecking back on.
+If you want to focus on writing code I suggest instead of using `any` everywhere to include `// @ts-nocheck` at the top of your file. After you're done writing code turn typechecking back on.
+
+**Don't let your editor bully you.**
 
 Be conservative when using `any` because it defeats the purpose of using TypeScript.
 
@@ -653,7 +642,7 @@ Be conservative when using `any` because it defeats the purpose of using TypeScr
 
 `unknown` is the type-safe version of `any`:
 
-- You can assign any value to `unknown`, but you can't do whatever you want
+- You can assign any value to `unknown` but you can't do whatever you want
 - You must perform checks before you can use a value
 - You can't access any properties on values
 - `unknown` can only be assigned to `unknown` and `any`
@@ -663,35 +652,41 @@ const apiResponse: unknown = {
   data: []
 }
 
-const anyType: any = apiResponse // assignable to `any` 👍
-const unknownType: unknown = apiResponse // assignable to `unknown` 👍
-const otherType: { data: [] } = apiResponse // 'unknown' not assignable to type '{ data: []; }'. 🚫
+// assignable to `any` 👍
+const anyType: any = apiResponse
+
+// assignable to `unknown` 👍
+const unknownType: unknown = apiResponse
+
+// 'unknown' not assignable to type '{ data: []; }'. 🚫
+const otherType: { data: [] } = apiResponse
 
 // we have to use checks to narrow down the type
 if (apiResponse && typeof apiResponse === 'object') {
-  apiResponse.data // Property 'data' does not exist on type 'object'. 🚫
+  // Property 'data' does not exist on type 'object'. 🚫
+  apiResponse.data
 }
 ```
 
-We narrowed down what the type of `apiResponse` is. Yet we can't access the `data` property since it's `unknown`.
+We narrowed down what the type of `apiResponse` is, yet we can't access the `data` property since it's `unknown`.
 
-We can use type assertion to say to TypeScript we know better:
+To solve the problem we have to use **type assertion** that let's TypeScript know we know the type.
 
 ```ts:playground.ts
 if (apiResponse && typeof apiResponse === 'object') {
     const response = apiResponse as { data: [] }
-    response.data // no warning 👍
+    response.data // no warning ✅
 }
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAhgBwJYCUCmEHgmgXDAVzAGswQB3MGAXhgG8AoGGAEzijnwG0BdBgXwYNQkWHDABPACoSEeeJJrxk6TNjTDssIqQpgZc-DrKUliVBiyQNI6DBBQAFmgBOB+XVbtOMXjH5mKpbqQkgAZjAAFOaqVjgwAGQJMFCyaCARMcHWNNS0AOQgAEYAVmjAUPkAlPRMzDC2sC7Z8bRZajlwEPReHNw8-nXMzR04AHRsHAJAA"
+  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAhgBwJYCUCmEHgmgXDAVzAGswQB3MGAXhgG8AoGGAEzijnwG0BdBgXwYMA9MPgQISAOZg4AIwA2aGFBAwABnDABPdTEC8G4FkdhqEiwt2gCraEeeDprxk6TNjRDR4yTPlKVa9SJSCjA9IxNsWCCySmtbfGiQx0RUDCxIdxExAHJEymyYMnMJaVlFZVUVG2VsulZ2ThheAG4YfmyAOgNAar2IsxgQKAALNAAnOLs6tg5uHjbk5zS3ISQAMxgAChSXdJwYADJ9qtsQde2ljJpqWmyQOQArNGAobIBKeiZmGFNoGFGLva0c6uS5wCD0eozJpzQRfP4AtAdaZwGCeMgwchwUZgJBgKQwQCg5AIgA"
 />
 
-We're going to learn about type assertion later. I just want to give you a feel of `unknown` since most examples don't.
+We're going to learn about **type assertion** later.
 
-We can use `unknown` to accept any argument without using `any`:
+`unknown` is safer to use than `any` when we don't know the function argument.
 
 ```ts:playground.ts
 function prettyPrint(input: unknown): string {
@@ -719,7 +714,7 @@ prettyPrint(['Bulbasaur', 'Charmander', 'Squirtle', 1, {}]))
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABABwE4FMpQJ4AVUxhQAUhyIUAXIuANZhwDuYAlNQM5QFgDmiA3gChEIxDGCJiAQVSoAhtgB0MdjPnZSYclBYsBw0YYxQQqJAAMA2gBJ+ZCooC2c5MTSYc+QjsUArOITEAOQANIhBLAC+ALrmBiKRgvFiEsQ4yOhwEvZQiAC8BeGc3DwR+oZGmKZIOcmJyeKS6ZnZWhT5hUFgII4ARuioZUIVosbViADKXIQ8mtosdUmVJmbhiutBgvUQCOxwADboivtws8nuWHjcJJZBAEIg+71y7HKmoeEAwgAWcqjOYAAJgMPkEJgBHEAwVBQQ4fACMYX4MQWLCAA"
 />
 
-We can use `unknown` to describe a function that returns a value of unknown type:
+We can use `unknown` to describe a function that returns an unknown value.
 
 ```ts:playground.ts
 const json = `
@@ -733,37 +728,39 @@ function safeParse(value: string): unknown {
     return JSON.parse(value)
 }
 
-const obj = safeParse(json)
+const obj = safeParse(json) // safe ✅
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAVhcMC8MAGAoG2YG8s6EBEAlgCZEBcMAjADQGHZFgCGAtgKZUxEAKJANatgACwCuRRjAC+GTBgBm4sMCgkkEVos59WAJwicAFADdWAG3Gdq0fSTABzAJTUVgsCADuYPNP2cUOL6vgBSAMoA8gByAHQADgZGZpbWzhhyGKCQsCAARnAoMFo6eoYmCODOQA"
+  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAVhcMC8MAGAoG2YG8s6EBEAlgCZEBcMAjADQGHZFgCGAtgKZUxEAKJANatgACwCuRRjAC+GTBgBm4sMCgkkEVos59WAJwicAFADdWAG3Gdq0fSTABzAJTUVgsCADuYPNP2cUOL6vgBSAMoA8gByAHQADgZGZpbWzhhyGKCQsCAARnAoMFo6eoYmCODOMAD0NcXanDCAoORAA"
 />
 
-If we didn't use `unknown` the infered return type would be `any` meaning we could do whatever we want with `obj`. Try it out yourself.
+If we didn't use `unknown` the infered return type would be `any` meaning you could do whatever you want with `obj`.
 
-If you're unsure when you'd use `any`, `unknown` it's fine. They're mostly useful when you're migrating existing JavaScript code to TypeScript. Don't look hard when to use them.
+If you're confused when you'd use `any` or `unknown` it's fine. You should avoid using them if possible.
 
 ## void
 
-`void` is a return type used when a function doesn't return any value. This doesn't mean it can't have any value like `undefined`.
+`void` is a return type used when a function doesn't return any value but it doesn't mean it can't have any value like `undefined`.
 
-There's no point assigning `void` to a variable since only `undefined` is assignable to `void`:
+There's no point assigning `void` to a variable since only `undefined` is assignable to `void`.
 
 ```ts:example.ts
 let pokemon: void
 
 pokemon = undefined
-pokemon = 'Pikachu' // Type 'string' is not assignable to type 'void'. 🚫
+
+// Type 'string' is not assignable to type 'void'. 🚫
+pokemon = 'Pikachu'
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdgLggNxgSwCYBQBsCyKEAvBAK4p4gBmOKIhJSqlEA5AAo5wAhgGMAFtW5A"
+  src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdgLggNxgSwCYBQBsCyKEAvBAK4p4gBmOKIhBA9OxACoCeUICAHIAzmABOzAOZCIOERBQxIAQxEicUlCoBGoCGBgH+godnxCAdBEC8G4Gq94vCSpKwgAo44KgMYALakJAA"
 />
 
-You see `void` on functions that don't return anything:
+Type `void` is used on functions that don't return anything.
 
 ```ts:example.ts
 function logPokemon(pokemon: string): void {
@@ -773,7 +770,7 @@ function logPokemon(pokemon: string): void {
 logPokemon('Pikachu')
 ```
 
-Imagine a `forEach` implementation:
+Let's learn why type `void` is useful when used in a `forEach` implementation.
 
 ```ts:playground.ts
 function forEach(arr: any[], callback: (arg: any, index?: number) => void): void {
@@ -790,40 +787,39 @@ forEach(['Bulbasaur', 'Charmander', 'Squirtle'], (pokemon) => console.log(pokemo
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABMOAnAogQwgCwBSaqoBcimYAngNoC6ANIhJgDbMBG2A1qQagOalyFBjDAATAKYAPAPykwIALZsJqAJSIAvAD5EANzgwxa0gaOIA3gChEyNIjzMJURDC2IADAG5XiADxkRAB0TmB8UDg+MADU0RrWtrZMrBwQnLyoVDD0rmo2iAC+VkVWKBjY+FQA5ABCIOyYAM6YIKhVDFUAwjiEiuSSbR0AygCOIDCoUE5VOXgADnCcEooIGjqMCI1wTiFwfPOLy6tqQA"
 />
 
-Let's just focus on `void` in the example. Because we used `void` as the return type for `forEach` we're saying the return value isn't going to be used, so it can be called with a callback that returns any value.
+Because we used type `void` as the return type for `forEach` we're saying the return value isn't going to be used. This let's it be called with a callback that returns any value.
 
-Using `void` explicity can save us from returning a value on accident during refactor:
+Using the return type `void` explicity can save us from returning a value on accident during refactor.
 
 ```ts:playground.ts
-function logPokemon(pokemon: string[]): void {
-    pokemon.forEach(pokemon => {
-        // ...
-        return pokemon
-    })
+function logPokemon(pokemonList: string[]): void {
+  pokemonList.forEach(pokemon => {
+    // ...
+    return pokemon
+  })
 }
 
-function logPokemonRefactor(pokemon: string[]): void {
-    for (const item of pokemon) {
-        // ...
-        return pokemon // Type 'string[]' is not assignable to type 'void'. 🚫
-    }
+function logPokemonRefactor(pokemonList: string[]): void {
+  for (const pokemon of pokemonList) {
+    // ...
+    // Type 'string' is not assignable to type 'void'. 🚫
+    return pokemon
+  }
 }
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAugJTUBucMAJogDeAKETjEZPITAA6YHHoBRAIYQAFqXIzEAXgB8wsRJMB6U4llXjJ8fVxQQ9JFIpgbiAL4cRnkSNBIWAQUdCxpBAAlXGA1KEUtCLBqOkZmdi5EXgEjEwV6RCIIBDpEGCgCRDhgSW0EDlzbcXNLaya7BycXOvcTP08gA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIAyMAzlAFyJ0BOMYaA2gLoCUjAbnBgATRAG8AUImmIyeQmGp0AdMDjMAogEMIAC1LkFiALwA+cVJlWA9NcTKHlq9Oa4oIZkjkUwTxAF8eCX8JCVBIWAQUdCx5BAAlXGAdKHUDOMVaBiYoVnZuPkRBEQsrNWZEIggEOllDKLhgOoylKB5S52lbe0dOrrsAFQBPElxEAHIWNk4uccRaRDA4KEQtGhoYNDAtACNkMdTEKBGx8eLhceVEQF4NwGq9vytXd09mnz8Q-yA"
 />
 
 ## never
 
 The `never` type represents values that never occur:
 
-- It can't have a value
-- No reachable end point like a while loop or error exception
-- Variables get the type `never` when narrowed by type guards to remove possibilities (one great example are React props where if you pass one type of prop you're saying other props can't used)
-
-No reachable end point:
+- `never` can't have a value
+- Used when there's no reachable end point like a while loop or error exception
+- Variables get the type `never` when narrowed by type guards to remove possibilities (one great example are props passed to a component where we can say if one type of prop gets passed other can't)
 
 ```ts:playground.ts
 function infiniteLoop(): never {
@@ -851,22 +847,25 @@ function timeout(ms: number): Promise<never> {
 Type narrowing:
 
 ```ts:playground.ts
-function getPokemonByType(pokemonType: 'fire' | 'water' | 'electric') {
+function getPokemonByType(
+  pokemonType: 'fire' | 'water' | 'electric'
+) {
   // type is 'fire' | 'water' | 'electric'
   if (pokemonType === 'fire') {
-      return 'fire Pokemon'
+    return '🔥 fire Pokemon'
   }
 
   // we narrow it down to 'water' | 'electric'
   if (pokemonType === 'water') {
-      return 'water Pokemon'
+    return '🌀 water Pokemon'
   }
 
-  // only 'electric' is left
+  // only ⚡ 'electric' is left
   pokemonType
 
-  // type never can't have any value
-  const remainingPokemonTypes: never = pokemonType // Type 'string' is not assignable to type 'never'. 🚫
+  // remainingPokemonTypes can't have any value because
+  // pokemonType is 'electric' 🚫
+  const remainingPokemonTypes: never = pokemonType
 
 
   return remainingPokemonTypes
@@ -877,37 +876,31 @@ getPokemonByType('electric')
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQApwNaoLYIBCAngCrEAOqAFBTvguVQFyIDkwMATqm4gD7sA7gEMoqLn0FtUAG1TQuMCGwCUiAN4AoRLsQB6fYiiVUiGAGd2nHlOFiJdmfMXK2OvTGCJa9AmCYzAF4Q625edW09aMQeKBAuJA5wxCxcf3dogF8tD11DRCEzMBEuLjghcyhEABMKpCg4e3FJAXY5BSglFTzzb190xlNEEKDmx0je6LiEpNEW1L8ETL0c3oKEWWJ2ly63cyt5YCheukGA01zogpMqRDBUADcJRAgRMDZqgAsRZ8R37aPESyECoXoQBAWao8PAiGBgeHINIMC5UCysB7PLgjRBnFGBK56GaJWL4OEIsBIpao1BWXRaNZoTDUkiBajOTrdNRAA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQApwNaoLYIBCAngCrEAOqAFAFCKIU74LlUBciA5MDAE6ouiAD7cA7gEMoqPkNFdUAG1TQ+MCF1oBKRAG96DRAHojiKJVSIYAZ268Bc8VJmOFy1es2GrwRNSa4BGBslgC84Xb8gjr63t4CUCB8SFyAvBuApLuI9pZYgQhehgC+tAYMJohilmASfHxwYlZQiAAm9UhQcE7SsiLcSipQahqlPn4BLMEWiOGhXS4xI-HoSSmAPBuAAPsVznyIuRMFDMUj5QiKxIiAhWR97oOeVrbKwFAj40EhJd7lAngSMGB-yD2bwstggEjAXCaAAsJAA3Szg86wiSKECWABGKgkIGsqGOplerCmNmuAyGQlSgGq9kYQBDWJrfX7-MCA5jAqjWThgVDwnazQmTKglEYJFaIRl-AFAokc2hHNCYNlEMgWahuMmeLRAA "
 />
 
-This let's us know that `getPokemonByType` is missing a check for the `electric` type.
+Because of this check we know that `getPokemonByType` is missing a check for the `electric` type.
 
 We haven't yet learned about some of the types in the examples. We're not glossing over them. We're going to cover each later.
 
-I want to have it organized in a logical way so you can skim over certain parts and have a reference instead of sprinkling concepts throughout and being hard to find.
-
 ## Array Types
 
-There's two ways to specify a type of array in TypeScript.
+There's two ways to specify **array type** in TypeScript and they're equivalent.
 
-Using the generics `Array<Type>` syntax:
+Using the generics `Array<Type>` syntax or using the `type[]` syntax.
 
 ```ts:playground.ts
 const pokemon: Array<string> = ['Bulbasaur', 'Charmander', 'Squirtle']
-```
 
-Using the `type[]` syntax:
-
-```ts:playground.ts
 const pokemon: string[] = ['Bulbasaur', 'Charmander', 'Squirtle']
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbgKoQJZgOYDiyYyATtsACoCecyAXDAIKmkCG1APNOfgHwwAvDADaAcgBCAVwA2AIzYQ2U0mIA0MMQGEAFm1Ko2YACZl1mgMoBHKdlJQZyMQF0AUKEiwEKdGCy48ayl9ZAl2YBQoCEYeAJFnIVFJWQUlFXNtPQMjU1UNMSC7BydnIA"
+  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbgKoQJZgOYDiyYyATtsACoCecyAXDAIKmkCG1APNOfgHwwAvDADaAcgBCAVwA2AIzYQ2U0mIA0MMQGEAFm1Ko2YACZl1mgMoBHKdlJQZyMQF0AUK9CRYCFOjBZcPGspfWQJdmAUKAhGHkCRZyFRSVkFJRVzbT0DI1NVDTFguwcnZyA"
 />
 
-You can use either one. I prefer the second one because it's less to type.
+I prefer the `any[]` syntax because it's less to type.
 
 ## Function Types
 
