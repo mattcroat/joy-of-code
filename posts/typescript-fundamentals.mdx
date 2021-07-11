@@ -45,7 +45,7 @@ _note: This one was a massive one to write so there might be more typos than usu
 25. [Intersection Types](#intersection-types)
 26. [Type Assertion](#type-assertion)
 27. [Type Assertion Using `!`](#type-assertion-using-)
-28. [Type Assertion For Rebels](#type-assertion-for-rebels)
+28. [Type Assertion Conversion](#type-assertion-conversion)
 29. [Literal Types](#literal-types)
 30. [Literal Inference](#literal-inference)
 31. [Object Index Signatures](#object-index-signatures)
@@ -1134,27 +1134,28 @@ We're going to learn ways to abstract these types to make it more readable.
 
 ## Union Types
 
-TypeScript let's us combine types in different ways.
-
-A union type is a type made from at least two types and represents any values of those types:
+A **union type** is a type made from at least two types and represents any values of those types.
 
 ```ts:playground.ts
 function logPokemon(pokemon: string[] | string) {
   console.log(pokemon)
 }
 
-logPokemon(['Bulbasaur', 'Charmander', 'Squirtle']) // ['Bulbasaur', 'Charmander', 'Squirtle']
-logPokemon('Pikachu') // Pikachu
+// ['Bulbasaur', 'Charmander', 'Squirtle']
+logPokemon(['Bulbasaur', 'Charmander', 'Squirtle'])
+
+// Pikachu
+logPokemon('Pikachu')
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoRIggIacZLgB0qNKXKEw-EQF8RIxVjyqiLAOQAhEMgBGAQxpWQ9IwBpERgMIALK-XxWwAE1wHZyMAZQBHEBh6KFkjNnVdFWIjDBhsKwh3ECN+IA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoROMQQENOMlwA6VGlLlCYfiIC+IkQHpdiFgHIAQiGQAjAIY0rIekYA0iIwGEAFlfr4rYACa4Ds5GAMoAjiAw9FByRmwiSlh4akTGZpY2dkEuHl4+-oFOLuGR0bFsGnoGGDDYVhDuIAnoSRRgREY1dQ0gRvxAA"
 />
 
-We're saying that `pokemon` can either be an array of Pokemon `string[]`, or a single Pokemon of type `string`.
+The `pokemon` argument can only be an array of Pokemon of type `string[]` or a single Pokemon of type `string`.
 
-You can only do things with the union type that every member supports:
+You can only do things with the union type that every member supports meaning that you can't just use a `string` method without checks because you said to TypeScript it could be `string[] | string`.
 
 ```ts:playground.ts
 function logPokemon(pokemon: string[] | string) {
@@ -1171,31 +1172,36 @@ logPokemon('Pikachu') // 🚫
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoRIgD0ExBnpwSuelACeiAORQ4AVRIL6AYQCGNXGsQATOLhqIwcKIlwAPGHUQJEKherqNm7NQA6REBeDcBqvbFECAQaOGRcQNQ0UnJCMEDNHT0jEyJ+fhEAXxERJKw8NKIWNQAhEGQAI2NDEHo1ABp1fQALQ3p8QzBzRQ71AGUARxAYJXi1NgKy1OI1DBhsQwhukDV+IA"
 />
 
-We can just narrow the type as before:
+Instead we have to put checks in place to narrow down the type so TypeScript knows the exact type.
 
 ```ts:playground.ts
 function logPokemon(pokemon: string[] | string) {
   if (Array.isArray(pokemon)) {
+    // `pokemon` can only be an array
     console.log(pokemon.map(pokemon => pokemon.toUpperCase()))
   }
 
   if (typeof pokemon === 'string') {
+    // `pokemon` can only be string
     console.log(pokemon.toUpperCase())
   }
 }
 
-logPokemon(['Bulbasaur', 'Charmander', 'Squirtle']) // ['BULBASAUR', 'CHARMANDER', 'SQUIRTLE']
-logPokemon('Pikachu') // PIKACHU
+// ['BULBASAUR', 'CHARMANDER', 'SQUIRTLE']
+logPokemon(['Bulbasaur', 'Charmander', 'Squirtle'])
+
+// PIKACHU
+logPokemon('Pikachu')
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoRIhjBERAIL16AQwCeAOhg05ipaXKEw-QaPHiICGnGS4VqNDrx6V+BSTsUkAXgB8iMvYQqoOABVEhJcegBhBRpcIgN+MUQAXxFEyWkoJTC4KV83RHdCxAByOkZmYsNEkzMLKxtXB0CQsMjo2INElJSRGyw-MCIWYoAhEGQAI2iFEHpigBoSiIALBXonMAATcIWSgGUARxAYeihLYrYEvt1iYowYbAUIZZBKoA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoROMQxgiIgEF69AIYBPAHQwa8pctLlCYfoNESTiAPRnEAAzJ59VxBEVIEyZYgBGuRM58KVYqbiEAg0cMi4qqhounYIqviKJLEUSAC8AHyItqmqUHAAqiQkuPQAwoo0uESG-IHiAL4i9ZLSRFDKJXDSOfqIaQOIAOR0jMxDRi0mFta9CA5OLmBunt6jfFMSIWBhEVHoKfp5hcWlFVU1dSZNTSIzLEMAQgUAMo+yAMqyBQBKQwA0wzKAAlZD8ALKyAByABEAKJ-QFDD4ARQKAEkfgAVF5woZsETRLBxMBEB6PEDIDyVRQgegAoEAC0U9ESYAAJqUGciAI4gGD0KARfF1O6WDDogDSshBBUJ6GJqSIQwwMGwiggjJAEyAA"
 />
 
-The second `if...else` statement is not required since if `pokemon` isn't of type `string[]` it can only be `string`. Keep in mind TypeScript doesn't save us at runtime.
+The second `if...else` statement is not required since if `pokemon` isn't of type `string[]` it can only be `string`.
 
-In cases where the union members like `string[]` and `string` have same methods like `slice` you don't have to narrow the type:
+In situations where the union members like `string[]` and `string` overlap and share the same methods such as `slice` you don't have to narrow the type.
 
 ```ts:playground.ts
 function logPokemon(pokemon: string[] | string) {
@@ -1203,18 +1209,23 @@ function logPokemon(pokemon: string[] | string) {
   console.log(pokemon.slice(0, 1))
 }
 
-logPokemon(['Bulbasaur', 'Charmander', 'Squirtle']) // ['Bulbasaur']
-logPokemon('Pikachu') // 'P'
+// ['Bulbasaur']
+logPokemon(['Bulbasaur', 'Charmander', 'Squirtle'])
+
+// 'P'
+logPokemon('Pikachu')
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoROMQB6SYgDucethqJgCxACM4UABaIoATxK5lgXg3AsjtiJEBDTjJcAOlRpS5QmAc1kMCLiIAGABpEAEZ+fhEAXxERZyw8dyIWAHIAIRBkdQBDGiyQemTg5IBhbSz6fCywABNcAqKAZQBHEBh6KHtktgi4t2JkjBhsLIhtEGT+IA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoROMQB6SYgDucethqJgCxACM4UABaIoATxK5lgUHIxEiAhpxkuAHSo0pcoTB2ayGBFxEADABpEAEZ+fhEAXxERaUQWAHIAIRBkdQBDGlSQeji2EUcsPFcieKSU9MzswLiAYW1U+nxUsAATXErEOIBlAEcQGHooWxyw6Jk4jDi89AKKMCJxmGxUiG0QOP4gA"
 />
 
 ## Discriminated Unions
 
-A **discriminated union** is when you **narrow** the members of the union that have the same **literal type**.
+A **discriminated union** is the result of **narrowing** the members of the union that have the same **literal type**.
+
+For example we can use a **type guard** to narrow the Pokemon type to `'fire' | 'water'` but we can also provide TypeScript with hints so it knows all of the possible types.
 
 Let's _switch_ 🤭 it up for fun:
 
@@ -1239,30 +1250,36 @@ function pokemonAttack(pokemon: Pokemon) {
 }
 
 // 🔥 'Flamethrower'
-pokemonAttack({ pokemonType: 'fire', flamethrower: () => console.log('🔥 Flamethrower') })
+pokemonAttack({
+  pokemonType: 'fire',
+  flamethrower: () => console.log('🔥 Flamethrower')
+})
 
 // 🌀 'Whirlpool'
-pokemonAttack({ pokemonType: 'water', whirlpool: () => console.log('🌀 Whirlpool') })
+pokemonAttack({
+  pokemonType: 'water',
+  whirlpool: () => console.log('🌀 Whirlpool')
+})
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmcjADZw4RgAWU6A7tAPwBcyAFAJTIBeAHzIAbumAATUuWb1gUSgAd06Spx79hYidPLIV2PCAAqATyUQuAchgKI15AB9k15nEhRrxAL7FiMACuIAhgwPgGWLj4AIJgYIiY3IbRIFwYRvj8JPoAzszAYAj0PCnGAHRl+OaW2TL6ZAhwuSi29tYc9Q36APQ9yADCcCAg6GDIoOLYyMPI6ABGAFYQochywMUTuZG5ucDzlGauwZIQdiAQktblyIC8G4DVe13dZFUg5VQ0dIws0HxPz-MoBA4Jh-o1mq13J4OmCGn1BsNRuNJlEZgQFstVutNsBtipdvtDscQKdzpdrndHs8Gq9yutFCo1H9qfpAcDQfo-H5iPDboBSXdcADFqLQGExWF5iK84gkEElCJFMqYLFZXHYgdYADQUEVfcXQLh8QQiBD4XJqCDlSjoADm3Gs-OQws+Yp+Xn4Pl4-nhgB4NwAA+64AOryBmqSjeaXxRLcBWvGqqtweaBatYh5Rhw1aE1mi1W232-3IYMKdNqawe3hAA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmcjADZw4RgAWU6A7tAPwBcyAFAJTIBeAHzIAbumAATUuWb1gUSgAd06Spx79hYidPLIV2PCAAqATyUQuAchgKI15AB9k15nEhRrxAL7FiMACuIAhgwPgGWLj4AIJgYIiY3IbRIFwYRvj8JPoAzszAYAj0PCnGAHRl+OaW2TL6ZAhwuSi29tYc9Q36APQ9yADCcCAg6GDIoOLYyMPI6ABGAFYQochywMUTuZG5ucDzlGauwZIQdiAQktblyIC8G4DVe13dZFUg5VQ0dIws0HxPz-MoBA4Jh-o1mq13J4OmCGn1BsNRuNJlEZgQFstVutNsBtipdvtDscQKdzpdrndHs8Gq9yutFCo1H9qfpAcDQfo-H5iPDboBSXdcADFqLQGExWF5iK84gkEEkcuRXjUrK47EDrAAaLofUXfCVcPiCEQIfC5NQQcqUdAAc241n5yGFnzFPy8vF87p5-UAPBuAAH3XAB1eQM1SUbzS+KJbgKl5RYzKmxQ6Carr05Shg1aY2m82Wm12v3IIMKdNqazuny8IA"
 />
 
-The type-checker can't determine if `flamethrower` or `whirpool` is present based on `pokemonType` property. We know more than TypeScript.
+The type-checker can't determine if `flamethrower` or `whirpool` is present based on the `pokemonType` property because they could not exist as they're optional and we can't require both because that would defeat the purpose.
 
-We have to be more intentional about what we know to TypeScript:
+To solve this problem we have to be more explicit and separate the arguments so TypeScript can be sure of the type.
 
 ```ts:playground.ts
 interface Fire {
-    flamethrower: () => void
-    pokemonType: 'fire'
+  flamethrower: () => void
+  pokemonType: 'fire'
 }
 
 interface Water {
-    whirlpool: () => void
-    pokemonType: 'water'
+  whirlpool: () => void
+  pokemonType: 'water'
 }
 
 type Pokemon = Fire | Water
@@ -1278,73 +1295,81 @@ function pokemonAttack(pokemon: Pokemon) {
   }
 }
 
-// '🔥 Flamethrower'
-pokemonAttack({ pokemonType: 'fire', flamethrower: () => console.log('🔥 Flamethrower') })
+// 🔥 'Flamethrower'
+pokemonAttack({
+  pokemonType: 'fire',
+  flamethrower: () => console.log('🔥 Flamethrower')
+})
 
-// '🌀 Whirlpool'
-pokemonAttack({ pokemonType: 'water', whirlpool: () => console.log('🌀 Whirlpool') })
+// 🌀 'Whirlpool'
+pokemonAttack({
+  pokemonType: 'water',
+  whirlpool: () => console.log('🌀 Whirlpool')
+})
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgGLCig3gKGf5GAGzgFsIwALKAewHdoAuZACgEpkBeAPmQDcawACZ4CABxoBrCKRogAKgE8xEZgHIYGCGpwBfHDlCRYiFAHU4x5LgLI6lDEQk0izdl14Dho-BOmyFZVVkNTpLaB19HDAg5AAFKRk5LjQtZAAfZAtjAxgAVxAEMGBkvySQAEEwMERJFjKA5gT-OQ4bAgBnOmAwBEpWBrkAOkHAlTafW2QEOA6UDS01Rkmp8USAoeIyCmp6aHYV1eQAI0w4SUP8GbmQsOMly6nRoftHZyIDo6nTiHPJ-SiAHpAchALwbgFJdkKoEjkKi0BhQHSjKo1BB1LDIUZKFTqTSYNQAGkIMJ28KYrA4PGmcg6LggQyINAA5iw1BC0CS4XtERxdGwDMDkIAeDcAAPshMwOKBOGguJHrOQo2osDFYoLqO4RImvKXvNyU3gIGl0hnM1mirKS6Wy3lsIA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgGLCig3gKGf5GAGzgFsIwALKAewHdoAuZACgEpkBeAPmQDcawACZ4CABxoBrCKRogAKgE8xEZgHIYGCGpwBfHDlCRYiFAHU4x5LgLI6lDEQk0izdl14Dho-BOmyFZVVkNTpLaB19HDAg5AAFKRk5LjQtZAAfZAtjAxgAVxAEMGBkvySQAEEwMERJFjKA5gT-OQ4bAgBnOmAwBEpWBrkAOkHAlTafW2QEOA6UDS01Rkmp8USAoeIyCmp6aHYV1eQAI0w4SUP8GbmQsOMly6nRoftHZyIDo6nTiHPJ-SiAHpAchALwbgFJdkKoEjkKi0BhQHSjKo1BB1dqjJQqdSaTBqAA0oi2sN2CLcHB40zkHRcECGRBoAHMWGoIWgYTt4RE2HoeThgchADwbgAB9kJmBxQJw0FxI9ZyFG1FgYuVjYKhcKIwn4V6S97kjxUkA0oh0hnMtQirISqUynm6NhAA"
 />
 
 By the use of a type guard style check `==`, `===`, `!=`, `!==` or `switch` on the discriminant property `pokemonType` TypeScript can do **type narrowing** based on the **literal type**.
 
-This also helps us catch mistakes if something passed through the `switch` clauses that shouldn't.
+This also helps us catch mistakes if something passed through the `switch` clauses that shouldn't have.
 
 ## Type Aliases
 
-So far we've been using types directly in type annotations. This is hard to read and not reusable.
+So far we've been using types directly using **type annotations**. This is hard to read and not reusable.
 
-A type alias is as the name suggests — just an alias for a type. Think of it as a shorthand.
+A **type alias** is as the name suggests — just an alias for a type.
 
-Just how there's people with different _types_ 🤭 of personalities sharing the same name.
+Just how there's people with different _types_. 🤭
 
-Take an array of Pokemon:
+You should already be familiar with the **object type** syntax.
 
 ```ts:playground.ts
-type Pokemon = { id: number, name: string, type: string }
+type Pokemon = { id: number, name: string, pokemonType: string }
 
 const pokemon: Pokemon[] = [{
   id: 1,
   name: 'Pikachu',
-  type: 'electric'
+  pokemonType: 'electric'
 }]
 
-pokemon.forEach(pokemon => console.log(pokemon)) // { 'id': 1, 'name': 'Pikachu', 'type': 'electric' }
+// { 'id': 1, 'name': 'Pikachu', 'pokemonType': 'electric' }
+pokemon.forEach(pokemon => console.log(pokemon))
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbygSwBMAuKNAV2QCMIAnAGjIENkJSBnYW-NAc0dCQOXHrygBfAFCSAxuk5QwiFOlLwkqNAG0AulihackqARJQAjPWPNWpAOQx8CJjIAW5O1ZOC2UOxAAbCBkRGTtJcR1pJQ10ADoAMzhaAFEXVwAKGJUMTAA+KDk0djgguIC4XizlTQBKWqA"
+  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbygSwBMAuKNAV2QCMIAnAGjIENkJSBnYW-NAc0bCIU6ACrg2UTtz5QAvgCh5AY3ScogpKjSl4m9AG0Aulij6c8qJYIkoARnoWraFhIDkMfAiZKAFuVcOVupCWmKQpK4QADYQSlz4Sq7ysoaKAPRpuFCuRK6k9tnOrHnZHl6+-oyuGsJoYRAlkTFx3Ily8jVaAHQAZnC0AKLePgAUnehYAHxQKmjscDFdUXC8YyHoAJQbQA"
 />
 
-Types can get long and unwieldy. We can alias and reuse them across our code. We can use a `types.ts` file where we import these types from.
-
-Note how we use `Pokemon[]` to say it's an array of type `Pokemon`. We're not just limited to primitives. We can also it this way:
+Instead of writing `Pokemon[]` where `[]` indicates to TypeScript it's an array of Pokemon we can say `{ id: number, name: string, type: string }[]` which is equivalent.
 
 ```ts:playground.ts
-type Pokemon = { id: number, name: string, type: string }[]
+type Pokemon = { id: number, name: string, pokemonType: string }[]
 
 const pokemon: Pokemon = [{
   id: 1,
   name: 'Pikachu',
-  type: 'electric'
+  pokemonType: 'electric'
 }]
 
-pokemon.forEach(pokemon => console.log(pokemon)) // { 'id': 1, 'name': 'Pikachu', 'type': 'electric' }
+// { 'id': 1, 'name': 'Pikachu', 'pokemonType': 'electric' }
+pokemon.forEach(pokemon => console.log(pokemon))
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbygSwBMAuKNAV2QCMIAnAGjIENkJSBnYW-NAc0dCQOXHrygBfANoBdAFCyAxuk5QwiFOlLwkqDNkk5ZUAiSgBGekeatSAchj4ETBQAtyty8cFsotiABsIBREFW1lxOVk1HXQAOgAzOFoAUWcXAApojT0APiglNHY4QNj-OF5M9V0ASmqgA"
+  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbygSwBMAuKNAV2QCMIAnAGjIENkJSBnYW-NAc0bCIU6ACrg2UTtz5QAvgG0AugChlAY3ScogpKjSl4u9FijycyqJYIkoARnoWraFhIDkMfAiZqAFuVcOVtpCemKQpK4QADYQalz4aq7KsirKAPRpuFCuRK6k9tnOrHnZHl6+-oyuOsJoYRAlkTFx3IlyyjV6AHQAZnC0AKLePgAUncaYAHxQGmjscDFdUXC8YyHoAJQbQA"
 />
 
-I prefer the first example because of semantics. If we have a single `Pokemon` type we can specify elsewhere it's a list of Pokemon with `Pokemon[]`. Else we would have to make another type like `Pokemons` (even if Pokemon is already plural) to indicate there's many.
+I prefer the `Pokemon[]` syntax because of reusability. We can use the `Pokemon` type on single Pokemon where it makes sense and `Pokemon[]` on a collection of Pokemon.
 
-We used an object type but it can be anything:
+This saves us from creating another type and using weird grammar like `Pokemons` to indicate there's many even if Pokemon is already plural.
+
+The next example shows how we can reuse the `Pokemon` type by using it as the argument and return type of the `logPokemon` function.
 
 ```ts:playground.ts
 type Pokemon = string[] | string
@@ -1361,19 +1386,22 @@ function logPokemon(pokemon: Pokemon): Pokemon {
   return 'Please enter a Pokemon.'
 }
 
-console.log(logPokemon(['Bulbasaur', 'Charmander', 'Squirtle'])) // ['BULBASAUR', 'CHARMANDER', 'SQUIRTLE']
-console.log(logPokemon('Pikachu')) // 'PIKACHU'
-console.log(logPokemon()) // Please enter a Pokemon.
+// ['BULBASAUR', 'CHARMANDER', 'SQUIRTLE']
+console.log(logPokemon(['Bulbasaur', 'Charmander', 'Squirtle']))
+
+// 'PIKACHU'
+console.log(logPokemon('Pikachu'))
+
+// Please enter a Pokemon.
+console.log(logPokemon())
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigZ2AJwEs0BzAbQF0oAfXA4kgKEYDMBXNAY2EPSgBs4JeElRoAFGEQp0ALljSxASnkiZGAN6MoOqIRZRxAQXz4AhiAB0hHCfMhJi9EqVQtuj1HwRgbfBilRdEtkMzBHIIxMAD4oQPVLYDgAVTBIfABhMxwIcRdtXQBfZg99Q1BIOAN4sSxMbAByPCJSBtd3Tx1vX384pzRElLSITOzcpQKdYsmvHz8MBph+CDGoCDRgEagzBUjLBsZpznQcOGXLQRJxS7UxcTIGgCE2fgAjbLM-BoAaKAaMgAWZnwoTQABMRj8-gBlACObEI+GAywaFBcUAA9BioA9HskADKPIzQozJABKUP+AAkjGSALJGAByABEAKIU34NaEARWSAEkyQAVfGs1FQRjHNCnc6Xa5CW7ocSLQgIMycAFsNquLF-GB8gDSRgyVOSB0l0ogFyEcuE-Ty2uxSxWOTWGy2OwVAyAA"
+  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigZ2AJwEs0BzAbQF0oAfXA4kgKEYDMBXNAY2EPSgBs4JeElRoAFGEQp0ALljSxASnkiZGAN6MoOqIRZRxAQXz4AhiAB0hHCfMhJi9EqVQtuj1HwRgbfBilRdEtkMzBHIIxMAD4oQPVLYDgAVTBIfABhMxwIcRdtXQBfZg99Q1BIOAN4sSxMbAByPCJSBtd3Tx1vX384pzRElLSITOzcpQKdYsmvHz8MBph+CDGoCDRgEagzBUjLBsZpgHojqDIGgCFkgBkLowBlI2SAJQaAGigGjIAJI2eAWSMADkACIAUVeHwa9wAiskAJLPAAq1zBDQojE46BwcGWlkEJHEBLUYnE5wubH4ACNsmY-O9PhkABZmfChNAAExGDOhAEc2IR8MBluj8owTp8YPCANJGH7JA5YtA4vEEolCEnocSLQgIMycJlsNoTcWnJYrHJrDZbHaagaY7G4iD4oTq4T9PJKIA"
 />
 
-Notice how we're using the same `Pokemon` type as the argument and the return value for `logPokemon`.
-
-Functions are just special objects in JavaScript:
+Functions are just special objects in JavaScript which is a roundabout way of saying we can type them as any other object.
 
 ```js:example.js
 function getPokemon() {
@@ -1392,26 +1420,31 @@ console.log(getPokemon.pokemon) // 'Pikachu'
   alt="Functions are objects"
 />
 
-This is reflected in the types because we can just describe the shape of an `object` including the call signature.
-
-Using a a **type alias** to type a **call signature of an anonymous function**:
+The next example shows ways to type different **function expressions** using a **type alias**.
 
 ```ts:playground.ts
 type LogPokemon = (pokemon: string) => void
 
-const logPokemon: LogPokemon = (pokemon) => console.log(pokemon)
+// named function expression
+const logPokemon1: LogPokemon = function logPokemon(pokemon) {
+  console.log(pokemon)
+}
 
-logPokemon('Pikachu') // 'Pikachu'
+// anonymous function expression
+const logPokemon2: LogPokemon = function(pokemon) {
+  console.log(pokemon)
+}
+
+// anonymous arrow function expression
+const logPokemon3: LogPokemon = (pokemon) => console.log(pokemon)
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBAMg9gcwApwNYQLZwHZQLxQAUYamOAXFAM7ABOAltggJT4B8UAbnPQCYBQ-AMY4aUADaIU6LNkrxkpWfiIkZOVng4jsVOOIgA6SQmJKNgk9LLZCAciT1UAQyEALAK53mQA"
+  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBAMg9gcwApwNYQLZwHZQLxQAUYamOAXFAM7ABOAltggJT4B8UAbnPQCYBQ-APRCo2AIYYIvKADMArtgDGwejigQAHmFoQqVNdn5KcNKABtEKdFmwBGSvGSlb+OYpWGLVlzmK-sVgBvfigwqBNsKjhzCAA6SwR-GxxmfgBfQREocWwcECx5KndlVXUtHT0DHGNTYG9nFOwAJkcfJrcFUsNkskCoEPCI0xj4xN7bNMzhUVz8wuLxWlo4AHcSz3LtXX1DWqj6xOs+gGY2xr63CdT2YajRhMRrwKA"
 />
 
-This doesn't work for regular function declarations (named function expressions).
-
-Using a **type alias** for **construct signatures** used to define the type signature of a constructor function:
+The next example shows how we can use a **construct signature** inside a **type alias** to type a constructor function.
 
 ```ts:playground.ts
 type Pokemon = {
@@ -1439,21 +1472,20 @@ function addPokemon(pokemonConstructor: PokemonConstructor, name: string, pokemo
 
 const pokemon: Pokemon = addPokemon(PokemonFactory, 'Pikachu', 'electric')
 
-console.log(pokemon) // PokemonFactory: { "name": "Pikachu", "pokemonType": "electric" }
+// PokemonFactory: { "name": "Pikachu", "pokemonType": "electric" }
+console.log(pokemon)
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbwFBSFRoCGyEAXFAM7ABOAlmgOYFFiIroAq4lN9JqwC+ePKEixOqNAGF0tOgFcAxsDh0suNoTQQA7gApS5KoqEAaKByQzekM4JYBKKvFvo8ovCoA2JamopDzQAMRI1DRAoBmQwXxQINGAg9y4MfCJiMn5zFh1raR4+R0Z8gpUFelV1OmMc0stCkPtcp2ZnbSys4AALBmoAOhNobBGCnv6hm3TWrRm7PgLRbwAzJTQ1BnQoEgATPbSZQwX0eTRFGo03Irkq5Ui6KxHGlitTtFbXjpuQrqI6BBgEo6Bg9PpmulzpdHvVyO9bq1nABuLxiHxVSEyX7pLT7Q63QxHdDhR4gKwAchgDAQEV6SgplIgCTUjBUFOcYkqFzgCUGvjgzBOt06AHpRcF0qTaiAqDgoAAiEYKqgK6m0lT0hVWBUfVoqxXMiCshgqBVQYRAA"
+  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbwFBSFRoCGyEAXFAM7ABOAlmgOYFFiIroAq4lN9JqwC+ePKEixOqNAGF0tOgFcAxsDh0suNoTQQA7gApS5KoqEAaKByQzekM4JYBKKvFvo8ovCoA2JamopDzQAMRI1DRAoBmQwXxQINGAg9y4MfCJiMn5zFh1raR4+R0Z8gpUFelV1OmMc0stCkPtcp2ZnbSys4AALBmoAOhNobBGCnv6hm3TWrRm7PgLRbwAzJTQ1BnQoEgATPbSZQwX0eTRFGo03Irkq5Ui6KxHGlitTtFbXjpuQrqI6BBgEo6Bg9PpmulzpdHvVyO9bq1nABuLxiHxVSEyX7pLT7Q63QxHdDhR4gKwAchgDAQEV6SgplIgCTUjBUFOcYgA9FzgulSbUQFQcFAAEQjUVUUXU2kqemiqyij6tSVi5kQVkMFSiqCiSoXOAJQa+ODME63ZxAA"
 />
 
-Most of what you see here is not exclusive to **type aliases**. We can swap the `type` syntax for `interface` and it would work the same.
-
-We're going to learn more about it next.
+This is more of a "showing you can do it" example than something you're going to use.
 
 ## Interfaces
 
-Interfaces are another way to name an object type:
+**Interfaces** are another way to name an object type.
 
 ```ts:playground.ts
 interface Pokemon {
@@ -1483,21 +1515,26 @@ pokemon.forEach(pokemon => pokemon.attack())
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmcsACYD8AXMiAK44BG0p5IcOE9AzmCigA5hzIAHLLnwAVAJ7jeyAUJCjyyOC2AAbYGDn9BIsZrBhEmABQBKegDd0VYgF9ixBPgHJJ2PCHoMP3wAbQBdZABeZBCSDSp6AEYAGlMuHnoAclRgTEQAC0ZM1I1faRB5RSyIHQgEYwRi0y1dfUNkTMBCsmQZQpBKaBZ0HTAmjThzS1siUw1PED5hiAA6HXRhKwADABJCMHzgPmX0iBdkRj4ISmRd-cPllr0DF2XNm1M3FzD3AHofjpyeQQhXOl2u3V6jH6g2Go2IZX8yxg6CgAFEClYEfgogA+HxSRETCwIaw2GxAA"
 />
 
-We can mark `object` properties optional with `?` and type function call signatures `attack(): void` just like with **type aliases**
+Inside the **interface** we can say properties are optional using `?` and type required functions like `attack(): void`.
 
-Interfaces and type aliases are almost interchangable. You can also use a semicolon or period after each property. It's optional.
+**Interfaces** and **type aliases** are almost interchangable.
 
-> For the most part, you can choose based on personal preference, and TypeScript will tell you if it needs something to be the other kind of declaration. If you would like a heuristic, use interface until you need to use features from type. - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)
+You can also use a semicolon or period after each property if you want as it's purely optional.
 
 ## Type Aliases or Interfaces?
 
-The short answer is — doesn't matter. Pick one and if it doesn't work for you use the other one. You can even use both. It's more about semantics.
+> For the most part, you can choose based on personal preference, and TypeScript will tell you if it needs something to be the other kind of declaration. If you would like a heuristic, use interface until you need to use features from type. - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)
 
-- Interface is more appropriate for describing shapes of objects
-- Interfaces and type aliases can be extended
-- You can add new fields to an existing interface but not to a type alias
+The short answer is — **doesn't matter**. Pick one and if it doesn't work for you use the other one.
 
-Extending a type alias using intersections:
+I use both where it makes sense:
+
+- **Interface** is more appropriate for describing shapes of objects
+- You can add new fields to an existing **interface** but not to a **type alias**
+
+We haven't learned about **intersections** yet but briefly it just let's us combine types.
+
+The next example shows how using **intersections** we can extend a **type alias** by combining the type `Pokemon` and `{ pokemonType: 'electric' }` into a new type `Pikachu`.
 
 ```ts:playground.ts
 type Pokemon = {
@@ -1505,22 +1542,22 @@ type Pokemon = {
   name: string
 }
 
-type Pikachu = Pokemon & { type: 'electric' }
+type Pikachu = Pokemon & { pokemonType: 'electric' }
 
 // has to satisfy the same checks ✅
 const pikachu: Pikachu = {
   id: 1,
   name: 'Pikachu',
-  type: 'electric'
+  pokemonType: 'electric'
 }
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbwFBSFQCWAJgFxRoCuyARhAE4FFoCGyElAzsI8WgDmeAL548oSLGII2AYwAW1LLEQp0UAGS4okrlADkEADYQ5fYnINQxeAPR2oCtt11wo3NsGLcAZiF0FaE9OKEUzBFdAXg3AWR28OXReKDAZeSVKGFTFZWx8IhIKKABGABoWQnZOSgNM2WyDMvy9apMzCytRIA"
+  src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbwFBSFQCWAJgFxRoCuyARhAE4FFoCGyElAzsI8WgDmeAL548oSLGII2AYwAW1LLEQp0UAGS4oYNajQAVcFygByCABsIcvsTlmoYvAHoXUBW25RgcKNzZgYm4AMxAfBWgAzihFGwRvQF4NwFkdvDl0Xl0ZeSVKGGzFZWx8IhIKKABGABoWQnZOSjN82UKzGtK9JANjSEarGzsHUSA"
 />
 
-Extending an interface:
+In the case of **interfaces** we use the **extends** keyword to extend them.
 
 ```ts:playground.ts
 interface Pokemon {
@@ -1529,23 +1566,23 @@ interface Pokemon {
 }
 
 interface Pikachu extends Pokemon {
-  type: 'electric'
+  pokemonType: 'electric'
 }
 
 // has to satisfy the same checks ✅
 const pikachu: Pikachu = {
   id: 1,
   name: 'Pikachu',
-  type: 'electric'
+  pokemonType: 'electric'
 }
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmcsACYBcyIArjgEbSnkhw4S0DOYUoAObEAvsWKhIsRClTBMiABb1kEAB6QQlHmiy58RNmTABPAA7dkAcggAbCAn7AEV0eID075Irg6w6ZB44MGAeGBNkMEUUIK5kBGiETB1AXg3AWR3iBHw+ZDN5JXpaOQUElQBeQ3IKGmQARgAaIzpOSytigqtGqtMLWht7RwEXUSA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmcsACYBcyIArjgEbSnkhw4S0DOYUoAObEAvsWKhIsRClTBMiABb1kEAB6QQlHmiy58RNmQAOevCAAqAT2PdkAcggAbCAn7AE90eID0P5IpwOmDoyDxwYMA8MFbIYIoo4VzICAkImDqAvBuAsjvECPh8yMbySvS0cgqpKgC8huQUNMgAjAA0RnScdvYVpfZt9abY5ta2tI4ubgKeokA"
 />
 
-Interfaces can get you into hot water if you don't remember that you can use an existing interface on accident:
+When using an **interface** you should always keep in mind that you can use an existing **interface** which could lead to some unexpected problems shown in the next example.
 
 ```ts:playground.ts
 interface Window {
@@ -1553,9 +1590,10 @@ interface Window {
   style: 'double-hung' | 'casement' | 'awning' | 'slider'
 }
 
-// Type '{ color: string; style: "double-hung"; }' is missing the following properties from
-// type 'Window': applicationCache, clientInformation, closed, customElements, and 207 more. 🚫
-const customWindow: Window = {
+// Type '{ color: string; style: "double-hung"; }' is missing
+// the following properties from type 'Window': applicationCache,
+// clientInformation, closed, customElements, and 207 more. 🚫
+const windows: Window = {
   color: 'white',
   style: 'double-hung'
 }
@@ -1563,18 +1601,18 @@ const customWindow: Window = {
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgOqgCYHsDuyDeAUMicglgDZZQBcyAzmFKAObGmMCeFEdA5NgCuAIx4BaABaCQLPsgA+yPgjj0IAWwjg5ivnBwhWOpfQrAM0PoQC+hQgHp7yACqcADij74ylanUbMMgDcDGDcvMgAREKiEJLSLJEh1nLA9MjqafSsyGASKDCUVDg5blBYHlBgwBDpMOXqDk5hHkroINg4fHRwbm5mKtVYIADCiPkANGRmWmAAkiCFUOpwQyBTCFRqGBuCjFjqAKI8muD0U3AdyABMAAwA7BnUEAB0yIC8G4DVe4TkIIxkezAB3anToINwyAAvAR2CRyFRaEocBJgJA+BNYaFwvwYuIpDIrNYgA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgOqgCYHsDuyDeAUMicglgDZZQBcyAzmFKAObGmMCeFEdA5NgCuAIx4BaABaCQLPsgA+yPgjj0IAWwjg5ivnBwhWOpfQrAM0PoQC+hQgHp7yACqcADij74ylanUbMMgDcDGDcvMgAREKiEJLSLJEh1nLA9MjqafSsDk5gEigwlFQ4rMhuUFgeUGDAEOkwlerIYR5K6CDYOHx0cG5uZiq1WCAAwogFADS5ZGZaYACSIEVQ6nDDIJOzWGoYWwiCjFjqAKI8muD0W3CdyABMAAwA7BnUEAB0yIC8G4DVe4TkIEYyFKnVw9DoHS6yAAvAR2OQqLQlDgJMBIHxpiQuDx+DFxFIZFZrEA"
 />
 
-`Window` is already an existing type that's declared in the `lib.dom.d.ts` DOM types file for the global `window` object.
+The type `Window` is already declared in `lib.dom.d.ts` types for the global `window` object.
 
-There's some controversy around how you should name your interfaces. People from other languages might be used to using the `I` prefix. In TypeScript it's discouraged. I leave that to your judgement.
+Let's briefly touch upon naming conventions. For the most part I just name the type the capitalized version of what I'm trying to type. For example `pokemon` would be `Pokemon`. Sometimes that's not enough when dealing with something like React where component names are capitalized so you can use a suffix such as `PokemonType` for a **type alias** or a prefix `IPokemon` for the **interface** or even your own convention such as `PokemonProps`. For some reason using the `I` prefix in TypeScript for **interfaces** is controversial but I think it's alright as long as you're consistent with your naming conventions.
 
 ## Intersection Types
 
-**Intersection types** let us combine types.
+**Intersection types** let us combine types using the `&` operator.
 
-To combine types we use the `&` operator:
+The next example also shows how we can use **interfaces** and **type aliases** together where it makes sense.
 
 ```ts:playground.ts
 interface Pokemon {
@@ -1617,23 +1655,21 @@ charizard.firePunch() // 'Charizard used 🔥 Fire Punch.'
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmciHDhAFzIDOYUoA5qeQBYAOdIArjgBG0dmS5Zc+ACoBPLrWQBtRsxAsANAyasA-AF1iAX2LFQkWIhQBBQcAA2wMDKKjkgu3ABeEABQBKOgA3dGAAEyMTM2h4JGQAWXRAiHoXcmQYYCgIVD4QBA5-IJDw42IneWQAMUyUAF5kG3tHZwAyeMTkk3KUaqyMbDwCev7JAjbeiBMEfEZkfLhmTwXQugmRweR6kjTKajoAcgBhDgXgJahQ-fVXbjoARgAGB+u08QHpOQVFfYysq+QfnYZKx9noXuR3F5fH5UmlyNMQPR0HYIAA6OzoFg+AAGABJCGAOMB6KjdhBDMg+PQIKFkIBeDcApLvIABCHm8qOxflchnBZF+2Vy+X8sLhcxmyLRGKxeIJRJJZIpVJp9KZEzQgo4HK5aWMpWI80Wy1RkO8woA9GaAcdTudaUraYyWWy0ft9SdDRdUfycnkCjCLVb3WdlpTqQ7VTV1b7UfsgA"
 />
 
-This is what I meant when I mentioned that you can use **type aliases** and **interfaces** together. Use them in situations where it makes sense.
+I threw in a sneaky **tuple** in `pokemonType` because a Pokemon can have dual-types. We're going to learn more about **tuple** later.
 
-I threw in a sneaky **tuple** in `pokemonType` because a Pokemon can have dual-types. We're going to learn more about it later.
-
-We could have **extended** the **interface** instead:
+If we wanted to use an **interface** we could and it works just the same.
 
 ```ts:example.ts
 interface FirePokemon extends Pokemon, Ability, Moves {}
 ```
 
-The difference is negligible. I think **type aliases** were more appropriate to use here.
+It's easier to compose types using **type aliases**.
 
 ## Type Assertion
 
-Type assertion is useful when you know more about a type than TypeScript. You can use it to specify a more specific type or override a type. Think of it like type casting.
+**Type assertion** is like type casting in TypeScript where it can be used to specify or override another type.
 
-In this example TypeScript only knows that `document.getElementById` returns some kind of `HTMLElement`:
+In this example TypeScript only knows that `formEl` that uses `document.getElementById` returns some kind of `HTMLElement` meaning we can't use some of the built-in form methods.
 
 ```ts:playground.ts
 // formEl is `HTMLElement | null` because it might not exist
@@ -1642,17 +1678,14 @@ const formEl = document.getElementById('form')
 
 These types correspond to the [browser API](https://developer.mozilla.org/en-US/docs/Web/API). [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) is the base class other elements inherit from. [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) is the base interface for HTML elements. That's how we get to the [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) that represents a `<form>` element in the DOM (Document Object Model).
 
-If we tried to use the form `reset` method:
-
 ```ts:playground.ts
 const formEl = document.getElementById('form')
 
-formEl?.reset() // Property 'reset' does not exist on type 'HTMLElement'. 🚫
+// Property 'reset' does not exist on type 'HTMLElement'. 🚫
+formEl?.reset()
 ```
 
-If you're not familiar with the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?` it just says to TypeScript the value can't be `null`.
-
-These are equivalent:
+If you're not familiar with the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) it just says to TypeScript the value can't be `null`.
 
 ```js:example.js
 // short-circuit evaluation
@@ -1666,7 +1699,7 @@ It's a relatively recent addition to JavaScript, so you might not be familiar wi
 
 If we look at the API for HTMLElement the TypeScript error makes complete sense since that method doesn't exist.
 
-We can be more specific about the type of element by using type assertion with the `as` keyword:
+We can be more specific about the type of element with **type assertion** using the `as` keyword.
 
 ```ts:playground.ts
 const formEl = document.getElementById('form') as HTMLFormElement
@@ -1674,9 +1707,9 @@ const formEl = document.getElementById('form') as HTMLFormElement
 formEl?.reset() // works ✅
 ```
 
-The 🧠 pro-tip of how you figure what element you want is fumbling around until your code completion gives you an option that looks like you want.
+The 🧠 pro-tip of how to figure out what element you want is fumbling around until your code completion gives you an option that looks like the option you want.
 
-You can also use the angle bracket `<>` syntax:
+There's also the alternative angle bracket `<>` syntax for **type assertion**.
 
 ```ts:playground.ts
 const formEl = <HTMLFormElement>document.getElementById('form')
@@ -1684,31 +1717,31 @@ const formEl = <HTMLFormElement>document.getElementById('form')
 formEl?.reset() // works ✅
 ```
 
-Don't confuse this syntax with TypeScript generics. We're going to learn about generics later.
+Don't confuse this syntax with TypeScript **generics**.
 
-This isn't popular because React components are named like that. We get this error in the TypeScript Playground because in the TS Config JSX for React is on by default.
+The angle bracket syntax is avoided because it gets mistaken for React components because of JSX.
+
+We can observe this error in the TypeScript Playground because in the **TS Config** the JSX for React option is on by default.
 
 ```ts:playground.ts
 // JSX element 'HTMLFormElement' has no corresponding closing tag. 🚫
 const formEl = <HTMLFormElement>document.getElementById('form')
 ```
 
-<Iframe
-  title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?jsx=0#code/DYUwLgBAZg9gTgWwKLAFCtolEC8EAmMAxgK4IgB2YAdAObgojlUBCAngJL4AUA5Jgl4BKdAJQB+anBABncNyEQA9EogAFODAAOIOGDYRe0uWF4EYsiBRiQQADwCWMyDAoR9OwwAkAKgFkAGUZmU2oIQF4NwGq90XhkYFxzUhC6BlAQ9i4+AWEIAEMZCF9AgDFY4MowGKxgSWN5RRUIAHd4AGsCwFByKriEgB4igNLqpgqAPkIkipSwctZOHn5YnO6JKVl65VUWuHaIDqA"
-/>
-
 In the example I disabled JSX in the TS Config options.
 
-In JavaScript and even it's frameworks event listeners are something we use often.
+<Iframe
+  title="TypeScript Playground"
+  src="https://www.typescriptlang.org/play?jsx=0#code/DYUwLgBAZg9gTgWwKLAFCtolEC8EAmMAxgK4IgB2YAdAObgojlUBCAngJL4AUA5Jgl4BKdAHpREAApwYABxBwwbCLzggAzuF4EYGiBRiQQADwCW6yDAoQl8lQAkAKgFkAMo2Zhe1CIF4NwNV7GPDIwAD81GqaYNwiQVjAuDqknnQMoJ7sXHwCwhAAhuoQTm4AYsEelGBiEgDu8ADWhYCg5HEh4ZHgMegC2HgAPMWuZfFMlQB8hMmVqWAVrJw8-MG51RAAUgDKABoE5nkARqD4EC09YREanUJAA"
+/>
 
-Imagine we have a input field to get Pokemon name:
+Event listeners are a big part of JavaScript and something we use often even when using JavaScript frameworks.
+
+In the next example we have a input field that takes a Pokemon name and has an event listener on it.
 
 ```html:example.html
 <input type="text" id="pokemon" />
 ```
-
-Our first lesson is how we can rely on TypeScript to infer types, so we can figure out the type to use:
 
 ```ts:playground.ts
 const pokemonInputEl = document.getElementById('pokemon') as HTMLInputElement
@@ -1720,9 +1753,11 @@ function handleInput(event) {
 pokemonInputEl.addEventListener('input', (event) => handleInput(event))
 ```
 
-If you hover over `event` in `addEventListener` you're going to notice it infered the type `Event`. This makes sense because [Event](https://developer.mozilla.org/en-US/docs/web/api/event) is the base interface for events.
+When you hover over `event` in `addEventListener` notice the infered type `Event`.
 
-Knowing that we can type out `event` in `handleInput`:
+This makes sense because [Event](https://developer.mozilla.org/en-US/docs/web/api/event) is the base interface for events. Derived from Event there's [UIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) that has other interfaces like [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent) and [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) among others.
+
+This is a teachable moment that let's us know we can leverage TypeScript to help us figure out built-in types instead of having to look it up.
 
 ```ts:playground.ts
 const pokemonInputEl = document.getElementById('pokemon') as HTMLInputElement
@@ -1736,7 +1771,7 @@ function handleInput(event: Event) {
 pokemonInputEl.addEventListener('input', (event) => handleInput(event))
 ```
 
-Using type assertion we can solve both of these problems:
+The problem we face has to do again with the type not being specific enough. We want the `value` from `event.target` but we can see the type is `EventTarget` so TypeScript doesn't let us access that property.
 
 ```ts:playground.ts
 const pokemonInputEl = document.getElementById('pokemon') as HTMLInputElement
@@ -1754,46 +1789,41 @@ pokemonInputEl.addEventListener('input', (event) => handleInput(event))
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbgJJjgVygUQBsYBeGAExGB1WTCgDoBzZAwtOqAIQE8NyAFAHIEKdGCEBKGAEMIMABIAVALIAZLLjYd6AKF0AzHGGBQAluBgALGWHLtNeAcgBunAFwx8b+tIDeujBBMKCQsFAyAE4sbKQwrpwMEdGsAISy8srqjtq0esEwyTFEDC4yhDjIugC++qJomNh4JTLk5N6cambQdMiRwmZNUEIANDDOPlDSJAB81rb2yDkTnJKSQA"
 />
 
-- We're saying to TypeScript that `targetEl` can't be `null` with `event.target!` (we should do checks to be safe)
-- At this point `targetEl` has the type `EventTarget` (this corresponds to the web API)
-- Since we want to access `value` which is a property of `HTMLInputElement` we have to help out TypeScript here by using type assertion
-- Now we can use methods and properties of HTMLInputElement
+TypeScript knows the type is `HTMLInputElement`, so we can use it's methods and properties.
 
-Derived from Event there's [UIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) that has other interfaces like [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent) and [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) among others.
-
-You don't have to keep this knowledge in your brain. Just let TypeScript and your editor help you:
+You don't have to keep this knowledge in your head. Let TypeScript and your editor help you.
 
 ```ts:playground.ts
-// event is `MouseEvent`
+// event is `MouseEvent` 🐭
 window.addEventListener('mouseover', (event) => console.log('Mouse event'))
 
-
-// event is `TouchEvent`
+// event is `TouchEvent` 👆
 window.addEventListener('touchmove', (event) => console.log('Touch event'))
 
-
-// event is `KeyboardEvent`
+// event is `KeyboardEvent` 🎹
 window.addEventListener('keyup', (event) => console.log('Keyboard event'))
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/PTAEFMDdwOwF1ASwM6gAYFkD2BXZ4BRaeNAKAHdEYATLcgOgENrqjY4AZFOWcAJwAUAcgC2ufFmh8hAGlACo7AJSgAvAD5QAYywxkWADbh6BrAHNh2POAjE4QpUtLOQt9klRoAKri0ALNhIKKloGZlY7LmQeGH5hOF8-MWhZeUV4FQ1tXX0jE3NhHxx-N3gHJxcwdIQUdABpcABPACMsRj4I9jJKGjomFkDObl5BIQBrJpwAB1SFO0zNHT1DY1MLIQaWto7S+0cgA"
+  src="https://www.typescriptlang.org/play?#code/PTAEFMDdwOwF1ASwM6gAYFkD2BXZ4BRaeNUQXg3BaHYCgB3RGAEyxoDoBDBho2OAGRTixwAJwAUAcgC2ufFmjDxAGlCioPAJSgAvAD5QAYywxkWADbgWprAHMJ2POAjE449eqpUQTnklRoAKrj6ABbcJOSAYju09EysHFzO-MiCMCIScEHB0tBKKmrwmroGRibmljYSgTgh3vCu7p5g+Qgo6ADS4ACeAEZYbMIJPKSAPBuAnfvRjMzsnGF8AkJi4gDWXTgADrmqzoV6hsZmFla24h09fQO1Lm5AA"
 />
 
-Also keep in mind that when using type assertion you're saying the element can't be `null`:
+In the previous example we used `!` that asserts the type can't be `null` but keep in mind that when using any **type assertion** you're saying the element can't be `null`.
 
 ```ts:playground.ts
-const pokemonInputEl = document.getElementById('pokemon') // HTMLElement | null
+// HTMLElement | null
+const pokemonInputEl = document.getElementById('pokemon')
 
-const pokemonInputEl = document.getElementById('pokemon') as HTMLInputElement // HTMLInputElement
+// HTMLInputElement
+const pokemonInputEl = document.getElementById('pokemon') as HTMLInputElement
 ```
 
-Using type assertion can cause problems since you won't get warned about code that can go wrong. Make sure you have checks in place.
+That being said don't lie to the TypeScript compiler and only use **type assertion** when you have to.
 
 ## Type Assertion Using `!`
 
-Using the `!` syntax after any expression is a type assertion that the value isn't going to be `null` or `undefined`:
+Using the `!` syntax after any expression is a type assertion that the value isn't going to be `null` or `undefined`.
 
 ```ts:playground.ts
 const formEl = document.getElementById('form')! as HTMLFormElement
@@ -1806,13 +1836,11 @@ formEl.reset() // works ✅
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAZiATgWwKIBsYF4YBMTACuyApmFAHQDmJUGJp5AQgJ4CSuAFAOQIrcBKAIQwAhhBgAJACoBZADIAxJGnQMyUAFCa+qiohIRanATAD0ZmAHckAawmBQciA"
 />
 
-Use this only when you're sure the value exists. Don't lie to the TypeScript compiler.
+## Type Assertion Conversion
 
-## Type Assertion For Rebels
+Using `any` and **type assertion** is great when you're just writing code but avoid using them unless you have to.
 
-Using `any` and type assertions is great when you're just writing code but avoid using them unless you have to.
-
-TypeScript tries it's best to not let you do something stupid:
+TypeScript tries it's best to not let you do something stupid.
 
 ```ts:playground.ts
 // Conversion of type 'string' to type 'number' may be a mistake because
@@ -1821,12 +1849,13 @@ TypeScript tries it's best to not let you do something stupid:
 const pokemon = 'Pikachu' as number
 ```
 
-That being said you can do whatever you want (you rebel):
+That doesn't mean you can't do whatever you want.
 
 ```ts:playground.ts
 const pokemon = 'Pikachu' as unknown as number
 
-pokemon.toFixed() // no complaints, but wait until you run your code 💥
+// no complaints, but wait until you run your code 💥
+pokemon.toFixed()
 ```
 
 <Iframe
@@ -1834,28 +1863,22 @@ pokemon.toFixed() // no complaints, but wait until you run your code 💥
   src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdgLggQxQTwFB6wLIoQC8EA5AAoCWcmAxgBYCulWAzhCq4gEYgATgSJJUAOjAwAYrQAeIACYAKAJQQA9JoiBeDcDVe6PjjSFGvSZsOmbqxRwUMAO6kbPPoJGFjJKbIXK6lo6uoClO0A"
 />
 
-This works because TypeScript only allows type assertions that convert to a more specific or less specific version of a type.
-
-That being said you might run into some scenarios where this is helpful, so keep it in mind.
+TypeScript only allows **type assertions** that convert to a more specific or less specific version of a type.
 
 ## Literal Types
 
-Literal types are exact values of strings and numbers.
+**Literal types** are exact values of strings and numbers.
 
 > Both `var` and `let` allow for changing what is held inside the variable, and `const` does not. This is reflected in how TypeScript creates types for literals. — [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types)
 
-If you hover over `pokemon` the type is `string`:
+TypeScript has `string`, `number`, and `boolean` literals. The `boolean` type itself is just an alias for the `true | false` union.
 
 ```ts:playground.ts
 // type is string
-let pokemon = 'Pikachu'
-```
+let pokemonLiteralType = 'Pikachu'
 
-When you hover over `pokemon` the type is `Pikachu`:
-
-```ts:playground.ts
 // type is 'Pikachu'
-const pokemon = 'Pikachu'
+const pokemonGeneralType = 'Pikachu'
 ```
 
 <Iframe
@@ -1863,10 +1886,12 @@ const pokemon = 'Pikachu'
   src="https://www.typescriptlang.org/play?#code/PTAEBcE8AcFNQJYGdRPAJwQOwOYCgAbWcUaAewGtYBbMrAGQXFnQEMCAVGeAXlAHIACggqsAxgAsArvzx4QEbohRCR46bLF00pSjToBxWFhbsucUH1WjJMvEA"
 />
 
-If we combine literals into unions we see how it's useful:
+This concept is more useful if we combine **type literals** into **unions**.
 
 ```ts:playground.ts
-function movePokemonOnBoard(direction: 'up' | 'right' | 'down' | 'left') {
+function movePokemonOnBoard(
+  direction: 'up' | 'right' | 'down' | 'left'
+) {
   // ...
 }
 
@@ -1876,10 +1901,8 @@ movePokemonOnBoard('rigth') // oops! typo. 🚫
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWzgNwKYAU4GsOpgDyYAQnAIYBOAJgBQ0xUbTxgBciA5CAA5eIAPtyowA5gAsoA4VxpwA7mBncANhmDSAlIgDeAKERHEAehOIAdFf0BffftSYc+QiXLV6PfjrOIKECAxeKAoAI3VENApVEAxEQFByB3RsPAIEN0paOi5RMSgJLh9zODheAGcAQkQoAE9eOAtEQF4NwGq9oA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWzgNwKYAU4GsOpgDyYAQnAIYBOAJgBQBQiiNMVG08YAXIgOQgADn0QAfflRgBzABZQR4vjTgB3MAv4AbDMHkMAlIgDeTRAHoziAHQ2GAXwYNUmHPkIly1egOGGLiCggIDEEoCgAjbUQ0Ck0QDERAUHIndGw8AgQPSlo6PkkpKBk+P0s4OEEAZwBCRCgAT0E4K0RAXg3Aar2gA"
 />
-
-There's also `number`, and `boolean` literals. `boolean` itself is just an alias for the `true | false` union.
 
 ## Literal Inference
 
