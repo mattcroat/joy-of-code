@@ -14,7 +14,7 @@ There's a lot of great resources out there for learning TypeScript, but I always
 
 That being said nothing can substitute the experience of using TypeScript in your project, so dust off an old JavaScript project or create a new one to learn from.
 
-_note: This one was a massive one to write so there might be more typos than usual — I plan to go over everything and improve it even more over time, so thank you for any contribution you might have._
+_note: This one was a massive one to write so there might be more typos than usual (the code checks out 💪) — I plan to go over everything and improve it even more over time, so thank you for any contribution you might have._
 
 ## Table of Contents
 
@@ -496,6 +496,7 @@ pokemon()
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdhAvBA5ABQJZwCGAxgBYCuWAUFbAsmplgMKmEBOeAXhwCbVUA9IOzMAEgEEASgEkAWtIAiWCIFByWvCSoAdGBgBVKFBDtmhAM4gAFAEoawiABUAnsewpyiAEYmVecxAoMJAW5ngA5iiEXqAQenGuINjmYJwo4VjaEIC8G4DVexr0qBgQAIz2Io6k-hAgAB5Q7CDmYUXVQZDEhMDA0aBZeQVaKLZAA"
+  load={false}
 />
 
 How great is this instant feedback in your editor?
@@ -517,6 +518,7 @@ function logPokemon() {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAJwKZRMsAFOBrVAWwQAoBKRAbwChEV1MkBybGPAQwgAsQnqBfatVCRYCRABs4Ac1wFiYclVqIICAM5wJqAHRTpJFm048mZAUA"
+  load={false}
 />
 
 It's encouraged to let TypeScript infer what it can but you can also be explicit.
@@ -546,6 +548,7 @@ async function getPokemon(name: string) {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/IYZwngdgxgBAZgV2gFwJYHsIwOYFNkAK6A1rgLaYAUEwZuAXDCMgE6oTYCUMA3gFAwYUTMxgtcIAA4jcMALwxgAd2Cpk8fFAAWlAAZbkySSHoB6U9NLBJqAHTDT11KYBuAJgslymUwBIeNHQAvrqcAkIi6pbeWArKquriUjK2AFYgVGGC4sgILFjRFBB8QUA"
+  load={false}
 />
 
 If you hover over `getPokemon` you can see TypeScript infered the return type as `Promise<any>`.
@@ -580,6 +583,7 @@ logPokemon()
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/IYZwngdgxgBAZgV2gFwJYHsIwOYFNkAK6A1rgLaYAUEwZuAXDCMgE6oTYCUjBL6ZqELgA8AbxioAJowgIyAI1wsANDBp1GzNhxgBfAHwxRAKBgwomZjBa4QAB0u4YAXhjAA7sFTJ4+KAAtKAAN-ZGQ7EHoAeiiHUmA7VAA6CyiE1CiANwAmWJJyTCiAElF1XF0gzlNzSx84gqxXDy8fG3tHJIArECoqsxtkBBYseooIY11jY1BIWEQUDCwAG3RsIlIxyk4jaosIK0TiYACEFzdPbxx8dYbKAHJD4-8EO76a-fQl3CSV7EpxKSMR4nJJSVRlIGoI4gsp6KqTYy-G6bThAA"
+  load={false}
 />
 
 Thanks to this slight change we get code completion for the `pikachu` object since TypeScript knows the type. It's magic. 🪄
@@ -633,6 +637,7 @@ apiResponse.doesntExist
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAhgBwJYCUCmEHgmgXPMATxgF4YBvAKBhgBM4o58BtAXUoF9LKB6HmAO5o64AOSwA5mlhwiguACcwSMBJiBeDcCMe5USoMWSGgB0tEBjBQAogA8k0GEA"
+  load={false}
 />
 
 Using `any` is useful when:
@@ -691,6 +696,7 @@ if (apiResponse && typeof apiResponse === 'object') {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAhgBwJYCUCmEHgmgXDAVzAGswQB3MGAXhgG8AoGGAEzijnwG0BdBgXwYMA9MPgQISAOZg4AIwA2aGFBAwABnDABPdTECg5A1CRYW7QBVtCPPB014ydJmxoho8ZJnylKteqKkFGB6hsbQhCRklJbW+AFRVLSIqBhYkK4iYgDk8UFZMGSmEtKyisqqKlbKWXSs7JwwvADcMPxZAHQwgLwbgNV7RtiwIFAAFmgATjE2tWwc3Dyt9slOaThCSABmMAAUS6kuMABkB5XWIJu7zuk01LRZIHIAVmjAUFkAlPRMzDBhsGN7VySjgBOHE9Dqs0a80E3xg-0uOHaMzgMHcZBg5DgYzASDAUgMAiAA"
+  load={false}
 />
 
 We're going to learn about **type assertion** later.
@@ -721,6 +727,7 @@ prettyPrint(['Bulbasaur', 'Charmander', 'Squirtle', 1, {}]))
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABABwE4FMpQJ4AVUxhQAUhyIUAXIuANZhwDuYAlNQM5QFgDmiA3gChEIxDGCJiAQVSoAhtgB0MdjPnZSYclBYsBw0YYxQQqJAAMA2gBJ+ZCooC2c5MTSYc+QjsUArOITEAOQANIhBLAC+ALrmBiKRgvFiEsQ4yOhwEvZQiAC8BeGc3DwR+oZGmKZIOcmJyeKS6ZnZWhT5hUFgII4ARuioZUIVosbViADKXIQ8mtosdUmVJmbhiutBgvUQCOxwADboivtws8nuWHjcJJZBAEIg+71y7HKmoeEAwgAWcqjOYAAJgMPkEJgBHEAwVBQQ4fACMYX4MQWLCAA"
+  load={false}
 />
 
 We can use `unknown` to describe a function that returns an unknown value.
@@ -743,6 +750,7 @@ const obj = safeParse(json) // safe ✅
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAVhcMC8MAGAoG2YG8s6EBEAlgCZEBcMAjADQGHZFgCGAtgKZUxEAKJANatgACwCuRRjAC+GTBgBm4sMCgkkEVos59WAJwicAFADdWAG3Gdq0fSTABzAJTUVgsCADuYPNP2cUOL6vgBSAMoA8gByAHQADgZGZpbWzhhyGKCQsCAARnAoMFo6eoYmCODOMAD0NcXanDCAoORAA"
+  load={false}
 />
 
 If we didn't use `unknown` the infered return type would be `any` meaning you could do whatever you want with `obj`.
@@ -767,6 +775,7 @@ pokemon = 'Pikachu'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdgLggNxgSwCYBQBsCyKEAvBAK4p4gBmOKIhBA9OxACoCeUICAHIAzmABOzAOZCIOERBQxIAQxEicUlCoBGoCGBgH+godnxCAdBEC8G4Gq94vCSpKwgAo44KgMYALakJAA"
+  load={false}
 />
 
 Type `void` is used on functions that don't return anything.
@@ -794,6 +803,7 @@ forEach(['Bulbasaur', 'Charmander', 'Squirtle'], (pokemon) => console.log(pokemo
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABMOAnAogQwgCwBSaqoBcimYAngNoC6ANIhJgDbMBG2A1qQagOalyFBjDAATAKYAPAPykwIALZsJqAJSIAvAD5EANzgwxa0gaOIA3gChEyNIjzMJURDC2IADAG5XiADxkRAB0TmB8UDg+MADU0RrWtrZMrBwQnLyoVDD0rmo2iAC+VkVWKBjY+FQA5ABCIOyYAM6YIKhVDFUAwjiEiuSSbR0AygCOIDCoUE5VOXgADnCcEooIGjqMCI1wTiFwfPOLy6tqQA"
+  load={false}
 />
 
 Because we used type `void` as the return type for `forEach` we're saying the return value isn't going to be used. This let's it be called with a callback that returns any value.
@@ -820,6 +830,7 @@ function logPokemonRefactor(pokemonList: string[]): void {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIAyMAzlAFyJ0BOMYaA2gLoCUjAbnBgATRAG8AUImmIyeQmGp0AdMDjMAogEMIAC1LkFiALwA+cVJlWA9NcTKHlq9Oa4oIZkjkUwTxAF8eCX8JCVBIWAQUdCx5BAAlXGAdKHUDOMVaBiYoVnZuPkRBEQsrNWZEIggEOllDKLhgOoylKB5S52lbe0dOrrsAFQBPElxEAHIWNk4uccRaRDA4KEQtGhoYNDAtACNkMdTEKBGx8eLhceVEQF4NwGq9vytXd09mnz8Q-yA"
+  load={false}
 />
 
 ## never
@@ -851,6 +862,7 @@ function timeout(ms: number): Promise<never> {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABDMwUygUwDJzgBwAoBKALkTEwDdMAnRAbwChFEB3ACxgBtNFCotEJmKMWrRAHpJiACZxEAZzgBbTFC5gA5uIC+TfU1CRYCRHVpxahNYsUBDLZnKLBKLWQrU6Y1hstsXoEAorSW1rYOTsQGTEbg0PBIsGpwIFA2iuRgICoARnSeAAqWKjCKmAA8lDS0AHy+iLTqILRIlIElquWYhIQA+gA0TZgAVpjQogC8DcwSSuoAKjCp6X3TDc3j0IQdiKHhhADkgNjEiMtqsohpUAB0R8TEwyqKMay6MfpAA"
+  load={false}
 />
 
 Type `unknown` can be used together with **type narrowing** to ensure we have a check for each Pokemon type.
@@ -885,7 +897,8 @@ getPokemonByType('electric')
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQApwNaoLYIBCAngCrEAOqAFAFCKIU74LlUBciA5MDAE6ouiAD7cA7gEMoqPkNFdUAG1TQ+MCF1oBKRAG96DRAHojiKJVSIYAZ268Bc8VJmOFy1es2GrwRNSa4BGBslgC84Xb8gjr63t4CUCB8SFyAvBuApLuI9pZYgQhehgC+tAYMJohilmASfHxwYlZQiAAm9UhQcE7SsiLcSipQahqlPn4BLMEWiOGhXS4xI-HoSSmAPBuAAPsVznyIuRMFDMUj5QiKxIiAhWR97oOeVrbKwFAj40EhJd7lAngSMGB-yD2bwstggEjAXCaAAsJAA3Szg86wiSKECWABGKgkIGsqGOplerCmNmuAyGQlSgGq9kYQBDWJrfX7-MCA5jAqjWThgVDwnazQmTKglEYJFaIRl-AFAokc2hHNCYNlEMgWahuMmeLRAA "
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQApwNaoLYIBCAngCrEAOqAFAFCKIU74LlUBciA5MDAE6ouiAD7cA7gEMoqPkNFdUAG1TQ+MCF1oBKRAG96DRAHojiKJVSIYAZ268Bc8VJmOFy1es2GrwRNSa4BGBslgC84Xb8gjr63t4CUCB8SFyAvBuApLuI9pZYgQhehgC+tAYMJohilmASfHxwYlZQiAAm9UhQcE7SsiLcSipQahqlPn4BLMEWiOGhXS4xI-HoSSmAPBuAAPsVznyIuRMFDMUj5QiKxIiAhWR97oOeVrbKwFAj40EhJd7lAngSMGB-yD2bwstggEjAXCaAAsJAA3Szg86wiSKECWABGKgkIGsqGOplerCmNmuAyGQlSgGq9kYQBDWJrfX7-MCA5jAqjWThgVDwnazQmTKglEYJFaIRl-AFAokc2hHNCYNlEMgWahuMmeLRAA"
+  load={false}
 />
 
 Because of this check we know that `getPokemonByType` is missing a check for the `electric` type.
@@ -907,6 +920,7 @@ const pokemonBrackets: string[] = ['Bulbasaur', 'Charmander', 'Squirtle']
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbgOLLMgTgS2AgC4YBBXXAQwE8AeaAsAcwD4YBeGAbQHIAhAK4AbAEZUIVQbl4AaGLwDCACyq5UVMABM8chQGUAjoPy4ow5LwC6AKBuhIsBCnRh+1YCigkYjfC24rTh4BEXFJaT0lVXVNHRl5XiMTMwtrGyA"
+  load={false}
 />
 
 I prefer the `any[]` syntax because it's less to type.
@@ -929,6 +943,7 @@ addPokemon('Pikachu')
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbgFw2gJwJZgDmA2gLowC8MZAUDQGYCuYwUe4MAhgCbcAKSNOAAUYTqmRZcBQgEopUfETIwA3jRib4g9GAB0cRhAAWo8clkatOZFEY4w2lLpoBfOj346RAcj55ETmBjRh9ZIA"
+  load={false}
 />
 
 We explicitly typed `pokemon` as `string[]`. If TypeScript can't infer the type it would use `any` by default, or in this case it would be `any[]`.
@@ -949,6 +964,7 @@ addPokemon('Pikachu')
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbgFw2gJwJZgDmA2gLowC8MZAUDaJLAIYAmLACkmuJTABRgmqZFlwFCASlFR8RMpQB8MAN40Y6+F3RgAdHACuEABYChyCWo05kUfTjCaU2mgF86rDlvB8A5OzyITMBG+j4SQA"
+  load={false}
 />
 
 TypeScript uses **contextual typing** to figure out the type of the argument based on how it's used.
@@ -973,6 +989,7 @@ pokemonList.forEach((pokemon: string) => console.log(pokemon))
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/PTAECMFMEsDsHNSQB4AcA20DG0AuoALSAJ0lGgGdQB7Aa1EFByAKC2tgv1TsgFs2AZSrgBcoDsTjwA2gF1QAXlBSA5ACEArunABDCtvXFlAGlDKAwgW3Ee22ABMSx0wGUAjuujFc6SMplMmEFA7NmV8ENBcAkpQQF4NwGq9pi5aXgEhADoAM2piAFFtLAIACiLk1NhRcUkASgUAPlBWdmofdPRqeFLuPlhq6qA"
+  load={false}
 />
 
 Knowing about **contextual typing** you understand what things you don't have to type.
@@ -1051,6 +1068,7 @@ logPokemon({ name: 'Pikachu', hp: 35 })
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmciHDhAFzIDOYUoA5qeQBYAOdIArjgBG0YgF9ixGHxAIwwfMgA26Fhmx4QACkrU6jZiBYAaZN14DhUAJR0AbumAATSdNnyCy1Vlz5NXbxoA8oIAVhCydGo+IDbI9k4SUjJyCp5RGppwUCwAjHTSmCDoAO4gJlksAEwA-PkghSUxdg6OROzkAPQdyDhwYAgcEPTIYIPIMMBQjMjottDKcK30wCyUYHxQKOTtyMAwyJpgAJ5cEOj7FTnIALy3yADk+qz3yABkryMnZxfZlTd3934Qmg9ysbXIEOQXWQl12wwABjoIPCYSBWhU-sAEdx4TsIQh8PR0IoIAA6TyaeEAEkIl1EpjgwxpGPpAAlUKT4VYduJkDtob1+oNhqMUPRwvhWrN5uhFgwVmsNhAdnsDsdTucYdkrrdrg90KFwmBQeDIWRocsZChgMbhnACAawrJkMUUAh7TD6OKoGARmN1SgwOhkMI0AF8HjyASQNNCBQqBATNxkPS9bDGWH1BHI+bup4-ShHEMmHxZErWrY4Io+EMc8ho0SSeSVJSaUj6RwMzTuGyOVyeXzxMRofdUMBMIgOHwGcMAMwAVmQ7NJL0AoOTENLhrSj8eTvj3EwL7nD7o7icDaedueL5drjcqdK+ONIuhnvcH0w8ZALlPcoA"
+  load={false}
 />
 
 Let's break it down into steps:
@@ -1097,6 +1115,7 @@ const pokemonExplicitType: { name: string } = {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/PTAEEsDsDMFMCdYBNQBcCeAHWAoAxgPaQDOqomBA1rALZECSMCyAKlrKALygDeOooSAEMasAFygA5AAVwlIXgAWAV0k4AvjhwhQsAB6YANuDzgyGbPiKlyVWkQCiB46dRtsEnoJHjQpeFAA5qDqXLz83qISMnIKKmrqQA"
+  load={false}
 />
 
 In the next examples we can see how TypeScript treats missing, optional, and extra object properties.
@@ -1128,6 +1147,7 @@ const pokemonExtraProperty: { id?: number, name: string } = {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/PTAEAUCcHsAcFNIBcCeoDkBLAJu0mBnUAW0IMwDsBzfC0VBDAb1AoENj4AuUApSSlQDcoAL54ARgFckAKBChI8AI5TMS7LXopG6Fjh4UpxCYhHtOPPgOojxAOlCBeDcDVe7IDG0Cn1CxoAa3hiLwBZMkEoOERUHn1sQ2NTSAAaVg5uXn5BMVAAXlAmWVBitMsMcEx-NncACyl0WVFZeTAAAxxW-CI4JEwvNgAbZ0BZHY8vHz9A4IoAeVhe-oGAQUgqY3gKJFj8bAB+BJNEVIsM62zRPIKikpOedAqq2vrG5oUZiQAreHckUAHMJCIQYkNhoLwDNAEBDuTAAMzQ-go0AA7nRYDAEMhMPACI5XGNvL9JkEvABRAAe-DYkUxMQKO32rESR1Kpyy1By+UKJR2PAAjMlrsVbuVKtU6uhBTzidMACo6DLoeADb5ZdwNURAA"
+  load={false}
 />
 
 We're going to learn ways to abstract these types to make it more readable.
@@ -1151,6 +1171,7 @@ logPokemon('Pikachu')
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoROMQQENOMlwA6VGlLlCYfiIC+IkQHpdiFgHIAQiGQAjAIY0rIekYA0iIwGEAFlfr4rYACa4Ds5GAMoAjiAw9FByRmwiSlh4akTGZpY2dkEuHl4+-oFOLuGR0bFsGnoGGDDYVhDuIAnoSRRgREY1dQ0gRvxAA"
+  load={false}
 />
 
 The `pokemon` argument can only be an array of Pokemon of type `string[]` or a single Pokemon of type `string`.
@@ -1170,6 +1191,7 @@ logPokemon('Pikachu') // 🚫
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoRIgD0ExBnpwSuelACeiAORQ4AVRIL6AYQCGNXGsQATOLhqIwcKIlwAPGHUQJEKherqNm7NQA6REBeDcBqvbFECAQaOGRcQNQ0UnJCMEDNHT0jEyJ+fhEAXxERJKw8NKIWNQAhEGQAI2NDEHo1ABp1fQALQ3p8QzBzRQ71AGUARxAYJXi1NgKy1OI1DBhsQwhukDV+IA"
+  load={false}
 />
 
 Instead we have to put checks in place to narrow down the type so TypeScript knows the exact type.
@@ -1197,6 +1219,7 @@ logPokemon('Pikachu')
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoROMQxgiIgEF69AIYBPAHQwa8pctLlCYfoNESTiAPRnEAAzJ59VxBEVIEyZYgBGuRM58KVYqbiEAg0cMi4qqhounYIqviKJLEUSAC8AHyItqmqUHAAqiQkuPQAwoo0uESG-IHiAL4i9ZLSRFDKJXDSOfqIaQOIAOR0jMxDRi0mFta9CA5OLmBunt6jfFMSIWBhEVHoKfp5hcWlFVU1dSZNTSIzLEMAQgUAMo+yAMqyBQBKQwA0wzKAAlZD8ALKyAByABEAKJ-QFDD4ARQKAEkfgAVF5woZsETRLBxMBEB6PEDIDyVRQgegAoEAC0U9ESYAAJqUGciAI4gGD0KARfF1O6WDDogDSshBBUJ6GJqSIQwwMGwiggjJAEyAA"
+  load={false}
 />
 
 The second `if...else` statement is not required since if `pokemon` isn't of type `string[]` it can only be `string`.
@@ -1219,6 +1242,7 @@ logPokemon('Pikachu')
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhoDaAuogD60NNoCUiAN4AoROMQB6SYgDucethqJgCxACM4UABaIoATxK5lgUHIxEiAhpxkuAHSo0pcoTB2ayGBFxEADABpEAEZ+fhEAXxERaUQWAHIAIRBkdQBDGlSQeji2EUcsPFcieKSU9MzswLiAYW1U+nxUsAATXErEOIBlAEcQGHooWxyw6Jk4jDi89AKKMCJxmGxUiG0QOP4gA"
+  load={false}
 />
 
 ## Discriminated Unions
@@ -1265,6 +1289,7 @@ pokemonAttack({
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmcjADZw4RgAWU6A7tAPwBcyAFAJTIBeAHzIAbumAATUuWb1gUSgAd06Spx79hYidPLIV2PCAAqATyUQuAchgKI15AB9k15nEhRrxAL7FiMACuIAhgwPgGWLj4AIJgYIiY3IbRIFwYRvj8JPoAzszAYAj0PCnGAHRl+OaW2TL6ZAhwuSi29tYc9Q36APQ9yADCcCAg6GDIoOLYyMPI6ABGAFYQochywMUTuZG5ucDzlGauwZIQdiAQktblyIC8G4DVe13dZFUg5VQ0dIws0HxPz-MoBA4Jh-o1mq13J4OmCGn1BsNRuNJlEZgQFstVutNsBtipdvtDscQKdzpdrndHs8Gq9yutFCo1H9qfpAcDQfo-H5iPDboBSXdcADFqLQGExWF5iK84gkEEkcuRXjUrK47EDrAAaLofUXfCVcPiCEQIfC5NQQcqUdAAc241n5yGFnzFPy8vF87p5-UAPBuAAH3XAB1eQM1SUbzS+KJbgKl5RYzKmxQ6Carr05Shg1aY2m82Wm12v3IIMKdNqazuny8IA"
+  load={false}
 />
 
 The type-checker can't determine if `flamethrower` or `whirpool` is present based on the `pokemonType` property because they could not exist as they're optional and we can't require both because that would defeat the purpose.
@@ -1311,6 +1336,7 @@ pokemonAttack({
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgGLCig3gKGf5GAGzgFsIwALKAewHdoAuZACgEpkBeAPmQDcawACZ4CABxoBrCKRogAKgE8xEZgHIYGCGpwBfHDlCRYiFAHU4x5LgLI6lDEQk0izdl14Dho-BOmyFZVVkNTpLaB19HDAg5AAFKRk5LjQtZAAfZAtjAxgAVxAEMGBkvySQAEEwMERJFjKA5gT-OQ4bAgBnOmAwBEpWBrkAOkHAlTafW2QEOA6UDS01Rkmp8USAoeIyCmp6aHYV1eQAI0w4SUP8GbmQsOMly6nRoftHZyIDo6nTiHPJ-SiAHpAchALwbgFJdkKoEjkKi0BhQHSjKo1BB1dqjJQqdSaTBqAA0oi2sN2CLcHB40zkHRcECGRBoAHMWGoIWgYTt4RE2HoeThgchADwbgAB9kJmBxQJw0FxI9ZyFG1FgYuVjYKhcKIwn4V6S97kjxUkA0oh0hnMtQirISqUynm6NhAA"
+  load={false}
 />
 
 By the use of a type guard style check `==`, `===`, `!=`, `!==` or `switch` on the discriminant property `pokemonType` TypeScript can do **type narrowing** based on the **literal type**.
@@ -1343,6 +1369,7 @@ pokemon.forEach(pokemon => console.log(pokemon))
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbygSwBMAuKNAV2QCMIAnAGjIENkJSBnYW-NAc0bCIU6ACrg2UTtz5QAvgCh5AY3ScogpKjSl4m9AG0Aulij6c8qJYIkoARnoWraFhIDkMfAiZKAFuVcOVupCWmKQpK4QADYQSlz4Sq7ysoaKAPRpuFCuRK6k9tnOrHnZHl6+-oyuGsJoYRAlkTFx3Ily8jVaAHQAZnC0AKLePgAUnehYAHxQKmjscDFdUXC8YyHoAJQbQA"
+  load={false}
 />
 
 Instead of writing `Pokemon[]` where `[]` indicates to TypeScript it's an array of Pokemon we can say `{ id: number, name: string, type: string }[]` which is equivalent.
@@ -1363,6 +1390,7 @@ pokemon.forEach(pokemon => console.log(pokemon))
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbygSwBMAuKNAV2QCMIAnAGjIENkJSBnYW-NAc0bCIU6ACrg2UTtz5QAvgG0AugChlAY3ScogpKjSl4u9FijycyqJYIkoARnoWraFhIDkMfAiZqAFuVcOVtpCemKQpK4QADYQalz4aq7KsirKAPRpuFCuRK6k9tnOrHnZHl6+-oyuOsJoYRAlkTFx3IlyyjV6AHQAZnC0AKLePgAUncaYAHxQGmjscDFdUXC8YyHoAJQbQA"
+  load={false}
 />
 
 I prefer the `Pokemon[]` syntax because of reusability. We can use the `Pokemon` type on single Pokemon where it makes sense and `Pokemon[]` on a collection of Pokemon.
@@ -1399,6 +1427,7 @@ console.log(logPokemon())
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigZ2AJwEs0BzAbQF0oAfXA4kgKEYDMBXNAY2EPSgBs4JeElRoAFGEQp0ALljSxASnkiZGAN6MoOqIRZRxAQXz4AhiAB0hHCfMhJi9EqVQtuj1HwRgbfBilRdEtkMzBHIIxMAD4oQPVLYDgAVTBIfABhMxwIcRdtXQBfZg99Q1BIOAN4sSxMbAByPCJSBtd3Tx1vX384pzRElLSITOzcpQKdYsmvHz8MBph+CDGoCDRgEagzBUjLBsZpgHojqDIGgCFkgBkLowBlI2SAJQaAGigGjIAJI2eAWSMADkACIAUVeHwa9wAiskAJLPAAq1zBDQojE46BwcGWlkEJHEBLUYnE5wubH4ACNsmY-O9PhkABZmfChNAAExGDOhAEc2IR8MBluj8owTp8YPCANJGH7JA5YtA4vEEolCEnocSLQgIMycJlsNoTcWnJYrHJrDZbHaagaY7G4iD4oTq4T9PJKIA"
+  load={false}
 />
 
 Functions are just special objects in JavaScript which is a roundabout way of saying we can type them as any other object.
@@ -1442,6 +1471,7 @@ const logPokemon3: LogPokemon = (pokemon) => console.log(pokemon)
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/C4TwDgpgBAMg9gcwApwNYQLZwHZQLxQAUYamOAXFAM7ABOAltggJT4B8UAbnPQCYBQ-APRCo2AIYYIvKADMArtgDGwejigQAHmFoQqVNdn5KcNKABtEKdFmwBGSvGSlb+OYpWGLVlzmK-sVgBvfigwqBNsKjhzCAA6SwR-GxxmfgBfQREocWwcECx5KndlVXUtHT0DHGNTYG9nFOwAJkcfJrcFUsNkskCoEPCI0xj4xN7bNMzhUVz8wuLxWlo4AHcSz3LtXX1DWqj6xOs+gGY2xr63CdT2YajRhMRrwKA"
+  load={false}
 />
 
 The next example shows how we can use a **construct signature** inside a **type alias** to type a constructor function.
@@ -1479,6 +1509,7 @@ console.log(pokemon)
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbwFBSFRoCGyEAXFAM7ABOAlmgOYFFiIroAq4lN9JqwC+ePKEixOqNAGF0tOgFcAxsDh0suNoTQQA7gApS5KoqEAaKByQzekM4JYBKKvFvo8ovCoA2JamopDzQAMRI1DRAoBmQwXxQINGAg9y4MfCJiMn5zFh1raR4+R0Z8gpUFelV1OmMc0stCkPtcp2ZnbSys4AALBmoAOhNobBGCnv6hm3TWrRm7PgLRbwAzJTQ1BnQoEgATPbSZQwX0eTRFGo03Irkq5Ui6KxHGlitTtFbXjpuQrqI6BBgEo6Bg9PpmulzpdHvVyO9bq1nABuLxiHxVSEyX7pLT7Q63QxHdDhR4gKwAchgDAQEV6SgplIgCTUjBUFOcYgA9FzgulSbUQFQcFAAEQjUVUUXU2kqemiqyij6tSVi5kQVkMFSiqCiSoXOAJQa+ODME63ZxAA"
+  load={false}
 />
 
 This is more of a "showing you can do it" example than something you're going to use.
@@ -1513,6 +1544,7 @@ pokemon.forEach(pokemon => pokemon.attack())
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmcsACYD8AXMiAK44BG0p5IcOE9AzmCigA5hzIAHLLnwAVAJ7jeyAUJCjyyOC2AAbYGDn9BIsZrBhEmABQBKegDd0VYgF9ixBPgHJJ2PCHoMP3wAbQBdZABeZBCSDSp6AEYAGlMuHnoAclRgTEQAC0ZM1I1faRB5RSyIHQgEYwRi0y1dfUNkTMBCsmQZQpBKaBZ0HTAmjThzS1siUw1PED5hiAA6HXRhKwADABJCMHzgPmX0iBdkRj4ISmRd-cPllr0DF2XNm1M3FzD3AHofjpyeQQhXOl2u3V6jH6g2Go2IZX8yxg6CgAFEClYEfgogA+HxSRETCwIaw2GxAA"
+  load={false}
 />
 
 Inside the **interface** we can say properties are optional using `?` and type required functions like `attack(): void`.
@@ -1555,6 +1587,7 @@ const pikachu: Pikachu = {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/C4TwDgpgBACg9gawgWzgOygXigbwFBSFQCWAJgFxRoCuyARhAE4FFoCGyElAzsI8WgDmeAL548oSLGII2AYwAW1LLEQp0UAGS4oYNajQAVcFygByCABsIcvsTlmoYvAHoXUBW25RgcKNzZgYm4AMxAfBWgAzihFGwRvQF4NwFkdvDl0Xl0ZeSVKGGzFZWx8IhIKKABGABoWQnZOSjN82UKzGtK9JANjSEarGzsHUSA"
+  load={false}
 />
 
 In the case of **interfaces** we use the **extends** keyword to extend them.
@@ -1580,6 +1613,7 @@ const pikachu: Pikachu = {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmcsACYBcyIArjgEbSnkhw4S0DOYUoAObEAvsWKhIsRClTBMiABb1kEAB6QQlHmiy58RNmQAOevCAAqAT2PdkAcggAbCAn7AE90eID0P5IpwOmDoyDxwYMA8MFbIYIoo4VzICAkImDqAvBuAsjvECPh8yMbySvS0cgqpKgC8huQUNMgAjAA0RnScdvYVpfZt9abY5ta2tI4ubgKeokA"
+  load={false}
 />
 
 When using an **interface** you should always keep in mind that you can use an existing **interface** which could lead to some unexpected problems shown in the next example.
@@ -1602,6 +1636,7 @@ const windows: Window = {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgOqgCYHsDuyDeAUMicglgDZZQBcyAzmFKAObGmMCeFEdA5NgCuAIx4BaABaCQLPsgA+yPgjj0IAWwjg5ivnBwhWOpfQrAM0PoQC+hQgHp7yACqcADij74ylanUbMMgDcDGDcvMgAREKiEJLSLJEh1nLA9MjqafSsDk5gEigwlFQ4rMhuUFgeUGDAEOkwlerIYR5K6CDYOHx0cG5uZiq1WCAAwogFADS5ZGZaYACSIEVQ6nDDIJOzWGoYWwiCjFjqAKI8muD0W3CdyABMAAwA7BnUEAB0yIC8G4DVe4TkIEYyFKnVw9DoHS6yAAvAR2OQqLQlDgJMBIHxpiQuDx+DFxFIZFZrEA"
+  load={false}
 />
 
 The type `Window` is already declared in `lib.dom.d.ts` types for the global `window` object.
@@ -1653,6 +1688,7 @@ charizard.firePunch() // 'Charizard used 🔥 Fire Punch.'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmciHDhAFzIDOYUoA5qeQBYAOdIArjgBG0dmS5Zc+ACoBPLrWQBtRsxAsANAyasA-AF1iAX2LFQkWIhQBBQcAA2wMDKKjkgu3ABeEABQBKOgA3dGAAEyMTM2h4JGQAWXRAiHoXcmQYYCgIVD4QBA5-IJDw42IneWQAMUyUAF5kG3tHZwAyeMTkk3KUaqyMbDwCev7JAjbeiBMEfEZkfLhmTwXQugmRweR6kjTKajoAcgBhDgXgJahQ-fVXbjoARgAGB+u08QHpOQVFfYysq+QfnYZKx9noXuR3F5fH5UmlyNMQPR0HYIAA6OzoFg+AAGABJCGAOMB6KjdhBDMg+PQIKFkIBeDcApLvIABCHm8qOxflchnBZF+2Vy+X8sLhcxmyLRGKxeIJRJJZIpVJp9KZEzQgo4HK5aWMpWI80Wy1RkO8woA9GaAcdTudaUraYyWWy0ft9SdDRdUfycnkCjCLVb3WdlpTqQ7VTV1b7UfsgA"
+  load={false}
 />
 
 I threw in a sneaky **tuple** in `pokemonType` because a Pokemon can have dual-types. We're going to learn more about **tuple** later.
@@ -1733,6 +1769,7 @@ In the example I disabled JSX in the TS Config options.
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?jsx=0#code/DYUwLgBAZg9gTgWwKLAFCtolEC8EAmMAxgK4IgB2YAdAObgojlUBCAngJL4AUA5Jgl4BKdAHpREAApwYABxBwwbCLzggAzuF4EYGiBRiQQADwCW6yDAoQl8lQAkAKgFkAMo2Zhe1CIF4NwNV7GPDIwAD81GqaYNwiQVjAuDqknnQMoJ7sXHwCwhAAhuoQTm4AYsEelGBiEgDu8ADWhYCg5HEh4ZHgMegC2HgAPMWuZfFMlQB8hMmVqWAVrJw8-MG51RAAUgDKABoE5nkARqD4EC09YREanUJAA"
+  load={false}
 />
 
 Event listeners are a big part of JavaScript and something we use often even when using JavaScript frameworks.
@@ -1787,6 +1824,7 @@ pokemonInputEl.addEventListener('input', (event) => handleInput(event))
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbgJJjgVygUQBsYBeGAExGB1WTCgDoBzZAwtOqAIQE8NyAFAHIEKdGCEBKGAEMIMABIAVALIAZLLjYd6AKF0AzHGGBQAluBgALGWHLtNeAcgBunAFwx8b+tIDeujBBMKCQsFAyAE4sbKQwrpwMEdGsAISy8srqjtq0esEwyTFEDC4yhDjIugC++qJomNh4JTLk5N6cambQdMiRwmZNUEIANDDOPlDSJAB81rb2yDkTnJKSQA"
+  load={false}
 />
 
 TypeScript knows the type is `HTMLInputElement`, so we can use it's methods and properties.
@@ -1807,6 +1845,7 @@ window.addEventListener('keyup', (event) => console.log('Keyboard event'))
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/PTAEFMDdwOwF1ASwM6gAYFkD2BXZ4BRaeNUQXg3BaHYCgB3RGAEyxoDoBDBho2OAGRTixwAJwAUAcgC2ufFmjDxAGlCioPAJSgAvAD5QAYywxkWADbgWprAHMJ2POAjE449eqpUQTnklRoAKrj6ABbcJOSAYju09EysHFzO-MiCMCIScEHB0tBKKmrwmroGRibmljYSgTgh3vCu7p5g+Qgo6ADS4ACeAEZYbMIJPKSAPBuAnfvRjMzsnGF8AkJi4gDWXTgADrmqzoV6hsZmFla24h09fQO1Lm5AA"
+  load={false}
 />
 
 In the previous example we used `!` that asserts the type can't be `null` but keep in mind that when using any **type assertion** you're saying the element can't be `null`.
@@ -1834,6 +1873,7 @@ formEl.reset() // works ✅
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBAZiATgWwKIBsYF4YBMTACuyApmFAHQDmJUGJp5AQgJ4CSuAFAOQIrcBKAIQwAhhBgAJACoBZADIAxJGnQMyUAFCa+qiohIRanATAD0ZmAHckAawmBQciA"
+  load={false}
 />
 
 ## Type Assertion Conversion
@@ -1861,6 +1901,7 @@ pokemon.toFixed()
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdgLggQxQTwFB6wLIoQC8EA5AAoCWcmAxgBYCulWAzhCq4gEYgATgSJJUAOjAwAYrQAeIACYAKAJQQA9JoiBeDcDVe6PjjSFGvSZsOmbqxRwUMAO6kbPPoJGFjJKbIXK6lo6uoClO0A"
+  load={false}
 />
 
 TypeScript only allows **type assertions** that convert to a more specific or less specific version of a type.
@@ -1884,6 +1925,7 @@ const pokemonGeneralType = 'Pikachu'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/PTAEBcE8AcFNQJYGdRPAJwQOwOYCgAbWcUaAewGtYBbMrAGQXFnQEMCAVGeAXlAHIACggqsAxgAsArvzx4QEbohRCR46bLF00pSjToBxWFhbsucUH1WjJMvEA"
+  load={false}
 />
 
 This concept is more useful if we combine **type literals** into **unions**.
@@ -1902,6 +1944,7 @@ movePokemonOnBoard('rigth') // oops! typo. 🚫
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWzgNwKYAU4GsOpgDyYAQnAIYBOAJgBQBQiiNMVG08YAXIgOQgADn0QAfflRgBzABZQR4vjTgB3MAv4AbDMHkMAlIgDeTRAHoziAHQ2GAXwYNUmHPkIly1egOGGLiCggIDEEoCgAjbUQ0Ck0QDERAUHIndGw8AgQPSlo6PkkpKBk+P0s4OEEAZwBCRCgAT0E4K0RAXg3Aar2gA"
+  load={false}
 />
 
 ## Literal Inference
@@ -1954,6 +1997,7 @@ addPokemon(pokemon.name, pokemon.type) // pokemon.type is 'electric' ✅
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoApwNYFMC2CAFGMvrgFyIDOUATjGAOYA0iUAngA6WIDkwGHVx9EAH34B3ZFFx1REvrgA2uaAwh8AlIgDeAKERHEEBNTiqAdMrhMiuxKXJtOPRAF8t+9-v2mwtIhcOAQIiAC8eobGTrx8GDDYyBAAFiB8LNFGrnEqavQwmt4o1CZmUL76aJghhGBEwXh1lrFsjaFgljk6APQ9QbUIXdy4iDClSqrqhaKAoOT6QA"
+  load={false}
 />
 
 This makes sure properties are assigned a literal type instead of a general type like `string` or `number`.
@@ -2048,6 +2092,7 @@ logPokemon() // '7', 'blaze', 'solar-power'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26QCCqAkgEoQDOADvhSgN4BQyLyA2qACYQAeAXMgpgooAOYBdAQFcQmEOgDuIZqwBGcOgH1eVaMAggkAkFJyroKlsE7HT5qJeQg4OCAKEiQox3FXAANsBg+hQCBFBQcACeADz0yL4BQVEC8c6u7sJiADTIUlD+mZ6iyAC+pQB8jngAbpRhEdFxyLVuyGkubR45eQVFYmWVjKWMjBpRhsgwMgjB+MiiEGAY2HggABTpXVleAJQCqFDoOMB0MSu4+ERklDQgdBXtjgi0YMhQt7QoALwJCnBBKZLBAAC3WAAMQWAwFRQgB6OE0bBwKjAAB0LzhKOAcJqACZEVhLiA4QASehbUrg3bPV7IJHE5C-OD-QEfahfNEAKwo+HWNNY7yW+RA9KJa2Go3Gk2mhjmov86FEFzW-Kegpe9zeoLgIgAXrrOEy-gC3otluK+QByHX6w1WmmOBHIADyqi5EFmyFOyHQMGQYCiumQVpkckUICtaOQgF4NwDVe7T7uh-BA0YrROtbcADVBOGj0LnoGiwOgAMo7DO7R2C50KFAgCAQI2gz2YCje0VUfyIFAwAv0o66KDBSjIOvITj4K1vcMKBKqdBSMCJ3kptNK9aZkG67OG-OFqAJdsmMzQXbFssV-nV1hOuFjlDmhYfODa9DcZAvHBdpbAeZ9w8qEHaBIHbcdZ3nRdlw1bc7VzNFEkCEcKDRACAFFEDBdZ4kQ5Iyl2JlHk1VdU3TdZcMDNEtirSVGHTFU+QI50rQAditXIrVUbs9QgdiQ1XXUAFoaDrKArSAA"
+  load={false}
 />
 
 Take Pokemon ratings for example where we don't know the Pokemon ahead of time:
@@ -2124,6 +2169,7 @@ pokemon[bulbasaur] // correct ✅
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMpjmAzsg3gKGSOWABMAuZEAVwFsAjaQ4gCwAdKaGnjlMMEAa051GUZkVIQYEEFggju4gL758oSLEQoACgHtBEWnpB4JyetQA29OFjjUoldJizmELOFFpwQUp2gY2OZYAI7UwFBgVgqBrviq+AgmWGDIbAZGJpT6hsamALxmvJY2dg4BuCQUyACMADTI7JQALACsjfyIwsgtAJyNUjJysf3IyvXunt6+-pRVZJQATI3NyADMA3xgAj1tK8hDsvKt6+OTvGERUTHz1ZTrqxy9LZ073a0AHIPSx7EAbG1xgk1Mk5GlSrZ7I5KKkoKAAObIIoAckh5UcKKSKTSHi8Pj80EoKLxM0JUBRyOQJOmBP8WJiaSukWiKFRzJuEEpdmQYNSagyeRMAG10dCoABdfCCrIgYWkunQKUy-LCjmsqVAA"
+  load={false}
 />
 
 I only made the type explicit so it's obvious. `const` is going to infer a **type literal**. We can also use the `as const` assertion.
@@ -2157,6 +2203,7 @@ getPokemonByType('electric')
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQApwNaoLYIBCAngCrEAOqAFBTvguVQFyIDkwMATqm4gD7sA7gEMoqLn0FtUAG1TQuMCGwCUiAN4AoRIgD0exFEqpEMAM7tOPKcLETbM+YuVsdZ4Ilr0CYJqYBeIKtuXnVtXUjEHigQLiQ2QF4NwFJdxGtTYypELFxfN10AXy13A0QhUzARLi44ITMoRAATWqQoODtxSQF2OQUoJRV3GE9vXMYTRCCAjodw9yiYuITAHg3AKH2y+y4jCZyGMHzEIpLDcsRK6tr6ppajdqc+gYO6Mb8TYt1S-wBlCCUKBuwYFqlgQsmIPWc-VcZksdHM5hgACN5O5FvF2IBCskQvRcEG2WV2eS0RzQmB8RDIJmo91xaiAA"
+  load={false}
 />
 
 Let's appreciate for a moment how cool it is that TypeScript just knows the type we're dealing with based on analyzing the code flow. 🤯
@@ -2197,6 +2244,7 @@ pokemonAttack(pokemon) // 'Pikachu used Thunderbolt.'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/C4TwDgpgBAYglgJ2gXigbygMwDYEMC2EwAFggPYDuECAXFABQCUUyAfFAG5lwAmUAvgChBoSFADquYNRbooFYomxgyZbHSYt2XXgOGjoAUWwQAxsARxTsjCQCuAOx7UARmuAbmbTtz5DBmI7mcGQOUCoA1hD4oQCCwMC4phH0kdGhdPBIUAA+ElIyecZmFlbMaIJQVVBwmAwA5DgERKSU1PU1YWkxDuWV1QPdoQB0TYQk5FQITP1V-gO1DQpKKmodcF1kUT19A4Nb6Q7DywjKqtgzA-PVi-T19k6u7uub26G7e1VDRw-OCG7YYCXapCfymUIAZ2A4QOPRssygDmadHqAAU4BEksQ7PUADQI35PQGaCqfKrghwQtQQYbYMgAc3oAAMACRoEhwCHDJGEfhQOwQiB8AAq2Me-3cwyZjARoOE33iiWSqVh7ygAHp1VA0RisXZ+YKRWK-gDgMN6kA"
+  load={false}
 />
 
 Using `instanceof` narrowing we can check if a value is an instance of another value:
@@ -2220,6 +2268,7 @@ logDate(new Date())
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwCIEMoFMAUAJjrgFyLZ6IA+iAzlAE4xhoCUiA3gFCJ+IxgiIiQFgGWSLjhDKuDj35LEEBHTjJcAOlRoReLVDgBVACoBhAMpMWeth2WP+vfgF9EuZHVxcXj1eIa2rr62kbGAA4RuIzmWN749nx+iK7cadwA9JmIAOSmABLGiABSxgAyiAAMAIyIAExV9XWNpFVVbVWIAOIAsqYA1E3twuYAogBypgBKAIKVY8bTAPIACmOzE4iWxr29Y9OIpgCS+2y53Lpy+Nf23Fk5+QAWIAA01XUlIMgNTS0d7U6PX6FyuJHwYFwAHcKOD7EA"
+  load={false}
 />
 
 If you remember from a previous example there's a distinction between the constructor `new Date()` that returns an `object` and function `Date()` that returns a `string`.
@@ -2248,6 +2297,7 @@ logPokemon(['Bulbasaur', 'Charmander', 'Squirtle'])
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgziA2CmB0w4EMBOAKAlAKGwMwFcxgAXAS3AAJoQBzABRAGtYBbcdAB2bfAC5KEEqjJhaAbQC6lAD6UwBaNEyUA3tkqbKZPJXQkAnp1ghd3FuzCUAvLcoByEACMAVrFL2V6rT8rneYPB4IKgAosjAABZcPJY2AHyUoJAwCDS0MRbgmDg+AL64PqiwJASoVv6W2AXY6YxZYOji9gBCik7IEMhl9gA0DgDCkWisyGAAJrCofQ4AygCOBGSoJHD2kphAA"
+  load={false}
 />
 
 In `logPokemon` we naively check if `pokemon` is an array by checking if it's an `object` since almost everything in JavaScript is an object. Unfortunately, so does `null`.
@@ -2319,6 +2369,7 @@ function isPokemon(value: any): value is Pokemon {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmciHDhAFzIDOYUoA5qecJDgCoCeADrQZNWxAL7FiCfI2Sdc9ZAF5kAbXZkS5bRSpCA5KmCZEACwCu+gDQad8ngIP8sufNdtib2rTrKVqdPoAQtBQvO6+ZPZ8goHSIPTmOHAARgA2EPoexAC6kjDmIAhgwPhy9BjYeCAAFABucGnmQnAgvACUdA1NKMCKla4EPmRQEGDmUATdzQB00Y7KSir6zlVuyAD8yEzNyHTwafQQ4vmFxaUEMMBpkFAD1TX29HSFmCDoAO4gqjntRLajcaTORcegzK43aCPLjKAB8-0ichgyEeFRcD3s7T+w0RyHi9HQGRmaXQLGhuBm-gg7Vs2gkdJpEmIENu93w5Jw9D+AHpuchDMYzJYgA"
+  load={false}
 />
 
 The `item` type is narrowed to `Pokemon` and we can access it's properties.
@@ -2357,6 +2408,7 @@ const pokemon: Array<Pokemon> = [{ name: 'Pikachu', pokemonType: 'electric' }]
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbgMpQE4EswDmAgttgIYCeAXDCeRQDzR6EB8MAvDANoDkAQgFcANgCMyEMoOy8ANDF4BhABZlsqMmAAmyGfN4YAjoNzYow5LwC6AKBuhIsBCnRgA8qIBWyYFDqUaf0YAbxgwMlRkGmZ8AnlnNHAAFQo4KJgYwhgAX3YublDwyJpeAAVcRDJgZUE5eCREsBS0kuQLXzxgXhzbG3woXQAzKuQYUobXGGCbGFmwiPTMghm5hNdmxZxYm2y7B2h6l3APb18ggCZA0koGcaOwPJ5ChZLyyura+Ink1PTeNp8Wy6PT24AOa2OXkBQQAzDQ7o1uFZOE95sUFG8qjU6hCmr9Wu0gd1slYgA"
+  load={false}
 />
 
 Instead of the `Array<Pokemon>` syntax we can use the equivalent `Pokemon[]` syntax if you remember what we learned before.
@@ -2379,6 +2431,7 @@ const log2 = logPokemon(['Bulbasaur', 'Charmander', 'Squirtle'])
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAhmAJ4CUiA3gFCKeIBOuUI3JGTyEwbAL5s2EBAGcoKdAEZEAXkWZyoogHIMMbDQgALEDsbS5C1GgBMajVhHEA2joBCIZACMasmgI6ADSIOgDCxjTc+HQAJrjcwaEAygCOIDDcUMi4OgC6FkA"
+  load={false}
 />
 
 We have no idea what the user might pass as the `pokemon` argument so we don't know the type ahead of time.
@@ -2405,6 +2458,7 @@ log2.map(pokemon => pokemon.toUpperCase)
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAFAA44EIBciAzlAE4xhqIA+tDTaA2gLoCUiAN4AoROMT1cUEPSRk8hMCIC+IkRAR0U6AIyIAvDszklRAOQYY2AIYQAFiHP8NWqMYBMh41kXFu5gBCIMgARjY0NrLmADSI5gDC9jb0+DZgACa49LHxAMoAjiAw9FDIuOYC6gD01YgY9HAk2VAAnvFQcACqJM30CREViBlwuDSIYHDuuAAeMNoIiG3N8XSMzHzmAHSIgLwbgNV7IqhouludPX0DNLhELiK19Y19bfFpJObDo+OT03MLSMtcKtOMxtntDscPFs3qRTIsDAA+RAKChgM7dXrZK64FxAA"
+  load={false}
 />
 
 Since we can't narrow down the type and the union members don't overlap we get a TypeScript error.
@@ -2431,6 +2485,7 @@ log2.map(pokemon => pokemon.toUpperCase)
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAGzgcwApwNYFMC2CAPACoCeADrgHwAUFOBCAXIuVQJSvu6IDeAKETDEAJ1xQQopAzyEwAgL4CBEBAGcoKdAEZEAXm2ZG82gHIMMbAEMIACxBmOqjVtRoATAaNY5CWgDaZgBCIMgARtbq1lJmADSIZgDCdtai+NZgACa4ovGJAMoAjiAwolDIuGYAus4qAPT1iJqiMGBoiICg5ALuOgB0UHAAqhRUoklRuLR1jc1Qre2IcMCIaaLWZOpdPegefRkU9CYIBtSIskxgA8OjuRPquBxAA"
+  load={false}
 />
 
 The generics syntax looks like `<T>` where `T` represents the **type variable.** You might see the single letter `T` used instead but I think it's confusing. It makes the code harder to read and you might assume you have to use `T` as a type name. **You can name the type variable anything you want.**
@@ -2465,6 +2520,7 @@ console.log(formatPokemon) // ["BULBASAUR", "CHARMANDER", "SQUIRTLE"]
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcAUqBOOBciqYAngDSISoA21ARqhANaHY4DmhxJAlIgLwA+IqT4BvAFCJpiHAFMoIHElw4AdGixVaDZjwkBfCRIgIAzlETA4ONFAAKcJnOQIBKDJgDaAcgBCIPSoZqhKPhQ+AMIAFrhoYAAmcjjhiD4AygCOIDA4UNRyPgC6FJjoTi4IfEKI5c6uYGpQcACq6OjJkcFymDz6JuZwBWrUcOyY1raoDhUN+kA"
+  load={false}
 />
 
 There's a couple of thoughts I have:
@@ -2489,6 +2545,7 @@ console.log(formatPokemon) // ["BULBASAUR", "CHARMANDER", "SQUIRTLE"]
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcA8BJM6RQA0iA8gflAHwAUqATnQFyK4UDaAusRKgDa8AjVBADWzWnQDmzVgQCUiALyVS5eYgDeAKES7EdAKZQQdJPToA6NOmo9+Q0XK0BfLVogIAzlETA4dNCgABTgRA2QEJRQMajYAcgAhEEFUT1QTOOI4gGEAC3o0MAATAzpMxDiAZQBHEBg6KF4DOK5EanRQ8IQFZUQOsIiwCyg4AFV0dFLs1INqOSd3Lzgmi144SWo-ANRgzsGFAHoDxDYAIgTRgBkEgEFKm9GAJVPiU+yACRvHgFkbgDkACIAUWer0qAEVRthHgAVS5A04cIA"
+  load={false}
 />
 
 If we look at `formatPokemon` it's infered as `string[]` and `map` has the signature type of `map<string, string>(arr: string[], callback: (arg: string) => string): string[]` as we would expect.
@@ -2529,6 +2586,7 @@ const consumables: Dictionary<Consumable> = {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgCLAWYB7EcoCeAPACoEAOEAfMgN4BQyTyA2gNYQEBcyAzmFFABzALo8ylegF969UJFiIUABWwcAtrjqNmedRB79BIITqYALcjxABXdQCNoZ5OTURNICQb4Dh02fLQ8EjIAMK4vHZw9gA2KAzMyHreRn6JcJo24NZ2jlD+9AgRYC5uHjzomDh4hESqGrg0ALzaiQCMPLRJGd4A5ABCNjH2cLxwNlC9ADTIljwALACsM64NnhR9QlCjvL3IUlPOAEyd3fo8vaHm+OpwIAAm0NOzVsgAzACcK2W4XhcwwCgED2B2cb1OyQuAGUAI42QFgOLPObIebzb5rP7IXoAdzgChBBSKIH4yGJkVusQgvAqGCwuHwxHCJKiVOarWYHToZz6AEFwMB7thIM8MtgsmAFvtDokTtzIdjVPSQKLMtlkAAOaVgiE9C4AURiwAAHoDVeL1Ud9gUgA"
+  load={false}
 />
 
 We're creating a generic interface `Dictionary` where we accept any `string` as the object key and it's property has to match the shape of `Type`.
@@ -2563,6 +2621,7 @@ console.log(numberLength) // undefined
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgDIRAczAC2QbwChkTkAbDbHALmRAFcBbAI2kIF9DCZ6QExgAexDJgkRuiy4APABUAngAcUEAB6QQAEwDOaSrgB8ACjERGtBcoCUBYqSgQw9KCNOMAdBSk4OXBMO0wZEVBAGszYQBBKCg4eUkqZABeUXEE3CMAbQByACF6MmY4bThnbIAaZGyAYRw4KEY4LWgKqoBlAEd6YCgwCmyAXSsAbj8AoO1QTAoABTCIkHS8FLclo2yZ4FDEHHpsqy4AekPkaMwmDCDBGGQwJRRshhYW0V0QQSDiycwQOGYKW6CYL1OCMRzQZDXW73KpLbLuZCAXg3ANV7hH8IECdCYrCgS2SqTMawAjAc0QFBBRPIJMEYQuFGFEYnEljZjsgAMxkjEUiBUmmTLCzeYMxb6HCsk4Adi52h5fKMTxxLOQbN4mggMFAEE0QA"
+  load={false}
 />
 
 In the `sortPokemon` example we constrain the shape of `pokemon` to the `Pokemon` interface:
@@ -2601,6 +2660,7 @@ console.log(sortPokemon(pokemon, 'hp'))
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmciHDhAFzIDOYUoA5qeQBYAOdIArjgBG0YgF9ixMAE8uKAMpg4YZAF5kAcm7qJMPiARhg+BuihgM2PCAA8AFRkoIAD0ggAJvTRZc+AHwAKLm8rOntZAG0AXQAaBkUwOgUlAEpQhyiidjIoCDA+KAIgy3wAOnpTMH9-GGAoRgBRABtY+ggEfDcm5NVfBjaOpvDGJUjkAFpkGrqwQeGwSOSxCXaQRmQinxA6C02MtXCszPJjiipaDQBhDjgoHDh3aHVow+PuOgBmAE5D0WfjkhO5Eo1Do6iuN2ojQg+CeL04PGQAFYABw-P7kAGA04gy7XZgALxublhWOQb2QAHZUcdfsRIhIAPQMkxmLzFAiCKRk4AsDgQNZzYgrcpQkqNdAsfzlMw7KyBYL4WKaLjqZLJIA"
+  load={false}
 />
 
 TypeScript generics are flexible. 💪
@@ -2646,6 +2706,7 @@ getProperty(pokemon, 'oops')
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQAoCc4AdVZQCeAPACpH4A0iA0qkYqgB5SpgAmAzogNYNxgiCvgB8ACjgAjAFYAuYZVQ1+RBfSIBKRAG8AUIkOIs6EFiTSZAbVUBdPQF89eiAi5REuOPwC2CRAC8ugZGABa4CgDMAKxUIYZgAIY+qAoA5BgwvIkQoSBpcUae3qh+YCKpiGmoADao0FgwEGmOzmiYOPiEROJevgg0aeFpmnrt2HgExL0lZYNweFwjQA"
+  load={false}
 />
 
 The `keyof` operator takes an object type and produces a string or numeric literal union of its keys.
@@ -2705,6 +2766,7 @@ movePokemonOnBoard(Direction.Up)
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADlALxQDkRAClQDQFQBKcA5gBaoXUsCSAcQASAFUbMYGAO7ZKVGAHkA6gDkJhADLAAZj3maAogDFxeAL548OsCDSZsEDADdgtDAGtgTkIpAAhDABDBAATAApQxBR0LAAuWGj7LABKXGZCZCwAZwwAG2AAOjyMdkik2JA0gHpq4loLKydXdy8fP0CQiPgkZJBC0hSgA"
+  load={false}
 />
 
 TypeScript compiles Enums down to some _interesting_ 🧐 JavaScript code you can look at in the JavaScript output tab if you're curious.
@@ -2763,6 +2825,7 @@ const coordinates: CartesianCoordinates = [3, 4]
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/PTAECUHECFQYwPYBsECdQBcCuAHJBTAKAwE8d8IYBhZNUAXlAG0A7LAWwCN9UAaUNlx79B3PgI5iAuoUKIWAZwyhUAc040UqAFyVomuoyYAmAKyn+Zi6Cv8ADADoALDMIg9AQXi102PEVJyTwN0I1FhCSFxcOjJHgB+V3klFXUAQxDdKGgPEIZmWxtzS2LQRxdZdyo01Ax8BQBLNJZvNAATBpY0uoVMXAJiMgpq2vqmlhp2zu76-KYAD10Y-hIluNQkhEVlRCmunt0RnvHJ1A792aMAZn4XIA"
+  load={false}
 />
 
 I might expand this with more examples.
@@ -2795,6 +2858,7 @@ pokemon.name = 'Charizard'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKD2BrApgW3gO2gbwFDQOgCdkwATTEAT2gzFWQC5oIAXIgSwwHNd9DgmNkQCuwVvCIAKOg2bCu3AJQ5+hQqwAWHCADpZyaAF5a9ZGugBfXNdyCMbaAAckaTMdrIA7nFfoMUgDksByIYMCaIoFKfAD0sdAAwmAYGPCs0JAQHNxYEtCBBoHQAEbIwGAiEIYcGTqZxKRkALSUNE5E8E7IRKxUutCAvBuA1Xu4Lij++mYegYmaYJwAXgtkgUA"
+  load={false}
 />
 
 **public**
@@ -2818,6 +2882,7 @@ pokemon.name = 'Charizard' // no problem ✅
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKD2BrApgW3gO2gbwFDQOgAcBXAIxAEthoMxVkAuaCAFwCdKMBzXfQ4JjbsSwVvHYAKOg2bCu3AJQ5+hQqwAWlCADoZyaAF5a9ZKugBfXFdyCMbYkjSYjtZAHc4T9BkkByWEpEMGANEj9FPiJvTD1TVz8AYQ0wTgAvVIATP2gAelzaeGJ2eAo0aEBQciA"
+  load={false}
 />
 
 **protected**
@@ -2852,6 +2917,7 @@ pokemon.logPokemon() // 'Pikachu'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKD2BrApgW3gO2gbwFDQOgAcAneAF2WEoBNoMxVkAuaCckgSwwHNd9CwTOxIBXavBIAKBk1YjuPAJQ4BhQuQAWnCADpZyaAF56jZGugBfXNdyhIMADLweCFOizIAHpQw0YbmiYqupEogBGIJzA0CAugR5SKnjq6kIYEPAgyLpxPFJaOvpmShbWtunsxEhBWCYYyADu0M6uNYkA5LCciGDAmqIdpbgA9CNwZETIJOQAntAdBh3QOsRklNTIdGB+0Jgg833AyFCckYaNnIUYo+P2UAsJmMs7dFcwEBH3ECe60IC8G4BqvdwRHamGKTH4Y3o8DW8HOqGggFByEFgjC5eJopLQaFdHp9AYdIA"
+  load={false}
 />
 
 **private**
@@ -2888,6 +2954,7 @@ pokemon.logPokemon() // 'Pikachu'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKD2BrApgW3gO2gbwFDQOgAcAnASwDcwAXZaDMVZALmgmvIwHNd9DhM7EgFdg1eCQAUDJqyFluAShx9ChagAsyEAHQy6AXnqNkq6AF9cl3KEgwAMvC4IU6LMgAetDABMYLtEwVNSJhACMQMmBoECcAt0llPDU1AHpUuBJ4ImQSagBPaAByfSLobWJyKlpoMF9oTBB8szSMsGBgZCgyCLoAdzJNBWhbKGL4zCKdaEBeDcBqvZb+QXgQZB1Yrkkh3X1FM0trAQx2YiRArCMMZD7oR2czhKLYMkR2jWEivdx0zOzcguKpXKMFI8FoYmQPlq9UahXanW6vWgAyGGG+GVGMCeD0m0KhgxgEHCmK603muCIOIwehMvB+GHglXgvVQ0EAoOQUqnrOJUxLQH5PF5vD5AA"
+  load={false}
 />
 
 **Parameter properties**
@@ -2905,6 +2972,7 @@ class Pokemon {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKD2BrApgW3gO2gbwFDQOmEwgBcAnAV2FPnIAoAHSgIxAEthoMxVkAuaGXLsMAcwCUOfIVkB6Od3jQW8ACYBPbsmDIoYchpkEAvrhNA"
+  load={false}
 />
 
 We can see the equivalent in the transpiled output:
@@ -2943,6 +3011,7 @@ class Pokedex implements LogPokemon {
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgDIHsDmAFdBrCAW3RGQG8AoZa5AGy1wOJAAoBKALmQDd1gATCgF8KFBLTgBnSckZESyYIQAOtIhHAyMOfPNKUayBCUlgoAVwRh0UFsvMAjWsATIQcQhC6mooTG3IRKhp7Jxc6Bl1mdnJgw2pjEEl0NQA6ekwWMAALYElU9082OOQRIPEpGTl+CAAPRRU1T000SKYFAxoAei7ZKHRlaDAAT2QAcgy5ZjHFGUI8yT9FUhHB8eq6mYdzMBKe5CgIAEdzYEP+ZeRVlDHtKZIx1ORAXg3Aar3hIA"
+  load={false}
 />
 
 **Generics**
@@ -2964,6 +3033,7 @@ const pokemonArray = new Pokemon(['Bulbasaur', 'Charmander', 'Squirtle'])
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKD2BrApgW3gOwDwBUCeADsgHzQDeAUNNdMJhAC4BOArsA-EwBQEsBGIAJbBoBJGkwAuaPiIBKcgF8KyigHo1ccemyMmgjAHNSgUHIKdDI1HbMAZWYHD0ALzQMyAO5aUOrgHJYQUQwYAALFj85CnVNBB9MLD1HAG0AXVNzegZreIwAQSYmMDwXN09vCQwuZL8AIRYQPkgwFiY-ABpoPwBhULAmVDAMABNkNs6-WwBHFkEmBhBkP1S5IA"
+  load={false}
 />
 
 **Abstract classes and members**
@@ -2991,6 +3061,7 @@ charizard.useItem('Potion') // 'Charizard used 🧪 Potion.'
 <Iframe
   title="TypeScript Playground"
   src="https://www.typescriptlang.org/play?#code/IYIwzgLgTsDGEAJYBthjAgCgewNYFMBbbAOwQG8AoBGpUyKAV3mygAoAHRkZAS1gQlghfAC4EDXiQDmASgoBfStVqgGcRIzD4AkhCJte+wuMkzZ4gG7ZeAE0pLKKNBgBivKPhwFiZfAA99ElsMbyJSChUaLV1jQ2NTaCk5SNo0uhIwbGR8ADpkbGk2AAMAEnIIAAteMFyhEQUEGNsEQD4NwCvdhHKjIgVc4tkohCVHWHpEWErgKF4AL2mWgF5BfAB3BHdPMN82AHIAYSmZ+ahbXcGnI7mF3Ji9A12cCF5Sc4QAeneEA6uTlua2p0ni8SLldkA"
+  load={false}
 />
 
 We glanced over classes in TypeScript because it's a large topic deserving it's own post. If classes are something you use and want to learn more about using in TypeScript [read the Classes section in the TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/classes.html).
