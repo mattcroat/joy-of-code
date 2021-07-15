@@ -34,6 +34,7 @@ export function Iframe({
           <Box
             alignItems="center"
             bg="gray.700"
+            borderRadius="base"
             d="flex"
             fontSize="2xl"
             fontWeight="700"
@@ -41,7 +42,7 @@ export function Iframe({
             justifyContent="center"
             onClick={() => setShouldLoad(true)}
           >
-            Tap to Load TypeScript Playground{' '}
+            {`👆 Tap to Load Example`}
           </Box>
         )}
 
