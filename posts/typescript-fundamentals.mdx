@@ -14,6 +14,8 @@ There's a lot of great resources out there for learning TypeScript, but I always
 
 That being said nothing can substitute the experience of using TypeScript in your project, so dust off an old JavaScript project or create a new one to learn from.
 
+**Update**: Added Decorators
+
 _note: This one was a massive one to write so there might be more typos than usual (the code checks out 💪) — I plan to go over everything and improve it even more over time, so thank you for any contribution you might have._
 
 ## Table of Contents
@@ -59,12 +61,13 @@ _note: This one was a massive one to write so there might be more typos than usu
 39. [Enums](#enums)
 40. [Tuple](#tuple)
 41. [Classes](#classes)
-42. [Set Up TypeScript](#set-up-typescript)
-43. [Reading Type Definitions](#reading-type-definitions)
-44. [Reading TypeScript Errors](#reading-typescript-errors)
-45. [Dealing With Untyped Libraries](#dealing-with-untyped-libraries)
-46. [Generate Types](#generate-types)
-47. [Closing Thoughts](#closing-thoughts)
+42. [Decorators](#decorators)
+43. [Set Up TypeScript](#set-up-typescript)
+44. [Reading Type Definitions](#reading-type-definitions)
+45. [Reading TypeScript Errors](#reading-typescript-errors)
+46. [Dealing With Untyped Libraries](#dealing-with-untyped-libraries)
+47. [Generate Types](#generate-types)
+48. [Closing Thoughts](#closing-thoughts)
 
 ## You're Already Using TypeScript
 
@@ -3066,6 +3069,103 @@ charizard.useItem('Potion') // 'Charizard used 🧪 Potion.'
 We glanced over classes in TypeScript because it's a large topic deserving it's own post.
 
 If classes are something you want to learn more about using in TypeScript [read the Classes section in the TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/classes.html).
+
+In the next section we're going to briefly introduce another concept that TypeScript introduces to classes — **decorators**.
+
+## Decorators
+
+**Decorators** are like **higher-order functions** (function that takes another function as an argument or returns a function) that can hook into a class and it's methods and properties, so we end up with composable and reusable pieces of code.
+
+JavaScript has a [proposal for decorators](https://github.com/tc39/proposal-decorators), so they might get added to the language in the future.
+
+I want to preface this by saying that **decorators** are primarily used by library authors and frameworks such as [Angular](https://angular.io/) and [Nest](https://nestjs.com/).
+
+Don't sweat it when you would use **decorators** because they mainly just improve your developer experience without having to think about how it works.
+
+If you're using decorators you have to enable experimental support for decorators inside `tsconfig.json`.
+
+```json:tsconfig.json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
+}
+```
+
+In the next example we're going to see how we can use a **method decorator** for validation.
+
+To check if a Pokemon has enough experience to evolve we add **@requiredExperience** above the `evolve` method.
+
+The implementation is inside `requiredExperience` that's also known as a **decorator factory** because it returns a function that will be called by the **decorator** at runtime.
+
+```ts:playground.ts
+function requiredExperience() {
+  return function(
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    // the original method
+    const originalMethod = descriptor.value
+
+    // overwrite the method
+    descriptor.value = function(...args: any[]) {
+      // if check passes...
+      if (this.experience > this.experienceThreshold) {
+        // use original method
+        originalMethod.apply(this, args)
+      } else {
+        // otherwise do something else
+        console.log(`${this.name} doesn't have enough experience to evolve into ${this.evolution}. 🚫`)
+      }
+    }
+
+    return descriptor
+  }
+}
+
+class Pokemon {
+  constructor(
+    private name: string,
+    private experience: number,
+    private evolution: string,
+    private experienceThreshold: number
+  ) {}
+
+  @requiredExperience()
+  evolve() {
+    console.log(`${this.name} evolved to ${this.evolution}. ✨`)
+  }
+}
+
+const pikachu = new Pokemon('Pikachu', 80, 'Raichu', 120)
+
+// "Pikachu doesn't have enough experience to
+// evolve into Raichu." 🚫
+pikachu.evolve()
+```
+
+<Iframe
+  title="TypeScript Playground"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAJwKYEcQzQEwKIAeADqsjKpKgBQCUiA3gFCIqpQjJKiSwJXMtEUAIbIA5mwBciYWACeAGgEsiyOCWRQ5AaVRzpAZyhkwYpYMQ5UBiGSJQ4yaQAU1GrQBFrtmPccWBOiYLAHoQoQALVERHGDEYMGEAG0QAWzYIuBxlRAgEIxiyeMSkgFkMrMQAXktvOwdkADoAN2SQVEYcsJjm0gB3MihoqCi0iuyLKxt6xxa26JruaHgwKkb10TEDaVk5AG0AXSCclm6YYFyoiABrRCJhAwNrdcaTxHPEKhGYA0bUYlI5EoiAAfJEfn8AWQKBBUAAVCJoAyZJI4Y4WULhEBPQpxBLJMYjSpvFixYrJcpEnCNYREIhJORfCI-BQycQGGhvAC+iFQSRxwQxp3CcBG-R+0RwcEQBjg6W+ply2IcqRJuXycCSqEaSTgYioAAMACT0b6-RLpHlS6xgADkUEQEWEvV5YDgIDEEV5UKBsKE0tQzU1LoSDkQJrNfyDSRAvDAXMaiEAvBuAar2DZyhVyclmuuE0OxOJFovLMhNBPmOEgpj4-MgBFmcxAkg8DIhnHBrqhUggGAI8mAjMgQNBHPwLKoYK0hogLahDMYEmYchOp9F-hpfXOZyBUgAjUjmQQr4TTwOa2MrecmJfjsir70bmHwxHWFE4aRgHf7ussII5lgAAJoJg2CoPgPpPrQAhnkkvS0L2Fj9rKWo6nqhoRsy5rCJavLRr0OD+uGpqYVG55xgmiCABTk6b1owjb5A6RAwNcwgQBEIDVDOqB9G2HZdnwtrOMxrHsbarIABwAAysraABKwgwGxIBiYgACMABMkmcow3QAERCSxSmWHANr2o6zprm6HpeuugJPv6OnhDBIZgGG8mKexjS6cmKaMExhmec51A0EAA"
+  load={false}
+/>
+
+We barely touched upon **decorators** because it would get lengthy and it's enough you just know about them.
+
+Hooking into code like this is also called [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) and is often more useful in frameworks where you might need to add metadata to measure or analyze code.
+
+There's a great video by [Fireship](https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA) on [The Magic of TypeScript Decorators](https://www.youtube.com/watch?v=O6A-u_FoEX8) you should watch. 🍿
+
+<Iframe
+  title="The Magic of TypeScript Decorators"
+  src="https://www.youtube.com/embed/O6A-u_FoEX8"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></Iframe>
+
+If you want to dive deep into **decorators** you can read [Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) from the TypeScript Handbook.
 
 ## Set Up TypeScript
 
