@@ -1,15 +1,4 @@
-import {
-  Box,
-  Button,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Box, Button, useColorModeValue } from '@chakra-ui/react'
 
 import { Delight } from '@/root/components/shared/Delight'
 import { Icon } from '@/root/components/shared/Icon'
@@ -33,36 +22,19 @@ export function UniversalAccess({
   }
 
   return (
-    <Popover defaultIsOpen={true}>
-      <PopoverTrigger>
-        <Button
-          _hover={hoverStyle}
-          bg="none"
-          color={mutedColor}
-          disabled={true}
-          onClick={() => setAccessibleFont(!accessibleFont)}
-          p={0}
-        >
-          <Box d="block">
-            <Delight>
-              <Icon icon="universalAccess" />
-            </Delight>
-          </Box>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <PopoverHeader>Accessibility (Coming)</PopoverHeader>
-        <PopoverBody>
-          <span>
-            If you have difficulty reading try using a font for dyslexia.
-          </span>
-          <Box as="span" color="gray.400" d="block" mt={4}>
-            {`Tap anywhere on the page to close the pop-up. 👋`}
-          </Box>
-        </PopoverBody>
-      </PopoverContent>
-    </Popover>
+    <Button
+      _hover={hoverStyle}
+      bg="none"
+      color={mutedColor}
+      disabled={true}
+      onClick={() => setAccessibleFont(!accessibleFont)}
+      p={0}
+    >
+      <Box d="block">
+        <Delight>
+          <Icon icon="universalAccess" />
+        </Delight>
+      </Box>
+    </Button>
   )
 }
