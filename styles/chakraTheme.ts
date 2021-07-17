@@ -4,6 +4,8 @@ export const chakraTheme = extendTheme({
   fonts: {
     Inter: 'Inter, sans-serif',
     Mononoki: 'Mononoki, monospace',
+    OpenDyslexic: 'OpenDyslexic, Inter',
+    OpenDyslexicMono: 'OpenDyslexic, Mononoki',
   },
   config: {
     initialColorMode: 'dark',

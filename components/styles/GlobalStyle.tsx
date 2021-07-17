@@ -1,8 +1,9 @@
 import { css, Global } from '@emotion/react'
-import type { ReactNode } from 'react'
 import { useColorModeValue } from '@chakra-ui/react'
 
 import { chakraTheme } from '@/root/styles/chakraTheme'
+
+import type { ReactNode } from 'react'
 
 interface GlobalStyleProps {
   children: ReactNode
@@ -37,6 +38,33 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
             src: url('./fonts/mononoki/mononoki-Bold.woff2') format('woff2');
           }
 
+          @font-face {
+            font-family: 'OpenDyslexic';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('./fonts/openDyslexic/OpenDyslexic-Regular.woff2')
+              format('woff2');
+          }
+
+          @font-face {
+            font-family: 'OpenDyslexic';
+            font-style: bold;
+            font-weight: 700;
+            font-display: swap;
+            src: url('./fonts/openDyslexic/OpenDyslexic-Bold.woff2')
+              format('woff2');
+          }
+
+          @font-face {
+            font-family: 'OpenDyslexic';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('./fonts/openDyslexic/OpenDyslexicMono-Regular.woff2')
+              format('woff2');
+          }
+
           ::selection {
             background-color: ${useColorModeValue('#bee3f8', '#fbd38d')};
             color: ${useColorModeValue('#1A365d', '#652b19')};
@@ -53,6 +81,7 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
           }
 
           body {
+            font-family: ${chakraTheme.fonts.Inter};
             height: 100%;
             overflow-x: hidden;
           }

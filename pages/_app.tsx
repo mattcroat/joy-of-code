@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import Head from 'next/head'
 
+import { Accessibility } from '@/root/components/accessibility'
 import { chakraTheme } from '@/root/styles/chakraTheme'
 import { GlobalStyle } from '@/root/components/styles/GlobalStyle'
 import { Navigation } from '@/root/components/shared/Layout/Navigation'
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
             name="viewport"
           />
         </Head>
+        <Accessibility />
         <Navigation />
         <Component {...pageProps} />
       </GlobalStyle>

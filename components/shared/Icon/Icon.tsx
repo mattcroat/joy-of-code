@@ -17,6 +17,7 @@ export type Icon =
   | 'sun'
   | 'swatch'
   | 'typescript'
+  | 'universalAccess'
 
 interface IconProps {
   icon: Icon
@@ -38,6 +39,7 @@ const icons = {
   sun: <SVG.Sun />,
   swatch: <SVG.Swatch />,
   typescript: <SVG.TypeScriptLogo />,
+  universalAccess: <SVG.UniversalAccess />,
 }
 
 export function Icon({ icon, size = 32 }: IconProps): JSX.Element | null {
