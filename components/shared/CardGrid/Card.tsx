@@ -77,7 +77,7 @@ export function Card({ category, title, slug }: CardProps) {
               fill="currentColor"
             ></path>
           </svg>
-          <Box as="span" fontSize="sm" transform="translateY(1px)">
+          <Box as="span" fontSize="sm">
             {views}
           </Box>
         </Box>
