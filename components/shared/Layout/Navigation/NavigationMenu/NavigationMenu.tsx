@@ -6,7 +6,6 @@ import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Icon } from '@/root/components/shared/Icon'
 import { MenuToggle } from './MenuToggle'
 import { MotionBox } from '@/root/components/shared/MotionBox'
-import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
 
 const menuVariants = {
   open: {
@@ -241,20 +240,6 @@ export function NavigationMenu() {
                 </Box>
               </Box>
             </CustomLink>
-          </Box>
-          <Box role="group">
-            <Box hover={hoverStyle}>
-              <ThemeToggle />
-              <Box
-                _groupHover={hoverStyle}
-                as="span"
-                color={menuTextColor}
-                d="inline-block"
-                ml={2}
-              >
-                Theme
-              </Box>
-            </Box>
           </Box>
         </SimpleGrid>
       </MotionBox>

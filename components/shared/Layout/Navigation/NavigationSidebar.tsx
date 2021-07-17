@@ -11,7 +11,6 @@ import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Delight } from '@/root/components/shared/Delight'
 import { Icon } from '@/root/components/shared/Icon'
 import { MotionBox } from '@/root/components/shared/MotionBox'
-import { ThemeToggle } from '@/root/components/shared/ThemeToggle'
 
 const menuVariants = {
   hover: { display: 'block', opacity: 1 },
@@ -321,14 +320,6 @@ export function NavigationSidebar() {
                 </Box>
               </MotionBox>
             </MotionBox>
-          </ListItem>
-
-          <ListItem mb={8} mt="auto">
-            <Box mt={8}>
-              <Delight>
-                <ThemeToggle />
-              </Delight>
-            </Box>
           </ListItem>
         </List>
       </Box>
