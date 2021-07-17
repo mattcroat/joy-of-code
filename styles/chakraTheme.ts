@@ -29,6 +29,7 @@ export const chakraTheme = extendTheme({
           maxW: '600px',
           my: [4, 8, 16],
           textAlign: ['left', 'center'],
+          mx: 'auto',
         },
         h2: {
           color: colorMode === 'dark' ? 'orange.200' : 'blue.600',
@@ -41,8 +42,9 @@ export const chakraTheme = extendTheme({
           mt: [12, 20],
         },
         p: {
+          color: colorMode === 'dark' ? 'gray.300' : 'gray.600',
           fontSize: [18, 20],
-          lineHeight: '1.6',
+          lineHeight: '1.8',
           my: 8,
         },
         ul: {

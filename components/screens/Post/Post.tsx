@@ -43,7 +43,7 @@ export function Post({ content, frontMatter }: PostProps) {
         animate="show"
         className="mdx-prose"
         initial="hidden"
-        maxW="72ch"
+        maxW="80ch"
         mx="auto"
         variants={postVariants}
       >
