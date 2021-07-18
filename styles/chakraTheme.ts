@@ -2,10 +2,11 @@ import { extendTheme } from '@chakra-ui/react'
 
 export const chakraTheme = extendTheme({
   fonts: {
-    Inter: 'Inter, sans-serif',
-    Mononoki: 'Mononoki, monospace',
-    OpenDyslexic: 'OpenDyslexic, Inter',
-    OpenDyslexicMono: 'OpenDyslexic, Mononoki',
+    body: 'Inter, sans-serif',
+    heading: 'Inter, sans-serif',
+    mono: 'Mononoki, monospace',
+    dyslexic: 'OpenDyslexic, sans-serif',
+    dyslexicMono: 'OpenDyslexic Mono, monoscape',
   },
   config: {
     initialColorMode: 'dark',

@@ -3,32 +3,20 @@ import { Box, Button, useColorModeValue } from '@chakra-ui/react'
 import { Delight } from '@/root/components/shared/Delight'
 import { Icon } from '@/root/components/shared/Icon'
 import { Popover } from '@/root/components/shared/Popover'
+import { usePreferences } from '@/root/context/PreferencesProvider'
 
-import type { Dispatch, SetStateAction } from 'react'
-
-interface UniversalAccessProps {
-  accessibleFont: boolean
-  setAccessibleFont: Dispatch<SetStateAction<boolean>>
-}
-
-export function UniversalAccess({
-  accessibleFont,
-  setAccessibleFont,
-}: UniversalAccessProps) {
-  const mutedColor = useColorModeValue('gray.600', 'gray.400')
-
-  const hoverStyle = {
-    transition: 'color .5s ease',
-    color: useColorModeValue('blue.600', 'orange.200'),
-  }
+export function UniversalAccess() {
+  const { accessibleFont, setAccessibleFont } = usePreferences()
 
   return (
     <Box>
       <Button
-        _hover={hoverStyle}
+        _hover={{
+          transition: 'color .5s ease',
+          color: useColorModeValue('blue.600', 'orange.200'),
+        }}
         bg="none"
-        color={mutedColor}
-        disabled={true}
+        color={useColorModeValue('gray.600', 'gray.400')}
         onClick={() => setAccessibleFont(!accessibleFont)}
         p={0}
       >
@@ -40,7 +28,7 @@ export function UniversalAccess({
       </Button>
       <Popover isOpen={true}>
         <Box as="p" fontSize="lg" fontWeight="700" mb={2}>
-          Accessibility (Coming)
+          Accessibility
         </Box>
         <hr />
         <Box as="p" mt={4}>

@@ -6,6 +6,7 @@ import { Accessibility } from '@/root/components/accessibility'
 import { chakraTheme } from '@/root/styles/chakraTheme'
 import { GlobalStyle } from '@/root/components/styles/GlobalStyle'
 import { Navigation } from '@/root/components/shared/Layout/Navigation'
+import { PreferencesProvider } from '@/root/context/PreferencesProvider'
 import { useAnalytics } from '@/root/hooks/useAnalytics'
 
 // hide Chakra UI outline borders around clickable components
@@ -16,17 +17,19 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider theme={chakraTheme}>
-      <GlobalStyle>
-        <Head>
-          <meta
-            content="initial-scale=1.0, width=device-width"
-            name="viewport"
-          />
-        </Head>
-        <Accessibility />
-        <Navigation />
-        <Component {...pageProps} />
-      </GlobalStyle>
+      <PreferencesProvider>
+        <GlobalStyle>
+          <Head>
+            <meta
+              content="initial-scale=1.0, width=device-width"
+              name="viewport"
+            />
+          </Head>
+          <Accessibility />
+          <Navigation />
+          <Component {...pageProps} />
+        </GlobalStyle>
+      </PreferencesProvider>
     </ChakraProvider>
   )
 }

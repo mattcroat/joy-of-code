@@ -1,31 +1,9 @@
 import { Box, useColorModeValue } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
 
 import { ChangeTheme } from './ChangeTheme'
 import { UniversalAccess } from './UniversalAccess'
 
 export function Accessibility() {
-  const [accessibleFont, setAccessibleFont] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      if (window.localStorage.getItem('accessibleFont')) {
-        return true
-      }
-    }
-
-    return false
-  })
-
-  useEffect(() => {
-    const storage = window.localStorage
-    const serialize = JSON.stringify
-
-    if (accessibleFont) {
-      storage.setItem('accessibleFont', serialize(true))
-    } else {
-      storage.removeItem('accessibleFont')
-    }
-  }, [accessibleFont])
-
   return (
     <Box
       alignItems="center"
@@ -41,10 +19,7 @@ export function Accessibility() {
       top={4}
       zIndex={3}
     >
-      <UniversalAccess
-        accessibleFont={accessibleFont}
-        setAccessibleFont={setAccessibleFont}
-      />
+      <UniversalAccess />
       <ChangeTheme />
     </Box>
   )

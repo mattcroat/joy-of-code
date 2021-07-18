@@ -2,6 +2,7 @@ import { css, Global } from '@emotion/react'
 import { useColorModeValue } from '@chakra-ui/react'
 
 import { chakraTheme } from '@/root/styles/chakraTheme'
+import { usePreferences } from '@/root/context/PreferencesProvider'
 
 import type { ReactNode } from 'react'
 
@@ -10,6 +11,8 @@ interface GlobalStyleProps {
 }
 
 export function GlobalStyle({ children }: GlobalStyleProps) {
+  const { accessibleFont } = usePreferences()
+
   return (
     <>
       <Global
@@ -48,7 +51,7 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
           }
 
           @font-face {
-            font-family: 'OpenDyslexic';
+            font-family: 'OpenDyslexic Mono';
             font-style: bold;
             font-weight: 700;
             font-display: swap;
@@ -81,9 +84,19 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
           }
 
           body {
-            font-family: ${chakraTheme.fonts.Inter};
+            font-family: ${accessibleFont
+              ? chakraTheme.fonts.dyslexic
+              : chakraTheme.fonts.body};
             height: 100%;
             overflow-x: hidden;
+          }
+
+          h1,
+          h2,
+          h3 {
+            font-family: ${accessibleFont
+              ? chakraTheme.fonts.dyslexic
+              : chakraTheme.fonts.body} !important;
           }
 
           a,
@@ -109,7 +122,10 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
               chakraTheme.colors.gray[700]
             )};
             color: ${chakraTheme.colors.gray[100]};
-            font-family: ${chakraTheme.fonts.Mononoki};
+            font-family: ${accessibleFont
+              ? chakraTheme.fonts.dyslexicMono
+              : chakraTheme.fonts.mono};
+            font-family: 'OpenDyslexic Mono';
             padding: ${chakraTheme.space[1]};
           }
 
@@ -136,7 +152,9 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
               chakraTheme.colors.blue[900],
               chakraTheme.colors.orange[900]
             )};
-            font-family: ${chakraTheme.fonts.Mononoki};
+            font-family: ${accessibleFont
+              ? chakraTheme.fonts.dyslexicMono
+              : chakraTheme.fonts.mono};
             font-weight: ${chakraTheme.fontWeights.bold};
             padding: ${chakraTheme.space[2]} ${chakraTheme.space[4]};
             border-radius: ${chakraTheme.radii.base};
