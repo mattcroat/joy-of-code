@@ -65,7 +65,7 @@ export function Popover({ children, isOpen = false }: PopoverProps) {
           >
             {children}
             <Box as="p" color="gray.400" mt={4}>
-              {`Tap anywhere on the page to close the pop-up. 👋`}
+              {`Tap anywhere on the page to close the pop-up. 👆`}
             </Box>
           </Box>
         </Box>
