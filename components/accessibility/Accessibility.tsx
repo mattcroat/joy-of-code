@@ -39,7 +39,7 @@ export function Accessibility() {
       py={2}
       right={4}
       top={4}
-      zIndex={1}
+      zIndex={3}
     >
       <UniversalAccess
         accessibleFont={accessibleFont}
