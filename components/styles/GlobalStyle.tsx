@@ -125,7 +125,6 @@ export function GlobalStyle({ children }: GlobalStyleProps) {
             font-family: ${accessibleFont
               ? chakraTheme.fonts.dyslexicMono
               : chakraTheme.fonts.mono};
-            font-family: 'OpenDyslexic Mono';
             padding: ${chakraTheme.space[1]};
           }
 
