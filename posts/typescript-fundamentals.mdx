@@ -1589,7 +1589,7 @@ pokemon.forEach(pokemon => pokemon.attack())
   load={false}
 />
 
-Inside the **interface** we can say properties are optional using `?` and type required functions like `attack(): void`.
+Inside the **interface** we can say properties are **optional** using `?` and type **function signatures** like `attack(): void`.
 
 **Interfaces** and **type aliases** are almost interchangable.
 
@@ -1683,7 +1683,11 @@ const windows: Window = {
 
 The type `Window` is already declared in `lib.dom.d.ts` types for the global `window` object.
 
-Let's briefly touch upon naming conventions. For the most part I just name the type the capitalized version of what I'm trying to type. For example `pokemon` would be `Pokemon`. Sometimes that's not enough when dealing with something like React where component names are capitalized so you can use a suffix such as `PokemonType` for a **type alias** or a prefix `IPokemon` for the **interface** or even your own convention such as `PokemonProps`. For some reason using the `I` prefix in TypeScript for **interfaces** is controversial but I think it's alright as long as you're consistent with your naming conventions.
+Let's briefly touch upon naming conventions. For the most part I just name the type the capitalized version of what I'm trying to type. For example `pokemon` would be `Pokemon`.
+
+Sometimes that's not enough when dealing with a framework like React where component names are capitalized so you can use a suffix such as `PokemonType` for a **type alias** or a prefix `IPokemon` for the **interface** that's for some reason controversial around TypeScript circles.
+
+You probably shouldn't care and you can use any name you prefer such as `PokemonProps` as long as your naming convention is consistent.
 
 ## Intersection Types
 
@@ -1738,7 +1742,9 @@ I threw in a sneaky **tuple** in `pokemonType` because a Pokemon can have dual-t
 If we wanted to use an **interface** we could and it works just the same.
 
 ```ts:example.ts
-interface FirePokemon extends Pokemon, Ability, Moves {}
+interface Fire extends Ability, Moves {}
+
+interface FirePokemon extends Pokemon, Fire {}
 ```
 
 It's easier to compose types using **type aliases**.
@@ -1747,7 +1753,7 @@ It's easier to compose types using **type aliases**.
 
 **Type assertion** is like type casting in TypeScript where it can be used to specify or override another type.
 
-In this example TypeScript only knows that `formEl` that uses `document.getElementById` returns some kind of `HTMLElement` meaning we can't use some of the built-in form methods.
+In this example TypeScript only knows that `formEl` returns some kind of `HTMLElement` or `null` from `document.getElementById` meaning we can't use some of the built-in form methods.
 
 ```ts:playground.ts
 // formEl is `HTMLElement | null` because it might not exist
@@ -1769,11 +1775,11 @@ If you're not familiar with the [optional chaining operator](https://developer.m
 // short-circuit evaluation
 formEl && formEl.reset()
 
-// optional chaining
+// optional chaining equivalent
 formEl?.reset()
 ```
 
-It's a relatively recent addition to JavaScript, so you might not be familiar with it. If the value doesn't exist it's just going to return `undefined`.
+It's a relatively recent addition to JavaScript but it's been a part of TypeScript for a while, so you might not be familiar with it. If the value doesn't exist it's just going to return `undefined`.
 
 If we look at the API for HTMLElement the TypeScript error makes complete sense since that method doesn't exist.
 
@@ -1785,7 +1791,7 @@ const formEl = document.getElementById('form') as HTMLFormElement
 formEl?.reset() // works ✅
 ```
 
-The 🧠 pro-tip of how to figure out what element you want is fumbling around until your code completion gives you an option that looks like the option you want.
+The 🧠 pro-tip of how to figure out what element you want is fumbling around until your code completion gives you an option that looks like what you want.
 
 There's also the alternative angle bracket `<>` syntax for **type assertion**.
 
@@ -1816,7 +1822,7 @@ In the example I disabled JSX in the TS Config options.
 
 Event listeners are a big part of JavaScript and something we use often even when using JavaScript frameworks.
 
-In the next example we have a input field that takes a Pokemon name and has an event listener on it.
+In the next example we have an input field with an event listener that takes a Pokemon name.
 
 ```html:example.html
 <input type="text" id="pokemon" />
@@ -1856,8 +1862,8 @@ The problem we face has to do again with the type not being specific enough. We 
 const pokemonInputEl = document.getElementById('pokemon') as HTMLInputElement
 
 function handleInput(event: Event) {
-    const targetEl = event.target! as HTMLInputElement
-    targetEl.value
+  const targetEl = event.target! as HTMLInputElement
+  targetEl.value
 }
 
 pokemonInputEl.addEventListener('input', (event) => handleInput(event))
@@ -1904,7 +1910,7 @@ That being said don't lie to the TypeScript compiler and only use **type asserti
 
 ## Type Assertion Using `!`
 
-Using the `!` syntax after any expression is a type assertion that the value isn't going to be `null` or `undefined`.
+Using the `!` syntax after any expression is a **type assertion** that the value isn't going to be `null` or `undefined`.
 
 ```ts:playground.ts
 const formEl = document.getElementById('form')! as HTMLFormElement
@@ -1936,13 +1942,13 @@ That doesn't mean you can't do whatever you want.
 ```ts:playground.ts
 const pokemon = 'Pikachu' as unknown as number
 
-// no complaints, but wait until you run your code 💥
+// looks great 💥
 pokemon.toFixed()
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/DYUwLgBADg9g1iAtjAdgLggQxQTwFB6wLIoQC8EA5AAoCWcmAxgBYCulWAzhCq4gEYgATgSJJUAOjAwAYrQAeIACYAKAJQQA9JoiBeDcDVe6PjjSFGvSZsOmbqxRwUMAO6kbPPoJGFjJKbIXK6lo6uoClO0A"
+  src="https://www.typescriptlang.org/play?#code/MYewdgzgLgBADiA1gUwLbhgXhgcgAoCWiAhsABYCuOMxEMFYiYIA7mDXWBagEbIBOAKEEB6ETAA2IJHQDm-ZMViBeDcClO4IQp0YAHRQQAMQIAPZABMAFAEogA"
   load={false}
 />
 
@@ -1973,19 +1979,19 @@ const pokemonGeneralType = 'Pikachu'
 This concept is more useful if we combine **type literals** into **unions**.
 
 ```ts:playground.ts
-function movePokemonOnBoard(
+function movePokemon(
   direction: 'up' | 'right' | 'down' | 'left'
 ) {
   // ...
 }
 
-movePokemonOnBoard('up') // acceptable value ✅
-movePokemonOnBoard('rigth') // oops! typo. 🚫
+movePokemon('up') // acceptable value ✅
+movePokemon('rigth') // oops! typo. 🚫
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWzgNwKYAU4GsOpgDyYAQnAIYBOAJgBQBQiiNMVG08YAXIgOQgADn0QAfflRgBzABZQR4vjTgB3MAv4AbDMHkMAlIgDeTRAHoziAHQ2GAXwYNUmHPkIly1egOGGLiCggIDEEoCgAjbUQ0Ck0QDERAUHIndGw8AgQPSlo6PkkpKBk+P0s4OEEAZwBCRCgAT0E4K0RAXg3Aar2gA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWzgNwKYAU4GsOpgAUAUIogCYwBOG08YAXIgOQgAOLiAPq9TAHMAFlC68WFOAHcwY1gBsMwUSQCUiAN5lEAeh2IAdEZIBfEiVSYc+QkTad1exAEMIEDOyjOARosRpneRAMREBQcgt0bDwCBDt+ASghFkd9ODh2AGcAQkQoAE92OANEQF4NwGq9oA"
   load={false}
 />
 
@@ -1997,7 +2003,8 @@ Types are used to determine reading and writing behavior.
 
 ```ts:playground.ts
 function addPokemon(
-  name: string, pokemonType: '🔥 fire' | '🌀 water' | '⚡ electric'
+  name: string,
+  pokemonType: '🔥 fire' | '🌀 water' | '⚡ electric'
 ) {
   console.log({ name, pokemonType })
 }
@@ -2010,7 +2017,7 @@ const pokemon = {
 // Argument of type 'string' is not assignable to
 // parameter of type '"🔥 fire" | "🌀 water" | "⚡ electric"'. 🚫
 
-// `pokemon.pokemonType` is 'string' instead of '⚡ electric' 🚫
+// `pokemonType` is 'string' instead of '⚡ electric' 🚫
 addPokemon(pokemon.name, pokemon.pokemonType)
 ```
 
@@ -2027,7 +2034,8 @@ The easier method is using the `as const` suffix that acts like the type equival
 
 ```ts:playground.ts
 function addPokemon(
-  name: string, pokemonType: '🔥 fire' | '🌀 water' | '⚡ electric'
+  name: string,
+  pokemonType: '🔥 fire' | '🌀 water' | '⚡ electric'
 ) {
   console.log({ name, pokemonType })
 }
@@ -2037,17 +2045,17 @@ const pokemon = {
   pokemonType: '⚡ electric'
 } as const
 
-// pokemon.type is 'electric' ✅
+// pokemonType is 'electric' ✅
 addPokemon(pokemon.name, pokemon.pokemonType)
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoApwNYFMC2CAFAFCLmJjL64BciAzlAE4xgDmANIgA44EIAKgE8edRAHJAvBuBSXcTAYzXBMQAfSYB4NwAD7iAO7IouZivUTAhWSJcAG1zRWECSQCUiAN5kKEBAzg2AdFZw7ESulNS43Hx4hGAiYogAvk4kCSQkXmBMvPwxiAC8bh7kVDT0Ehgw2MgQABYgEpxF2dFCouLmljZ2MA4pKAyIGUxpAPQjzQJgflBtiDADEta2LD0qgKDkJGiYOcRRk34lERMxfnsxcbhOQA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoApwNYFMC2CAFAFCLmJjL64BciAzlAE4xgDmANGRQA44EEAFQCevOogDkgXg3ApLuJgMZrkmIAPlMA8G4AB9xAHdkUXM1UbJgQrJEuADa5orCJJIBKRAG8e5CAgZxbAOms4diI3SmpcTkR+PEIwUXFEAF9nEiSSEm8wJmiBOMQAXndPcJp6SQwYbGQIAAsQSW4KXNjhMQkLK1t7GEc0lAZELKYMgHpRlsF49sQYQckbOxZe1UBQchI0TDziGKn-Khoo3bj-Y7bxZyA"
   load={false}
 />
 
-TypeScript adds a `readonly` type on the `pokemon` properties that signals they won't change, so TypeScript infers a **literal type** instead of a **general type** like `string` or `number`.
+TypeScript adds a `readonly` type on the `pokemon` properties that signals they won't change, so TypeScript knows it's a **literal type** instead of a **general type** like `string` or `number`.
 
 ```ts:example.ts
 const pokemon: {
@@ -2060,7 +2068,7 @@ This signals to TypeScript the values of `pokemon` won't change.
 
 ## Object Index Signatures
 
-In times when we don't know the properties of an object ahead of time but know the shape of the values we can use **index signatures**.
+When we don't know the properties of an object ahead of time but know the shape of the values we can use **index signatures**.
 
 JavaScript has two ways to access a property on an object:
 
@@ -2069,7 +2077,7 @@ JavaScript has two ways to access a property on an object:
 
 The second syntax is called **index accessors**.
 
-This is reflected in the types system where you can add an **index signature** to unknown properties:
+This is reflected in the types system where you can add an **index signature** to unknown properties.
 
 ```ts:playground.ts
 interface PokemonAPIResponse {
@@ -2086,11 +2094,11 @@ interface PokemonAPIResponse {
 
 This shows the [Pokemon API response](https://pokeapi.co/api/v2/pokemon/charizard).
 
-We're using an **index signature** syntax `[key: type]: type` to indicate that the keys of the object are going to be a `string` with a `unknown` property.
+We're using an **index signature** syntax `[key: type]: type` to indicate that the keys of the object are going to be a `string` with an `unknown` property.
 
-This is useful where we don't have control over an API or time to type out a complex interface.
+This is useful when we don't have control over an API or time to type out a complex **interface**.
 
-In the previous example we might only care about some properties and not the rest.
+In the example we might only care about some properties and not the rest.
 
 ```ts:playground.ts
 interface PokemonAPIResponse {
@@ -2114,35 +2122,37 @@ interface PokemonAPIResponse {
   moves: Array<{ move: { name: string, url: string }}>
 }
 
+const API = 'https://pokeapi.co/api/v2/pokemon/'
+
 async function getPokemon(
   name: string
 ): Promise<PokemonAPIResponse> {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+  const response = await fetch(`${API}${name}`)
   const pokemon = await response.json()
   return pokemon
 }
 
-async function logPokemon() {
-  const charizard = await getPokemon('charizard')
+async function logPokemon(name) {
+  const pokemon = await getPokemon(name)
 
   // Object is of type 'unknown'. 🚫
-  console.log(charizard.order.toString())
+  console.log(pokemon.order.toString())
 
   // we need checks in place for properties we don't know about
-  console.log((charizard.order as number).toString())
+  console.log((pokemon.order as number).toString())
 
   // we get great code completion for propertes we know about
-  charizard.abilities.forEach(
+  pokemon.abilities.forEach(
     ({ ability }) => console.log(ability.name)
   )
 }
 
-logPokemon() // '7', 'blaze', 'solar-power'
+logPokemon('pikachu') // '35', 'static', 'lightning-rod'
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26QCCqAkgEoQDOADvhSgN4BQyLyA9G8gDYRjJwgAnsnRgAFtGRUo6KtDDDxMgK4BzMcnFwwzVh2Q5tCCRU0TkoACYQAHsgrBVIbcqgRdLANpXbALntgUKCqALr+yiCYIOgA7iCMHuycAEZwdMi2ckEQIEiJqXQA+pnQwDlI-iDKOMnQCaxJUli4+BaWicCWldW1UPV6nDTYeCDIzjjuDeMQ-hSBwf0s+kMto3DJwFzAYGUUieub27v+BFBQcIIAPPT8G1sK-jfTs-MgqgA0yK5cL0FvyABfAEAPkWjRWIwM6AAbpREnhYRQTmcLtcobDHmM4BNfsFPt9cf8gaCAQk0oJcsgYBEEDtWqpeBhhvgABS6Z4BP6qRgASn8qBkOGAdEuTNWRDIlBoIDowOQTAaCFofDc1FoKAAvPwYnBtlTeMYWQADMRgMBUJEcFZwKjAAB0SrYNuAbGhACY2BD8GwACT0aYAo08xJKmV8L2jLVwHV61XSuh2gBWFFZwYabjArlGEcYpMY5Mp1NydNGXHQqjFIxZPPlIeVyGMcCCAC8m5ZkFGY3wGWBK6yAOSNltt-vBxL6ADyyUTEFpFlM6BgmkEcmQ-YiUViIH7duQgF4NwDVe3WZegeHay6oWUPgK2oJY7eg79A7WB0ABlV6Xnljhr6GIoEAIAgdtjFnTBTFAKQuEQFAYEfKQZCyHZKGQf9kEsfB+z4TcYludBlB0RVaFPCBz3LFkrzEJsbzbB8nygfhTCqGpoB5F930-asfwGVCUB7ZBVDcbQG3QawRJwKgeBLKl4OkWR5BQtCcLwgiQyo4c7ztA57l2O04KgABRRAxDZBoWRubTtmEAEaw1OVQxTM8LxZSyFDtaY01YYM8wvPsQGrRp+wAdn7T5+2SaDmwgUK10cpsAFoaH-KB+yAA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26QCCqAkgEoQDOADvhSgN4BQyLyA9G8gDYRjJwgAnsnRgAFtGRUo6KtDDDxMgK4BzMcnFwwzVh2Q5tCCRU0TkoACYQAHsgrBVIbcqgRdLANpXbALntgUKCqALr+yiCYIOgA7iCMHuycAEZwdMi2ckEQIEiJqXQA+pnQwDlI-iDKOMnQCaxJUli4+BaWicCWldW1UPV6nDTYeCDIzjjuDeMQ-hSBwf0s+kMto3DJwFzAYGUUieub27v+BFBQcIIAPPT8G1sK-jfTs-MgqgA0yK5cL0FvyABfAEAPkWjRWIwM6AAbpREnhYRQTmcLtcobDHmM4BNfsFPt9cf8gaCAQkELQ+ERiMgALzIADkYjAYCoSI4KzgVGAADpyWxOcA2NCAExsCH4Nj0hJpQS5ZAwCIIHatVS8DDDfAACl0zwCf1UjAAlP5UDIcMA6Jd1asqeRqLQIMDkEwGuSQHNkG57e6UHS4DE4Nt5bxjJqAAYAEnoVIBUemALDhsSbo94tGfoDQa9NB93IAVhQtUmGm4wK5RmnGKTGDK5QrcsrRlx0KprSNNbq5vrDc7kxSmhr0-xM3xVWA21rpknEvoAPLJPMQJUWUzoGCaQRyBkRKKxED07nIQC8G4Bqvb77vQPG5zdUmrT3PQUGsUG5YHQAGVXrfDdOGvoYigIAQBAljIMYS6YKYoBSFwiAoDAj5SDIWQ7JQyAAcglj4PSfC7jEtzoMoOiurQl4QNeLaanezQjA+T6SGkYw9NAhqvh+X6aj+YL-igY7IKobjaGB6DWMJOBUDwjbyoh0iyPIaEYXhBFEYk94HPcuzcghUAAKKIGI2oNA0mo3Op2zCACPY0k6KZkRRt5mQo3JTokSbVjeE4gJq9Jcpg+nKPSPb6PSADMACs9KfPSczaMACCRQyWzqGAIDBAAtDIlj0kAA"
   load={false}
 />
 
@@ -2180,7 +2190,6 @@ const pokemon: Pokemon = {
   charmander: { id: 2, hp: 39, attack: 52, defense: 43 },
   squirtle: { id: 3, hp: 44, attack: 48, defense: 65 }
 }
-
 
 const bulbasaur: string = 'bulbasaur'
 
@@ -2220,7 +2229,7 @@ pokemon[bulbasaur]
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMpjmAzsg3gKGSOWABMAuZEAVwFsAjaQ4gCwAdKaGnjlMMEAa051GUZkVIQYEEFggju4gL758oSLEQoACgHtBEWnpB4JyetQA29OFjjUoldJizmELOFFpwQUp2gY2OZYAI7UwFBgVgqBrviq+AgmWGDIbAZGJpT6hsamALxmvJY2dg4BuCQUyACMADTI7JQALACsjfyIwsgtAJyNUjJysf3IyvXunt6+-pRVZJQATI3NyADMA3xgAj1tK8hDsvKt6+OTvGERUTHz1ZTrqxy9LZ073a0AHIPSx7EAbG1xgk1Mk5GlSrZ7I5KKkoKAAObIIoAckh5UcKKSKTSHi8Pj80EoKLxM0JUBRyOQJOmBP8WJiaSukWiKFRzJuEEpdmQYNSagyeRMAG10dCoABdfCCrIgYWkunQKUy-LCjmsqVAA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMpjmAzsg3gKGSOWABMAuZEAVwFsAjaQ4gCwAdKaGnjlMMEAa051GUZkVIQYEEFggju4gL758oSLEQoACgHtBEWnpB4JyetQA29OFjjUoldJizmELOFFpwQUp2gY2OZYAI7UwFBgVgqBrviq+AgmWGDIbAZGJpT6hsamALxmvJY2dg4BuCQUyACMADTI7JQALACsjfyIwsgtAJyNUjJysf3IyvXunt6+-pRVZJQATI3NyADMA3xgAj1tK8hDsvKt6+OTvGERUTHz1ZTrqxy9LZ073a0AHIPSx7EAbG1xgk1Mk5GlSrZ7I5KKkoKAAObIIoAckh5UcKKSKTSHi8Pj80EoKLxM0JUBRyOQJOmBP8WJiaSukWiKFRzJuEEpdmQYNSagyeRMAG10dCoABdZAAemlyEAvBuAar38IKsiBhaS6dApbLkIBQchVmXywo5rJ1coNQA"
   load={false}
 />
 
@@ -2228,7 +2237,7 @@ You could also use the `as const` assertion.
 
 ## Type Narrowing
 
-**Type narrowing** is when you narrow types to more specific types, so you can limit what you can with a certain value.
+**Type narrowing** is when you narrow types to more specific types, so you can limit what you can do with a certain value.
 
 ```ts:playground.ts
 function getPokemonByType(
@@ -2236,19 +2245,19 @@ function getPokemonByType(
 ) {
   // type is 'fire' | 'water' | 'electric'
   if (pokemonType === 'fire') {
-      return '🔥 fire type Pokemon'
+      return '🔥 Fire type Pokemon'
   }
 
   // we narrow it down to 'water' | 'electric'
   if (pokemonType === 'water') {
-      return '🌀 water type Pokemon'
+      return '🌀 Water type Pokemon'
   }
 
   // we narrow it down to 'electric'
   pokemonType
 
   // TypeScript knows only 'electric' is possible
-  return '⚡ electric type Pokemon'
+  return '⚡ Electric type Pokemon'
 }
 
 getPokemonByType('electric')
@@ -2256,13 +2265,13 @@ getPokemonByType('electric')
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQApwNaoLYIBCAngCrEAOqAFAFCIOIU74LlUBciA5MDAE6puiAD48A7gEMoqfsLHdUAG1TR+MCN1oBKRAG96iAPRHEUSqkQwAzjz6D5E6bMeKVajVoYxgias1wCMHZLAF5wuwEhXQNGRkEoEH4kbkBeDcBSXcR7S3MqRCxAhC9EAF9aQxNEcUswSX5+OHErKEQAE0akKDgnGTlRHmVVKHVNQx8-ANZgi0Rw0J6XGMM4hKSUwB4NwCh9qud+MxmCqeKyitNqxFr6xua2jrNutyGR4smgkPKGSpCAZQh1Cha2DAjVsCCUxAG7mGnistmY1msMAARipDKtkjxAIVkiEGHgg+zyhyCWhOaEwLCCJBC1EeeO42iAA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQApwNaoLYIBCAngCrEAOqAFAFCIOIU74LlUBciA5MDAE6puiAD48A7gEMoqfsLHdUAG1TR+MCN1oBKRAG96iAPRHEUSqkQwAzjz6D5E6bMeKVajVoYxgias1wCMHZLAF5wuwEhXQNGRkEoEH4kbkBeDcBSXcQAMSizC0QsQIQvRABfWkMTRHFLMEl+fjhxKyhEABMmpCg4Jxk5UR5lVSh1TUMfPwDWYPzw0N6XGMM4hKSUwB4NwCh9xAB1Z348qgKWIJLyytMaxDqGppb2zrMet2HRkqmgkIqGKpCAZQg6gorWwYCatgQSmIg3cI08VlszGs1hgACMVIZVskeIBCskQAFFYaNDpZCtMtOc0JgTkQyBZqC8PJptEA"
   load={false}
 />
 
 Let's appreciate for a moment how cool it is that TypeScript just knows the type we're dealing with based on analyzing the code flow. 🤯
 
-The next example shows how we can use the `in` operator that checks if a property is in the object for **type narrowing**.
+The next example shows **type narrowing** using the `in` operator that checks if a property is in the object.
 
 ```ts:playground.ts
 type Fire = { flamethrower: () => void }
@@ -2273,15 +2282,15 @@ type Electric = { thunderbolt: () => void }
 
 function pokemonAttack(pokemon: Fire | Water | Electric) {
   if ('flamethrower' in pokemon) {
-      pokemon.flamethrower()
+    pokemon.flamethrower()
   }
 
   if ('whirlpool' in pokemon) {
-      pokemon.whirlpool()
+    pokemon.whirlpool()
   }
 
   if ('thunderbolt' in pokemon) {
-      pokemon.thunderbolt()
+    pokemon.thunderbolt()
   }
 }
 
@@ -2308,9 +2317,9 @@ In the same way we can use `instanceof` to check if a value is an instance of an
 ```ts:playground.ts
 function logDate(date: Date | string) {
   if (date instanceof Date) {
-      console.log(date.toUTCString())
+    console.log(date.toUTCString())
   } else {
-      console.log(date.toUpperCase())
+    console.log(date.toUpperCase())
   }
 }
 
@@ -2327,7 +2336,7 @@ logDate(new Date())
   load={false}
 />
 
-You can [read more about narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) that covers some plain JavaScript concepts if you're not familiar with concepts such as truthiness and equality checks.
+You can [read more about narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) that covers some plain JavaScript concepts if you're not familiar with concepts such as **truthiness** and **equality checks**.
 
 ## Type Guards
 
@@ -2363,16 +2372,16 @@ This isn't a bad assumption since almost everything in JavaScript is an object. 
 In JavaScript `null` is a primitive value that returns `object`.
 
 ```js:example.js
-typeof null // 'object'
+console.log(typeof null) // 'object'
 ```
 
-This mistake is part of the language. You can read [The history of “typeof null”](https://2ality.com/2013/10/typeof-null.html) to learn why that is so.
+This mistake is part of the JavaScript language. You can read [The history of “typeof null”](https://2ality.com/2013/10/typeof-null.html) to learn why that is so.
 
 ## Type Predicates
 
 **Type predicates** are a special return type that's like a **type guard** for functions.
 
-Take for example a `isPokemon` function that checks if a passed value is a Pokemon. In `filterPokemon` the `items` array is of type `unknown[]` so `item` is `unknown`. We expect TypeScript to narrow the type through the `if...else` clause to make sure the item we're passing is a Pokemon, so we can access it's properties but the `item` is `unknown`.
+Take for example a `isPokemon` function that checks if a passed value is a Pokemon. In `filterPokemon` the `items` array is of type `unknown[]` so `item` is `unknown`. We expect TypeScript to narrow the type through the `if...else` statement to make sure the item we're passing is a Pokemon, so we can access it's properties but the `item` is `unknown`.
 
 ```ts:playground.ts
 interface Pokemon {
@@ -2407,9 +2416,9 @@ function filterPokemon(items: unknown[]) {
 filterPokemon(items) // 'Pikachu'
 ```
 
-How do we narrow the type of `item` to be `Pokemon`?
+How do we **narrow** the type of `item` to be `Pokemon`?
 
-We can use **type predicates** to narrow the `item` type to `Pokemon` by using the `argumentName is Type` syntax that changes the argument type if the function returns `true`.
+We can use **type predicates** to **narrow** the `item` type to `Pokemon` by using the `argumentName is Type` syntax that changes the argument type if the function returns `true`.
 
 ```ts:playground.ts
 function isPokemon(value: any): value is Pokemon {
@@ -2423,7 +2432,7 @@ function isPokemon(value: any): value is Pokemon {
   load={false}
 />
 
-The `item` type is narrowed to `Pokemon` and we can access it's properties.
+The `item` type is **narrowed** to `Pokemon` and we can access it's properties.
 
 ## Generics
 
@@ -2443,7 +2452,7 @@ The `Array` type is using an interface `Array<T>` where `T` represents a type va
 const pokemon: Array<{ name: string, pokemonType: string }> = [{ name: 'Pikachu', pokemonType: 'electric' }]
 ```
 
-To make the code a lot more readable we can use a **type alias** or **interface**.
+To make the code more readable we can use a **type alias** or **interface**.
 
 ```ts:playground.ts
 interface Pokemon {
@@ -2479,9 +2488,9 @@ const log2 = logPokemon(['Bulbasaur', 'Charmander', 'Squirtle'])
   load={false}
 />
 
-Hovering over the values we can see the infered type for `logPokemon` is `(pokemon: any): any` and `log1` and `log2` are `any`.
+Hovering over the values we can see the infered type for `logPokemon` is `(pokemon: any): any` and `log1` and `log2` types are `any`.
 
-We might think of using a **union type** to handle the types but it's not ideal since it wouldn't narrow the type.
+We might think of using a **union type** to handle the types but it's not ideal since it wouldn't **narrow** the type without **type guards**.
 
 ```ts:playground.ts
 function logPokemon(pokemon: string | string[]) {
@@ -2531,7 +2540,7 @@ log2.map(pokemon => pokemon.toUpperCase)
   load={false}
 />
 
-In the above example we're saying the `logPokemon` is a generic function that takes a type parameter `Type` and an argument `pokemon` of `Type` and returns `Type`.
+In the above example we're saying the `logPokemon` is a **generic** function that takes a type parameter `Type` and an argument `pokemon` of `Type` and returns `Type`.
 
 Hovering over `logPokemon` for `log1` we can see the call signature matches the string we passed in `logPokemon<"Pikachu">(pokemon: "Pikachu"): "Pikachu"` and `log1` is the type literal "Pikachu".
 
@@ -2544,43 +2553,20 @@ const log1 = logPokemon<string>('Pikachu')
 const log2 = logPokemon<string[]>(['Bulbasaur', 'Charmander', 'Squirtle'])
 ```
 
+You can also nest **generics** which can get hard to read, for example `logPokemon<Array<Pokemon>>`.
+
 In the next example we're going to look at a `map` array method implementation that takes advantage of **generics**.
 
-Let's make a couple of observations:
+Let's think about the problem:
 
 - We can't know the type of `arr` since you're able to pass any type of array
 - The `callback` function could have any argument and return type based on that array
 - `formatPokemon` is of type `any` because we don't know the return type
 
 ```ts:playground.ts
-function map(arr: any, callback: (arg: any) => any) {
-  return arr.map(callback)
-}
-
-const formatPokemon = map(
-  ['Bulbasaur', 'Charmander', 'Squirtle'],
-  (pokemon) => pokemon.toUpperCase()
-)
-
-// ["BULBASAUR", "CHARMANDER", "SQUIRTLE"]
-console.log(formatPokemon)
-```
-
-<Iframe
-  title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcAUqBOOBciqYAngDSISoA21ARqhANaHY4DmhxJAlIgLwA+IqT4BvAFCJpiHAFMoIHElw4AdGixVaDZjwkBfCRIgIAzlETA4ONFAAKcJnOQIBKDJikyA2gHIAIRB6VDNUJT8KPwBhAAtcNDAAEzkcSMQ-AGUARxAYHChqOT8AXTJvaUx0JxcEPiFEaudXMDUoOABVdHRU6NC5TH19CQB6EcQfACIAjoAZAIBBTIWOgCVJiknogAkF1YBZBYA5ABEAUXXNzIBFDoBJVYAVWbPJkpNzOCK1ajh2TGstlQDhqLR4QA"
-  load={false}
-/>
-
-So far we have only seen **generics** with one type variable but we can use as many type variables as we want.
-
-Hovering over `formatPokemon` in the log we see it's of type `string[]` and `map` has the signature type of `map<string, string>(arr: string[], callback: (arg: string) => string): string[]` as you would expect.
-
-Using proper names for **generics** makes the code easier to read.
-
-```ts:playground.ts
-function map<Input, Output>(
-  arr: Input[], callback: (arg: Input) => Output
+function map(
+  arr: any,
+  callback: (arg: any) => any
 ) {
   return arr.map(callback)
 }
@@ -2596,7 +2582,36 @@ console.log(formatPokemon)
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcA8BJM6RQA0iA8gflAHwAUAUIg4qgE7MBciuFA2gLrERUAGyEAjVBADWHaiwDmHLgQCUiALyVS5ArVUBveo2YBTKCGZIWzAHRp01QSPFTltAL61aEBAGcoiYDhmNCgABThJY2QEdRQMOkZEbgByACEQMVQfVHNk4mSAYQALFjQwABNjZjzEZIBlAEcQGGYoIWNk-kMGanQIqIRVDUQ+yOiwayg4AFV0dCqCrONqV1daAHp1pIAiVOmAGVSAQTqj6YAlbeJtgoAJI-OAWSOAOQARAFFL67qARWnsOcACr7D7bXheXxwdrWIRwOTUQLBVBhfrjZRAA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcAUAoRfGoBOhAXAWAJ4A0u+EqANgwEaoQDWZmRA5mapQCUiALwA+chWzCA3rTyEAplBCEkRQgDo0Wek1YdB2AL7ZsEBAGcoiYHEJooABTjtFyBKJQYc+RAG0AcgAhEBZUS1RVQKpEQIBhAAsiNDAAE0VCGLiAZQBHEBhCKAZFQIBdGj9MdFd3BGFxRFq3DzBNKDgAVXR0TPiIxUwjI2wAejGAgCJgroAZYIBBHMWugCUp2Kn4gAlFtYBZRYA5ABEAUQ2tnIBFLoBJNYAVOfOp8vMrOFLNBjgeTB2ByoZx1NqCIA"
+  load={false}
+/>
+
+So far we have only seen **generics** with one type variable but we can use as many type variables as we want.
+
+Hovering over `formatPokemon` in the log we see it's of type `string[]` and `map` has the signature type of `map<string, string>(arr: string[], callback: (arg: string) => string): string[]` as you would expect.
+
+Using proper names for **type variables** makes the code so much easier to reason about.
+
+```ts:playground.ts
+function map<Input, Output>(
+  arr: Input[],
+  callback: (arg: Input) => Output
+) {
+  return arr.map(callback)
+}
+
+const formatPokemon = map(
+  ['Bulbasaur', 'Charmander', 'Squirtle'],
+  (pokemon) => pokemon.toUpperCase()
+)
+
+// ["BULBASAUR", "CHARMANDER", "SQUIRTLE"]
+console.log(formatPokemon)
+```
+
+<Iframe
+  title="TypeScript Playground"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcA8BJM6RQA0iA8gflAHwAUAUIg4qgE7MBciuFA2gLqH1GEVABsRAI1QQA1h2osA5hy4EAlIgC8lUuQK11Ab0ENmAUyghmSFswB0adNWFjJM1bQC+tWhAQBnKERgOGY0KAAFOGlTZARNFAw6RkRuAHIAIRAJVD9US1TiVIBhAAsWNDAAE1NmAsRUgGUARxAYZigRU1T+Y0RqdCiYhHUtRAHo2LBbKDgAVXR0GqKc02p3d1oAek2UgCJ02YAZdIBBBpPZgCVd4l2igAkTy4BZE4A5ABEAUWvbhoBFWbYS4AFUOX12vB8-jgnVsIjgCmowVCqAig0mqiAA"
   load={false}
 />
 
@@ -2693,7 +2708,9 @@ function sortPokemon<Type extends Pokemon>(
   pokemon: Type[],
   stat: Stat
 ): Type[] {
-  return pokemon.sort((firstEl, secondEl) => secondEl[stat] - firstEl[stat])
+  return pokemon.sort(
+    (firstEl, secondEl) => secondEl[stat] - firstEl[stat]
+  )
 }
 
 const pokemon: Pokemon[] = [
@@ -2717,7 +2734,7 @@ console.log(sortPokemon(pokemon, 'hp'))
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmciHDhAFzIDOYUoA5qeQBYAOdIArjgBG0YgF9ixMAE8uKAMpg4YZAF5kAcm7qJMPiARhg+BuihgM2PCAA8AFRkoIAD0ggAJvTRZc+AHwAKdjIubys6e1kAbQBdABoghkUwOgUlYgBKcIcYogSoCDA+KAIQy3wAOnpTMH9-GGAoRgBRABtYhggEfDdW9NVfDq73VsjGJWjkAFpkesawEbGwaPSxCSHGZFKfEDoLbZy1SISSclOKKloNAGEOOCgcOHdodXizzh5kAGYATgTRV-IJze52odHUNzu1BaEHwLwSp24dAArAAOP4AshAt6UUHXW7MABedzccOByERyAA7GjTv9iNEJAB6RkmMxeMoEQRScnAFgcCAbRbEdboaHlFroFj+KpmPZWfxbKztTRcdTpdJAA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26TIDeAUMmciHDhAFzIDOYUoA5qeQBYAOdIArjgBG0YgF9ixMAE8uKAMpg4YZAF5kAcm7qJMPiARhg+BuihgM2PCAA8AFRkoIAD0ggAJvTRZc+AHwAKdjIubys6e1kAbQBdABoghkUwOgUlYgBKcIcYogSoCDA+KAIQy3wAOnpTMEDyOuR-GGAoRgBRABtYhggEfDcO9NVfbt73DsjGJWjkAFpkJpawccmwaIT0sQlRxmRSnxA6C32ctUiEknrySmo6dQBhDjgoHDh3aHV4y7JuOgBmAE4EqJPuQLl9rrQNA8ntR2hB8B8EnUfsgAKwADiBILIYMuENu0OYAC8nm5EV9kCiAOyYurA4hrYgAeiZJjMXjKBEEUkpwBYHAgOxWxG26Dh5Xa6BY-iqZiOVn8eysXU0XHU6XSQA"
   load={false}
 />
 
@@ -2725,7 +2742,7 @@ TypeScript generics are flexible. 💪
 
 ## Generic Constraints Using Type Parameters
 
-In situations where we want to know if properties of an object we're trying to access exist we can use the `keyof` operator.
+In situations where we want to know if properties of an object we are trying to access exist we can use the `keyof` operator.
 
 Before I show you that let's first look at an example in JavaScript.
 
@@ -2740,12 +2757,12 @@ const pokemon = {
 In JavaScript we can use `Object.keys` to get the keys of an object.
 
 ```js:example.js
-Object.keys(pokemon) // ["hp", "name", "pokemonType"]
+Object.keys(pokemon) // ['hp', 'name', 'pokemonType']
 ```
 
 We can do the type equivalent in TypeScript to make sure the property exists using the `Key extends keyof Type` syntax.
 
-The `keyof` operator takes an object type and gives us a string or numeric literal union of its keys.
+The `keyof` operator takes an object type and gives us a **string or numeric literal union** of its keys.
 
 ```ts:playground.ts
 function getProperty<Type, Key extends keyof Type>(
@@ -2764,13 +2781,14 @@ const pokemon = {
 // the property 'hp' exists on `pokemon` ✅
 getProperty(pokemon, 'hp')
 
-// Argument of type '"oops"' is not assignable to parameter of type '"hp" | "name" | "pokemonType"'. 🚫
+// Argument of type '"oops"' is not assignable to
+// parameter of type '"hp" | "name" | "pokemonType"'. 🚫
 getProperty(pokemon, 'oops')
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQAoCc4AdVZQCeAPACpH4A0iA0qkYqgB5SpgAmAzogNYNxgiCvgB8ACgBQiGYjgAjAFYAuYZVRVps-kVX0ikgJSIA3lplZ0ILEgWKA2joC6kgL6TJEBFyiJccfgBbBEQAXlNzRAALXFUAZgBWTVlEMABDQNRVAHIMGF40iCiQbOTZfyCEESzEbNQAG1RoLBgIbLcPNEwcfEIicQrUYLAabJjsw0ku7DwCYgGAoYRRuDwuCaA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAcwKZQAoCc4AdVZQCeAPACpH4A0iA0qkYqgB5SpgAmAzogNYNxgiCvgB8ACgBQiGYjgAjAFYAuYZVRVps-kVX0ikgJSIA3lplZ0ILEgWKA2joC6kgL6TJEBFyiJccfgBbBEQAXlNzRAALXFUAZgBWTVlEMABDQNRVAHIMGF40iCiQbOTZfyCEESzEbNQAG1RoLBgIbLcPAHpOxCgo1D8cfEJGbJjspmYYHx4QgAMK1GCwOcRAUHJJNEwhgmJxReWaMdxswy6egEEsZBBMsF9BXvVagCI4PC4XienUuF80rhcGDIdLyRq9OCSbp+NJYDLoAhyITEfCvGIvRAAH0QL3SmQx2JeByq6i+ADpEIBeDcA1XubdDYPC7Ij7AJLBBHd64LinIA"
   load={false}
 />
 
@@ -2780,7 +2798,7 @@ getProperty(pokemon, 'oops')
 
 You might be familiar with **enums** from other languages. **Enums** are a feature of TypeScript. They don't exist in JavaScript.
 
-In JavaScript it's popular to create a object with some constants to reduce the amount of typos.
+In JavaScript it's popular to create an object with some constants to reduce the amount of typos.
 
 ```js:example.js
 const direction = {
@@ -2792,21 +2810,21 @@ const direction = {
 ```
 
 ```js:example.js
-function movePokemonOnBoard(direction) {
+function movePokemon(direction) {
   console.log(direction) // 'UP'
 }
 
-movePokemonOnBoard(direction.up)
+movePokemon(direction.up)
 ```
 
 This is very useful when you have some dynamic code.
 
 ```js:example.js
-function movePokemonOnBoard(direction) {
-  console.log(direction) // whatever we passed
+function movePokemon(direction) {
+  console.log(direction) // whatever got passed
 }
 
-movePokemonOnBoard(direction[direction])
+movePokemon(direction[direction])
 ```
 
 **Enums** are what you could use in such a case.
@@ -2819,26 +2837,24 @@ enum Direction {
   Left = 'LEFT'
 }
 
-function movePokemonOnBoard(direction: Direction) {
+function movePokemon(direction: Direction) {
   console.log(direction) // UP
 }
 
-movePokemonOnBoard(Direction.Up)
+movePokemon(Direction.Up)
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADlALxQDkRAClQDQFQBKcA5gBaoXUsCSAcQASAFUbMYGAO7ZKVGAHkA6gDkJhADLAAZj3maAogDFxeAL548OsCDSZsEDADdgtDAGtgTkIpAAhDABDBAATAApQxBR0LAAuWGj7LABKXGZCZCwAZwwAG2AAOjyMdkik2JA0gHpq4loLKydXdy8fP0CQiPgkZJBC0hSgA"
+  src="https://www.typescriptlang.org/play?#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADlALxQDkRAClQDQFQBKcA5gBaoXUsCSAcQASAFUbMYGAO7ZKVGAHkA6gDkJhADLAAZj3maAogDFxeAL548OsCDSZsEDADdgtDAGtgTkAAoAJogo6FgAXLBB9lgAlLjMyFgAzhgANsAAdCkY7AGRISCxAPSFxLQWVk6u7l4+vvBIUSDppNFAA"
   load={false}
 />
 
 TypeScript compiles Enums to some _interesting_ 🧐 JavaScript code you can look at in the JavaScript output tab if you're curious.
 
-This looks like a _fun_ interview question.
+This looks like a _fun_ interview question. 😅
 
 ```js:output.js
-"use strict"
-
 var Direction
 
 (function (Direction) {
@@ -2847,15 +2863,9 @@ var Direction
     Direction["Down"] = "DOWN"
     Direction["Left"] = "LEFT"
 })(Direction || (Direction = {}))
-
-function movePokemonOnBoard(direction) {
-  console.log(direction)
-}
-
-movePokemonOnBoard(Direction.Up)
 ```
 
-There's a lot more to **enums** if you want to [learn more about enums](https://www.typescriptlang.org/docs/handbook/enums.html) since I rarely use them I just wanted to give a brief overview.
+There's more to **enums** if you're curious you can [read more about enums](https://www.typescriptlang.org/docs/handbook/enums.html) since I just gave a brief overview.
 
 ## Tuple
 
@@ -2920,7 +2930,7 @@ pokemon.name = 'Charizard'
   load={false}
 />
 
-The `public` member can be accessed anywhere and it's the default. You don't have to type it unless you want to be explicit.
+The `public` member can be accessed anywhere and it's used by default, so you don't have to type it unless you want to be explicit.
 
 ```ts:playground.ts
 class Pokemon {
@@ -3010,11 +3020,13 @@ pokemon.logPokemon() // 'Pikachu'
   load={false}
 />
 
-TypeScript gives us a shorter syntax for declaring a class property from the constructor using **parameter properties** by prefixing it with `public`, `private`, `protected` or `readonly`.
+TypeScript gives us a shorter syntax for declaring a class property from the constructor using **parameter properties** by prefixing it with `public`, `private`, `protected`, or `readonly`.
 
 ```ts:playground.ts
 class Pokemon {
-  constructor(name) {
+  name: string
+
+  constructor(name: string) {
     this.name = name
   }
 }
@@ -3192,7 +3204,7 @@ pikachu.evolve()
 
 We barely touched upon **decorators** because it would get lengthy and it's enough you just know about them.
 
-Hooking into code like this is also called [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) and is often more useful in frameworks where you might need to add metadata to measure or analyze code.
+Hooking into code like this is called [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) and is often more useful in frameworks where you might need to add metadata to measure or analyze code.
 
 There's a great video by [Fireship](https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA) on [The Magic of TypeScript Decorators](https://www.youtube.com/watch?v=O6A-u_FoEX8) you should watch. 🍿
 
@@ -3210,9 +3222,11 @@ If you want to dive deep into **decorators** you can read [Decorators](https://w
 
 You're probably learning TypeScript to use with a JavaScript framework and that's great because most popular JavaScript frameworks require zero configuration for enabling TypeScript support. You should consult the docs for your framework how to set TypeScript up.
 
-If you want to use vanilla TypeScript on a passion project I highly recommend you use [Vite](https://vitejs.dev/) to set up your project. Using Vite is simple as running `npm init @vitejs/app` and picking a template.
+If you want to use vanilla TypeScript on a passion project I highly recommend you use [Vite](https://vitejs.dev/) to set up your project. Using Vite is simple as running `npm init vite` and picking a template.
 
-I would use Vite for any project and you can look at the list of [Vite template presets](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) for other frameworks.
+I would use **Vite** for any project since it's the future of web development (you won't want to go back once you try out the developer experience).
+
+You can look at the list of [Vite template presets](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) for other frameworks.
 
 Let's look at how to set up TypeScript (it's easy) from scratch and show you around the TypeScript compiler settings.
 
@@ -3226,11 +3240,7 @@ npm init -y
 npm i -D typescript
 ```
 
-Next create a `app.ts` file at the root and add some TypeScript code.
-
-```shell:terminal
-touch app.ts
-```
+Next create a `app.ts` file at the root of the project and add some TypeScript code.
 
 ```ts:app.ts
 const pokemon: string = 'Pikachu'
@@ -3243,7 +3253,7 @@ const pokemon: string = 'Pikachu'
   alt="TypeScript setup"
 />
 
-Since the browser or Node doesn't understand TypeScript we have to transpile the TypeScript code to JavaScript.
+Since your web browser and **Node** don't understand TypeScript we have to transpile the TypeScript code to JavaScript.
 
 ```shell:terminal
 npx tsc app.ts
@@ -3258,9 +3268,9 @@ npx tsc app.ts
 
 [npm](https://www.npmjs.com/) includes a `npx` tool that runs executables without having to install a package globally. It just downloads the binary to your `.bin` folder in `node_modules` and removes it when you're done.
 
-The `tsc` command invokes the TypeScript compiler that creates a `app.js` file. This is what your browser and Node are going to run.
+The `tsc` command invokes the TypeScript compiler that creates a `app.js` file. This is what your browser and **Node** are going to run.
 
-It would be a drag having to run this each time when you make a change, so you can pass a watch flag to the TypeScript compiler.
+It would be a drag having to run this each time when you make a change, so you can pass a **watch flag** to the TypeScript compiler.
 
 ```shell:terminal
 npx tsc app.ts -w
@@ -3291,9 +3301,7 @@ npm run dev
   alt="TypeScript watch"
 />
 
-If you're not using Vite and want live reload for your site you can use [live-server](https://www.npmjs.com/package/live-server).
-
-You can run live-server and TypeScript at the same time.
+If you're not using **Vite** and want **live reload** for your site you can use [live-server](https://www.npmjs.com/package/live-server) and run **live-server** and TypeScript at the same time.
 
 ```json:package.json
 {
@@ -3306,6 +3314,8 @@ You can run live-server and TypeScript at the same time.
   }
 }
 ```
+
+You only have to include the JavaScript file in your HTML file using `defer` to load it after the DOM (Document Object Model) has loaded.
 
 ```html:example.html
 <!DOCTYPE html>
@@ -3320,9 +3330,9 @@ You can run live-server and TypeScript at the same time.
 </html>
 ```
 
-If you're a Node chad you can use [ts-node](https://www.npmjs.com/package/ts-node) that let's you run TypeScript files with `ts-node app.ts`.
+If you're a **Node** chad you can use [ts-node](https://www.npmjs.com/package/ts-node) that let's you run TypeScript files without having to transpile them first by using `ts-node app.ts`.
 
-You also get a live code environment (REPL) if you run `ts-node` (`npx ts-node` 👍) like you would typing `node` in your terminal.
+You also get a live code environment (**REPL**) if you run `ts-node` (`npx ts-node` 👍) like you would typing `node` in your terminal.
 
 <Image
   height={304}
@@ -3354,7 +3364,7 @@ Inside the generated `tsconfig.json` file we can see useful descriptions alongsi
 
 You can look at the [TypeScript compiler options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) and the [TSConfig Reference](https://www.typescriptlang.org/tsconfig) that explains each option if you want to learn more.
 
-Let's make the `tsconfig.json` file more readable by removing most of the TypeScript compiler options and focusing on a single options.
+Let's make the `tsconfig.json` file more readable by removing most of the TypeScript compiler options and focusing on a couple of options.
 
 ```json:tsconfig.json
 {
@@ -3370,20 +3380,20 @@ Let's make the `tsconfig.json` file more readable by removing most of the TypeSc
 }
 ```
 
-- **target** specifies the target JavaScript version the TypeScript code compiles to where **ESNext** is the latest
-- **module** specifies the module system we're going to transpile to where [CommonJS](https://en.wikipedia.org/wiki/CommonJS) is using the `const package = require('package')` syntax and the **ES6** and onwards option uses **ECMAScript modules** (**ESM**) `import package from 'package'` which are only supported natively in browsers as of recently
-- **lib** let us decide what types to include with our code because we might not need **DOM** types if we're writing for Node or want to target some other JavaScript features (TypeScript includes a default set of type definitions for built-in JavaScript APIs)
-- **outDir** specifies the output directory for transpiled JavaScript code
-- **rootDir** specifies the root directory for TypeScript files
-- **noEmirOnError** is not going to output anything if there's a TypeScript error
-- **strict** enables all the strict flags so our code is more type-safe
+- **target**: specifies the target JavaScript version the TypeScript code compiles to where **ESNext** is the latest
+- **module**: specifies the module system we're going to transpile to where [CommonJS](https://en.wikipedia.org/wiki/CommonJS) uses the `const package = require('package')` syntax and the **ES6** and onwards option uses **ECMAScript modules** (**ESM**) `import package from 'package'` syntax which is supported natively in browsers only as of recent
+- **lib**: decides what types to include with our code because we might not need **DOM** types if we're writing for **Node** or want to target some other JavaScript features (TypeScript includes a default set of type definitions for built-in JavaScript APIs)
+- **outDir**: specifies the output directory for transpiled JavaScript code
+- **rootDir**: specifies the root directory for TypeScript files
+- **noEmitOnError**: doesn't output anything if there's a TypeScript error
+- **strict**: enables all the strict flags so our code is more type-safe
 
 Since we set the **rootDir** we don't have specify what file to run inside `package.json` since it watches the entire directory.
 
 ```json:package.json
 "scripts": {
   "dev": "npx tsc -w"
-},
+}
 ```
 
 <Image
@@ -3393,7 +3403,7 @@ Since we set the **rootDir** we don't have specify what file to run inside `pack
   alt="TypeScript output"
 />
 
-If you want to fire up a quick TypeScript demo you can use an online editor like [CodeSandbox](https://codesandbox.io/) so you can try things out.
+If you want to fire up a quick TypeScript demo you can use an online editor like [CodeSandbox](https://codesandbox.io/) so you can try things out for any project or framework.
 
 Hope this helps you get started using TypeScript.
 
@@ -3401,9 +3411,9 @@ Hope this helps you get started using TypeScript.
 
 TypeScript gives us documentation inside our editor.
 
-This is more useful than code completion since you can dive into the types directly to understand the surface area of an API.
+This is useful as code completion since you can dive into the types directly to understand the surface area of an API.
 
-If you just started to learn TypeScript it requires practice to understand the types first.
+If you just started to learn TypeScript don't be intimidated as it requires practice to understand the types first.
 
 We can inspect the **generic** `Array` interface by selecting `Array` and pressing <kbd>F12</kbd> or right-clicking it and selecting **Go to Definition**.
 
@@ -3422,10 +3432,10 @@ There's always going to be a lot of information in type definition files. Focus 
 
 There's a couple of interesting things to note:
 
-- The file ends with a `.d.ts` extension which is just a declaration file for types (this is used to add TypeScript types to things that aren't built with TypeScript)
+- The file ends with a `.d.ts` extension which is just a **declaration file** for types (it's used to add TypeScript types to things that aren't built with TypeScript)
 - There's multiple type declarations on the right depending on the version of JavaScript the features were added in among other things (remember it's one **interface** since we can declare it again)
 
-If we poke around **lib.es2015.core.d.ts** more we can find the types that describe how to create arrays.
+If we poke around **lib.es2015.core.d.ts** we can find the types that describe how to create arrays on the fly.
 
 <Image
   height={768}
@@ -3434,7 +3444,7 @@ If we poke around **lib.es2015.core.d.ts** more we can find the types that descr
   alt="Array constructor"
 />
 
-If we look at **lib.es5.d.ts** it looks like something we would expect. You can double-click on it or <kbd>Alt</kbd> + <kbd>Click</kbd> on the type definition to open it.
+If we go back and look at **lib.es5.d.ts** on the right it looks like something we would expect. You can double-click on it or <kbd>Alt</kbd> + <kbd>Click</kbd> on the type definition to open it.
 
 <Image
   height={768}
@@ -3443,14 +3453,20 @@ If we look at **lib.es5.d.ts** it looks like something we would expect. You can 
   alt="es5 interface"
 />
 
-This has the properties we would expect like `length`, `pop`, `push` and `map`.
+This has properties we would expect like `length`, `pop`, `push` and `map`.
 
-By looking at the type definitions we can learn how they typed the `map` array method.
+By looking at the **type definitions** we can learn how they typed the `map` array method.
 
 ```ts:example.ts
 interface Array<T> {
   // ...
-  map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[]
+  map<U>(
+    callbackfn: (
+      value: T,
+      index: number,
+      array: T[]
+    ) => U, thisArg?: any
+  ): U[]
   // ...
 }
 ```
@@ -3461,7 +3477,7 @@ You can get a real idea how **generics** are used in practice.
 
 Arguably, the hardest part about TypeScript can be reading and understanding errors.
 
-First open the **problems** tab in your editor so you have an easier time reading TypeScript errors.
+First open the **problems** tab in your editor by pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> so you have an easier time reading TypeScript errors.
 
 ```ts:example.ts
 const pokemon = {
@@ -3492,7 +3508,7 @@ Sometimes you're going to have these sort of errors that make you question your 
 The error message is verbose because it's describing the entire object as a **literal type** since we're not using a **type alias** or **interface** it can refer to instead.
 
 ```json:error
-Element implicitly has an 'any' type because expression of type 'Pokemon'.
+Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Pokemon'.
   No index signature with a parameter of type 'string' was found on type 'Pokemon'.
 ```
 
@@ -3505,9 +3521,9 @@ Element implicitly has an 'any' type because expression of type 'string' can't b
   because no index signature with a parameter of type 'string' was found on type ...
 ```
 
-The further you go down the chain the more specific the error is, so start from there.
+The further you go down the **because chain** the more specific the error is, so start from there.
 
-This problem might be harder to reason about if you don't understand things like **object index signatures** in TypeScript. Everything we learn ties together.
+This problem might be harder to reason about if you don't understand things like **object index signatures** in TypeScript. Everything we learned ties together.
 
 The second part of the error message reveals the problem.
 
@@ -3519,13 +3535,13 @@ This is what TypeScript thinks is going on.
 // TypeScript sees the general type `string` 🚫
 const chosenPokemon = pokemon['random string']
 
-// it expects the literal type `bulbasaur` ✅
+// TypeScript expects the literal type `bulbasaur` ✅
 const chosenPokemon = pokemon['bulbasaur']
 ```
 
 TypeScript freaks out because it thinks we're passing some random string since we haven't specified the **index signature**.
 
-If you remember, objects are number indexed by default.
+If you remember, objects are **number indexed** by default.
 
 ```ts:example.ts
 interface Pokemon {
@@ -3577,7 +3593,7 @@ interface Pokemon {
 }
 ```
 
-The problem is that we're not passing the **type literal** `bulbasaur`, so TypeScript can compare it to the key `bulbasaur` in `pokemon`.
+The problem is that we're not passing the **type literal** `bulbasaur`, so TypeScript can't compare it to the key `bulbasaur` in `pokemon`.
 
 ```ts:example.ts
 const pokemon = {
@@ -3595,7 +3611,7 @@ You're going to encounter this when dealing with dynamic values.
 
 If you used `const` it would infer it as a **literal type**, so the type assignment isn't required and it's only there so it's obvious.
 
-There's times when TypeScript goes _cuckoo for Cocoa Puffs_ and something goes wrong. Instead of closing and opening your editor just restart the TypeScript server by pressing <kbd>F1</kbd> to open the **command palette** in VS Code and find "TypeScript: Restart TS server".
+There's times when TypeScript goes _cuckoo for Cocoa Puffs_ and something goes wrong. Instead of closing and opening your editor just **restart the TypeScript server** by pressing <kbd>F1</kbd> to open the **command palette** in VS Code and find "TypeScript: Restart TS server".
 
 <Image
   height={768}
@@ -3604,7 +3620,9 @@ There's times when TypeScript goes _cuckoo for Cocoa Puffs_ and something goes w
   alt="Restart TS server"
 />
 
-If you don't understand the error open up the [TypeScript Playground](https://www.typescriptlang.org/play/) and reproduce it there. This is also great because now you have a shareable link you can send to anyone. If you have doubts you can always ask a question in the [TypeScript Community Discord Server](https://discord.com/invite/typescript).
+If you don't understand the error open up the [TypeScript Playground](https://www.typescriptlang.org/play/) and reproduce it there so you have a shareable link you can send to anyone.
+
+If you have doubts you can always ask a question in the [TypeScript Community Discord Server](https://discord.com/invite/typescript).
 
 ## Dealing With Untyped Libraries
 
@@ -3614,7 +3632,7 @@ The great thing about TypeScript is that the community can gather around to crea
 
 **Ambient declarations** describe the types that would have been there if the project was written in TypeScript and they have the `.d.ts` file extension that TypeScript picks up.
 
-[DefinitelyTyped](https://definitelytyped.org/) is a project that holds a repository for types that everyone gathered around for to contribute types to that has over **76,000** commits. It's used to [search for types](https://www.typescriptlang.org/dt/search?search=) on the official TypeScript page.
+[DefinitelyTyped](https://definitelytyped.org/) is a project that holds a repository for types that everyone gathered around to contribute types to that has over **76,000** commits and it's used to [search for types](https://www.typescriptlang.org/dt/search?search=) on the official TypeScript page.
 
 <Image
   height={843}
@@ -3647,7 +3665,7 @@ server.listen(8080)
   alt="Type definitions"
 />
 
-In the example we have a simple HTTP server in Node that sends a JSON response.
+In the example we have a simple HTTP server in **Node** that sends a JSON response.
 
 You don't have to use search to figure out if what you're using is typed or not. TypeScript is going to let you know.
 
@@ -3670,7 +3688,7 @@ TypeScript let's us know we can convert `require` to an `import`.
 import * as http from 'http'
 ```
 
-You have to keep in mind these older libraries use **commonjs** that uses module exports, so we can't expect it to use **ECMAScript modules** where you can import a package simply as `import http from 'http` using the default export or `import { http } from http` if it's a named import.
+You have to keep in mind these older libraries use **CommonJS** that uses module exports, so we can't expect it to use **ECMAScript modules** where you can import a package simply as `import http from 'http` using the default export or `import { http } from http` if it's a named import.
 
 Try it first and if it doesn't work you can use `import * as http from 'http'` to import the entire module's contents.
 
@@ -3680,7 +3698,7 @@ We still haven't resolved the types for `req` and `res` for `requestListener` si
 
 How do we figure the types in this case?
 
-We can always search for the answer and that's a valid approach but let's dig through the type definitions to figure it out.
+We can always search for the answer and that's a valid approach but let's dig through the **type definitions** to figure it out.
 
 Let's select the `http` part and press <kbd>F12</kbd> to "Go to Definition". This is going to open the `http.d.ts` type declaration file.
 
