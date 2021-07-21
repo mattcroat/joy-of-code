@@ -715,8 +715,8 @@ To solve the problem we have to use **type assertion** that lets TypeScript know
 
 ```ts:playground.ts
 if (apiResponse && typeof apiResponse === 'object') {
-    const response = apiResponse as { data: [] }
-    response.data // no warning ✅
+  const response = apiResponse as { data: [] }
+  response.data // no warning ✅
 }
 ```
 
@@ -1383,7 +1383,7 @@ So far we've been using types directly using **type annotations**. This is hard 
 
 A **type alias** is as the name suggests — just an **alias** for a type.
 
-Just how we assign names to different _types_. 🤭 of people.
+Just how we assign names to different _types_ 🤭 of people.
 
 You should already be familiar with the **object type** syntax.
 
@@ -1606,7 +1606,7 @@ I use both where it makes sense:
 - **Interface** is more appropriate for describing shapes of objects
 - You can add new fields to an existing **interface** but not to a **type alias**
 
-We haven't learned about **intersections** yet but briefly it just let's us combine types.
+We haven't learned about **intersections** yet but briefly it just lets us combine types.
 
 The next example shows how using **intersections** we can extend a **type alias** by combining the type `Pokemon` and `{ pokemonType: 'electric' }` into a new type `Pikachu`.
 
@@ -1842,7 +1842,7 @@ When you hover over `event` in `addEventListener` notice the infered type `Event
 
 This makes sense because [Event](https://developer.mozilla.org/en-US/docs/web/api/event) is the base interface for events. Derived from Event there's [UIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) that has other interfaces like [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent) and [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) among others.
 
-This is a teachable moment that let's us know we can leverage TypeScript to help us figure out built-in types instead of having to look it up.
+This is a teachable moment that lets us know we can leverage TypeScript to help us figure out built-in types instead of having to look it up.
 
 ```ts:playground.ts
 const pokemonInputEl = document.getElementById('pokemon') as HTMLInputElement
@@ -1964,15 +1964,15 @@ TypeScript has `string`, `number`, and `boolean` literals. The `boolean` type it
 
 ```ts:playground.ts
 // type is string
-let pokemonLiteralType = 'Pikachu'
+let pokemonGeneralType = 'Pikachu'
 
 // type is 'Pikachu'
-const pokemonGeneralType = 'Pikachu'
+const pokemonLiteralType = 'Pikachu'
 ```
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/PTAEBcE8AcFNQJYGdRPAJwQOwOYCgAbWcUaAewGtYBbMrAGQXFnQEMCAVGeAXlAHIACggqsAxgAsArvzx4QEbohRCR46bLF00pSjToBxWFhbsucUH1WjJMvEA"
+  src="https://www.typescriptlang.org/play?#code/PTAEBcE8AcFNQJYGdRPAJwQOwOYCgAbWcUaAewGtYBbMrAcVi1nQEMCAVGeAXlAHIACggqsAxgAsArvzx4QEbohRCR46bLF00pSjToAZBOBbsucUH1WjJMoA"
   load={false}
 />
 
@@ -2141,7 +2141,7 @@ async function logPokemon(name) {
   // we need checks in place for properties we don't know about
   console.log((pokemon.order as number).toString())
 
-  // we get great code completion for propertes we know about
+  // we get great code completion for properties we know about
   pokemon.abilities.forEach(
     ({ ability }) => console.log(ability.name)
   )
@@ -2152,7 +2152,7 @@ logPokemon('pikachu') // '35', 'static', 'lightning-rod'
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26QCCqAkgEoQDOADvhSgN4BQyLyA9G8gDYRjJwgAnsnRgAFtGRUo6KtDDDxMgK4BzMcnFwwzVh2Q5tCCRU0TkoACYQAHsgrBVIbcqgRdLANpXbALntgUKCqALr+yiCYIOgA7iCMHuycAEZwdMi2ckEQIEiJqXQA+pnQwDlI-iDKOMnQCaxJUli4+BaWicCWldW1UPV6nDTYeCDIzjjuDeMQ-hSBwf0s+kMto3DJwFzAYGUUieub27v+BFBQcIIAPPT8G1sK-jfTs-MgqgA0yK5cL0FvyABfAEAPkWjRWIwM6AAbpREnhYRQTmcLtcobDHmM4BNfsFPt9cf8gaCAQkELQ+ERiMgALzIADkYjAYCoSI4KzgVGAADpyWxOcA2NCAExsCH4Nj0hJpQS5ZAwCIIHatVS8DDDfAACl0zwCf1UjAAlP5UDIcMA6Jd1asqeRqLQIMDkEwGuSQHNkG57e6UHS4DE4Nt5bxjJqAAYAEnoVIBUemALDhsSbo94tGfoDQa9NB93IAVhQtUmGm4wK5RmnGKTGDK5QrcsrRlx0KprSNNbq5vrDc7kxSmhr0-xM3xVWA21rpknEvoAPLJPMQJUWUzoGCaQRyBkRKKxED07nIQC8G4Bqvb77vQPG5zdUmrT3PQUGsUG5YHQAGVXrfDdOGvoYigIAQBAljIMYS6YKYoBSFwiAoDAj5SDIWQ7JQyAAcglj4PSfC7jEtzoMoOiurQl4QNeLaanezQjA+T6SGkYw9NAhqvh+X6aj+YL-igY7IKobjaGB6DWMJOBUDwjbyoh0iyPIaEYXhBFEYk94HPcuzcghUAAKKIGI2oNA0mo3Op2zCACPY0k6KZkRRt5mQo3JTokSbVjeE4gJq9Jcpg+nKPSPb6PSADMACs9KfPSczaMACCRQyWzqGAIDBAAtDIlj0kAA"
+  src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoHsDWEC26QCCqAkgEoQDOADvhSgN4BQyLyA9G8gDYRjJwgAnsnRgAFtGRUo6KtDDDxMgK4BzMcnFwwzVh2Q5tCCRU0TkoACYQAHsgrBVIbcqgRdLANpXbALntgUKCqALr+yiCYIOgA7iCMHuycAEZwdMi2ckEQIEiJqXQA+pnQwDlI-iDKOMnQCaxJUli4+BaWicCWldW1UPV6nDTYeCDIzjjuDeMQ-hSBwf0s+kMto3DJwFzAYGUUieub27v+BFBQcIIAPPT8G1sK-jfTs-MgqgA0yK5cL0FvyABfAEAPkWjRWIwM6AAbpREnhYRQTmcLtcobDHmM4BNfsFPt9cf8gaCAQkELQ+ERiMgALzIADkYjAYCoSI4KzgVGAADpyWxOcA2NCAExsCH4Nj0hJpQS5ZAwCIIHatVS8DDDfAACl0zwCf1UjAAlP5UDIcMA6Jd1asqeRqLQIMDkEwGuSQHNkG57e6UHS4DE4Nt5bxjJqAAYAEnoVIBUemALDhsSbo94tGfoDQa9NB93IAVhQtUmGm4wK5RmnGKTGDK5QrcsrRlx0KprSNNbq5vrDc7kxSmhr0-xM3xVWA21rpknEvoAPLJPMQJUWUzoGCaQRyBkRKKxED07nIQC8G4Bqvb77vQPG5zdUmrT3PQUGsUG5YHQAGVXrfDdOGvoYigIAQBAljIMYS6YKYoBSFwiAoDAj5SDIWQ7JQyAAcglj4PSfC7jEtzoMoOiurQl4QNeLaanezQjA+T6SGkYw9NAhqvh+X6aj+YL-igY7IKobjaGB6DWMJOBUDwjbyoh0iyPIuzoSgeEEURiT3gc9y7NyCFQAAoogYjag0DSajcGnbMIAI9jSTopmRFG3uZCjclOiRJtWN4TiAmr0lymAGco9I9vo9IAMwAKz0p89JzNowAIFFDJbOoYAgMEAC0MiWPSQA"
   load={false}
 />
 
@@ -2198,9 +2198,9 @@ const bulbasaur: string = 'bulbasaur'
 pokemon[bulbasaur]
 ```
 
-TypeScript thinks we're trying to access the object property by using a `string` index when objects are `number` indexed by default.
+TypeScript thinks we're trying to access the object property by using a **string index** when objects are **number indexed** by default.
 
-In reality we want to access the `pokemon` object using the **type literal** type `bulbasaur` instead of `string`.
+In reality we want to access the `pokemon` object using the **type literal** `bulbasaur` instead of `string`.
 
 We can see this is true if we change the **index signature** to `string` meaning we can pass anything that matches that **index signature**.
 
@@ -2213,12 +2213,11 @@ interface Pokemon {
 }
 
 // careful if this is what you want ⚠️
-
 // general type 'string' ✅
 pokemon[bulbasaur]
 ```
 
-What you should do is make sure you're passing a **type literal** instead.
+What you should do is make sure you're passing a **type literal** instead or use the `as const` assertion.
 
 ```ts:playground.ts
 const bulbasaur: 'bulbasaur' = 'bulbasaur'
@@ -2232,8 +2231,6 @@ pokemon[bulbasaur]
   src="https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMpjmAzsg3gKGSOWABMAuZEAVwFsAjaQ4gCwAdKaGnjlMMEAa051GUZkVIQYEEFggju4gL758oSLEQoACgHtBEWnpB4JyetQA29OFjjUoldJizmELOFFpwQUp2gY2OZYAI7UwFBgVgqBrviq+AgmWGDIbAZGJpT6hsamALxmvJY2dg4BuCQUyACMADTI7JQALACsjfyIwsgtAJyNUjJysf3IyvXunt6+-pRVZJQATI3NyADMA3xgAj1tK8hDsvKt6+OTvGERUTHz1ZTrqxy9LZ073a0AHIPSx7EAbG1xgk1Mk5GlSrZ7I5KKkoKAAObIIoAckh5UcKKSKTSHi8Pj80EoKLxM0JUBRyOQJOmBP8WJiaSukWiKFRzJuEEpdmQYNSagyeRMAG10dCoABdZAAemlyEAvBuAar38IKsiBhaS6dApbLkIBQchVmXywo5rJ1coNQA"
   load={false}
 />
-
-You could also use the `as const` assertion.
 
 ## Type Narrowing
 
@@ -2363,7 +2360,7 @@ logPokemon(['Bulbasaur', 'Charmander', 'Squirtle'])
   load={false}
 />
 
-TypeScript let's us know the `pokemon` type was narrowed down to `string[] | null` instead of just `string[]`.
+TypeScript lets us know the `pokemon` type was narrowed down to `string[] | null` instead of just `string[]`.
 
 In `logPokemon` we naively check if `pokemon` is an array by checking if it's an `object`.
 
@@ -2471,7 +2468,7 @@ const pokemon: Array<Pokemon> = [{ name: 'Pikachu', pokemonType: 'electric' }]
 
 If you remember what we learned before, instead of the `Array<Pokemon>` syntax we can use the equivalent `Pokemon[]` syntax.
 
-Let's look at an example where we use `logPokemon` to log Pokemon where we don't know the type ahead of time because a user could pass anything from a `string`, `object` or `array`.
+Let's look at an example where we use `logPokemon` to log Pokemon where we don't know the type ahead of time because a user could pass anything from a `string` to an `array`.
 
 ```ts:playground.ts
 function logPokemon(pokemon: any) {
@@ -2567,7 +2564,7 @@ Let's think about the problem:
 function map(
   arr: any,
   callback: (arg: any) => any
-) {
+): any {
   return arr.map(callback)
 }
 
@@ -2582,7 +2579,7 @@ console.log(formatPokemon)
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcAUAoRfGoBOhAXAWAJ4A0u+EqANgwEaoQDWZmRA5mapQCUiALwA+chWzCA3rTyEAplBCEkRQgDo0Wek1YdB2AL7ZsEBAGcoiYHEJooABTjtFyBKJQYc+RAG0AcgAhEBZUS1RVQKpEQIBhAAsiNDAAE0VCGLiAZQBHEBhCKAZFQIBdGj9MdFd3BGFxRFq3DzBNKDgAVXR0TPiIxUwjI2wAejGAgCJgroAZYIBBHMWugCUp2Kn4gAlFtYBZRYA5ABEAUQ2tnIBFLoBJNYAVOfOp8vMrOFLNBjgeTB2ByoZx1NqCIA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcAUAoRfGoBOhAXAWAJ4A0u+EqANgwEaoQDWZmRA5mapQCUiALwA+chWyD+lRAG9aeQgFMoIQkiKEAdGiz0mrDoOwBfbNggIAzlETA4hNFAAKcdiuQJRKDDnxEAG0AcgAhEBZUG1QNEKpEEIBhAAsiNDAAExVCeMSAZQBHEBhCKAYVEIBdGkDMdA8vBGFxRAbPbzAdKDgAVXR0HKTolUxTU2wAeknggCIw3oAZMIBBfJXegCVZhNmkgAkVzYBZFYA5ABEAUW3d-IBFXoBJTYAVRavZqqtbOAqdBhwHiYRzOVBuRqdQRAA"
   load={false}
 />
 
@@ -2596,7 +2593,7 @@ Using proper names for **type variables** makes the code so much easier to reaso
 function map<Input, Output>(
   arr: Input[],
   callback: (arg: Input) => Output
-) {
+): Output[] {
   return arr.map(callback)
 }
 
@@ -2611,7 +2608,7 @@ console.log(formatPokemon)
 
 <Iframe
   title="TypeScript Playground"
-  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcA8BJM6RQA0iA8gflAHwAUAUIg4qgE7MBciuFA2gLqH1GEVABsRAI1QQA1h2osA5hy4EAlIgC8lUuQK11Ab0ENmAUyghmSFswB0adNWFjJM1bQC+tWhAQBnKERgOGY0KAAFOGlTZARNFAw6RkRuAHIAIRAJVD9US1TiVIBhAAsWNDAAE1NmAsRUgGUARxAYZigRU1T+Y0RqdCiYhHUtRAHo2LBbKDgAVXR0GqKc02p3d1oAek2UgCJ02YAZdIBBBpPZgCVd4l2igAkTy4BZE4A5ABEAUWvbhoBFWbYS4AFUOX12vB8-jgnVsIjgCmowVCqAig0mqiAA"
+  src="https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWwIYAcA8BJM6RQA0iA8gflAHwAUAUIg4qgE7MBciuFA2gLqH1GEVABsRAI1QQA1h2osA5hy4EAlIgC8lUuQK1VHMlB69EAb0ENmAUyghmSFswB0adNWFjJM1bQC+tLQQCADOUIjAcMxoUAAKcNLWyAiaKBh0jIjcAOQAQiASqCGo9tnE2QDCABYsaGAAJtbMZYjZAMoAjiAwzFAi1tn8lojU6AlJCOpaiGOJyWDOUHAAqujoTRVF1tS+vrQA9PtZAES5ywAyuQCCbVfLAErHxMcVABJX9wCyVwByACIAUUezzaAEVlth7gAVc4A468IKhOD9ZwiOAKaiRaKoOLjeaqIA"
   load={false}
 />
 
@@ -2865,7 +2862,7 @@ var Direction
 })(Direction || (Direction = {}))
 ```
 
-There's more to **enums** if you're curious you can [read more about enums](https://www.typescriptlang.org/docs/handbook/enums.html) since I just gave a brief overview.
+You can [learn more about enums](https://www.typescriptlang.org/docs/handbook/enums.html) since I just gave a brief overview.
 
 ## Tuple
 
@@ -3129,7 +3126,7 @@ In the next section we're going to briefly introduce another concept that TypeSc
 
 JavaScript has a [proposal for decorators](https://github.com/tc39/proposal-decorators), so they might get added to the language in the future.
 
-I want to preface this by saying that **decorators** are primarily used by library authors and frameworks such as [Angular](https://angular.io/) and [Nest](https://nestjs.com/).
+I want to preface this by saying that **decorators** are primarily used by library authors and frameworks such as [Angular](https://angular.io/) and [NestJS](https://nestjs.com/).
 
 Don't sweat it when you would use **decorators** because they mainly just improve your developer experience without having to think about how it works.
 
@@ -3143,11 +3140,9 @@ If you're using decorators you have to enable experimental support for decorator
 }
 ```
 
-In the next example we're going to see how we can use a **method decorator** for validation.
+In the next example we're going to see how we can use a **method decorator** for validation to check if a Pokemon has enough experience to evolve by using **@requiredExperience** above the `evolve` method.
 
-To check if a Pokemon has enough experience to evolve we add **@requiredExperience** above the `evolve` method.
-
-The implementation is inside `requiredExperience` that's also known as a **decorator factory** because it returns a function that will be called by the **decorator** at runtime.
+The **decorator** implementation is inside `requiredExperience` that's also known as a **decorator factory** because it returns a function that will be called by the **decorator** at runtime.
 
 ```ts:playground.ts
 function requiredExperience() {
@@ -3220,21 +3215,19 @@ If you want to dive deep into **decorators** you can read [Decorators](https://w
 
 ## Set Up TypeScript
 
-You're probably learning TypeScript to use with a JavaScript framework and that's great because most popular JavaScript frameworks require zero configuration for enabling TypeScript support. You should consult the docs for your framework how to set TypeScript up.
+You're probably learning TypeScript to use with a JavaScript framework and that's great because most popular JavaScript frameworks require zero configuration for enabling TypeScript support. You should consult the docs for your framework how to set up TypeScript.
 
-If you want to use vanilla TypeScript on a passion project I highly recommend you use [Vite](https://vitejs.dev/) to set up your project. Using Vite is simple as running `npm init vite` and picking a template.
+If you want to use vanilla TypeScript on a passion project I highly recommend using [Vite](https://vitejs.dev/), to set up your project just run `npm init vite` and pick a template.
 
-I would use **Vite** for any project since it's the future of web development (you won't want to go back once you try out the developer experience).
+Let's look at how to set up TypeScript from scratch and show you around the TypeScript compiler settings.
 
-You can look at the list of [Vite template presets](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) for other frameworks.
-
-Let's look at how to set up TypeScript (it's easy) from scratch and show you around the TypeScript compiler settings.
-
-Start by initializing a project inside an empty folder and installing TypeScript as a development dependency.
+Start by initializing a project inside an empty folder.
 
 ```shell:terminal
 npm init -y
 ```
+
+Install TypeScript as a development dependency.
 
 ```shell:terminal
 npm i -D typescript
@@ -3253,7 +3246,7 @@ const pokemon: string = 'Pikachu'
   alt="TypeScript setup"
 />
 
-Since your web browser and **Node** don't understand TypeScript we have to transpile the TypeScript code to JavaScript.
+Since your web browser and **Node** don't understand TypeScript we have to **transpile** the TypeScript code to JavaScript.
 
 ```shell:terminal
 npx tsc app.ts
@@ -3268,7 +3261,7 @@ npx tsc app.ts
 
 [npm](https://www.npmjs.com/) includes a `npx` tool that runs executables without having to install a package globally. It just downloads the binary to your `.bin` folder in `node_modules` and removes it when you're done.
 
-The `tsc` command invokes the TypeScript compiler that creates a `app.js` file. This is what your browser and **Node** are going to run.
+The `tsc` command invokes the TypeScript compiler that creates a `app.js` file. This is what your browser and **Node** would run.
 
 It would be a drag having to run this each time when you make a change, so you can pass a **watch flag** to the TypeScript compiler.
 
@@ -3276,7 +3269,7 @@ It would be a drag having to run this each time when you make a change, so you c
 npx tsc app.ts -w
 ```
 
-It's easier to add a command to scripts in your `package.json`, so we can just use `npm run dev`.
+It's easier to add a command to scripts in your `package.json`.
 
 ```json:package.json
 {
@@ -3290,6 +3283,8 @@ It's easier to add a command to scripts in your `package.json`, so we can just u
 }
 ```
 
+This lets us just run `npm run dev`.
+
 ```shell:terminal
 npm run dev
 ```
@@ -3301,7 +3296,7 @@ npm run dev
   alt="TypeScript watch"
 />
 
-If you're not using **Vite** and want **live reload** for your site you can use [live-server](https://www.npmjs.com/package/live-server) and run **live-server** and TypeScript at the same time.
+If you're not using **Vite** and want **live reload** for your site you can use [live-server](https://www.npmjs.com/package/live-server) together with TypeScript at the same time.
 
 ```json:package.json
 {
@@ -3315,7 +3310,7 @@ If you're not using **Vite** and want **live reload** for your site you can use 
 }
 ```
 
-You only have to include the JavaScript file in your HTML file using `defer` to load it after the DOM (Document Object Model) has loaded.
+You only have to include the JavaScript file in your HTML file. Using `defer` loads it after the DOM (Document Object Model) has loaded.
 
 ```html:example.html
 <!DOCTYPE html>
@@ -3330,9 +3325,9 @@ You only have to include the JavaScript file in your HTML file using `defer` to 
 </html>
 ```
 
-If you're a **Node** chad you can use [ts-node](https://www.npmjs.com/package/ts-node) that let's you run TypeScript files without having to transpile them first by using `ts-node app.ts`.
+If you're a **Node** chad you can use [ts-node](https://www.npmjs.com/package/ts-node) that lets you run TypeScript files without having to **transpile** them first by using `ts-node app.ts`.
 
-You also get a live code environment (**REPL**) if you run `ts-node` (`npx ts-node` 👍) like you would typing `node` in your terminal.
+You also get a live code environment (**REPL**) if you run `ts-node` like you would typing `node` in your terminal.
 
 <Image
   height={304}
@@ -3428,7 +3423,7 @@ const pokemon: Array<string> = ['Bulbasaur', 'Charmander', 'Squirtle']
   alt="es2015 interface"
 />
 
-There's always going to be a lot of information in type definition files. Focus on what you're inspecting. We can leap-frog from type definition to type definition by doing the same to other types inside.
+There's always going to be a lot of information in **type definition** files, so focus on what you're inspecting. You can jump from one **type definition** to another by doing the same to other types inside.
 
 There's a couple of interesting things to note:
 
@@ -3444,7 +3439,7 @@ If we poke around **lib.es2015.core.d.ts** we can find the types that describe h
   alt="Array constructor"
 />
 
-If we go back and look at **lib.es5.d.ts** on the right it looks like something we would expect. You can double-click on it or <kbd>Alt</kbd> + <kbd>Click</kbd> on the type definition to open it.
+If we go back and look at **lib.es5.d.ts** on the right it looks like something we would expect. You can double-click it or <kbd>Alt</kbd> + <kbd>Click</kbd> the **type definition** to open it.
 
 <Image
   height={768}
@@ -3453,7 +3448,7 @@ If we go back and look at **lib.es5.d.ts** on the right it looks like something 
   alt="es5 interface"
 />
 
-This has properties we would expect like `length`, `pop`, `push` and `map`.
+This has properties we would expect like `length`, `pop`, `push`, and `map`.
 
 By looking at the **type definitions** we can learn how they typed the `map` array method.
 
@@ -3512,8 +3507,6 @@ Element implicitly has an 'any' type because expression of type 'string' can't b
   No index signature with a parameter of type 'string' was found on type 'Pokemon'.
 ```
 
-Let's not get overwhelmed and read the error calmly.
-
 You can read TypeScript errors like sentences with **because** inbetween.
 
 ```json:error
@@ -3523,11 +3516,11 @@ Element implicitly has an 'any' type because expression of type 'string' can't b
 
 The further you go down the **because chain** the more specific the error is, so start from there.
 
-This problem might be harder to reason about if you don't understand things like **object index signatures** in TypeScript. Everything we learned ties together.
+This problem might be harder to reason about if you don't understand things like **object index signatures** in TypeScript and that's why everything we learned so far ties together.
 
 The second part of the error message reveals the problem.
 
-We don't care if `chosenPokemon` type is `any` because that's what TypeScript cares about. We care about what causes it.
+We don't care if `chosenPokemon` type is `any` because that's what TypeScript cares about — we care about what causes it.
 
 This is what TypeScript thinks is going on.
 
@@ -3564,11 +3557,9 @@ const bulbasaur: string = 'bulbasaur'
 const chosenPokemon = pokemon[bulbasaur] // ok ✅
 ```
 
-That works but it's not what we want.
+That works, but it's not what we want.
 
-We just want TypeScript to infer the type for us here so we don't have to do it by hand.
-
-If we did this by hand we would have to update the **interface** each time there's another Pokemon.
+We just want TypeScript to **infer** the type for us here so we don't have to do it by hand, otherwise we would have to update the **interface** each time there's another Pokemon.
 
 ```ts:example.ts
 interface Pokemon {
@@ -3611,7 +3602,7 @@ You're going to encounter this when dealing with dynamic values.
 
 If you used `const` it would infer it as a **literal type**, so the type assignment isn't required and it's only there so it's obvious.
 
-There's times when TypeScript goes _cuckoo for Cocoa Puffs_ and something goes wrong. Instead of closing and opening your editor just **restart the TypeScript server** by pressing <kbd>F1</kbd> to open the **command palette** in VS Code and find "TypeScript: Restart TS server".
+There's times when TypeScript goes **cuckoo for Cocoa Puffs** and something goes wrong. Instead of closing and opening your editor just **restart the TypeScript server** by pressing <kbd>F1</kbd> to open the **command palette** in VS Code and find **TypeScript: Restart TS server**.
 
 <Image
   height={768}
@@ -3622,7 +3613,7 @@ There's times when TypeScript goes _cuckoo for Cocoa Puffs_ and something goes w
 
 If you don't understand the error open up the [TypeScript Playground](https://www.typescriptlang.org/play/) and reproduce it there so you have a shareable link you can send to anyone.
 
-If you have doubts you can always ask a question in the [TypeScript Community Discord Server](https://discord.com/invite/typescript).
+You can always ask a question in the [TypeScript Community Discord Server](https://discord.com/invite/typescript).
 
 ## Dealing With Untyped Libraries
 
@@ -3632,7 +3623,7 @@ The great thing about TypeScript is that the community can gather around to crea
 
 **Ambient declarations** describe the types that would have been there if the project was written in TypeScript and they have the `.d.ts` file extension that TypeScript picks up.
 
-[DefinitelyTyped](https://definitelytyped.org/) is a project that holds a repository for types that everyone gathered around to contribute types to that has over **76,000** commits and it's used to [search for types](https://www.typescriptlang.org/dt/search?search=) on the official TypeScript page.
+[DefinitelyTyped](https://definitelytyped.org/) is a project that holds a repository for types that everyone gathered around to contribute types having over **76,000** commits and it's used to [search for types](https://www.typescriptlang.org/dt/search?search=) on the official TypeScript page.
 
 <Image
   height={843}
@@ -3640,6 +3631,8 @@ The great thing about TypeScript is that the community can gather around to crea
   src="/images/typescript-fundamentals/28-type-search.png"
   alt="Type search"
 />
+
+In the example we have a simple HTTP server in **Node** that sends a JSON response.
 
 ```ts:app.ts
 // Cannot find name 'require'.
@@ -3665,9 +3658,9 @@ server.listen(8080)
   alt="Type definitions"
 />
 
-In the example we have a simple HTTP server in **Node** that sends a JSON response.
+You don't have to use search to figure out if what you're using is typed or not — TypeScript is going to let you know.
 
-You don't have to use search to figure out if what you're using is typed or not. TypeScript is going to let you know.
+To install a **type definition** you just have to do `npm i -D @types/package` to install it as a development dependency.
 
 Let's install the types for Node.
 
@@ -3682,25 +3675,25 @@ npm i -D @types/node
   alt="Require to import"
 />
 
-TypeScript let's us know we can convert `require` to an `import`.
+TypeScript lets us know we can convert `require` to an `import`.
 
 ```ts:app.ts
 import * as http from 'http'
 ```
 
-You have to keep in mind these older libraries use **CommonJS** that uses module exports, so we can't expect it to use **ECMAScript modules** where you can import a package simply as `import http from 'http` using the default export or `import { http } from http` if it's a named import.
+You have to keep in mind these older libraries use **CommonJS** that uses module exports, so we can't expect it to use **ECMAScript modules** where you can import a package simply as `import http from 'http'` using the default export syntax or `import { http } from http` syntax if it's a named import.
 
 Try it first and if it doesn't work you can use `import * as http from 'http'` to import the entire module's contents.
 
 You can brush up on how JavaScript modules work by reading [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) on the MDN Web Docs.
 
-We still haven't resolved the types for `req` and `res` for `requestListener` since we can't do that alone by just installing type definitions.
+We still haven't resolved the types for `req` and `res` for `requestListener` since we can't do that alone by just installing **type definitions**.
 
 How do we figure the types in this case?
 
-We can always search for the answer and that's a valid approach but let's dig through the **type definitions** to figure it out.
+You can always search for the answer and that's a valid approach but let's dig through the **type definitions** to figure it out.
 
-Let's select the `http` part and press <kbd>F12</kbd> to "Go to Definition". This is going to open the `http.d.ts` type declaration file.
+Let's select the `http` part and press <kbd>F12</kbd> to **Go to Definition**. This is going to open the `http.d.ts` type declaration file.
 
 Inside the file we can do a <kbd>Ctrl</kbd> + <kbd>F</kbd> search for `requestListener`. If that wouldn't work we coud look for `req` or `res` until we find something.
 
@@ -3711,9 +3704,9 @@ Inside the file we can do a <kbd>Ctrl</kbd> + <kbd>F</kbd> search for `requestLi
   alt="Type declaration search"
 />
 
-We found our types! The `req` argument expects `IncomingMessage` and the `res` argument expects `ServerResponse`.
+We found our types! 🎉 The `req` argument expects `IncomingMessage` and the `res` argument expects `ServerResponse`.
 
-We can import the types from `http`.
+We can import the types from the `http` package.
 
 ```ts:app.ts
 import * as http from 'http'
@@ -3737,11 +3730,11 @@ const server = http.createServer(requestListener)
 server.listen(8080)
 ```
 
-Now we have the entire `http` API at our fingertips and look at the options without leaving our editor.
+Now we have the entire `http` API at our fingertips we can look at without leaving our editor.
 
 Using types is easy in most cases when it's properly documented in a project that uses TypeScript. I wanted to show you how to deal with a scenario where that isn't the case.
 
-In the rare case when there's no types for a package you can create a `index.d.ts` file and place it someplace such as inside a `types` folder. The name could be anything.
+In the rare case when there's no types for a package you can create a `index.d.ts` file and place it inside a `types` folder. The name could be anything.
 
 ```ts:index.d.ts
 declare module 'http'
@@ -3768,12 +3761,10 @@ This is also great as a learning tool.
 
 ## Closing Thoughts
 
-You learned a lot about TypeScript fundamentals to give you confidence in using it in your projects. TypeScript itself is a tool that gives confidence about your code but don't forget it doesn't save you at runtime.
+You learned a lot about TypeScript fundamentals to give you confidence in using it in your projects. TypeScript itself is a tool that gives confidence about your code but don't forget it **doesn't save you at runtime**.
 
 TypeScript is only gaining more popularity and since more projects are using TypeScript that means we as developers have to step up if we want to contribute to those projects.
 
-Even if TypeScript fades and JavaScript gets types we didn't have to learn another language to use types because TypeScript is JavaScript.
-
-There's a lot more to learn about TypeScript. Using TypeScript to type out a library is another game. Did you know you can use conditional logic in your types? I'll leave that for another post. 🤭
+Even if TypeScript fades and JavaScript gets types we didn't have to learn another language to use types because **TypeScript is JavaScript**.
 
 Thank you for your time! 😄
