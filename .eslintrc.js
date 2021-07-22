@@ -16,9 +16,7 @@ module.exports = {
   },
   rules: {
     semi: [1, 'never'],
-    'react/react-in-jsx-scope': 0,
     'react/display-name': 0,
-    'react/prop-types': 0,
     'react/jsx-sort-props': [
       'error',
       {
@@ -26,6 +24,9 @@ module.exports = {
         reservedFirst: true,
       },
     ],
+    'react/no-unescaped-entities': 0,
+    'react/prop-types': 0,
+    'react/react-in-jsx-scope': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
