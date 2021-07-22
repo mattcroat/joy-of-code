@@ -24,7 +24,13 @@ export function PostCredits() {
         px={6}
         py={4}
       >
-        <Box alignItems="center" as="span" d="flex" fontSize="2xl">
+        <Box
+          alignItems="center"
+          as="span"
+          d="flex"
+          fontSize="2xl"
+          justifyContent="center"
+        >
           <Emoji
             emoji="❤️"
             fontSize={['2xl', '3xl', '4xl']}
@@ -36,12 +42,12 @@ export function PostCredits() {
           </Box>
         </Box>
 
-        <Text fontSize={[16, 18, 20]} my={8} spacing={4}>
-          Found a mistake? I encourage you to contribute on GitHub by{' '}
-          <CustomLink href={href}>editing it</CustomLink>.
+        <Text fontSize={[16, 18, 20]} my={4}>
+          Found a mistake? Contribute on GitHub by{' '}
+          <CustomLink href={href}>{'📝'} editing it</CustomLink>.
         </Text>
 
-        <Text fontSize={[16, 18, 20]} my={8} spacing={4}>
+        <Text fontSize={[16, 18, 20]} my={4}>
           Thank you!
           <Emoji
             emoji="🥰"
@@ -60,7 +66,14 @@ export function PostCredits() {
         px={6}
         py={4}
       >
-        <Box alignItems="center" as="span" d="flex" fontSize="2xl">
+        <Box
+          alignItems="center"
+          as="span"
+          d="flex"
+          fontSize="2xl"
+          justifyContent="center"
+          textAlign="center"
+        >
           <Emoji
             emoji="☕"
             fontSize={['2xl', '3xl', '4xl']}
@@ -72,14 +85,11 @@ export function PostCredits() {
           </Box>
         </Box>
 
-        <Text fontSize={[16, 18, 20]} my={8} spacing={4}>
-          Hey!
-          <Emoji emoji="👋" label="Waving hand emoji" spacing={1} />
-          I&apos;m Matija, and I love sharing what I learn in a simple, but
-          practical way.&nbsp;
-          <CustomLink href="https://github.com/mattcroat">
-            Learn more about me.
-          </CustomLink>
+        <Text fontSize={[16, 18, 20]} my={4}>
+          I'm{' '}
+          <CustomLink href="https://github.com/mattcroat">Matija</CustomLink>{' '}
+          from {'🇭🇷'} Croatia and I'm infinitely curious at how things work but
+          mostly passionate about {'☕'} JavaScript and {'🎨'} UI/UX.
         </Text>
       </Box>
     </Box>

@@ -41,13 +41,14 @@ export function Post({ content, frontMatter }: PostProps) {
     >
       <MotionBox
         animate="show"
-        className="mdx-prose"
         initial="hidden"
         maxW="80ch"
         mx="auto"
         variants={postVariants}
       >
-        <MDXRemote {...content} components={MDXComponents} />
+        <div className="mdx-prose">
+          <MDXRemote {...content} components={MDXComponents} />
+        </div>
         <Newsletter />
         <PostCredits />
       </MotionBox>

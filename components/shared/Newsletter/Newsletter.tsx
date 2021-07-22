@@ -40,11 +40,11 @@ export function Newsletter({ ...props }) {
 
   return (
     <Box borderRadius={8} borderWidth={1} my={16} p={8} {...props}>
-      <Box as="span" fontSize="2xl" fontWeight={700}>
+      <Box as="span" fontSize={['2xl', '4xl']} fontWeight={700}>
         Subscribe for Updates
       </Box>
-      <Box as="p" color="gray.400">
-        If you hate email, you can use the&nbsp;
+      <Box as="p" color="gray.400" fontSize={[16, 18, 20]} my={2}>
+        If you hate email there's a{' '}
         <CustomLink color={customLinkColor} href="/feed/rss.xml">
           RSS feed.
         </CustomLink>
