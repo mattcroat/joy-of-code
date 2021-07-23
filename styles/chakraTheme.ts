@@ -55,7 +55,7 @@ export const chakraTheme = extendTheme({
           listStyleType: 'disc',
           mb: 8,
           ml: 2,
-          mt: 2,
+          mt: 8,
           pl: 4,
         },
         ol: {
@@ -63,7 +63,7 @@ export const chakraTheme = extendTheme({
           listStyleType: 'decimal',
           mb: 8,
           ml: 2,
-          mt: 2,
+          mt: 8,
           pl: 4,
         },
         li: {
