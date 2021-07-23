@@ -1,10 +1,4 @@
-const withPWA = require('next-pwa')
-
-module.exports = withPWA({
-  pwa: {
-    dest: 'public',
-    disable: process.env.NODE_ENV === 'development',
-  },
+module.exports = {
   webpack: (config, { dev, isServer }) => {
     if (isServer) {
       require('./utils/scripts/generate-rss')
@@ -21,4 +15,4 @@ module.exports = withPWA({
 
     return config
   },
-})
+}

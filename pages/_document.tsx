@@ -16,7 +16,7 @@ class MyDocument extends Document {
             rel="preload"
             type="font/woff2"
           />
-          <link href="/manifest.json" rel="manifest" />
+          <link href="/icons/manifest.json" rel="manifest" />
           <link href="/icons/favicon.svg" rel="icon" />
           <link
             href="/icons/favicon-16x16.png"
