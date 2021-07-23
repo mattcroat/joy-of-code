@@ -15,7 +15,7 @@ export function useAnalytics() {
     router.events.on('routeChangeComplete', handleRouteChange)
 
     return function cleanup() {
-      router.events.off('routerChangeComplete', handleRouteChange)
+      router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
 }
