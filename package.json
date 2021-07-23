@@ -29,6 +29,7 @@
     "remark-unwrap-images": "^2.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.8",
     "@types/gtag.js": "^0.0.7",
     "@types/mdx-js__react": "^1.5.4",
     "@types/node": "^16.4.1",
