@@ -1,5 +1,8 @@
+import { useRef, useState } from 'react'
 import { Box } from '@chakra-ui/react'
 import NextImage from 'next/image'
+
+import { useIntersectionObserver } from '@/root/hooks/useIntersectionObserver'
 
 interface ImageProps {
   height?: number
@@ -16,9 +19,34 @@ export function Image({
   alt,
   inline = false,
 }: ImageProps) {
+  const [isVisible, setIsVisible] = useState<boolean>(false)
+  const imageRef = useRef<HTMLDivElement>(null)
+
+  useIntersectionObserver({
+    target: imageRef,
+    onIntersect: () => setIsVisible(true),
+    enabled: true,
+  })
+
   if (inline) {
     return (
-      <Box my={{ sm: 8 }}>
+      <Box ref={imageRef} my={{ sm: 8 }}>
+        {isVisible && (
+          <NextImage
+            alt={alt}
+            height={height}
+            layout="intrinsic"
+            src={src}
+            width={width}
+          />
+        )}
+      </Box>
+    )
+  }
+
+  return (
+    <Box ref={imageRef} mx={{ xl: '-10%' }} my={{ sm: 8 }} textAlign="center">
+      {isVisible && (
         <NextImage
           alt={alt}
           height={height}
@@ -26,19 +54,7 @@ export function Image({
           src={src}
           width={width}
         />
-      </Box>
-    )
-  }
-
-  return (
-    <Box mx={{ xl: '-10%' }} my={{ sm: 8 }} textAlign="center">
-      <NextImage
-        alt={alt}
-        height={height}
-        layout="intrinsic"
-        src={src}
-        width={width}
-      />
+      )}
     </Box>
   )
 }
