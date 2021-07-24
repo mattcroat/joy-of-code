@@ -36,8 +36,8 @@ export function Image({
             alt={alt}
             height={height}
             layout="intrinsic"
-            quality={100}
             src={src}
+            unoptimized={true}
             width={width}
           />
         )}
@@ -52,8 +52,8 @@ export function Image({
           alt={alt}
           height={height}
           layout="intrinsic"
-          quality={100}
           src={src}
+          unoptimized={true}
           width={width}
         />
       )}
