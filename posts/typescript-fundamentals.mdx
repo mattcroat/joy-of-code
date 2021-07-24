@@ -73,9 +73,9 @@ _note: This one was a massive one to write so there might be more typos than usu
 
 If you're a web developer, you're probably using [Visual Studio Code](https://code.visualstudio.com/) (not to be confused with [Visual Studio](https://visualstudio.microsoft.com/)) and if you're not at least consider it.
 
-If you do use **VS Code** you're probably like me and don't even know anymore what's an extension and what's built-in.
+If you use **VS Code** you're probably like me and don't even know what's built-in and what's from an extension anymore.
 
-Have you ever asked yourself how code completion in your editor works?
+Have you ever asked yourself how **code completion** in your editor works?
 
 ```js:example.js
 const pokemon = ['Bulbasaur', 'Charmander', 'Squirtle']
@@ -84,16 +84,16 @@ const pokemon = ['Bulbasaur', 'Charmander', 'Squirtle']
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/01-hover-type.png"
+  src="/images/typescript-fundamentals/hover-type.webp"
   alt="Type on hover"
 />
 
-The editor understands that `pokemon` is an **array** of strings.
+The editor knows that `pokemon` is an **array** of strings.
 
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/02-intellisense.png"
+  src="/images/typescript-fundamentals/intellisense.webp"
   alt="Intellisense"
 />
 
@@ -104,7 +104,7 @@ Imagine not having this feature. You would have to remember and look every metho
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/03-signature-call.png"
+  src="/images/typescript-fundamentals/signature-call.webp"
   alt="Signature call"
 />
 
@@ -112,22 +112,22 @@ If we look at the `map` array method we can see it's **call signature** and desc
 
 This is **JavaScript** — yet it's using **TypeScript** under the hood.
 
-TypeScript isn't just about types — it's popular because this is the kind of developer experience it gives.
+TypeScript isn't just about types — it's popular because this is the kind of developer experience you can expect.
 
-We can add `@ts-check` to the top of a JavaScript file to enable TypeScript checking in JavaScript.
+We can add `@ts-check` at the top of a JavaScript file to enable TypeScript checking in JavaScript.
 
 ```js:example.js
 // @ts-check
 
 const pokemon = ['Bulbasaur', 'Charmander', 'Squirtle']
 
-pokemon.push(1) // oops! 🚫
+pokemon.push(1) // oops! 💩
 ```
 
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/04-ts-error.png"
+  src="/images/typescript-fundamentals/ts-error.webp"
   alt="TypeScript error"
 />
 
@@ -138,11 +138,11 @@ The **VS Code** editor uses the **TypeScript language server** under the hood.
 <Image
   height={1052}
   width={1920}
-  src="/images/typescript-fundamentals/05-built-in-extensions.png"
+  src="/images/typescript-fundamentals/built-in-extensions.webp"
   alt="Built-in extensions"
 />
 
-If we look at the built-in **VS Code** extensions, we can notice some usual suspects. Look, it's [Emmet](https://www.emmet.io/)!
+If we look at the built-in **VS Code** extensions, we can notice some usual suspects. Look, there's [Emmet](https://www.emmet.io/). 😄
 
 The language server provides us with sophisticated features such as **code completion**, **refactoring**, **syntax highlighting**, and **error and warnings**.
 
@@ -173,13 +173,13 @@ const pikachu = {
   weight: 60
 }
 
-pikachu.weigth // oops! 🚫
+pikachu.weigth // oops! 💩
 ```
 
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/06-no-checking.png"
+  src="/images/typescript-fundamentals/no-checking.webp"
   alt="No checking"
 />
 
@@ -203,20 +203,11 @@ pikachu.weigth // 🤔 Did you mean 'weight'?
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/07-checking.png"
+  src="/images/typescript-fundamentals/checking.webp"
   alt="Checking"
 />
 
-The editor code completion already makes it harder to make such a mistake writing regular JavaScript because of the benefits we get from TypeScript under the hood, but when we do there's nothing to warn us.
-
-<Image
-  height={768}
-  width={1024}
-  src="/images/typescript-fundamentals/08-quick-fix.png"
-  alt="Quick fix"
-/>
-
-**Quick fix** can be useful in many situations.
+**Code completion** already makes it hard to make such a mistake writing regular JavaScript because of the benefits we get from TypeScript under the hood, but when we do there's nothing to warn us.
 
 > The most common kinds of errors that programmers write can be described as type errors: a certain kind of value was used where a different kind of value was expected. This could be due to simple typos, a failure to understand the API surface of a library, incorrect assumptions about runtime behavior, or other errors. — [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 
@@ -263,7 +254,7 @@ function addPokemon(pokemonName) {
 // ['Pikachu'] ✅
 addPokemon('Pikachu')
 
-// oops! 😳
+// oops! 💩
 addPokemon(1)
 ```
 
@@ -298,7 +289,7 @@ If you're on the fence about TypeScript but prefer [JSDoc](https://jsdoc.app/) y
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/33-jsdoc.png"
+  src="/images/typescript-fundamentals/jsdoc.webp"
   alt="JSDoc"
 />
 
@@ -316,7 +307,7 @@ Let's get a clear picture of TypeScript 📸:
 - TypeScript is a **superset of JavaScript** (this means that any JavaScript program is also a valid TypeScript program)
 - TypeScript **preserves the runtime behavior of JavaScript** (TypeScript doesn't change how JavaScript works)
 - TypesScript **compiles to JavaScript**
-- **Types are gone once it compiles to JavaScript** (the browser or Node doesn't understand TypeScript)
+- **Types are gone once it compiles to JavaScript** (the browser and **Node** don't understand TypeScript)
 - Using TypeScript is a **gradual adoption**
 
 ## JavaScript Types
@@ -356,9 +347,9 @@ const stringObject = new String('Pikachu')
 ```
 
 <Image
-  height={250}
-  width={589}
-  src="/images/typescript-fundamentals/09-primitives.png"
+  height={658}
+  width={601}
+  src="/images/typescript-fundamentals/primitives.webp"
   alt="Primitives"
 />
 
@@ -366,9 +357,9 @@ JavaScript converts **primitive types** to **primitive wrapper objects** behind 
 
 This is because methods like `toUpperCase` extend the `String` object.
 
-The reason we don't use **primitive wrapper objects** is because it's more work to get the value out of the object and we could get unexpected results if we pass an object to something expecting a primitive value.
+The reason we don't use **primitive wrapper objects** is because it's more work to get the value out of the object and we could get unexpected results if we pass an object to something expecting a **primitive** value.
 
-That being said don't confuse the `new String` constructor with the function `String` that does type conversion.
+That being said don't confuse the `new String` constructor with the function `String` that does **type conversion**.
 
 ```js:example.js
 const number = '42'
@@ -376,7 +367,7 @@ const number = '42'
 const string = String(number) // '42'
 ```
 
-As we've learned TypeScript doesn't save us at runtime, so we have to put checks in place.
+As we've learned TypeScript doesn't save us at **runtime**, so we have to put **checks** in place.
 
 ```ts:example.ts
 function isString(value: string): boolean {
@@ -387,43 +378,43 @@ isString('Pikachu') // true ✅
 isString(1) // false 🚫
 ```
 
-Why are we writing more code?
+So why are we writing **more** code? Let's look at an example where we're just adding Pokemon and don't understand the implementation details.
 
 ```js:example.js
 const pokemon = []
 
-function addPokemon(name, added) {
-  pokemon.push({ name, added })
+function addPokemon(name, timeAdded) {
+  pokemon.push({ name, timeAdded })
 }
 
 addPokemon('Pikachu', new Date())
 ```
 
-Writing JavaScript we need to keep a lot of things in mind:
+Writing JavaScript we have to consider a lot of things:
 
-- Is the function callable?
-- Does the function return anything?
-- What are the arguments of the function?
-- What date format does the argument accept?
+- Is the function **callable**?
+- Does the function **return** anything?
+- What are the **arguments** of the function?
+- What date **format** does the argument accept?
 
 Even if we look at the implementation of `addPokemon` we don't know what date format we should pass to `added`, so we turn to documentation.
 
-TypeScript helps us prevent make those mistakes in the first place by knowing we are accessing the right properties and passing the right arguments alongside code completion.
+TypeScript helps us **prevent** from making those mistakes in the first place by knowing we are accessing the **right properties** and passing the **right arguments** alongside **code completion**.
 
 ```ts:example.ts
 const pokemon = []
 
-function addPokemon(name: string, added: Date) {
-  pokemon.push({ name, added })
+function addPokemon(name: string, timeAdded: Date) {
+  pokemon.push({ name, timeAdded })
 }
 ```
 
-In the example the argument `name` is of type `string` and argument `added` is of type `Date` which is just a built-in type.
+In the example the argument `name` is of type `string` and argument `timeAdded` is of type `Date` which is just a built-in type.
 
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/10-code-completion.png"
+  src="/images/typescript-fundamentals/code-completion.webp"
   alt="Code completion"
 />
 
@@ -438,7 +429,7 @@ addPokemon('Pikachu', Date())
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/11-date-string.png"
+  src="/images/typescript-fundamentals/date-string.webp"
   alt="Date string"
 />
 
@@ -452,7 +443,7 @@ addPokemon('Pikachu', new Date())
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/12-date-constructor.png"
+  src="/images/typescript-fundamentals/date-constructor.webp"
   alt="Date constructor"
 />
 
@@ -467,7 +458,7 @@ The playground is a great way of seeing the compiled JavaScript code and generat
 <Image
   height={843}
   width={1300}
-  src="/images/typescript-fundamentals/34-typescript-playground.png"
+  src="/images/typescript-fundamentals/typescript-playground.webp"
   alt="TypeScript Playground"
 />
 
@@ -1117,16 +1108,16 @@ Let's break it down into steps:
 - If `arg1` is an `object` we know it matches the second signature, so we can use **type assertion** and destructure the `name` and `hp` values from it
 
 <Image
-  height={267}
-  width={712}
-  src="/images/typescript-fundamentals/14-overload-signature.png"
+  height={153}
+  width={812}
+  src="/images/typescript-fundamentals/first-overload-signature.webp"
   alt="Overload signature"
 />
 
 <Image
-  height={121}
-  width={673}
-  src="/images/typescript-fundamentals/15-overload-signature.png"
+  height={141}
+  width={798}
+  src="/images/typescript-fundamentals/second-overload-signature.webp"
   alt="Overload signature"
 />
 
@@ -1467,19 +1458,19 @@ console.log(logPokemon())
 **Functions are just special objects in JavaScript** which is a roundabout way of saying we can type them as any other object.
 
 ```js:example.js
-function getPokemon() {
-  // ...
+function logPokemon() {
+  console.log(logPokemon.pokemon)
 }
 
 getPokemon.pokemon = 'Pikachu'
 
-console.log(getPokemon.pokemon) // 'Pikachu'
+logPokemon() // 'Pikachu'
 ```
 
 <Image
-  height={448}
-  width={585}
-  src="/images/typescript-fundamentals/13-functions-are-objects.png"
+  height={592}
+  width={605}
+  src="/images/typescript-fundamentals/functions-are-objects.webp"
   alt="Functions are objects"
 />
 
@@ -2086,9 +2077,9 @@ interface PokemonAPIResponse {
 ```
 
 <Image
-  height={503}
-  width={734}
-  src="/images/typescript-fundamentals/16-pokemon-api.png"
+  height={843}
+  width={1300}
+  src="/images/typescript-fundamentals/pokemon-api.webp"
   alt="Pokemon API"
 />
 
@@ -3242,7 +3233,7 @@ const pokemon: string = 'Pikachu'
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/17-typescript-setup.png"
+  src="/images/typescript-fundamentals/typescript-setup.webp"
   alt="TypeScript setup"
 />
 
@@ -3255,7 +3246,7 @@ npx tsc app.ts
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/18-typescript-compiler.png"
+  src="/images/typescript-fundamentals/typescript-compiler.webp"
   alt="Description"
 />
 
@@ -3292,7 +3283,7 @@ npm run dev
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/19-typescript-watch.png"
+  src="/images/typescript-fundamentals/typescript-watch.webp"
   alt="TypeScript watch"
 />
 
@@ -3330,9 +3321,9 @@ If you're a **Node** chad you can use [ts-node](https://www.npmjs.com/package/ts
 You also get a live code environment (**REPL**) if you run `ts-node` like you would typing `node` in your terminal.
 
 <Image
-  height={304}
-  width={655}
-  src="/images/typescript-fundamentals/20-typescript-ts-node.png"
+  height={768}
+  width={1024}
+  src="/images/typescript-fundamentals/ts-node.webp"
   alt="ts-node"
 />
 
@@ -3351,7 +3342,7 @@ npx tsc --init
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/21-typescript-tsconfig.png"
+  src="/images/typescript-fundamentals/tsconfig.webp"
   alt="TSConfig"
 />
 
@@ -3394,7 +3385,7 @@ Since we set the **rootDir** we don't have specify what file to run inside `pack
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/22-typescript-output.png"
+  src="/images/typescript-fundamentals/typescript-output.webp"
   alt="TypeScript output"
 />
 
@@ -3419,8 +3410,8 @@ const pokemon: Array<string> = ['Bulbasaur', 'Charmander', 'Squirtle']
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/23-array-es2015-interface.png"
-  alt="es2015 interface"
+  src="/images/typescript-fundamentals/array-interface.webp"
+  alt="Array interface"
 />
 
 There's always going to be a lot of information in **type definition** files, so focus on what you're inspecting. You can jump from one **type definition** to another by doing the same to other types inside.
@@ -3435,16 +3426,16 @@ If we poke around **lib.es2015.core.d.ts** we can find the types that describe h
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/24-array-constructor.png"
+  src="/images/typescript-fundamentals/array-constructor.webp"
   alt="Array constructor"
 />
 
-If we go back and look at **lib.es5.d.ts** on the right it looks like something we would expect. You can double-click it or <kbd>Alt</kbd> + <kbd>Click</kbd> the **type definition** to open it.
+If we go back and look at **lib.es5.d.ts** on the right it looks like something we would expect. You can double-click it or <kbd>Alt</kbd> + <kbd>Click</kbd> the **type definition** to open it in a separate tab.
 
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/25-array-es5-interface.png"
+  src="/images/typescript-fundamentals/array-interface-es5.webp"
   alt="es5 interface"
 />
 
@@ -3483,13 +3474,14 @@ const pokemon = {
 
 const bulbasaur: string = 'bulbasaur'
 
-const chosenPokemon = pokemon[bulbasaur] // TypeScript is mad. 🚫
+// TypeScript is mad. 🙅‍♀️
+const chosenPokemon = pokemon[bulbasaur]
 ```
 
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/26-problems-tab.png"
+  src="/images/typescript-fundamentals/problems-tab.webp"
   alt="Problems tab"
 />
 
@@ -3607,7 +3599,7 @@ There's times when TypeScript goes **cuckoo for Cocoa Puffs** and something goes
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/27-restart-ts-server.png"
+  src="/images/typescript-fundamentals/ts-server.webp"
   alt="Restart TS server"
 />
 
@@ -3628,20 +3620,15 @@ The great thing about TypeScript is that the community can gather around to crea
 <Image
   height={843}
   width={1300}
-  src="/images/typescript-fundamentals/28-type-search.png"
+  src="/images/typescript-fundamentals/type-search.webp"
   alt="Type search"
 />
 
-In the example we have a simple HTTP server in **Node** that sends a JSON response.
+In the example we have a simple **HTTP server** in **Node** that sends a JSON response.
 
 ```ts:app.ts
-// Cannot find name 'require'.
-// Do you need to install type definitions for node?
-// Try `npm i --save-dev @types/node`. 🚫
 const http = require('http')
 
-// Parameter 'req' implicitly has an 'any' type. 🚫
-// Parameter 'res' implicitly has an 'any' type. 🚫
 function requestListener(req, res) {
   res.writeHead(200, { 'Content-Type': 'application/json' })
   res.end(JSON.stringify({ pokemon: 'Pikachu' }))
@@ -3654,7 +3641,7 @@ server.listen(8080)
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/29-type-definitions.png"
+  src="/images/typescript-fundamentals/type-definitions.webp"
   alt="Type definitions"
 />
 
@@ -3671,7 +3658,7 @@ npm i -D @types/node
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/30-require-to-import.png"
+  src="/images/typescript-fundamentals/require-to-import.webp"
   alt="Require to import"
 />
 
@@ -3700,7 +3687,7 @@ Inside the file we can do a <kbd>Ctrl</kbd> + <kbd>F</kbd> search for `requestLi
 <Image
   height={768}
   width={1024}
-  src="/images/typescript-fundamentals/31-type-declaration-search.png"
+  src="/images/typescript-fundamentals/type-declaration-search.webp"
   alt="Type declaration search"
 />
 
@@ -3753,7 +3740,7 @@ Their default example uses Pokemon, so it's perfect! Consistency. 💪
 <Image
   height={843}
   width={1300}
-  src="/images/typescript-fundamentals/32-quicktype.png"
+  src="/images/typescript-fundamentals/quicktype.webp"
   alt="quicktype"
 />
 
