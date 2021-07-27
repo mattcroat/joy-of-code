@@ -187,9 +187,7 @@ The editor didn't warn us about mispelling `weight`.
 
 Imagine the same scenario with an API where you pass wrong arguments to a method — **you just hope it works**.
 
-```js:example.js
-// @ts-check
-
+```js:example.ts
 const pikachu = {
   name: 'Pikachu',
   weight: 60
@@ -373,7 +371,7 @@ isString('Pikachu') // true ✅
 isString(1) // false 🚫
 ```
 
-So why are we writing **more** code? Let's look at an example of a `addPokemon` function but don't understand the implementation details.
+So why are we writing **more** code? Let's look at an example of a `addPokemon` function.
 
 ```js:example.js
 const pokemon = []
@@ -659,7 +657,7 @@ Using type `any` is useful in situations where:
 - You have a **complex API** response you don't want to type
 - The API of the code you're writing **could change**
 
-If you want to focus on writing code I suggest instead of using `any` everywhere to include `// @ts-nocheck` at the top of your file. After you're done writing code turn **type checking** back on. **Don't let your editor bully you.**
+If you want to focus on writing code I suggest instead of using `any` everywhere to include `// @ts-nocheck` at the top of your file. After you're done writing code turn **type checking** back on. Don't let your editor bully you.
 
 Be conservative when using `any` because it defeats the purpose of using TypeScript.
 
@@ -1382,9 +1380,9 @@ You can also use a semicolon or period after each property if you want as it's p
 
 The short answer is — **doesn't matter**. Pick one and if it doesn't work for you use the other one.
 
-I use both where it makes sense:
+I use **both** when it makes sense:
 
-- **Interface** is more appropriate for describing shapes of objects
+- **Interface** is more appropriate for describing **shapes** of objects
 - You can add new fields to an existing **interface** but not to a **type alias**
 
 We haven't learned about **intersections** yet but briefly it just lets us **combine** types.
@@ -1468,7 +1466,7 @@ Let's briefly touch upon naming conventions. For the most part I just name the t
 
 Sometimes that won't work like in the case of React where component names are capitalized so you can use a **suffix** such as `PokemonProps`.
 
-For whatever reasong using the prefix `IPokemon` for an **interface** is controversial inside TypeScript circles but you probably shouldn't care as long as your naming convention is consistent.
+For whatever reasong using the **prefix** `IPokemon` for an **interface** is [controversial](https://github.com/microsoft/TypeScript-Handbook/issues/121) inside TypeScript circles but you probably shouldn't care as long as your naming convention is consistent.
 
 ## Union Types
 
@@ -1494,7 +1492,7 @@ logPokemon('Pikachu')
 
 The `pokemon` argument can only be an **array** of Pokemon of type `string[]` or a **single** Pokemon of type `string`.
 
-**You can only do things with the union type that every member supports** meaning that you can't just use a `string` method without checks because you said to TypeScript the type could either be a `string[]` or `string`.
+**You can only do things with the union type that every member supports** meaning that you can't just use a `string` method **without checks** because you said to TypeScript the type could either be `string[]` or `string`.
 
 ```ts:playground.ts
 function logPokemon(pokemon: string[] | string) {
@@ -1512,7 +1510,7 @@ logPokemon('Pikachu')
   load={false}
 />
 
-Instead we have to put **checks** in place to **narrow down the type** so TypeScript knows the **exact type**.
+Instead we have to put **checks** in place to **narrow** down the type so TypeScript knows the **exact type**.
 
 ```ts:playground.ts
 function logPokemon(pokemon: string[] | string) {
@@ -1540,9 +1538,9 @@ logPokemon('Pikachu')
   load={false}
 />
 
-Unfortunately the second `if...else` statement is required because TypeScript can't **narrow** down the `pokemon` type to `string` itself.
+Unfortunately the second `if...else` statement is required because TypeScript can't **narrow** down the `pokemon` type to `string`.
 
-In situations where the **union members** like `string[]` and `string` **overlap** and **share** the same methods such as `slice` you don't have to narrow the type.
+In situations where the **union members** like `string[]` and `string` **overlap** and **share** the same methods such as `slice` you don't have to **narrow** the type.
 
 ```ts:playground.ts
 function logPokemon(pokemon: string[] | string) {
@@ -1567,7 +1565,7 @@ logPokemon('Pikachu')
 
 A **discriminated union** is the result of **narrowing** the **members** of the union that have the same **literal type**.
 
-For example we can use a **type guard** to narrow the Pokemon type `'fire' | 'water'` to `'fire'` or `'water'`.
+For example we can use a **type guard** to **narrow** the Pokemon type `'fire' | 'water'` to `'fire'` or `'water'`.
 
 The next example shows what you might expect would work but **doesn't** because TypeScript **can't** determine if the property exists.
 
@@ -1734,7 +1732,7 @@ In this example TypeScript only knows that `formEl` returns some kind of `HTMLEl
 const formEl = document.getElementById('form')
 ```
 
-These types correspond to the [browser API](https://developer.mozilla.org/en-US/docs/Web/API). [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) is the **base class** other elements inherit from. [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) is the base interface for HTML elements. That's how we get to the [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) that represents a `<form>` element in the DOM (Document Object Model).
+These types correspond to the [browser API](https://developer.mozilla.org/en-US/docs/Web/API). [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) is the **base class** other elements inherit from. [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) is the **base interface** for HTML elements. That's how we get to the [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) that represents a `<form>` element in the DOM (Document Object Model).
 
 ```ts:playground.ts
 const formEl = document.getElementById('form')
@@ -1757,7 +1755,7 @@ It's a relatively recent addition to JavaScript but it's been a part of TypeScri
 
 If we look at the API for **HTMLElement** the TypeScript error makes complete sense since that method doesn't exist.
 
-We can be more specific about the type of element with **type assertion** using the `as` keyword.
+We can be more **specific** about the type of element with **type assertion** using the `as` keyword.
 
 ```ts:playground.ts
 const formEl = document.getElementById('form') as HTMLFormElement
@@ -1765,7 +1763,7 @@ const formEl = document.getElementById('form') as HTMLFormElement
 formEl?.reset() // works ✅
 ```
 
-The 🧠 pro-tip of how to figure out what element you want is fumbling around until your **code completion** gives you an option that looks like what you want.
+The 🧠 pro-tip for how to figure out what element you want is fumbling around until your **code completion** gives you an option that looks like what you want.
 
 There's also the alternative angle bracket `<>` syntax for **type assertion**.
 
@@ -2005,20 +2003,10 @@ const pokemon = {
 The easier method is using the `as const` suffix that acts like the **type equivalent** of `const`.
 
 ```ts:playground.ts
-function addPokemon(
-  name: string,
-  pokemonType: '🔥 fire' | '🌀 water' | '⚡ electric'
-) {
-  console.log({ name, pokemonType })
-}
-
 const pokemon = {
   name: 'Pikachu',
   pokemonType: '⚡ electric'
 } as const
-
-// pokemonType is 'electric' ✅
-addPokemon(pokemon.name, pokemon.pokemonType)
 ```
 
 <Iframe
@@ -2813,7 +2801,7 @@ movePokemon(Direction.Up)
 
 TypeScript **compiles** Enums to some _interesting_ 🧐 JavaScript code you can look at in the JavaScript output tab if you're curious.
 
-This looks like a _fun_ interview question. 😅
+This looks like a _fun_ 😅 interview question.
 
 ```js:output.js
 var Direction
@@ -3092,9 +3080,9 @@ JavaScript has a [proposal for decorators](https://github.com/tc39/proposal-deco
 
 I want to preface this by saying that **decorators** are primarily used by library authors and frameworks such as [Angular](https://angular.io/) and [NestJS](https://nestjs.com/).
 
-Don't sweat it when you would use **decorators** because they mainly just improve your developer experience without having to think about how it works.
+Don't sweat it when you would use **decorators** because they're mainly given to you to use them to improve your developer experience without having to think about how it works.
 
-If you're using decorators you have to enable **experimental** support for decorators inside `tsconfig.json`.
+If you're using **decorators** you have to enable **experimental** support for decorators inside `tsconfig.json`.
 
 ```json:tsconfig.json
 {
@@ -3165,7 +3153,7 @@ We barely touched upon **decorators** because it would get lengthy and it's enou
 
 Hooking into code like this is called [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) and is often more useful in frameworks where you might need to add metadata to measure or analyze code.
 
-There's a great video by [Fireship](https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA) on [The Magic of TypeScript Decorators](https://www.youtube.com/watch?v=O6A-u_FoEX8) you should watch. 🍿
+There's a great video by [Fireship](https://fireship.io/) on [The Magic of TypeScript Decorators](https://www.youtube.com/watch?v=O6A-u_FoEX8) you should watch. 🍿
 
 <Iframe
   title="The Magic of TypeScript Decorators"
@@ -3289,7 +3277,7 @@ You only have to include the JavaScript file in your HTML file. Using the `defer
 </html>
 ```
 
-If you're a **Node** chad you can use [ts-node](https://www.npmjs.com/package/ts-node) that lets you run TypeScript files without having to **transpile** them first by using `ts-node app.ts`.
+If you're a **Node** chad 💪 you can use [ts-node](https://www.npmjs.com/package/ts-node) that lets you run TypeScript files without having to **transpile** them first by using `ts-node app.ts`.
 
 You also get a live code environment (**REPL**) if you run `ts-node` like you would typing `node` in your terminal.
 
@@ -3304,7 +3292,7 @@ If you're using `ts-node` you can use [nodemon](https://www.npmjs.com/package/no
 
 Tooling is a subject that deserves it's own post. I just want to expose you to what is out there.
 
-Let's look at the TypeScript compiler options.
+Let's look at the TypeScript **compiler options**.
 
 TypeScript looks for a `tsconfig.json` file that we can create by hand or generate by using the `--init` flag.
 
@@ -3319,11 +3307,11 @@ npx tsc --init
   alt="TSConfig"
 />
 
-Inside the generated `tsconfig.json` file we can see useful descriptions alongside the TypeScript compiler options.
+Inside the generated `tsconfig.json` file we can see useful descriptions alongside the TypeScript **compiler options**.
 
 You can look at the [TypeScript compiler options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) and the [TSConfig Reference](https://www.typescriptlang.org/tsconfig) that explains each option if you want to learn more.
 
-Let's make the `tsconfig.json` file more readable by removing most of the TypeScript compiler options and focusing on a couple of options.
+Let's make the `tsconfig.json` file more readable by removing most of the TypeScript **compiler options** and focusing on a couple of options.
 
 ```json:tsconfig.json
 {
@@ -3342,8 +3330,8 @@ Let's make the `tsconfig.json` file more readable by removing most of the TypeSc
 - **target**: specifies the target JavaScript version the TypeScript code compiles to where **ESNext** is the latest
 - **module**: specifies the module system we're going to transpile to where [CommonJS](https://en.wikipedia.org/wiki/CommonJS) uses the `const package = require('package')` syntax and the **ES6** and onwards option uses **ECMAScript modules** (**ESM**) `import package from 'package'` syntax which is supported natively in browsers only as of recent
 - **lib**: decides what types to include with our code because we might not need **DOM** types if we're writing for **Node** or want to target some other JavaScript features (TypeScript includes a default set of type definitions for built-in JavaScript APIs)
-- **outDir**: specifies the output directory for transpiled JavaScript code
-- **rootDir**: specifies the root directory for TypeScript files
+- **outDir**: specifies the **output** directory for transpiled JavaScript code
+- **rootDir**: specifies the **root** directory for TypeScript files
 - **noEmitOnError**: doesn't output anything if there's a TypeScript error
 - **strict**: enables all the strict flags so our code is more type-safe
 
@@ -3392,7 +3380,7 @@ There's always going to be a lot of information in **type definition** files, so
 There's a couple of interesting things to note:
 
 - The file ends with a `.d.ts` extension which is just a **declaration file** for types (it's used to add TypeScript types to things that aren't built with TypeScript)
-- There's multiple type declarations on the right depending on the version of JavaScript the features were added in among other things (remember it's one **interface** since we can declare it again)
+- There's multiple **type declarations** on the right depending on the version of JavaScript the features were added in among other things (remember it's one **interface** since we can declare it again)
 
 If we poke around **lib.es2015.core.d.ts** we can find the types that describe how to create arrays on the fly.
 
@@ -3465,7 +3453,7 @@ Element implicitly has an 'any' type because expression of type 'string' can't b
 
 Sometimes you're going to have these sort of errors that make you question your sanity when using TypeScript when it's a simple fix.
 
-The error message is verbose because it's describing the entire object as a **literal type** since we're not using a **type alias** or **interface** it can refer to instead.
+The error message is **verbose** because it's describing the entire object as a **literal type** since we're not using a **type alias** or **interface** it can refer to instead.
 
 ```json:error
 Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Pokemon'.
@@ -3481,7 +3469,7 @@ Element implicitly has an 'any' type because expression of type 'string' can't b
 
 The further you go down the **because chain** the more specific the error is, so start from there.
 
-This problem might be harder to reason about if you don't understand things like **object index signatures** in TypeScript and that's why everything we learned so far ties together.
+This problem might be harder to reason about if you don't understand things like **object index signatures** tying everything we learned so far together.
 
 The second part of the error message reveals the problem.
 
@@ -3560,7 +3548,7 @@ const pokemon = {
 
 const bulbasaur: 'bulbasaur' = 'bulbasaur'
 
-const chosenPokemon = pokemon[bulbasaur]
+const chosenPokemon = pokemon[bulbasaur] // ✅
 ```
 
 You're going to encounter this when dealing with dynamic values.
@@ -3576,7 +3564,7 @@ There's times when TypeScript goes **cuckoo for Cocoa Puffs** and something goes
   alt="Restart TS server"
 />
 
-If you don't understand the error open up the [TypeScript Playground](https://www.typescriptlang.org/play/) and reproduce it there so you have a shareable link you can send to anyone.
+If you don't understand the error open up the [TypeScript Playground](https://www.typescriptlang.org/play/) and **reproduce** it there so you have a shareable link you can send to anyone.
 
 You can always ask a question in the [TypeScript Community Discord Server](https://discord.com/invite/typescript).
 
@@ -3641,7 +3629,7 @@ TypeScript lets us know we can convert `require` to an `import`.
 import * as http from 'http'
 ```
 
-You have to keep in mind these older libraries use **CommonJS** that uses module exports, so we can't expect it to use **ECMAScript modules** where you can import a package simply as `import http from 'http'` using the default export syntax or `import { http } from http` syntax if it's a named import.
+You have to keep in mind these older libraries use **CommonJS** that uses **module exports**, so we can't expect it to use **ECMAScript modules** where you can import a package simply as `import http from 'http'` using the **default export** syntax or `import { http } from http` syntax if it's a **named import**.
 
 Try it first and if it doesn't work you can use `import * as http from 'http'` to import the entire module's contents.
 
