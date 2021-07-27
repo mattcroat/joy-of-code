@@ -14,7 +14,7 @@ export function Newsletter({ ...props }) {
   async function subscribe(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
 
-    const response = await fetch('api/newsletter', {
+    const response = await fetch('/api/newsletter', {
       body: JSON.stringify({
         email: inputEl?.current?.value,
       }),
