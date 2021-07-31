@@ -1,6 +1,6 @@
 # 🖌 Joy of Code
 
-[Joy of Code](https://joyofcode.xyz/) is a **digital garden** where I tend to **web development topics for humans** by gathering my thoughts and sharing what I know in a friendly way.
+[Joy of Code](https://joyofcode.xyz/) is a **digital garden** about **web development** anyone can contribute to.
 
 ## Contribute
 
