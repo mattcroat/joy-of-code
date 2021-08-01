@@ -1,5 +1,3 @@
-// not to future self: this can only be used inside getStaticProps,
-// as packages such as 'fs' don't work in the browser and throw an error
 import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'

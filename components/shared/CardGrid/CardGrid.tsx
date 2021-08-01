@@ -1,12 +1,15 @@
+import { motion } from 'framer-motion'
+
 import { Card } from './Card'
-import { MotionSimpleGrid } from '@/root/components/shared/MotionBox'
+
+import type { Category } from '@/root/types/category'
 
 interface CardGridProps {
   posts: {
     title: string
     description: string
     published: string
-    category: string
+    category: Category
     slug: string
   }[]
 }
@@ -23,16 +26,15 @@ const cardGridVariants = {
 
 export function CardGrid({ posts }: CardGridProps) {
   return (
-    <MotionSimpleGrid
+    <motion.div
       animate="show"
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-cards"
       initial="hidden"
-      spacing={4}
-      templateColumns="repeat(auto-fill, minmax(auto, 420px))"
       variants={cardGridVariants}
     >
       {posts.map(({ category, title, slug }) => (
         <Card key={slug} category={category} slug={slug} title={title} />
       ))}
-    </MotionSimpleGrid>
+    </motion.div>
   )
 }

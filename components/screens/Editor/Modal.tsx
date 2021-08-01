@@ -1,71 +1,41 @@
-import { Box } from '@chakra-ui/react'
 import React from 'react'
 
-import { cardTheme } from '@/root/styles/cardTheme'
 import { Icon } from '@/root/components/shared/Icon'
 
+import type { Category } from '@/root/types/category'
+
 interface ModalProps {
-  category: string
+  category: Category
   title: string
   modalOpen: (arg: boolean) => void
 }
 
 export function Modal({ category, title, modalOpen }: ModalProps) {
   return (
-    <Box
-      bg="hsl(0 0% 0% / 80%)"
-      bottom="0"
-      d="grid"
+    <button
+      className="absolute inset-0 z-50 grid w-full text-white place-items-center bg-gray-900/90"
       onClick={() => modalOpen(false)}
-      placeItems="center"
-      pos="absolute"
-      top="0"
-      w="100%"
-      zIndex="1"
     >
-      <Box
-        bgImage={cardTheme[category].bg}
-        bgRepeat="no-repeat"
-        bgSize="cover"
-        h={630}
-        pos="relative"
-        w={1200}
+      <div
+        className="relative bg-no-repeat bg-cover"
+        style={{
+          width: '1200px',
+          backgroundImage: `url(/images/categories/${category.toLowerCase()}.webp)`,
+          height: '630px',
+        }}
       >
-        <Box
-          as="span"
-          bg="white"
-          color="gray.900"
-          fontSize="lg"
-          fontWeight="bold"
-          left={8}
-          pos="absolute"
-          px={4}
-          py={2}
-          textTransform="uppercase"
-          top={8}
-        >
-          <Box as="span" css={{ transform: 'translateY(2px)' }} d="block">
-            Joy Of Code
-          </Box>
-        </Box>
-        <Box
-          as="span"
-          bottom={8}
-          fontSize="8xl"
-          fontWeight="bold"
-          left={8}
-          letterSpacing="-2px"
-          lineHeight="1"
-          maxW="80%"
-          pos="absolute"
-          textShadow={`2px 2px 0 hsl(0 0% 0% / 100%)`}
-        >
+        <span className="absolute px-4 py-2 text-lg font-bold text-gray-900 uppercase bg-white left-8 top-8">
+          <span className="block translate-y-[1px]">Joy Of Code</span>
+        </span>
+
+        <span className="absolute max-w-xs font-bold text-8xl bottom-8 left-8 text-shadow">
           {title}
-        </Box>
-        <Box color={cardTheme[category].color} pos="absolute" right={8} top={8}>
-          <Icon icon={cardTheme[category].icon} size={64} />
-        </Box>
-      </Box>
-    </Box>
+        </span>
+
+        <div className="absolute right-8 top-8">
+          <Icon className="w-16 h-16" icon={category} />
+        </div>
+      </div>
+    </button>
   )
 }

@@ -1,18 +1,28 @@
-import { Box, FormControl, FormLabel, Input, Select } from '@chakra-ui/react'
-import React from 'react'
+import { useState } from 'react'
 
-import { cardTheme } from '@/root/styles/cardTheme'
 import { Icon } from '@/root/components/shared/Icon'
 import { Modal } from '@/root/components/screens/Editor/Modal'
 
-type FormEvent =
-  | React.FormEvent<HTMLDivElement>
-  | React.FormEvent<HTMLFormElement>
+import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
+import type { Category } from '@/root/types/category'
 
 export function PostImage() {
-  const [title, setTitle] = React.useState<string>('Placeholder')
-  const [category, setCategory] = React.useState<string>('CSS')
-  const [modalOpen, setModalOpen] = React.useState<boolean>(false)
+  const [title, setTitle] = useState<string>('Placeholder')
+  const [category, setCategory] = useState<Category>('CSS')
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+
+  function handleInput(event: ChangeEvent<HTMLInputElement>) {
+    setTitle(event.target.value)
+  }
+
+  function handleSelect(event: FocusEvent<HTMLSelectElement>) {
+    const category = event.target.value as Category
+    setCategory(category)
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+  }
 
   return (
     <>
@@ -20,81 +30,50 @@ export function PostImage() {
         <Modal category={category} modalOpen={setModalOpen} title={title} />
       )}
 
-      <Box maxW="72ch" mx="auto" pl="80px" pt={8}>
-        <Box
-          bgImage={cardTheme[category].bg}
-          bgRepeat="no-repeat"
-          bgSize="cover"
-          h="340px"
-          mx="auto"
+      <div className="max-w-[72ch] mx-auto pl-[80px] pt-8">
+        <button
+          className="relative w-full mx-auto text-white bg-no-repeat bg-cover"
           onClick={() => setModalOpen(true)}
-          pos="relative"
+          style={{
+            backgroundImage: `url(/images/categories/${category.toLowerCase()}.webp)`,
+            height: '340px',
+          }}
         >
-          <Box
-            as="span"
-            bg="white"
-            color="gray.900"
-            fontSize="md"
-            fontWeight="bold"
-            left={8}
-            pos="absolute"
-            px={4}
-            py={2}
-            textTransform="uppercase"
-            top={8}
-          >
-            <Box as="span" css={{ transform: 'translateY(2px)' }} d="block">
-              Joy Of Code
-            </Box>
-          </Box>
-          <Box
-            as="span"
-            bottom={8}
-            fontSize="6xl"
-            fontWeight="bold"
-            left={8}
-            letterSpacing="-2px"
-            lineHeight="1"
-            maxW="80%"
-            pos="absolute"
-            textShadow={`2px 2px 0 hsl(0 0% 0% / 100%)`}
-          >
+          <span className="absolute px-4 py-2 text-lg font-bold text-gray-900 uppercase bg-white left-8 top-8">
+            Joy of Code
+          </span>
+          <span className="absolute max-w-xs text-6xl font-bold text-left bottom-8 left-8 text-shadow">
             {title}
-          </Box>
-          <Box
-            color={cardTheme[category].color}
-            pos="absolute"
-            right={8}
-            top={8}
-          >
-            <Icon icon={cardTheme[category].icon} size={40} />
-          </Box>
-        </Box>
+          </span>
+          <div className="absolute right-8 top-8">
+            <Icon className="w-10 h-10" icon={category} />
+          </div>
+        </button>
 
-        <Box
-          as="form"
-          d="flex"
-          gridGap={4}
-          mt={4}
-          onSubmit={(event: FormEvent) => event.preventDefault()}
-        >
-          <FormControl id="title">
-            <FormLabel htmlFor="title">Title</FormLabel>
-            <Input
+        <form className="flex mt-8" onSubmit={handleSubmit}>
+          <div className="flex-1 p-4 rounded-tl rounded-bl bg-secondary">
+            <label className="sr-only" htmlFor="title">
+              Title
+            </label>
+            <input
+              className="text-white bg-transparent"
               id="title"
               name="title"
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={handleInput}
               type="text"
               value={title}
             />
-          </FormControl>
+          </div>
 
-          <FormControl flexBasis="200px" id="theme">
-            <FormLabel htmlFor="theme">Category</FormLabel>
-            <Select
+          <div className="p-4 rounded-tr rounded-br bg-highlight">
+            <label className="sr-only" htmlFor="theme">
+              Category
+            </label>
+            <select
+              className="font-bold bg-transparent"
               id="theme"
               name="theme"
-              onChange={(event) => setCategory(event.target.value)}
+              onChange={handleSelect}
             >
               <option>CSS</option>
               <option>General</option>
@@ -102,10 +81,10 @@ export function PostImage() {
               <option>JavaScript</option>
               <option>React</option>
               <option>TypeScript</option>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
+            </select>
+          </div>
+        </form>
+      </div>
     </>
   )
 }

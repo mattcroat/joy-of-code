@@ -1,18 +1,15 @@
-import { Box, Button, Input, useColorModeValue } from '@chakra-ui/react'
+import { FormEvent, useRef, useState } from 'react'
 import Confetti from 'react-dom-confetti'
-import React from 'react'
 
 import { CustomLink } from '@/root/components/shared/CustomLink'
 
 export function Newsletter({ ...props }) {
-  const [isSubscribed, setIsSubscribed] = React.useState<boolean>(false)
-  const [isError, setIsError] = React.useState<boolean>(false)
-  const inputEl = React.useRef<HTMLInputElement>(null)
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false)
+  const [isError, setIsError] = useState<boolean>(false)
+  const inputEl = useRef<HTMLInputElement>(null)
 
-  const customLinkColor = useColorModeValue('blue.600', 'orange.200')
-
-  async function subscribe(e: React.FormEvent<HTMLFormElement>): Promise<void> {
-    e.preventDefault()
+  async function subscribe(event: FormEvent<HTMLFormElement>): Promise<void> {
+    event.preventDefault()
 
     const response = await fetch('/api/newsletter', {
       body: JSON.stringify({
@@ -39,55 +36,41 @@ export function Newsletter({ ...props }) {
   }
 
   return (
-    <Box borderRadius={8} borderWidth={1} my={16} p={8} {...props}>
-      <Box as="span" fontSize={['2xl', '4xl']} fontWeight={700}>
-        Subscribe for Updates
-      </Box>
-      <Box as="p" color="gray.400" fontSize={[16, 18, 20]} my={2}>
-        If you hate email there's a{' '}
-        <CustomLink color={customLinkColor} href="/feed/rss.xml">
-          RSS feed.
-        </CustomLink>
-      </Box>
+    <div className="p-8 rounded-md bg-highlight" {...props}>
+      <div>
+        <span className="text-xl font-bold text-secondary md:text-4xl">
+          {'📬'} Subscribe for Updates
+        </span>
+        <p className="my-4 text-secondary">
+          I don't want your data, so there's also a
+          <CustomLink href="/feed/rss.xml">
+            {' '}
+            <span className="underline">RSS feed.</span>
+          </CustomLink>
+        </p>
+      </div>
 
-      <form onSubmit={subscribe}>
-        <Box my={4} pos="relative">
-          <Input
-            ref={inputEl}
-            aria-label="Email for newsletter"
-            id="newsletter-email"
-            name="newsletter-email"
-            placeholder="unix@chad.com"
-            required
-            type="email"
-          />
-          <Button
-            colorScheme="orange"
-            mt={{ base: 4, sm: 0 }}
-            pos={{ sm: 'absolute' }}
-            right={0}
-            type="submit"
-            zIndex={1}
-          >
-            Subscribe
-          </Button>
-        </Box>
-        <Box pos="relative">
-          {isSubscribed && (
-            <Box as="p" fontWeight="700" mt={8}>
-              {`You're subscribed! 🎉`}
-            </Box>
-          )}
-          <Box left={40} pos="absolute" top={0}>
-            <Confetti active={isSubscribed} />
-          </Box>
-          {isError && (
-            <Box as="p" fontWeight="700" mt={8}>
-              {'Oops! 💩 Something went wrong'}
-            </Box>
-          )}
-        </Box>
+      <form className="mt-8" onSubmit={subscribe}>
+        <input
+          ref={inputEl}
+          aria-label="Email for newsletter"
+          className="max-w-[140px] sm:max-w-none p-2 text-highlight rounded-tl rounded-bl md:p-4 bg-secondary"
+          id="newsletter-email"
+          name="newsletter-email"
+          placeholder="unix@chad.com"
+          required
+          type="email"
+        />
+        <button
+          className="p-2 font-bold border-0 rounded-tr rounded-br shadow-sm md:p-4 bg-primary text-highlight"
+          type="submit"
+        >
+          {!isError && !isSubscribed && 'Subscribe'}
+          {isError && '💩 Try again'}
+          {isSubscribed && 'Subscribed! 🎉'}
+          <Confetti active={isSubscribed} />
+        </button>
       </form>
-    </Box>
+    </div>
   )
 }

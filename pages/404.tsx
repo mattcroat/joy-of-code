@@ -1,5 +1,4 @@
-import { Box, Divider, Heading, useColorModeValue } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { Emoji } from '@/root/components/shared/Emoji'
@@ -7,33 +6,25 @@ import { Layout } from '@/root/components/shared/Layout'
 
 export default function NotFound() {
   const router = useRouter()
-  const primaryHeadingColor = useColorModeValue('gray.600', 'gray.400')
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(() => router.replace('/'), 4000)
   }, [router])
 
   return (
     <Layout>
-      <Box maxW={{ sm: '60%', lg: '80%' }} mx="auto" px={{ base: 8, sm: 0 }}>
-        <Heading
-          as="h1"
-          color={primaryHeadingColor}
-          fontSize={['3xl', '4xl', '5xl']}
-          letterSpacing="-1px"
-          lineHeight="normal"
-          maxW="600px"
-        >
+      <div className="mx-auto px-8 sm:px-0 sm:max-w-[60%] lg:max-w-[80%]">
+        <h1>
           Oops!
-          <Emoji animate emoji="💩" label="Face screaming in fear emoji" />
-        </Heading>
+          <Emoji emoji="💩" label="Poop emoji" />
+        </h1>
 
-        <Divider bg="gray.600" borderBottom="none" h="4px" my={2} w="40px" />
+        <hr className="w-10 h-1 my-2 bg-gray-600 border-0"></hr>
 
-        <Box as="span" d="block" fontSize={[16, 18, 20]} my={8}>
+        <p className="my-8">
           <strong>Page not found.</strong> Redirecting...
-        </Box>
-      </Box>
+        </p>
+      </div>
     </Layout>
   )
 }

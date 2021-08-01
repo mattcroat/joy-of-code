@@ -1,11 +1,10 @@
-import { Box, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
-import React from 'react'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 
 import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Icon } from '@/root/components/shared/Icon'
 import { MenuToggle } from './MenuToggle'
-import { MotionBox } from '@/root/components/shared/MotionBox'
 
 const menuVariants = {
   open: {
@@ -48,21 +47,10 @@ const menuItemsVariants = {
 }
 
 export function NavigationMenu() {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const router = useRouter()
 
-  const menuBackground = useColorModeValue('white', 'gray.700')
-  const menuTextBorderColor = useColorModeValue('gray.200', 'gray.600')
-  const menuTextColor = useColorModeValue('gray.800', 'gray.100')
-  const mutedColor = useColorModeValue('gray.600', 'gray.400')
-  const primaryColor = useColorModeValue('blue.600', 'orange.200')
-
-  const hoverStyle = {
-    transition: 'color .5s ease',
-    color: primaryColor,
-  }
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isOpen) return
 
     const handleRouteChange = () => setIsOpen(!isOpen)
@@ -75,175 +63,106 @@ export function NavigationMenu() {
   }, [isOpen, router.events])
 
   return (
-    <MotionBox
+    <motion.div
       animate={isOpen ? 'open' : 'closed'}
-      as="nav"
-      bottom={0}
-      display={{ base: 'block', md: 'none' }}
+      className="fixed top-0 bottom-0 left-0 right-0 z-30 pointer-events-none md:hidden"
       initial={false}
-      left={0}
-      pointerEvents="none"
-      pos="fixed"
-      right={0}
-      top={0}
-      zIndex={3}
     >
-      <MotionBox
-        bg={menuBackground}
-        bottom={0}
-        left={0}
-        pos="absolute"
-        top={0}
+      <motion.div
+        className="absolute top-0 bottom-0 left-0 w-full bg-secondary"
         variants={menuVariants}
-        w="100%"
       />
-      <MotionBox
-        color={mutedColor}
-        h="100%"
-        p={6}
-        pointerEvents="auto"
-        pos="absolute"
-        top={0}
+      <motion.div
+        className="absolute top-0 w-full h-full p-6 pointer-events-auto text-muted"
         variants={menuItemsVariants}
-        w="100%"
       >
-        <Box
-          as="span"
-          borderBottom="1px solid"
-          borderColor={menuTextBorderColor}
-          color={primaryColor}
-          d="block"
-          fontSize="2xl"
-          fontWeight={600}
-          py={2}
-        >
-          Categories
-        </Box>
-        <SimpleGrid columns={2} mt={8} spacing={8}>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/css" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="swatch" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  CSS
-                </Box>
-              </Box>
-            </CustomLink>
-          </Box>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/general" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="bulb" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  General
-                </Box>
-              </Box>
-            </CustomLink>
-          </Box>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/design" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="figma" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  Figma
-                </Box>
-              </Box>
-            </CustomLink>
-          </Box>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/git" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="github" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  Git / GitHub
-                </Box>
-              </Box>
-            </CustomLink>
-          </Box>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/javascript" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="javascript" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  JavaScript
-                </Box>
-              </Box>
-            </CustomLink>
-          </Box>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/next" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="next" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  Next.js
-                </Box>
-              </Box>
-            </CustomLink>
-          </Box>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/react" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="react" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  React
-                </Box>
-              </Box>
-            </CustomLink>
-          </Box>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/typescript" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="typescript" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  TypeScript
-                </Box>
-              </Box>
-            </CustomLink>
-          </Box>
-        </SimpleGrid>
+        <div>
+          <span className="block py-2 text-2xl font-semibold border-b border-separator text-highlight">
+            Categories
+          </span>
 
-        <Box
-          as="span"
-          borderBottom="1px solid"
-          borderColor={menuTextBorderColor}
-          color={primaryColor}
-          d="block"
-          fontSize="2xl"
-          fontWeight={600}
-          mt={8}
-          py={2}
-        >
-          Subscribe
-        </Box>
-        <SimpleGrid columns={2} mt={8} spacing={8}>
-          <Box role="group">
-            <CustomLink hover={hoverStyle} href="/newsletter" isInternal>
-              <Box d="flex" gridGap={4}>
-                <Icon icon="newsletter" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  Newsletter
-                </Box>
-              </Box>
+          <div className="grid grid-cols-2 gap-8 mt-8">
+            <CustomLink href="/css" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="CSS" />
+                <span>CSS</span>
+              </div>
             </CustomLink>
-          </Box>
-          <Box role="group">
-            <CustomLink
-              hover={hoverStyle}
-              href="/feed/rss.xml"
-              isInternal
-              openSeparateTab
-            >
-              <Box d="flex" gridGap={4}>
-                <Icon icon="feed" />
-                <Box _groupHover={hoverStyle} as="span" color={menuTextColor}>
-                  RSS Feed
-                </Box>
-              </Box>
+
+            <CustomLink href="/general" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="General" />
+                <span>General</span>
+              </div>
             </CustomLink>
-          </Box>
-        </SimpleGrid>
-      </MotionBox>
+
+            <CustomLink href="/design" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="Figma" />
+                <span>Figma</span>
+              </div>
+            </CustomLink>
+
+            <CustomLink href="/git" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="Git" />
+                <span>Git / GitHub</span>
+              </div>
+            </CustomLink>
+
+            <CustomLink href="/javascript" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="JavaScript" />
+                <span>JavaScript</span>
+              </div>
+            </CustomLink>
+
+            <CustomLink href="/next" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="Next" />
+                <span>Next.js</span>
+              </div>
+            </CustomLink>
+
+            <CustomLink href="/react" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="React" />
+                <span>React</span>
+              </div>
+            </CustomLink>
+
+            <CustomLink href="/typescript" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="TypeScript" />
+                <span>TypeScript</span>
+              </div>
+            </CustomLink>
+          </div>
+        </div>
+
+        <div>
+          <span className="block py-2 mt-8 text-2xl font-semibold border-b border-separator text-highlight">
+            Subscribe
+          </span>
+
+          <div className="grid grid-cols-2 gap-8 mt-8">
+            <CustomLink href="/newsletter" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="Newsletter" />
+                <span>Newsletter</span>
+              </div>
+            </CustomLink>
+
+            <CustomLink href="/feed/rss.xml" isInternal>
+              <div className="flex gap-4 hover:text-highlight">
+                <Icon className="w-8 h-8" icon="Feed" />
+                <span>RSS Feed</span>
+              </div>
+            </CustomLink>
+          </div>
+        </div>
+      </motion.div>
       <MenuToggle open={isOpen} toggle={setIsOpen} />
-    </MotionBox>
+    </motion.div>
   )
 }

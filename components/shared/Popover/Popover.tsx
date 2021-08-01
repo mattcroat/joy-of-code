@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { Box } from '@chakra-ui/react'
 
 import type { ReactNode } from 'react'
 
@@ -36,39 +35,17 @@ export function Popover({ children, isOpen = false }: PopoverProps) {
   return (
     <>
       {isPopoverOpen && (
-        <Box
+        <div
           ref={popoverRef}
-          maxW="400px"
-          pos="absolute"
-          right={0}
-          top={6}
-          width="max-content"
+          className="text-left max-w-[400px] absolute right-[-84px] top-4 w-max"
         >
-          <Box
-            _after={{
-              content: '" "',
-              position: 'absolute',
-              right: '28px',
-              top: '-16px',
-              borderTop: 'none',
-              borderRight: '16px solid transparent',
-              borderLeft: '16px solid transparent',
-              borderBottom: '16px solid teal',
-            }}
-            backgroundColor="gray.700"
-            borderRadius="base"
-            borderTop="4px solid teal"
-            boxShadow="lg"
-            m={10}
-            p={4}
-            pos="relative"
-          >
+          <div className="relative p-4 m-10 border-t-4 border-highlight rounded-md shadow-lg after:absolute after:-top-4 after:right-[44px] after:border-t-0 after:border-r-[16px] after:border-r-transparent after:border-l-[16px] after:border-l-transparent after:border-b-[16px] after:border-highlight bg-secondary">
             {children}
-            <Box as="p" color="gray.400" mt={4}>
+            <p className="mt-4 text-muted">
               {`Tap anywhere on the page to close the pop-up. 👆`}
-            </Box>
-          </Box>
-        </Box>
+            </p>
+          </div>
+        </div>
       )}
     </>
   )

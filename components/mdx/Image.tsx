@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { Box } from '@chakra-ui/react'
 import NextImage from 'next/image'
 
 import { useIntersectionObserver } from '@/root/hooks/useIntersectionObserver'
@@ -30,7 +29,7 @@ export function Image({
 
   if (inline) {
     return (
-      <Box ref={imageRef} my={{ sm: 8 }}>
+      <div ref={imageRef} className="sm:my-8">
         {isVisible && (
           <NextImage
             alt={alt}
@@ -41,12 +40,12 @@ export function Image({
             width={width}
           />
         )}
-      </Box>
+      </div>
     )
   }
 
   return (
-    <Box ref={imageRef} mx={{ xl: '-10%' }} my={{ sm: 8 }} textAlign="center">
+    <div ref={imageRef} className="text-center xl:mx-[-10%] sm:my-8">
       {isVisible && (
         <NextImage
           alt={alt}
@@ -57,6 +56,6 @@ export function Image({
           width={width}
         />
       )}
-    </Box>
+    </div>
   )
 }

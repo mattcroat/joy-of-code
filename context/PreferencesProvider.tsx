@@ -28,8 +28,10 @@ export function PreferencesProvider({ children }: any) {
 
     if (accessibleFont) {
       storage.setItem('accessibleFont', serialize(true))
+      document.documentElement.setAttribute('data-font', 'accessible')
     } else {
       storage.removeItem('accessibleFont')
+      document.documentElement.removeAttribute('data-font')
     }
   }, [accessibleFont])
 

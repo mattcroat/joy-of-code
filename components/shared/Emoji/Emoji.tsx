@@ -1,13 +1,8 @@
-import { Box } from '@chakra-ui/react'
-
-import { MotionBox } from '@/root/components/shared/MotionBox'
+import { motion } from 'framer-motion'
 
 interface EmojiProps {
-  animate?: boolean
   emoji: string
   label: string
-  spacing?: number
-  [props: string]: any
 }
 
 const emojiAppearVariants = {
@@ -34,37 +29,18 @@ const emojiWaveVariants = {
   },
 }
 
-export function Emoji({
-  animate = false,
-  emoji,
-  label,
-  spacing = 4,
-  ...props
-}: EmojiProps) {
+export function Emoji({ emoji, label }: EmojiProps) {
   return (
-    <Box
-      aria-label={label}
-      as="span"
-      d="inline-block"
-      mx={spacing}
-      role="img"
-      {...props}
-    >
-      {animate ? (
-        <>
-          <MotionBox
-            animate="show"
-            initial="hidden"
-            variants={emojiAppearVariants}
-          >
-            <MotionBox animate="wave" variants={emojiWaveVariants}>
-              {emoji}
-            </MotionBox>
-          </MotionBox>
-        </>
-      ) : (
-        emoji
-      )}
-    </Box>
+    <div aria-label={label} className="inline-block" role="img">
+      <motion.div
+        animate="show"
+        initial="hidden"
+        variants={emojiAppearVariants}
+      >
+        <motion.div animate="wave" variants={emojiWaveVariants}>
+          {emoji}
+        </motion.div>
+      </motion.div>
+    </div>
   )
 }

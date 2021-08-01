@@ -1,5 +1,4 @@
-import { Box } from '@chakra-ui/react'
-import React from 'react'
+import { useRef, useState } from 'react'
 
 import { useIntersectionObserver } from '@/root/hooks/useIntersectionObserver'
 
@@ -16,10 +15,9 @@ export function Iframe({
   title,
   load = true,
 }: IframeProps) {
-  const [isVisible, setIsVisible] = React.useState<boolean>(false)
-  const [shouldLoad, setShouldLoad] = React.useState<boolean>(false)
-
-  const iframeRef = React.useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
+  const [shouldLoad, setShouldLoad] = useState<boolean>(false)
+  const iframeRef = useRef<HTMLDivElement>(null)
 
   useIntersectionObserver({
     target: iframeRef,
@@ -29,53 +27,38 @@ export function Iframe({
 
   if (!load) {
     return (
-      <Box ref={iframeRef}>
+      <div ref={iframeRef}>
         {!shouldLoad && (
-          <Box
-            alignItems="center"
-            bg="gray.700"
-            borderRadius="base"
-            d="flex"
-            fontSize="2xl"
-            fontWeight="700"
-            h={height}
-            justifyContent="center"
+          <button
+            className="flex items-center justify-center w-full p-16 mx-auto text-2xl rounded-md bg-secondary"
             onClick={() => setShouldLoad(true)}
           >
             {`👆 Tap to Load Example`}
-          </Box>
+          </button>
         )}
 
         {shouldLoad && isVisible && (
-          <Box
-            as="iframe"
-            bg="white"
-            h={height}
-            mx={{ xl: '-10%' }}
-            my={{ sm: 8 }}
+          <iframe
+            className="w-full bg-white sm:my-8 xl:w-[120%] xl:mx-[-10%]"
+            height={height}
             src={src}
             title={title}
-            w={{ base: '100%', xl: '120%' }}
           />
         )}
-      </Box>
+      </div>
     )
   }
 
   return (
-    <Box ref={iframeRef}>
+    <div ref={iframeRef}>
       {isVisible && (
-        <Box
-          as="iframe"
-          bg="white"
-          h={height}
-          mx={{ xl: '-10%' }}
-          my={{ sm: 8 }}
+        <iframe
+          className="w-full bg-white sm:my-8 xl:w-[120%] xl:mx-[-10%]"
+          height={height}
           src={src}
           title={title}
-          w={{ base: '100%', xl: '120%' }}
         />
       )}
-    </Box>
+    </div>
   )
 }

@@ -1,26 +1,11 @@
-import { Box, useColorModeValue } from '@chakra-ui/react'
-
-import { ChangeTheme } from './ChangeTheme'
+import { Theme } from './Theme'
 import { UniversalAccess } from './UniversalAccess'
 
 export function Accessibility() {
   return (
-    <Box
-      alignItems="center"
-      bg={useColorModeValue('white', 'gray.700')}
-      borderRadius="full"
-      boxShadow="base"
-      d="flex"
-      gridGap={2}
-      pos="fixed"
-      px={4}
-      py={2}
-      right={4}
-      top={4}
-      zIndex={3}
-    >
+    <div className="fixed z-30 flex items-center gap-2 px-4 py-2 rounded-full shadow-md bg-secondary top-4 right-4 text-muted">
       <UniversalAccess />
-      <ChangeTheme />
-    </Box>
+      <Theme />
+    </div>
   )
 }

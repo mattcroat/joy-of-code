@@ -1,8 +1,8 @@
-import { Box, Divider, Heading, useColorModeValue } from '@chakra-ui/react'
-
 import { CardGrid } from '@/root/components/shared/CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
 import { Layout } from '@/root/components/shared/Layout'
+
+import type { Category as Categories } from '@/root/types/category'
 
 interface CategoryProps {
   category: string
@@ -10,40 +10,29 @@ interface CategoryProps {
     title: string
     description: string
     published: string
-    category: string
+    category: Categories
     slug: string
   }[]
   title: string
 }
 
 export function Category({ category, posts, title }: CategoryProps) {
-  const primaryHeadingColor = useColorModeValue('gray.600', 'gray.400')
-
   return (
     <Layout title={`Joy of Code | ${category}`}>
-      <Heading
-        as="h1"
-        color={primaryHeadingColor}
-        fontSize={['3xl', '4xl', '5xl']}
-        letterSpacing="-1px"
-        lineHeight="normal"
-        maxW="600px"
-      >
-        {title}
-      </Heading>
+      <h1>{title}</h1>
 
-      <Divider bg="gray.600" borderBottom="none" h="4px" my={2} w="40px" />
+      <hr className="w-10 h-1 my-2 bg-gray-600 border-0"></hr>
 
       {posts.length < 1 && (
-        <Box fontSize={[16, 18, 20]} my={8}>
-          Nothing to see here...
-          <Emoji animate emoji="🕵️" label="Spy emoji" spacing={2} />
-        </Box>
+        <div className="flex gap-2 my-8">
+          <p>Nothing to see here...</p>
+          <Emoji emoji="🕵️" label="Spy emoji" />
+        </div>
       )}
 
-      <Box my={10}>
+      <div className="my-12">
         <CardGrid posts={posts} />
-      </Box>
+      </div>
     </Layout>
   )
 }

@@ -1,14 +1,16 @@
-import React from 'react'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
 
-import { MotionBox } from '@/root/components/shared/MotionBox'
+import type { ReactNode } from 'react'
+
 import { playSound } from '@/root/utils/helpers/playSound'
 
 interface DelightProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export function Delight({ children }: DelightProps) {
-  const [isPressed, setIsPressed] = React.useState(false)
+  const [isPressed, setIsPressed] = useState(false)
 
   function delight() {
     setIsPressed(!isPressed)
@@ -16,8 +18,8 @@ export function Delight({ children }: DelightProps) {
   }
 
   return (
-    <MotionBox animate={{ rotate: (isPressed && 360) || 0 }} onClick={delight}>
+    <motion.div animate={{ rotate: (isPressed && 360) || 0 }} onClick={delight}>
       {children}
-    </MotionBox>
+    </motion.div>
   )
 }

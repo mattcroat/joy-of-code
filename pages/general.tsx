@@ -1,13 +1,15 @@
 import { getPostsByCategory, getSortedPosts } from '@/root/utils/helpers/posts'
 import { Category } from '@/root/components/screens/Category'
 
+import type { Category as Categories } from '@/root/types/category'
+
 interface PageProps {
   category: string
   posts: {
     title: string
     description: string
     published: string
-    category: string
+    category: Categories
     slug: string
   }[]
 }

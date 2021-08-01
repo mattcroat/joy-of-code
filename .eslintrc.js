@@ -16,6 +16,31 @@ module.exports = {
   },
   rules: {
     semi: [1, 'never'],
+    'no-console': [
+      2,
+      {
+        allow: ['warn', 'error'],
+      },
+    ],
+    'sort-imports': [
+      'error',
+      {
+        ignoreCase: true,
+        ignoreDeclarationSort: false,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+        allowSeparatedGroups: true,
+      },
+    ],
+    'jsx-a11y/anchor-is-valid': [
+      'error',
+      {
+        components: ['Link'],
+        specialLink: ['hrefLeft', 'hrefRight'],
+        aspects: ['invalidHref', 'preferButton'],
+      },
+    ],
+    'jsx-a11y/no-onchange': 0,
     'react/display-name': 0,
     'react/jsx-sort-props': [
       'error',
@@ -39,22 +64,6 @@ module.exports = {
       2,
       {
         argsIgnorePattern: '^_',
-      },
-    ],
-    'no-console': [
-      2,
-      {
-        allow: ['warn', 'error'],
-      },
-    ],
-    'sort-imports': [
-      'error',
-      {
-        ignoreCase: true,
-        ignoreDeclarationSort: false,
-        ignoreMemberSort: false,
-        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-        allowSeparatedGroups: true,
       },
     ],
   },

@@ -1,59 +1,40 @@
-import { Box, Divider, Heading, useColorModeValue } from '@chakra-ui/react'
-
 import { CardGrid } from '@/root/components/shared/CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
 import { Layout } from '@/root/components/shared/Layout'
+
+import type { Category } from '@/root/types/category'
 
 interface HomeProps {
   posts: {
     title: string
     description: string
     published: string
-    category: string
+    category: Category
     slug: string
   }[]
 }
 
 export function Home({ posts }: HomeProps) {
-  const primaryHeadingColor = useColorModeValue('gray.600', 'gray.400')
-  const secondaryHeadingColor = useColorModeValue('blue.600', 'orange.200')
-
   return (
     <Layout>
-      <Heading
-        as="h1"
-        color={primaryHeadingColor}
-        fontSize={['3xl', '4xl', '5xl']}
-        letterSpacing="-1px"
-        lineHeight="normal"
-        maxW="600px"
-      >
-        Welcome Friend
-        <Emoji animate emoji="👋" label="Waving hand emoji" />
-      </Heading>
+      <h1>
+        <span className="mr-4">Welcome Friend</span>
+        <Emoji emoji="👋" label="Waving hand emoji" />
+      </h1>
 
-      <Divider bg="gray.600" borderBottom="none" h="4px" my={2} w="40px" />
+      <hr className="w-10 h-1 my-2 bg-gray-600 border-0"></hr>
 
       {posts.length < 1 && (
-        <Box fontSize={[16, 18, 20]} my={8}>
-          Nothing to see here...
-          <Emoji animate emoji="🕵️" label="Spy emoji" spacing={2} />
-        </Box>
+        <div className="flex gap-2 my-8">
+          <p>Nothing to see here...</p>
+          <Emoji emoji="🕵️" label="Spy emoji" />
+        </div>
       )}
 
-      <Box py={{ base: 8, md: 12 }}>
-        <Heading
-          as="h2"
-          color={secondaryHeadingColor}
-          fontSize={['2xl', '3xl', '4xl']}
-          letterSpacing="-1px"
-          maxW="600px"
-          mb={8}
-        >
-          Latest
-        </Heading>
+      <div className="mt-12">
+        <h2 className="mb-8 text-highlight">Latest</h2>
         <CardGrid posts={posts} />
-      </Box>
+      </div>
     </Layout>
   )
 }

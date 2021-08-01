@@ -1,0 +1,357 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --highlight: #fbd38d;
+  --muted: #a0aec0;
+  --primary: #1a202c;
+  --secondary: #2d3748;
+  --body: #cbd5e0;
+  --selection: var(--highlight);
+  --selectionText: #652b19;
+  --separator: #374151;
+
+  --code: #ffffff;
+  --pre: #1f2735;
+  --tokenFunction: #93c5fd;
+  --tokenKeyword: var(--highlight);
+  --tokenOperator: #fca5a5;
+  --tokenPunctuation: #bfdbfe;
+  --tokenString: #fca5a5;
+  --comment: #9ca3af;
+
+  --sans: 'Inter, sans-serif';
+  --mono: 'Mononoki, monospace';
+  --openDyslexic: 'OpenDyslexic, sans-serif';
+  --openDyslexicMono: 'OpenDyslexic Mono, monospace';
+}
+
+html[data-theme='🌙 Dusk'] {
+  --highlight: #fbd38d;
+  --muted: #a0aec0;
+  --primary: #1a202c;
+  --secondary: #2d3748;
+  --body: #cbd5e0;
+  --selection: var(--highlight);
+  --selectionText: #652b19;
+  --separator: #374151;
+
+  --code: #ffffff;
+  --pre: #1f2735;
+  --tokenFunction: #93c5fd;
+  --tokenKeyword: var(--highlight);
+  --tokenOperator: #fca5a5;
+  --tokenPunctuation: #bfdbfe;
+  --tokenString: #fca5a5;
+  --comment: #9ca3af;
+}
+
+html[data-theme='☀️ Light'] {
+  --highlight: #2b6cb0;
+  --muted: #4a5568;
+  --primary: #ffffff;
+  --secondary: #fafafa;
+  --body: #4a5568;
+  --selection: var(--highlight);
+  --selectionText: #ffffff;
+  --separator: #e5e7eb;
+
+  --code: #00000;
+  --pre: #ffffff;
+  --tokenFunction: #e2732e;
+  --tokenKeyword: var(--highlight);
+  --tokenOperator: #ec644f;
+  --tokenPunctuation: #8a8a8a;
+  --tokenString: #ec644f;
+  --comment: #9ca3af;
+}
+
+html[data-theme='🐺 Night Howl'] {
+  --highlight: #00b1fb;
+  --muted: #5ba5cd;
+  --primary: #0e1e2b;
+  --secondary: #122738;
+  --body: #78948c;
+  --selection: var(--highlight);
+  --selectionText: #0e1e2b;
+  --separator: #162e42;
+
+  --code: #ffffff;
+  --pre: #0e1e2b;
+  --tokenFunction: #e2732e;
+  --tokenKeyword: #00b1fb;
+  --tokenOperator: #ef7276;
+  --tokenPunctuation: #abc2d6;
+  --tokenString: #96e688;
+  --comment: #9ca3af;
+}
+
+html[data-theme='🧘‍♀️ Night Mind'] {
+  --highlight: #ffbcb0;
+  --muted: #9395fb;
+  --primary: #1e1a24;
+  --secondary: #23202b;
+  --body: #ffffff;
+  --selection: var(--highlight);
+  --selectionText: #0e1e2b;
+  --separator: #2b2533;
+
+  --code: #e6c466;
+  --pre: #23202b;
+  --tokenFunction: #9395fb;
+  --tokenKeyword: #56aeef;
+  --tokenOperator: #ef7276;
+  --tokenPunctuation: #6a57d5;
+  --tokenString: #93e572;
+  --comment: #9ca3af;
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 700 900;
+    font-display: swap;
+    src: url('/fonts/inter/Inter-Variable.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Mononoki';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/mononoki/mononoki-Regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Mononoki';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/mononoki/mononoki-Bold.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'OpenDyslexic';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/openDyslexic/OpenDyslexic-Regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'OpenDyslexic Mono';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/openDyslexic/OpenDyslexic-Bold.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'OpenDyslexic';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/openDyslexic/OpenDyslexicMono-Regular.woff2')
+      format('woff2');
+  }
+
+  ::selection {
+    @apply bg-selection text-selectionText;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-highlight;
+  }
+
+  html {
+    height: 100%;
+    cursor: url('/images/cursor-default.webp'), default;
+    scrollbar-color: theme('colors.highlight') transparent;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scroll-padding-top: theme('space.8');
+  }
+
+  html[data-font='accessible'] body {
+    @apply font-openDyslexic;
+  }
+
+  html[data-font='accessible'] .prose kbd,
+  html[data-font='accessible'] .prose code,
+  html[data-font='accessible'] .prose .remark-code-title {
+    @apply font-openDyslexicMono;
+  }
+
+  body {
+    @apply h-full overflow-x-hidden font-sans bg-primary;
+  }
+
+  h1 {
+    @apply text-3xl font-black text-muted md:text-4xl lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl font-bold text-muted md:text-3xl lg:text-4xl;
+  }
+
+  p {
+    @apply text-lg leading-loose md:text-xl text-body;
+  }
+
+  a,
+  button,
+  select {
+    cursor: url('/images/cursor-pointer.webp'), pointer;
+  }
+
+  .prose {
+    @apply text-body;
+  }
+
+  .prose h1 {
+    @apply max-w-xl pb-4 mx-auto mb-4 text-center border-b border-separator md:pb-8 lg:text-6xl md:mb-8 lg:mb-8 lg:leading-tight;
+  }
+
+  .prose h2 {
+    @apply mt-16 text-highlight;
+  }
+
+  .prose p {
+    @apply my-8 leading-loose;
+  }
+
+  .prose a {
+    @apply relative before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-highlight before:scale-x-0 before:transition-transform hover:before:scale-x-100 text-highlight before:origin-left;
+  }
+
+  .prose ul,
+  .prose ol {
+    @apply my-8 space-y-4 text-lg md:text-xl md:leading-loose;
+  }
+
+  .prose ul {
+    @apply list-disc list-inside;
+  }
+
+  .prose ol {
+    @apply list-decimal list-inside;
+  }
+
+  .prose blockquote {
+    @apply px-8 py-2 my-8 border-l-4 bg-secondary border-highlight;
+  }
+
+  .prose kbd {
+    @apply p-1 font-mono border border-b-[3px] rounded-md bg-primary text-code border-gray-700;
+  }
+
+  .prose code {
+    @apply p-1 font-mono rounded-md text-code bg-secondary;
+  }
+
+  .prose pre {
+    @apply relative z-20 p-6 overflow-auto rounded-md shadow-lg bg-pre md:text-lg;
+  }
+
+  .prose code[class*='language-'],
+  .prose pre[class*='language-'] {
+    @apply p-0 leading-relaxed bg-transparent text-code;
+  }
+
+  .prose .remark-code-title {
+    @apply relative px-4 py-2 font-mono font-bold shadow-lg rounded-tl-md left-4 lg:left-0 rounded-tr-md -z-10 w-max bg-highlight text-primary;
+  }
+
+  .prose .token.comment,
+  .prose .token.prolog,
+  .prose .token.doctype,
+  .prose .token.cdata {
+    @apply text-comment;
+  }
+
+  .prose .token.punctuation {
+    @apply text-tokenPunctuation;
+  }
+
+  .prose .token.property,
+  .prose .token.tag,
+  .prose .token.boolean,
+  .prose .token.number,
+  .prose .token.constant,
+  .prose .token.symbol,
+  .prose .token.deleted {
+    /* color: ${chakraTheme.colors.red[400]}; */
+    @apply text-red-400;
+  }
+
+  .prose .token.selector,
+  .prose .token.attr-name,
+  .prose .token.string,
+  .prose .token.char,
+  .prose .token.builtin,
+  .prose .token.inserted {
+    /* color: ${useColorModeValue(
+      chakraTheme.colors.red[500],
+      chakraTheme.colors.red[200]
+    )}; */
+    /* @apply text-red-300; */
+    @apply text-tokenString;
+  }
+
+  .prose .token.operator,
+  .prose .token.entity,
+  .prose .token.url,
+  .prose .language-css .token.string,
+  .prose .style .token.string {
+    /* color: ${useColorModeValue(
+      chakraTheme.colors.red[500],
+      chakraTheme.colors.red[200]
+    )}; */
+    /* @apply text-red-300; */
+    @apply text-tokenOperator;
+  }
+
+  .prose .token.atrule,
+  .prose .token.attr-value,
+  .prose .token.keyword {
+    /* color: ${useColorModeValue(
+      chakraTheme.colors.orange[500],
+      chakraTheme.colors.orange[200]
+    )}; */
+    /* @apply text-highlight; */
+    @apply text-tokenKeyword;
+  }
+
+  .prose .token.function,
+  .prose .token.class-name {
+    /* color: ${useColorModeValue(
+      chakraTheme.colors.blue[500],
+      chakraTheme.colors.blue[200]
+    )}; */
+    /* @apply text-blue-300; */
+    @apply text-tokenFunction;
+  }
+
+  .prose .token.regex,
+  .prose .token.important,
+  .prose .token.variable {
+    /* color: ${chakraTheme.colors.orange[300]}; */
+    @apply text-highlight;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px hsla(0, 0%, 0%, 100%);
+  }
+}
