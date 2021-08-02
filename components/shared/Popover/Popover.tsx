@@ -37,9 +37,9 @@ export function Popover({ children, isOpen = false }: PopoverProps) {
       {isPopoverOpen && (
         <div
           ref={popoverRef}
-          className="hidden md:block text-left max-w-[280px] md:max-w-[400px] absolute right-[-84px] top-4 w-max"
+          className="absolute hidden text-left md:max-w-[400px] md:block -right-11 top-12 w-max"
         >
-          <div className="relative p-4 m-10 border-t-4 border-highlight rounded-md shadow-lg after:absolute after:-top-4 after:right-[44px] after:border-t-0 after:border-r-[16px] after:border-r-transparent after:border-l-[16px] after:border-l-transparent after:border-b-[16px] after:border-highlight bg-secondary">
+          <div className="relative p-4 border-t-4 border-highlight rounded-md shadow-lg after:absolute after:-top-4 after:right-[44px] after:border-t-0 after:border-r-[16px] after:border-r-transparent after:border-l-[16px] after:border-l-transparent after:border-b-[16px] after:border-highlight bg-secondary">
             {children}
             <p className="mt-4 text-muted">
               {`Tap anywhere on the page to close the pop-up. 👆`}
