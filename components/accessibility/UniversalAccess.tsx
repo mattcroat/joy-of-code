@@ -1,10 +1,29 @@
+import { useEffect, useState } from 'react'
+
 import { Delight } from '@/root/components/shared/Delight'
 import { Icon } from '@/root/components/shared/Icon'
 import { Popover } from '@/root/components/shared/Popover'
-import { usePreferences } from '@/root/context/PreferencesProvider'
 
 export function UniversalAccess() {
-  const { accessibleFont, setAccessibleFont } = usePreferences()
+  const [accessibleFont, setAccessibleFont] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      if (window.localStorage.getItem('accessibleFont')) {
+        return true
+      }
+    }
+    return false
+  })
+
+  useEffect(() => {
+    if (accessibleFont) {
+      window.localStorage.setItem('accessibleFont', JSON.stringify(true))
+      document.documentElement.setAttribute('data-font', 'accessible')
+    } else {
+      window.localStorage.removeItem('accessibleFont')
+      document.documentElement.removeAttribute('data-font')
+    }
+  }, [accessibleFont])
+
   const isToggled = accessibleFont ? 'text-highlight' : 'text-muted'
 
   return (
