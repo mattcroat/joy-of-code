@@ -25,7 +25,7 @@ export function Seo({ ...metadata }: SeoProps) {
       <meta content={meta.type} property="og:type" />
       <meta content={meta.image} property="og:image" />
       <meta
-        content={`https://joyofcode.xyz/${router.asPath}`}
+        content={`https://joyofcode.xyz${router.asPath}`}
         property="og:url"
       />
       <meta content={meta.description} property="og:description" />
