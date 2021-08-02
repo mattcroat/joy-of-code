@@ -111,7 +111,7 @@ html[data-theme='🧘‍♀️ Night Mind'] {
   @font-face {
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 400 700 900;
+    font-weight: 100 900;
     font-display: swap;
     src: url('/fonts/inter/Inter-Variable.woff2') format('woff2');
   }
