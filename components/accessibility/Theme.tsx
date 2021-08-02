@@ -36,7 +36,7 @@ export function Theme() {
           {'👩‍🎨 Theme'}
         </option>
         {themes.map((theme) => (
-          <option key={theme} value={theme}>
+          <option key={theme} className="font-bold bg-muted" value={theme}>
             {theme}
           </option>
         ))}
