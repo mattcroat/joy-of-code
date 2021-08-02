@@ -68,11 +68,11 @@ html[data-theme='☀️ Light'] {
 }
 
 html[data-theme='🐺 Night Howl'] {
-  --highlight: #00b1fb;
-  --muted: #5ba5cd;
+  --highlight: #bde1ff;
+  --muted: #9bc1d5;
   --primary: #0e1e2b;
   --secondary: #122738;
-  --body: #78948c;
+  --body: #9bc1d5;
   --selection: var(--highlight);
   --selectionText: #0e1e2b;
   --separator: #162e42;
@@ -89,7 +89,7 @@ html[data-theme='🐺 Night Howl'] {
 
 html[data-theme='🧘‍♀️ Night Mind'] {
   --highlight: #ffbcb0;
-  --muted: #9395fb;
+  --muted: #c3b5d6;
   --primary: #1e1a24;
   --secondary: #23202b;
   --body: #ffffff;

@@ -27,7 +27,7 @@ export function MenuToggle({ open, toggle }: MenuToggleProps) {
   return (
     <button
       aria-label="Menu"
-      className="fixed p-5 text-white rounded-full shadow-md pointer-events-auto bg-secondary left-3 bottom-3"
+      className="fixed p-5 rounded-full shadow-md pointer-events-auto text-muted bg-secondary left-3 bottom-3"
       onClick={() => toggle(!open)}
     >
       <svg height="23" viewBox="0 0 23 23" width="23">
