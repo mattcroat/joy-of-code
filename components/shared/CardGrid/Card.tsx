@@ -40,6 +40,7 @@ export function Card({ category, title, slug }: CardProps) {
         <Image
           alt={category}
           layout="fill"
+          objectFit="cover"
           priority={true}
           quality={20}
           src={`/images/categories/${category.toLowerCase()}.webp`}
