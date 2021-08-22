@@ -36,6 +36,7 @@ export function UniversalAccess() {
           className={`w-8 h-8 hover:text-highlight transition-colors ${isToggled}`}
           icon="UniversalAccess"
         />
+        <span className="sr-only">Use font for dyslexia</span>
       </Delight>
       <Popover isOpen={true}>
         <p className="mb-2 text-lg font-bold">Accessibility</p>
