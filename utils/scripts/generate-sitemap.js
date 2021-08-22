@@ -1,0 +1,45 @@
+const globby = require('globby')
+const { writeFileSync } = require('fs')
+const prettier = require('prettier')
+
+async function generateSitemap() {
+  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
+  const pages = await globby([
+    'pages/*.tsx',
+    'posts/*.mdx',
+    '!pages/_*.tsx',
+    '!pages/api',
+    '!pages/404.tsx',
+  ])
+
+  const sitemap = `
+    <?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${pages
+      .map((page) => {
+        const path = page
+          .replace('pages', '')
+          .replace('posts', '')
+          .replace('.tsx', '')
+          .replace('.mdx', '')
+        const route = path === '/index' ? '' : path
+
+        return `
+          <url>
+            <loc>${`https://joyofcode.xyz${route}`}</loc>
+          </url>
+        `
+      })
+      .join('')}
+    </urlset>
+  `
+
+  const formattedSitemap = prettier.format(sitemap, {
+    ...prettierConfig,
+    parser: 'html',
+  })
+
+  writeFileSync('public/sitemap.xml', formattedSitemap)
+}
+
+generateSitemap()

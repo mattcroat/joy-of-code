@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://joyofcode.xyz/sitemap.xml
