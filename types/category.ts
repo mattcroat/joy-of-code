@@ -1,4 +1,4 @@
-export type Category =
+export type CategoryType =
   | 'CSS'
   | 'General'
   | 'Git'

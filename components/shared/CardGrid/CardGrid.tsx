@@ -2,16 +2,10 @@ import { motion } from 'framer-motion'
 
 import { Card } from './Card'
 
-import type { Category } from '@/root/types/category'
+import type { PostType } from '@/root/types/post'
 
 interface CardGridProps {
-  posts: {
-    title: string
-    description: string
-    published: string
-    category: Category
-    slug: string
-  }[]
+  posts: PostType[]
 }
 
 const cardGridVariants = {

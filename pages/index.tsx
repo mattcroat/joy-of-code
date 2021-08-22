@@ -1,16 +1,12 @@
 import { getPosts, getSortedPosts } from '@/root/utils/helpers/posts'
 import { Home } from '@/root/components/screens/Home'
 
-import type { Category as Categories } from '@/root/types/category'
+import type { CategoryType } from '@/root/types/category'
+import type { PostType } from '@/root/types/post'
 
 interface PageProps {
-  posts: {
-    title: string
-    description: string
-    published: string
-    category: Categories
-    slug: string
-  }[]
+  category: CategoryType
+  posts: PostType[]
 }
 
 export default function IndexPage({ posts }: PageProps) {

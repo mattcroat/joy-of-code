@@ -4,11 +4,11 @@ import { Icon } from '@/root/components/shared/Icon'
 import { Modal } from '@/root/components/screens/Editor/Modal'
 
 import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
-import type { Category } from '@/root/types/category'
+import type { CategoryType } from '@/root/types/category'
 
 export function PostImage() {
   const [title, setTitle] = useState<string>('Placeholder')
-  const [category, setCategory] = useState<Category>('CSS')
+  const [category, setCategory] = useState<CategoryType>('CSS')
   const [modalOpen, setModalOpen] = useState<boolean>(false)
 
   function handleInput(event: ChangeEvent<HTMLInputElement>) {
@@ -16,7 +16,7 @@ export function PostImage() {
   }
 
   function handleSelect(event: FocusEvent<HTMLSelectElement>) {
-    const category = event.target.value as Category
+    const category = event.target.value as CategoryType
     setCategory(category)
   }
 

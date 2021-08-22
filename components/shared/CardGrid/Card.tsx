@@ -7,10 +7,10 @@ import { playSound } from '@/root/utils/helpers/playSound'
 
 import { usePostViews } from '@/root/hooks/usePostViews'
 
-import type { Category } from '@/root/types/category'
+import type { CategoryType } from '@/root/types/category'
 
 interface CardProps {
-  category: Category
+  category: CategoryType
   title: string
   slug: string
 }

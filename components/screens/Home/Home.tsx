@@ -2,16 +2,10 @@ import { CardGrid } from '@/root/components/shared/CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
 import { Layout } from '@/root/components/shared/Layout'
 
-import type { Category } from '@/root/types/category'
+import type { PostType } from '@/root/types/post'
 
 interface HomeProps {
-  posts: {
-    title: string
-    description: string
-    published: string
-    category: Category
-    slug: string
-  }[]
+  posts: PostType[]
 }
 
 export function Home({ posts }: HomeProps) {

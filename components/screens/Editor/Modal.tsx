@@ -2,10 +2,10 @@ import React from 'react'
 
 import { Icon } from '@/root/components/shared/Icon'
 
-import type { Category } from '@/root/types/category'
+import type { CategoryType } from '@/root/types/category'
 
 interface ModalProps {
-  category: Category
+  category: CategoryType
   title: string
   modalOpen: (arg: boolean) => void
 }

@@ -2,17 +2,12 @@ import { CardGrid } from '@/root/components/shared/CardGrid'
 import { Emoji } from '@/root/components/shared/Emoji'
 import { Layout } from '@/root/components/shared/Layout'
 
-import type { Category as Categories } from '@/root/types/category'
+import type { CategoryType } from '@/root/types/category'
+import type { PostType } from '@/root/types/post'
 
 interface CategoryProps {
-  category: string
-  posts: {
-    title: string
-    description: string
-    published: string
-    category: Categories
-    slug: string
-  }[]
+  category: CategoryType
+  posts: PostType[]
   title: string
 }
 

@@ -1,17 +1,12 @@
 import { getPostsByCategory, getSortedPosts } from '@/root/utils/helpers/posts'
 import { Category } from '@/root/components/screens/Category'
 
-import type { Category as Categories } from '@/root/types/category'
+import type { CategoryType } from '@/root/types/category'
+import type { PostType } from '@/root/types/post'
 
 interface PageProps {
-  category: string
-  posts: {
-    title: string
-    description: string
-    published: string
-    category: Categories
-    slug: string
-  }[]
+  category: CategoryType
+  posts: PostType[]
 }
 
 export default function TypeScriptPage({ category, posts }: PageProps) {
