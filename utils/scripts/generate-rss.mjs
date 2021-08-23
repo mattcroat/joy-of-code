@@ -1,15 +1,20 @@
-const { promises: fs } = require('fs')
-const path = require('path')
-
-const matter = require('gray-matter')
-const RSS = require('rss')
+import {
+  accessSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'fs'
+import { join } from 'path'
+import matter from 'gray-matter'
+import RSS from 'rss'
 
 const FEED_PATH = './public/feed'
 const RSS_PATH = `${FEED_PATH}/rss.xml`
 
 async function exists(path) {
   try {
-    await fs.access(path)
+    accessSync(path)
   } catch (error) {
     return false
   }
@@ -24,13 +29,11 @@ async function generateRSSFeed() {
     feed_url: 'https://joyofcode.xyz/rss/feed.xml',
   })
 
-  const postsPath = path.join(__dirname, '..', '..', 'posts')
-  const posts = await fs.readdir(postsPath)
+  const posts = readdirSync(join(process.cwd(), 'posts'))
 
   await Promise.all(
     posts.map(async (name) => {
-      const postPath = path.join(__dirname, '..', '..', 'posts', name)
-      const content = await fs.readFile(postPath)
+      const content = readFileSync(join(process.cwd(), 'posts', name))
       const { data: frontMatter } = matter(content)
 
       feed.item({
@@ -41,13 +44,13 @@ async function generateRSSFeed() {
     })
   )
 
-  const doesExist = await exists(FEED_PATH)
+  const folder = await exists(FEED_PATH)
 
-  if (!doesExist) {
-    await fs.mkdir(FEED_PATH)
-    await fs.writeFile(RSS_PATH, feed.xml({ indent: true }))
+  if (!folder) {
+    mkdirSync(FEED_PATH)
+    writeFileSync(RSS_PATH, feed.xml({ indent: '  ' }))
   } else {
-    await fs.writeFile(RSS_PATH, feed.xml({ indent: true }))
+    writeFileSync(RSS_PATH, feed.xml({ indent: '  ' }))
   }
 }
 

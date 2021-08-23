@@ -1,15 +1,17 @@
-const globby = require('globby')
-const { writeFileSync } = require('fs')
-const prettier = require('prettier')
+import globby from 'globby'
+import prettier from 'prettier'
+import { writeFileSync } from 'fs'
 
 async function generateSitemap() {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
   const pages = await globby([
+    '!pages/_*.tsx',
+    '!pages/[slug].tsx',
+    '!pages/404.tsx',
+    '!pages/api',
+    '!pages/editor.tsx',
     'pages/*.tsx',
     'posts/*.mdx',
-    '!pages/_*.tsx',
-    '!pages/api',
-    '!pages/404.tsx',
   ])
 
   const sitemap = `
@@ -24,8 +26,7 @@ async function generateSitemap() {
           .replace('.mdx', '')
         const route = path === '/index' ? '' : path
 
-        return `
-          <url>
+        return `<url>
             <loc>${`https://joyofcode.xyz${route}`}</loc>
           </url>
         `

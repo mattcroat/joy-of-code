@@ -6,7 +6,7 @@
     "dev": "next dev",
     "watch": "next-remote-watch ./posts",
     "build": "next build",
-    "postbuild": "node ./utils/scripts/generate-rss.js && node ./utils/scripts/generate-sitemap.js",
+    "postbuild": "node ./utils/scripts/generate-rss.mjs && node ./utils/scripts/generate-sitemap.mjs",
     "start": "next start",
     "lint": "next lint"
   },
