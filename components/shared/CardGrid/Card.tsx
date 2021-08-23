@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 
 import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Icon } from '@/root/components/shared/Icon'
@@ -15,13 +14,6 @@ interface CardProps {
   slug: string
 }
 
-const cardVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-  },
-}
-
 export function Card({ category, title, slug }: CardProps) {
   const { views } = usePostViews(slug)
 
@@ -31,11 +23,12 @@ export function Card({ category, title, slug }: CardProps) {
       isInternal
       prefetch={false}
     >
-      <motion.div
-        className="rounded-lg h-[200px] overflow-hidden relative md:h-[240px] z-0 hover:shadow-md"
+      <div
+        className="rounded-lg h-[200px] overflow-hidden relative md:h-[240px] z-0 origin-bottom-left transition-all hover:shadow-md hover:-translate-y-2 hover:-rotate-2"
         onClick={() => playSound('page')}
-        variants={cardVariants}
-        whileHover={{ y: -10 }}
+        onKeyPress={() => playSound('page')}
+        role="link"
+        tabIndex={-1}
       >
         <Image
           alt={category}
@@ -55,7 +48,7 @@ export function Card({ category, title, slug }: CardProps) {
         <span className="absolute z-10 max-w-xs text-4xl font-bold tracking-tight text-white shadow-lg bottom-4 sm:text-3xl text-shadow left-4">
           {title}
         </span>
-      </motion.div>
+      </div>
     </CustomLink>
   )
 }

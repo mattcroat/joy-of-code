@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-import type { ReactNode } from 'react'
-
 import { playSound } from '@/root/utils/helpers/playSound'
+import { Spin } from '@/root/components/animation'
+
+import type { ReactNode } from 'react'
 
 interface DelightProps {
   children: ReactNode
@@ -18,8 +18,10 @@ export function Delight({ children }: DelightProps) {
   }
 
   return (
-    <motion.div animate={{ rotate: (isPressed && 360) || 0 }} onClick={delight}>
-      {children}
-    </motion.div>
+    <Spin spin={isPressed}>
+      <div onClick={delight} onKeyPress={delight} role="button" tabIndex={0}>
+        {children}
+      </div>
+    </Spin>
   )
 }

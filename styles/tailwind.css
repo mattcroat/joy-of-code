@@ -355,3 +355,55 @@ html[data-theme='🧠 Night Mind'] {
     text-shadow: 2px 2px hsla(0, 0%, 0%, 100%);
   }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes wave {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+  50% {
+    transform: translateY(0);
+    rotate: 20deg;
+  }
+  60% {
+    rotate: -20deg;
+  }
+  70% {
+    rotate: 20deg;
+  }
+  80% {
+    rotate: -20deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+
+.menu {
+  clip-path: circle(0px at 44px 93.8%);
+}
+
+.menu.open {
+  clip-path: circle(1000px at 44px 93.8%);
+}

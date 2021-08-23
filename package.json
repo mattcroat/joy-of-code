@@ -14,7 +14,6 @@
     "@mapbox/rehype-prism": "^0.7.0",
     "@supabase/supabase-js": "^1.22.2",
     "focus-visible": "^5.2.0",
-    "framer-motion": "^4.1.17",
     "gray-matter": "^4.0.3",
     "next": "^11.1.0",
     "next-mdx-remote": "^3.0.4",
