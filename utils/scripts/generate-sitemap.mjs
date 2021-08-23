@@ -5,13 +5,13 @@ import { writeFileSync } from 'fs'
 async function generateSitemap() {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
   const pages = await globby([
+    'pages/*.tsx',
+    'posts/*.mdx',
     '!pages/_*.tsx',
     '!pages/[slug].tsx',
     '!pages/404.tsx',
     '!pages/api',
     '!pages/editor.tsx',
-    'pages/*.tsx',
-    'posts/*.mdx',
   ])
 
   const sitemap = `
