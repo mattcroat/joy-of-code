@@ -14,7 +14,7 @@ export default function ReactPage({ category, posts }: PageProps) {
 }
 
 export async function getStaticProps() {
-  const filteredPosts = getPostsByCategory('React')
+  const filteredPosts = getPostsByCategory('react')
 
   return {
     props: {

@@ -11,7 +11,7 @@ export function NavigationSidebar() {
             <CustomLink href="/" isInternal>
               <span className="sr-only">Home</span>
               <Delight>
-                <Icon className="w-8 h-8" icon="PaintBrush" />
+                <Icon className="w-8 h-8" icon="paintBrush" />
               </Delight>
             </CustomLink>
           </li>
@@ -20,7 +20,7 @@ export function NavigationSidebar() {
             <CustomLink href="/javascript" isInternal>
               <span className="sr-only">JavaScript</span>
               <Delight>
-                <Icon className="w-8 h-8" icon="JavaScript" />
+                <Icon className="w-8 h-8" icon="javascript" />
               </Delight>
             </CustomLink>
           </li>
@@ -29,7 +29,7 @@ export function NavigationSidebar() {
             <CustomLink href="/react" isInternal>
               <span className="sr-only">React</span>
               <Delight>
-                <Icon className="w-8 h-8" icon="React" />
+                <Icon className="w-8 h-8" icon="react" />
               </Delight>
             </CustomLink>
           </li>
@@ -38,7 +38,7 @@ export function NavigationSidebar() {
             <CustomLink href="/css" isInternal>
               <span className="sr-only">CSS</span>
               <Delight>
-                <Icon className="w-8 h-8" icon="CSS" />
+                <Icon className="w-8 h-8" icon="css" />
               </Delight>
             </CustomLink>
           </li>
@@ -47,7 +47,7 @@ export function NavigationSidebar() {
             <CustomLink href="/general" isInternal>
               <span className="sr-only">General</span>
               <Delight>
-                <Icon className="w-8 h-8" icon="Bulb" />
+                <Icon className="w-8 h-8" icon="bulb" />
               </Delight>
             </CustomLink>
           </li>
@@ -56,7 +56,7 @@ export function NavigationSidebar() {
             <span className="sr-only">More</span>
             <Icon
               className="w-8 h-8 transition-colors hover:text-highlight"
-              icon="More"
+              icon="more"
             />
             <div className="absolute hidden px-8 py-8 text-lg transition-all -translate-y-1/2 rounded-md shadow-lg group-hover:block bg-secondary left-20 w-max before:absolute before:-translate-x-20 before:top-0 before:h-full before:w-full before:-z-10">
               <div className="absolute top-0 left-0 flex items-center h-full -translate-y-5 text-secondary -translate-x-3/4">
@@ -80,7 +80,7 @@ export function NavigationSidebar() {
                     <li className="transition-colors hover:text-highlight">
                       <div className="flex gap-4">
                         <Delight>
-                          <Icon className="w-8 h-8" icon="Figma" />
+                          <Icon className="w-8 h-8" icon="figma" />
                         </Delight>
                         <span>Figma</span>
                       </div>
@@ -91,7 +91,7 @@ export function NavigationSidebar() {
                     <CustomLink href="/git" isInternal>
                       <div className="flex gap-4">
                         <Delight>
-                          <Icon className="w-8 h-8" icon="Git" />
+                          <Icon className="w-8 h-8" icon="git" />
                         </Delight>
                         <span>Git / GitHub</span>
                       </div>
@@ -102,7 +102,7 @@ export function NavigationSidebar() {
                     <CustomLink href="/next" isInternal>
                       <div className="flex gap-4">
                         <Delight>
-                          <Icon className="w-8 h-8" icon="Next" />
+                          <Icon className="w-8 h-8" icon="next" />
                         </Delight>
                         <span>Next.js</span>
                       </div>
@@ -113,7 +113,7 @@ export function NavigationSidebar() {
                     <CustomLink href="/typescript" isInternal>
                       <div className="flex gap-4">
                         <Delight>
-                          <Icon className="w-8 h-8" icon="TypeScript" />
+                          <Icon className="w-8 h-8" icon="typescript" />
                         </Delight>
                         <span>TypeScript</span>
                       </div>
@@ -132,7 +132,7 @@ export function NavigationSidebar() {
                     <CustomLink href="/newsletter" isInternal>
                       <div className="flex gap-4">
                         <Delight>
-                          <Icon className="w-8 h-8" icon="Newsletter" />
+                          <Icon className="w-8 h-8" icon="newsletter" />
                         </Delight>
                         <span>Newsletter</span>
                       </div>
@@ -143,7 +143,7 @@ export function NavigationSidebar() {
                     <CustomLink href="/feed/rss.xml" isInternal openSeparateTab>
                       <div className="flex gap-4">
                         <Delight>
-                          <Icon className="w-8 h-8" icon="Feed" />
+                          <Icon className="w-8 h-8" icon="feed" />
                         </Delight>
                         <span>RSS Feed</span>
                       </div>

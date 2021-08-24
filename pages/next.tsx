@@ -14,7 +14,7 @@ export default function NextPage({ category, posts }: PageProps) {
 }
 
 export async function getStaticProps() {
-  const filteredPosts = getPostsByCategory('Next')
+  const filteredPosts = getPostsByCategory('next')
 
   return {
     props: {

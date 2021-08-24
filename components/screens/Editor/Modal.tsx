@@ -20,7 +20,7 @@ export function Modal({ category, title, modalOpen }: ModalProps) {
         className="relative bg-no-repeat bg-cover"
         style={{
           width: '1200px',
-          backgroundImage: `url(/images/categories/${category.toLowerCase()}.webp)`,
+          backgroundImage: `url(/images/categories/${category}.webp)`,
           height: '630px',
         }}
       >

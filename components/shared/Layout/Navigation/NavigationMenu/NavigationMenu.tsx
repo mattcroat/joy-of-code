@@ -43,7 +43,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/css" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="CSS" />
+                      <Icon className="w-8 h-8" icon="css" />
                       <span>CSS</span>
                     </div>
                   </CustomLink>
@@ -52,7 +52,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/general" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="General" />
+                      <Icon className="w-8 h-8" icon="general" />
                       <span>General</span>
                     </div>
                   </CustomLink>
@@ -61,7 +61,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/design" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="Figma" />
+                      <Icon className="w-8 h-8" icon="figma" />
                       <span>Figma</span>
                     </div>
                   </CustomLink>
@@ -70,7 +70,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/git" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="Git" />
+                      <Icon className="w-8 h-8" icon="git" />
                       <span>Git / GitHub</span>
                     </div>
                   </CustomLink>
@@ -79,7 +79,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/javascript" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="JavaScript" />
+                      <Icon className="w-8 h-8" icon="javascript" />
                       <span>JavaScript</span>
                     </div>
                   </CustomLink>
@@ -88,7 +88,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/next" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="Next" />
+                      <Icon className="w-8 h-8" icon="next" />
                       <span>Next.js</span>
                     </div>
                   </CustomLink>
@@ -97,7 +97,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/react" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="React" />
+                      <Icon className="w-8 h-8" icon="react" />
                       <span>React</span>
                     </div>
                   </CustomLink>
@@ -106,7 +106,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/typescript" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="TypeScript" />
+                      <Icon className="w-8 h-8" icon="typescript" />
                       <span>TypeScript</span>
                     </div>
                   </CustomLink>
@@ -123,7 +123,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/newsletter" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="Newsletter" />
+                      <Icon className="w-8 h-8" icon="newsletter" />
                       <span>Newsletter</span>
                     </div>
                   </CustomLink>
@@ -132,7 +132,7 @@ export function NavigationMenu() {
                 <li className="hover:text-highlight">
                   <CustomLink href="/feed/rss.xml" isInternal>
                     <div className="flex gap-4">
-                      <Icon className="w-8 h-8" icon="Feed" />
+                      <Icon className="w-8 h-8" icon="feed" />
                       <span>RSS Feed</span>
                     </div>
                   </CustomLink>

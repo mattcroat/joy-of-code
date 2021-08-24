@@ -1,7 +1,7 @@
 export type CategoryType =
-  | 'CSS'
-  | 'General'
-  | 'Git'
-  | 'JavaScript'
-  | 'React'
-  | 'TypeScript'
+  | 'css'
+  | 'general'
+  | 'git'
+  | 'javascript'
+  | 'react'
+  | 'typescript'

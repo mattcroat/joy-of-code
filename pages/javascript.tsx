@@ -14,7 +14,7 @@ export default function JavaScriptPage({ category, posts }: PageProps) {
 }
 
 export async function getStaticProps() {
-  const filteredPosts = getPostsByCategory('JavaScript')
+  const filteredPosts = getPostsByCategory('javascript')
 
   return {
     props: {

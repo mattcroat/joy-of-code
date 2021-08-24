@@ -2,7 +2,7 @@
 title: Let Your CSS Flow Like Prose With Tailwind CSS
 description: Introduction to Tailwind CSS
 published: '2021-3-20'
-category: 'CSS'
+category: 'css'
 image: '/images/introduction-to-tailwind-css/og-image.webp'
 ---
 
@@ -394,7 +394,7 @@ You can copy the original HTML code if you wish to follow along. The nice thing 
 Let's start with the container.
 
 ```html:index.html
-<div class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0">
+<div class="grid h-screen p-4 font-serif text-gray-800 bg-gray-200 place-content-center dark:bg-gray-800 dark:text-gray-50 sm:p-0">
   <!-- ... -->
 </div>
 ```
@@ -408,8 +408,8 @@ You're able to change things as you think, not having to switch to a separate fi
 Let's do the same for the card.
 
 ```html:index.html
-<div class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0">
-  <article class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700">
+<div class="grid h-screen p-4 font-serif text-gray-800 bg-gray-200 place-content-center dark:bg-gray-800 dark:text-gray-50 sm:p-0">
+  <article class="max-w-sm overflow-hidden bg-white rounded shadow-lg dark:bg-gray-700">
     <!-- ... -->
   </article>
 </div>
@@ -420,8 +420,8 @@ Notice how simple adding dark mode is with the `dark` variant, and the use of me
 We can even remove most of the styles from the image, because of Tailwind defaults.
 
 ```html:index.html
-<div class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0">
-  <article class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700">
+<div class="grid h-screen p-4 font-serif text-gray-800 bg-gray-200 place-content-center dark:bg-gray-800 dark:text-gray-50 sm:p-0">
+  <article class="max-w-sm overflow-hidden bg-white rounded shadow-lg dark:bg-gray-700">
     <div>
       <img class="object-cover" src="https://i.ibb.co/09nx6Jt/converse.webp" alt="Converse sneakers"/>
     </div>
@@ -433,8 +433,8 @@ We can even remove most of the styles from the image, because of Tailwind defaul
 Let's style the details such as title, description, price.
 
 ```html:index.html
-<div class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0">
-  <article class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700">
+<div class="grid h-screen p-4 font-serif text-gray-800 bg-gray-200 place-content-center dark:bg-gray-800 dark:text-gray-50 sm:p-0">
+  <article class="max-w-sm overflow-hidden bg-white rounded shadow-lg dark:bg-gray-700">
     <div>
       <img class="object-cover" src="https://i.ibb.co/09nx6Jt/converse.webp" alt="Converse sneakers"/>
     </div>
@@ -452,8 +452,8 @@ Let's style the details such as title, description, price.
 Next up is the color section.
 
 ```html:index.html
-<div class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0">
-  <article class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700">
+<div class="grid h-screen p-4 font-serif text-gray-800 bg-gray-200 place-content-center dark:bg-gray-800 dark:text-gray-50 sm:p-0">
+  <article class="max-w-sm overflow-hidden bg-white rounded shadow-lg dark:bg-gray-700">
     <div>
       <img class="object-cover" src="https://i.ibb.co/09nx6Jt/converse.webp" alt="Converse sneakers"/>
     </div>
@@ -464,33 +464,33 @@ Next up is the color section.
       <span class="font-semibold">$60</span>
     </div>
 
-    <div class="flex gap-4 mt-4 px-4">
+    <div class="flex gap-4 px-4 mt-4">
       <span class="sr-only">Colors available</span>
 
       <button aria-label="Yellow" class="p-0.5 bg-white border border-gray-200 dark:border-gray-500 rounded-full cursor-pointer">
-        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
-          <div class="h-1/2 bg-yellow-500"></div>
+        <div class="w-6 h-6 overflow-hidden transform -rotate-45 rounded-full">
+          <div class="bg-yellow-500 h-1/2"></div>
           <div class="h-1/2 white"></div>
         </div>
       </button>
 
       <button aria-label="Red" class="p-0.5 bg-white border border-gray-200 dark:border-gray-500 rounded-full cursor-pointer">
-        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
-          <div class="h-1/2 bg-red-500"></div>
+        <div class="w-6 h-6 overflow-hidden transform -rotate-45 rounded-full">
+          <div class="bg-red-500 h-1/2"></div>
           <div class="h-1/2 white"></div>
         </div>
       </button>
 
       <button aria-label="Blue" class="p-0.5 bg-white border border-gray-200 dark:border-gray-500 rounded-full cursor-pointer">
-        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
-          <div class="h-1/2 bg-blue-500"></div>
+        <div class="w-6 h-6 overflow-hidden transform -rotate-45 rounded-full">
+          <div class="bg-blue-500 h-1/2"></div>
           <div class="h-1/2 white"></div>
         </div>
       </button>
 
       <button aria-label="Black" class="p-0.5 bg-white border border-gray-200 dark:border-gray-500 rounded-full cursor-pointer">
-        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
-          <div class="h-1/2 bg-gray-800"></div>
+        <div class="w-6 h-6 overflow-hidden transform -rotate-45 rounded-full">
+          <div class="bg-gray-800 h-1/2"></div>
           <div class="h-1/2 white"></div>
         </div>
       </button>
@@ -507,8 +507,8 @@ There's other ways of extracting out classes (see the documentation), but it's n
 The last thing left is the "Add to Cart" section.
 
 ```html:index.html
-<div class="h-screen grid place-content-center font-serif p-4 bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-50 sm:p-0">
-  <article class="max-w-sm bg-white rounded shadow-lg overflow-hidden dark:bg-gray-700">
+<div class="grid h-screen p-4 font-serif text-gray-800 bg-gray-200 place-content-center dark:bg-gray-800 dark:text-gray-50 sm:p-0">
+  <article class="max-w-sm overflow-hidden bg-white rounded shadow-lg dark:bg-gray-700">
     <div>
       <img class="object-cover" src="https://i.ibb.co/09nx6Jt/converse.webp" alt="Converse sneakers"/>
     </div>
@@ -519,43 +519,43 @@ The last thing left is the "Add to Cart" section.
       <span class="font-semibold">$60</span>
     </div>
 
-    <div class="flex gap-4 mt-4 px-4">
+    <div class="flex gap-4 px-4 mt-4">
       <span class="sr-only">Colors available</span>
 
       <button aria-label="Yellow" class="p-0.5 bg-white border border-gray-200 dark:border-gray-500 rounded-full cursor-pointer">
-        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
-          <div class="h-1/2 bg-yellow-500"></div>
+        <div class="w-6 h-6 overflow-hidden transform -rotate-45 rounded-full">
+          <div class="bg-yellow-500 h-1/2"></div>
           <div class="h-1/2 white"></div>
         </div>
       </button>
 
       <button aria-label="Red" class="p-0.5 bg-white border border-gray-200 dark:border-gray-500 rounded-full cursor-pointer">
-        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
-          <div class="h-1/2 bg-red-500"></div>
+        <div class="w-6 h-6 overflow-hidden transform -rotate-45 rounded-full">
+          <div class="bg-red-500 h-1/2"></div>
           <div class="h-1/2 white"></div>
         </div>
       </button>
 
       <button aria-label="Blue" class="p-0.5 bg-white border border-gray-200 dark:border-gray-500 rounded-full cursor-pointer">
-        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
-          <div class="h-1/2 bg-blue-500"></div>
+        <div class="w-6 h-6 overflow-hidden transform -rotate-45 rounded-full">
+          <div class="bg-blue-500 h-1/2"></div>
           <div class="h-1/2 white"></div>
         </div>
       </button>
 
       <button aria-label="Black" class="p-0.5 bg-white border border-gray-200 dark:border-gray-500 rounded-full cursor-pointer">
-        <div class="h-6 w-6 transform -rotate-45 rounded-full overflow-hidden">
-          <div class="h-1/2 bg-gray-800"></div>
+        <div class="w-6 h-6 overflow-hidden transform -rotate-45 rounded-full">
+          <div class="bg-gray-800 h-1/2"></div>
           <div class="h-1/2 white"></div>
         </div>
       </button>
     </div>
 
-    <div class="mt-4 p-4 border-t border-gray-200 dark:border-gray-600">
-      <button class="w-full flex justify-between items-center font-bold cursor-pointer hover:underline">
+    <div class="p-4 mt-4 border-t border-gray-200 dark:border-gray-600">
+      <button class="flex items-center justify-between w-full font-bold cursor-pointer hover:underline">
         <p class="text-base">Add to Cart</p>
         <svg
-          class="h-6 w-6"
+          class="w-6 h-6"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

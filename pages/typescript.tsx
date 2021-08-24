@@ -14,7 +14,7 @@ export default function TypeScriptPage({ category, posts }: PageProps) {
 }
 
 export async function getStaticProps() {
-  const filteredPosts = getPostsByCategory('TypeScript')
+  const filteredPosts = getPostsByCategory('typescript')
 
   return {
     props: {

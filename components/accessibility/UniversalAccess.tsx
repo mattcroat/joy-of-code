@@ -34,7 +34,7 @@ export function UniversalAccess() {
       <Delight>
         <Icon
           className={`w-8 h-8 hover:text-highlight transition-colors ${isToggled}`}
-          icon="UniversalAccess"
+          icon="universalAccess"
         />
         <span className="sr-only">Use font for dyslexia</span>
       </Delight>

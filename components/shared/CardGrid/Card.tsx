@@ -36,10 +36,10 @@ export function Card({ category, title, slug }: CardProps) {
           objectFit="cover"
           priority={true}
           quality={20}
-          src={`/images/categories/${category.toLowerCase()}.webp`}
+          src={`/images/categories/${category}.webp`}
         />
         <div className="absolute flex items-center gap-1 px-2 py-1 rounded-md bg-primary left-4 top-4 text-body">
-          <Icon aria-hidden={true} className="w-4 h-4" icon="Views" />
+          <Icon aria-hidden={true} className="w-4 h-4" icon="views" />
           <span>{views}</span>
         </div>
         <div className="absolute z-10 text-white right-4 top-4">
