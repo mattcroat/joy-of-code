@@ -46,7 +46,7 @@ export function Card({ category, title, slug }: CardProps) {
           <div className="absolute z-10 text-white right-4 top-4">
             <Icon className="w-8 h-8" icon={category} />
           </div>
-          <span className="absolute z-10 max-w-xs text-4xl font-bold tracking-tight text-white shadow-lg bottom-4 sm:text-3xl text-shadow left-4">
+          <span className="absolute z-10 max-w-xs text-3xl font-bold tracking-tight text-white shadow-lg bottom-4 lg:text-4xl text-shadow left-4">
             {title}
           </span>
         </div>

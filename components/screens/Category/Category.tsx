@@ -14,8 +14,7 @@ interface CategoryProps {
 export function Category({ category, posts, title }: CategoryProps) {
   return (
     <Layout title={`Joy of Code | ${category}`}>
-      <h1>{title}</h1>
-
+      <h1 className="mt-2 lg-mt-0">{title}</h1>
       <hr className="w-10 h-1 my-2 bg-gray-600 border-0"></hr>
 
       {posts.length < 1 && (

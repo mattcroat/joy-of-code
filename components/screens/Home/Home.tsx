@@ -12,10 +12,9 @@ export function Home({ posts }: HomeProps) {
   return (
     <Layout>
       <h1>
-        <span className="mr-4">Welcome Friend</span>
+        <span className="inline-block mt-2 mr-2 lg:mt-0">Welcome Friend</span>
         <Emoji emoji="👋" label="Waving hand emoji" />
       </h1>
-
       <hr className="w-10 h-1 my-2 bg-gray-600 border-0"></hr>
 
       {posts.length < 1 && (
@@ -25,8 +24,8 @@ export function Home({ posts }: HomeProps) {
         </div>
       )}
 
-      <div className="mt-12">
-        <h2 className="mb-8 text-highlight">Latest</h2>
+      <div className="mt-6 md:mt-12">
+        <h2 className="mb-4 text-highlight">Latest</h2>
         <CardGrid posts={posts} />
       </div>
     </Layout>
