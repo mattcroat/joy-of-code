@@ -24,30 +24,32 @@ export function Card({ category, title, slug }: CardProps) {
       prefetch={false}
     >
       <div
-        className="rounded-lg h-[200px] overflow-hidden relative md:h-[240px] z-0 origin-bottom-left transition-all hover:shadow-md hover:-translate-y-2 hover:-rotate-2"
+        className="rounded-lg h-[200px] overflow-hidden relative md:h-[240px] z-0 origin-bottom-left transition-all hover:shadow-md hover:-translate-y-2 hover:-rotate-2 aspect-w-16 aspect-h-9"
         onClick={() => playSound('page')}
         onKeyPress={() => playSound('page')}
         role="link"
         tabIndex={-1}
       >
-        <Image
-          alt={category}
-          layout="fill"
-          objectFit="cover"
-          priority={true}
-          quality={20}
-          src={`/images/categories/${category}.webp`}
-        />
-        <div className="absolute flex items-center gap-1 px-2 py-1 rounded-md bg-primary left-4 top-4 text-body">
-          <Icon aria-hidden={true} className="w-4 h-4" icon="views" />
-          <span>{views}</span>
+        <div>
+          <Image
+            alt={category}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            quality={20}
+            src={`/images/categories/${category}.webp`}
+          />
+          <div className="absolute flex items-center gap-1 px-2 py-1 rounded-md bg-primary left-4 top-4 text-body">
+            <Icon aria-hidden={true} className="w-4 h-4" icon="views" />
+            <span>{views}</span>
+          </div>
+          <div className="absolute z-10 text-white right-4 top-4">
+            <Icon className="w-8 h-8" icon={category} />
+          </div>
+          <span className="absolute z-10 max-w-xs text-4xl font-bold tracking-tight text-white shadow-lg bottom-4 sm:text-3xl text-shadow left-4">
+            {title}
+          </span>
         </div>
-        <div className="absolute z-10 text-white right-4 top-4">
-          <Icon className="w-8 h-8" icon={category} />
-        </div>
-        <span className="absolute z-10 max-w-xs text-4xl font-bold tracking-tight text-white shadow-lg bottom-4 sm:text-3xl text-shadow left-4">
-          {title}
-        </span>
       </div>
     </CustomLink>
   )

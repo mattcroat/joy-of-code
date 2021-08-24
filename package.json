@@ -13,6 +13,7 @@
   "dependencies": {
     "@mapbox/rehype-prism": "^0.7.0",
     "@supabase/supabase-js": "^1.22.2",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
     "focus-visible": "^5.2.0",
     "gray-matter": "^4.0.3",
     "next": "^11.1.0",

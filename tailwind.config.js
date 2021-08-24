@@ -30,15 +30,12 @@ module.exports = {
         openDyslexicMono: ['OpenDyslexic Mono', 'monospace'],
       },
       gridTemplateColumns: {
-        cards: 'repeat(auto-fill, minmax(auto, 420px))',
+        cards: 'repeat(auto-fill, minmax(340px, 1fr))',
       },
       zIndex: {
         '-10': '-10',
       },
     },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+  plugins: [require('@tailwindcss/aspect-ratio')],
 }
