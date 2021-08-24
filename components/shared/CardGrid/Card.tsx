@@ -12,10 +12,12 @@ interface CardProps {
   category: CategoryType
   title: string
   slug: string
+  featured: boolean
 }
 
-export function Card({ category, title, slug }: CardProps) {
+export function Card({ category, title, slug, featured }: CardProps) {
   const { views } = usePostViews(slug)
+  const shine = featured ? 'shine' : ''
 
   return (
     <CustomLink
@@ -24,7 +26,7 @@ export function Card({ category, title, slug }: CardProps) {
       prefetch={false}
     >
       <div
-        className="rounded-lg h-[200px] overflow-hidden relative md:h-[240px] z-0 origin-bottom-left transition-all hover:shadow-md hover:-translate-y-2 hover:-rotate-2 aspect-w-16 aspect-h-9"
+        className={`rounded-lg h-[200px] overflow-hidden relative md:h-[240px] z-0 origin-bottom-left transition-all hover:shadow-md hover:-translate-y-2 hover:-rotate-2 aspect-w-16 aspect-h-9 ${shine}`}
         onClick={() => playSound('page')}
         onKeyPress={() => playSound('page')}
         role="link"

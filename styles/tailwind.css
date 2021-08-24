@@ -201,7 +201,7 @@ html[data-theme='🧠 Night Mind'] {
   }
 
   h2 {
-    @apply text-2xl font-bold text-muted lg:text-4xl;
+    @apply text-3xl font-bold text-muted lg:text-4xl;
   }
 
   p {
@@ -328,6 +328,35 @@ html[data-theme='🧠 Night Mind'] {
   }
 }
 
+.menu {
+  clip-path: circle(0px at 44px 93.8%);
+}
+
+.menu.open {
+  clip-path: circle(1000px at 44px 93.8%);
+}
+
+.shine {
+  overflow: hidden;
+  position: relative;
+}
+
+.shine::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    45deg,
+    hsla(0 0% 100% / 0%) 0%,
+    hsla(0 0% 100% / 40%) 50%,
+    hsla(0 0% 100% / 0%) 100%
+  );
+  background-size: 400% 100%;
+  animation: shine 4s cubic-bezier(0.44, 0.21, 0, 1) infinite;
+  z-index: 20;
+}
+
 @layer utilities {
   .text-shadow {
     text-shadow: 2px 2px hsla(0, 0%, 0%, 100%);
@@ -378,10 +407,8 @@ html[data-theme='🧠 Night Mind'] {
   }
 }
 
-.menu {
-  clip-path: circle(0px at 44px 93.8%);
-}
-
-.menu.open {
-  clip-path: circle(1000px at 44px 93.8%);
+@keyframes shine {
+  0% {
+    background-position: right;
+  }
 }

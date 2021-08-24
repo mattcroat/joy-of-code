@@ -25,7 +25,16 @@ export function Home({ posts }: HomeProps) {
       )}
 
       <div className="mt-6 md:mt-12">
-        <h2 className="mb-4 text-highlight">Latest</h2>
+        <span className="block mb-4 font-bold uppercase md:text-xl text-highlight">
+          {'🌟'} Featured
+        </span>
+        <CardGrid featured={true} posts={posts} />
+      </div>
+
+      <div className="mt-6 md:mt-12">
+        <span className="block mb-4 font-bold uppercase md:text-xl text-highlight">
+          {'🔺'} Latest
+        </span>
         <CardGrid posts={posts} />
       </div>
     </Layout>
