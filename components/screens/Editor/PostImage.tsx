@@ -6,9 +6,18 @@ import { Modal } from '@/root/components/screens/Editor/Modal'
 import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
 import type { CategoryType } from '@/root/types/category'
 
+const categories = [
+  'CSS',
+  'General',
+  'Git',
+  'JavaScript',
+  'React',
+  'TypeScript',
+]
+
 export function PostImage() {
   const [title, setTitle] = useState<string>('Placeholder')
-  const [category, setCategory] = useState<CategoryType>('CSS')
+  const [category, setCategory] = useState<CategoryType>('css')
   const [modalOpen, setModalOpen] = useState<boolean>(false)
 
   function handleInput(event: ChangeEvent<HTMLInputElement>) {
@@ -35,7 +44,7 @@ export function PostImage() {
           className="relative w-full mx-auto text-white bg-no-repeat bg-cover"
           onClick={() => setModalOpen(true)}
           style={{
-            backgroundImage: `url(/images/categories/${category.toLowerCase()}.webp)`,
+            backgroundImage: `url(/images/categories/${category}.webp)`,
             height: '340px',
           }}
         >
@@ -74,13 +83,13 @@ export function PostImage() {
               id="theme"
               name="theme"
               onChange={handleSelect}
+              value={category}
             >
-              <option>CSS</option>
-              <option>General</option>
-              <option>Git</option>
-              <option>JavaScript</option>
-              <option>React</option>
-              <option>TypeScript</option>
+              {categories.map((category) => (
+                <option key={category} value={category.toLowerCase()}>
+                  {category}
+                </option>
+              ))}
             </select>
           </div>
         </form>
