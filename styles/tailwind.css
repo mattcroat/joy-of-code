@@ -290,7 +290,6 @@ html[data-theme='🧠 Night Mind'] {
   .prose .token.constant,
   .prose .token.symbol,
   .prose .token.deleted {
-    /* color: ${chakraTheme.colors.red[400]}; */
     @apply text-red-400;
   }
 
@@ -300,11 +299,6 @@ html[data-theme='🧠 Night Mind'] {
   .prose .token.char,
   .prose .token.builtin,
   .prose .token.inserted {
-    /* color: ${useColorModeValue(
-      chakraTheme.colors.red[500],
-      chakraTheme.colors.red[200]
-    )}; */
-    /* @apply text-red-300; */
     @apply text-tokenString;
   }
 
@@ -313,39 +307,23 @@ html[data-theme='🧠 Night Mind'] {
   .prose .token.url,
   .prose .language-css .token.string,
   .prose .style .token.string {
-    /* color: ${useColorModeValue(
-      chakraTheme.colors.red[500],
-      chakraTheme.colors.red[200]
-    )}; */
-    /* @apply text-red-300; */
     @apply text-tokenOperator;
   }
 
   .prose .token.atrule,
   .prose .token.attr-value,
   .prose .token.keyword {
-    /* color: ${useColorModeValue(
-      chakraTheme.colors.orange[500],
-      chakraTheme.colors.orange[200]
-    )}; */
-    /* @apply text-highlight; */
     @apply text-tokenKeyword;
   }
 
   .prose .token.function,
   .prose .token.class-name {
-    /* color: ${useColorModeValue(
-      chakraTheme.colors.blue[500],
-      chakraTheme.colors.blue[200]
-    )}; */
-    /* @apply text-blue-300; */
     @apply text-tokenFunction;
   }
 
   .prose .token.regex,
   .prose .token.important,
   .prose .token.variable {
-    /* color: ${chakraTheme.colors.orange[300]}; */
     @apply text-highlight;
   }
 }
