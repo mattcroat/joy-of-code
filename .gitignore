@@ -35,3 +35,6 @@ yarn-error.log*
 
 # feed
 /public/feed/rss.xml
+
+# sitemap
+sitemap.xml
