@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { FadeIn } from '@/root/components/animation'
+
 import type { ReactNode } from 'react'
 
 interface PopoverProps {
@@ -35,17 +37,19 @@ export function Popover({ children, isOpen = false }: PopoverProps) {
   return (
     <>
       {isPopoverOpen && (
-        <div
-          ref={popoverRef}
-          className="absolute hidden text-left md:max-w-[400px] md:block -right-11 top-12 w-max"
-        >
-          <div className="relative p-4 border-t-4 border-highlight rounded-md shadow-lg after:absolute after:-top-4 after:right-[44px] after:border-t-0 after:border-r-[16px] after:border-r-transparent after:border-l-[16px] after:border-l-transparent after:border-b-[16px] after:border-highlight bg-secondary">
-            {children}
-            <p className="mt-4 text-muted">
-              {`Tap anywhere on the page to close the pop-up. 👆`}
-            </p>
+        <FadeIn duration={1000}>
+          <div
+            ref={popoverRef}
+            className="absolute hidden text-left md:max-w-[400px] md:block -right-11 top-12 w-max"
+          >
+            <div className="relative p-4 border-t-4 border-highlight rounded-md shadow-lg after:absolute after:-top-4 after:right-[44px] after:border-t-0 after:border-r-[16px] after:border-r-transparent after:border-l-[16px] after:border-l-transparent after:border-b-[16px] after:border-highlight bg-secondary">
+              {children}
+              <p className="mt-4 text-muted">
+                {`Tap anywhere on the page to close the pop-up. 👆`}
+              </p>
+            </div>
           </div>
-        </div>
+        </FadeIn>
       )}
     </>
   )

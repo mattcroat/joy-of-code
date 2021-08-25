@@ -1,30 +1,44 @@
+import { useState } from 'react'
+
 interface SpinProps {
-  spin: boolean
+  playSound?: () => void
   duration?: number
   delay?: number
-  children: React.ReactChild
+  children: React.ReactNode
   style?: {
     [key: string]: string
   }
 }
 
 export function Spin({
-  spin = false,
+  playSound,
   duration = 300,
   delay = 0,
   children,
   ...props
 }: SpinProps) {
+  const [isPressed, setIsPressed] = useState(false)
+
+  function spin() {
+    setIsPressed(!isPressed)
+    playSound && playSound()
+  }
+
   return (
     <div
+      onAnimationEnd={() => setIsPressed(false)}
+      onClick={spin}
+      onKeyPress={spin}
+      role="button"
       {...props}
       style={{
         ...(props.style ?? {}),
-        animationName: spin ? 'spin' : '',
+        animationName: isPressed ? 'spin' : '',
         animationFillMode: 'backwards',
         animationDuration: `${duration}ms`,
         animationDelay: `${delay}ms`,
       }}
+      tabIndex={0}
     >
       {children}
     </div>

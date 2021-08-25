@@ -19,6 +19,7 @@ export function Wave({
       style={{
         ...(props.style ?? {}),
         animationName: 'wave',
+        animationTimingFunction: 'cubic-bezier(.52,.02,.14,.95)',
         animationFillMode: 'backwards',
         animationDuration: `${duration}ms`,
         animationDelay: `${delay}ms`,

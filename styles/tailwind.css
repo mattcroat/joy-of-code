@@ -374,36 +374,36 @@ html[data-theme='🧠 Night Mind'] {
 
 @keyframes spin {
   from {
-    rotate: 0deg;
+    transform: rotate(0deg);
   }
   to {
-    rotate: 360deg;
+    transform: rotate(360deg);
   }
 }
 
 @keyframes wave {
   0% {
     opacity: 0;
+    transform: translateX(-20px);
   }
   20% {
     opacity: 1;
-    transform: translateY(20px);
+    transform: translateX(0) translateY(20px);
   }
   50% {
-    transform: translateY(0);
-    rotate: 20deg;
+    transform: translateY(0) rotate(20deg);
   }
   60% {
-    rotate: -20deg;
+    transform: rotate(-20deg);
   }
   70% {
-    rotate: 20deg;
+    transform: rotate(20deg);
   }
   80% {
-    rotate: -20deg;
+    transform: rotate(-20deg);
   }
   100% {
-    rotate: 0deg;
+    transform: rotate(0);
   }
 }
 
