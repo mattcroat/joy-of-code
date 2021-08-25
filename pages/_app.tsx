@@ -3,13 +3,10 @@ import Head from 'next/head'
 
 import { Accessibility } from '@/root/components/accessibility'
 import { Navigation } from '@/root/components/shared/Layout/Navigation'
-import { useAnalytics } from '@/root/hooks/useAnalytics'
 
 import '@/root/styles/tailwind.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-  useAnalytics()
-
   return (
     <>
       <Head>
