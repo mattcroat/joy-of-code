@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
+import { playSound } from '@/root/utils/helpers/playSound'
+
 interface SpinProps {
-  playSound?: () => void
   duration?: number
   delay?: number
   children: React.ReactNode
@@ -11,7 +12,6 @@ interface SpinProps {
 }
 
 export function Spin({
-  playSound,
   duration = 300,
   delay = 0,
   children,
@@ -21,7 +21,7 @@ export function Spin({
 
   function spin() {
     setIsPressed(!isPressed)
-    playSound && playSound()
+    playSound('confirm')
   }
 
   return (
@@ -38,7 +38,7 @@ export function Spin({
         animationDuration: `${duration}ms`,
         animationDelay: `${delay}ms`,
       }}
-      tabIndex={0}
+      tabIndex={-1}
     >
       {children}
     </div>

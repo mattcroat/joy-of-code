@@ -3,17 +3,10 @@ import { useState } from 'react'
 import { Icon } from '@/root/components/shared/Icon'
 import { Modal } from '@/root/components/screens/Editor/Modal'
 
-import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
+import { categories } from '@/root/utils/helpers/categories'
 import type { CategoryType } from '@/root/types/category'
 
-const categories = [
-  'CSS',
-  'General',
-  'Git',
-  'JavaScript',
-  'React',
-  'TypeScript',
-]
+import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
 
 export function PostImage() {
   const [title, setTitle] = useState<string>('Placeholder')

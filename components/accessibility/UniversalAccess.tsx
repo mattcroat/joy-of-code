@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { Delight } from '@/root/components/shared/Delight'
 import { Icon } from '@/root/components/shared/Icon'
 import { Popover } from '@/root/components/shared/Popover'
+import { Spin } from '@/root/components/animation'
 
 export function UniversalAccess() {
   const [accessibleFont, setAccessibleFont] = useState<boolean>(() => {
@@ -31,13 +31,13 @@ export function UniversalAccess() {
       className="relative p-0 transition-colors"
       onClick={() => setAccessibleFont(!accessibleFont)}
     >
-      <Delight>
+      <Spin>
         <Icon
           className={`w-8 h-8 hover:text-highlight transition-colors ${isToggled}`}
           icon="universalAccess"
         />
         <span className="sr-only">Use font for dyslexia</span>
-      </Delight>
+      </Spin>
       <Popover isOpen={true}>
         <p className="mb-2 text-lg font-bold">Accessibility</p>
         <hr className="border-gray-600" />
