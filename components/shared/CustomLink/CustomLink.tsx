@@ -1,8 +1,7 @@
 import Link, { LinkProps } from 'next/link'
-import { ReactNode } from 'react'
 
 interface CustomLinkProps extends LinkProps {
-  children: ReactNode
+  children: React.ReactNode
   href: string
   isInternal?: boolean
   openSeparateTab?: boolean

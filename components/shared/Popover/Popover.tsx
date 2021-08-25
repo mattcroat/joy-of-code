@@ -2,10 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 
 import { FadeIn } from '@/root/components/animation'
 
-import type { ReactNode } from 'react'
-
 interface PopoverProps {
-  children: ReactNode
+  children: React.ReactNode
   isOpen: boolean
 }
 

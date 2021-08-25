@@ -1,10 +1,8 @@
-import { ReactNode } from 'react'
-
 import { Seo } from '@/root/components/shared/Layout/Seo'
 
 interface LayoutProps {
   [key: string]: any
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export function Layout({ children, ...metadata }: LayoutProps) {

@@ -1,7 +1,7 @@
 interface FadeInProps {
   duration?: number
   delay?: number
-  children: React.ReactChild
+  children: React.ReactNode
   style?: {
     [key: string]: string
   }

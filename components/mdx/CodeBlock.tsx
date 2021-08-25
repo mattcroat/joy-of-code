@@ -1,8 +1,8 @@
-import { ReactNode, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import Confetti from 'react-dom-confetti'
 
 interface CodeBlockProps {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export function CodeBlock({ children }: CodeBlockProps) {
