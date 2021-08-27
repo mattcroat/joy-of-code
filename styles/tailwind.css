@@ -193,7 +193,35 @@ html[data-theme='🧠 Night Mind'] {
   }
 
   body {
-    @apply h-full overflow-x-hidden font-sans bg-primary;
+    height: 100%;
+    font-family: theme('fontFamily.sans');
+    background-color: theme('colors.primary');
+    background-image: linear-gradient(
+        to bottom,
+        transparent,
+        theme('colors.primary')
+      ),
+      url('/images/nebula.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    animation: zoom 10s ease-in-out alternate infinite;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(
+      to bottom,
+      theme('colors.primary') 90%,
+      transparent
+    );
+    opacity: 0.7;
+    z-index: -10;
   }
 
   h1 {
@@ -410,5 +438,11 @@ html[data-theme='🧠 Night Mind'] {
 @keyframes shine {
   0% {
     background-position: right;
+  }
+}
+
+@keyframes zoom {
+  0% {
+    background-size: 120% 120%;
   }
 }
