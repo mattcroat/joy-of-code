@@ -5,6 +5,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // site
         highlight: 'var(--highlight)',
         muted: 'var(--muted)',
         primary: 'var(--primary)',
@@ -14,6 +15,9 @@ module.exports = {
         selection: 'var(--selection)',
         selectionText: 'var(--selectionText)',
         separator: 'var(--separator)',
+        // card
+        cardTitle: 'var(--cardTitle)',
+        // code
         code: 'var(--code)',
         pre: 'var(--pre)',
         tokenFunction: 'var(--tokenFunction)',

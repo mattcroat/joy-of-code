@@ -3,23 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --highlight: #fbd38d;
-  --muted: #a0aec0;
-  --primary: #1a202c;
-  --secondary: #2d3748;
-  --body: #cbd5e0;
+  --highlight: hsl(38, 93%, 77%);
+  --muted: hsl(214, 20%, 69%);
+  --primary: hsl(220, 26%, 14%);
+  --secondary: hsl(218, 23%, 23%);
+  --body: hsl(211, 25%, 84%);
   --selection: var(--highlight);
-  --selectionText: #652b19;
-  --separator: #374151;
+  --selectionText: hsl(14, 60%, 25%);
+  --separator: hsl(217, 19%, 27%);
 
-  --code: #ffffff;
-  --pre: #1f2735;
-  --tokenFunction: #93c5fd;
+  --cardTitle: hsl(0, 0%, 98%);
+
+  --code: hsl(0, 0%, 100%);
+  --pre: hsl(218, 26%, 16%);
+  --tokenFunction: hsl(212, 96%, 78%);
   --tokenKeyword: var(--highlight);
-  --tokenOperator: #fca5a5;
-  --tokenPunctuation: #bfdbfe;
-  --tokenString: #fca5a5;
-  --comment: #9ca3af;
+  --tokenOperator: hsl(0, 94%, 82%);
+  --tokenPunctuation: hsl(213, 97%, 87%);
+  --tokenString: hsl(0, 94%, 82%);
+  --comment: hsl(218, 11%, 65%);
 
   --sans: 'Inter, sans-serif';
   --mono: 'Mononoki, monospace';
@@ -28,83 +30,85 @@
 }
 
 html[data-theme='🌙 Dusk'] {
-  --highlight: #fbd38d;
-  --muted: #a0aec0;
-  --primary: #1a202c;
-  --secondary: #2d3748;
-  --body: #cbd5e0;
+  --highlight: hsl(38.2, 93.2%, 76.9%);
+  --muted: hsl(213.8, 20.3%, 69%);
+  --primary: hsl(220, 25.7%, 13.7%);
+  --secondary: hsl(217.8, 23.1%, 22.9%);
+  --body: hsl(211.4, 25.3%, 83.7%);
   --selection: var(--highlight);
-  --selectionText: #652b19;
-  --separator: #374151;
+  --selectionText: hsl(14.2, 60.3%, 24.7%);
+  --separator: hsl(216.9, 19.1%, 26.7%);
 
-  --code: #ffffff;
-  --pre: #1f2735;
-  --tokenFunction: #93c5fd;
+  --code: hsl(0, 0%, 100%);
+  --pre: hsl(218.2, 26.2%, 16.5%);
+  --tokenFunction: hsl(211.7, 96.4%, 78.4%);
   --tokenKeyword: var(--highlight);
-  --tokenOperator: #fca5a5;
-  --tokenPunctuation: #bfdbfe;
-  --tokenString: #fca5a5;
-  --comment: #9ca3af;
+  --tokenOperator: hsl(0, 93.5%, 81.8%);
+  --tokenPunctuation: hsl(213.3, 96.9%, 87.3%);
+  --tokenString: hsl(0, 93.5%, 81.8%);
+  --comment: hsl(217.9, 10.6%, 64.9%);
 }
 
 html[data-theme='☀️ Light'] {
-  --highlight: #2b6cb0;
-  --muted: #4a5568;
-  --primary: #ffffff;
-  --secondary: #fafafa;
-  --body: #4a5568;
+  --highlight: hsl(210.7, 60.7%, 42.9%);
+  --muted: hsl(218, 16.9%, 34.9%);
+  --primary: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 98%);
+  --body: hsl(218, 16.9%, 34.9%);
   --selection: var(--highlight);
-  --selectionText: #ffffff;
-  --separator: #e5e7eb;
+  --selectionText: hsl(0, 0%, 100%);
+  --separator: hsl(220, 13%, 91%);
 
-  --code: #00000;
-  --pre: #ffffff;
-  --tokenFunction: #e2732e;
+  --cardTitle: hsl(0, 0%, 20%);
+
+  --code: hsl(0, 0%, 0%);
+  --pre: hsl(0, 0%, 100%);
+  --tokenFunction: hsl(23, 75.6%, 53.3%);
   --tokenKeyword: var(--highlight);
-  --tokenOperator: #ec644f;
-  --tokenPunctuation: #8a8a8a;
-  --tokenString: #ec644f;
-  --comment: #9ca3af;
+  --tokenOperator: hsl(8, 80.5%, 61.8%);
+  --tokenPunctuation: hsl(0, 0%, 54.1%);
+  --tokenString: hsl(8, 80.5%, 61.8%);
+  --comment: hsl(217.9, 10.6%, 64.9%);
 }
 
 html[data-theme='🐺 Night Howl'] {
-  --highlight: #e3f2ff;
-  --muted: #9bc1d5;
-  --primary: #0e1e2b;
-  --secondary: #122738;
-  --body: #9bc1d5;
+  --highlight: hsl(207.9, 100%, 94.5%);
+  --muted: hsl(200.7, 40.8%, 72.2%);
+  --primary: hsl(206.9, 50.9%, 11.2%);
+  --secondary: hsl(206.8, 51.4%, 14.5%);
+  --body: hsl(200.7, 40.8%, 72.2%);
   --selection: var(--highlight);
-  --selectionText: #0e1e2b;
-  --separator: #162e42;
+  --selectionText: hsl(206.9, 50.9%, 11.2%);
+  --separator: hsl(207.3, 50%, 17.3%);
 
-  --code: #ffffff;
-  --pre: #0e1e2b;
-  --tokenFunction: #e2732e;
-  --tokenKeyword: #00b1fb;
-  --tokenOperator: #ef7276;
-  --tokenPunctuation: #abc2d6;
-  --tokenString: #96e688;
-  --comment: #9ca3af;
+  --code: hsl(0, 0%, 100%);
+  --pre: hsl(206.9, 50.9%, 11.2%);
+  --tokenFunction: hsl(23, 75.6%, 53.3%);
+  --tokenKeyword: hsl(197.7, 100%, 49.2%);
+  --tokenOperator: hsl(358.1, 79.6%, 69.2%);
+  --tokenPunctuation: hsl(207.9, 34.4%, 75.5%);
+  --tokenString: hsl(111.1, 65.3%, 71.8%);
+  --comment: hsl(217.9, 10.6%, 64.9%);
 }
 
 html[data-theme='🧠 Night Mind'] {
-  --highlight: #ffbcb0;
-  --muted: #c3b5d6;
-  --primary: #1e1a24;
-  --secondary: #23202b;
-  --body: #ffffff;
+  --highlight: hsl(9.1, 100%, 84.5%);
+  --muted: hsl(265.5, 28.7%, 77.5%);
+  --primary: hsl(264, 16.1%, 12.2%);
+  --secondary: hsl(256.4, 14.7%, 14.7%);
+  --body: hsl(0, 0%, 100%);
   --selection: var(--highlight);
-  --selectionText: #0e1e2b;
-  --separator: #2b2533;
+  --selectionText: hsl(206.9, 50.9%, 11.2%);
+  --separator: hsl(265.7, 15.9%, 17.3%);
 
-  --code: #e6c466;
-  --pre: #23202b;
-  --tokenFunction: #9395fb;
-  --tokenKeyword: #56aeef;
-  --tokenOperator: #ef7276;
-  --tokenPunctuation: #6a57d5;
-  --tokenString: #93e572;
-  --comment: #9ca3af;
+  --code: hsl(44.1, 71.9%, 65.1%);
+  --pre: hsl(256.4, 14.7%, 14.7%);
+  --tokenFunction: hsl(238.8, 92.9%, 78%);
+  --tokenKeyword: hsl(205.5, 82.7%, 63.7%);
+  --tokenOperator: hsl(358.1, 79.6%, 69.2%);
+  --tokenPunctuation: hsl(249, 60%, 58.8%);
+  --tokenString: hsl(102.8, 68.9%, 67.3%);
+  --comment: hsl(217.9, 10.6%, 64.9%);
 }
 
 @layer base {
@@ -203,9 +207,7 @@ html[data-theme='🧠 Night Mind'] {
       ),
       url('/images/nebula.webp');
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
-    animation: zoom 10s ease-in-out alternate infinite;
+    background-size: cover;
     overflow-x: hidden;
   }
 
@@ -222,6 +224,14 @@ html[data-theme='🧠 Night Mind'] {
     );
     opacity: 0.7;
     z-index: -10;
+  }
+
+  @media (min-width: theme('screens.md')) {
+    body {
+      background-position: center;
+      background-size: 100% 100%;
+      animation: zoom 10s ease-in-out alternate infinite;
+    }
   }
 
   h1 {
