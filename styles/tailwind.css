@@ -369,7 +369,7 @@ html[data-theme='🧠 Night Mind'] {
   position: relative;
 }
 
-.shine::before {
+.shine::after {
   content: '';
   position: absolute;
   height: 100%;
@@ -377,11 +377,11 @@ html[data-theme='🧠 Night Mind'] {
   background: linear-gradient(
     45deg,
     hsla(0 0% 100% / 0%) 0%,
-    hsla(0 0% 100% / 40%) 50%,
+    hsla(0 0% 100% / 30%) 50%,
     hsla(0 0% 100% / 0%) 100%
   );
   background-size: 400% 100%;
-  animation: shine 4s cubic-bezier(0.44, 0.21, 0, 1) infinite;
+  animation: shine 4s cubic-bezier(0.44, 0.21, 0, 1) alternate infinite;
   z-index: 20;
 }
 
