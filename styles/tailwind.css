@@ -68,7 +68,7 @@ html[data-theme='☀️ Light'] {
 }
 
 html[data-theme='🐺 Night Howl'] {
-  --highlight: #bde1ff;
+  --highlight: #e3f2ff;
   --muted: #9bc1d5;
   --primary: #0e1e2b;
   --secondary: #122738;
