@@ -2,14 +2,13 @@ import { Card } from './Card'
 
 import { FadeIn } from '@/root/components/animation'
 
+import { featuredPosts } from '@/root/utils/featured'
 import type { PostType } from '@/root/types/post'
 
 interface CardGridProps {
   featured?: boolean
   posts: PostType[]
 }
-
-const featuredPosts = ['TypeScript Fundamentals', 'Using Fonts on The Web']
 
 export function CardGrid({ featured = false, posts }: CardGridProps) {
   return (
