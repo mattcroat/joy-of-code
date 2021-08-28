@@ -12,7 +12,7 @@ import rehypePrism from '@mapbox/rehype-prism'
 import slug from 'remark-slug'
 import unwrapImages from 'remark-unwrap-images'
 
-import { postFilePaths, postsPath } from '@/root/utils/helpers/posts'
+import { postFilePaths, postsPath } from '@/root/utils/posts'
 import { Post } from '@/root/components/screens/Post'
 
 interface PostProps {

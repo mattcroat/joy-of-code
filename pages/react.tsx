@@ -1,4 +1,4 @@
-import { getPostsByCategory, getSortedPosts } from '@/root/utils/helpers/posts'
+import { getPostsByCategory, getSortedPosts } from '@/root/utils/posts'
 import { Category } from '@/root/components/screens/Category'
 
 import type { CategoryType } from '@/root/types/category'

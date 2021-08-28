@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { playSound } from '@/root/utils/helpers/playSound'
+import { playSound } from '@/root/utils/playSound'
 
 interface SpinProps {
   duration?: number

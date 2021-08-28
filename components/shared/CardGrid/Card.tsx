@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Icon } from '@/root/components/shared/Icon'
-import { playSound } from '@/root/utils/helpers/playSound'
+import { playSound } from '@/root/utils/playSound'
 
 import { usePostViews } from '@/root/hooks/usePostViews'
 

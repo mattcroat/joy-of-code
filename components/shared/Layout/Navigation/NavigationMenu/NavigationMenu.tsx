@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import {
-  menuCategories,
-  subscribeCategories,
-} from '@/root/utils/helpers/categories'
+import { menuCategories, subscribeCategories } from '@/root/utils/categories'
 import { CustomLink } from '@/root/components/shared/CustomLink'
 import { FadeIn } from '@/root/components/animation'
 import { Icon } from '@/root/components/shared/Icon'

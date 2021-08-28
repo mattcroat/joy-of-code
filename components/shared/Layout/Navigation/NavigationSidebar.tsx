@@ -2,7 +2,7 @@ import {
   moreCategories,
   sidebarCategories,
   subscribeCategories,
-} from '@/root/utils/helpers/categories'
+} from '@/root/utils/categories'
 import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Icon } from '@/root/components/shared/Icon'
 import { Spin } from '@/root/components/animation'
