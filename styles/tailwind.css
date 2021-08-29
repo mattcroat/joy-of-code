@@ -3,25 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --highlight: hsl(38, 93%, 77%);
-  --muted: hsl(214, 20%, 69%);
-  --primary: hsl(220, 26%, 14%);
-  --secondary: hsl(218, 23%, 23%);
-  --body: hsl(211, 25%, 84%);
+  --highlight: hsl(38 93% 77%);
+  --muted: hsl(214 20% 69%);
+  --primary: hsl(220 26% 14%);
+  --secondary: hsl(218 23% 23%);
+  --body: hsl(211 25% 84%);
   --selection: var(--highlight);
-  --selectionText: hsl(14, 60%, 25%);
-  --separator: hsl(217, 19%, 27%);
+  --selectionText: hsl(14 60% 25%);
+  --separator: hsl(217 19% 27%);
 
-  --cardTitle: hsl(0, 0%, 98%);
+  --cardTitle: hsl(0 0% 98%);
 
-  --code: hsl(0, 0%, 100%);
-  --pre: hsl(218, 26%, 16%);
-  --tokenFunction: hsl(212, 96%, 78%);
+  --code: hsl(0 0% 100%);
+  --pre: hsl(218 26% 16%);
+  --tokenFunction: hsl(212 96% 78%);
   --tokenKeyword: var(--highlight);
-  --tokenOperator: hsl(0, 94%, 82%);
-  --tokenPunctuation: hsl(213, 97%, 87%);
-  --tokenString: hsl(0, 94%, 82%);
-  --comment: hsl(218, 11%, 65%);
+  --tokenOperator: hsl(0 94% 82%);
+  --tokenPunctuation: hsl(213 97% 87%);
+  --tokenString: hsl(0 94% 82%);
+  --comment: hsl(218 11% 65%);
 
   --sans: 'Inter, sans-serif';
   --mono: 'Mononoki, monospace';
@@ -30,85 +30,85 @@
 }
 
 html[data-theme='🌙 Dusk'] {
-  --highlight: hsl(38.2, 93.2%, 76.9%);
-  --muted: hsl(213.8, 20.3%, 69%);
-  --primary: hsl(220, 25.7%, 13.7%);
-  --secondary: hsl(217.8, 23.1%, 22.9%);
-  --body: hsl(211.4, 25.3%, 83.7%);
+  --highlight: hsl(38.2 93.2% 76.9%);
+  --muted: hsl(213.8 20.3% 69%);
+  --primary: hsl(220 25.7% 13.7%);
+  --secondary: hsl(217.8 23.1% 22.9%);
+  --body: hsl(211.4 25.3% 83.7%);
   --selection: var(--highlight);
-  --selectionText: hsl(14.2, 60.3%, 24.7%);
-  --separator: hsl(216.9, 19.1%, 26.7%);
+  --selectionText: hsl(14.2 60.3% 24.7%);
+  --separator: hsl(216.9 19.1% 26.7%);
 
-  --code: hsl(0, 0%, 100%);
-  --pre: hsl(218.2, 26.2%, 16.5%);
-  --tokenFunction: hsl(211.7, 96.4%, 78.4%);
+  --code: hsl(0 0% 100%);
+  --pre: hsl(218.2 26.2% 16.5%);
+  --tokenFunction: hsl(211.7 96.4% 78.4%);
   --tokenKeyword: var(--highlight);
-  --tokenOperator: hsl(0, 93.5%, 81.8%);
-  --tokenPunctuation: hsl(213.3, 96.9%, 87.3%);
-  --tokenString: hsl(0, 93.5%, 81.8%);
-  --comment: hsl(217.9, 10.6%, 64.9%);
+  --tokenOperator: hsl(0 93.5% 81.8%);
+  --tokenPunctuation: hsl(213.3 96.9% 87.3%);
+  --tokenString: hsl(0 93.5% 81.8%);
+  --comment: hsl(217.9 10.6% 64.9%);
 }
 
 html[data-theme='☀️ Light'] {
-  --highlight: hsl(210.7, 60.7%, 42.9%);
-  --muted: hsl(218, 16.9%, 34.9%);
-  --primary: hsl(0, 0%, 100%);
-  --secondary: hsl(0, 0%, 98%);
-  --body: hsl(218, 16.9%, 34.9%);
+  --highlight: hsl(210.7 60.7% 42.9%);
+  --muted: hsl(218 16.9% 34.9%);
+  --primary: hsl(0 0% 100%);
+  --secondary: hsl(0 0% 98%);
+  --body: hsl(218 16.9% 34.9%);
   --selection: var(--highlight);
-  --selectionText: hsl(0, 0%, 100%);
-  --separator: hsl(220, 13%, 91%);
+  --selectionText: hsl(0 0% 100%);
+  --separator: hsl(220 13% 91%);
 
-  --cardTitle: hsl(0, 0%, 20%);
+  --cardTitle: hsl(0 0% 20%);
 
-  --code: hsl(0, 0%, 0%);
-  --pre: hsl(0, 0%, 100%);
-  --tokenFunction: hsl(23, 75.6%, 53.3%);
+  --code: hsl(0 0% 0%);
+  --pre: hsl(0 0% 100%);
+  --tokenFunction: hsl(23 75.6% 53.3%);
   --tokenKeyword: var(--highlight);
-  --tokenOperator: hsl(8, 80.5%, 61.8%);
-  --tokenPunctuation: hsl(0, 0%, 54.1%);
-  --tokenString: hsl(8, 80.5%, 61.8%);
-  --comment: hsl(217.9, 10.6%, 64.9%);
+  --tokenOperator: hsl(8 80.5% 61.8%);
+  --tokenPunctuation: hsl(0 0% 54.1%);
+  --tokenString: hsl(8 80.5% 61.8%);
+  --comment: hsl(217.9 10.6% 64.9%);
 }
 
 html[data-theme='🐺 Night Howl'] {
-  --highlight: hsl(207.9, 100%, 94.5%);
-  --muted: hsl(200.7, 40.8%, 72.2%);
-  --primary: hsl(206.9, 50.9%, 11.2%);
-  --secondary: hsl(206.8, 51.4%, 14.5%);
-  --body: hsl(200.7, 40.8%, 72.2%);
+  --highlight: hsl(207.9 100% 94.5%);
+  --muted: hsl(200.7 40.8% 72.2%);
+  --primary: hsl(206.9 50.9% 11.2%);
+  --secondary: hsl(206.8 51.4% 14.5%);
+  --body: hsl(200.7 40.8% 72.2%);
   --selection: var(--highlight);
-  --selectionText: hsl(206.9, 50.9%, 11.2%);
-  --separator: hsl(207.3, 50%, 17.3%);
+  --selectionText: hsl(206.9 50.9% 11.2%);
+  --separator: hsl(207.3 50% 17.3%);
 
-  --code: hsl(0, 0%, 100%);
-  --pre: hsl(206.9, 50.9%, 11.2%);
-  --tokenFunction: hsl(23, 75.6%, 53.3%);
-  --tokenKeyword: hsl(197.7, 100%, 49.2%);
-  --tokenOperator: hsl(358.1, 79.6%, 69.2%);
-  --tokenPunctuation: hsl(207.9, 34.4%, 75.5%);
-  --tokenString: hsl(111.1, 65.3%, 71.8%);
-  --comment: hsl(217.9, 10.6%, 64.9%);
+  --code: hsl(0 0% 100%);
+  --pre: hsl(206.9 50.9% 11.2%);
+  --tokenFunction: hsl(23 75.6% 53.3%);
+  --tokenKeyword: hsl(197.7 100% 49.2%);
+  --tokenOperator: hsl(358.1 79.6% 69.2%);
+  --tokenPunctuation: hsl(207.9 34.4% 75.5%);
+  --tokenString: hsl(111.1 65.3% 71.8%);
+  --comment: hsl(217.9 10.6% 64.9%);
 }
 
 html[data-theme='🧠 Night Mind'] {
-  --highlight: hsl(9.1, 100%, 84.5%);
-  --muted: hsl(265.5, 28.7%, 77.5%);
-  --primary: hsl(264, 16.1%, 12.2%);
-  --secondary: hsl(256.4, 14.7%, 14.7%);
-  --body: hsl(0, 0%, 100%);
+  --highlight: hsl(9.1 100% 84.5%);
+  --muted: hsl(265.5 28.7% 77.5%);
+  --primary: hsl(264 16.1% 12.2%);
+  --secondary: hsl(256.4 14.7% 14.7%);
+  --body: hsl(0 0% 100%);
   --selection: var(--highlight);
-  --selectionText: hsl(206.9, 50.9%, 11.2%);
-  --separator: hsl(265.7, 15.9%, 17.3%);
+  --selectionText: hsl(206.9 50.9% 11.2%);
+  --separator: hsl(265.7 15.9% 17.3%);
 
-  --code: hsl(44.1, 71.9%, 65.1%);
-  --pre: hsl(256.4, 14.7%, 14.7%);
-  --tokenFunction: hsl(238.8, 92.9%, 78%);
-  --tokenKeyword: hsl(205.5, 82.7%, 63.7%);
-  --tokenOperator: hsl(358.1, 79.6%, 69.2%);
-  --tokenPunctuation: hsl(249, 60%, 58.8%);
-  --tokenString: hsl(102.8, 68.9%, 67.3%);
-  --comment: hsl(217.9, 10.6%, 64.9%);
+  --code: hsl(44.1 71.9% 65.1%);
+  --pre: hsl(256.4 14.7% 14.7%);
+  --tokenFunction: hsl(238.8 92.9% 78%);
+  --tokenKeyword: hsl(205.5 82.7% 63.7%);
+  --tokenOperator: hsl(358.1 79.6% 69.2%);
+  --tokenPunctuation: hsl(249 60% 58.8%);
+  --tokenString: hsl(102.8 68.9% 67.3%);
+  --comment: hsl(217.9 10.6% 64.9%);
 }
 
 @layer base {
@@ -397,7 +397,7 @@ html[data-theme='🧠 Night Mind'] {
 
 @layer utilities {
   .text-shadow {
-    text-shadow: 2px 2px hsla(0, 0%, 0%, 100%);
+    text-shadow: 2px 2px hsla(0 0% 0% / 100%);
   }
 }
 
