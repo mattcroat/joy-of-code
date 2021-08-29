@@ -29,7 +29,13 @@ export function Card({ category, title, slug, featured }: CardProps) {
           isInternal
           prefetch={false}
         >
-          <div className="p-4 rounded-lg bg-secondary">
+          <div
+            className="p-4 rounded-lg bg-secondary"
+            onClick={() => playSound('page')}
+            onKeyPress={() => playSound('page')}
+            role="link"
+            tabIndex={-1}
+          >
             <div className="flex justify-between text-white">
               <span className="text-muted">{views} views</span>
               <Icon className="w-6 h-6" icon={category} />
