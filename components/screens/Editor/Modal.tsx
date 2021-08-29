@@ -28,7 +28,7 @@ export function Modal({ category, title, modalOpen }: ModalProps) {
           <span className="block translate-y-[1px]">Joy Of Code</span>
         </span>
 
-        <span className="absolute max-w-2xl font-bold text-left text-8xl bottom-8 left-8 text-shadow">
+        <span className="absolute max-w-4xl font-bold text-left text-8xl bottom-8 left-8 text-shadow">
           {title}
         </span>
 
