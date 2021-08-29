@@ -223,7 +223,7 @@ html[data-theme='🧠 Night Mind'] {
       transparent
     );
     opacity: 0.7;
-    z-index: -10;
+    z-index: -20;
   }
 
   @media (min-width: theme('screens.md')) {
@@ -257,7 +257,7 @@ html[data-theme='🧠 Night Mind'] {
   }
 
   .prose h1 {
-    @apply max-w-xl pb-4 mx-auto mb-4 text-center border-b border-separator md:pb-8 lg:text-6xl md:mb-8 lg:mb-8 lg:leading-tight;
+    @apply max-w-2xl pb-4 mx-auto mb-4 text-center border-b border-separator md:pb-8 lg:text-6xl md:mb-8 lg:mb-8 lg:leading-tight;
   }
 
   .prose h2 {
