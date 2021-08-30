@@ -3,36 +3,42 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   const { email } = req.body
 
-  if (!email || !email.length) {
+  if (!email) {
     return res.status(400).json({ error: 'Email is required' })
   }
 
   try {
-    const API_KEY = process.env.MAILCHIMP_API_KEY
-    const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID
-    const DATA_CENTER = API_KEY?.split('-')[1]
-    const API_URL = `https://${DATA_CENTER}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`
+    const API_KEY = process.env.BUTTONDOWN_API_KEY
+    const response = await fetch(
+      `https://api.buttondown.email/v1/subscribers`,
+      {
+        body: JSON.stringify({
+          email,
+        }),
+        headers: {
+          Authorization: `Token ${API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      }
+    )
 
-    const data = {
-      email_address: email,
-      status: 'subscribed',
+    if (response.status >= 400) {
+      const text = await response.text()
+
+      if (text.includes('already subscribed')) {
+        return res.status(400).json({
+          error: `You're already subscribed. 😎`,
+        })
+      }
+
+      return res.status(400).json({
+        error: text,
+      })
     }
 
-    const base64ApiKey = Buffer.from(`anystring:${API_KEY}`).toString('base64')
-
-    await fetch(API_URL, {
-      body: JSON.stringify(data),
-      headers: {
-        Authorization: `Basic ${base64ApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
-
-    return res.status(201).json({ error: null })
+    return res.status(201).json({ error: '' })
   } catch (error) {
-    return res.status(400).json({
-      error: 'Oops! 💩 Something went wrong.',
-    })
+    return res.status(500).json({ error: error.message || error.toString() })
   }
 }
