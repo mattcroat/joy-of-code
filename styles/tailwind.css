@@ -184,6 +184,7 @@ html[data-theme='🧠 Night Mind'] {
     scrollbar-width: thin;
     scroll-behavior: smooth;
     scroll-padding-top: theme('space.8');
+    -webkit-tap-highlight-color: transparent;
   }
 
   html[data-font='accessible'] body {
@@ -248,7 +249,9 @@ html[data-theme='🧠 Night Mind'] {
 
   a,
   button,
-  select {
+  select,
+  ul > li div,
+  button div {
     cursor: url('/images/cursor-pointer.webp'), pointer;
   }
 
