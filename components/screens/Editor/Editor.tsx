@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { Icon } from '@/root/components/shared/Icon'
 import { Modal } from '@/root/components/screens/Editor/Modal'
@@ -8,13 +8,32 @@ import type { CategoryType } from '@/root/types/category'
 
 import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
 
+function getDate() {
+  const [month, day, year] = new Date()
+    .toLocaleString('en', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    })
+    .split('/')
+
+  return `${year}-${month}-${day}`
+}
+
 export function Editor() {
   const [title, setTitle] = useState<string>('Placeholder')
+  const [description, setDescription] = useState<string>('Description')
   const [category, setCategory] = useState<CategoryType>('css')
   const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const preEl = useRef<HTMLPreElement>(null)
+  const date = getDate()
 
-  function handleInput(event: ChangeEvent<HTMLInputElement>) {
+  function updateTitle(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value)
+  }
+
+  function updateDescription(event: ChangeEvent<HTMLInputElement>) {
+    setDescription(event.target.value)
   }
 
   function handleSelect(event: FocusEvent<HTMLSelectElement>) {
@@ -24,6 +43,11 @@ export function Editor() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+  }
+
+  function copyToClipboard() {
+    const content = preEl.current?.textContent?.trim() ?? ''
+    navigator.clipboard.writeText(content)
   }
 
   return (
@@ -50,40 +74,88 @@ export function Editor() {
         </div>
       </button>
 
-      <form className="flex mt-8" onSubmit={handleSubmit}>
+      <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
+        <div className="flex">
+          <div className="flex-1 p-4 rounded-tl rounded-bl bg-secondary">
+            <label className="sr-only" htmlFor="title">
+              Title
+            </label>
+            <input
+              className="text-white bg-transparent"
+              id="title"
+              name="title"
+              onChange={updateTitle}
+              type="text"
+              value={title}
+            />
+          </div>
+
+          <div className="p-4 rounded-tr rounded-br bg-highlight">
+            <label className="sr-only" htmlFor="theme">
+              Category
+            </label>
+            <select
+              className="font-bold bg-transparent"
+              id="theme"
+              name="theme"
+              onChange={handleSelect}
+              value={category}
+            >
+              {categories.map((category) => (
+                <option key={category} value={category.toLowerCase()}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
         <div className="flex-1 p-4 rounded-tl rounded-bl bg-secondary">
-          <label className="sr-only" htmlFor="title">
-            Title
+          <label className="sr-only" htmlFor="description">
+            Description
           </label>
           <input
             className="text-white bg-transparent"
-            id="title"
-            name="title"
-            onChange={handleInput}
+            id="description"
+            name="description"
+            onChange={updateDescription}
             type="text"
-            value={title}
+            value={description}
           />
         </div>
-
-        <div className="p-4 rounded-tr rounded-br bg-highlight">
-          <label className="sr-only" htmlFor="theme">
-            Category
-          </label>
-          <select
-            className="font-bold bg-transparent"
-            id="theme"
-            name="theme"
-            onChange={handleSelect}
-            value={category}
-          >
-            {categories.map((category) => (
-              <option key={category} value={category.toLowerCase()}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
       </form>
+      <div className="relative px-4 my-4 rounded bg-secondary">
+        <button
+          className="absolute px-4 py-2 rounded bg-highlight right-4 top-4"
+          onClick={copyToClipboard}
+        >
+          {'📋'}
+        </button>
+        <pre ref={preEl} className="text-white">
+          {`
+---
+title: ${title}
+description: ${description}
+published: '${date}'
+category: '${category}'
+image: '/images/${title}/og-image.webp'
+---
+
+# ${title}
+
+<Image
+  height={0}
+  width={0}
+  src="/images/${title}/image.webp"
+  alt="Description"
+/>
+
+## Table of Contents
+
+1. [link](#link)
+        `}
+        </pre>
+      </div>
     </div>
   )
 }
