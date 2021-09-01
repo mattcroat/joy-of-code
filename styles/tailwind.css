@@ -206,7 +206,7 @@ html[data-theme='🧠 Night Mind'] {
         transparent,
         theme('colors.primary')
       ),
-      url('/images/nebula.webp');
+      url('/images/nebula-bg.webp');
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
