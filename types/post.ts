@@ -5,5 +5,6 @@ export interface PostType {
   description: string
   published: string
   category: CategoryType
+  image?: string
   slug: string
 }

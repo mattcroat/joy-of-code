@@ -1,16 +1,16 @@
-import fs from 'fs'
-import path from 'path'
+import { join } from 'path'
+import { readFileSync } from 'fs'
 
 // MDX sauce
 import matter from 'gray-matter'
 import { serialize } from 'next-mdx-remote/serialize'
 
 // MDX plugins
-import codeTitle from 'remark-code-titles'
-import headings from 'remark-autolink-headings'
 import rehypePrism from '@mapbox/rehype-prism'
-import slug from 'remark-slug'
-import unwrapImages from 'remark-unwrap-images'
+import remarkCodeTitle from 'remark-code-titles'
+import remarkHeadings from 'remark-autolink-headings'
+import remarkSlug from 'remark-slug'
+import remarkUnwrapImages from 'remark-unwrap-images'
 
 import { postFilePaths, postsPath } from '@/root/utils/posts'
 import { Post } from '@/root/components/screens/Post'
@@ -55,15 +55,20 @@ export async function getStaticPaths() {
 
 // grab and process MDX post by the slug "posts/[slug]"
 export async function getStaticProps({ params }: Params) {
-  const postFilePath = path.join(postsPath, `${params?.slug}.mdx`)
-  const source = fs.readFileSync(postFilePath)
+  const postFilePath = join(postsPath, `${params?.slug}.mdx`)
+  const source = readFileSync(postFilePath)
 
   const { content, data } = matter(source)
 
   const MDXSource = await serialize(content, {
     mdxOptions: {
       rehypePlugins: [rehypePrism],
-      remarkPlugins: [slug, headings, codeTitle, unwrapImages],
+      remarkPlugins: [
+        remarkSlug,
+        remarkHeadings,
+        remarkCodeTitle,
+        remarkUnwrapImages,
+      ],
     },
   })
 

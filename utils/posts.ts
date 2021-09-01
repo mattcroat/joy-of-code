@@ -19,8 +19,8 @@ export const getPosts = postFilePaths.map((slug) => {
   frontMatter.published = new Date(frontMatter.published).valueOf()
   frontMatter.slug = slug.replace(/\.mdx?$/, '')
 
-  return frontMatter
-}) as Array<PostType>
+  return frontMatter as PostType
+})
 
 export function getPostsByCategory(category: string) {
   const filteredPosts = getPosts.filter(
