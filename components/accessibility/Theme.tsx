@@ -3,19 +3,23 @@ import { useEffect, useState } from 'react'
 import type { FocusEvent } from 'react'
 
 const themes = ['🌙 Dusk', '☀️ Light', '🐺 Night Howl', '🧠 Night Mind']
+const browser = typeof window !== 'undefined'
 
 export function Theme() {
   const [theme, setTheme] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      if (window.localStorage.getItem('theme')) {
-        return window.localStorage.getItem('theme') as string
-      }
+    if (browser) {
+      const theme = window.localStorage.getItem('theme')
+      const { matches: prefersLight } = window.matchMedia(
+        'prefers-color-scheme: light'
+      )
+      if (theme) return theme
+      if (!theme && prefersLight) return '☀️ Light'
     }
-    return 'Dusk'
+    return '🌙 Dusk'
   })
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
+    document.documentElement.setAttribute('color-scheme', theme)
     window.localStorage.setItem('theme', theme)
   }, [theme])
 
