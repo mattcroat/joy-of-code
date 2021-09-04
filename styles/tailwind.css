@@ -246,7 +246,7 @@
     body {
       background-position: center;
       background-size: 100% 100%;
-      /* animation: zoom 10s ease-in-out alternate infinite; */
+      animation: zoom 10s ease-in-out alternate infinite;
     }
   }
 
@@ -471,6 +471,6 @@
     hsla(0 0% 100% / 0%) 100%
   );
   background-size: 400% 100%;
-  /* animation: shine 4s cubic-bezier(0.44, 0.21, 0, 1) alternate infinite; */
+  animation: shine 4s cubic-bezier(0.44, 0.21, 0, 1) alternate infinite;
   z-index: 20;
 }
