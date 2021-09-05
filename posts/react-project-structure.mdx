@@ -100,11 +100,12 @@ root/
 │  ├─ shared/
 ├─ hooks/
 ├─ lib/
+├─ providers/
+├─ scripts/
 ├─ styles/
+├─ tests/
 ├─ types/
 ├─ utils/
-│  ├─ helpers/
-│  ├─ scripts/
 ```
 
 It makes your project structure easily scannable:
@@ -112,11 +113,11 @@ It makes your project structure easily scannable:
 - `components` are self-explanatory with the exception that they include a `shared` folder for shared components
 - `hooks` are where you keep reusable React hooks
 - `lib` is where you store third party code (e.g., client API for a CMS, analytics)
+- `providers` is where you keep your [context](https://reactjs.org/docs/hooks-reference.html#usecontext) providers
+- `scripts` could be **Bash** or **Node** scripts you can run
 - `styles` could hold anything related to styles even if you're using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) you could have some logic (I use it for cards on the site)
 - `types` is where you keep your reusable TypeScript types (if used in a single component, I don't include it here) — if you're using a npm package without types, you can add `index.d.ts` and `declare module 'package-name'` so TypeScript doesn't complain
-- `utils` is where you keep utilities and scripts
-  - `helpers` are helpful functions such as currency conversion
-  - `scripts` could be Bash or Node scripts you can run
+- `utils` are helpful functions such as currency conversion
 
 If you have static assets such as images or fonts, they should be placed inside the `assets` or `static` folder.
 
