@@ -4,7 +4,7 @@ import { Icon } from '@/root/components/shared/Icon'
 import { Popover } from '@/root/components/shared/Popover'
 import { Spin } from '@/root/components/animation'
 
-export function UniversalAccess() {
+export function Font() {
   const [accessibleFont, setAccessibleFont] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       if (window.localStorage.getItem('accessibleFont')) {

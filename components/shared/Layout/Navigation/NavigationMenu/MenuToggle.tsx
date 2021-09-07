@@ -13,7 +13,7 @@ export function MenuToggle({ open, toggle }: MenuToggleProps) {
   return (
     <button
       aria-label="Menu"
-      className="fixed p-5 rounded-full shadow-md pointer-events-auto bg-secondary left-3 bottom-3"
+      className="fixed p-5 rounded-full shadow-md pointer-events-auto left-3 bottom-3 bg-secondary/80 backdrop-blur-2xl"
       onClick={() => toggle(!open)}
     >
       <div className="flex flex-col justify-around w-6 h-6">

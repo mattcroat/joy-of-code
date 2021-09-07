@@ -9,7 +9,7 @@ import { Spin } from '@/root/components/animation'
 
 export function NavigationSidebar() {
   return (
-    <nav className="hidden md:block w-[80px] fixed z-30 top-0 left-0 h-full shadow-md">
+    <nav className="hidden md:block w-[80px] fixed z-30 top-0 left-0 h-full shadow-md bg-secondary/80 backdrop-blur-2xl">
       <ul className="flex flex-col items-center h-full gap-8">
         {sidebarCategories.map(({ name, url, icon }) => {
           const spacing = name === 'Home' ? 'my-8' : ''
