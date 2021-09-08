@@ -9,7 +9,7 @@ import { Spin } from '@/root/components/animation'
 
 export function NavigationSidebar() {
   return (
-    <nav className="hidden md:block w-[80px] fixed z-30 top-0 left-0 h-full shadow-md bg-secondary/80 backdrop-blur-2xl">
+    <nav className="hidden md:block w-[80px] fixed z-30 top-0 left-0 h-full shadow-md">
       <ul className="flex flex-col items-center h-full gap-8">
         {sidebarCategories.map(({ name, url, icon }) => {
           const spacing = name === 'Home' ? 'my-8' : ''
@@ -33,7 +33,7 @@ export function NavigationSidebar() {
             className="w-8 h-8 transition-colors hover:text-highlight"
             icon="more"
           />
-          <div className="absolute hidden px-8 py-8 text-lg transition-all -translate-y-1/2 rounded-md shadow-lg group-hover:block bg-secondary left-20 w-max before:absolute before:-translate-x-20 before:top-0 before:h-full before:w-full before:-z-10">
+          <div className="absolute hidden px-8 py-8 text-lg transition-all -translate-y-1/2 rounded-md shadow-lg group-hover:block bg-secondary/80 backdrop-blur-2xl left-20 w-max before:absolute before:-translate-x-20 before:top-0 before:h-full before:w-full before:-z-10">
             <div className="absolute top-0 left-0 flex items-center h-full -translate-y-5 text-secondary -translate-x-3/4">
               <svg
                 className="w-10 h-10 -rotate-90"
