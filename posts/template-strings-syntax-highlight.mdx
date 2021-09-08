@@ -8,7 +8,7 @@ image: '/images/template-strings-syntax-highlight/og-image.webp'
 
 # Syntax Highlight and Code Completion Inside ES6 Template Strings
 
-I love to dable in the fine arts of **vanilla JavaScript**, and one of my favorite things when doing so is using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) as **templating** because it's faster and more fun than using the **imperative** API of the browser to manipulate the Document Object Model (DOM).
+One of my favorite things when working with vanilla **JavaScript** is using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) because it makes working with the **Document Object Model** (DOM) faster and more fun than using the **imperative** browser API.
 
 Take the output of some movies as example.
 
@@ -26,7 +26,7 @@ for (const movie of movies) {
 document.body.append(ulElement)
 ```
 
-We didn't even add **classes**, **attributes**, or nested elements that would make the code harder to read and more error prone compared to using **template literals**. I'm **not** saying it's bad — but it sucks the fun out of it.
+We didn't even add **classes**, **attributes**, or nested elements yet that make the code harder to read, and more error prone compared to using **template literals**. I'm **not** saying you **shouldn't** do it — but it sucks the fun out of it.
 
 ```js:example.js
 const movies = ['Seven Samurai', 'Hara-Kiri', 'Yojimbo', 'The Sword of Doom']
@@ -45,7 +45,7 @@ document.body.innerHTML = moviesHtml
 
 It's not perfect because we don't get the usual benefits and help from our code editor such as **syntax highlight**, **code completion** from [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) and [Emmet](https://code.visualstudio.com/docs/editor/emmet) which causes similar problems I had before.
 
-That's how I found [Inline HTML](https://marketplace.visualstudio.com/items?itemName=pushqrdx.inline-html) — a Visual Studio Code plugin that solves those problems.
+That's how I found [Inline HTML](https://marketplace.visualstudio.com/items?itemName=pushqrdx.inline-html) — a **Visual Studio Code** extension that solves those problems.
 
 To use it you only have to prefix the **template literal** with `html` or `/* html */`. You can do the same for **CSS** using `css` or `/* css */`.
 

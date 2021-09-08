@@ -33,10 +33,12 @@ const moviesHtml = `
   <section>
     <h1>Samurai Movies</h1>
     <ul class="movies">
-      ${movies.map(movie => `<li class="movie">${movie}</li>`)}
+      ${movies.map(movie => `<li class="movie">${movie}</li>`).join('')}
     </ul>
   </section>
 `
+
+document.body.innerHTML = moviesHtml
 ```
 
 We could set the `margin` for each `.movie` class but then it would also affect the top element.
