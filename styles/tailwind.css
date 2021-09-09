@@ -215,30 +215,18 @@
   body {
     height: 100%;
     font-family: theme('fontFamily.sans');
-    background-color: theme('colors.primary');
-    background-image: linear-gradient(
-        to bottom,
-        transparent,
-        theme('colors.primary')
-      ),
-      url('/images/nebula-bg.webp');
-    background-repeat: no-repeat;
+    background-image: url('/images/nebula-bg.webp');
+    background-attachment: fixed;
     background-size: cover;
     overflow-x: hidden;
   }
 
   body::after {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(
-      to bottom,
-      theme('colors.primary') 90%,
-      transparent
-    );
-    opacity: 0.8;
+    background-color: theme('colors.primary');
+    opacity: 0.9;
     z-index: -20;
   }
 
@@ -386,7 +374,7 @@
 
 @layer utilities {
   .text-shadow {
-    text-shadow: 2px 2px hsla(0 0% 0% / 100%);
+    text-shadow: 2px 2px 2px hsla(0 0% 0% / 100%);
   }
 }
 
@@ -464,7 +452,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  background: linear-gradient(
+  background-image: linear-gradient(
     45deg,
     hsla(0 0% 100% / 0%) 0%,
     hsla(0 0% 100% / 30%) 50%,
