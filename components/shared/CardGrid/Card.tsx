@@ -83,8 +83,8 @@ export function Card({ category, title, slug, featured }: CardProps) {
                     points="100 163.2 29.2 92.5 29.2 107.5 100 178.2"
                   />
                   <path
-                    fill="#B4BFCC"
                     d="M100 21.8L29.2 92.5l70.7 70.7l70.7-70.7L100 21.8z M100 127.9L64.6 92.5L100 57.1l35.4 35.4L100 127.9z"
+                    fill="#B4BFCC"
                   />
                   <polygon
                     fill="#5b7594"
