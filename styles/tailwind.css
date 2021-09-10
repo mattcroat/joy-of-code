@@ -215,7 +215,7 @@
   body {
     height: 100%;
     font-family: theme('fontFamily.sans');
-    background-image: url('/images/nebula-bg.webp');
+    background-image: url('/images/neon-space.svg');
     background-attachment: fixed;
     background-size: cover;
     overflow-x: hidden;
@@ -226,16 +226,8 @@
     position: fixed;
     inset: 0;
     background-color: theme('colors.primary');
-    opacity: 0.9;
+    opacity: 0.8;
     z-index: -20;
-  }
-
-  @media (min-width: theme('screens.md')) {
-    body {
-      background-position: center;
-      background-size: 100% 100%;
-      animation: zoom 10s ease-in-out alternate infinite;
-    }
   }
 
   h1 {
@@ -425,12 +417,6 @@
 @keyframes shine {
   0% {
     background-position: right;
-  }
-}
-
-@keyframes zoom {
-  0% {
-    background-size: 120% 120%;
   }
 }
 
