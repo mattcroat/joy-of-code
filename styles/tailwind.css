@@ -448,3 +448,15 @@
   animation: shine 4s cubic-bezier(0.44, 0.21, 0, 1) alternate infinite;
   z-index: 20;
 }
+
+.backdrop {
+  background-color: theme('colors.secondary');
+  opacity: 0.98;
+}
+
+@supports (backdrop-filter: blur(10px)) {
+  .backdrop {
+    background-color: transparent;
+    backdrop-filter: blur(40px);
+  }
+}

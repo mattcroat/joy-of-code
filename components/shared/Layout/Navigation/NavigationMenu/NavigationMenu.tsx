@@ -29,7 +29,7 @@ export function NavigationMenu() {
       className={`fixed top-0 bottom-0 left-0 right-0 z-30 pointer-events-none md:hidden`}
     >
       <div
-        className={`${open} absolute top-0 bottom-0 left-0 w-full bg-secondary/80 backdrop-blur-2xl transition-all duration-1000 menu`}
+        className={`${open} absolute top-0 bottom-0 left-0 w-full backdrop transition-all duration-1000 menu`}
       />
       {isOpen && (
         <FadeIn delay={300}>
