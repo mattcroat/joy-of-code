@@ -43,7 +43,7 @@ export function Popover({ children, isOpen = false }: PopoverProps) {
             <div className="relative p-4 border-t-4 border-highlight rounded-md shadow-lg backdrop after:absolute after:-top-4 after:right-[44px] after:border-t-0 after:border-r-[16px] after:border-r-transparent after:border-l-[16px] after:border-l-transparent after:border-b-[16px] after:border-highlight">
               {children}
               <p className="mt-4 text-muted">
-                {`Tap anywhere on the page to close the pop-up. 👆`}
+                {`Scrolling closes the pop-up. 👆`}
               </p>
             </div>
           </div>

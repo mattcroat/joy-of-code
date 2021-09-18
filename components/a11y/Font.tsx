@@ -13,6 +13,7 @@ export function Font() {
     }
     return false
   })
+  const [popover, setPopover] = useState<boolean>(true)
 
   useEffect(() => {
     if (accessibleFont) {
@@ -23,6 +24,15 @@ export function Font() {
       document.documentElement.removeAttribute('data-font')
     }
   }, [accessibleFont])
+
+  useEffect(() => {
+    const handlePopover = () => setPopover(false)
+    window.addEventListener('scroll', handlePopover)
+
+    return function cleanup() {
+      window.removeEventListener('scroll', handlePopover)
+    }
+  }, [])
 
   const isToggled = accessibleFont ? 'text-highlight' : 'text-muted'
 
@@ -38,13 +48,15 @@ export function Font() {
         />
         <span className="sr-only">Use font for dyslexia</span>
       </Spin>
-      <Popover isOpen={true}>
-        <p className="mb-2 text-lg font-bold">Accessibility</p>
-        <hr className="border-gray-600" />
-        <p className="mt-4">
-          If you have difficulty reading try using a font for dyslexia.
-        </p>
-      </Popover>
+      {popover && (
+        <Popover isOpen={true}>
+          <p className="mb-2 text-lg font-bold">Accessibility</p>
+          <hr className="border-gray-600" />
+          <p className="mt-4">
+            If you have difficulty reading try using a font for dyslexia.
+          </p>
+        </Popover>
+      )}
     </button>
   )
 }
