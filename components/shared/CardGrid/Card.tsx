@@ -14,6 +14,16 @@ interface CardProps {
   featured: boolean
 }
 
+const colors = {
+  css: 'bg-gradient-to-b from-transparent to-green-600',
+  general: 'bg-gradient-to-b from-transparent to-red-800',
+  git: 'bg-gradient-to-b from-transparent to-gray-900',
+  javascript: 'bg-gradient-to-b from-transparent to-yellow-600',
+  next: 'bg-gradient-to-b from-transparent to-indigo-800',
+  react: 'bg-gradient-to-b from-transparent to-blue-500',
+  typescript: 'bg-gradient-to-b from-transparent to-blue-800',
+}
+
 export function Card({ category, title, slug, featured }: CardProps) {
   const { views } = usePostViews(slug)
   const match = useMedia('(min-width: 768px)')
@@ -57,7 +67,7 @@ export function Card({ category, title, slug, featured }: CardProps) {
             role="link"
             tabIndex={-1}
           >
-            <div className="bg-primary">
+            <div className={colors[category]}>
               <svg
                 height="620"
                 viewBox="0 0 200 200"
@@ -135,7 +145,7 @@ export function Card({ category, title, slug, featured }: CardProps) {
               <div className="absolute z-10 text-white right-4 top-4">
                 <Icon className="w-8 h-8" icon={category} />
               </div>
-              <span className="absolute z-10 max-w-xs p-2 text-3xl font-bold tracking-tight text-white bottom-4 lg:text-4xl text-shadow left-4">
+              <span className="absolute z-10 max-w-xs p-2 text-3xl font-bold tracking-tight text-white bottom-4 lg:text-4xl text-shadow left-4 max-h-48">
                 {title}
               </span>
             </div>
