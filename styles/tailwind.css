@@ -195,7 +195,7 @@
   html {
     height: 100%;
     cursor: url('/images/cursor-default.webp'), default;
-    scrollbar-color: theme('colors.highlight') transparent;
+    scrollbar-color: theme('colors.highlight') theme('colors.secondary');
     scrollbar-width: thin;
     scroll-behavior: smooth;
     scroll-padding-top: theme('space.8');
@@ -226,7 +226,7 @@
     position: fixed;
     inset: 0;
     background-color: theme('colors.primary');
-    opacity: 0.8;
+    opacity: 0.9;
     z-index: -20;
   }
 
