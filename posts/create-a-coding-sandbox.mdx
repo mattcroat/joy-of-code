@@ -22,13 +22,13 @@ You can create a simple **Codepen** if you want with the knowledge you learn, bu
 - Load **npm packages** from a **URL** using [Skypack](https://www.skypack.dev/)
 - Render **HTML** to an `<iframe>`
 - Display **error messages** from the console
-- Show the **transpiled** output of [Babel](https://babeljs.io/) to be able to see the **JavaScript** created under the hood when using [React](https://reactjs.org/), or **transpiling** newer to older versions of **JavaScript** (EcmaScript)
+- Show the **transpiled** output of [Babel](https://babeljs.io/) to be able to see the **JavaScript** created under the hood when using [React](https://reactjs.org/), or **transpiling** newer to older versions of **JavaScript**
 
 I want to start simple from a `<textarea>` to adding the [Monaco Editor](https://microsoft.github.io/monaco-editor/) that powers [Visual Studio Code](https://code.visualstudio.com/) at the end.
 
 We're going to use the **build tool** [Vite](https://vitejs.dev/) with [TypeScript](https://www.typescriptlang.org/) to get a nice development environment. **It's alright if you don't know TypeScript** because you can just ignore the types, and keep the filename as `*.js`. Everything is going to work the same — I just like using **TypeScript**.
 
-You can visit the [JavaScript Sandbox](https://javascriptsandbox.netlify.app/) above, and find the [source code](https://github.com/joysofcode/javascript-sandbox) on **GitHub**.
+You can visit the [JavaScript Sandbox](https://javascriptsandbox.netlify.app/) above, and get the [starter and finished project files](https://github.com/joysofcode/javascript-sandbox) on **GitHub**.
 
 ## Table of Contents
 
@@ -46,7 +46,7 @@ You can visit the [JavaScript Sandbox](https://javascriptsandbox.netlify.app/) a
 
 Let's start by playing detective 🔎, and examining **Codepen** source code through the lens of our **developer tools**. This part is **optional**, as I only want to share my thought process with you.
 
-If you're in a new pen on **Codepen**, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to bring up the **developers tools**. Notice something interesting by **inspecting** the right-hand column. It's an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). You can imagine an `<iframe>` as a separate page inside another page. By definition _"it's a nested browsing context, embedding another HTML page into the current one."_
+If you're in a new pen on **Codepen**, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to bring up the **developers tools**. Notice something interesting by **inspecting** the right-hand column. It's an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). You can imagine an `<iframe>` as a separate page inside another page. By definition **"it's a nested browsing context, embedding another HTML page into the current one."**
 
 <Image
   height="745px"
@@ -62,11 +62,11 @@ An `<iframe>` behaves just like a regular page, but contained into it's own micr
 - Output displays on in the `<iframe>` the right
 - We can execute **JavaScript**
 
-These are just using a fancy `<textarea>` that does **syntax highlighting**, and **code completion** among other things. **Codepen** uses [CodeMirror](https://codemirror.net/). **CodeSandbox** on the other hand is a lot more involved, and it's basically an **integrated development environment** (IDE) inside your browser. It uses the **Monaco Editor** just like **VS Code** That's what I decided to use for this project.
+These online editors are just using a fancy `<textarea>` that does **syntax highlighting**, and **code completion** among other things. **Codepen** uses [CodeMirror](https://codemirror.net/). **CodeSandbox** on the other hand is a lot more involved, and it's basically an **integrated development environment** (IDE) inside your browser using the **Monaco Editor** just like **VS Code**.
 
 ## Project Setup
 
-Create a project using **Vite**. Confirm, and name your project from the questions it asks you. From the **framework options** select **"vanilla"**, and pick **"vanilla-ts"**, or **"vanilla"** if you don't want to use **TypeScript**.
+Create a project using **Vite**. Confirm, and name your project from the questions it asks you. From the **framework options** select **vanilla**, and pick **vanilla-ts**, or **vanilla** if you don't want to use **TypeScript**.
 
 ```shell:terminal
 npm init vite@latest
@@ -74,7 +74,7 @@ npm init vite@latest
 
 Install **npm** dependencies with `npm i`, and start the development server with `npm run dev`. Open `http://localhost:3000/`.
 
-You can get the [starter and finished project files](https://github.com/joysofcode/javascript-sandbox), so drop it into your project. The styles are simple, and not worth going over but you can look at it if you want.
+You can also just use the [starter project files](https://github.com/joysofcode/javascript-sandbox) that include the styles we're going to need.
 
 ```shell:terminal
 git clone https://github.com/joysofcode/javascript-sandbox.git
@@ -127,7 +127,7 @@ Inside `index.html` the only interesting thing to focus on is our page markup.
 
 I prefer to use **class** for styling, and [global data-\* attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) to hook into with **JavaScript** because **class** names could always change.
 
-There's only two sections, the left-hand side for the **editor**, and right-hand side for the **output** and **errors**. We're going to use a simple show and hide to only show the `<iframe>` if there are no errors, and vice versa.
+There's only **two** sections, the **left-hand** side for the **editor**, and **right-hand** side for the **output** and **errors**. We're going to use a simple show and hide to only show the `<iframe>` if there are no errors, and vice versa.
 
 <Image
   height="1080px"
@@ -174,7 +174,7 @@ Using an element is going to be less error prone using `elements.element` with t
 
 ## Updating the User Interface
 
-Using **state** is going to make it simple to update the user interface, reduce errors, and impossible states (here we're just using **global variables**).
+Using **state** is going to make it simple to update the **user interface**, **reduce errors**, and **impossible states** (for simplicity we're just using **global variables**).
 
 ```ts:src/main.ts
 import { elements, showError, showIframe } from './utils/dom'
@@ -199,9 +199,9 @@ function updateUI(): void {
 }
 ```
 
-We're always going to know what state the application is thanks to `state`. Once we set state `state = 'editing'` we can update the user interface with `updateUI`.
+We're always going to know what state the application is thanks to `state`. Once we set state to **editing** we can update the user interface with `updateUI`.
 
-If you want to learn **TypeScript** I have an entire [TypeScript Fundamentals](https://joyofcode.xyz/typescript-fundamentals) post. 🤓
+If you want to learn **TypeScript** I have an entire [TypeScript Fundamentals](https://joyofcode.xyz/typescript-fundamentals) post. 😎
 
 You can look at the `src/types/index.ts` types if you're curious. If you don't care about **TypeScript** just ignore types completely.
 
@@ -215,7 +215,7 @@ export interface TranspiledCodeType {
 }
 ```
 
-You could also use an [enum](https://www.typescriptlang.org/docs/handbook/enums.html), or if using **JavaScript** a regular object.
+You could also use an [enum](https://www.typescriptlang.org/docs/handbook/enums.html) for **state**, or if using **JavaScript** a regular object.
 
 ```ts:example.ts
 // index.ts
@@ -225,7 +225,7 @@ export enum State {
 }
 
 // main.ts
-import type { State } from './types'
+import { State } from './types'
 let state = State.Editing
 ```
 
@@ -237,7 +237,7 @@ Let's make sure we **update the user interface** when you type something inside 
 elements.editor.addEventListener('keyup', updateUI)
 ```
 
-We don't want to instantly update the **user interface** because it would be annoying for the user to instantly get an error on the screen as they type. Instead we're going to wrap `updateUI` with a `debounce` function that's going to wait at least **500ms**, or **0.5 seconds** before updating the **user interface**.
+We don't want to instantly update the **user interface** because it would be annoying for the user to instantly get an error on the screen as they type. Instead we're going to wrap `updateUI` with a `debounce` function that's going to wait at least **500 ms**, or **0.5 seconds** before updating the **user interface**.
 
 ```js:src/utils/helpers.ts
 export function debounce(callback: () => void, delay = 500): () => void {
@@ -250,7 +250,7 @@ export function debounce(callback: () => void, delay = 500): () => void {
 }
 ```
 
-The `debounce` function accepts a `callback` function it executes inside `setTimeout`, and a `delay` with a default value of **500ms**. The reason it returns a function is because of [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures), which creates a new environment each time when used to prevent unexpected behavior.
+The `debounce` function accepts a `callback` function it executes inside `setTimeout`, and a `delay` with a default value of **500 ms**. The reason it returns a function is because of [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures), which creates a new environment each time that cancels the last request out. If we just used `setTimeout`, it would stack them on top of each other.
 
 ```ts:src/main.ts
 import { debounce } from './utils/helpers'
@@ -273,16 +273,9 @@ window.addEventListener('error', ({ error }: ErrorEvent) => {
 
 `error` is destructured from `event.error` that has a couple of properties but we're only interested in `error.message`, so we use it to set `errorMessage`.
 
-If there are no **errors** on the page it won't run again, so the **state** is going to be set to **"editing"**.
+If there are no **errors** on the page it won't run again, so the **state** is going to be set to **editing**.
 
-There's also a **loading indicator** inside `index.html` that shows, and gets removed after the page loads. We already have a reference to `loading` inside `src/utils/dom.ts`.
-
-```html:index.html
-<div class="loading" data-loading>
-  <div class="loader"></div>
-  <h1>Loading Sandbox</h1>
-</div>
-```
+There's also a **loading indicator** inside `index.html` that gets removed after the page loads. We already have a reference to `loading` inside `src/utils/dom.ts`.
 
 ```ts:src/main.ts
 window.addEventListener('load', () => elements.loading.remove())
@@ -322,7 +315,7 @@ Let's create the `transpileCode` function first, and explain how that works. Bef
 npm i @babel/standalone
 ```
 
-After you have done that we can import `transform` from '@babel/standalone'.
+After you have done that we can import `transform` from `@babel/standalone`.
 
 ```ts:src/main.ts
 import { transform } from '@babel/standalone'
@@ -362,11 +355,11 @@ Let's break down what's going on:
 3. We set **Babel** options to use the **es2015-loose** (it transpiles **ES6** to **ES5** in a way that's more readable), and **react** preset so it understands **JSX**
 4. We pass those parameters to **Babel** `transform`, and destructure `code` from the result that we rename to `transpiledCode`
 5. If for some reason `transpiledCode` doesn't return anything, we raise an **error**
-6. `hasImports` checks if there are **imports**, and `imports` find the **imports** that returns an **array** so we use `join` to return a **string** and separate each **imports** by a new line, or set it to an **empty string**
+6. `hasImports` checks if there are **imports**, and `imports` find the **imports** that returns an **array** so we use `join` to return a **string** and separate each **import** by a new line, or set it to an **empty string** as fallback
 7. In the return we set `iframeCode` to include `imports` and `transpiledCode` if there are **imports**, or just the **transpiledCode** if there are none
-8. For `sourceCode` we replace `/*#__PURE__*/` **string** everywhere to reduce noise in the output since
+8. For `sourceCode` we replace `/*#__PURE__*/` **string** generated by **Babel** to make the output more readable
 
-The `format.ts` utils is nothing special — just some **regex** to match **imports** and the `/\/\*#__PURE__\*\//g` **string** we wanted to remove, and a `replace` function I created to save on typing.
+The `format.ts` utils is nothing special — just some **regex** to match **imports**, the **string** we want to remove, and a `replace` function to save on typing.
 
 ```ts:src/utils/format.ts
 export const importsRegex = /import(?:["'\s]*([\w*{}\n\r\t, ]+)from\s*)?["'\s].*([@\w/_-]+)["'\s].*/g
@@ -386,21 +379,21 @@ We need to create the `updateIframe`, and `updateSource` functions.
 ```ts:src/main.ts
 function updateIframe(code: string): void {
   const source = /* html */ `
-      <html>
-      <head>
-        <link rel="stylesheet" href="/iframe.css">
-      </head>
-      <body>
-        <div id="app"></div>
-        <script type="module">${code}</script>
-      </body>
-      </html>
-    `
+    <html>
+    <head>
+      <link rel="stylesheet" href="/iframe.css">
+    </head>
+    <body>
+      <div id="app"></div>
+      <script type="module">${code}</script>
+    </body>
+    </html>
+  `
   elements.iframe.srcdoc = source
 }
 ```
 
-Don't forget we have to invoke `updateUI` to render the **user interface**.
+Don't forget we have to invoke `updateUI` to render the **user interface**. If you're coding along temporarily comment out `updateSource` to see the result.
 
 ```ts:src/main.ts
 updateUI()
@@ -418,9 +411,9 @@ In `updateFrame` we just create a **template string** and replace the [srcdoc](h
 ```ts:src/main.ts
 function updateSource(transpiledOutput: string): void {
   const sourceHTML = /* html */ `
-      <h3>📜 Source</h3>
-      <xmp>${transpiledOutput}</xmp>
-    `
+    <h3>📜 Source</h3>
+    <xmp>${transpiledOutput}</xmp>
+  `
   elements.source.innerHTML = sourceHTML
 }
 ```
@@ -436,7 +429,7 @@ For `updateSource` we just set the `innerHTML` for `source`. The only interestin
 
 ## Showing Errors
 
-We already set up the **event listener** earlier to listen for **errors**, so the only thing left to do is to update `updateUI`.
+We already set up the **event listener** earlier to listen for **errors**, so the only thing left to do is to update the `updateUI` function.
 
 ```ts:src/main.ts
 function updateUI(): void {
@@ -457,9 +450,9 @@ function updateUI(): void {
 ```ts:src/main.ts
 function logError(error: string): void {
   const errorHtml = /* html */ `
-      <h3>💩 Error</h3>
-      <xmp>${error}</xmp>
-    `
+    <h3>💩 Error</h3>
+    <xmp>${error}</xmp>
+  `
   elements.errors.innerHTML = errorHtml
 }
 ```
@@ -512,9 +505,9 @@ export default defineConfig({
 
 In the final version I'm reducing the bundle size by only importing features we're using. The only **service workers** we need is for the **editor**, and **TypeScript**. You have to include **TypeScript**, because it shares the same **service worker** with **JavaScript**. You can always read the documentation to learn more.
 
-**Service workers** let you do tasks in the background (it's like using multiple threads), so you can use the page. **Monaco Editor** uses **service workers** for all features of the **editor**.
+**Service workers** let you do tasks in the background (it's like using multiple threads), so it doesn't freeze the **user interface**. **Monaco Editor** uses **service workers** for all features of the **editor**.
 
-Inside `lib` we're going to add `monacoEditor.ts`.
+Inside `lib/monaco/` we're going to add `monacoEditor.ts`.
 
 ```ts:src/lib/monaco/monacoEditor.ts
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
@@ -571,15 +564,15 @@ We're doing the same here by only importing features we're using such as **code 
 
 I figured this out through trial and error by spelunking inside **node_modules** because I already knew you could import only what you require from the plugin documentation.
 
-If you don't care about this, and make the code cleaner you can just say `import * as monaco from 'monaco-editor'`. The `import * as monaco` part is because there's no **default export**, the **Monaco Editor** just imports a bunch of things we can use.
+If you don't care about this, you can just say `import * as monaco from 'monaco-editor'`. The `import * as monaco` part is because there's no **default export**, the **Monaco Editor** just imports a bunch of things we can use.
 
-We're using **React** code as the default example to show **Babel**, and **ES modules** working. You could try any other **JavaScript** framework such as **Vue** if it can work with **ES modules**. I even managed to make **Svelte** work.
+We're using **React** code as the default example to show **Babel**, and **ES modules** working. You could try any other **JavaScript** framework such as **Vue** if it can work with **ES modules**. I even managed to make **Svelte** work (without single file components since there's no compiler).
 
 Inside **editorOptions** we can set the **language**, and **theme** among other things. [automaticLayout](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroptions.html#automaticlayout) checks if the **editor** is resized to adjust the size.
 
 You can read the [Monaco Editor API](https://microsoft.github.io/monaco-editor/api/index.html) to learn what's possible but it might take you a while to figure things out through search and asking questions since it's confusing.
 
-Lastly we create, and **export** it as `monacoEditor`. Now we just need to **import**, and use it inside `main.ts`.
+Lastly we create the **Monaco Editor**, and **export** it as `monacoEditor` that has a `getValue` method to get the contents.
 
 ```ts:src/main.ts
 import monacoEditor from './lib/monaco/monacoEditor'
@@ -603,8 +596,8 @@ Congratulations! 🥳
 Hope you learned something, and changed the code to work how you want. Here's what you can do next if you're interested:
 
 - Let the user enter **HTML**, **CSS**, and **JavaScript** like **Codepen**
-- Have the ability to use multiple files (you can look up how it's done using the **Monaco Editor**),
-- **Persist code** by using [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) (you would just need to save the input to **local storage**, and on **page load** check if it exists, then set the contents of the editor to use it)
+- Have the ability to use multiple files (you can look up how it's done using the **Monaco Editor**)
+- **Persist code** by using [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) (save the input to **local storage**, and check if it exists on **page load** to set the contents of the **editor**)
 - Use a framework
 
 Thanks for reading! 🏄‍♀️
