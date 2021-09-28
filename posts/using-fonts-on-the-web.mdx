@@ -320,7 +320,7 @@ Assuming you have your font downloaded already which you can do from [Google Fon
 - **font-weight** — are numbers mapped to weight names: **100** (Thin), **200** (Extra Light), **300** (Light), **400** (Normal), **500** (Medium), **600** (Semi Bold), **700** (Bold), **800** (Extra Bold), **900** (Black)
 - **font-display** — determines how a font is displayed depending on if it's loaded, or not
 
-The only thing left to do is serve the fonts which depends on your hosting. Treat them as any other static asset. In general, you want to place them in some public folder. I simply include mine in **public/fonts** for [Next.js](https://nextjs.org/). That way it's a relative path, for example https://joyofcode.xyz/fonts/Inter.woff2.
+The only thing left to do is serve the fonts which depends on your hosting. Treat them as any other static asset. In general, you want to place them in some public folder. I simply include mine in **public/fonts** for [Next.js](https://nextjs.org/). That way it's an absolute path, for example https://joyofcode.xyz/fonts/Inter.woff2.
 
 To use the font simply use it in your CSS, and include a fallback stack of system UI fonts:
 
