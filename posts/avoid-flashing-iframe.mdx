@@ -29,7 +29,7 @@ const iframeElement = document.querySelector('iframe')
 
 editorElement.addEventListener('input', (event) => {
   // get current editor value
-  const html = event.target.value
+  const html = event.target.value;
 
   // update iframe
   iframeElement.srcdoc = `
