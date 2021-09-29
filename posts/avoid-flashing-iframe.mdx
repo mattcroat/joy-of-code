@@ -8,15 +8,15 @@ image: '/images/avoid-flashing-iframe/og-image.webp'
 
 # Avoid Flashing Iframe Inside Your Code Sandbox
 
-In a previous post [Create a Coding Sandbox](https://joyofcode.xyz/create-a-coding-sandbox) we created a simple **code sandbox** from scratch using plain **TypeScript** and it works great but then I noticed something interesting.
+In a [previous post](https://joyofcode.xyz/create-a-coding-sandbox) we created a simple **code sandbox** from scratch using plain **TypeScript** and it works great but then I noticed something interesting.
 
-I was used to the constant iframe flashing on each update when using [Codepen](https://codepen.io/) but when I was playing around in the [Svelte REPL](https://svelte.dev/repl/hello-world) I noticed it doesn't do that — in fact it updates **instantly** without the iframe flashing.
+Whenever you update code on sites such as [Codepen](https://codepen.io/) the **iframe flashes** because it tears down and rebuilds the **DOM** (Document Object Model). When I was using the [Svelte REPL](https://svelte.dev/repl/hello-world) I noticed it doesn't do that — in fact it updates **instantly** without the **iframe flashing**.
 
-At first I thought how could this be? Does it use some clever framework **DOM** (Document Object Model) updates behind the scenes? I was imagining this magical solution when the answer is simpler than you might think.
+At first I wondered how could this be — does it use some clever **DOM** updates behind the scenes? The answer is simpler than you might think.
 
 ## The Flashing Iframe
 
-First let me show you a demonstration of the offending code.
+First let me show you the offending code.
 
 ```html:index.html
 <textarea spellcheck="false"></textarea>
@@ -49,21 +49,20 @@ editorElement.addEventListener('input', (event) => {
   />
 </video>
 
-This is just takes a `<textarea>` input and updates the `srcdoc` attribute of the `<iframe>` creating a minimal possible code sandbox.
+The code just takes a `<textarea>` input and updates the `srcdoc` attribute of the `<iframe>` creating a minimal code sandbox.
 
 In my example I have some basic styles that I haven't included here to keep things simple.
 
 ## The Solution
 
-The **solution** to the flashing iframe is to not update the `srcdoc` each time a change happens but send a **message** from the parent to perform **DOM** manipulation inside the `<iframe>` which causes no refresh.
+The **solution** to the flashing iframe is to not update the `srcdoc` each time a change happens but send a **message** from the parent to perform **DOM** manipulations inside the `<iframe>` which causes no refresh.
 
-We can do this using the [window.postMessage()](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method from the parent `window` and listen for **messages** inside the `<iframe>` using the [message event listener](https://developer.mozilla.org/en-US/docs/Web/API/Window/message_event).
+We can do this using the [window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method from the parent `window` and listen for **messages** inside the `<iframe>` using the [message event listener](https://developer.mozilla.org/en-US/docs/Web/API/Window/message_event).
 
 ```js:app.js
 const editorElement = document.querySelector('textarea')
 const iframeElement = document.querySelector('iframe')
 
-// set `srcdoc` once and listen for any message
 iframeElement.srcdoc = `
   <html>
     <head>
@@ -84,9 +83,9 @@ iframeElement.srcdoc = `
 
 editorElement.addEventListener('input', (event) => {
   // get current editor value
-  const html = event.target.value
+  const value = event.target.value
 
-  // imagine you had different html, css and javascript files
+  // imagine you had different file types
   const html = { type: 'html', value }
 
   iframeElement.contentWindow.postMessage(html, '*')
