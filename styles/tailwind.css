@@ -305,7 +305,7 @@
   }
 
   .prose .remark-code-title {
-    @apply relative px-4 py-2 font-mono font-bold shadow-lg rounded-tl-md left-4 lg:left-0 rounded-tr-md -z-10 w-max bg-highlight text-primary;
+    @apply relative px-4 py-2 font-mono font-bold shadow-lg bg-highlight rounded-tl-md left-4 lg:left-0 rounded-tr-md w-max text-primary;
   }
 
   .prose .token.comment,
