@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 
+import { getDate } from '@/root/utils/date'
 import { Icon } from '@/root/components/shared/Icon'
 import { Modal } from '@/root/components/screens/Editor/Modal'
 
@@ -7,18 +8,6 @@ import { categories } from '@/root/utils/categories'
 import type { CategoryType } from '@/root/types/category'
 
 import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
-
-function getDate() {
-  const [month, day, year] = new Date()
-    .toLocaleString('en', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-    })
-    .split('/')
-
-  return `${year}-${month}-${day}`
-}
 
 export function Editor() {
   const [title, setTitle] = useState<string>('Placeholder')
@@ -81,7 +70,7 @@ export function Editor() {
               Title
             </label>
             <input
-              className="text-white bg-transparent"
+              className="bg-transparent text-body"
               id="title"
               name="title"
               onChange={updateTitle}
@@ -95,7 +84,7 @@ export function Editor() {
               Category
             </label>
             <select
-              className="font-bold bg-transparent"
+              className="font-bold bg-highlight text-primary"
               id="theme"
               name="theme"
               onChange={handleSelect}
@@ -115,7 +104,7 @@ export function Editor() {
             Description
           </label>
           <input
-            className="text-white bg-transparent"
+            className="bg-transparent text-body"
             id="description"
             name="description"
             onChange={updateDescription}
@@ -131,7 +120,7 @@ export function Editor() {
         >
           {'📋'}
         </button>
-        <pre ref={preEl} className="text-white">
+        <pre ref={preEl} className="text-body">
           {`
 ---
 title: ${title}
