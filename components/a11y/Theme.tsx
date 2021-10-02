@@ -33,7 +33,7 @@ export function Theme() {
         Choose a theme
       </label>
       <select
-        className="w-24 p-1 font-bold bg-transparent appearance-none"
+        className="p-1 font-bold text-center bg-transparent appearance-none"
         defaultValue="theme"
         id="theme"
         name="theme"
