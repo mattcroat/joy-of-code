@@ -11,7 +11,6 @@ async function generateSitemap() {
     '!pages/[slug].tsx',
     '!pages/404.tsx',
     '!pages/api',
-    '!pages/editor.tsx',
   ])
 
   const sitemap = `
