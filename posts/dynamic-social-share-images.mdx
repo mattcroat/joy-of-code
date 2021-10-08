@@ -19,17 +19,16 @@ image: '/images/dynamic-social-share-images/og-image.png'
 
 ## Why Use Social Share Images
 
-Using a **social share image** is important to make your content stand out in a feed when you link it on **social media** because it **draws your attention** and creates a large clickable area compared to a simple link.
+Using a **social share image** is important to make your content stand out in a feed when you link it on **social media** because it **draws your attention** and has a large **actionable** area.
 
 <Image
-  height={381}
-  width={447}
+  height={394}
+  width={600}
   src="/images/dynamic-social-share-images/social-card.webp"
   alt="Social card embed"
-  inline={true}
 />
 
-In this post I'm going to show you a simple way how to automate that process, so that you're able to **art direct** and **quickly export** one for your post using what you already know as a developer without involving a **headless browser** and **serverless**.
+In this post I'm going to show you a simple way how to automate that process, so that you're able to **art direct** and **quickly export** one for your post using what you already know as a developer without involving a **headless browser**, or **serverless**.
 
 ## Open Graph Meta Tags
 
@@ -39,7 +38,7 @@ If you're unfamiliar with the [open graph protocol](https://ogp.me/) it's just *
 <meta content="https://joyofcode.xyz/og-image.png" property="og:image" />
 ```
 
-Here is a [Twitter](https://twitter.com/) example that displays the **large card**.
+Here is a [Twitter](https://twitter.com/) example that displays the **large card** for [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/abouts-cards). Other services such as [Discord](https://discord.com/) can decide to also use these.
 
 ```html:example.html
 <meta content="summary_large_image" name="twitter:card" />
@@ -48,7 +47,7 @@ Here is a [Twitter](https://twitter.com/) example that displays the **large card
 
 ## Project Setup
 
-How this is going to work is that we're going to design the **social share image** with plain **HTML** and **CSS** and take an **optimized image** of it that we can save.
+We're going to design the **social share image** with plain **HTML** and **CSS**, then take an **optimized image** of it that we can save.
 
 <Image
   height={778}
@@ -76,7 +75,7 @@ Let's add some markup in `index.html`.
 
 ```html:index.html
 <div class="social" data-social>
-  <span class="social-site" contenteditable>Site</span>
+  <span class="social-site" contenteditable>Joy of Code</span>
   <h1 class="social-title" contenteditable>Post Title</h1>
 </div>
 
@@ -85,9 +84,7 @@ Let's add some markup in `index.html`.
 
 Thanks to the `contenteditable` attribute we can directly edit the text inside the element. We have to disable `:focus` because in **Chrome** it displays an outline which is going to end up in the final image.
 
-For the styles we have to define a `width` and `height` of **1200x630** recommended by **Facebook** for **social share images**. We're going to do some simple styles and add a design element for interest that can be **SVG**, or a simple shape using **CSS**.
-
-Feel free to experiment with the design of your card. You can find a lot of cool patters from places such as [Hero Patterns](https://www.heropatterns.com/), or use any **SVG** illustration you like.
+For the styles we have to define a `width` and `height` of **1200x630** recommended by **Facebook** for **social share images**. We're going to add some simple styles and add a design element for interest that can be a **SVG**, or a simple shape using **CSS**.
 
 <Image
   height={630}
@@ -96,7 +93,7 @@ Feel free to experiment with the design of your card. You can find a lot of cool
   alt="Description"
 />
 
-Here are the styles. 💅
+Feel free to experiment with the design of your card. You can find a lot of cool patterns from places such as [Hero Patterns](https://www.heropatterns.com/) and [unDraw](https://undraw.co/illustrations), or use any **SVG** illustration site you like.
 
 ```css:styles.css
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -110,9 +107,9 @@ Here are the styles. 💅
 :root {
   --font-sans: 'Inter', sans-serif;
 
-  --dark-10: hsl(220 20% 10%);
-  --dark-14: hsl(220 20% 14%);
-  --light-98: hsl(0 0% 98%);
+  --gray-10: hsl(220 20% 10%);
+  --gray-14: hsl(220 20% 14%);
+  --white-98: hsl(0 0% 98%);
   --blue-50: hsl(240 100% 50%);
   --purple-25: hsl(300 100% 25%);
 
@@ -131,8 +128,8 @@ body {
   place-content: center;
   justify-items: start;
   font-family: var(--font-sans);
-  color: var(--light-98);
-  background-color: var(--dark-14);
+  color: var(--white-98);
+  background-color: var(--gray-14);
 }
 
 button {
@@ -141,8 +138,8 @@ button {
   margin: var(--spacing-2) 0;
   font-size: 1.4rem;
   font-weight: bold;
-  color: var(--light-98);
-  background-color: var(--dark-10);
+  color: var(--white-98);
+  background-color: var(--gray-10);
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
@@ -166,7 +163,7 @@ button::before {
   align-items: flex-start;
   justify-content: space-between;
   padding: var(--spacing-2);
-  background-color: var(--dark-10);
+  background-color: var(--gray-10);
   overflow: hidden;
   z-index: 10;
 }
@@ -191,8 +188,8 @@ button::before {
   padding: var(--spacing-1) var(--spacing-2);
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--dark-10);
-  background-color: var(--light-98);
+  color: var(--gray-10);
+  background-color: var(--white-98);
   border-radius: var(--radius);
 }
 
@@ -241,17 +238,16 @@ This is going to happen each time you press **Save**.
 ```ts:src/main.ts
 async function saveImage(node: HTMLElement) {
   try {
-    // options
-    const options = { width: 1200, height: 630 }
     // create Blob from node
-    const imageBlob = (await htmlToImage.toBlob(node, options)) as File
+    const imageOptions = { width: 1200, height: 630 }
+    const imageBlob = (await htmlToImage.toBlob(node, imageOptions)) as File
 
     // pass Blob and the quality option to be compressed
-    const compressedFile = await imageCompression(imageBlob, {
-      initialQuality: 1,
-    })
+    const compressionOptions = { initialQuality: 1 }
+    const compressedFile = await imageCompression(imageBlob, compressionOptions)
+
     // create URL from Blob
-    const imageUrl = URL.createObjectURL(compressedFile)
+    const imageUrl = window.URL.createObjectURL(compressedFile)
 
     // download image
     const linkElement = document.createElement('a')
@@ -266,10 +262,10 @@ async function saveImage(node: HTMLElement) {
 
 Depending how complex your image is the size may vary. In this example before **compression** the size is around **76 kB** and after compression it's around **14 kB**.
 
-The design I use for the site has a size of **400 kB** before compression and **100 kB** after. You can have a look at [what I use for the site to create posts](https://postcreator.netlify.app/) that generates the **image** and post **frontmatter**. Here's the [source code to the repository](https://github.com/mattcroat/post-meta-creator).
+The design I use for [Joy of Code](https://joyofcode.xyz/) has a size of **400 kB** before compression and **100 kB** after. You can have a look at [what I use for the site to create posts](https://postcreator.netlify.app/) that generates the **image** and post **front matter**. Here's the [source code to the repository](https://github.com/mattcroat/post-meta-creator).
 
 ## Conclusion
 
-You can deploy this to anywhere like [Netlify](https://www.netlify.com/) by simply pointing to your repository since it's just a **static site** and you're not using a server.
+If you want to preview how your card looks on different sites use [Social Share Preview](https://socialsharepreview.com/). You can deploy this to anywhere like [Netlify](https://www.netlify.com/) by simply pointing to your repository since it's just a **static site**.
 
 Thanks for reading! 🏄‍♀️
