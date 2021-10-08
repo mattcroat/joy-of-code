@@ -145,7 +145,7 @@ export function Card({ category, title, slug, featured }: CardProps) {
               <div className="absolute z-10 text-white right-4 top-4">
                 <Icon className="w-8 h-8" icon={category} />
               </div>
-              <span className="absolute z-10 w-4/5 p-2 text-3xl font-bold tracking-tight text-white bottom-4 lg:text-4xl text-shadow left-4 max-h-48">
+              <span className="absolute z-10 p-2 font-bold tracking-tight text-white bottom-4 text-shadow left-4 card-title">
                 {title}
               </span>
             </div>

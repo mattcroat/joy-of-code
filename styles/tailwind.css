@@ -212,6 +212,10 @@
     @apply font-openDyslexicMono;
   }
 
+  html[data-font='accessible'] .card-title {
+    @apply w-[94%];
+  }
+
   body {
     height: 100%;
     font-family: theme('fontFamily.sans');
@@ -248,6 +252,10 @@
   ul > li div,
   button div {
     cursor: url('/images/cursor-pointer.webp'), pointer;
+  }
+
+  .card-title {
+    @apply w-[80%] text-3xl;
   }
 
   .prose {
