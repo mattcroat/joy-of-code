@@ -291,7 +291,7 @@ Here's a component.
 <Counter />
 ```
 
-````md:post-2.mdx
+```md:post-2.mdx
 ---
 title: Second Post
 description: This is the second post
@@ -305,16 +305,16 @@ image: '/images/post-2/social-image.png'
 
 This is the second post.
 
-```js:example.js {2} showLineNumbers
+``js:example.js {2} showLineNumbers
 function greeting() {
   console.log('Hello, World')
 }
-```
+``
 
 If you had an image:
 
 ![Description](/images/post-2/image.webp)
-````
+```
 
 You should store images in `public/images` because that's where you store **static assets**. From there if you want to use an image don't include `public` in the path but just `/images/post-2/image.webp` because **Next.js** is going to serve it from [http://localhost:3000/images/post-2/image.webp](http://localhost:3000/images/post-2/image.webp).
 
