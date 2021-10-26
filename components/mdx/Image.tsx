@@ -1,23 +1,15 @@
 import { useRef, useState } from 'react'
-import NextImage from 'next/image'
 
 import { useIntersectionObserver } from '@/root/hooks/useIntersectionObserver'
 
 interface ImageProps {
-  height?: number
-  width?: number
+  height: number
+  width: number
   src: string
   alt: string
-  inline?: boolean
 }
 
-export function Image({
-  height = 300,
-  width = 1000,
-  src,
-  alt,
-  inline = false,
-}: ImageProps) {
+export function Image({ height, width, src, alt }: ImageProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const imageRef = useRef<HTMLDivElement>(null)
 
@@ -27,32 +19,14 @@ export function Image({
     enabled: true,
   })
 
-  if (inline) {
-    return (
-      <div ref={imageRef} className="sm:my-8">
-        {isVisible && (
-          <NextImage
-            alt={alt}
-            height={height}
-            layout="intrinsic"
-            src={src}
-            unoptimized={true}
-            width={width}
-          />
-        )}
-      </div>
-    )
-  }
-
   return (
-    <div ref={imageRef} className="text-center xl:mx-[-10%] sm:my-8">
+    <div ref={imageRef}>
       {isVisible && (
-        <NextImage
+        <img
           alt={alt}
+          className="mx-auto overflow-hidden rounded-lg sm:my-8"
           height={height}
-          layout="intrinsic"
           src={src}
-          unoptimized={true}
           width={width}
         />
       )}

@@ -35,7 +35,7 @@ export function Post({ content, frontMatter }: PostProps) {
       type="article"
     >
       <FadeIn duration={1000}>
-        <div className="mx-auto max-w-[80ch]">
+        <div className="mx-auto max-w-[70ch]">
           <div className="prose">
             <MDXRemote {...content} components={MDXComponents} />
           </div>

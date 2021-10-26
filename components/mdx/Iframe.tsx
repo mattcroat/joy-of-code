@@ -39,7 +39,7 @@ export function Iframe({
 
         {shouldLoad && isVisible && (
           <iframe
-            className="w-full bg-white sm:my-8 xl:w-[120%] xl:mx-[-10%]"
+            className="w-full bg-white rounded-lg sm:my-8 xl:w-[120%] xl:mx-[-10%]"
             height={height}
             src={src}
             title={title}
@@ -53,7 +53,7 @@ export function Iframe({
     <div ref={iframeRef}>
       {isVisible && (
         <iframe
-          className="w-full bg-white sm:my-8 xl:w-[120%] xl:mx-[-10%]"
+          className="w-full bg-white rounded-lg sm:my-8 xl:w-[120%] xl:mx-[-10%]"
           height={height}
           src={src}
           title={title}

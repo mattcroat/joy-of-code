@@ -243,7 +243,7 @@
   }
 
   p {
-    @apply text-lg leading-loose md:text-xl text-body;
+    @apply text-lg leading-relaxed md:text-xl text-body;
   }
 
   a,
@@ -271,7 +271,7 @@
   }
 
   .prose p {
-    @apply my-8 leading-loose;
+    @apply my-6 leading-relaxed;
   }
 
   .prose a {
@@ -280,7 +280,7 @@
 
   .prose ul,
   .prose ol {
-    @apply my-8 space-y-4 text-lg md:text-xl md:leading-loose;
+    @apply my-6 text-lg md:text-xl md:leading-loose;
   }
 
   .prose ul {
