@@ -1,100 +1,70 @@
 ---
 title: Create a Markdown Blog Using Next.js
-description: Description
+description: Learn how to create a Markdown blog using Next.js
 published: '2021-10-25'
 category: 'next'
-image: '/images/create-a-markdown-blog/og-image.webp'
+image: '/images/create-a-markdown-blog/social-image.png'
 ---
 
 # Create a Markdown Blog Using Next.js
 
 <Iframe title="JavaScript Sandbox" src="https://thedigitalgarden.vercel.app/" />
 
+You can view the entire site at [The Digital Garden](https://thedigitalgarden.vercel.app/) and view the [source code on GitHub](https://github.com/JoysOfCode/markdown-blog).
+
 ## Table of Contents
 
-1.  [Everyone Should Write](#everyone-should-write)
-2.  [Your Digital Garden](#your-digital-garden)
-3.  [The Stack](#the-stack)
-4.  [Project Setup](#project-setup)
-5.  [Next.js Folder Structure](#nextjs-folder-structure)
-6.  [Next.js File System Based Router](#nextjs-file-system-based-router)
-7.  [Showing Posts](#showing-posts)
-8.  [Markdown Plugins](#markdown-plugins)
-9.  [Markdown Component Substitution](#markdown-component-substitution)
-10. [Markdown Plugins](#markdown-plugins)
-11. [List Sorted Posts](#list-sorted-posts)
-12. [Post Categories](#post-categories)
-13. [Navigation](#navigation)
-14. [SEO](#seo)
-15. [Styles](#styles)
-16. [Layout](#layout)
-17. [Dark Mode](#dark-mode)
-18. [Deploy](#Deploy)
-19. [Conclusion](#Conclusion)
-
-## Everyone Should Write
-
-**There is always going to be more beginners than experts.**
-
-Writing posts isn't reserved for experts. Everyone should write posts regardless of their skill level because when you have to explain a concept to someone else you have to understand it yourself.
-
-**Writing posts shouldn't be a chore.**
-
-Writing is a creative process and you shouldn't feel like writing a book but sharing whatever you learned with others. **The best way to learn is by teaching others.**
-
-I don't want to just share knowledge how to write a blog but give you control and ownership over it.
-
-Despite the popular platforms for web developers to author and share content with others I strongly believe that you should have your own place on the internet — your own **digital garden.**
+- [Your Digital Garden](#your-digital-garden)
+- [List of Features](#list-of-features)
+- [How Does it Work](#how-does-it-work)
+- [Project Setup](#project-setup)
+- [Next.js Folder Structure](#nextjs-folder-structure)
+- [Next.js File System Based Router](#nextjs-file-system-based-router)
+- [Showing Posts](#showing-posts)
+- [Markdown Plugins](#markdown-plugins)
+- [Markdown Component Substitution](#markdown-component-substitution)
+- [Markdown Plugins](#markdown-plugins)
+- [List Sorted Posts](#list-sorted-posts)
+- [Post Categories](#post-categories)
+- [Navigation](#navigation)
+- [SEO](#seo)
+- [Styles](#styles)
+- [Layout](#layout)
+- [Dark Mode](#dark-mode)
+- [Deploy](#Deploy)
+- [Conclusion](#Conclusion)
 
 ## Your Digital Garden
 
-I set out to create something that I would personally use based on my experience.
+Despite popular platforms for developers to author and share content with others I strongly believe that you should have your own place on the internet — your own **digital garden.**
 
-The reason why I want you to **understand every part of your blog is because that's another thing you can learn through, modify and extend.**
+I set out to create something that I would want to use based on what I think a markdown blog should have. Understanding every part of your site is another excuse to **learn, modify and extend**.
 
 The reason why I don't use [Gatsby](https://www.gatsbyjs.com/) is because it's **easy but not simple** meaning you can probably set up a blog in minutes like [Wordpress](https://wordpress.org/) but you don't understand how any of it works because the abstraction is so high.
 
-For this reason I'm using [Next.js](https://nextjs.org/) because while you have to do more work you get to learn a lot more and don't rely as much on the ecosystem.
+For this reason I'm using [Next.js](https://nextjs.org/) because while you have to do more work you get to learn a lot more. Having more code doesn't mean it's more complicated — in fact you're going to be surprised how little code we're going to write.
 
-**Complex doesn't mean more code.** In fact you're going to be surprised how little code we're going to write.
+More importantly most of what I'm going to show you is **meta-framework agnostic** meaning you can use what you learn with other framewors.
 
-More importantly most of what I'm going to show you is **framework agnostic** meaning you can use what you learn with **Vue**, or **Svelte**.
+Understanding **React** is required but I'm going to try to keep it beginner friendly if you never used **Next.js** before and we're going to be using **TypeScript** which is **optional**, so you can completely ignore it and just use **JavaScript**.
 
-Understanding of **React** is required but I'm going to try to keep it beginner friendly if you never used **Next.js** before and we're going to be using **TypeScript** which is optional, so you can completely ignore it and just use **JavaScript** with the `.js`, or `.jsx` extension for your files.
+## List of Features
 
-[Markdown](https://daringfireball.net/projects/markdown/) is very popular because it's easy to author content, so we don't have to write **HTML** by hand or use a [WYSWYG](https://en.wikipedia.org/wiki/WYSIWYG) solution that can't keep up with you.
-
-We're going to use [MDX](https://mdxjs.com/) (JSX in **Markdown**) that lets you use **React** components inside **Markdown**. Imagine writing about something and having the user learn through interacting with it.
-
-**These are the features I want from a Markdown blog:**
+These are the features I expect a **Markdown** blog to have:
 
 - **Dark mode**
 - **MDX** for a rich user experience
-- **Syntax highlight** with line numbers, line highlight and copying code to the clipboard
+- **Syntax highlight** (**line numbers**, **line highlight** and **copying code** to the clipboard)
 - **List posts** by oldest to newest
 - **Filter posts** by category
-- **Meta tags** (SEO and social share images)
+- **Meta tags** (**SEO** and **social share images**)
 - **Table of contents** autogenerated from headings
 - **Tables** and other extended **Markdown** features from [GitHub Flavored Markdown](https://github.github.com/gfm/)
 - **Smart typography** (real quotes and ellipses)
 
-## The Stack
+## How Does it Work
 
-Before we start let me explain how the site works so you get an idea of what we're going to build and how we're going to deploy it.
-
-The site itself is **static generated** meaning **Next.js** is going to build the entire site and it's assets in advance at **build time** when it deploys to **Vercel** to be super fast and cached by it's [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) (content delivery network).
-
-**Static** doesn't mean not interactive because it's using **React**. You might be familiar with the term from other site builders where it just means to output **HTML**, **CSS** and **JavaScript**. This is not the case with **Next.js**.
-
-For the styles we're going to use a **CSS-in-JS** solution [styled-jsx](https://github.com/vercel/styled-jsx) mostly because it works out of the box with **Next.js** and using it is similar to a single file component you see in **Vue**, or **Svelte**. If you want highlighting and code completion there's [styled-jsx Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=Divlo.vscode-styled-jsx-syntax) and [styled-jsx Language Server](https://marketplace.visualstudio.com/items?itemName=Divlo.vscode-styled-jsx-languageserver) extension for [VS Code](https://code.visualstudio.com/) but it's optional.
-
-Nothing here is specific to **CSS-in-JS** other than giving us **scoped styles**, so feel free to use any **CSS** solution with **React** you prefer.
-
-For deployment we're going to use **Vercel** which has a free generous tier. The best part is that it doesn't cost anything. Whenever we push to **GitHub** it's going to trigger a deploy to **Vercel** but we're going to cover that later.
-
-I wanted to eliminate reliance on third-party sites and database setups. That's why we're going to store everything on **GitHub**. It can't get any simpler.
-
-This is a simplified diagram of how the site works.
+We're going to create the **URL slug** from the post title and have **Next.js** build the page for us for every post.
 
 <Image
   height="314px"
@@ -103,7 +73,31 @@ This is a simplified diagram of how the site works.
   alt="Site diagram"
 />
 
-We're going to create the **URL slug** from the post title and have **Next.js** do it for us for every post.
+**Markdown**
+
+[Markdown](https://daringfireball.net/projects/markdown/) is popular because it's easy to author content, so we don't have to write **HTML** by hand or use a clumsy [WYSWYG](https://en.wikipedia.org/wiki/WYSIWYG) solution that can't keep up with your intent.
+
+**MDX**
+
+We're going to use [MDX](https://mdxjs.com/) (JSX in **Markdown**) that lets you use **React** components inside **Markdown**.
+
+**Static Generated**
+
+The site itself is **static generated** meaning **Next.js** is going to build the entire site in advance at **build time** when it deploys to **Vercel** meaning it's going to be fast once it's cached on their [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) (content delivery network).
+
+**Static** doesn't mean not interactive. You might be familiar with the term from other site builders where it just means to output **HTML**, **CSS** and **JavaScript**. This is not the case with **Next.js**.
+
+**Styles**
+
+For the styles we're going to use a **CSS-in-JS** solution [styled-jsx](https://github.com/vercel/styled-jsx) mostly because it works out of the box with **Next.js** and using it is similar to a **single file component** if you ever used **Vue**, or **Svelte**.
+
+If you want highlighting and code completion there's [styled-jsx Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=Divlo.vscode-styled-jsx-syntax) and [styled-jsx Language Server](https://marketplace.visualstudio.com/items?itemName=Divlo.vscode-styled-jsx-languageserver) extension for [VS Code](https://code.visualstudio.com/) but it's optional (I expect you to use your prefered styling method).
+
+Nothing here is specific to **CSS-in-JS** other than giving us **scoped styles**, so feel free to use any **CSS** solution for **React** you prefer.
+
+**Deployment**
+
+For deployment we're going to use **Vercel**, so whenever we push to **GitHub** it's going to trigger a deploy to **Vercel**.
 
 ## Project Setup
 
@@ -121,12 +115,14 @@ Start the development server and the page should be available at [http://localho
 npm run dev
 ```
 
-Let's **remove** things we're not going to use:
+There's a couple of things we don't need, so let's remove:
 
 - **api** folder inside **pages**
 - Everything inside the **styles** folder
 - Styles import in **pages/\_app.tsx**
 - Everything inside **pages/index.tsx**
+
+After that change the contents of `index.tsx`. After you're done you should see **Home** on your page.
 
 ```tsx:pages/index.tsx
 export default function Home() {
@@ -134,9 +130,9 @@ export default function Home() {
 }
 ```
 
-You should see **Home** on your page. We're going to come back to this page later.
+Let's also set up [module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases) inside `tsconfig.json`, so we can import things **relative to the root of our project**.
 
-Let's also set up [module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases) inside `tsconfig.json`, so we can import things **relative to the root of our project** using `'@/root/components/Component'` instead of `../../Component'` as an example.
+For example instead of doing `../../Component'` you can do `'@/root/components/Component'`.
 
 ```json:tsconfig.json
 {
@@ -151,56 +147,65 @@ Let's also set up [module path aliases](https://nextjs.org/docs/advanced-feature
 }
 ```
 
-You can set as many **module path aliases** as you want. Some people prefer to have special paths for **components**, **styles** and other things but I prefer keeping it simple.
-
-You might need to restart your development server.
+You can set as many **path aliases** as you want. Some people prefer to have special paths for **components**, **styles** and other things but I prefer keeping it simple.
 
 ## Next.js Folder Structure
 
-Here is an explanation of the **Next.js** folder structure:
+Here is an explanation of the **Next.js** folder structure.
 
 **.next**
+
 **Next.js** cache and build output.
 
 **pages**
-**Next.js** uses a **file-system based router** where every file you create is a page like in **PHP**. For example `about.tsx` would map to `http://localhost:3000/about`. You can also have **dynamic routing** and it's awesome.
 
-**Next.js** has special files **\_app.tsx** that gives you control over every page because it acts like a wrapper and **\_document.tsx** to get access to the `<html>` and `<body>` tags which we're going to use later when implementing dark mode because of how **server-side hydration** works causing flashing on page reload.
+**Next.js** uses a **file-system based router** where every file you create is a page like in **PHP**. For example `pages/about.tsx` would map to `http://localhost:3000/about`. You can also have **dynamic routing** and it's awesome.
+
+**Next.js** has special files **\_app.tsx** that acts like a wrapper around every page and **\_document.tsx** to get access to the `<html>` and `<body>` tags.
 
 **api**
-Holds your **API endpoints** using serverless functions meaning you don't need to use a real server for simple things.
 
-Take for example scraping a site and serving the **JSON** as a response you can render in your frontend, or storing it inside a database. You can't create, or write to files since serverless functions don't have storage because they spin up once per request.
+Holds your **API endpoints** using **serverless functions** meaning you don't need to use a real server for simple things.
+
+You can scrape a site and serve the **JSON** as a response you can render in your **frontend**, or **store it inside a database**. You **can't** create, or write to files since **serverless functions** don't have storage because they spin up once per request.
 
 **public**
-Hold your **static assets** such as images.
+
+Holds your **static assets** such as images.
 
 **styles**
+
 Your **CSS** but it's not convention.
 
 **eslintrc.json**
+
 **ESLint** linting rules.
 
 **next-env.d.ts**
+
 Makes sure **Next.js** types are picked up by **TypeScript**.
 
 **next.config.js**
-Let's you extend the **Next.js** config such **Webpack** without having to eject.
+
+Let's you extend the **Webpack** config for **Next.js** without having to **eject**.
 
 **tsconfig.json**
+
 **TypeScript** compiler options. You're going to use **jsconfig.json** if you're using **JavaScript**.
 
-I want to note that some things like `pages` are convention in **Next.js** but other things like styles and where you place your components are unopinionated.
+I want to note that some things like `pages` are convention in **Next.js** but other things like **styles** and where you place your components are unopinionated.
 
 ## Next.js File System Based Router
 
-We need a way to generate pages when we build our site. It would be a chore to create a new page for every post by hand like `pages/post1.tsx`, `pages/post2.tsx` and so on.
+We need a way to generate pages when we build our site.
 
-Remember how I said we could have **dynamic routes**?
+Imagine what a chore it would be if we created a new page for every post like `pages/post1.tsx`, `pages/post2.tsx`.
 
-We can instead create a **dynamic route** `pages/[slug].tsx`, so that we can create pages on the fly based on the posts we create.
+We can instead create a **dynamic route** such as `pages/[slug].tsx`, so that we can create pages on the fly based on the posts we create.
 
 We're going to get those paths from the **file system** because we can use **Node.js** inside **Next.js** pages.
+
+This is possible because **Next.js** exposes **special functions** we can only use inside a page such as `getStaticPaths` and `getStaticProps` where we can **pre-render the page at build time**.
 
 <Image
   height="496px"
@@ -209,7 +214,7 @@ We're going to get those paths from the **file system** because we can use **Nod
   alt="Next.js page render"
 />
 
-This is possible because **Next.js** exposes **special functions** we can only use inside a page such as `getStaticPaths` and `getStaticProps` where we can **pre-render the page at build time**.
+This is how it looks inside **Next.js**.
 
 ```tsx:pages/[slug].tsx
 export default function Post(props) {
@@ -239,11 +244,11 @@ In the above example since we created `[slug].tsx` **Next.js** expects us to spe
 
 This means we generate the **paths** and **props** in advance. The **props** are then sent to the **component** like regular **props**.
 
-**Next.js** is flexible, so we can specify per page if we want it to be **SSG** (server-side generated) meaning **Next.js** builds the pages during **build time**, or **SSR** (server-side rendered) using `getServerSideProps` where you have to request the page from the server which we aren't going to use since we're creating a **static** Markdown blog.
+**Next.js** is flexible, so we can specify per page if we want it to be **SSG** (server-side generated) meaning **Next.js** builds the pages during **build time**, or **SSR** (server-side rendered) using `getServerSideProps` where you have to request the page from the server.
 
-The best part is since this code gets executed **server-side** in **Node.js** land in some **ephemeral serverless function** it's not part of the bundle.
+Since this code gets executed **server-side** in **Node.js** land in some **ephemeral serverless function** it's not part of the bundle.
 
-**Next.js** is just **React** with a couple of extra things with a great developer experience. Hope this brief introduction to **Next.js** made sense but if you want to learn **Next.js** hit up the [Next.js basics](https://nextjs.org/learn/basics/create-nextjs-app).
+**Next.js** is just **React** with a couple of extra things with a great developer experience. This was just a brief introduction to **Next.js** but if you want to learn **Next.js** hit up the [Next.js basics](https://nextjs.org/learn/basics/create-nextjs-app).
 
 ## Showing Posts
 
@@ -263,8 +268,6 @@ Inside `posts` we're going to create at least two folders with posts following t
 
 - `posts/post-1/post-1.mdx`
 - `posts/post-2/post-2.mdx`
-
-We create folders for every post mainly because of organization because we might have components inside.
 
 At the top of every **Markdown** file we're going to include the **title**, **description**, **published**, **category**, **slug** and **social share image** metadata that we can parse as **front matter**.
 
@@ -305,28 +308,22 @@ image: '/images/post-2/social-image.png'
 
 This is the second post.
 
-``js:example.js {2} showLineNumbers
-function greeting() {
-  console.log('Hello, World')
-}
-``
-
 If you had an image:
 
 ![Description](/images/post-2/image.webp)
 ```
 
-You should store images in `public/images` because that's where you store **static assets**. From there if you want to use an image don't include `public` in the path but just `/images/post-2/image.webp` because **Next.js** is going to serve it from [http://localhost:3000/images/post-2/image.webp](http://localhost:3000/images/post-2/image.webp).
+If you want to use an image don't include `public` in the path but just `/images/post-2/image.webp` because **Next.js** is going to serve it from [http://localhost:3000/images/post-2/image.webp](http://localhost:3000/images/post-2/image.webp).
 
-I'm not going to include any **social share images** here but in my other post I explain how you can automate creating [dynamic social share images](https://joyofcode.xyz/dynamic-social-share-images) and later I'm going to show you what `<meta>` tags to include.
+I'm not going to include any **social share images** here but in my other post I explain how you can [automate creating dynamic social share images](https://joyofcode.xyz/dynamic-social-share-images) and later I'm going to show you what `<meta>` tags to include.
 
 If you just want to know the dimensions it should be **1200px** by **630px** in size. If you're going to do it yourself use [Figma](https://www.figma.com/).
 
-Let's also add a simple counter component for `post-1`:
+We're going to include a component for `post-1`:
 
 - `posts/post-1/Counter.tsx`
 
-```tsx:Counter.tsx
+```tsx:posts/post-1/Counter.tsx
 import { useState } from 'react'
 
 export function Counter() {
@@ -341,7 +338,7 @@ export function Counter() {
 }
 ```
 
-Create `[slug].tsx` inside the `pages` directory that's going to be responsible for our posts.
+Create `[slug].tsx` inside the `pages` directory that's going to be responsible for our posts:
 
 - `pages/[slug].tsx`
 
@@ -421,14 +418,13 @@ export async function getStaticProps({ params }) {
     },
   }
 }
-
 ```
 
 `getStaticProps` taks a `context` argument from where we destructure `params`.
 
 After we parse the post using `bundleMDXFile` we get the bundled `code` that we can use on the frontend to create a component using `getMDXComponent`.
 
-We also have `metadata` from the **front matter** we can use for **SEO**.
+We also have `metadata` from the **front matter** we can use for **SEO** later.
 
 ```tsx:pages/[slug].tsx
 import { useMemo } from 'react'
@@ -455,7 +451,7 @@ If you navigate to [http://localhost:3000/post-1](http://localhost:3000/post-1) 
   alt="MDX component"
 />
 
-This took no code at all and we have a working blog that we can understand how it works completely.
+This took no code at all and we have a working blog that we understand how it works completely.
 
 This is how `[slug].tsx` should look like.
 
@@ -519,15 +515,15 @@ export async function getStaticProps({ params }: Params) {
 
 ```
 
-I don't expect everything to be clear to you and that's why I urge you to `console.log` everything to see how it works — keep in mind logs inside special **Next.js** functions only show inside your **terminal** because it happens on the server (I still fall for that one).
+I urge you to `console.log` everything to see how it works — keep in mind logs inside special **Next.js** functions only show inside your **terminal** because it happens on the server (I still fall for that one).
 
 ## Markdown Plugins
 
-There's a bunch of awesome **Markdown** plugins we can use. There's [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md) that process **Markdown** and [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md) that process **HTML** after it's converted from **Markdown**.
+There's [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md) that process **Markdown** and [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md) that process **HTML** after it's converted from **Markdown**.
 
-Don't be confused by the difference, if you find a plugin you want to use just run with it.
+Don't be confused by the difference. If you find a **plugin** you want to use it's either going to be one of them. You're going to have to figure out if they work or don't.
 
-We're going to include a bunch of useful plugins from **syntax highlight** to generating a **table of contents**.
+We're going to include useful **plugins** from **syntax highlight** to generating a **table of contents**.
 
 ```shell:terminal
 npm i rehype-code-titles rehype-image-placeholder rehype-prism-plus remark-gfm remark-autolink-headings remark-slug @silvenon/remark-smartypants remark-toc remark-unwrap-images
@@ -600,17 +596,18 @@ export async function getStaticProps({ params }: Params) {
 }
 ```
 
-If you want to see the plugins features head over to the [features page](https://thedigitalgarden.vercel.app/features) of the finished project.
+If you want to see what the plugins do head over to the [features page](https://thedigitalgarden.vercel.app/features) of the finished project.
 
-Brief aside, since some of the plugins don't have types we have to apease **TypeScript** by creating `types/global.d.ts` and say they exist.
+Since some of the **plugins** don't have types we have to apease **TypeScript** by creating `types/global.d.ts` and say they exist.
 
-```ts:global.d.ts
+```ts:types/global.d.ts
 declare module '@silvenon/remark-smartypants'
+declare module 'rehype-image-placeholder'
 ```
 
 While we're here, let's create `types/post.ts` and use that type instead of `any` for `PostProps`.
 
-```ts:post.ts
+```ts:types/post.ts
 export interface Post {
   category: string
   description: string
@@ -720,12 +717,11 @@ export default function Image({
     </div>
   )
 }
-
 ```
 
-We're just passing basic `src` and `alt` image props alongside additional props we get from using the image plugin that gives us the `width` and `height` with the `blurDataURL` for the placeholder.
+We're just passing basic `src` and `alt` image props alongside additional props we get from using the **image plugin** that gives us the `width` and `height` with the `blurDataURL` for the placeholder.
 
-After that we're just doing a simple zoom effect like you see on **Medium** when the image is loaded and `next/image` takes care of everything else.
+After that we're just doing a simple zoom effect like you see on some sites when the image is loaded and `next/image` takes care of everything else.
 
 If this is the first time you're seeing `styled-jsx` the only thing you have to know is that the styles only apply to the single component but you can also specify a `global` attribute.
 
@@ -784,7 +780,6 @@ export default function CodeBlock({ children }: CodeBlockProps) {
     </div>
   )
 }
-
 ```
 
 We're using a `ref` to get the contents of the `<pre>` element and copy the contents to the **clipboard** using the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API).
@@ -805,7 +800,7 @@ const mdxComponents = {
 export default mdxComponents
 ```
 
-I also like to create a `index.ts` to export everything, so we can import from `components/mdx` instead of `components/mdx/mdxComponents`:
+I also like to create a `index.ts` to export everything, so we can import doing `components/mdx` instead of `components/mdx/mdxComponents`:
 
 - `components/mdx/index.ts`
 
@@ -813,7 +808,7 @@ I also like to create a `index.ts` to export everything, so we can import from `
 export { default } from './MDXComponents'
 ```
 
-Import it in `[slug].tsx` and pass it to `Component` using the `components` prop.
+Import `mdxComponents` in `[slug].tsx` and pass it to `Component` using the `components` prop.
 
 ```tsx:pages/[slug].tsx
 // ...
@@ -950,15 +945,17 @@ Now if you navigate to [http://localhost:3000/](http://localhost:3000/) you can 
 
 ## Post Categories
 
-At some point we're going to have a couple of posts, so it would be nice being able to filter them by category for example when a user visits [http://localhost:3000/category/javascript](http://localhost:3000/category/javascript) it should only show **JavaScript** posts.
+At some point we're going to have a couple of posts, so it would be nice being able to filter them by category.
 
-To create such a path we can just create a `category` folder inside `pages` with `[category].tsx` inside.
+For example when a user visits [http://localhost:3000/category/javascript](http://localhost:3000/category/javascript) it should only show **JavaScript** posts.
+
+To create such a path we can create a `category` folder inside `pages` with `[category].tsx` inside:
 
 - `pages/category/[category].tsx`
 
 To achieve this we're going to use the `category` field from the post **front matter** and filter the posts based on it.
 
-We're going to keep a list of categories to create **paths** from:
+We're going to keep a list of categories to create **paths** from.
 
 ```ts:example.ts
 const categories = ['html', 'css', 'javascript'] as const
@@ -1040,11 +1037,10 @@ export async function getStaticProps(context: Context) {
 }
 ```
 
-This is how `[category].tsx` should look.
+This is how `[category].tsx` looks.
 
 ```tsx:pages/category/[category].tsx
 import { bundleMDXFile } from 'mdx-bundler'
-import { cwd } from 'process'
 import { readdirSync } from 'fs'
 
 import { Post } from '@/root/types/post'
@@ -1094,7 +1090,7 @@ export async function getStaticProps(context: Context) {
   const { category } = context.params
 
   // get the post paths
-  const currentDirectory = cwd()
+  const currentDirectory = process.cwd()
   const postFoldersPath = `${currentDirectory}/posts`
   const postFolders = readdirSync(postFoldersPath)
   const postPaths = postFolders.map(
@@ -1127,11 +1123,9 @@ export async function getStaticProps(context: Context) {
 }
 ```
 
-If you head over to [http://localhost:3000/category/javascript](http://localhost:3000/category/javascript) you can see our posts.
+If you head over to [http://localhost:3000/category/javascript](http://localhost:3000/category/javascript) you can see the posts.
 
-Create more posts with more categories if you want.
-
-You can even change the code so it works with multiple categories. For example if you had `category: 'javascript, tips'` inside the **front matter** you could `split` the string to get posts that are of type **JavaScript** and **tips** for your `javascript-tips` page.
+You can treat the **categories** as **tags** if for example you had `category: 'javascript, tips'` in your **front matter** you could `split` the string and get posts that are of type **JavaScript** and **tips** for your `javascript-tips` page.
 
 ## Navigation
 
@@ -1274,6 +1268,8 @@ If you're curious how **syntax highlight** works it's simple. Using the **Markdo
 I did the tedious job of turning everything I can into [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) from the **font family**, **colors** and **spacing** to **tokens**, so you can create your own themes.
 
 We're going to separate the styles because they're long and it's going to be easier to manage.
+
+All the variables including **tokens** are inside `style.ts`.
 
 Inside the `styles` folder create:
 
@@ -1580,8 +1576,6 @@ const styles = css.global`
 export default styles
 ```
 
-All the variables including **tokens** are inside `style.ts`.
-
 ```css:styles/prism.ts
 import css from 'styled-jsx/css'
 
@@ -1743,8 +1737,6 @@ export default prism
 
 ## Layout
 
-Now that we have everything things can come together inside our layout.
-
 This is the general layout of the site but for posts we use a grid where we extend images and code blocks outside the grid because it looks cool.
 
 <Image
@@ -1893,7 +1885,7 @@ It has a `<ThemeToggle />` component that has the logic and a presentational `<T
 
 I found the [toggle component on Codepen](https://codepen.io/havardob/pen/MWawKVy) and cleaned it up and turned the values into **CSS variables**.
 
-I also recommend reading [Adding a Dark / Light Mode Toggle to Next.js Using CSS Variables](https://electricanimals.com/articles/next-js-dark-mode-toggle) because it explains how to solve the flashing issue when you save a theme to [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) and refresh the page because of how **server-side hydration** works.
+Thanks to [Adding a Dark / Light Mode Toggle to Next.js Using CSS Variables](https://electricanimals.com/articles/next-js-dark-mode-toggle) because it explains how to solve the flashing issue when you save a theme to [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) and refresh the page because of how **server-side hydration** works.
 
 ```tsx:components/ThemeToggle.tsx
 import { useEffect, useState } from 'react'
@@ -1999,7 +1991,7 @@ If you remember from earlier we can hook into the **DOM** using `_document.tsx`,
 
 - `pages/_document.tsx`
 
-Not that any change you do to `_document.tsx` requires you to restart the development server.
+If you changed `_document.tsx` you have to restart the development server.
 
 ```tsx:_document.tsx
 import Document, {
@@ -2046,7 +2038,7 @@ export default class MyDocument extends Document {
 
 ```
 
-Most of this is just **Next.js** boilerplate. The only thing we added is `setInitialTheme` and inserted the `<script>`.
+Most of this is just **Next.js** boilerplate from [the documentation](https://nextjs.org/docs/advanced-features/custom-document). The only thing we added is `setInitialTheme` and inserted the `<script>`.
 
 After that we have to dynamically load the `<ThemeToggle />` component using `next/dynamic` to avoid running the code on the server.
 
@@ -2073,20 +2065,20 @@ export function Navigation() {
 
 ```
 
-We have a working theme we can save in **local storage** but we also respect the user's preference if no theme is set.
+We have a working theme we can save to **local storage** but we also respect the user's preference if no theme is set.
 
 ## Deploy
 
-You won't ever have to pay for hosting your **static site** unless for some weird reason you're uploading **gigabytes** of images.
+You don't ever have to pay for hosting your **static site** unless for some weird reason you're uploading **gigabytes** of images.
 
-Also don't make the same mistake as I did and turn your blog into a **PWA** unless you want to make an offering to the bandwidth gods.
+Also don't make the same mistake as I did and turn your blog into a **PWA** (progressive web app) unless you want to make an offering to the bandwidth gods.
 
-If you haven't yet:
+You can deploying the site in a couple of steps:
 
-- Push your project up on [GitHub](https://github.com/)
+- Push your project to [GitHub](https://github.com/)
 - Create an account on [Vercel](https://vercel.com/)
 - When you're logged in to **Vercel** tap the **New Project** button
-- For the next step you just have to point **Vercel** to your repository and it's going to build and deploy your site
+- For the next step you just have to point **Vercel** to your repository
 
 <Image
   height="573px"
@@ -2095,9 +2087,11 @@ If you haven't yet:
   alt="Deployment to Vercel"
 />
 
-If you come across any errors don't panic but calmly read the **log** output because it's just like reading your terminal but it's on another server.
+You shouldn't have any problems but you can always try `npm run build` on your machine to see if your site builds first and solve any issues before you deploy.
 
-You can also change the **URL** that's generated for you to something else also at no cost.
+If you come across any errors don't panic but calmly read the **log output** because it's just like reading your terminal but it's on another server.
+
+You can also change the **URL** that's generated for you to something else with **\*.vercel.app** at the end also at no cost.
 
 If you want a cheap domain name **.xyz** domains are around **$1 / year** on [Namecheap](https://www.namecheap.com/) and I use it for this site and my portfolio.
 
@@ -2109,12 +2103,8 @@ You can get the [final project files](https://github.com/JoysOfCode/markdown-blo
 
 I hope you learned about **Next.js** but more importantly I hope you're going to write and share your knowledge with others.
 
-What you learned here is **framework agnostic**, so you can use what you learned for any framework with **server-side rendering** since we're just using **mdx-bundler** and **Markdown** plugins.
+If you want to check out [Shiki](https://github.com/shikijs/shiki) if you want to play around with a modern **syntax highlighter** since it lets you use **VS Code** themes.
 
-Also if you want to, check out [Shiki](https://github.com/shikijs/shiki) if you want to play around with a modern **syntax highlighter** since it lets you use **VS Code** themes.
-
-If you want you can change the code blocks theme for light mode we're using as an exercise because I left it the same as the dark mode one.
-
-You can also create more themes like I'm doing on this site by giving it a name and targeting it in **CSS** with `body[data-theme='theme']`.
+You can also create more themes like I'm doing on [Joy of Code](https://joyofcode.xyz/) by giving it a name and targeting it with `body[data-theme='theme']` in **CSS**.
 
 Thanks for reading! 🏄
