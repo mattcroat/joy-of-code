@@ -12,17 +12,14 @@ export function Seo({ ...metadata }: SeoProps) {
     title: 'Joy of Code',
     description: `Joy of Code is a digital garden about web development tutorials, and articles such as HTML, CSS, JavaScript, React and TypeScript.`,
     image: 'https://joyofcode.xyz/images/og-image.webp',
-    type: 'website',
     ...metadata,
   }
 
   return (
     <Head>
       <title>{meta.title}</title>
-      <meta content="index, follow" name="robots" />
       <meta content={meta.description} name="description" />
       <meta content={meta.title} property="og:title" />
-      <meta content={meta.type} property="og:type" />
       <meta content={meta.image} property="og:image" />
       <meta
         content={`https://joyofcode.xyz${router.asPath}`}
