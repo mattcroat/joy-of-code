@@ -3,8 +3,8 @@ import { useRef, useState } from 'react'
 import { useIntersectionObserver } from '@/root/hooks/useIntersectionObserver'
 
 interface ImageProps {
-  height: number
-  width: number
+  height: string
+  width: string
   src: string
   alt: string
 }
@@ -25,9 +25,9 @@ export function Image({ height, width, src, alt }: ImageProps) {
         <img
           alt={alt}
           className="mx-auto overflow-hidden rounded-lg sm:my-8"
-          height={height}
+          height={height.replace('px', '')}
           src={src}
-          width={width}
+          width={width.replace('px', '')}
         />
       )}
     </div>
