@@ -48,12 +48,12 @@ export function CodeBlock({ children }: CodeBlockProps) {
 
   return (
     <div className="relative mb-8 lg:-mx-8">
-      <div className="absolute right-4 -top-9">
+      <div className="absolute right-6 -top-11">
         <div className="absolute z-30 right-10">
           <Confetti active={isCopied} config={config} />
         </div>
         <button
-          className="px-4 py-2 bg-secondary rounded-tl-md rounded-tr-md"
+          className="text-codeTitle rounded-tl-md rounded-tr-md"
           onClick={copyToClipboard}
         >
           {isCopied ? '🎉 Copied' : '📋'}

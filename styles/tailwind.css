@@ -13,9 +13,11 @@
   --selection: var(--highlight);
   --selectionText: hsl(14 60% 25%);
   --separator: hsl(217 19% 27%);
-
+  
   --cardTitle: hsl(0 0% 98%);
 
+  --code-title: hsl(0 0% 98%);
+  --code-border: hsl(218 26% 20%);
   --code: hsl(0 0% 100%);
   --pre: hsl(218 26% 16%);
   --tokenFunction: hsl(212 96% 78%);
@@ -45,6 +47,8 @@
 
   --cardTitle: hsl(0 0% 98%);
 
+  --code-title: hsl(0 0% 98%);
+  --code-border: hsl(218 26% 20%);
   --code: hsl(0 0% 100%);
   --pre: hsl(218 26% 16%);
   --tokenFunction: hsl(211 96% 78%);
@@ -69,6 +73,8 @@
 
   --cardTitle: hsl(0 0% 20%);
 
+  --code-title: hsl(0 0% 10%);
+  --code-border: hsl(0 0% 94%);
   --code: hsl(0 0% 0%);
   --pre: hsl(0 0% 100%);
   --tokenFunction: hsl(23 75% 53%);
@@ -93,8 +99,10 @@
 
   --cardTitle: hsl(0 0% 98%);
 
+  --code-title: hsl(0 0% 98%);
+  --code-border: hsl(206 50% 16%);
   --code: hsl(0 0% 100%);
-  --pre: hsl(206 50% 11%);
+  --pre: hsl(206 50% 14%);
   --tokenFunction: hsl(23 75% 53%);
   --tokenKeyword: hsl(197 100% 49%);
   --tokenOperator: hsl(358 79% 69%);
@@ -114,8 +122,11 @@
   --selection: var(--highlight);
   --selectionText: hsl(206 50% 11%);
   --separator: hsl(265 15% 17%);
+
   --cardTitle: hsl(0 0% 98%);
 
+  --code-title: hsl(0 0% 98%);
+  --code-border: hsl(256 14% 18%);
   --code: hsl(44 71% 65%);
   --pre: hsl(256 14% 14%);
   --tokenFunction: hsl(238 92% 78%);
@@ -181,7 +192,7 @@
   }
 
   ::-webkit-scrollbar {
-    @apply w-1;
+    @apply w-1 h-1;
   }
 
   ::-webkit-scrollbar-track {
@@ -304,7 +315,7 @@
   }
 
   .prose pre {
-    @apply relative z-20 p-6 overflow-auto rounded-md shadow-lg bg-pre md:text-lg;
+    @apply relative z-20 p-6 overflow-auto shadow-lg rounded-bl-md rounded-br-md bg-pre md:text-lg;
   }
 
   .prose code[class*='language-'],
@@ -313,7 +324,7 @@
   }
 
   .prose .remark-code-title {
-    @apply relative px-4 py-2 font-mono font-bold shadow-lg bg-highlight rounded-tl-md left-4 lg:left-0 rounded-tr-md w-max text-primary;
+    @apply py-4 pl-6 text-lg border-b text-codeTitle border-codeBorder bg-pre rounded-tl-md rounded-tr-md lg:-mx-8;
   }
 
   .prose .token.comment,

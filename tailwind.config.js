@@ -18,6 +18,8 @@ module.exports = {
         // card
         cardTitle: 'var(--cardTitle)',
         // code
+        codeTitle: 'var(--code-title)',
+        codeBorder: 'var(--code-border)',
         code: 'var(--code)',
         pre: 'var(--pre)',
         tokenFunction: 'var(--tokenFunction)',
