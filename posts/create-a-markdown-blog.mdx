@@ -23,7 +23,6 @@ You can view the entire site at [The Digital Garden](https://thedigitalgarden.ve
 - [Showing Posts](#showing-posts)
 - [Markdown Plugins](#markdown-plugins)
 - [Markdown Component Substitution](#markdown-component-substitution)
-- [Markdown Plugins](#markdown-plugins)
 - [List Sorted Posts](#list-sorted-posts)
 - [Post Categories](#post-categories)
 - [Navigation](#navigation)
@@ -1004,7 +1003,7 @@ export async function getStaticProps(context: Context) {
   const { category } = context.params
 
   // get the post paths
-  const currentDirectory = cwd()
+  const currentDirectory = process.cwd()
   const postFoldersPath = `${currentDirectory}/posts`
   const postFolders = readdirSync(postFoldersPath)
   const postPaths = postFolders.map(
