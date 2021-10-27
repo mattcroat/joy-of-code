@@ -13,7 +13,7 @@
   --selection: var(--highlight);
   --selectionText: hsl(14 60% 25%);
   --separator: hsl(217 19% 27%);
-  
+
   --cardTitle: hsl(0 0% 98%);
 
   --code-title: hsl(0 0% 98%);
@@ -100,7 +100,7 @@
   --cardTitle: hsl(0 0% 98%);
 
   --code-title: hsl(0 0% 98%);
-  --code-border: hsl(206 50% 16%);
+  --code-border: hsl(206 50% 18%);
   --code: hsl(0 0% 100%);
   --pre: hsl(206 50% 14%);
   --tokenFunction: hsl(23 75% 53%);
