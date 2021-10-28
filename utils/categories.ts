@@ -14,7 +14,8 @@ export const moreCategories = [
 ] as const
 
 export const menuCategories = [
-  { name: 'CSS', url: '/', icon: 'css' },
+  { name: 'Home', url: '/', icon: 'paintBrush' },
+  { name: 'CSS', url: '/css', icon: 'css' },
   { name: 'General', url: '/general', icon: 'general' },
   { name: 'Design', url: '/design', icon: 'figma' },
   { name: 'Git / GitHub', url: '/git', icon: 'git' },
