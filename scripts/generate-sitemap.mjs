@@ -1,14 +1,14 @@
+import fs from 'fs'
 import globby from 'globby'
 import prettier from 'prettier'
-import { writeFileSync } from 'fs'
 
 async function generateSitemap() {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
   const pages = await globby([
-    'pages/*.tsx',
-    'posts/*.mdx',
+    'posts',
     '!pages/_*.tsx',
     '!pages/[slug].tsx',
+    '!pages/category/[category].tsx',
     '!pages/404.tsx',
     '!pages/api',
   ])
@@ -23,6 +23,7 @@ async function generateSitemap() {
           .replace('posts', '')
           .replace('.tsx', '')
           .replace('.mdx', '')
+          .replace(/^\/[a-z-]+/, '')
         const route = path === '/index' ? '' : path
 
         return `<url>
@@ -39,7 +40,7 @@ async function generateSitemap() {
     parser: 'html',
   })
 
-  writeFileSync('public/sitemap.xml', formattedSitemap)
+  fs.writeFileSync('public/sitemap.xml', formattedSitemap)
 }
 
 generateSitemap()

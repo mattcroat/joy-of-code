@@ -47,10 +47,12 @@
 
   --cardTitle: hsl(0 0% 98%);
 
-  --code-title: hsl(0 0% 98%);
-  --code-border: hsl(218 26% 20%);
   --code: hsl(0 0% 100%);
   --pre: hsl(218 26% 16%);
+  --code-title: hsl(0 0% 98%);
+  --code-border: hsl(218 26% 20%);
+  --color-code-line-highlight: hsl(218 26% 20%);
+  --color-code-line-number: hsl(218 26% 40%);
   --tokenFunction: hsl(211 96% 78%);
   --tokenKeyword: var(--highlight);
   --tokenOperator: hsl(0 93% 81%);
@@ -73,10 +75,12 @@
 
   --cardTitle: hsl(0 0% 20%);
 
-  --code-title: hsl(0 0% 10%);
-  --code-border: hsl(0 0% 94%);
   --code: hsl(0 0% 0%);
   --pre: hsl(0 0% 100%);
+  --code-title: hsl(0 0% 10%);
+  --code-border: hsl(0 0% 94%);
+  --color-code-line-highlight: hsl(0 0% 98%);
+  --color-code-line-number: hsl(0 0% 80%);
   --tokenFunction: hsl(23 75% 53%);
   --tokenKeyword: var(--highlight);
   --tokenOperator: hsl(8 80% 61%);
@@ -99,10 +103,12 @@
 
   --cardTitle: hsl(0 0% 98%);
 
-  --code-title: hsl(0 0% 98%);
-  --code-border: hsl(206 50% 18%);
   --code: hsl(0 0% 100%);
   --pre: hsl(206 50% 14%);
+  --code-title: hsl(0 0% 98%);
+  --code-border: hsl(206 50% 18%);
+  --color-code-line-highlight: hsl(206 50% 20%);
+  --color-code-line-number: hsl(206 50% 40%);
   --tokenFunction: hsl(23 75% 53%);
   --tokenKeyword: hsl(197 100% 49%);
   --tokenOperator: hsl(358 79% 69%);
@@ -125,10 +131,12 @@
 
   --cardTitle: hsl(0 0% 98%);
 
-  --code-title: hsl(0 0% 98%);
-  --code-border: hsl(256 14% 18%);
   --code: hsl(44 71% 65%);
   --pre: hsl(256 14% 14%);
+  --code-title: hsl(0 0% 98%);
+  --code-border: hsl(256 14% 18%);
+  --color-code-line-highlight: hsl(256 14% 24%);
+  --color-code-line-number: hsl(256 14% 40%);
   --tokenFunction: hsl(238 92% 78%);
   --tokenKeyword: hsl(205 82% 63%);
   --tokenOperator: hsl(358 79% 69%);
@@ -219,7 +227,7 @@
 
   html[data-font='accessible'] .prose kbd,
   html[data-font='accessible'] .prose code,
-  html[data-font='accessible'] .prose .remark-code-title {
+  html[data-font='accessible'] .prose .rehype-code-title {
     @apply font-openDyslexicMono;
   }
 
@@ -323,8 +331,33 @@
     @apply p-0 leading-relaxed bg-transparent text-code;
   }
 
-  .prose .remark-code-title {
+  .prose .rehype-code-title {
     @apply py-4 pl-6 text-lg border-b text-codeTitle border-codeBorder bg-pre rounded-tl-md rounded-tr-md lg:-mx-8;
+  }
+
+  .prose .code-highlight {
+    width: 100%;
+    float: left;
+  }
+
+  .prose .code-line {
+    display: block;
+    padding-right: 16px;
+    padding-left: 16px;
+    margin-right: -16px;
+    margin-left: -16px;
+  }
+  .prose .highlight-line {
+    margin-right: -16px;
+    margin-left: -16px;
+    background-color: var(--color-code-line-highlight);
+  }
+
+  .prose .line-number::before {
+    content: attr(line);
+    margin-left: -8px;
+    padding-right: 16px;
+    color: var(--color-code-line-number);
   }
 
   .prose .token.comment,

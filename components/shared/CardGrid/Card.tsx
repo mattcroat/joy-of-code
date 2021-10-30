@@ -1,17 +1,15 @@
+import { CategoryType } from '@/root/types/category'
 import { CustomLink } from '@/root/components/shared/CustomLink'
 import { Icon } from '@/root/components/shared/Icon'
 import { playSound } from '@/root/utils/playSound'
-
 import { useMedia } from '@/root/hooks/useMedia'
 import { usePostViews } from '@/root/hooks/usePostViews'
 
-import type { CategoryType } from '@/root/types/category'
-
 interface CardProps {
   category: CategoryType
+  featured?: boolean | undefined
   title: string
   slug: string
-  featured: boolean
 }
 
 const colors = {

@@ -1,34 +1,14 @@
-import { join } from 'path'
-import { readFileSync } from 'fs'
+import { getMDXComponent } from 'mdx-bundler/client'
+import { useMemo } from 'react'
 
-// MDX sauce
-import matter from 'gray-matter'
-import { serialize } from 'next-mdx-remote/serialize'
-
-// MDX plugins
-import rehypePrism from '@mapbox/rehype-prism'
-import remarkCodeTitle from 'remark-code-titles'
-import remarkHeadings from 'remark-autolink-headings'
-import remarkSlug from 'remark-slug'
-import remarkUnwrapImages from 'remark-unwrap-images'
-
-import { postFilePaths, postsPath } from '@/root/utils/posts'
+import { getPaths, getPost } from '@/root/utils/mdx'
+import { MDXComponents } from '@/root/components/mdx'
 import { Post } from '@/root/components/screens/Post'
+import { PostType } from '@/root/types/post'
 
 interface PostProps {
-  source: {
-    compiledSource: string
-    renderedOutput: string
-    scope?: any
-  }
-  frontMatter: {
-    category: string
-    description: string
-    image: string
-    published: number
-    slug: string
-    title: string
-  }
+  code: string
+  frontmatter: PostType
 }
 
 interface Params {
@@ -37,15 +17,18 @@ interface Params {
   }
 }
 
-export default function PostPage({ source, frontMatter }: PostProps) {
-  return <Post content={source} frontMatter={frontMatter} />
+export default function PostPage({ code, frontmatter }: PostProps) {
+  const Content = useMemo(() => getMDXComponent(code), [code])
+  return (
+    <Post
+      content={<Content components={MDXComponents as any} />}
+      frontmatter={frontmatter}
+    />
+  )
 }
 
-// generate paths at build-time
 export async function getStaticPaths() {
-  const paths = postFilePaths
-    .map((path) => path.replace(/\.mdx?$/, ''))
-    .map((slug) => ({ params: { slug } }))
+  const paths = getPaths()
 
   return {
     paths,
@@ -53,29 +36,13 @@ export async function getStaticPaths() {
   }
 }
 
-// grab and process MDX post by the slug "posts/[slug]"
 export async function getStaticProps({ params }: Params) {
-  const postFilePath = join(postsPath, `${params?.slug}.mdx`)
-  const source = readFileSync(postFilePath)
-
-  const { content, data } = matter(source)
-
-  const MDXSource = await serialize(content, {
-    mdxOptions: {
-      rehypePlugins: [rehypePrism],
-      remarkPlugins: [
-        remarkSlug,
-        remarkHeadings,
-        remarkCodeTitle,
-        remarkUnwrapImages,
-      ],
-    },
-  })
+  const { code, frontmatter } = await getPost(params.slug)
 
   return {
     props: {
-      source: MDXSource,
-      frontMatter: data,
+      code,
+      frontmatter,
     },
   }
 }
