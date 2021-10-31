@@ -3,30 +3,6 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
-
-  --highlight: hsl(38 93% 77%);
-  --muted: hsl(214 20% 69%);
-  --primary: hsl(220 26% 14%);
-  --secondary: hsl(218 23% 23%);
-  --body: hsl(211 25% 84%);
-  --selection: var(--highlight);
-  --selectionText: hsl(14 60% 25%);
-  --separator: hsl(217 19% 27%);
-
-  --cardTitle: hsl(0 0% 98%);
-
-  --code-title: hsl(0 0% 98%);
-  --code-border: hsl(218 26% 20%);
-  --code: hsl(0 0% 100%);
-  --pre: hsl(218 26% 16%);
-  --tokenFunction: hsl(212 96% 78%);
-  --tokenKeyword: var(--highlight);
-  --tokenOperator: hsl(0 94% 82%);
-  --tokenPunctuation: hsl(213 97% 87%);
-  --tokenString: hsl(0 94% 82%);
-  --comment: hsl(218 11% 65%);
-
   --sans: 'Inter, sans-serif';
   --mono: 'Mononoki, monospace';
   --openDyslexic: 'OpenDyslexic, sans-serif';
@@ -35,114 +11,102 @@
 
 [color-scheme='🌙 Dusk'] {
   color-scheme: dark;
-
   --highlight: hsl(38 93% 76%);
   --muted: hsl(213 20% 69%);
   --primary: hsl(220 25% 13%);
   --secondary: hsl(217 23% 22%);
   --body: hsl(211 25% 83%);
-  --selection: var(--highlight);
-  --selectionText: hsl(14 60% 24%);
+  --color-selection: var(--highlight);
+  --color-selection-text: hsl(14 60% 24%);
   --separator: hsl(216 19% 26%);
-
-  --cardTitle: hsl(0 0% 98%);
-
-  --code: hsl(0 0% 100%);
+  --card-title: hsl(0 0% 98%);
+  --code: hsl(0 0% 98%);
   --pre: hsl(218 26% 16%);
   --code-title: hsl(0 0% 98%);
   --code-border: hsl(218 26% 20%);
   --color-code-line-highlight: hsl(218 26% 20%);
   --color-code-line-number: hsl(218 26% 40%);
-  --tokenFunction: hsl(211 96% 78%);
-  --tokenKeyword: var(--highlight);
-  --tokenOperator: hsl(0 93% 81%);
-  --tokenPunctuation: hsl(213 96% 87%);
-  --tokenString: hsl(0 93% 81%);
-  --comment: hsl(217 10% 64%);
+  --token-1: hsl(211 96% 78%);
+  --token-2: var(--highlight);
+  --token-3: hsl(0 93% 81%);
+  --token-4: hsl(218 26% 80%);
+  --token-5: hsl(0 93% 81%);
+  --token-6: hsl(217 10% 64%);
 }
 
 [color-scheme='☀️ Light'] {
   color-scheme: light;
-
   --highlight: hsl(210 60% 42%);
   --muted: hsl(218 16% 34%);
   --primary: hsl(0 0% 100%);
   --secondary: hsl(0 0% 98%);
   --body: hsl(218 16% 34%);
-  --selection: var(--highlight);
-  --selectionText: hsl(0 0% 100%);
+  --color-selection: var(--highlight);
+  --color-selection-text: hsl(0 0% 100%);
   --separator: hsl(220 13% 91%);
-
-  --cardTitle: hsl(0 0% 20%);
-
-  --code: hsl(0 0% 0%);
-  --pre: hsl(0 0% 100%);
+  --card-title: hsl(0 0% 20%);
+  --code: hsl(0 0% 10%);
+  --pre: hsl(0 0% 98%);
   --code-title: hsl(0 0% 10%);
   --code-border: hsl(0 0% 94%);
   --color-code-line-highlight: hsl(0 0% 98%);
   --color-code-line-number: hsl(0 0% 80%);
-  --tokenFunction: hsl(23 75% 53%);
-  --tokenKeyword: var(--highlight);
-  --tokenOperator: hsl(8 80% 61%);
-  --tokenPunctuation: hsl(0 0% 54%);
-  --tokenString: hsl(8 80% 61%);
-  --comment: hsl(217 10% 64%);
+  --token-1: hsl(23 75% 53%);
+  --token-2: var(--highlight);
+  --token-3: hsl(8 80% 61%);
+  --token-4: hsl(0 0% 40%);
+  --token-5: hsl(8 80% 61%);
+  --token-6: hsl(217 10% 64%);
 }
 
 [color-scheme='🐺 Night Howl'] {
   color-scheme: dark;
-
   --highlight: hsl(207 100% 94%);
   --muted: hsl(200 40% 72%);
   --primary: hsl(206 50% 11%);
   --secondary: hsl(206 51% 14%);
   --body: hsl(200 40% 72%);
-  --selection: var(--highlight);
-  --selectionText: hsl(206 50% 11%);
+  --color-selection: var(--highlight);
+  --color-selection-text: hsl(206 50% 11%);
   --separator: hsl(207 50% 17%);
-
-  --cardTitle: hsl(0 0% 98%);
-
-  --code: hsl(0 0% 100%);
+  --card-title: hsl(0 0% 98%);
+  --code: hsl(0 0% 98%);
   --pre: hsl(206 50% 14%);
   --code-title: hsl(0 0% 98%);
   --code-border: hsl(206 50% 18%);
   --color-code-line-highlight: hsl(206 50% 20%);
   --color-code-line-number: hsl(206 50% 40%);
-  --tokenFunction: hsl(23 75% 53%);
-  --tokenKeyword: hsl(197 100% 49%);
-  --tokenOperator: hsl(358 79% 69%);
-  --tokenPunctuation: hsl(207 34% 75%);
-  --tokenString: hsl(111 65% 71%);
-  --comment: hsl(217 10% 64%);
+  --token-1: hsl(180 100% 43%);
+  --token-2: hsl(197 100% 49%);
+  --token-3: hsl(358 79% 69%);
+  --token-4: hsl(206 50% 98%);
+  --token-5: hsl(111 65% 71%);
+  --token-6: hsl(217 10% 64%);
 }
 
 [color-scheme='🧠 Night Mind'] {
   color-scheme: dark;
-
   --highlight: hsl(9 100% 84%);
   --muted: hsl(265 28% 77%);
   --primary: hsl(264 16% 12%);
   --secondary: hsl(256 14% 14%);
   --body: hsl(0 0% 100%);
-  --selection: var(--highlight);
-  --selectionText: hsl(206 50% 11%);
+  --color-selection: var(--highlight);
+  --color-selection-text: hsl(206 50% 11%);
   --separator: hsl(265 15% 17%);
-
-  --cardTitle: hsl(0 0% 98%);
-
-  --code: hsl(44 71% 65%);
+  --card-title: hsl(0 0% 98%);
+  --code: hsl(0 0% 98%);
   --pre: hsl(256 14% 14%);
   --code-title: hsl(0 0% 98%);
   --code-border: hsl(256 14% 18%);
   --color-code-line-highlight: hsl(256 14% 24%);
   --color-code-line-number: hsl(256 14% 40%);
-  --tokenFunction: hsl(238 92% 78%);
-  --tokenKeyword: hsl(205 82% 63%);
-  --tokenOperator: hsl(358 79% 69%);
-  --tokenPunctuation: hsl(249 60% 58%);
-  --tokenString: hsl(102 68% 67%);
-  --comment: hsl(217 10% 64%);
+  --token-1: hsl(238 80% 80%);
+  --token-2: hsl(205 82% 70%);
+  --token-3: hsl(358 79% 68%);
+  --token-4: hsl(256 14% 98%);
+  --token-5: hsl(102 68% 67%);
+  --token-6: hsl(217 10% 64%);
 }
 
 @layer base {
@@ -196,7 +160,8 @@
   }
 
   ::selection {
-    @apply bg-selection text-selectionText;
+    color: var(--color-selection-text);
+    background-color: var(--color-selection);
   }
 
   ::-webkit-scrollbar {
@@ -277,6 +242,11 @@
     @apply w-[80%] text-3xl;
   }
 
+  .code-title {
+    color: var(--code-title);
+    border-color: var(--code-border);
+  }
+
   .prose {
     @apply text-body;
   }
@@ -332,7 +302,7 @@
   }
 
   .prose .rehype-code-title {
-    @apply py-4 pl-6 text-lg border-b text-codeTitle border-codeBorder bg-pre rounded-tl-md rounded-tr-md lg:-mx-8;
+    @apply py-4 pl-6 text-lg border-b code-title bg-pre rounded-tl-md rounded-tr-md lg:-mx-8;
   }
 
   .prose .code-highlight {
@@ -347,6 +317,7 @@
     margin-right: -16px;
     margin-left: -16px;
   }
+
   .prose .highlight-line {
     margin-right: -16px;
     margin-left: -16px;
@@ -364,11 +335,11 @@
   .prose .token.prolog,
   .prose .token.doctype,
   .prose .token.cdata {
-    @apply text-comment;
+    color: var(--token-6);
   }
 
   .prose .token.punctuation {
-    @apply text-tokenPunctuation;
+    color: var(--token-4);
   }
 
   .prose .token.property,
@@ -378,7 +349,7 @@
   .prose .token.constant,
   .prose .token.symbol,
   .prose .token.deleted {
-    @apply text-red-400;
+    color: var(--token-3);
   }
 
   .prose .token.selector,
@@ -387,7 +358,7 @@
   .prose .token.char,
   .prose .token.builtin,
   .prose .token.inserted {
-    @apply text-tokenString;
+    color: var(--token-5);
   }
 
   .prose .token.operator,
@@ -395,18 +366,18 @@
   .prose .token.url,
   .prose .language-css .token.string,
   .prose .style .token.string {
-    @apply text-tokenOperator;
+    color: var(--token-3);
   }
 
   .prose .token.atrule,
   .prose .token.attr-value,
   .prose .token.keyword {
-    @apply text-tokenKeyword;
+    color: var(--token-2);
   }
 
   .prose .token.function,
   .prose .token.class-name {
-    @apply text-tokenFunction;
+    color: var(--token-1);
   }
 
   .prose .token.regex,
