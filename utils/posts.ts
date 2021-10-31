@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
 
-import type { PostType } from '@/root/types/post'
+import { PostType } from '@/root/types/post'
 
 export const postsPath = path.join(process.cwd(), 'posts')
 

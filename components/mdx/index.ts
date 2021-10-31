@@ -1,1 +1,1 @@
-export * from './MDXComponents'
+export * from './mdx-components'

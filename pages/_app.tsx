@@ -1,7 +1,7 @@
-import type { AppProps } from 'next/app'
+import { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import { Navigation } from '@/root/components/shared/Layout/Navigation'
+import { Navigation } from '@/root/components/shared/layout/navigation'
 import { Options } from '@/root/components/a11y'
 
 import '@/root/styles/tailwind.css'

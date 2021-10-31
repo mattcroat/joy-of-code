@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { Emoji } from '@/root/components/shared/Emoji'
-import { Layout } from '@/root/components/shared/Layout'
+import { Emoji } from '@/root/components/shared/emoji'
+import { Layout } from '@/root/components/shared/layout'
 
 export default function NotFound() {
   const router = useRouter()

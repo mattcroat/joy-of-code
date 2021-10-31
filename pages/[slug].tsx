@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 
 import { getPaths, getPost } from '@/root/utils/mdx'
 import { MDXComponents } from '@/root/components/mdx'
-import { Post } from '@/root/components/screens/Post'
+import { Post } from '@/root/components/screens/post'
 import { PostType } from '@/root/types/post'
 
 interface PostProps {

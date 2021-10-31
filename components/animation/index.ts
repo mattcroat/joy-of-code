@@ -1,3 +1,3 @@
-export * from './FadeIn'
-export * from './Spin'
-export * from './Wave'
+export * from './fade-in'
+export * from './spin'
+export * from './wave'

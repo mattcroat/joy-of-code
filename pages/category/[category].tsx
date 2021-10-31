@@ -1,5 +1,5 @@
 import { categories } from '@/root/utils/categories'
-import { Category } from '@/root/components/screens/Category'
+import { Category } from '@/root/components/screens/category'
 import { CategoryType } from '@/root/types/category'
 import { getPostsByCategory } from '@/root/utils/mdx'
 import { PostType } from '@/root/types/post'
