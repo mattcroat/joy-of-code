@@ -165,7 +165,7 @@
   }
 
   ::-webkit-scrollbar {
-    @apply w-1 h-1;
+    @apply w-2 h-2;
   }
 
   ::-webkit-scrollbar-track {
@@ -173,7 +173,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-highlight;
+    @apply rounded-lg bg-highlight;
   }
 
   html {
