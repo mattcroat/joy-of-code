@@ -49,7 +49,7 @@
   --pre: hsl(0 0% 98%);
   --code-title: hsl(0 0% 10%);
   --code-border: hsl(0 0% 94%);
-  --color-code-line-highlight: hsl(0 0% 98%);
+  --color-code-line-highlight: hsl(0 0% 94%);
   --color-code-line-number: hsl(0 0% 80%);
   --token-1: hsl(23 75% 53%);
   --token-2: var(--highlight);
