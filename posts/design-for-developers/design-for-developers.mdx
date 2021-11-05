@@ -1,0 +1,298 @@
+---
+title: Design For Developers
+description: Learn enough visual design to be dangerous with actionable advice instead of theory
+slug: design-for-developers
+published: '2021-11-5'
+category: 'design'
+image: '/images/design-for-developers/social-image.png'
+---
+
+# Design for Developers
+
+## Table of Contents
+
+## You Suck at Design
+
+Let's get this out of the way. Sucking at something doesn't mean we can't improve. Talent is a pursued interest. Let's change how we talk about ourselves in a more positive light because that's not how we should define ourselves.
+
+The greatest misconception around design is that you have to be artistic. Design and development share more in common than you know. Design is [utilitarian](https://en.wikipedia.org/wiki/Utilitarianism) meaning it's used to solve problems. If you like rules and constraints this is going to appease your analytical mind since that's exactly what I'm going to show you, so you can learn enough visual design to be dangerous as a developer.
+
+Regardless if you use a CSS framework or write styles by hand understanding design fundamentals is an incredibly valuable tool. You already know what great design is when you look at it. You just don't understand what makes it great because you don't know how to talk about it.
+
+My goal is to provide you with actionable things you can apply immediately instead of boring you with theory. I'm not a professional designer but this is what I learned through experience and learning from others.
+
+## The Four Principles of Design
+
+The goal of design is to be **easy to understand** in a **aesthetically pleasing** way.
+
+I want you to learn one thing. **Design is C.R.A.P**. If you remember this [mnemonic](https://en.wikipedia.org/wiki/Mnemonic) and always ask yourself if your design satisfies being **crap** you're in good shape. A lot of design principles are based from psychology such as the [gestalt principles](https://en.wikipedia.org/wiki/Principles_of_grouping) that describe how humans group similar elements and recognize patterns. These are the four principles behind great design:
+
+- **Contrast**
+- **Repetition**
+- **Alignment**
+- **Proximity**
+
+## Contrast
+
+Contrast draws **attention**.
+
+We can achieve **contrast** in many ways through **size** and **color** of not just text but shapes. It's a way of making elements look different. Contrast creates **visual hierarchy**, so you know what is important on the page.
+
+<Image
+  width="640px"
+  height="555px"
+  src="/images/design-for-developers/text-contrast.webp"
+  alt="Text contrast"
+/>
+
+You've probably seen geometric shapes in a lot of designs and wondered about their purpose. They're not random because everything in design has a purpose. Their main purpose is to **draw your eyes** to something while adding **visual interest** or **balance** to an area to feel less empty. You can use this in many creative ways like using shapes as leading lines to direct the view of your reader. This is something you see more in traditional design and infographics than on websites.
+
+<Image
+  width="640px"
+  height="555px"
+  src="/images/design-for-developers/color-contrast-bad.webp"
+  alt="Bad text contrast"
+/>
+
+<Image
+  width="640px"
+  height="555px"
+  src="/images/design-for-developers/color-contrast-good.webp"
+  alt="Good text contrast"
+/>
+
+Contrast between text and background colors is just as important. Your contrast has to pass [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) (Web Content Accessibility Guidelines). There are three levels of conformance from **A**, **AA** to **AAA**. You can check the contrast ratio from your developer tools.
+
+<Image
+  width="600px"
+  height="423px"
+  src="/images/design-for-developers/contrast-checker.webp"
+  alt="Contrast checker in developer tools"
+/>
+
+## Repetition
+
+Repetition creates **consistency** in your design.
+
+The repetition of content helps create a **ryhthm** where the user can easily scan the content. This is achieved through using a consistent style for your elements. Repeating the same **font type**, **size** and **color** helps make the content more readable.
+
+<Image
+  width="640px"
+  height="882px"
+  src="/images/design-for-developers/repetition.webp"
+  alt="Repetition"
+/>
+
+How many times have you seen a landing page with a graphic of a mouse indicating there's more to scroll? I never liked it because it treats your user as an idiot since you have to shout at them there's more of your page.
+
+<Image
+  width="640px"
+  height="490px"
+  src="/images/design-for-developers/scroll-more-idiot.webp"
+  alt="Mouse indicating scrolling"
+/>
+
+We can use design and **repetition** instead to lead the user. We don't have to but let's pretend we're using the line from the logo to establish **repetition**. Design is about small details. If you look closely none of the elements are placed randomly but with purpose. We're going to talk more about this in **alignment**.
+
+<Image
+  width="640px"
+  height="490px"
+  src="/images/design-for-developers/repetition-scrolling-heading.webp"
+  alt="Using a design element to indicate scrolling"
+/>
+
+We can even extend the line to the second page, so it makes you curious. The number is mostly a design element and doesn't have to have meaning even if you could argue it represents the first page of our site. The more you look at design the more you're going to pick up on these details.
+
+<Image
+  width="640px"
+  height="916px"
+  src="/images/design-for-developers/repetition-scrolling-area.webp"
+  alt="Using a design element to indicate scrolling"
+/>
+
+## Alignment
+
+Alignment is used to **organize information** to create order.
+
+In design everything should be **intentional** and not arbitrary. Elements visually connect to each other. Alignment is the **anchor** for your eyes. It's not one good or bad thing that makes or breaks a design but a lot of other smaller things.
+
+The most common **mistake** everyone makes is **centering everything** and not constraining the width of the content making everything hard to read.
+
+<Image
+  width="960px"
+  height="712px"
+  src="/images/design-for-developers/alignment-bad.webp"
+  alt="Bad alignment"
+/>
+
+This is the difference after we use hard alignment.
+
+<Image
+  width="960px"
+  height="712px"
+  src="/images/design-for-developers/alignment-good.webp"
+  alt="Good alignment"
+/>
+
+You should always have a strong **horizontal** or **vertical line** because it anchors your eye. You also might have noticed how the logo and navigation links are centered on the **baseline** which is another simple thing you can do with **CSS**.
+
+If you're using a design tool like [Figma](https://www.figma.com/) you can enable the grid. I'm using a **twelve column grid** since that's the most frequently used one. You can create the same grid using [CSS grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) for your site making translating your design easy.
+
+<Image
+  width="960px"
+  height="712px"
+  src="/images/design-for-developers/alignment-grid.webp"
+  alt="Alignment grid overlay"
+/>
+
+This **isn't** to say that centering is bad. You can center short text but when it gets long it becomes hard to read. We're going to cover more on text in **typography**.
+
+Once you learn the fundamentals of design you can learn how to break rules to create more interesting design. For example it looks boring when everything is on a grid, so a popular trend over the years on many sites is breaking out images out of their containers. When you do something like that it's **intentional** and looks great because it's use is consistent and that's why design we perceive as **bad** often looks **unintentional**.
+
+To demonstrate how "breaking the rules" is good lets look at the design of [Apple.com](https://www.apple.com/). If you want to study design all you have to do is draw a grid around things. In this case **Apple** has a nice **cohesive** design but also "breaks the rules" of the grid in an interesting way for some of the products because they go outside the grid and page. This is intentional because it creates **interest** and makes us curious. We know this is true because everything else is on a grid and aligned perfectly, so it looks **intentional**.
+
+<Image
+  width={296}
+  height={800}
+  src="/images/design-for-developers/apple-grid.webp"
+  alt="Apple.com grid overlay"
+/>
+
+## Proximity
+
+Proximity is **grouping related things together**.
+
+Look at an example of where we space everything **evenly** and where we do so using **proximity**.
+
+<Image
+  width={628}
+  height={542}
+  src="/images/design-for-developers/proximity.webp"
+  alt="Proximity"
+/>
+
+**Proximity** lets you brain group related information together. In the before example things seem **unrelated** to each other but in the after example they appear as **one visual unit** where we can quickly parse the information.
+
+<Image
+  width={628}
+  height={542}
+  src="/images/design-for-developers/proximity-outline.webp"
+  alt="Outline around elements showing proximity"
+/>
+
+## Layout
+
+Before you do typography or colors get a **pen and a piece of paper** or open your design tool and just draw **wireframes** that are just boxes that represent your layout. You're going to avoid many problems before you even get started.
+
+<Image
+  width={446}
+  height={473}
+  src="/images/design-for-developers/wireframe.webp"
+  alt="Wireframe"
+/>
+
+Another mistake I often see is having a layout that resembles boxes inside boxes. Use **contrast** instead to separate content instead of having to use borders.
+
+Layout is not something that can be easily taught but it has to be practiced instead. If you want to create unique designs you have to look at inspiration on sites such as [Behance](https://www.behance.net/) and [Dribbble](https://dribbble.com/) and recreate the designs to learn. Using a grid is going to make you realize how nothing in design is random but intentional. This isn't always the case because a lot of great looking design isn't always professional design, so you're going to notice a difference.
+
+Here is how you could be more creative in your designs. Pretend this is a landing page with a login form. The first idea is boring but then you can play with the design by adding **visual interest**. You can do the layout in a couple of different ways.
+
+<Image
+  width={905}
+  height={504}
+  src="/images/design-for-developers/wireframe-landing-page.webp"
+  alt="Landing page wireframe"
+/>
+
+It's not supposed to be polished or refined and that's the point. You can work on ideas without distractions.
+
+## Typography
+
+<Image
+  width={600}
+  height={200}
+  src="/images/design-for-developers/typefaces.webp"
+  alt="Typefaces"
+/>
+
+Typography envokes emotion and that's why picking a font is important to convey if you're going for a more serious or more playful tone. While there are plenty [typeface](https://en.wikipedia.org/wiki/Typeface) styles such as **serif**, **sans-serif**, **monospaced** and **display** you're mostly going to see the **serif** fonts in books and publications while **sans-serif** looks more modern. I promised, no theory.
+
+Having great looking typography isn't hard with a couple of rules:
+
+- Use a **sans-serif** font
+- Never go below the **baseline** font size of **16 pixels** because it's going to be unreadable
+- Use a single font and it's weights to achieve **contrast**
+- Don't go below the regular **400** font weight size because of legibility
+- When picking font weights skip a weight for more **contrast** such as **400, 600, 700, 900**
+- Set a higher **line height** to make body text more readable
+- Reduce the **line height** for large text such as titles
+- Avoid using **absolute** color values such as black or white as it's harsh on the eyes, so make it slighly less black or white
+- Add a subtle color to text to make it look cooler or warmer
+
+I sometimes see a **monospace** font used on a portfolio to give it a techy vibe but it's not legible, so don't use it for text or make sure it's legible. The often thing I hear is to use a font pairing but **don't** even if you use a font pairing site it just introduces more variables. **Keep it simple**. You're never going to regret if you stick to one of the gorgeous **sans-serif** font from [Google Fonts](https://fonts.google.com/):
+
+- Inter
+- Lato
+- Montserrat
+- Open Sans
+- Poppins
+- Raleway
+- Roboto
+
+If the list is long go for **Inter** for a more professional font and **Montserrat** or **Poppins** for something more playful.
+
+Typography and color are one of the things in design everyone complicates the most for no reason because there's so much theory. You can create your own typographic scale easily without having to use weird [Fibonnaci number](https://en.wikipedia.org/wiki/Fibonacci_number) generators to get some divine ratio. I prefer to use **multiples of eight** meaning **8px**, **16px**, **24px**, **32px**, **64px** and so on because it works so great as a base unit for typography and spacing inside a **8 point grid** system. If you're using a design tool such as **Figma** set your nudge value to **8px** to use a **8 point grid**. You're going to take the same values and create [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) for your typography and spacing. This method never fails and I always scratch my head when I hear of other convoluted methods not because they're bad but you're using something you don't understand when anyone can understand this.
+
+None of this is gospel but just constraints to help you create a cohesive design by removing decisions you have to make to avoid mindless **pixel pushing**. For example I prefer a **18 pixel** size font for text because I find **16 pixels** is often too small as the devices we use have larger screen sizes.
+
+For text the optimal reading length is around **60 characters** but I prefer to go up to **80 characters**. This is easily done in **CSS** using `max-width: 60ch` for your content.
+
+One of the most important things for legible text is **line height**. You can use the same system if you want but I just prefer to do it by eye. I find a great **line height** to be from **150%** to **180%** which is **1.5** to **1.8** in **CSS**. Don't forget to adjust your title's **line height** also to compensate. Always test how your typography looks with long titles that wrap.
+
+<Image
+  width={630}
+  height={595}
+  src="/images/design-for-developers/typography.webp"
+  alt="Typography"
+/>
+
+## Color
+
+<Image
+  width={412}
+  height={400}
+  src="/images/design-for-developers/color-wheel.webp"
+  alt="Color wheel"
+/>
+
+Most color picking sites are useless because they give you five random colors you have no idea what to do with. Use them only to find a **primary** color you like and **complementary** colors that work with it. You don't have to use different colors because you can instead use **shades** of one color and have a **monochromatic** color scheme. Keep in mind if you're using **black** and **white** you're already using two colors.
+
+I like the [color picker from Canva](https://www.canva.com/colors/color-wheel/) because it's simple and you can learn more about color.
+
+Here's a simple way to find **complementary** colors that work with each other. If you take a color wheel and pick a color opposite the one you picked it's going to work. You can then adjust the color to your liking. You can use the **60-30-10** color rule taken from interior design where **60%** is the **main** color, **30%** is the **secondary** color and **10%** is your **accent** color. You can think of these values more as ratios since it would be hard to measure it exactly. It also doesn't mean your **primary** color should always take up **60%** because you can flip the values for different sections of your site.
+
+<Image
+  width={464}
+  height={272}
+  src="/images/design-for-developers/color-palette.webp"
+  alt="Color palette"
+/>
+
+Just because a color is **complementary** doesn't mean you should use it on anything. In this example if we used this high contrast green for our text it would look awful (remember the contrast section), so we're using as the accent color instead.
+
+<Image
+  width={960}
+  height={712}
+  src="/images/design-for-developers/color-rule.webp"
+  alt="Color rule"
+/>
+
+There's a lot of psychology and theory behind color but as you develop an eye for design you're going to find what you like — **keep it simple**.
+
+## Conclusion
+
+You learned enough visual design to be dangerous as a developer. If you stick to a couple of simple rules you can be confident your design is going to look great. You have the vocabulary to critique and talk about design in a more intelligent way.
+
+If this ignited your passion for design I highly recommend reading [Refactoring UI](https://www.refactoringui.com/book) and [Design for Hackers: Reverse Engineering Beauty](https://www.amazon.com/Design-Hackers-Reverse-Engineering-Beauty/dp/1119998956).
+
+Thanks for reading! 🏄
