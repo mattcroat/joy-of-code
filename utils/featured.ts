@@ -1,6 +1,6 @@
 export const featuredPosts = [
   'TypeScript Fundamentals',
-  'Using Fonts on The Web',
+  'Best Practices When Using Fonts',
   'Create a Code Sandbox',
   'Create a Markdown Blog Using Next.js',
   'Design For Developers',
