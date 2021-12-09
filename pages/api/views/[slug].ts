@@ -38,7 +38,9 @@ async function updateViews(slug: string, views: number): Promise<void> {
       .update({ views: views + 1 })
       .match({ slug })
   } catch (error) {
-    throw new Error(`Couldn't update views: ${error.message}`)
+    if (error instanceof Error) {
+      throw new Error(`Couldn't update views: ${error.message}`)
+    }
   }
 }
 
@@ -46,7 +48,9 @@ async function addEntry(slug: string): Promise<void> {
   try {
     await supabase.from('views').insert([{ slug, views: 1 }])
   } catch (error) {
-    throw new Error(`Couldn't add entry: ${error.message}`)
+    if (error instanceof Error) {
+      throw new Error(`Couldn't add entry: ${error.message}`)
+    }
   }
 }
 

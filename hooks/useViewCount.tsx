@@ -8,7 +8,9 @@ function countView(slug: string) {
       method: 'POST',
     })
   } catch (error) {
-    throw new Error(`Could not count view: ${error.message}`)
+    if (error instanceof Error) {
+      throw new Error(`Could not count view: ${error.message}`)
+    }
   }
 }
 
