@@ -4,7 +4,7 @@ import { CustomLink } from '@/root/components/shared/custom-link'
 
 export function PostCredits() {
   const router = useRouter()
-  const href = `https://github.com/mattcroat/joy-of-code/blob/main/posts/${router?.query?.slug}.mdx`
+  const href = `https://github.com/mattcroat/joy-of-code/blob/main/posts/${router?.query?.slug}/${router?.query?.slug}.mdx`
 
   return (
     <div className="md:gap-4 md:flex">
