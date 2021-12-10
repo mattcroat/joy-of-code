@@ -7,7 +7,7 @@ export const sidebarCategories = [
 ] as const
 
 export const moreCategories = [
-  { name: 'Design', url: '/category/design', icon: 'figma' },
+  { name: 'Design', url: '/category/design', icon: 'design' },
   { name: 'Git / GitHub', url: '/category/git', icon: 'git' },
   { name: 'Next.js', url: '/category/next', icon: 'next' },
   { name: 'TypeScript', url: '/category/typescript', icon: 'typescript' },
@@ -17,7 +17,7 @@ export const menuCategories = [
   { name: 'Home', url: '/', icon: 'paintBrush' },
   { name: 'CSS', url: '/category/css', icon: 'css' },
   { name: 'General', url: '/category/general', icon: 'general' },
-  { name: 'Design', url: '/category/design', icon: 'figma' },
+  { name: 'Design', url: '/category/design', icon: 'design' },
   { name: 'Git / GitHub', url: '/category/git', icon: 'git' },
   { name: 'JavaScript', url: '/category/javascript', icon: 'javascript' },
   { name: 'Next.js', url: '/category/next', icon: 'next' },
