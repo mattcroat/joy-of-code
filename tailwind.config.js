@@ -19,13 +19,13 @@ module.exports = {
         pre: 'var(--pre)',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif'],
         mono: ['Mononoki', 'monospace'],
         openDyslexic: ['OpenDyslexic', 'sans-serif'],
         openDyslexicMono: ['OpenDyslexic Mono', 'monospace'],
       },
       gridTemplateColumns: {
-        cards: 'repeat(auto-fill, minmax(340px, 1fr))',
+        cards: 'repeat(auto-fill, minmax(240px, 1fr))',
       },
       zIndex: {
         '-10': '-10',

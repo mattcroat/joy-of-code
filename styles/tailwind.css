@@ -111,11 +111,27 @@
 
 @layer base {
   @font-face {
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-style: normal;
-    font-weight: 100 900;
+    font-weight: 400;
     font-display: swap;
-    src: url('/fonts/inter/Inter-Variable.woff2') format('woff2');
+    src: url('/fonts/poppins/Poppins-Regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/poppins/Poppins-Bold.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-style: black;
+    font-weight: 900;
+    font-display: swap;
+    src: url('/fonts/poppins/Poppins-Black.woff2') format('woff2');
   }
 
   @font-face {
@@ -437,39 +453,12 @@
   }
 }
 
-@keyframes shine {
-  0% {
-    background-position: right;
-  }
-}
-
 .menu {
   clip-path: circle(0px at 44px 93.8%);
 }
 
 .menu.open {
   clip-path: circle(1000px at 44px 93.8%);
-}
-
-.shine {
-  overflow: hidden;
-  position: relative;
-}
-
-.shine::after {
-  content: '';
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-image: linear-gradient(
-    45deg,
-    hsla(0 0% 100% / 0%) 0%,
-    hsla(0 0% 100% / 30%) 50%,
-    hsla(0 0% 100% / 0%) 100%
-  );
-  background-size: 400% 100%;
-  animation: shine 4s cubic-bezier(0.44, 0.21, 0, 1) alternate infinite;
-  z-index: 20;
 }
 
 .backdrop {
