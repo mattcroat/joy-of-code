@@ -2,6 +2,8 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'testing-library', 'jest-dom'],
   extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
     'plugin:@next/next/recommended',
     'plugin:testing-library/react',
     'plugin:jest-dom/recommended',
@@ -28,14 +30,6 @@ module.exports = {
         ignoreMemberSort: false,
         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
         allowSeparatedGroups: true,
-      },
-    ],
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['invalidHref', 'preferButton'],
       },
     ],
     'jsx-a11y/no-onchange': 0,
