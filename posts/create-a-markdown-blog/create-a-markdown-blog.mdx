@@ -46,8 +46,8 @@ These are the features I want from a **Markdown** blog that we're going to imple
 We're going to create the **URL slug** from the post title such as `post.mdx` and have **Next.js** build the page for every post, so we can access it at `http://localhost:3000/post`.
 
 <Image
-  height="398px"
-  width="724px"
+  height={398}
+  width={724}
   src="/images/create-a-markdown-blog/site-diagram.webp"
   alt="Site diagram"
 />
@@ -169,8 +169,8 @@ Imagine what a chore it would be if we created a new page for every post such as
 We're going to get those paths from the **file system** because we can use **Node.js** inside **Next.js** pages. This is possible because **Next.js** has **special functions** `getStaticPaths` and `getStaticProps` that we can only use inside a page, so we can **pre-render the page at build time**.
 
 <Image
-  height="546px"
-  width="893px"
+  height={546}
+  width={893}
   src="/images/create-a-markdown-blog/next-page-render.webp"
   alt="Next.js page render"
 />
@@ -400,8 +400,8 @@ export default function Post({ code, metadata }: PostProps) {
 If you navigate to [http://localhost:3000/post-1](http://localhost:3000/post-1) you should see the post.
 
 <Image
-  height="284px"
-  width="511px"
+  height={284}
+  width={511}
   src="/images/create-a-markdown-blog/mdx-component.webp"
   alt="MDX component"
 />
@@ -880,8 +880,8 @@ export default function Posts({ posts }: PostsProps) {
 Now if you navigate to [http://localhost:3000/](http://localhost:3000/) you can see the sorted posts.
 
 <Image
-  height="216px"
-  width="370px"
+  height={216}
+  width={370}
   src="/images/create-a-markdown-blog/sorted-posts.webp"
   alt="Sorted posts"
 />
@@ -1669,8 +1669,8 @@ export default prism
 This is the general layout of the site but for posts we use a grid where we extend images and code blocks outside the grid because it looks cool.
 
 <Image
-  height="677px"
-  width="531px"
+  height={677}
+  width={531}
   src="/images/create-a-markdown-blog/layout.webp"
   alt="Site layout"
 />
@@ -1992,8 +1992,8 @@ If your project is **open source** and **non-commercial** you can [request a spo
 - Point **Vercel** to your repository
 
 <Image
-  height="573px"
-  width="505px"
+  height={573}
+  width={505}
   src="/images/create-a-markdown-blog/vercel.webp"
   alt="Deployment to Vercel"
 />

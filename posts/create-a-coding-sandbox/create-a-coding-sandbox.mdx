@@ -50,8 +50,8 @@ Let's start by playing detective 🔎, and examining **Codepen** source code thr
 If you're in a new pen on **Codepen**, press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to bring up the **developers tools**. Notice something interesting by **inspecting** the right-hand column. It's an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). You can imagine an `<iframe>` as a separate page inside another page. By definition **"it's a nested browsing context, embedding another HTML page into the current one."**
 
 <Image
-  height="745px"
-  width="1276px"
+  height={745}
+  width={1276}
   src="/images/create-a-coding-sandbox/codepen.webp"
   alt="Codepen"
 />
@@ -131,8 +131,8 @@ I prefer to use **class** for styling, and [global data-\* attributes](https://d
 There's only **two** sections, the **left-hand** side for the **editor**, and **right-hand** side for the **output** and **errors**. We're going to use a simple show and hide to only show the `<iframe>` if there are no errors, and vice versa.
 
 <Image
-  height="1080px"
-  width="1920px"
+  height={1080}
+  width={1920}
   src="/images/create-a-coding-sandbox/diagram.webp"
   alt="Codepen"
 />
@@ -401,8 +401,8 @@ updateUI()
 ```
 
 <Image
-  height="748px"
-  width="1143px"
+  height={748}
+  width={1143}
   src="/images/create-a-coding-sandbox/iframe.webp"
   alt="Iframe"
 />
@@ -420,8 +420,8 @@ function updateSource(transpiledOutput: string): void {
 ```
 
 <Image
-  height="748px"
-  width="1143px"
+  height={748}
+  width={1143}
   src="/images/create-a-coding-sandbox/source.webp"
   alt="Source"
 />
@@ -459,8 +459,8 @@ function logError(error: string): void {
 ```
 
 <Image
-  height="748px"
-  width="1143px"
+  height={748}
+  width={1143}
   src="/images/create-a-coding-sandbox/error.webp"
   alt="Error"
 />

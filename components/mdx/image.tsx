@@ -22,14 +22,13 @@ export function Image({ height, width, src, alt }: ImageProps) {
   return (
     <div ref={imageRef}>
       {isVisible && (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           alt={alt}
           className="mx-auto overflow-hidden rounded-lg sm:my-8"
-          height={
-            typeof height === 'string' ? height.replace('px', '') : height
-          }
+          height={height}
           src={src}
-          width={typeof width === 'string' ? width.replace('px', '') : width}
+          width={width}
         />
       )}
     </div>
