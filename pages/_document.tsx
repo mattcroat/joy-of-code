@@ -30,7 +30,7 @@ class MyDocument extends Document {
             href="/icons/apple-touch-icon.png"
             rel="apple-touch-icon"
           ></link>
-          <meta content="#fbd38d" name="theme-color" />
+          <meta content="#191e29" name="theme-color" />
         </Head>
         <body>
           <Main />
