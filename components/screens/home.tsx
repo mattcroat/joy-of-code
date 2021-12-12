@@ -11,12 +11,11 @@ function Welcome() {
   return (
     <>
       <h1>
-        <span className="inline-block mt-2 mr-2 lg:mt-0">
+        <span className="inline-block mt-2 mr-2 lg:mt-2">
           See You Space Cowboy
         </span>
         <Emoji emoji="👋" label="Waving hand emoji" />
       </h1>
-      <hr className="w-10 h-1 my-2 bg-gray-600 border-0"></hr>
     </>
   )
 }

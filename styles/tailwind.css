@@ -235,11 +235,11 @@
   }
 
   h1 {
-    @apply text-4xl font-black text-muted lg:text-5xl;
+    @apply text-4xl font-bold tracking-tight capitalize text-muted lg:text-5xl;
   }
 
   h2 {
-    @apply text-3xl font-bold text-muted lg:text-4xl;
+    @apply text-3xl font-normal tracking-tight capitalize text-muted lg:text-4xl;
   }
 
   p {
@@ -268,11 +268,11 @@
   }
 
   .prose h1 {
-    @apply max-w-2xl pb-4 mx-auto mb-4 text-center md:pb-8 lg:text-6xl md:mb-8 lg:mb-8 lg:leading-tight;
+    @apply pb-4 mx-auto mt-16 mb-4 font-bold md:pb-8 md:text-6xl md:mb-8 lg:mb-8;
   }
 
   .prose h2 {
-    @apply mt-16 text-highlight;
+    @apply mt-16 font-bold text-highlight;
   }
 
   .prose p {
@@ -285,15 +285,12 @@
 
   .prose ul,
   .prose ol {
-    @apply my-6 text-lg md:text-xl md:leading-loose;
+    @apply my-6 text-lg list-inside md:text-xl md:leading-loose;
   }
 
-  .prose ul {
-    @apply list-disc list-inside;
-  }
-
-  .prose ol {
-    @apply list-decimal list-inside;
+  .prose li::before {
+    content: '👉️';
+    padding-right: 10px;
   }
 
   .prose blockquote {

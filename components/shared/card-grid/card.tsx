@@ -13,13 +13,14 @@ interface CardProps {
 }
 
 const colors = {
-  css: 'bg-gradient-to-b from-transparent to-green-600',
-  general: 'bg-gradient-to-b from-transparent to-red-800',
-  git: 'bg-gradient-to-b from-transparent to-gray-900',
-  javascript: 'bg-gradient-to-b from-transparent to-yellow-600',
-  next: 'bg-gradient-to-b from-transparent to-indigo-800',
-  react: 'bg-gradient-to-b from-transparent to-blue-500',
-  typescript: 'bg-gradient-to-b from-transparent to-blue-800',
+  css: 'bg-gradient-to-t from-transparent to-green-600',
+  design: 'bg-gradient-to-t from-transparent to-green-400',
+  general: 'bg-gradient-to-t from-transparent to-red-800',
+  git: 'bg-gradient-to-t from-transparent to-gray-900',
+  javascript: 'bg-gradient-to-t from-transparent to-yellow-600',
+  next: 'bg-gradient-to-t from-transparent to-indigo-800',
+  react: 'bg-gradient-to-t from-transparent to-blue-500',
+  typescript: 'bg-gradient-to-t from-transparent to-blue-800',
 }
 
 export function Card({ category, title, slug }: CardProps) {
