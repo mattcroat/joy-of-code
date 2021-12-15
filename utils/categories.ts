@@ -11,6 +11,7 @@ export const moreCategories = [
   { name: 'Git / GitHub', url: '/category/git', icon: 'git' },
   { name: 'Next.js', url: '/category/next', icon: 'next' },
   { name: 'TypeScript', url: '/category/typescript', icon: 'typescript' },
+  { name: 'Svelte', url: '/category/svelte', icon: 'svelte' },
 ] as const
 
 export const menuCategories = [
@@ -23,6 +24,7 @@ export const menuCategories = [
   { name: 'Next.js', url: '/category/next', icon: 'next' },
   { name: 'React', url: '/category/react', icon: 'react' },
   { name: 'TypeScript', url: '/category/typescript', icon: 'typescript' },
+  { name: 'Svelte', url: '/category/svelte', icon: 'svelte' },
 ] as const
 
 export const subscribeCategories = [
@@ -39,4 +41,5 @@ export const categories = [
   'Next',
   'React',
   'TypeScript',
+  'Svelte',
 ] as const

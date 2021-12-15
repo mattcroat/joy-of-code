@@ -21,6 +21,7 @@ const colors = {
   next: 'bg-gradient-to-t from-transparent to-indigo-800',
   react: 'bg-gradient-to-t from-transparent to-blue-500',
   typescript: 'bg-gradient-to-t from-transparent to-blue-800',
+  svelte: 'bg-gradient-to-t from-transparent to-red-600',
 }
 
 export function Card({ category, title, slug }: CardProps) {
