@@ -11,7 +11,7 @@ export function Seo({ ...metadata }: SeoProps) {
   const meta = {
     title: 'Joy of Code',
     description: `Joy of Code is a digital garden about web development tutorials, and articles such as HTML, CSS, JavaScript, React and TypeScript.`,
-    image: 'https://joyofcode.xyz/images/social-image.jpg',
+    image: 'https://joyofcode.xyz/images/social-image.png',
     ...metadata,
   }
 
