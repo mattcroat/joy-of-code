@@ -341,8 +341,11 @@
 
   .prose .line-number::before {
     content: attr(line);
+    display: inline-block;
+    width: 1rem;
     margin-left: -8px;
-    padding-right: 16px;
+    margin-right: 16px;
+    text-align: right;
     color: var(--color-code-line-number);
   }
 
