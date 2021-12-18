@@ -129,16 +129,16 @@ Because we need to assign a value for Svelte to pick it up methods like `push` w
 
 ```html:App.svelte {10} {showLineNumbers}
 <script>
-	let list = ['React', 'Vue']
+  let list = ['React', 'Vue']
 
-	function handleClick() {
-		// doesn't update
+  function handleClick() {
+    // doesn't update
     list.push('Svelte')
-		// until you assign it
-		list = list
-		// so it's easier doing this
-		list = [...list, 'Svelte']
-	}
+    // until you assign it
+    list = list
+    // so it's easier doing this
+    list = [...list, 'Svelte']
+  }
 </script>
 
 <p>{list}</p>
@@ -234,31 +234,27 @@ Since HTML can't express logic such as conditionals and loops you would have to 
 <script>
   let appElement = document.querySelector('#app')
 
-  let user = {
-	  loggedIn: false
-	}
+  let todos = [
+    { id: 1, text: 'Todo 1', completed: true },
+    { id: 2, text: 'Todo 2', completed: false },
+    { id: 3, text: 'Todo 3', completed: false },
+    { id: 4, text: 'Todo 4', completed: false },
+  ]
 
-	function toggle() {
-	  user.loggedIn = !user.loggedIn
-		updateUI()
-	}
+  let todosHtml
 
-	function updateUI() {
-    let html
+  for (let todo of todos) {
+    let checked = todo.completed ? 'checked' : null
 
-	  if (user.loggedIn) {
-		  html = `<button>Log out</button>`
-		}
+    todosHtml += `
+      <li data-id=${todo.id}>
+		    <input ${checked} type="checkbox" />
+		    <span>${todo.text}</span>
+	    </li>
+		`
+  }
 
-		if (!user.loggedIn) {
-		  html = `<button>Log in</button>`
-		}
-
-		appElement.innerHTML = html
-    appElement.querySelector('button').onclick = toggle
-	}
-
-  updateUI()
+  appElement.innerHTML = `<ul>${todosHtml}</ul>`
 </script>
 ```
 
@@ -601,9 +597,9 @@ You import another Svelte component using the `import Component as './Component'
 	import Album from './Album.svelte'
 
 	let artists = [
-	  {
-		  name: 'Fleetwood Mac',
-		  albums: [
+		{
+			name: 'Fleetwood Mac',
+			albums: [
 				{
 					name: 'Tango in the Night',
 					year: 1987,
@@ -614,10 +610,10 @@ You import another Svelte component using the `import Component as './Component'
 						{ title: 'Caroline', length: '3:50' },
 						{ title: 'Tango in the Night', length: '3:56' },
 						{ title: 'Mystified', length: '3:08' },
-					]
-				}
-			]
-		}
+					],
+				},
+			],
+		},
 	]
 </script>
 
