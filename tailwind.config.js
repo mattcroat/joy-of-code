@@ -20,7 +20,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
-        mono: ['Mononoki', 'monospace'],
+        mono: ['Source Code Pro', 'monospace'],
         openDyslexic: ['OpenDyslexic', 'sans-serif'],
         openDyslexicMono: ['OpenDyslexic Mono', 'monospace'],
       },

@@ -4,7 +4,7 @@
 
 :root {
   --sans: 'Inter, sans-serif';
-  --mono: 'Mononoki, monospace';
+  --mono: 'Source Code Pro, monospace';
   --openDyslexic: 'OpenDyslexic, sans-serif';
   --openDyslexicMono: 'OpenDyslexic Mono, monospace';
 }
@@ -135,19 +135,20 @@
   }
 
   @font-face {
-    font-family: 'Mononoki';
+    font-family: 'Source Code Pro';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('/fonts/mononoki/mononoki-Regular.woff2') format('woff2');
+    src: url('/fonts/source-code-pro/SourceCodePro-Regular.woff2')
+      format('woff2');
   }
 
   @font-face {
-    font-family: 'Mononoki';
+    font-family: 'Source Code Pro';
     font-style: bold;
     font-weight: 700;
     font-display: swap;
-    src: url('/fonts/mononoki/mononoki-Bold.woff2') format('woff2');
+    src: url('/fonts/source-code-pro/SourceCodePro-Bold.woff2') format('woff2');
   }
 
   @font-face {
@@ -311,7 +312,8 @@
 
   .prose code[class*='language-'],
   .prose pre[class*='language-'] {
-    @apply p-0 leading-relaxed bg-transparent text-code;
+    @apply p-0 leading-relaxed whitespace-pre bg-transparent text-code;
+    tab-size: 2;
   }
 
   .prose .rehype-code-title {
