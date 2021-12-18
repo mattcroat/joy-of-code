@@ -620,7 +620,10 @@ You import another Svelte component using the `import Component as './Component'
 {#each artists as artist}
   <Artist artistName={artist.name} />
   {#each artist.albums as album}
-		<Album albumTitle="Tango in the Night" albumTracks={album.tracks} />
+		<Album
+			albumTitle="Tango in the Night"
+			albumTracks={album.tracks}
+		/>
   {/each}
 {/each}
 ```
