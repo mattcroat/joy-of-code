@@ -8,7 +8,7 @@ class MyDocument extends Document {
           <link
             as="font"
             crossOrigin="anonymous"
-            href="/fonts/inter/Inter-Variable.woff2"
+            href="/fonts/poppins/Poppins-Regular.woff2"
             rel="preload"
             type="font/woff2"
           />
