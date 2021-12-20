@@ -151,7 +151,26 @@ Svelte has **reactive declarations** using the `$:` syntax which is valid [JavaS
 
 Using the `$:` syntax is saying **"re-run this code whenever any of the referenced values change"**.
 
-```html:App.svelte {10, 31-34} {showLineNumbers}
+```html:App.svelte {6, 13} {showLineNumbers}
+<script>
+	// state
+	let items = [1, 2, 3, 4]
+
+	// computed
+	$: amount = items.length
+
+	function addItem() {
+		items = [...items, items.length + 1]
+	}
+</script>
+
+<p>The amount is {amount}</p>
+<button on:click={addItem}>Add item</button>
+```
+
+**Think about it as giving Svelte dependencies to watch and rerun the code when the value changes** because in `$: albumLength = getAlbumLength(album)` on the right `album` is the referenced value.
+
+```html:App.svelte {10, 32-35} {showLineNumbers}
 <script>
 	// state
 	let album = [
@@ -189,8 +208,6 @@ Using the `$:` syntax is saying **"re-run this code whenever any of the referenc
 </p>
 <button on:click={addTrack}>Add track</button>
 ```
-
-**Think about it as giving Svelte dependencies to watch and rerun the code when the value changes** because in `$: albumLength = getAlbumLength(album)` on the right `album` is the referenced value.
 
 One of the cool things you can do is log a value whenever it changes so it's easy to see what's going on.
 
@@ -589,7 +606,9 @@ You might have an `<Artist />` component:
 - `<Album />` component has `albumTitle` and `albumTracks` property passed to `<AlbumTrack />`
 - `<AlbumTrack />` component has `track` and `length` properties but also a `playing` state
 
-You import another Svelte component using the `import Component as './Component'` syntax. Pretend that `artists` is some data we fetched as a JSON response from the Spotify API.
+The filename can be whatever but a capitalised tag such as `<Artist />` indicates to Svelte that something is a component. You import another Svelte component using the `import Component as './Component'` syntax.
+
+Pretend that `artists` is some data we fetched as a JSON response from the Spotify API.
 
 ```html:App.svelte {2, 3} {showLineNumbers}
 <script>
@@ -621,7 +640,7 @@ You import another Svelte component using the `import Component as './Component'
   <Artist artistName={artist.name} />
   {#each artist.albums as album}
 		<Album
-			albumTitle="Tango in the Night"
+			albumTitle={album.name}
 			albumTracks={album.tracks}
 		/>
   {/each}
@@ -726,9 +745,15 @@ We can also use a reactive statement `$: playing = playing === title` for `playi
 The `<slot>` element lets us do that with components. If you're familiar with React this is similar to the `children` prop and Vue also has slots. We can provide a **fallback** if no content is provided.
 
 ```html:Button.svelte {2} {showLineNumbers}
-<div>
+<button>
   <slot>Placeholder</slot>
-</div>
+</button>
+
+<style>
+	button {
+		color: teal;
+	}
+</style>
 ```
 
 ```html:App.svelte {2, 6} {showLineNumbers}
@@ -758,17 +783,17 @@ You can use **named slots** for more control over the placement of elements. If 
 </script>
 
 <Button>
-  <span slot="icon">💩</span>
-	<span slot="text">Receive Spam</span>
+  <span slot="icon">➕</span>
+	<span slot="text">Add</span>
 </Button>
 
 <Button>
-  <span slot="icon">💣️</span>
-	<span slot="text">Read Terms You Don't Understand</span>
+  <span slot="icon">💩</span>
+	<span slot="text">Delete</span>
 </Button>
 ```
 
-You might be asking when you'd use slots over regular components and the answer is you might not often reach for slots and that's fine.
+You might be asking when you'd use slots over regular components and the answer might be not often and that's fine.
 
 Here's an example of slots and composition used in a real-world scenario in [Svelte Cubed](https://svelte-cubed.vercel.app/) that's a wrapper around [Three.js](https://threejs.org/) so you write less code because it's more declarative:
 
@@ -805,7 +830,7 @@ To use a transition use `transition:fade`. You can specify parameters such as `d
 	}
 </script>
 
-<button on:click={toggleFade}>Wax Poetic</button>
+<button on:click={toggleFade}>Wax poetic</button>
 
 {#if showFade}
 	<blockquote transition:fade={{delay: 250, duration: 300}}>
