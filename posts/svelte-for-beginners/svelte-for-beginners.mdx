@@ -251,27 +251,31 @@ Since HTML can't express logic such as conditionals and loops you would have to 
 <script>
   let appElement = document.querySelector('#app')
 
-  let todos = [
-    { id: 1, text: 'Todo 1', completed: true },
-    { id: 2, text: 'Todo 2', completed: false },
-    { id: 3, text: 'Todo 3', completed: false },
-    { id: 4, text: 'Todo 4', completed: false },
-  ]
+  let user = {
+	  loggedIn: false
+	}
 
-  let todosHtml
+	function toggle() {
+	  user.loggedIn = !user.loggedIn
+		updateUI()
+	}
 
-  for (let todo of todos) {
-    let checked = todo.completed ? 'checked' : null
+	function updateUI() {
+    let html
 
-    todosHtml += `
-      <li data-id=${todo.id}>
-		    <input ${checked} type="checkbox" />
-		    <span>${todo.text}</span>
-	    </li>
-		`
-  }
+	  if (user.loggedIn) {
+		  html = `<button>Log out</button>`
+		}
 
-  appElement.innerHTML = `<ul>${todosHtml}</ul>`
+		if (!user.loggedIn) {
+		  html = `<button>Log in</button>`
+		}
+
+	  appElement.innerHTML = html
+    appElement.querySelector('button').onclick = toggle
+	}
+
+  updateUI()
 </script>
 ```
 
@@ -462,7 +466,6 @@ This is an example of an event listener in JavaScript.
   function handleMouseMove(event) {
     mouse.x = event.clientX
     mouse.y = event.clientY
-
     updateUI()
   }
 
@@ -562,7 +565,7 @@ Filtering a list of items using JavaScript.
 
 Instead of using `event.target.value` which we could also do in Svelte we can bind the value of the text input field to `searchQuery` instead.
 
-```html:App.svelte {4, 13} {showLineNumbers}
+```html:App.svelte {4, 17} {showLineNumbers}
 <script>
  	let list = ['React', 'Vue', 'Svelte']
   let filteredList = []
