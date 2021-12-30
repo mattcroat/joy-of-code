@@ -889,8 +889,8 @@ export function localStorageStore(key, initial) {
     localStorage.setItem(key, JSON.stringify(initial))
   }
 
-  const saved = JSON.parse(localStorage.getItem(key))
-  const { subscribe, set, update } = writable(saved)
+  let saved = JSON.parse(localStorage.getItem(key))
+  let { subscribe, set, update } = writable(saved)
 
   return {
     subscribe,
