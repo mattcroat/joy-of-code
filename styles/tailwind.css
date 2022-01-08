@@ -214,7 +214,7 @@
   }
 
   html[data-font='accessible'] .card-title {
-    @apply w-[94%];
+    @apply w-[94%] text-2xl;
   }
 
   body {
