@@ -16,6 +16,7 @@ module.exports = {
   },
   rules: {
     semi: [1, 'never'],
+    'no-undef': 0,
     'no-console': [
       2,
       {
