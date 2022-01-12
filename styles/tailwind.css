@@ -255,6 +255,10 @@
     cursor: url('/images/cursor-pointer.webp'), pointer;
   }
 
+  summary {
+    @apply text-xl;
+  }
+
   .card-title {
     @apply w-[80%] text-3xl;
   }
@@ -292,6 +296,14 @@
   .prose li::before {
     content: '👉️';
     padding-right: 10px;
+  }
+
+  .prose li > ul {
+    @apply pl-4 m-0;
+  }
+
+  .prose li > ul > li::before {
+    display: none;
   }
 
   .prose blockquote {
