@@ -24,23 +24,33 @@ In the previous [Svelte For Beginners](https://joyofcode.xyz/svelte-for-beginner
 
 At the end I told you to go and build something but sometimes it's nice to have a friend to guide you through it. I also want to share my thought process instead of just making you do things because that's not a great way to learn and I'd rather you learn by working on things you care about.
 
-I know from the title of the post some of you might be yawning 🥱 but stick around!
+I know from the title of the post some of you might be yawning 🥱 at the idea of yet another todo app but stick around!
 
-This is just an excuse for us to learn more about how using Svelte might look in a real project with animations and in another post I'm going to show you why and how to add tests in Svelte so you have more confidence your code works as expected and how testing can be fun.
+This is just an excuse for us to learn more about how using Svelte might look in a real project and in another post I'm going to show you how to add tests to have more confidence your code works as expected. It's going to be awesome!
 
-We're going to be making a todo list app based on [TodoMVC](https://todomvc.com/) which is one of my favorite examples when learning anything new because it teaches us everything we need to know about what we're trying to learn because everything you build is creating, reading, updating and deleting.
+We're going to be making a todo list app based on [TodoMVC](https://todomvc.com/) which is one of my favorite examples when learning anything new because it teaches us everything we need to know about what we're trying to learn because everything you build includes creating, reading, updating and deleting content.
+
+<blockquote>
+  🖌️ Bob is here to help you out and let you know when you have to do something.
+</blockquote>
+
+<blockquote>
+  🐿️ Peapod is a friend of Bob's and provides you with helpful information.
+</blockquote>
 
 ## Learn From Reverse Engineering
 
-I understand a lot of you might struggle with how to get started and I want you to know that's **normal**. The more you work on things the more experience you have and your tool belt helps you solve more problems like Batman (but please don't go around beating people up at night 🦇).
+I understand a lot of you might struggle with how to get started and I want you to know that's **normal**.
 
-If we look at the [TodoMVC](https://todomvc.com/examples/vanilla-es6/) example we can observe a lot of things and that might be intimidating at first if you were asked to do it on your own. Don't concern yourself with everything at once. Break everything into smaller parts. It's mostly a text input field adding what you just typed to the screen.
+The more you work on things the more experience you have and your tool belt helps you solve more problems like Batman (ignoring striking fear in the hearts of criminals at night 🦇).
+
+Let's say you were tasked to make something like [TodoMVC](https://todomvc.com/examples/vanilla-es6/). It might be intimidating at first but let's break everything into smaller parts. It's mostly a text input field adding what you just typed to the screen.
 
 Focus on one step at a time. 👍️
 
-One thing I would be distracted by for example is how to get the animations working when you complete a todo and notice if you double-click edit it does a cool thing where you can edit the todo.
+One thing I would be distracted by is the animations when you complete a todo and notice if you double-click the todo you can edit it.
 
-This might sound complicated, right? 😱
+This might look complicated, right? 😱
 
 Here is where I would open the browser developer tools with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> and spend some time inspecting how it works.
 
@@ -51,11 +61,13 @@ Here is where I would open the browser developer tools with <kbd>Ctrl</kbd> + <k
   alt="TodoMVC editing a todo item"
 />
 
-Huh? it's not bad as you thought! If you see it's just hiding the label with the original content and replacing it with an empty text input if you're in the editing state.
+Huh? it's not bad as you thought! If you see it's just hiding the todo label and replacing it with a text input field of the same value if you're in the editing state.
 
 This is such a great touch that might look complicated at first but if you spend time figuring out how it works you can see it's not that complicated.
 
-Next thing I would do to learn how it works is to copy the HTML and CSS they're using. You don't even need JavaScript because you can just use fake data in the markup. In fact you can even disable the styles on the page by removing the `<head>` so you can focus on how it works.
+Next thing I would do to learn how it works is to copy the HTML and CSS. You don't even need JavaScript because you can just use fake data in the markup.
+
+In fact you can even disable the styles on the page by removing the `<head>` so you can focus on how it works.
 
 If we did this before we would immediately see through the magic trick. 🪄
 
@@ -66,7 +78,7 @@ If we did this before we would immediately see through the magic trick. 🪄
   alt="TodoMVC todo list markup without styles"
 />
 
-I observed how their example works and wrote down a todo list (I know, very meta 🤭) on what I need to make it work the same.
+This can be great fun! Instead of getting overwhelmed by everything observe how it works and write it down as a todo list (I know 🤭).
 
 - **Add todo**
   - [ ] Input should be focused when page loads
@@ -93,17 +105,9 @@ I observed how their example works and wrote down a todo list (I know, very meta
 
 ## Project Setup
 
-<blockquote>
-  🖌️ Bob is here to help you out and let you know when you have to do something.
-</blockquote>
-
-<blockquote>
-  🐿️ Peapod is a friend of Bob's and provides you with helpful information.
-</blockquote>
-
 We're going to use [Vite](https://vitejs.dev/) which is a fast and simple build tool with a lot of presets for different frameworks so we can focus on Svelte instead of configuring things.
 
-I'm going to be using [VS Code](https://code.visualstudio.com/) as my editor (you're going to need the [Svelte for VS Code extension](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode)) but you can use a web based editor like [CodeSandbox](https://codesandbox.io/) which is great if you're on a potato — in that case just pick the Svelte preset and you're good.
+I'm going to be using [VS Code](https://code.visualstudio.com/) as my editor (you're going to need the [Svelte for VS Code extension](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode)) but you can use a web based editor like [CodeSandbox](https://codesandbox.io/) which is great if you're on a potato 🥔 — in that case just pick the Svelte preset and you're good.
 
 🖌️ In your terminal create the Vite project and pick Svelte with TypeScript.
 
@@ -143,7 +147,7 @@ This is the brief rundown of the folder structure:
 - **public** is where you keep your public files such as images and your favicon
 - **src** is where you keep your source files
 
-🖌️ Remove these files because we don't need them:
+🖌️ Remove these things because we don't need them:
 
 - **.vscode**
 - **/src/assets**
@@ -163,7 +167,7 @@ npm run dev
 
 ## Path Alias
 
-Before we continue let's set up a **path alias** so we can import our files using `$root` which means the root of our project so if you have nested imports you don't have to do `../../some-file.svelte` gymnastics.
+Before we continue let's set up a **path alias** so we can import files using `$root` which means the root of our project so if you have nested imports you don't have to do `../../Component.svelte` gymnastics.
 
 You can set up as many of path aliases as you want for example `$components`, `$styles` and so on but I prefer to keep it simple. I'm using the `$` prefix because that's what [SvelteKit](https://kit.svelte.dev/) uses.
 
@@ -572,9 +576,9 @@ First let's create a `Todos.svelte` file in `src/components` and then import it 
 <Todos />
 ```
 
-I took the liberty to modernize the styles and make it more accessible from the original. There's also some slight differences in the markup but it's not relevant to us.
+I named the sections in the styles so it's easier for you to know what to move later into components.
 
-If you notice we already checked some of the items from the list such as the input being focused when the page loads and using a `<form>` we can use <kbd>Enter</kbd> to submit.
+If you notice we already checked some of the items from the list such as the input being focused when the page loads and because we're using a `<form>` we can use <kbd>Enter</kbd> to submit.
 
 The use of `autofocus` is discouraged because it's bad for accessibility but in this case we only have one area of the page we're using.
 
@@ -681,6 +685,10 @@ If you don't want to use TypeScript just ignore the types! 👍️
   alt="Showing list of todo items"
 />
 
+You should see a list of todo items.
+
+If you want to you can add `$: console.log(todos)` inside `Todos.svelte` to see the values update when you change them so it's easier to see what's going on in the future.
+
 ## Adding Todo Items
 
 🖌️ First let's create a `AddTodo.svelte` file in `src/components` and move the markup and styles for it from `Todos.svelte`.
@@ -738,17 +746,19 @@ If you don't want to use TypeScript just ignore the types! 👍️
 </style>
 ```
 
-We're going to need a couple of props:
+`AddTodo.svelte` is going take a couple of props:
 
 - **addTodo** function that takes a todo and updates the todo list in
 - **toggleCompleted** function that's going to toggle the completion of the todos
-- **amount** so we know the todos count to show and hide marking the todos as completed
+- **todosAmount** so we know the todos count to show and hide marking the todos as completed
 
-Parts of our application depend on the same values such as `todos` and `amount` but in the future you can use a Svelte store if you want.
+We're also going to use `todosAmount` to show the information and options for the todo items only if there are todo items.
+
+Parts of our application depend on the same values such as `todos` and `todosAmount` but in the future you can use a Svelte store if you want.
 
 🖌️ Let's keep it simple and define what we need inside `Todos.svelte` and simply pass the props to `AddTodo.svelte`.
 
-```html:src/components/Todos.svelte {4,14-39,46} {showLineNumbers}
+```html:src/components/Todos.svelte {4,14-39,46,48,84} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -763,7 +773,7 @@ Parts of our application depend on the same values such as `todos` and `amount` 
   ]
 
   // computed
-  $: amountTodos = todos.length
+  $: todosAmount = todos.length
 
   // methods
   function generateRandomId(): string {
@@ -794,43 +804,45 @@ Parts of our application depend on the same values such as `todos` and `amount` 
   <h1 class="title">todos</h1>
 
   <section class="todos">
-    <AddTodo {addTodo} {toggleCompleted} amount={amountTodos} />
+    <AddTodo {addTodo} {toggleCompleted} {todosAmount} />
 
-    <ul class="todo-list">
-      {#each todos as todo (todo.id)}
-        <li class="todo">
-          <div class="todo-item">
-            <div>
-              <input
-                checked={todo.completed}
-                id="todo"
-                class="toggle"
-                type="checkbox"
-              />
-              <label
-								aria-label="Check todo"
-								class="todo-check"
-								for="todo"
-							/>
+    {#if todosAmount}
+      <ul class="todo-list">
+        {#each todos as todo (todo.id)}
+          <li class="todo">
+            <div class="todo-item">
+              <div>
+                <input
+                  checked={todo.completed}
+                  id="todo"
+                  class="toggle"
+                  type="checkbox"
+                />
+                <label
+                  aria-label="Check todo"
+                  class="todo-check"
+                  for="todo"
+                />
+              </div>
+              <span class="todo-text">{todo.text}</span>
+              <button aria-label="Remove todo" class="remove" />
             </div>
-            <span class="todo-text">{todo.text}</span>
-            <button aria-label="Remove todo" class="remove" />
-          </div>
 
-          <!-- <input class="edit" type="text" autofocus /> -->
-        </li>
-      {/each}
-    </ul>
+            <!-- <input class="edit" type="text" autofocus /> -->
+          </li>
+        {/each}
+      </ul>
 
-    <div class="actions">
-      <span class="todo-count">0 left</span>
-      <div class="filters">
-        <button class="filter">All</button>
-        <button class="filter">Active</button>
-        <button class="filter">Completed</button>
+      <div class="actions">
+        <span class="todo-count">0 left</span>
+        <div class="filters">
+          <button class="filter">All</button>
+          <button class="filter">Active</button>
+          <button class="filter">Completed</button>
+        </div>
+        <button class="clear-completed">Clear completed</button>
       </div>
-      <button class="clear-completed">Clear completed</button>
-    </div>
+    {/if}
   </section>
 </main>
 
@@ -847,11 +859,11 @@ The form right now submits and reloads the page so we need to prevent the defaul
 <script lang="ts">
   type AddTodoType = (todo: string) => void
   type ToggleCompletedType = (event: MouseEvent) => void
-  type AmountType = number
+  type TodosAmountType = number
 
   export let addTodo: AddTodoType
   export let toggleCompleted: ToggleCompletedType
-  export let amount: AmountType
+  export let todosAmount: TodosAmountType
 
   let todo = ''
 
@@ -862,7 +874,7 @@ The form right now submits and reloads the page so we need to prevent the defaul
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
-	{#if amount > 0}
+	{#if todosAmount > 0}
 	  <input type="checkbox" id="toggle-all" class="toggle-all" />
 	  <label aria-label="Mark all as complete" for="toggle-all">
 	    Mark all as complete
@@ -884,8 +896,6 @@ The form right now submits and reloads the page so we need to prevent the defaul
 
 That's it! 🥳
 
-If you want to you can add `$: console.log(todos)` inside `Todos.svelte` to see the values update when you change them so it's easier to see what's going on.
-
 ## Completing Todo Items
 
 Before we create the `Todo.svelte` component we need to create the methods inside `Todos.svelte` we're going to pass as props:
@@ -895,7 +905,7 @@ Before we create the `Todo.svelte` component we need to create the methods insid
 
 🖌️ Update `Todos.svelte`.
 
-```html:src/components/Todos.svelte {5,42-49,60} {showLineNumbers}
+```html:src/components/Todos.svelte {5,42-49,61} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -911,7 +921,7 @@ Before we create the `Todo.svelte` component we need to create the methods insid
   ]
 
   // computed
-  $: amountTodos = todos.length
+  $: todosAmount = todos.length
 
   // methods
   function generateRandomId(): string {
@@ -951,23 +961,25 @@ Before we create the `Todo.svelte` component we need to create the methods insid
   <h1 class="title">todos</h1>
 
   <section class="todos">
-    <AddTodo {addTodo} {toggleCompleted} amount={amountTodos} />
+    <AddTodo {addTodo} {toggleCompleted} {todosAmount} />
 
-    <ul class="todo-list">
-      {#each todos as todo (todo.id)}
-        <Todo {todo} {completeTodo} />
-      {/each}
-    </ul>
+    {#if todosAmount}
+      <ul class="todo-list">
+        {#each todos as todo (todo.id)}
+          <Todo {todo} {completeTodo} />
+        {/each}
+      </ul>
 
-    <div class="actions">
-      <span class="todo-count">0 left</span>
-      <div class="filters">
-        <button class="filter">All</button>
-        <button class="filter">Active</button>
-        <button class="filter">Completed</button>
+      <div class="actions">
+        <span class="todo-count">0 left</span>
+        <div class="filters">
+          <button class="filter">All</button>
+          <button class="filter">Active</button>
+          <button class="filter">Completed</button>
+        </div>
+        <button class="clear-completed">Clear completed</button>
       </div>
-      <button class="clear-completed">Clear completed</button>
-    </div>
+    {#if}
   </section>
 </main>
 
@@ -1142,7 +1154,7 @@ We're also going to set the `checked` attribute and use the `class:` directive t
   <!-- <input class="edit" type="text" autofocus /> -->
 </li>
 
-<!-- ... ->
+<!-- ... -->
 ```
 
 That's it, great job! 👍️
@@ -1151,7 +1163,7 @@ That's it, great job! 👍️
 
 🖌️ Inside `Todos.svelte` add the method for removing the todo and pass it to `Todo.svelte`.
 
-```html:src/components/Todos.svelte {51-53,64} {showLineNumbers}
+```html:src/components/Todos.svelte {51-53,65} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -1167,7 +1179,7 @@ That's it, great job! 👍️
   ]
 
   // computed
-  $: amountTodos = todos.length
+  $: todosAmount = todos.length
 
   // methods
   function generateRandomId(): string {
@@ -1211,23 +1223,25 @@ That's it, great job! 👍️
   <h1 class="title">todos</h1>
 
   <section class="todos">
-    <AddTodo {addTodo} {toggleCompleted} amount={amountTodos} />
+    <AddTodo {addTodo} {toggleCompleted} {todosAmount} />
 
-    <ul class="todo-list">
-      {#each todos as todo (todo.id)}
-        <Todo {todo} {completeTodo} {removeTodo} />
-      {/each}
-    </ul>
+    {#if todosAmount}
+      <ul class="todo-list">
+        {#each todos as todo (todo.id)}
+          <Todo {todo} {completeTodo} {removeTodo} />
+        {/each}
+      </ul>
 
-    <div class="actions">
-      <span class="todo-count">0 left</span>
-      <div class="filters">
-        <button class="filter">All</button>
-        <button class="filter">Active</button>
-        <button class="filter">Completed</button>
+      <div class="actions">
+        <span class="todo-count">0 left</span>
+        <div class="filters">
+          <button class="filter">All</button>
+          <button class="filter">Active</button>
+          <button class="filter">Completed</button>
+        </div>
+        <button class="clear-completed">Clear completed</button>
       </div>
-      <button class="clear-completed">Clear completed</button>
-    </div>
+    {/if}
   </section>
 </main>
 
@@ -1276,11 +1290,9 @@ That's it, great job! 👍️
 <!-- ... -->
 ```
 
-That's it! 🥳 Since we've done the groundwork for `Todo.svelte` it's going to be easier adding features.
+That's it! 🥳
 
 ## Editing Todo Items
-
-We're looking good so far. 💪
 
 I'm surprised how many posts and tutorials show you the steps up to now but ignore the most important part which is editing the todo but I'm never going to give you up, let you down, run around and desert you.
 
@@ -1288,10 +1300,9 @@ We're going to create a function that takes in the todo `id` to find the todo an
 
 🖌️ Inside `Todos.svelte` we need to add the `editTodo` method and pass it to `Todo.svelte`.
 
-```html:src/components/Todos.svelte {56-59,70} {showLineNumbers}
+```html:src/components/Todos.svelte {55-58,70} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
-
 
 	import AddTodo from './AddTodo.svelte'
   import Todo from './Todo.svelte'
@@ -1305,7 +1316,7 @@ We're going to create a function that takes in the todo `id` to find the todo an
   ]
 
   // computed
-  $: amountTodos = todos.length
+  $: todosAmount = todos.length
 
   // methods
   function generateRandomId(): string {
@@ -1354,35 +1365,37 @@ We're going to create a function that takes in the todo `id` to find the todo an
   <h1 class="title">todos</h1>
 
   <section class="todos">
-    <AddTodo {addTodo} {toggleCompleted} amount={amountTodos} />
+    <AddTodo {addTodo} {toggleCompleted} {todosAmount} />
 
-    <ul class="todo-list">
-      {#each todos as todo (todo.id)}
-        <Todo {todo} {completeTodo} {removeTodo} {editTodo} />
-      {/each}
-    </ul>
+    {#if todosAmount}
+      <ul class="todo-list">
+        {#each todos as todo (todo.id)}
+          <Todo {todo} {completeTodo} {removeTodo} {editTodo} />
+        {/each}
+      </ul>
 
-    <div class="actions">
-      <span class="todo-count">0 left</span>
-      <div class="filters">
-        <button class="filter">All</button>
-        <button class="filter">Active</button>
-        <button class="filter">Completed</button>
+      <div class="actions">
+        <span class="todo-count">0 left</span>
+        <div class="filters">
+          <button class="filter">All</button>
+          <button class="filter">Active</button>
+          <button class="filter">Completed</button>
+        </div>
+        <button class="clear-completed">Clear completed</button>
       </div>
-      <button class="clear-completed">Clear completed</button>
-    </div>
+    {/if}
   </section>
 </main>
 
 <!-- ... -->
 ```
 
-We're going to have an `editing` state and `toggleEdit` function to change it together with a couple of methods for handling updating the todo:
+For editing the todo item we're going to have an `editing` state and `toggleEdit` function together with a couple of methods for handling updating the todo:
 
 - **handleEdit** is going to be responsible for editing the todo and registering if the user pressed <kbd>Escape</kbd> or <kbd>Enter</kbd> to handle those scenarios
 - **handleBlur** is going to save the todo when the input loses focus which is the **blur** event
 
-After we're going to add a `class:editing` directive to the `<li>`, a `dblclick` event listener on the span to toggle editing mode and conditionally show the editing input element based on if `editing` is true with `keydown` and `blur` event listeners.
+The `<li>` is going to have a `class:editing` directive and a `dblclick` event listener on the span to toggle editing mode and conditionally show the editing input element based on if `editing` is true with the `keydown` and `blur` event listeners.
 
 🖌️ Update `Todo.svelte`.
 
@@ -1482,7 +1495,7 @@ To see how many incomplete todos there are we're going to have a computed proper
 
 🖌️ Update `Todos.svelte`.
 
-```html:src/components/Todos.svelte {18,76} {showLineNumbers}
+```html:src/components/Todos.svelte {6,18,77} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -1499,7 +1512,7 @@ To see how many incomplete todos there are we're going to have a computed proper
   ]
 
   // computed
-  $: amountTodos = todos.length
+  $: todosAmount = todos.length
   $: incompleteTodos = todos.filter((todo) => !todo.completed).length
 
   // methods
@@ -1549,23 +1562,25 @@ To see how many incomplete todos there are we're going to have a computed proper
   <h1 class="title">todos</h1>
 
   <section class="todos">
-    <AddTodo {addTodo} {toggleCompleted} amount={amountTodos} />
+    <AddTodo {addTodo} {toggleCompleted} {todosAmount} />
 
-    <ul class="todo-list">
-      {#each todos as todo (todo.id)}
-        <Todo {todo} {completeTodo} {removeTodo} {editTodo} />
-      {/each}
-    </ul>
+    {#if todosAmount}
+      <ul class="todo-list">
+        {#each todos as todo (todo.id)}
+          <Todo {todo} {completeTodo} {removeTodo} {editTodo} />
+        {/each}
+      </ul>
 
-    <div class="actions">
-      <TodosLeft {incompleteTodos} />
-      <div class="filters">
-        <button class="filter">All</button>
-        <button class="filter">Active</button>
-        <button class="filter">Completed</button>
+      <div class="actions">
+        <TodosLeft {incompleteTodos} />
+        <div class="filters">
+          <button class="filter">All</button>
+          <button class="filter">Active</button>
+          <button class="filter">Completed</button>
+        </div>
+        <button class="clear-completed">Clear completed</button>
       </div>
-      <button class="clear-completed">Clear completed</button>
-    </div>
+    {/if}
   </section>
 </main>
 
@@ -1595,7 +1610,7 @@ When the filter changes we could have a computed property `filteredTodos` which 
 
 🖌️ Let's quickly add the `FiltersType` so we can use it.
 
-```ts:src/types/todo.ts
+```ts:src/types/todo.ts {7} {showLineNumbers}
 export interface ITodo {
   id: string
   text: string
@@ -1607,7 +1622,7 @@ export type FiltersType = 'all' | 'active' | 'completed'
 
 🖌️ Update `Todos.svelte`.
 
-```html:src/components/Todos.svelte {2,7,17,22,66-79,89,96} {showLineNumbers}
+```html:src/components/Todos.svelte {2,7,17,22,66-79,90,97} {showLineNumbers}
 <script lang="ts">
   import type { FiltersType, ITodo } from '$root/types/todo'
 
@@ -1627,7 +1642,7 @@ export type FiltersType = 'all' | 'active' | 'completed'
   let selectedFilter: FiltersType = 'all'
 
   // computed
-  $: amountTodos = todos.length
+  $: todosAmount = todos.length
   $: incompleteTodos = todos.filter((todo) => !todo.completed).length
   $: filteredTodos = filterTodos(todos, selectedFilter)
 
@@ -1693,19 +1708,21 @@ export type FiltersType = 'all' | 'active' | 'completed'
   <h1 class="title">todos</h1>
 
   <section class="todos">
-    <AddTodo {addTodo} {toggleCompleted} amount={amountTodos} />
+    <AddTodo {addTodo} {toggleCompleted} {todosAmount} />
 
-    <ul class="todo-list">
-      {#each filteredTodos as todo (todo.id)}
-        <Todo {todo} {completeTodo} {removeTodo} {editTodo} />
-      {/each}
-    </ul>
+    {#if todosAmount}
+      <ul class="todo-list">
+        {#each filteredTodos as todo (todo.id)}
+          <Todo {todo} {completeTodo} {removeTodo} {editTodo} />
+        {/each}
+      </ul>
 
-    <div class="actions">
-      <TodosLeft {incompleteTodos} />
-      <FilterTodos {selectedFilter} {setFilter} />
-      <button class="clear-completed">Clear completed</button>
-    </div>
+      <div class="actions">
+        <TodosLeft {incompleteTodos} />
+        <FilterTodos {selectedFilter} {setFilter} />
+        <button class="clear-completed">Clear completed</button>
+      </div>
+    {/if}
   </section>
 </main>
 
@@ -1795,7 +1812,7 @@ You're almost done! 😄 For the last part we need to clear the completed todos.
 
 🖌️ Inside `Todos.svelte` add a computed value `completedTodos` and a `clearCompleted` function we're going pass as props to `ClearTodos.svelte`.
 
-```html:src/components/Todos.svelte {8,24,83-85,103} {showLineNumbers}
+```html:src/components/Todos.svelte {8,24,83-85,104} {showLineNumbers}
 <script lang="ts">
   import type { FiltersType, ITodo } from '$root/types/todo'
 
@@ -1816,7 +1833,7 @@ You're almost done! 😄 For the last part we need to clear the completed todos.
   let selectedFilter: FiltersType = 'all'
 
   // computed
-  $: amountTodos = todos.length
+  $: todosAmount = todos.length
   $: incompleteTodos = todos.filter((todo) => !todo.completed).length
   $: filteredTodos = filterTodos(todos, selectedFilter)
   $: completedTodos = todos.filter((todo) => todo.completed).length
@@ -1887,19 +1904,21 @@ You're almost done! 😄 For the last part we need to clear the completed todos.
   <h1 class="title">todos</h1>
 
   <section class="todos">
-    <AddTodo {addTodo} {toggleCompleted} amount={amountTodos} />
+    <AddTodo {addTodo} {toggleCompleted} {todosAmount} />
 
-    <ul class="todo-list">
-      {#each filteredTodos as todo (todo.id)}
-        <Todo {todo} {completeTodo} {removeTodo} {editTodo} />
-      {/each}
-    </ul>
+    {#if todosAmount}
+      <ul class="todo-list">
+        {#each filteredTodos as todo (todo.id)}
+          <Todo {todo} {completeTodo} {removeTodo} {editTodo} />
+        {/each}
+      </ul>
 
-    <div class="actions">
-      <TodosLeft {incompleteTodos} />
-      <FilterTodos {selectedFilter} {setFilter} />
-      <ClearTodos {clearCompleted} {completedTodos} />
-    </div>
+      <div class="actions">
+        <TodosLeft {incompleteTodos} />
+        <FilterTodos {selectedFilter} {setFilter} />
+        <ClearTodos {clearCompleted} {completedTodos} />
+      </div>
+    {/if}
   </section>
 </main>
 
@@ -1956,11 +1975,13 @@ What if I told you that you can implement local storage in Svelte in two lines o
 <!-- ... -->
 ```
 
-First we deserialize the value from local storage using `JSON.parse` because we're going to store an array and values in local storage have to be a string. If there is nothing with the key of **todos** we default to an empty array using `??` which is the [nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator).
+First we deserialize the todos value from local storage using `JSON.parse` because we're going to store an array and values in local storage have to be a string.
+
+If there is nothing with the key of **todos** we default to an empty array using [the nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator).
 
 We learned that we can have reactive blocks before so we're updating local storage each time `todos` change and serializing the value using `JSON.stringify`.
 
-This is great but it would be even better if we used a Svelte store to be able to reuse it across components. This might look similar if you ever used React hooks.
+This is great but it would be even better if we used a Svelte store to be able to reuse it across components. This might look familiar if you ever used React hooks.
 
 🖌️ Create a new file `useStorage.ts` inside `src/stores`.
 
@@ -2009,7 +2030,7 @@ export function useStorage<Value>(
 }
 ```
 
-We're going to see how generics are awesome in a moment.
+We're going to see why generics are awesome in a moment.
 
 🖌️ Update `Todos.svelte` to use the store but note we have to change `todos` with a reactive `$todos` value from the store in places where we use it.
 
@@ -2025,7 +2046,7 @@ We're going to see how generics are awesome in a moment.
   let selectedFilter: FiltersType = 'all'
 
   // computed
-  $: amountTodos = $todos.length
+  $: todosAmount = $todos.length
   $: incompleteTodos = $todos.filter((todo) => !todo.completed).length
   $: filteredTodos = filterTodos($todos, selectedFilter)
   $: completedTodos = $todos.filter((todo) => todo.completed).length
@@ -2095,13 +2116,15 @@ We're going to see how generics are awesome in a moment.
 <!-- ... -->
 ```
 
-Going back to TypeScript generics because we passed the `ITodo` type as a generic `<ITodo[]>` type for `useStorage` we know the type of `todos` is a writable that returns an array of todos or `Writable<ITodo[]>`. Sweet! 😄
+Because we passed the `ITodo` type as a generic `<ITodo[]>` type for `useStorage` we know the type of `todos` is a writable that returns an array of todos or `Writable<ITodo[]>` so we get type safety and completion. Sweet! 😄
 
-I'm going to leave you with an exercise dear reader. 🧠 Since we're using a
-store we can define and export the todos there so we can **collocate** more
-things inside of the components because we no longer have
-to keep state in the parent. I want you to clean up the code if you're up for
-it.
+Since we're using a
+store we can define and export the todos from there so we can **collocate** more
+things inside of each component because we no longer have
+to keep the todos state in the parent.
+
+I want you to clean up the code if you're up for
+it. I leave this up to you as an exercise dear reader. 🧠
 
 ## Adding Animations
 
@@ -2125,7 +2148,9 @@ We're going to add a simple **slide** and **fade** transition to the todo list i
 <!-- ... -->
 ```
 
-That's it! 🦄 There's one problem though. The transition is happening for each todo item when we change the filter so let's fix that.
+That's it! 🦄
+
+There's one problem though. The transition is happening for each todo item when we change the filter.
 
 <video autoPlay={true} loop muted controls>
   <source
@@ -2134,11 +2159,9 @@ That's it! 🦄 There's one problem though. The transition is happening for each
   />
 </video>
 
-This one was a head scratcher but remember how I said to learn and use tools when the problem arises? This is a great example of learning about the Svelte lifecycle function [tick](https://svelte.dev/docs#run-time-svelte-tick).
+Building something is the only time when you encounter a problem that requires a specific solution so you're going to learn and understand how something works instead of just watching or reading about it.
 
 The solution we can use is to have a computed `duration` value for the animation that's going to be `0 ms` or `250 ms` based on if `filtering` is `true` or `false` in `Todos.svelte` which we can pass to `Todo.svelte`.
-
-There's one problem we're going to encounter.
 
 ```ts:Example.ts {2,4} {showLineNumbers}
 function setFilter(newFilter: FiltersType): void {
@@ -2148,13 +2171,15 @@ function setFilter(newFilter: FiltersType): void {
 }
 ```
 
-Svelte batches pending DOM changes for efficiency so nothing would happen. You can see that's true if you log the computed value `$: console.log(duration)`.
+There's one problem with the solution.
 
-Using `tick` we can let Svelte know to update the DOM immediately.
+Svelte batches pending DOM changes for efficiency so nothing would happen. You can see that's true if you log the computed value `$: console.log(duration)` after we add it.
+
+This is a great example of learning about the Svelte lifecycle function [tick](https://svelte.dev/docs#run-time-svelte-tick). Using `tick` we can let Svelte know to update the DOM immediately.
 
 🖌️ Let's update `Todos.svelte` and pass the `duration` prop to `Todo.svelte`.
 
-```html:src/components/Todos.svelte {2,16,67-73,99-105} {showLineNumbers}
+```html:src/components/Todos.svelte {2,16,67-73,100-106} {showLineNumbers}
 <script lang="ts">
   import { tick } from 'svelte'
 
@@ -2173,7 +2198,7 @@ Using `tick` we can let Svelte know to update the DOM immediately.
   let filtering = false
 
   // computed
-  $: amountTodos = $todos.length
+  $: todosAmount = $todos.length
   $: incompleteTodos = $todos.filter((todo) => !todo.completed).length
   $: filteredTodos = filterTodos($todos, selectedFilter)
   $: completedTodos = $todos.filter((todo) => todo.completed).length
@@ -2249,25 +2274,27 @@ Using `tick` we can let Svelte know to update the DOM immediately.
   <h1 class="title">todos</h1>
 
   <section class="todos">
-    <AddTodo {addTodo} {toggleCompleted} amount={amountTodos} />
+    <AddTodo {addTodo} {toggleCompleted} {todosAmount} />
 
-    <ul class="todo-list">
-      {#each filteredTodos as todo (todo.id)}
-        <Todo
-          {todo}
-          {completeTodo}
-          {removeTodo}
-          {editTodo}
-          {duration}
-        />
-      {/each}
-    </ul>
+    {#if todosAmount}
+      <ul class="todo-list">
+        {#each filteredTodos as todo (todo.id)}
+          <Todo
+            {todo}
+            {completeTodo}
+            {removeTodo}
+            {editTodo}
+            {duration}
+          />
+        {/each}
+      </ul>
 
-    <div class="actions">
-      <TodosLeft {incompleteTodos} />
-      <FilterTodos {selectedFilter} {setFilter} />
-      <ClearTodos {clearCompleted} {completedTodos} />
-    </div>
+      <div class="actions">
+        <TodosLeft {incompleteTodos} />
+        <FilterTodos {selectedFilter} {setFilter} />
+        <ClearTodos {clearCompleted} {completedTodos} />
+      </div>
+    {/if}
   </section>
 </main>
 
@@ -2314,7 +2341,9 @@ That's it! 🥳
   />
 </video>
 
-With that we can cross off all the items from the list we wanted to do at the start. In the next post I'm going to show you how to add tests. 🧪
+With that we can cross off all the items from the list we wanted to do at the start.
+
+Keep an eye on the next post where I'm going to show you how to add tests. 🧪
 
 ## Conclusion
 
@@ -2326,6 +2355,6 @@ Don't be afraid of learning and feeling uncomfortable because that's a good sign
 
 You're going to learn way more struggling a week on your personal project and feeling you barely made progress than reading or watching any tutorial like a marathon and feeling a false sense of accomplishment.
 
-Take your time learning and share it with others.
+Take your time learning and share your knowledge with others.
 
 Thanks for reading! 🏄️
