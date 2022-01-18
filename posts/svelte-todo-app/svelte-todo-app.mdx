@@ -297,7 +297,7 @@ You can include the styles inside `index.html` but you wouldn't benefit from HMR
 
 ```html:src/App.svelte {2} {showLineNumbers}
 <script lang="ts">
-	import `$root/styles/global.css`
+	import '$root/styles/global.css'
 </script>
 
 <h1>Hello, World 👋</h1>
@@ -476,7 +476,7 @@ First let's create a `Todos.svelte` file in `src/components` and then import it 
 				border-radius: 100%;
 			}
 		
-			.completed .todo-text {
+			.completed {
 				color: var(--color-gray-58);
 				text-decoration: line-through;
 			}
@@ -854,7 +854,7 @@ The form right now submits and reloads the page so we need to prevent the defaul
 
 🖌️ Update `AddTodo.svelte`.
 
-```html:src/components/AddTodo.svelte {1-39} {showLineNumbers}
+```html:src/components/AddTodo.svelte {1-16,18,19,21,29,32} {showLineNumbers}
 <script lang="ts">
   type AddTodoType = (todo: string) => void
   type ToggleCompletedType = (event: MouseEvent) => void
@@ -1113,7 +1113,7 @@ Before we create the `Todo.svelte` component we need to create the methods insid
 
 Inside `Todo.svelte` we're going to listen for changes when a user checks the checkbox and mark the todo as completed by passing the todo `id` to `completeTodo`.
 
-We're also going to set the `checked` attribute and use the `class:` directive to apply a `.completed` class if the todo is completed.
+We're also going to use the `class:` directive to apply a `.completed` class if the todo is completed.
 
 <blockquote>
   🐿️ If you're wondering about why we use the anonymous function `() =>
@@ -1123,7 +1123,7 @@ We're also going to set the `checked` attribute and use the `class:` directive t
 
 🖌️ Update `Todo.svelte` to reflect the changes.
 
-```html:src/components/Todo.svelte {14-15,26} {showLineNumbers}
+```html:src/components/Todo.svelte {14,26} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -1248,7 +1248,7 @@ That's it, great job! 👍️
   </section>
 </main>
 
-<!-- ... ->
+<!-- ... -->
 ```
 
 🖌️ In `Todo.svelte` we need to take in the prop and wire up the event to the button.
