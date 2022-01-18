@@ -758,7 +758,7 @@ Parts of our application depend on the same values such as `todos` and `todosAmo
 
 🖌️ Let's keep it simple and define what we need inside `Todos.svelte` and simply pass the props to `AddTodo.svelte`.
 
-```html:src/components/Todos.svelte {4,14-39,46,48,84} {showLineNumbers}
+```html:src/components/Todos.svelte {4,14-39,45,47,83} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -787,7 +787,6 @@ Parts of our application depend on the same values such as `todos` and `todosAmo
       completed: false,
     }
     todos = [...todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
@@ -905,7 +904,7 @@ Before we create the `Todo.svelte` component we need to create the methods insid
 
 🖌️ Update `Todos.svelte`.
 
-```html:src/components/Todos.svelte {5,42-49,61} {showLineNumbers}
+```html:src/components/Todos.svelte {5,41-48,60} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -935,7 +934,6 @@ Before we create the `Todo.svelte` component we need to create the methods insid
       completed: false,
     }
     todos = [...todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
@@ -1163,7 +1161,7 @@ That's it, great job! 👍️
 
 🖌️ Inside `Todos.svelte` add the method for removing the todo and pass it to `Todo.svelte`.
 
-```html:src/components/Todos.svelte {51-53,65} {showLineNumbers}
+```html:src/components/Todos.svelte {50-52,64} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -1193,7 +1191,6 @@ That's it, great job! 👍️
       completed: false,
     }
     todos = [...todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
@@ -1300,7 +1297,7 @@ We're going to create a function that takes in the todo `id` to find the todo an
 
 🖌️ Inside `Todos.svelte` we need to add the `editTodo` method and pass it to `Todo.svelte`.
 
-```html:src/components/Todos.svelte {55-58,70} {showLineNumbers}
+```html:src/components/Todos.svelte {54-57,69} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -1330,7 +1327,6 @@ We're going to create a function that takes in the todo `id` to find the todo an
       completed: false,
     }
     todos = [...todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
@@ -1495,7 +1491,7 @@ To see how many incomplete todos there are we're going to have a computed proper
 
 🖌️ Update `Todos.svelte`.
 
-```html:src/components/Todos.svelte {6,18,77} {showLineNumbers}
+```html:src/components/Todos.svelte {6,18,76} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -1527,7 +1523,6 @@ To see how many incomplete todos there are we're going to have a computed proper
       completed: false,
     }
     todos = [...todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
@@ -1622,7 +1617,7 @@ export type FiltersType = 'all' | 'active' | 'completed'
 
 🖌️ Update `Todos.svelte`.
 
-```html:src/components/Todos.svelte {2,7,17,22,66-79,90,97} {showLineNumbers}
+```html:src/components/Todos.svelte {2,7,17,22,65-78,89,96} {showLineNumbers}
 <script lang="ts">
   import type { FiltersType, ITodo } from '$root/types/todo'
 
@@ -1658,7 +1653,6 @@ export type FiltersType = 'all' | 'active' | 'completed'
       completed: false,
     }
     todos = [...todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
@@ -1812,7 +1806,7 @@ You're almost done! 😄 For the last part we need to clear the completed todos.
 
 🖌️ Inside `Todos.svelte` add a computed value `completedTodos` and a `clearCompleted` function we're going pass as props to `ClearTodos.svelte`.
 
-```html:src/components/Todos.svelte {8,24,83-85,104} {showLineNumbers}
+```html:src/components/Todos.svelte {8,24,82-84,103} {showLineNumbers}
 <script lang="ts">
   import type { FiltersType, ITodo } from '$root/types/todo'
 
@@ -1850,7 +1844,6 @@ You're almost done! 😄 For the last part we need to clear the completed todos.
       completed: false,
     }
     todos = [...todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
@@ -2034,7 +2027,7 @@ We're going to see why generics are awesome in a moment.
 
 🖌️ Update `Todos.svelte` to use the store but note we have to change `todos` with a reactive `$todos` value from the store in places where we use it.
 
-```html:src/components/Todos.svelte {3,7,12-15,28,35,42,51,55,75} {showLineNumbers}
+```html:src/components/Todos.svelte {3,7,12-15,28,34,41,50,54,74} {showLineNumbers}
 <script lang="ts">
   import type { FiltersType, ITodo } from '$root/types/todo'
   import { useStorage } from '$root/stores/useStorage'
@@ -2063,7 +2056,6 @@ We're going to see why generics are awesome in a moment.
       completed: false,
     }
     $todos = [...$todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
@@ -2179,7 +2171,7 @@ This is a great example of learning about the Svelte lifecycle function [tick](h
 
 🖌️ Let's update `Todos.svelte` and pass the `duration` prop to `Todo.svelte`.
 
-```html:src/components/Todos.svelte {2,16,67-73,100-106} {showLineNumbers}
+```html:src/components/Todos.svelte {2,16,66-72,99-105} {showLineNumbers}
 <script lang="ts">
   import { tick } from 'svelte'
 
@@ -2216,7 +2208,6 @@ This is a great example of learning about the Svelte lifecycle function [tick](h
       completed: false,
     }
     $todos = [...$todos, newTodo]
-    todo = ''
   }
 
   function toggleCompleted(event: MouseEvent): void {
