@@ -1005,6 +1005,7 @@ Before we create the `Todo.svelte` component we need to create the methods insid
   <div class="todo-item">
     <div>
       <input
+        checked={todo.completed}
         id="todo"
         class="toggle"
         type="checkbox"
@@ -1045,7 +1046,7 @@ Before we create the `Todo.svelte` component we need to create the methods insid
     border-radius: 100%;
   }
 
-  .completed .todo-text {
+  .completed {
     color: var(--color-gray-58);
     text-decoration: line-through;
   }
