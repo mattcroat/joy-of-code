@@ -36,8 +36,11 @@ export function CodeBlock({ children }: CodeBlockProps) {
       textareaEl.style.visibility = 'none'
       document.body.appendChild(textareaEl)
 
+      // fix the newline issue
+      let textareaValue = textareaEl.value.replace(/\n\n/g, '\n')
+
       // copy code
-      await navigator.clipboard.writeText(textareaEl.value)
+      await navigator.clipboard.writeText(textareaValue)
 
       // cleanup
       document.body.removeChild(textareaEl)
