@@ -874,7 +874,12 @@ The form right now submits and reloads the page so we need to prevent the defaul
 
 <form on:submit|preventDefault={handleSubmit}>
 	{#if todosAmount > 0}
-	  <input type="checkbox" id="toggle-all" class="toggle-all" />
+    <input
+      on:click={toggleCompleted}
+      type="checkbox"
+      id="toggle-all"
+      class="toggle-all"
+    />
 	  <label aria-label="Mark all as complete" for="toggle-all">
 	    Mark all as complete
 	  </label>
