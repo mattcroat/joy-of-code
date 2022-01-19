@@ -7,13 +7,23 @@ category: 'svelte'
 image: '/images/social-image.png'
 ---
 
-# Make a Svelte Todo App Using Problem Solving
+# Make a Svelte Todo App
+
+<Iframe
+  title="Make a Svelte Todo App"
+  src="https://www.youtube.com/embed/cQYLPhBmqG8"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></Iframe>
 
 ## Table of Contents
 
 ## The Project
 
-This is an interactive example! 🦄 You can find the [source files on GitHub](https://github.com/JoysOfCode/svelte-todo).
+You can watch the [Make A Svelte Todo App](https://www.youtube.com/playlist?list=PLA9WiRZ-IS_xz1M4H0fjZAii4vzRffTno) playlist on YouTube and find the [source files on GitHub](https://github.com/JoysOfCode/svelte-todo).
+
+This is an interactive example! 🦄
 
 <Iframe
   title="Svelte Todo App"
@@ -1401,7 +1411,7 @@ The `<li>` is going to have a `class:editing` directive and a `dblclick` event l
 
 🖌️ Update `Todo.svelte`.
 
-```html:src/components/Todo.svelte {13-42,45,58,71-80} {showLineNumbers}
+```html:src/components/Todo.svelte {6,11,13-42,45,58,71-80} {showLineNumbers}
 <script lang="ts">
   import type { ITodo } from '$root/types/todo'
 
@@ -1948,9 +1958,9 @@ The class of `.hidden` is applied if there are no todos and it's defined in our 
 
 Congratulations! 🥳
 
-Stick around if you want to learn how to add permanent storage using local storage and animations.
+Stick around if you want to learn how to add persistent storage using local storage and animations.
 
-## Adding Permanent Storage
+## Adding Persistent Storage
 
 We're going to use the [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to save and retrieve the list of todos from the local storage in our browser.
 
@@ -2177,7 +2187,7 @@ This is a great example of learning about the Svelte lifecycle function [tick](h
 
 🖌️ Let's update `Todos.svelte` and pass the `duration` prop to `Todo.svelte`.
 
-```html:src/components/Todos.svelte {2,16,66-72,99-105} {showLineNumbers}
+```html:src/components/Todos.svelte {2,16,23,66-72,99-105} {showLineNumbers}
 <script lang="ts">
   import { tick } from 'svelte'
 
