@@ -121,11 +121,11 @@ I'm going to be using [VS Code](https://code.visualstudio.com/) as my editor (yo
 
 🖌️ In your terminal create the Vite project and pick Svelte with TypeScript.
 
-```shell:terminal {showLineNumbers}
+```shell:terminal
 npm init vite@latest
 ```
 
-```shell:terminal {showLineNumbers}
+```shell:terminal
 ✔ Project name: … svelte-todo
 ✔ Package name: … svelte-todo
 ? Select a framework: › - Use arrow-keys. Return to submit.
@@ -139,7 +139,7 @@ npm init vite@latest
 
 I'm going to use Svelte with TypeScript so select `svelte-ts` but it's purely optional. When you see types you can simply ignore them.
 
-```shell:terminal {showLineNumbers}
+```shell:terminal
 ? Select a variant: › - Use arrow-keys. Return to submit.
     svelte
 ❯   svelte-ts
@@ -147,17 +147,31 @@ I'm going to use Svelte with TypeScript so select `svelte-ts` but it's purely op
 
 Don't forget to install the packages.
 
-```shell:terminal {showLineNumbers}
+```shell:terminal
 npm i
 ```
 
-This is the brief rundown of the folder structure:
+This is the typical folder structure you're going to see.
 
+```shell:terminal
+svelte-todo/
+├── .vscode
+├── dist
+├── public
+└── src/
+    ├── assets
+    ├── lib
+    ├── App.svelte
+    └── main.ts
+```
+
+- **.vscode** contains workspace settings for Visual Studio Code and is safe to remove
 - **dist** is the build output (you're not going to see it until your run `npm run build`)
 - **public** is where you keep your public files such as images and your favicon
 - **src** is where you keep your source files
+- **assets** and **lib** are for your assets and components but it's safe to remove because it's not convention
 
-🖌️ Remove these things because we don't need them:
+🖌️ Remove what we don't need:
 
 - **.vscode**
 - **/src/assets**
@@ -1426,11 +1440,11 @@ The `<li>` is going to have a `class:editing` directive and a `dblclick` event l
 
   let editing = false
 
-  function toggleEdit() {
+  function toggleEdit(): void {
     editing = true
   }
 
-  function handleEdit(event: KeyboardEvent, id: string) {
+  function handleEdit(event: KeyboardEvent, id: string): void {
     let pressedKey = event.key
     let targetElement = event.target as HTMLInputElement
     let newTodo = targetElement.value
@@ -1446,7 +1460,7 @@ The `<li>` is going to have a `class:editing` directive and a `dblclick` event l
     }
   }
 
-  function handleBlur(event: FocusEvent, id: string) {
+  function handleBlur(event: FocusEvent, id: string): void {
     let targetElement = event.target as HTMLInputElement
     let newTodo = targetElement.value
 
@@ -2169,7 +2183,7 @@ There's one problem though. The transition is happening for each todo item when 
 
 Building something is the only time when you encounter a problem that requires a specific solution so you're going to learn and understand how something works instead of just watching or reading about it.
 
-The solution we can use is to have a computed `duration` value for the animation that's going to be `0 ms` or `250 ms` based on if `filtering` is `true` or `false` in `Todos.svelte` which we can pass to `Todo.svelte`.
+The solution we can use is to have a computed `duration` value for the animation that's going to be `0ms` or `250ms` based on if `filtering` is `true` or `false` in `Todos.svelte` which we can pass to `Todo.svelte`.
 
 ```ts:Example.ts {2,4} {showLineNumbers}
 function setFilter(newFilter: FiltersType): void {
