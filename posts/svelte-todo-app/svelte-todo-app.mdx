@@ -568,7 +568,6 @@ First let's create a `Todos.svelte` file in `src/components` and then import it 
 			.filters {
 				display: flex;
 				gap: var(--spacing-4);
-				list-style: none;
 			}
 		
 			.filter {
@@ -1777,7 +1776,6 @@ Now the computed value of `filteredTodos` is in charge of showing the todos.
   .filters {
     display: flex;
     gap: var(--spacing-4);
-    list-style: none;
   }
 
   .filter {
@@ -2112,7 +2110,7 @@ We're going to see why generics are awesome in a moment.
 
   function editTodo(id: string, newTodo: string): void {
     let currentTodo = $todos.findIndex((todo) => todo.id === id)
-    todos[currentTodo].text = newTodo
+    $todos[currentTodo].text = newTodo
   }
 
   function setFilter(newFilter: FiltersType): void {
@@ -2264,7 +2262,7 @@ This is a great example of learning about the Svelte lifecycle function [tick](h
 
   function editTodo(id: string, newTodo: string): void {
     let currentTodo = $todos.findIndex((todo) => todo.id === id)
-    todos[currentTodo].text = newTodo
+    $todos[currentTodo].text = newTodo
   }
 
   async function setFilter(newFilter: FiltersType): Promise<void> {
