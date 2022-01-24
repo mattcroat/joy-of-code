@@ -9,6 +9,13 @@ let uses = [
     },
   },
   {
+    title: '💻️ Terminal',
+    link: {
+      text: 'ZSH (Shell) & Starship (Cross-Shell Prompt)',
+      url: 'https://starship.rs/',
+    },
+  },
+  {
     title: '📜 Code Editor',
     link: {
       text: 'Visual Studio Code',
