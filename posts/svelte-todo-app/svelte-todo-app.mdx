@@ -2055,7 +2055,7 @@ We're going to see why generics are awesome in a moment.
 
 🖌️ Update `Todos.svelte` to use the store but note we have to change `todos` with a reactive `$todos` value from the store in places where we use it.
 
-```html:src/components/Todos.svelte {3,7,12-15,28,34,41,50,54,74} {showLineNumbers}
+```html:src/components/Todos.svelte {3,7,12-15,28,34,41,50,54-55,74} {showLineNumbers}
 <script lang="ts">
   import type { FiltersType, ITodo } from '$root/types/todo'
   import { useStorage } from '$root/stores/useStorage'
