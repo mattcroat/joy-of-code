@@ -236,7 +236,7 @@
   }
 
   h1 {
-    @apply text-4xl font-bold tracking-tight capitalize text-muted lg:text-5xl;
+    @apply text-4xl font-bold capitalize text-muted lg:text-5xl;
   }
 
   h2 {
@@ -293,7 +293,11 @@
     @apply my-6 text-lg list-inside md:text-xl md:leading-loose;
   }
 
-  .prose li::before {
+  .prose ol {
+    @apply list-decimal;
+  }
+
+  .prose ul li::before {
     content: '👉️';
     padding-right: 10px;
   }
