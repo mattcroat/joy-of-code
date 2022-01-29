@@ -17,11 +17,9 @@ Hey friends! 👋
 
 Testing is a subject that severely lacks content and might seem like the black arts to the uninitiated. I want to make testing more approachable and show you how it can even be fun!
 
-We're going to learn how to test any frontend JavaScript frameworks to have more confidence in our code.
+We're going to learn how to test any frontend JavaScript framework to have more confidence in our code.
 
 I'm going to use the todo app from [Make a Svelte Todo App](https://joyofcode.xyz/svelte-todo-app) we built previously but **don't think because it's Svelte it's not relevant** to you because we're going to use [Testing Library](https://testing-library.com/) that's **framework agnostic** and works for all of the popular frontend JavaScript frameworks.
-
-Because Testing Library doesn't care about what you use to render the component and just gives you methods to do assertions.
 
 Testing is important because it gives you confidence your code works as expected and if you test your application as your users you know their experience is predictable.
 
@@ -31,7 +29,12 @@ You can use tests to prevent people from submitting code in a pull request that 
 
 ## Build Your Test Framework
 
-Let's build a simple test framework in a couple of lines of code to see how it works. Credit goes to Kent C. Dodds and his great article on [But really, what is a JavaScript test?](https://kentcdodds.com/blog/but-really-what-is-a-javascript-test).
+Let's build a simple test framework in a couple of lines of code to see how it works. Credit goes to [@kentcdodds](https://twitter.com/kentcdodds) and his great article on [But really, what is a JavaScript test?](https://kentcdodds.com/blog/but-really-what-is-a-javascript-test).
+
+<blockquote>
+  🐿️ To run the code you need [Node.js](https://nodejs.org/en/) and then you can
+  use `node example.js` in your terminal.
+</blockquote>
 
 What's the simplest test we can write?
 
@@ -105,7 +108,11 @@ test('sum adds numbers', () => {
   let expected = 4
   expect(result).toBe(expected)
 })
+```
 
+```shell:terminal
+~/example 🔥 node example.js
+👍️ sum adds numbers
 ```
 
 We need something to look for tests in our project and run them. This is what a JavaScript testing framework does.
@@ -120,7 +127,7 @@ Let's quickly explain the types of tests because you're going to hear these term
 
 - **Unit** testing is making sure an individual part like a method or component works
 - **Integration** testing is making sure that several methods or components work together
-- **End-to-end** testing means simulating the actual user experience inside a browser for example navigating between pages for a Discord login integration ([Cypress](https://www.cypress.io/) is popular for this and works great with Testing Library but it's overkill for us)
+- **End-to-end** testing means simulating the actual user experience inside a browser like testing a Discord login integration ([Cypress](https://www.cypress.io/) is popular for this and works great with Testing Library but it's overkill for us)
 
 **The only thing you should care about is writing a test.**
 
@@ -130,7 +137,9 @@ If you're using any of these methods to achieve that is going to be an accident 
 
 If we strip away the terminology and technology we're only left with something simple — which is making our test work.
 
-The second thing most people ask is **"What to test?"**. This depends of course but you always want to test something that's most critical to your application. You might not have time or resources to test every aspect and that's fine so test the parts that are a disaster if they fail such as a checkout process.
+The second thing you're going to ask is **"What to test?"**. This depends of course but you always want to test something that's most critical to your application.
+
+You might not have time or resources to test every aspect and that's fine so test the parts that are a disaster if they fail such as a checkout process.
 
 ## Testing Library
 
@@ -166,17 +175,17 @@ Each query has their counterpart for finding more elements such as `getAllBy`, `
 The other important part based on the guiding principles of Testing Library is the [priority](https://testing-library.com/docs/queries/about#priority) in how you should query your elements to resemble your users `getByRole` being the highest and `getByTestId` being the lowest meaning you should avoid using it.
 
 1. **getByRole** to query an element in the accessibility tree such as `getByRole('button', { name: /submit/i })`
-2. **getByLabelText**
-3. **getByPlaceholderText**
-4. **getByText**
-5. **getByDisplayValue**
-6. **getByAltText**
-7. **getByTitle**
-8. **getByTestId**
+2. **getByLabelText** is good for form fields
+3. **getByPlaceholderText** if you don't have a label but it's not a substitute for it
+4. **getByText** is the main way users find non-interactive elements
+5. **getByDisplayValue** for form elements with filled-in values
+6. **getByAltText** for elements that support `alt` text
+7. **getByTitle** for elements with a `title`
+8. **getByTestId** only as a last resort if you can't match by role or text or the text is dynamic
 
 One of the great things about Testing Library is if you follow these guiding principles it's going to expose bad accessibility which we're going to look at later.
 
-You can learn more about other methods for [appearance and disappearance](https://testing-library.com/docs/guide-disappearance/) that we're going to use later to wait for animations to complete.
+You can learn more about other methods for [appearance and disappearance](https://testing-library.com/docs/guide-disappearance/) that are required when you're dealing with animations.
 
 This is an example of a simple test. 🧪
 
@@ -277,7 +286,7 @@ npm i -D @testing-library/svelte svelte-jester @testing-library/jest-dom ts-jest
 ```
 
 - `svelte-jester` is used to compile Svelte components before they're used in Jest and `ts-jest` is required for TypeScript
-- `babel-jest` if required because we're using the ES modules `import` syntax which Babel has to transpile
+- `babel-jest` is required because we're using the ES modules `import` syntax which Babel has to transpile
 - `@testing-library/jest-dom` adds more useful assertions for Jest
 
 The documentation says you need `svelte-preprocess` to process TypeScript in Svelte but that should already be installed because we created the project with TypeScript.
@@ -354,7 +363,7 @@ I want to help you understand how **reading documentation isn't scary but an imp
 
 🖌️ Let's add a test under `src/components/tests` and if we run `npm run test:watch` Jest should find our tests.
 
-```ts:example.test.js {showLineNumbers}
+```ts:src/components/tests/example.test.js {showLineNumbers}
 test('it should work', () => {})
 ```
 
@@ -475,7 +484,7 @@ That wasn't so bad, right? Take a minute to understand what just happened:
 
 First passing test! 🥳
 
-```ts:Todos.test.ts {showLineNumbers}
+```shell:terminal
  PASS  src/components/tests/Todos.test.ts
   ✓ able to add a todo item (67 ms)
 
@@ -535,7 +544,7 @@ test('able to add a todo item', async () => {
 />
 ```
 
-Alright, you're on fire! 🔥 How would we test adding multiple todo items? Whenever something is new to you like a library or framework it's easy to forget it's just JavaScript. We already know how to use loops and encapsulate repeating logic inside functions, right?
+Alright, you're on fire! 🔥 How would we test adding multiple todo items? Whenever something is new to you like a library or framework it's easy to forget it's just JavaScript. You already know how to use loops, right?
 
 🖌️ Lets add a new test!
 
@@ -612,7 +621,7 @@ Not sure about you, but I already feel more confident!
 
 Here's one that might stump you if you tried it. Whenever you're using animations you have to wait for them to finish otherwise if you make an assertion it's going to fail because the DOM isn't updated.
 
-In this case this happens when removing a todo so we have to use the `waitFor` and `queryBy` otherwise we would get an error from `getBy` because it's not in the document.
+In this case this happens when removing a todo so you have to use the `waitFor` method and `query` to assert it's removed.
 
 🖌️ Unfortunately our markup is also poor here so let's add `data-testid` to the button for removing the todo inside `Todo.svelte`.
 
@@ -661,7 +670,7 @@ test('able to remove a todo item', async () => {
 })
 ```
 
-Because we're using `queryBy` it requires a container that we can get from the `render` as `container`. This is documented in the [API section](https://testing-library.com/docs/svelte-testing-library/api/) of the Testing Library documentation.
+Because we're using `queryByText` it requires a container that we can get from the `render` as `container`. This is documented in the [API section](https://testing-library.com/docs/svelte-testing-library/api/) of the Testing Library documentation.
 
 Another passing test! 👏
 
@@ -779,7 +788,7 @@ test('able to clear completed todo items', async () => {
 
 All our tests should be passing! 🥳
 
-```ts:src/components/tests/Todos.test.ts {showLineNumbers}
+```shell:terminal
  PASS  src/components/tests/Todos.test.ts
   ✓ able to add a todo item (73 ms)
   ✓ able to add multiple todo items (41 ms)
@@ -799,7 +808,7 @@ Watch Usage: Press w to show more.
 
 Having some tests is better than having no tests. Next time someone asks to add a feature and our tests are passing we can avoid manual test checking and have confidence our code works as expected.
 
-Now we can focus on testing individual components because we couldn't test the entire logic inside `Todo.svelte` since it requires more components working together so we did it in the parent.
+Now we can focus on testing individual components because we couldn't test the logic inside `Todo.svelte` since it requires more components working together so we did it in the parent (unless you have global state).
 
 For the `Todo.svelte` component itself we can test does it have the right class when a todo item is completed or does it handle keyboard events as expected.
 
@@ -1168,7 +1177,5 @@ This is enough to get you started but there's a lot of other questions and test 
 Take an example the newsletter you can subscribe to below. You wouldn't use the real API because it might be slow or if it's not working it might break your tests so look into using [Mock Service Worker](https://mswjs.io/) instead.
 
 As for other resources I highly recommend reading everything from @kentcdodds on [testing](https://kentcdodds.com/blog?q=testing) including [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library).
-
-If you want a structured approach to learning testing he made [Testing JavaScript](https://testingjavascript.com/) but it might not be for everyone how expensive it is for an individual. If you're working a job, they should pay for your education.
 
 Thanks for reading! 🏄️
