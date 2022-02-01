@@ -9,6 +9,14 @@ image: '/images/social-image.png'
 
 # Testing User Interfaces For Beginners Regardless What JavaScript Framework You're Using
 
+<Iframe
+  title="Make a Svelte Todo App"
+  src="https://www.youtube.com/embed/y53wwdBr5AI"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></Iframe>
+
 ## Table of Contents
 
 ## Tests Give You Confidence
@@ -145,17 +153,17 @@ You might not have time or resources to test every aspect and that's fine so tes
 
 These are the tools we're going to use:
 
-- **Jest**
-- **Testing Library**
-- **Svelte Testing Library**
+- [Jest](https://jestjs.io/)
+- [Testing Library](https://testing-library.com/)
+- [Svelte Testing Library](https://github.com/testing-library/svelte-testing-library)
 
-[Jest](https://jestjs.io/) is a JavaScript testing framework and a test runner that gives you methods to test your logic.
+Jest is a JavaScript testing framework and a test runner that gives you methods to test your logic.
 
-[Testing Library](https://testing-library.com/) was made by [@kentcdodds](https://twitter.com/kentcdodds) and is only responsible for querying and interacting with DOM nodes thanks to [jsdom](https://github.com/jsdom/jsdom) simulating the browser in [Node.js](https://nodejs.org/en/) but it doesn't care how you render the DOM but it requires a test runner like Jest and works with everything like using a real browser with Cypress.
+Testing Library is only responsible for querying and interacting with DOM nodes thanks to [jsdom](https://github.com/jsdom/jsdom) simulating the browser in [Node.js](https://nodejs.org/en/) but it doesn't care how you render the DOM but it requires a test runner like Jest and works with everything like using a real browser with Cypress.
 
 Testing Library also has packages that extend Jest functionality such as [jest-dom](https://github.com/testing-library/jest-dom) that makes it easier to test the DOM with custom matchers like checking for the element's attributes, it's text contents, it's CSS classes and so on.
 
-Because Testing Library is built on top of [DOM Testing Library](https://testing-library.com/docs/dom-testing-library/intro/) the reason why it's framework agnostic is because it gives you a wrapper around other libraries such as [Svelte Testing Library](https://github.com/testing-library/svelte-testing-library) but the API is the same regardless what framework you're using.
+Because Testing Library is built on top of [DOM Testing Library](https://testing-library.com/docs/dom-testing-library/intro/) the reason why it's framework agnostic is because it gives you a wrapper around other libraries such as Svelte Testing Library but the API is the same regardless what framework you're using.
 
 <blockquote>
   🐿️ The more your tests resemble the way your software is used, the more
@@ -1174,8 +1182,8 @@ Hope you learned a lot!
 
 This is enough to get you started but there's a lot of other questions and test cases you might have such as "How do I test an API?".
 
-Take an example the newsletter you can subscribe to below. You wouldn't use the real API because it might be slow or if it's not working it might break your tests so look into using [Mock Service Worker](https://mswjs.io/) instead.
+Take for example the newsletter you can subscribe to below. You wouldn't use the real API because it might be slow or if it's not working it might break your tests so use [Mock Service Worker](https://mswjs.io/) instead.
 
-As for other resources I highly recommend reading everything from @kentcdodds on [testing](https://kentcdodds.com/blog?q=testing) including [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library).
+I highly recommend reading [everything on testing](https://kentcdodds.com/blog?q=testing) from @kentcdodds including [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library).
 
 Thanks for reading! 🏄️
