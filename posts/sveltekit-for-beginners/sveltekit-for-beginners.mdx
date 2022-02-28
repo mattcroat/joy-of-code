@@ -427,13 +427,15 @@ model Liked {
 
 </details>
 
-Here it's creating the `Tweet`, `User` and `Liked` tables.
+In the schema you're creating the `Tweet`, `User` and `Liked` tables. The tweets are linked to the `User` table by using `@relation` where the `userId` field matches the `id` field of `Tweet`. In the same way the `Liked` table references the `User` so we can know what tweets they liked.
 
-The tweets are linked to the `User` table by using `@relation` where the `userId` field matches the `id` field of `Tweet`.
+🖌️ The last step is to install the [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) which generates the client and types you can use.
 
-In the same way the `Liked` table references the `User` so we can know what tweets they liked.
+```shell:terminal
+npm i @prisma/client
+```
 
-🖌️ At this point we can create the database from our schema.
+🖌️ Create the database from the schema.
 
 ```shell:terminal
 npx prisma db push
@@ -442,8 +444,17 @@ npx prisma db push
 ```shell:terminal
 SQLite database dev.db created at file:./dev.db
 
-🚀  Your database is now in sync with your schema. Done in 113ms
+🚀  Your database is now in sync with your schema. Done in 129ms
+
+✔ Generated Prisma Client in 78ms
 ```
+
+That's it! 😄
+
+<blockquote>
+  🐿️ If `npx prisma db push` fails at generating try installing the Prisma CLI
+  with `npm i -D prisma` and run it again.
+</blockquote>
 
 This creates a `dev.db` file that's our SQLite database.
 
@@ -471,14 +482,6 @@ dev.db
 You can read the exemplary [Prisma documentation](https://www.prisma.io/docs/) if you want to learn more and [Prisma's Data Guide](https://www.prisma.io/dataguide/) to learn basics of databases.
 
 Another awesome thing about Prisma is [Prisma Studio](https://www.prisma.io/studio). You can open it with `npx prisma studio` if you want a graphical user interface to explore your data. It gives me [phpMyAdmin](https://www.phpmyadmin.net/) vibes!
-
-🖌️ The last step to do is install the [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) which is required to use Prisma and run `npx prisma db push` to generate the client and types.
-
-```shell:terminal
-npm i @prisma/client
-```
-
-That's it! 😄
 
 I could leave it here but I want to show you how to 🌱 seed a database or populate it with data which is **purely optional**.
 
@@ -606,34 +609,26 @@ I have some helper functions to create a random looking url and random date so i
 
 I'm creating an array of users that matches the fields in the schema we created and then going over them and creating the users with `prisma.user.create`.
 
-🖌️ We need to add a seed script inside `package.json` and because there's growing pains in Node.js with the transition to ES modules we need to specify a loader.
+🖌️ To transpile TypeScript you need `ts-node` and let's install Node.js types.
+
+```shell:terminal
+npm i -D ts-node @types/node
+```
+
+<blockquote>
+  🐿️ Because there are growing pains in Node.js with the transition to ES
+  modules we need to specify a loader.
+</blockquote>
 
 I figured this out by reading the error and doing some good old fashioned detective work but I hope they expand the [Seeding your database](https://www.prisma.io/docs/guides/database/seed-database) until this gets resolved. 🕵️
+
+🖌️ Add a seed script inside `package.json`.
 
 ```json:package.json {showLineNumbers}
 "prisma": {
   "seed": "node --loader ts-node/esm prisma/seed.ts"
 }
 ```
-
-🖌️ Generate the client that's tailored to our database.
-
-```shell:terminal
-npx prisma db push
-```
-
-```shell:terminal
-SQLite database dev.db created at file:./dev.db
-
-🚀  Your database is now in sync with your schema. Done in 76ms
-
-✔ Generated Prisma Client (3.10.0 | library)
-```
-
-<blockquote>
-  🐿️ If `npx prisma db push` fails generating try installing the Prisma CLI with
-  `npm i -D prisma` and run it again.
-</blockquote>
 
 🖌️ Seed the data.
 
