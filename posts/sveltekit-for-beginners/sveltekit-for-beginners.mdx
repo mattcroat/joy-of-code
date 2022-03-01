@@ -1981,7 +1981,7 @@ Because we designed the API and shaped the data we have complete control of how 
 
     	return {
     		headers: {
-    			'Cache-Control': 'max-age=0, s-max-age=60'
+    			'Cache-Control': 'max-age=0, s-maxage=60'
     		},
     		body: { data }
     	}
@@ -1989,6 +1989,8 @@ Because we designed the API and shaped the data we have complete control of how 
     ```
 
 The `max-age` response directive informs the browser to not cache the page and `s-max-age` helps the CDN know how long to cache the page in seconds.
+
+The `load` function in your page also has a [maxage](https://kit.svelte.dev/docs/loading#output-maxage) option you can set.
 
 </blockquote>
 
