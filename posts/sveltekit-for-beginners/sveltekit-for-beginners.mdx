@@ -2,7 +2,7 @@
 title: Full Stack SvelteKit For Beginners
 description: SvelteKit is an opinionated full stack framework that ties the frontend and backend together delivering the best developer and user experience.
 slug: 'sveltekit-for-beginners'
-published: '2022-2-14'
+published: '2022-2-28'
 category: 'svelte'
 image: '/images/sveltekit-for-beginners/social-image.webp'
 ---
@@ -152,7 +152,7 @@ In fact we can have the best of both worlds using server-side rendering and clie
 
 If you want you can even prerender every page or only do it for ones that don't change like the about page so they don't even need to ship JavaScript. 🤯
 
-Because SvelteKit is built on web fundamentals using the [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object of the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) it's not bound to any environment but uses [adapters](https://kit.svelte.dev/docs/adapters) that generate the output required for the target platform without configuration.
+SvelteKit uses the web platform [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects of the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) so it's not tied to any environment but uses [adapters](https://kit.svelte.dev/docs/adapters) that generate the output required for the target platform without configuration.
 
 <blockquote>
   🐿️ Fetch provides a generic definition of `Request` and `Response` objects.
@@ -161,7 +161,7 @@ Because SvelteKit is built on web fundamentals using the [Request](https://devel
   handle or modify requests and responses.
 </blockquote>
 
-This just means that you can spend more time on MDN learning about web fundamentals and improve as a web developer instead of just learning a framework abstraction.
+This just means that you can spend more time on [MDN](https://developer.mozilla.org/en-US/) learning about web fundamentals and improve as a web developer instead of just learning a framework abstraction.
 
 SvelteKit and Next.js let you prerender your site meaning all your pages are built in advance but have endpoints like I'm using for subscribing to the [newsletter](https://joyofcode.xyz/newsletter) thanks to serverless functions that give you a sip of server-side JavaScript only when you need it when hosted on services like [Netlify](https://www.netlify.com/) and [Vercel](https://vercel.com/) that have a generous free tier (the site you're on only costs me time and paying for the domain name).
 
@@ -196,7 +196,7 @@ Try refreshing the page and enter a Pokémon.
   alt="Network tab showing how the page works with JavaScript disabled"
 />
 
-You can see the page refresh if you look at the favicon at the top left.There's no JavaScript! 🤯
+You can see the page refresh if you look at the favicon at the top left. There's no JavaScript! 🤯
 
 If you look at the response or view the page source the HTML generated from the server is right there! You can see how the page is being hydrated.
 
@@ -220,14 +220,11 @@ Since the about page doesn't have any interactivity you don't have to ship any J
 Meta-frameworks like SvelteKit **blur the line between frontend and backend** which is great because you don't even realize you're a full stack developer.
 
 <blockquote>
-  🐿️ You might be wondering when to use Svelte or Sveltekit and the answer is
-  always SvelteKit even if you don't use most of the features you always have
-  the option.
+  🐿️ You might wonder when to use Svelte or Sveltekit but always use SvelteKit
+  because it's opinionated.
 </blockquote>
 
-There's a lot more to learn about SvelteKit and in the next section I'm going to show you how to build a full stack app using SvelteKit and [Prisma](https://www.prisma.io/) to talk to a SQL database.
-
-We're going to use [SQLite](https://www.sqlite.org/index.html) that's just a regular file on your system requiring no setup but you can later switch to any local or hosted SQL database you want. 🪄
+There's a lot more to learn about SvelteKit but first let me give you a tour of SvelteKit.
 
 ## SvelteKit Tour
 
@@ -237,7 +234,7 @@ For the editor I'm using [Visual Studio Code](https://code.visualstudio.com/) bu
 
 <blockquote>
   🐿️ At the time of writing this post SvelteKit is near its 1.0 release so there
-  shouldn't be breaking changes but always practice reading the docs.
+  shouldn't be breaking changes but always practice reading the documentation.
 </blockquote>
 
 🖌️ Let's start a fresh [SvelteKit](https://kit.svelte.dev/) project!
@@ -620,7 +617,7 @@ npm i -D ts-node @types/node
   modules we need to specify a loader.
 </blockquote>
 
-I figured this out by reading the error and doing some good old fashioned detective work but I hope they expand the [Seeding your database](https://www.prisma.io/docs/guides/database/seed-database) until this gets resolved. 🕵️
+I figured this out by reading the error and doing some good old fashioned detective work but I hope they expand [Seeding your database](https://www.prisma.io/docs/guides/database/seed-database) until this gets resolved. 🕵️
 
 🖌️ Add a seed script inside `package.json`.
 
@@ -643,8 +640,8 @@ npx prisma db seed
 You can look at your data inside Prisma Studio.
 
 <blockquote>
-  🐿️ You can find the generated client and types if you dig inside
-  `node_modules` and `@prisma+client/.prisma/client`.
+  🐿️ You can find the generated client and types if you dig around
+  `node_modules` inside `@prisma+client/.prisma/client`.
 </blockquote>
 
 ## Landing Page Layout
@@ -1973,7 +1970,27 @@ We're going to pass each tweet as a prop to a `<Tweet>` component mostly because
 
 Because we designed the API and shaped the data we have complete control of how we want to use it.
 
-I added some nice transitions you can see later when we implement adding, removing and liking a tweet.
+<blockquote>
+  🐿️ If you're prerendering pages you don't have to think about caching because
+  they're static so if there's a [CDN](https://developer.mozilla.org/en-US/docs/Glossary/CDN) in front of your site it caches it for you until you rebuild and redeploy the site but if you're using server-side rendering you can set [cache-control
+  HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) in your endpoint and specify when the page should rebuild.
+
+    ```js
+    export async function get() {
+    	// ...
+
+    	return {
+    		headers: {
+    			'Cache-Control': 'max-age=0, s-max-age=60'
+    		},
+    		body: { data }
+    	}
+    }
+    ```
+
+The `max-age` response directive informs the browser to not cache the page and `s-max-age` helps the CDN know how long to cache the page in seconds.
+
+</blockquote>
 
 ## Compose Tweet
 
