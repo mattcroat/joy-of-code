@@ -862,7 +862,7 @@ ol {
 🖌️ To start let's add a simple landing page so open `index.svelte` and update it.
 
 ```html:app.html:routes/index.svelte {showLineNumbers}
-<script>
+<script lang="ts">
 	import { fly } from 'svelte/transition'
 </script>
 
@@ -1200,26 +1200,30 @@ Before we add the layout we need to add the `<Navigation>` and `<Trending>` comp
 				<li>
 					<a href="/" class="logo">🐦️</a>
 				</li>
+
 				<li class:active={path === '/home'}>
-					<a href="/home" sveltekit:prefetch>
+					<a href="/home">
 						<Icon width="32" height="32" name="home" />
 						<span>Home</span>
 					</a>
 				</li>
+
 				<li class:active={path === '/home/profile/matia'}>
-					<a href="/home/profile/matia" sveltekit:prefetch>
+					<a href="/home/profile/matia">
 						<Icon width="32" height="32" name="profile" />
 						<span>Profile</span>
 					</a>
 				</li>
+
 				<li class:active={path === '/home/settings'}>
-					<a href="/home/settings" sveltekit:prefetch>
+					<a href="/home/settings">
 						<Icon width="32" height="32" name="settings" />
 						<span>Settings</span>
 					</a>
 				</li>
+
 				<li class:active={path === '/home/about'}>
-					<a href="/home/about" sveltekit:prefetch>
+					<a href="/home/about">
 						<Icon width="32" height="32" name="about" />
 						<span>About</span>
 					</a>
