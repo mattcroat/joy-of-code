@@ -2099,7 +2099,7 @@ So far we can only read hot takes but we can't post any! 😱 This requires urge
 
 Crisis averted! The form is going to **POST** to `/home` so we can start adding the API inside `home/index.ts`.
 
-```ts: routes/home/index.ts {showLineNumbers}
+```ts:routes/home/index.ts {showLineNumbers}
 // ...
 
 export const post: RequestHandler = async ({ request }) => {
@@ -2183,7 +2183,7 @@ This is our form inside `tweet.svelte` for removing a tweet. We're using a 🥷 
 
 🖌️ Let's update the `svelte.config.js`.
 
-```js:svelte:config.js {showLineNumbers}
+```js:svelte.config.js {showLineNumbers}
 // ...
 
 const config = {
