@@ -2285,6 +2285,11 @@ export const post: RequestHandler = async ({ request }) => {
 		where: { id },
 		data: { likes: (count.likes += 1) }
 	})
+
+	return {
+		status: 303,
+		headers: { location: '/home' }
+	}
 }
 ```
 
@@ -2297,59 +2302,6 @@ In this section you're going to learn how to use [dynamic parameters](https://ki
 If you have a `home/profile/user` endpoint where the user value is dynamic it looks more like `home/profile/[user]` where the value inside the brackets is dynamic.
 
 You can use `[parameter]` for naming your folder and files to get a dynamic parameter you can catch in your endpoint.
-
-🖌️ Add a `[user].ts` endpoint inside `home/profile`.
-
-```ts:routes/home/profile/[user].ts {showLineNumbers}
-import type { RequestHandler } from '@sveltejs/kit'
-
-import prisma from '$root/lib/prisma'
-import { timePosted } from '$root/utils/date'
-
-export const get: RequestHandler = async ({ params }) => {
-	const profile = await prisma.user.findFirst({
-		where: { name: params.user }
-	})
-
-	const tweets = await prisma.tweet.findMany({
-		where: { user: { id: 1 } },
-		include: { user: true },
-		orderBy: { posted: 'desc' }
-	})
-
-	const liked = await prisma.liked.findMany({
-		where: { userId: 1 },
-		select: { tweetId: true }
-	})
-
-	const likedTweets = Object.keys(liked).map(
-		(key) => liked[key].tweetId
-	)
-
-	if (!profile || !tweets || tweets.length === 0) {
-		return { status: 404 }
-	}
-
-	const userTweets = tweets.map((tweet) => {
-		return {
-			id: tweet.id,
-			content: tweet.content,
-			likes: tweet.likes,
-			posted: timePosted(tweet.posted),
-			url: tweet.url,
-			avatar: tweet.user.avatar,
-			handle: tweet.user.handle,
-			name: tweet.user.name,
-			liked: likedTweets.includes(tweet.id)
-		}
-	})
-
-	return {
-		status: 200,
-		body: { profile, tweets: userTweets }
-	}
-}
-```
 
 🖌️ Add a `[user].svelte` file inside `home/profile/[user].svelte`.
 
@@ -2478,6 +2430,59 @@ export const get: RequestHandler = async ({ params }) => {
 		border-bottom: 4px solid var(--color-brand);
 	}
 </style>
+```
+
+🖌️ Add a `[user].ts` endpoint inside `home/profile`.
+
+```ts:routes/home/profile/[user].ts {showLineNumbers}
+import type { RequestHandler } from '@sveltejs/kit'
+
+import prisma from '$root/lib/prisma'
+import { timePosted } from '$root/utils/date'
+
+export const get: RequestHandler = async ({ params }) => {
+	const profile = await prisma.user.findFirst({
+		where: { name: params.user }
+	})
+
+	const tweets = await prisma.tweet.findMany({
+		where: { user: { id: 1 } },
+		include: { user: true },
+		orderBy: { posted: 'desc' }
+	})
+
+	const liked = await prisma.liked.findMany({
+		where: { userId: 1 },
+		select: { tweetId: true }
+	})
+
+	const likedTweets = Object.keys(liked).map(
+		(key) => liked[key].tweetId
+	)
+
+	if (!profile || !tweets || tweets.length === 0) {
+		return { status: 404 }
+	}
+
+	const userTweets = tweets.map((tweet) => {
+		return {
+			id: tweet.id,
+			content: tweet.content,
+			likes: tweet.likes,
+			posted: timePosted(tweet.posted),
+			url: tweet.url,
+			avatar: tweet.user.avatar,
+			handle: tweet.user.handle,
+			name: tweet.user.name,
+			liked: likedTweets.includes(tweet.id)
+		}
+	})
+
+	return {
+		status: 200,
+		body: { profile, tweets: userTweets }
+	}
+}
 ```
 
 Notice you get redirected to `home` if you like or remove a tweet but it's fine. You can always change that later in a couple of ways like passing where you want to redirect or using another endpoint.
