@@ -2508,7 +2508,7 @@ To create something like this you simply create the same path in your folder str
 
 Inside the endpoint you can get the user and the tweet id that's the special url we created in the schema.
 
-🖌️ Create the `home/profile/[user]/status/[tweetId]/index.ts` path.
+🖌️ Create the `home/profile/[user]/status/[tweetId]/index.svelte` path.
 
 ```html:home/profile/[user]/status/[tweetId]/index.svelte {showLineNumbers}
 <h1>Profile</h1>
@@ -2657,7 +2657,7 @@ I want to reset the layout because while everything is almost the same the `sett
 ```html:routes/home/settings/__layout.reset.svelte {showLineNumbers}
 <script lang="ts">
 	import { page } from '$app/stores'
-	import Navigation from '$root/components/sidebar/navigation.svelte'
+	import Navigation from '$root/components/navigation.svelte'
 
 	$: path = $page.url.pathname
 </script>
