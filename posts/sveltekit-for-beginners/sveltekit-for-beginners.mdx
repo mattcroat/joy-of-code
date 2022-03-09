@@ -1542,6 +1542,14 @@ If the endpoint has the same name as the component you can just use the `items` 
 </script>
 ```
 
+<blockquote>
+  🐿️ Because the page and route have the same URL the SvelteKit documentation
+  says to include the `accept: application/json` header to get JSON from the
+  endpoint rather than HTML from the page. You can view the raw data by
+  appending `/__data.json` to the URL. Because of this you can exclude the
+  `action` attribute on the form when doing a **POST** to the same endpoint.
+</blockquote>
+
 I'm going to use the second method because it's less code and having your endpoint where your component is makes it easier to update.
 
 Endpoints are the same as using any other API or a Node.js framework like [Express](https://expressjs.com/) to create API endpoints but instead of using a separate backend framework you can do that with SvelteKit.
@@ -2676,14 +2684,19 @@ I want to reset the layout because while everything is almost the same the `sett
 			>
 				Personalization and data
 			</a>
+
 			<a
 				class:active={path === '/home/settings/data'}
-				href="/home/settings/data">Your Twitter data</a
-			>
+				href="/home/settings/data">
+				Your Twittr data
+			</a>
+
 			<a
 				class:active={path === '/home/settings/cookies'}
-				href="/home/settings/cookies">Cookie preferences</a
+				href="/home/settings/cookies"
 			>
+				Cookie preferences
+			</a>
 		</section>
 
 		<section class="general">
@@ -2696,6 +2709,7 @@ I want to reset the layout because while everything is almost the same the `sett
 			</a>
 		</section>
 	</main>
+
 	<aside>
 		<slot />
 	</aside>
@@ -3273,7 +3287,7 @@ One thing we need to know is when the URL changes so we can use the `page` store
 
 🖌️ Update `__layout.svelte` inside `home`.
 
-```html:home/__layout.svelte {2,12-14} {showLineNumbers}
+```html:home/__layout.svelte {2,6,12-14} {showLineNumbers}
 <script lang="ts">
 	import { page } from '$app/stores'
 
