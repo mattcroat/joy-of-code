@@ -31,7 +31,7 @@ let uses = [
   },
   {
     title: '✍️ Coding Font',
-    link: { text: 'Coding Font', url: 'https://www.monolisa.dev/' },
+    link: { text: 'MonoLisa', url: 'https://www.monolisa.dev/' },
   },
   {
     title: '❤️ Other Fonts I Love',
