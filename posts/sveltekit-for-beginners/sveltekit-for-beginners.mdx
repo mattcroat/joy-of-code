@@ -2592,6 +2592,8 @@ I even recreated how Twitter shows the name and content in the title. Did you kn
 
 ## Settings Page
 
+**Update**: SvelteKit introduced a breaking change with [named layouts](https://kit.svelte.dev/docs/layouts#named-layouts) replacing layout resets. The solution is to create a named layout inside routes at `routes/__layout-reset.svelte` that has `<slot />` inside and use `@reset` when you need to reset a layout with `routes/home/settings/__layout@reset.svelte`.
+
 In this section you're going to learn how to reset a layout.
 
 I want to show you how awesome nested layouts are inspired by the [Twitter settings](https://twitter.com/settings/account/personalization). Notice how the contents of the settings update in a separate part of the page when you use the navigation.
