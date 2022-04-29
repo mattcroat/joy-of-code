@@ -273,7 +273,7 @@
   }
 
   .prose h1 {
-    @apply pb-4 mx-auto mt-16 mb-4 font-bold md:pb-8 md:text-6xl md:mb-8 lg:mb-8;
+    @apply pb-4 mx-auto mt-16 mb-4 font-bold text-center lg:leading-normal md:pb-8 md:text-6xl md:mb-8 lg:mb-8;
   }
 
   .prose h2 {
@@ -281,7 +281,7 @@
   }
 
   .prose p {
-    @apply my-6 leading-relaxed;
+    @apply my-6 leading-loose;
   }
 
   .prose a {
