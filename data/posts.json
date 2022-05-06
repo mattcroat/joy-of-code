@@ -1,6 +1,6 @@
 [
   {
-    "views": 374,
+    "views": 375,
     "title": "How Code Sandboxes Update Content",
     "description": "How do code sandboxes update the iframe without causing flashing?",
     "slug": "avoid-flashing-iframe",
@@ -8,7 +8,7 @@
     "category": "javascript"
   },
   {
-    "views": 231,
+    "views": 237,
     "title": "Clean Git History Using Rebase",
     "description": "How to have a clean Git history using rebase.",
     "slug": "clean-git-history",
@@ -16,7 +16,7 @@
     "category": "git"
   },
   {
-    "views": 1933,
+    "views": 1935,
     "title": "Create a JavaScript Code Sandbox",
     "description": "Create a JavaScript code sandbox using Vite and TypeScript.",
     "slug": "create-a-coding-sandbox",
@@ -32,7 +32,7 @@
     "category": "next"
   },
   {
-    "views": 719,
+    "views": 721,
     "title": "How to Style CSS Focus Outline",
     "description": "Learn the importance of CSS focus outline for accessibility and how to style it.",
     "slug": "css-focus-outline",
@@ -48,7 +48,7 @@
     "category": "css"
   },
   {
-    "views": 386,
+    "views": 388,
     "title": "Design For Developers",
     "description": "Learn enough visual design to be dangerous with actual tips instead of theory.",
     "slug": "design-for-developers",
@@ -64,7 +64,7 @@
     "category": "typescript"
   },
   {
-    "views": 235,
+    "views": 259,
     "title": "Great Developers Steal",
     "description": "What is open source education? Find out how it can help you learn and improve faster.",
     "slug": "great-developers-steal",
@@ -72,7 +72,7 @@
     "category": "javascript"
   },
   {
-    "views": 221,
+    "views": 222,
     "title": "How to Optimize Images",
     "description": "How to optimize images and automate image optimization using Squoosh.",
     "slug": "how-to-optimize-images",
@@ -80,7 +80,7 @@
     "category": "general"
   },
   {
-    "views": 338,
+    "views": 339,
     "title": "How to Think Like a Developer",
     "description": "Learn how to develop problem solving skills.",
     "slug": "how-to-think-like-a-developer",
@@ -104,7 +104,7 @@
     "category": "css"
   },
   {
-    "views": 1471,
+    "views": 1476,
     "title": "Reduce Next.js Bundle Size by Half",
     "description": "Learn how using Preact instead of React can reduce Next.js bundle size by half.",
     "slug": "next-bundle-size",
@@ -128,7 +128,7 @@
     "category": "git"
   },
   {
-    "views": 215,
+    "views": 217,
     "title": "Use Developer Tools to Screenshot the Entire Page",
     "description": "You don't need extensions to screenshot the page, sections and elements.",
     "slug": "screenshot-page-and-dom-elements",
@@ -168,7 +168,7 @@
     "category": "next"
   },
   {
-    "views": 1010,
+    "views": 1013,
     "title": "Svelte For Beginners",
     "description": "Start building things with the Svelte JavaScript framework today.",
     "slug": "svelte-for-beginners",
@@ -177,7 +177,7 @@
     "series": true
   },
   {
-    "views": 462,
+    "views": 483,
     "title": "Svelte Headless UI Component Library",
     "description": "Svelte Headless UI is an awesome unopinionated component library.",
     "slug": "svelte-headless-ui",
@@ -185,7 +185,7 @@
     "category": "svelte"
   },
   {
-    "views": 403,
+    "views": 404,
     "title": "Make a Svelte Todo App",
     "description": "Learn Svelte by making an awesome Svelte todo app.",
     "slug": "svelte-todo-app",
@@ -198,11 +198,10 @@
     "description": "Learn how to use a custom SvelteKit server for WebSockets.",
     "slug": "sveltekit-and-websockets",
     "published": "2022-5-1",
-    "category": "sveltekit",
-    "draft": true
+    "category": "sveltekit"
   },
   {
-    "views": 710,
+    "views": 714,
     "title": "Using Secret Environment Variables With SvelteKit",
     "description": "Learn how to keep your secret environment variables safe for your API tokens and other secrets.",
     "slug": "sveltekit-environment-variables",
@@ -210,7 +209,7 @@
     "category": "sveltekit"
   },
   {
-    "views": 1988,
+    "views": 1996,
     "title": "Full Stack SvelteKit For Beginners",
     "description": "SvelteKit is an opinionated full stack framework that ties the frontend and backend together delivering the best developer and user experience.",
     "slug": "sveltekit-for-beginners",
@@ -219,7 +218,7 @@
     "series": true
   },
   {
-    "views": 319,
+    "views": 320,
     "title": "Syntax Highlight Template Strings",
     "description": "Syntax highlight, and code completion inside JavaScript template strings.",
     "slug": "template-strings-syntax-highlight",
@@ -227,7 +226,7 @@
     "category": "javascript"
   },
   {
-    "views": 204,
+    "views": 205,
     "title": "Testing User Interfaces For Beginners",
     "description": "Gain confidence your code works and learn how to test user interfaces with Testing Library for any frontend JavaScript framework.",
     "slug": "testing-for-beginners",
@@ -236,7 +235,7 @@
     "series": true
   },
   {
-    "views": 11506,
+    "views": 11512,
     "title": "TypeScript Fundamentals",
     "description": "Learn TypeScript through example — the missing TypeScript reference.",
     "slug": "typescript-fundamentals",
