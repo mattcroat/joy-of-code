@@ -30,7 +30,7 @@ export const categories = {
 }
 
 // https://api.github.com/repos/user/repo/contents/data/posts.json
-export const postsDataUrl = `${api}/repos/${owner}/${repo}/contents/data/posts.json`
+export const postsDataUrl = `${api}/repos/${owner}/${repo}/contents/data/posts.json?ref=sveltekit`
 
 // https://api.github.com/repos/user/repo/contents/posts
 export const postsUrl = `${api}/repos/${owner}/${repo}/contents/${path}`
