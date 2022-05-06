@@ -4,7 +4,6 @@ description: Learn how to use a custom SvelteKit server for WebSockets.
 slug: sveltekit-and-websockets
 published: 2022-5-1
 category: sveltekit
-draft: true
 ---
 
 # Using WebSockets With SvelteKit
