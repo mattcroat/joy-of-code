@@ -1,5 +1,5 @@
 {
-  "name": "redesign",
+  "name": "joy-of-code",
   "type": "module",
   "scripts": {
     "dev": "env-cmd svelte-kit dev",
