@@ -1,6 +1,6 @@
 [
   {
-    "views": 375,
+    "views": 376,
     "title": "How Code Sandboxes Update Content",
     "description": "How do code sandboxes update the iframe without causing flashing?",
     "slug": "avoid-flashing-iframe",
@@ -8,7 +8,7 @@
     "category": "javascript"
   },
   {
-    "views": 237,
+    "views": 238,
     "title": "Clean Git History Using Rebase",
     "description": "How to have a clean Git history using rebase.",
     "slug": "clean-git-history",
@@ -16,7 +16,7 @@
     "category": "git"
   },
   {
-    "views": 1935,
+    "views": 1938,
     "title": "Create a JavaScript Code Sandbox",
     "description": "Create a JavaScript code sandbox using Vite and TypeScript.",
     "slug": "create-a-coding-sandbox",
@@ -40,7 +40,7 @@
     "category": "css"
   },
   {
-    "views": 283,
+    "views": 284,
     "title": "Favicon That Works for Light and Dark Mode",
     "description": "How to make a favicon that respects the user color scheme preference?",
     "slug": "dark-mode-favicon",
@@ -48,7 +48,7 @@
     "category": "css"
   },
   {
-    "views": 388,
+    "views": 389,
     "title": "Design For Developers",
     "description": "Learn enough visual design to be dangerous with actual tips instead of theory.",
     "slug": "design-for-developers",
@@ -104,7 +104,7 @@
     "category": "css"
   },
   {
-    "views": 1476,
+    "views": 1478,
     "title": "Reduce Next.js Bundle Size by Half",
     "description": "Learn how using Preact instead of React can reduce Next.js bundle size by half.",
     "slug": "next-bundle-size",
@@ -168,7 +168,7 @@
     "category": "next"
   },
   {
-    "views": 1013,
+    "views": 1014,
     "title": "Svelte For Beginners",
     "description": "Start building things with the Svelte JavaScript framework today.",
     "slug": "svelte-for-beginners",
@@ -177,7 +177,7 @@
     "series": true
   },
   {
-    "views": 483,
+    "views": 489,
     "title": "Svelte Headless UI Component Library",
     "description": "Svelte Headless UI is an awesome unopinionated component library.",
     "slug": "svelte-headless-ui",
@@ -194,14 +194,7 @@
     "series": true
   },
   {
-    "title": "Using SvelteKit And WebSockets",
-    "description": "Learn how to use a custom SvelteKit server for WebSockets.",
-    "slug": "sveltekit-and-websockets",
-    "published": "2022-5-1",
-    "category": "sveltekit"
-  },
-  {
-    "views": 714,
+    "views": 715,
     "title": "Using Secret Environment Variables With SvelteKit",
     "description": "Learn how to keep your secret environment variables safe for your API tokens and other secrets.",
     "slug": "sveltekit-environment-variables",
@@ -209,7 +202,7 @@
     "category": "sveltekit"
   },
   {
-    "views": 1996,
+    "views": 2005,
     "title": "Full Stack SvelteKit For Beginners",
     "description": "SvelteKit is an opinionated full stack framework that ties the frontend and backend together delivering the best developer and user experience.",
     "slug": "sveltekit-for-beginners",
@@ -257,6 +250,14 @@
     "slug": "using-tailwind-with-vite",
     "published": "2021-10-3",
     "category": "css"
+  },
+  {
+    "views": 4,
+    "title": "Using WebSockets With SvelteKit",
+    "description": "Learn how to use a custom SvelteKit server for WebSockets.",
+    "slug": "using-websockets-with-sveltekit",
+    "published": "2022-5-1",
+    "category": "sveltekit"
   },
   {
     "views": 196,
