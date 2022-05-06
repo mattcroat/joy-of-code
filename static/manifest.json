@@ -1,0 +1,20 @@
+{
+  "name": "Joy of Code",
+  "short_name": "Joy of Code",
+  "description": "Joy of Code is a digital garden about web development tutorials and articles such as HTML, CSS, JavaScript, React, Svelte and TypeScript.",
+  "icons": [
+    {
+      "src": "/assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#fbd38d",
+  "background_color": "#1a202c",
+  "display": "standalone"
+}
