@@ -24,7 +24,7 @@ export const  get: RequestHandler = async () => { /* ... */ }
 export const  post: RequestHandler = async () => { /* ... */ }
 
 // This doesn't exist yet unfortunately 😅
-export async function ws: WebSocketRequestHandler = async () => { /* ... */ }
+export const ws: WebSocketRequestHandler = async () => { /* ... */ }
 ```
 
 You can read more about it inside the [discussion about native support for WebSockets inside SvelteKit](https://github.com/sveltejs/kit/issues/1491) if you want.
@@ -33,7 +33,7 @@ One solution is to create a separate server but then you have to run two things 
 
 ## WebSockets For Development
 
-To make use of WebSockets during development you need to write a simple Vite plugin that hooks into the Vite development server.
+To make use of WebSockets during development you need to write a simple [Vite](https://vitejs.dev/) plugin that hooks into the Vite development server.
 
 Thanks to [Bob Fanger](https://github.com/bfanger) for his [workaround](https://github.com/sveltejs/kit/issues/1491#issuecomment-955205323).
 
@@ -54,9 +54,11 @@ const plugin = {
 }
 ```
 
-That's it! The final code only has more code related to Socket.io but you can use any WebSocket library.
+That's it!
 
-To avoid backtracking install the [Node adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) with `npm i @sveltejs/adapter-node` because it's required for this to work.
+There's more Socket.io code in the final version but you can use any WebSocket library you prefer.
+
+To avoid backtracking install the [Node adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) with `npm i -D @sveltejs/adapter-node` because it's required for this to work.
 
 Add the plugin code inside `svelte.config.js` or extract it into a separate file. 
 
@@ -129,10 +131,10 @@ Thanks to the Sveltekit [Node adapter](https://github.com/sveltejs/kit/tree/mast
 I'm going to use [Express](https://expressjs.com/) because it's a minimal web framework.
 
 ```shell:terminal
-npm i express
+npm i express @types/express
 ```
 
-The Node adapter creates the `index.js` and `handler.js` files in your `build` folder when you run `npm run build` — creating a custom server works by importing the `handler` from `build/handler.js` and using your custom server by creating a script instead of `index.js`.
+The Node adapter creates the `index.js` and `handler.js` files in your `build` folder when you run `npm run build` — creating a custom server works by importing the `handler` from `build/handler.js` and using your custom server instead of `index.js`.
 
 Make sure you create the `build` folder.
 
@@ -140,7 +142,7 @@ Make sure you create the `build` folder.
 npm run build
 ```
 
-I've created the `server/index.js` file at the root of the project just because it's easier to include it in the script.
+I've created the `server/index.js` file at the root of the project for convenience but this depends on your build step and where you're deploying it.
 
 ```js:server/index.js showLineNumbers
 import express from 'express'
@@ -159,7 +161,7 @@ io.on('connection', (socket) => {
   socket.emit('eventFromServer', 'Hello, World 👋')
 })
 
-// let SvelteKit handle everything else using Express middleware
+// SvelteKit should handle everything else using Express middleware
 // https://github.com/sveltejs/kit/tree/master/packages/adapter-node#custom-server
 app.use(handler)
 
