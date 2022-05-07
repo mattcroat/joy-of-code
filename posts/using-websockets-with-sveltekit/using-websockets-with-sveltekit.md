@@ -68,7 +68,7 @@ import preprocess from 'svelte-preprocess'
 
 import { Server } from 'socket.io'
 
-export const webSocketServer = {
+const webSocketServer = {
   name: 'webSocketServer',
   configureServer(server) {
     const io = new Server(server.httpServer)
