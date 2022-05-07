@@ -1,0 +1,415 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-sans: Poppins, sans-serif;
+  --font-mono: Source Code Pro, monospace;
+
+  --font-18: 1.8rem;
+  --font-24: 2.4rem;
+  --font-32: 3.2rem;
+  --font-48: 4.8rem;
+  --font-96: 9.6rem;
+
+  --spacing-4: 0.4rem;
+  --spacing-8: 0.8rem;
+  --spacing-16: 1.6rem;
+  --spacing-24: 2.4rem;
+  --spacing-32: 3.2rem;
+  --spacing-64: 6.4rem;
+  --spacing-128: 12.8rem;
+
+  --post-txt-size: 18px;
+  --post-txt-length: 70ch;
+  --post-txt-height: 40px;
+
+  --clr-primary: hsl(173 100% 66%);
+  --clr-txt: hsl(0 0% 98%);
+  --clr-bg: hsl(210 7% 11%);
+
+  --post-blockquote-txt: hsl(173 100% 94%);
+  --post-blockquote-bg: hsl(173 60% 4%);
+  --post-blockquote-border: hsl(173 10% 10%);
+
+  --clr-link-txt: hsl(0 100% 98%);
+
+  --clr-code-bg: hsl(173 60% 4%);
+  --clr-code-title: hsl(173 100% 94%);
+  --clr-code-border: hsl(173 10% 10%);
+  --clr-code-line-number: hsl(173 20% 20%);
+  --clr-code-line-highlight: hsl(173 40% 8%);
+  --clr-code-inline-txt: hsl(173 100% 94%);
+  --clr-code-inline-bg: hsl(173 60% 4%);
+
+  --clr-token-1: hsl(173 100% 66%);
+  --clr-token-2: hsl(180 60% 80%);
+  --clr-token-3: hsl(173 100% 66%);
+  --clr-token-4: hsl(0 0% 98%);
+  --clr-token-5: hsl(173 10% 60%);
+
+  --toastWidth: 40rem;
+  --toastMinHeight: 2rem;
+  --toastPadding: 1rem;
+  --toastContainerRight: auto;
+  --toastContainerLeft: calc(50vw - 20rem);
+  --toastBackground: hsl(0 88% 68%);
+  --toastBarBackground: hsl(0 61% 48%);
+
+  --shadow-sm: 0px 0px 4px 4px hsl(0 0% 0% / 4%);
+  --shadow-md: 0px 0px 10px 4px hsl(0 0% 0% / 10%);
+  --shadow-lg: 0px 0px 20px 8px hsl(0 0% 0% / 20%);
+
+  --rounded-4: 4px;
+  --rounded-20: 20px;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/poppins/Poppins-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/poppins/Poppins-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/poppins/Poppins-Black.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/source-code-pro/SourceCodePro-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/source-code-pro/SourceCodePro-Bold.woff2') format('woff2');
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-18);
+  color: var(--clr-txt);
+  background-color: var(--clr-bg);
+}
+
+h1,
+h2 {
+  color: var(--clr-primary);
+}
+
+h1 {
+  font-size: var(--font-32);
+}
+
+h2 {
+  font-size: var(--font-24);
+}
+
+a {
+  text-decoration: none;
+  color: var(--clr-link-txt);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: var(--radius-1);
+}
+
+svg {
+  display: block;
+}
+
+button {
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: var(--radius-1);
+  cursor: pointer;
+}
+
+.prose h1 {
+  margin: var(--spacing-64) 0;
+  color: var(--clr-primary);
+}
+
+.prose h2 {
+  margin-top: var(--spacing-64);
+  margin-bottom: var(--spacing-8);
+  color: var(--clr-primary);
+}
+
+.prose p,
+.prose li {
+  font-size: var(--post-txt-size);
+  line-height: var(--post-txt-height);
+}
+
+.prose iframe,
+.prose video,
+.prose pre,
+.prose .rehype-code-title {
+  grid-column: gutter-start / gutter-end;
+}
+
+.prose img {
+  justify-self: center;
+  grid-column: gutter-start / gutter-end;
+}
+
+.prose img,
+.prose iframe,
+.prose video,
+.prose p,
+.prose ul,
+.prose ol,
+.prose pre,
+.prose blockquote,
+.prose details {
+  margin-bottom: var(--spacing-32);
+}
+
+.prose li > ul {
+  margin-bottom: 0;
+}
+
+.prose ul,
+.prose ol {
+  display: grid;
+  row-gap: var(--spacing-8);
+  list-style-type: none;
+  list-style-position: inside;
+}
+
+.prose li a {
+  font-weight: inherit;
+}
+
+.prose ul li::before {
+  content: '👉️';
+  padding-right: var(--spacing-8);
+}
+
+.prose li > ul {
+  margin-top: var(--spacing-8);
+  padding-left: var(--spacing-16);
+}
+
+.prose li > ul > li {
+  list-style-type: circle;
+}
+
+.prose li > ul > li::before {
+  content: none;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose li > ol {
+  margin-top: var(--spacing-8);
+  padding-left: var(--spacing-16);
+}
+
+.prose blockquote {
+  padding: var(--spacing-32);
+  color: var(--post-blockquote-txt);
+  background-color: var(--post-blockquote-bg);
+  border: 1px solid var(--post-blockquote-border);
+  border-top: 4px solid var(--clr-primary);
+  border-radius: var(--rounded-20);
+  box-shadow: var(--shadow-sm);
+}
+
+.prose blockquote p {
+  margin-bottom: 0;
+}
+
+.prose details summary {
+  margin-bottom: var(--spacing-8);
+  font-weight: 700;
+}
+
+.prose code[class*='language-'],
+.prose pre[class*='language-'] {
+  color: var(--clr-txt);
+  tab-size: 2;
+}
+
+.prose pre {
+  padding: var(--spacing-32) 0;
+  line-height: 34px;
+  background-color: var(--clr-code-bg);
+  border: 1px solid var(--clr-code-border);
+  border-top: none;
+  border-bottom-left-radius: var(--rounded-20);
+  border-bottom-right-radius: var(--rounded-20);
+  box-shadow: var(--shadow-sm);
+  white-space: pre-wrap;
+}
+
+.prose pre .code-line {
+  padding-left: var(--spacing-24);
+}
+
+.prose pre .line-number {
+  padding-left: var(--spacing-8);
+}
+
+.prose pre > code {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+.prose code:not(pre > code) {
+  padding: var(--spacing-4) var(--spacing-8);
+  color: var(--clr-code-inline-txt);
+  background-color: var(--clr-code-inline-bg);
+  border-radius: var(--rounded-4);
+}
+
+.prose kbd,
+.prose code {
+  font-family: var(--font-mono);
+}
+
+html[data-font='dyslexic'] .prose kbd,
+html[data-font='dyslexic'] .prose code {
+  font-family: var(--font-dyslexic-mono);
+}
+
+.prose kbd {
+  padding: var(--spacing-4);
+  color: var(--clr-code-inline-txt);
+  background-color: var(--clr-code-inline-bg);
+  border: 1px solid var(--clr-primary);
+  border-width: 1px 1px 3px;
+  border-radius: var(--rounded-4);
+}
+
+.prose .rehype-code-title {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-16) var(--spacing-24) 0 var(--spacing-24);
+  color: var(--clr-code-title);
+  background-color: var(--clr-code-bg);
+  border: 1px solid var(--clr-code-border);
+  border-bottom: none;
+  border-top-left-radius: var(--rounded-20);
+  border-top-right-radius: var(--rounded-20);
+  z-index: 1;
+}
+
+.prose .line-number::before {
+  content: counter(step);
+  counter-increment: step;
+  width: 1rem;
+  display: inline-block;
+  margin-right: var(--spacing-16);
+  padding: 0 var(--spacing-16);
+  color: var(--clr-code-line-number);
+  text-align: right;
+}
+
+.prose .highlight-line {
+  display: block;
+  background-color: var(--clr-code-line-highlight);
+}
+
+.prose .code-line.inserted {
+  display: block;
+  background-color: hsl(160 84% 39% / 20%);
+}
+
+.prose .code-line.deleted {
+  display: block;
+  background-color: hsl(0 84% 60% / 20%);
+}
+
+.prose .token.regex,
+.prose .token.important,
+.prose .token.variable,
+.prose .token.function,
+.prose .token.class-name,
+.prose .language-css .token.rule {
+  color: var(--clr-token-1);
+}
+
+.prose .token.keyword,
+.prose .language-css .token.variable,
+.prose .language-css .token.selector,
+.prose .language-css .token.pseudo-element {
+  color: var(--clr-token-2);
+}
+
+.prose .token.tag,
+.prose .token.boolean,
+.prose .token.constant,
+.prose .token.symbol,
+.prose .token.deleted,
+.prose .token.entity,
+.prose .token.url,
+.prose .style .token.string {
+  color: var(--clr-token-3);
+}
+
+.prose .token.operator,
+.prose .token.punctuation,
+.prose .literal-property.property,
+.prose .token.property,
+.prose .token.attr-name,
+.prose .token.string,
+.prose .token.char,
+.prose .token.builtin,
+.prose .token.inserted,
+.prose .language-css .unit,
+.prose .language-css .token.function,
+.prose .token.atrule .token.property,
+.prose .token.atrule .token.rule {
+  color: var(--clr-token-4);
+}
+
+.prose .token.comment,
+.prose .token.prolog,
+.prose .token.doctype,
+.prose .token.cdata {
+  color: var(--clr-token-5);
+}
