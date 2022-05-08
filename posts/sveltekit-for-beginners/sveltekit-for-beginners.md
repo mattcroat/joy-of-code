@@ -885,9 +885,9 @@ SvelteKit provides a default error page but it's hard to read so we can do bette
 
 ```html:routes/__error.svelte showLineNumbers
 <script context="module" lang="ts">
-	import type { ErrorLoad } from '@sveltejs/kit'
+	import type { Load } from '@sveltejs/kit'
 
-	export const load: ErrorLoad = ({ error, status }) => {
+	export const load: Load = ({ error, status }) => {
 		return {
 			props: {
 				title: `${status}: ${error.message}`
@@ -1333,9 +1333,9 @@ I want to show you the real power of nested layouts — if a part of your site e
 
 ```html:routes/home/__error.svelte showLineNumbers
 <script lang="ts" context="module">
-	import type { ErrorLoad } from '@sveltejs/kit'
+	import type { Load } from '@sveltejs/kit'
 
-	export const load: ErrorLoad = ({ error, status }) => {
+	export const load: Load = ({ error, status }) => {
 		return {
 			props: {
 				title: `${status}: ${error.message}`
@@ -2429,8 +2429,6 @@ I even recreated how Twitter shows the name and content in the title. Did you kn
 
 ## Settings Page
 
-**Update**: SvelteKit introduced a breaking change with [named layouts](https://kit.svelte.dev/docs/layouts#named-layouts) replacing layout resets. The solution is to create a named layout inside routes at `routes/__layout-reset.svelte` that has `<slot />` inside and use `@reset` when you need to reset a layout with `routes/home/settings/__layout@reset.svelte`.
-
 In this section you're going to learn how to reset a layout.
 
 I want to show you how awesome nested layouts are inspired by the [Twitter settings](https://twitter.com/settings/account/personalization). Notice how the contents of the settings update in a separate part of the page when you use the navigation.
@@ -2499,9 +2497,17 @@ I want to show you how awesome nested layouts are inspired by the [Twitter setti
 
 I want to reset the layout because while everything is almost the same the `settings` page doesn't have a sidebar but instead it's going to have the content.
 
-🖌️ To reset a layout you use `__layout.reset.svelte`.
+SvelteKit has the concept of [named layouts](https://kit.svelte.dev/docs/layouts#named-layouts) where you can create any layout you want to use such as `__layout-reset.svelte` and reference it with `__layout@reset.svelte`.
 
-```html:routes/home/settings/__layout.reset.svelte showLineNumbers
+🖌️ Create a named layout in `routes`.
+
+```html:routes/__layout-reset.svelte showLineNumbers
+<slot />
+```
+
+To reset the layout create `__layout@reset.svelte` inside `settings`.
+
+```html:routes/home/settings/__layout@reset.svelte showLineNumbers
 <script lang="ts">
 	import { page } from '$app/stores'
 	import Navigation from '$root/components/navigation.svelte'
