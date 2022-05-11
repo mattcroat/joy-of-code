@@ -516,11 +516,11 @@ function getUsers() {
 }
 
 async function seed() {
-	await Promise.all(
-		getUsers().map((user) => {
-			return prisma.user.create({ data: user })
-		})
-	)
+  const users = getUsers()
+
+  for (const user of users) {
+    await prisma.user.create({ data: user })
+  }
 }
 
 seed()
