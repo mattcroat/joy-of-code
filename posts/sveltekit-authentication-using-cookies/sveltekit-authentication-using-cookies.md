@@ -14,7 +14,7 @@ draft: true
 
 ## Setting Up The Database
 
-In this post you're going to learn how to authenticate users securely using cookies to have protected routes.
+In this post you're going to learn how to authenticate users securely using cookies and using protected routes.
 
 I'm using a regular SvelteKit skeleton project with TypeScript but if you want to follow along create a new SvelteKit project with `npm init svelte auth` or pick SvelteKit from one of the fullstack options at [StackBlitz](https://stackblitz.com/) (it uses Node.js in the browser 🤯).
 
@@ -103,149 +103,82 @@ First let's edit the `routes/index.svelte` and create a layout inside `routes/__
   <a href="/register">Register</a>
 
   <a href="/protected">Admin</a>
+  <a href="/auth/logout">Log out</a>
 </nav>
 
 <slot />
 ```
 
-Create a `routes/register/index.svelte` file.
-
-> 🐿️ I prefer to keep things organized but you can just create a `register.svelte` file.
-
-```html:routes/register/index.svelte showLineNumbers
-<script lang="ts">
-  let error = ''
-
-  async function register(event: SubmitEvent) {
-    // ...
-  }
-</script>
-
-<form
-  on:submit|preventDefault={register}
-  action="/auth/register"
-  method="post"
->
-  <div>
-    <label for="username">Username</label>
-    <input
-      id="username"
-      name="username"
-      type="username"
-      required
-    />
-  </div>
-
-  <div>
-    <label for="password">Password</label>
-    <input
-      id="password"
-      name="password"
-      type="password"
-      required
-    />
-  </div>
-
-  {#if error}
-    <p class="error">{error}</p>
-  {/if}
-
-  <button type="submit">Sign Up</button>
-</form>
-
-<style>
-  .error {
-    color: tomato;
-  }
-</style>
-```
-
-I want to keep things simple so we can focus on authentication, so I'm not going to use a form library or Svelte action.
-
-If you define a `action` and `method` attribute on the form it's going to work if JavaScript fails for whatever reason and if JavaScript is loaded it's going to use the submit event — this is **progressive enhancement**.
-
-This is not only great for progressive enhancement but the form already gets serialized, so we can get the `action`, `method` and `data` from it and send it to the server.
-
-> 🐿️ To get the values from a form it's important you use the `name` attribute.
+I want to keep things simple to focus on authentication, so I'm not going to use a form library or a Svelte action but I am going to add a helper function for fetching data.
 
 You might have seen code like this.
 
 ```ts:example.ts
-async function example() {
-  await fetch('/api', {
-    method: 'POST',
-    // this is what you're going to see most of the time
-    // where you take state like username, password and serialize it
-    // so you can do `const { username, password } = await response.json()` on the server
-    body: JSON.stringify({ username, password })
+await fetch('/api', {
+  method: 'POST',
+  body: JSON.stringify({ username, password })
+})
+```
+
+You can still `bind` the `username` and `password` values for client-side validation if you want but let's leverage the web platform and use a `<form>` and progressive enhancement.
+
+Create a `src/lib/api.ts` file.
+
+```ts:src/lib/api.ts showLineNumbers
+type Send = Promise<{
+  error?: string
+  success?: string
+  user?: { username: string }
+}>
+
+export async function send(form: HTMLFormElement): Send {
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: new FormData(form),
+    headers: { accept: 'application/json' },
   })
+  return await response.json()
 }
 ```
 
-You can still `bind` the `username` and `password` values for client-side validation if you want but let's leverage the web platform and send the form to the server instead of using `JSON.stringify`.
+This takes advantage of the web platform because a form has information that you would otherwise have to pass yourself and you can get the form data inside the page endpoint.
 
-For the `register` function this looks as such.
+Using a `<form>` is important for progressive enhancement so the user can use the site in case JavaScript fails.
 
-```html:routes/register/index.svelte showLineNumbers
+Thanks to the `response` which returns a `body` object with an `error` or `success` value sent from the page endpoint we can show it on the client.
+
+Create a `routes/auth/register/index.svelte` file.
+
+```html:routes/auth/register/index.svelte showLineNumbers
 <script lang="ts">
+  import { send } from '$lib/api'
+
+  // these props are passed from the page endpoint
+  // so the user can get feedback if JavaScript doesn't work
+  export let error: string
+  export let success: string
+
+  // this runs on the client when JavaScript is available
+  // so we can just reuse the existing `error` and `success` props
   async function register(event: SubmitEvent) {
-    // we already have access to the form, so we don't have to recreate it
-    const form = event.target as HTMLFormElement
-    // turn it into something we can send to the server inside `body`
-    const data = new FormData(form)
+    error = ''
 
-    // we can get the `action`, `method` from the form
-    const response = await fetch(form.action, {
-      method: form.method,
-      body: data,
-      headers: { accept: 'application/json' },
-    })
-  }
-</script>
-```
+    const formEl = event.target as HTMLFormElement
+    const response = await send(formEl)
 
-This is awesome!
-
-One last thing to do is add some error validation. If you encounter an error on the server it's going to send a response with a `body` that has an `error` property you can check for and show the error message and if the registration is a success we can use `goto` from SvelteKit to redirect the user.
-
-This is the complete code for `routes/register/index.svelte`.
-
-<details>
-  <summary>routes/register/index.svelte</summary>
-
-```html:routes/register/index.svelte showLineNumbers
-<script lang="ts">
-  import { goto } from '$app/navigation'
-
-  let error = ''
-
-  async function register(event: SubmitEvent) {
-    const form = event.target as HTMLFormElement
-    const data = new FormData(form)
-
-    const response = await fetch(form.action, {
-      method: form.method,
-      body: data,
-      headers: { accept: 'application/json' },
-    })
-    const body = await response.json()
-
-    if (!response.ok) {
-      if (body.error) {
-        error = body.error
-      }
-      return
+    if (response.error) {
+      error = response.error
     }
 
-    await goto('/')
+    if (response.success) {
+      success = response.success
+    }
+
+    formEl.reset() // using the web platform 💪
   }
 </script>
 
-<form
-  on:submit|preventDefault={register}
-  action="/auth/register"
-  method="post"
->
+<form on:submit|preventDefault={register} method="post">
   <div>
     <label for="username">Username</label>
     <input
@@ -270,6 +203,11 @@ This is the complete code for `routes/register/index.svelte`.
     <p class="error">{error}</p>
   {/if}
 
+  {#if success}
+    <p>Thank you for signing up!</p>
+    <p><a href="/auth/login">You can log in.</a></p>
+  {/if}
+
   <button type="submit">Sign Up</button>
 </form>
 
@@ -280,7 +218,13 @@ This is the complete code for `routes/register/index.svelte`.
 </style>
 ```
 
-</details>
+You don't have to define an `action` if you're using a page endpoint since it lives on the same path such as `action="/auth/register"` unless you want to be explicit.
+
+Using a `<form>` if JavaScript fails for whatever reason it's going to use the form `action` to submit it but if JavaScript is on the page it's going to use the submit event instead — this is **progressive enhancement**.
+
+> 🐿️ To get the values from a form it's important you use the `name` attribute because you get the value using `await form.get('username')`.
+
+In the page endpoint for `auth/register` is going to receive the form data and do some light validation and create the user.
 
 For hashing the password you're going to need `bcrypt`.
 
@@ -291,12 +235,12 @@ npm i -D @types/bcrypt
 
 > 🐿️ For hashing the password `bcrypt` is great because it uses a slow encryption algorithm meaning the attacker is more likely to die of old age than breaking the encryption — learn more by reading [How To Safely Store A Password](https://codahale.com/how-to-safely-store-a-password/).
 
-Create the register API endpoint `routes/auth/register.ts`.
+Create the `routes/auth/register/index.ts` page endpoint.
 
 <details>
-  <summary>routes/auth/register.ts</summary>
+  <summary>routes/auth/register/index.ts</summary>
 
-```ts:routes/auth/register.ts showLineNumbers
+```ts:routes/auth/register/index.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
 import * as bcrypt from 'bcrypt'
 
@@ -312,21 +256,19 @@ export const post: RequestHandler = async ({ request }) => {
     typeof password !== 'string'
   ) {
     return {
-      status: 303,
+      status: 400,
       body: {
         error: 'Something went horribly wrong.',
       },
-      headers: { location: '/register' },
     }
   }
 
   if (!username || !password) {
     return {
-      status: 303,
+      status: 400,
       body: {
         error: 'Username and password is required.',
       },
-      headers: { location: '/register' },
     }
   }
 
@@ -337,81 +279,62 @@ export const post: RequestHandler = async ({ request }) => {
         passwordHash: await bcrypt.hash(password, 10),
       },
     })
+
+    return {
+      status: 200,
+      body: { success: 'Success.' },
+    }
   } catch (error) {
     return {
-      status: 303,
+      status: 400,
       body: {
         error: 'User already exists.',
       },
-      headers: { location: '/register' },
     }
-  }
-
-  return {
-    status: 301,
-    headers: { location: '/' },
   }
 }
 ```
 
-There's more lines of code for validation than actual logic we need to create a user.
+There's more lines of code for validation than the actual registration logic we need to create a user — you could add even more client side and server side validation. 🙈
 
-As mentioned previously we get the form data from the `request` and do some validation on the server and then hash the password specifying how strong the encryption should be and create the user with Prisma.
+The user is unique, so Prisma is going to return an error we can show if the user already exists.
 
-The user is unique, so Prisma is going to return an error we can catch and return if the user already exists.
-
-> 🐿️ The `location` header redirects the user if JavaScript isn't working and requires a 3xx status code.
-
-That's it! 😄
-
-You can try registering a user and look at the database using Prisma Studio.
-
-I'm not going to authenticate the user at this point because they might have to verify their email, so I redirect them.
+That's it. 😎
 
 </details>
 
 ## User Login
 
-Create the `routes/login/index.svelte` page which is identical to the register page.
+Create the `routes/auth/login/index.svelte` page which is almost identical to the registration page.
+
+You have to set the `session` from the data you get from the page endpoint so it causes the `load` function to rerun.
 
 <details>
-  <summary>routes/login/index.svelte</summary>
+  <summary>routes/auth/login/index.svelte</summary>
 
-```html:routes/login/index.svelte showLineNumbers
+```html:routes/auth/login/index.svelte showLineNumbers
+
 <script lang="ts">
-  import { goto } from '$app/navigation'
+  import { session } from '$app/stores'
+  import { send } from '$lib/api'
 
-  let error = ''
+  export let error: string
 
   async function login(event: SubmitEvent) {
-    const form = event.target as HTMLFormElement
-    const data = new FormData(form)
+    const formEl = event.target as HTMLFormElement
+    const response = await send(formEl)
 
-    const response = await fetch(form.action, {
-      method: form.method,
-      body: data,
-      headers: { accept: 'application/json' },
-    })
-    const body = await response.json()
-
-    form.reset()
-
-    if (!response.ok) {
-      if (body.error) {
-        error = body.error
-      }
-      return
+    if (response.error) {
+      error = response.error
     }
 
-    await goto('/protected')
-  }
-</>
+    $session.user = response.user
 
-<form
-  on:submit|preventDefault={login}
-  action="/auth/login"
-  method="post"
->
+    formEl.reset()
+  }
+</script>
+
+<form on:submit|preventDefault={login} method="post">
   <div>
     <label for="username">Username</label>
     <input
@@ -448,19 +371,19 @@ Create the `routes/login/index.svelte` page which is identical to the register p
 
 </details>
 
-You're going to need the `cookie` package, so setting and parsing the cookie header is easier.
+Before you add the `login` page yYou're going to need the `cookie` package, so setting and parsing the cookie header is easier.
 
 ```shell:terminal
 npm i cookie
 npm i -D @types/cookie
 ```
 
-The `login` API route is almost identical to `register`.
+Create the `auth/login/login.ts` page endpoint.
 
 <details>
   <summary></summary>
 
-```ts:routes/auth/login.ts showLineNumbers
+```ts:auth/login/login.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
 import * as bcrypt from 'bcrypt'
 import * as cookie from 'cookie'
@@ -477,21 +400,19 @@ export const post: RequestHandler = async ({ request }) => {
     typeof password !== 'string'
   ) {
     return {
-      status: 303,
+      status: 400,
       body: {
-        error: 'Something went horribly wrong.',
+        error: 'Enter a valid username and password.',
       },
-      headers: { location: '/login' },
     }
   }
 
   if (!username || !password) {
     return {
-      status: 303,
+      status: 400,
       body: {
         error: 'Username and password is required.',
       },
-      headers: { location: '/login' },
     }
   }
 
@@ -504,20 +425,19 @@ export const post: RequestHandler = async ({ request }) => {
 
   if (!user || !passwordMatch) {
     return {
-      status: 303,
+      status: 400,
       body: {
         error: 'You entered the wrong credentials.',
       },
-      headers: { location: '/login' },
     }
   }
 
   return {
-    status: 301,
+    status: 200,
     body: {
-      // set the session and navigate to `/protected`
-      user: { user: { username } },
-      message: 'Success.',
+      // for updating the session on the client
+      user: { username },
+      success: 'Success.',
     },
     headers: {
       'Set-Cookie': cookie.serialize('session', user.id, {
@@ -526,6 +446,7 @@ export const post: RequestHandler = async ({ request }) => {
         // server side only cookie so you can't use `document.cookie`
         httpOnly: true,
         // only requests from same site can send cookies
+        // and serves to protect from CSRF
         // https://developer.mozilla.org/en-US/docs/Glossary/CSRF
         sameSite: 'strict',
         // only sent over HTTPS
@@ -533,7 +454,6 @@ export const post: RequestHandler = async ({ request }) => {
         // set cookie to expire after a month
         maxAge: 60 * 60 * 24 * 30,
       }),
-      location: '/protected',
     },
   }
 }
@@ -541,29 +461,25 @@ export const post: RequestHandler = async ({ request }) => {
 
 </details>
 
-To authenticate the user you get the `user` from the database and compare if the passwords match using `bcrypt.compare(password, user.passwordHash)`.
+To authenticate the user you get the `user` from the database and compare if the passwords match with `bcrypt.compare(password, user.passwordHash)`.
 
 If the passwords match a `Set-Cookie` HTTP response header is set with the `user.id` as the session ID and options.
 
-> 🐿️ The name `session` for the cookie is arbitrary, so you can name the cookie whatever you want.
+> 🐿️ The name `session` for the cookie is arbitrary — you can name the cookie whatever you want.
 
-I'm using a simple [HttpOnly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies) cookie meaning you can't use the JavaScript `document.cookie` API to get the cookie on the client making it more secure and using `secure` ensures the cookie can only be sent using an encrypted HTTPS connection.
+I'm using a [HttpOnly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies) cookie which is more secure because you can't use the JavaScript `document.cookie` API to get the cookie on the client and using `secure` ensures the cookie can only be sent using an encrypted HTTPS connection.
 
-If you have ever noticed the "remember me" checkbox option on sites this sets the expiration date for the cookie to be longer — here it's set to 30 days.
+If you ever noticed the "remember me" checkbox option on sites this sets the expiration date for the cookie to be longer — here it's set to 30 days.
 
 You can learn more about [using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) if you want.
 
-> 🐿️ Using a cookie for authentication is simple but you can also create a `Sessions` table in your database to keep track of sessions. This is useful for use with multiple devices and being able to log out the user.
+> 🐿️ Using a cookie for authentication is simple but you can also create a `Sessions` table in your database to keep track of sessions across devices.
 
-// todo: forgot to add session stuff inside login.svelte
+Try to log in! 😄
 
-Try to log in!
+Open the developer tools and under the **Application** tab you can find **Cookies** and you should see the cookie. 🍪
 
-Open the developer tools and under the **Application** tab you can find **Cookies** and you should see your cookie. 🍪
-
-## Passing User Data To Endpoints Using SvelteKit Hooks
-
-It would be a lot easier if we checked for the session and pass the user data to all endpoints through `locals` and send values that are safe to the client through `session`.
+## Passing User Data To Endpoints
 
 SvelteKit has an optional `hooks.ts` file you can use to intercept a `request` and change the `response` — if you're familiar with [Express](https://expressjs.com/) you can think of hooks as middleware.
 
@@ -585,9 +501,29 @@ Being able to manipulate the `response` lets you change response headers, the bo
 
 I encourage you to do `console.log(event)` for the `event` — the output is in the terminal since it's on the server.
 
+```shell:terminal
+{
+  clientAddress: [Getter],
+  locals: {},
+  params: {},
+  platform: undefined,
+  request: Request { ... },
+  routeId: '',
+  url: URL { ... }
+}
+```
+
 The `event` has everything page endpoints have such as `request`, `locals`, `params`, `platform`, `routeId` and `url` while `response` invokes the SvelteKit's router and generates a response.
 
-In our case I parse the cookie and check for the session and then add the user information to `locals` so it's available in page endpoints.
+I parse the cookie and check for the session and then add the user information to `locals` so it's available in page endpoints.
+
+```shell:terminal
+{
+  // ...
+  locals: { user: { username: 'Username' } }
+  // ...
+}
+```
 
 Create the `src/hooks.ts` file.
 
@@ -638,7 +574,7 @@ export const getSession: GetSession = ({ locals }) => {
 }
 ```
 
-You're going to have some TypeScript errors, so let's add the types for the user to `src/app.d.ts` inside your project.
+There's some TypeScript errors, so let's add the types for the user to `src/app.d.ts` inside your project.
 
 ```ts:src/app.d.ts
 /// <reference types="@sveltejs/kit" />
@@ -658,9 +594,9 @@ declare namespace App {
 }
 ```
 
-Hooks might be confusing to wrap your head around at first, so let me explain where you use these values.
+Let me explain where you use these values so it makes more sense.
 
-1. The `locals` value is available in page endpoints
+The `locals` value is available in page endpoints.
 
 ```ts:example.ts showLineNumbers
 export const get = async ({ locals }) => {
@@ -668,7 +604,7 @@ export const get = async ({ locals }) => {
 }
 ```
 
-2. The `getSession` function passes the value to `session` that is available in the `load` function and from the SvelteKit store
+The `getSession` function passes the value to `session` that is available in the `load` function and from the SvelteKit store.
 
 ```html:example.svelte
 <script context="module" lang="ts">
@@ -688,9 +624,7 @@ Hope this clears it up!
 
 ## Securing Routes
 
-You might already have an idea how we're going to secure the routes from the last section.
-
-To check if the user is logged in we can check the `session` for `session.user`. If it doesn't exist it redirects to `/login` otherwise it returns the `username` from the `session`.
+To check if the user is logged in we can check the `session` for `session.user` — if it doesn't exist it redirects to `/login` otherwise it returns the `username` from the `session`.
 
 Create a `routes/protected/index.svelte` file.
 
@@ -724,16 +658,18 @@ Create a `routes/protected/index.svelte` file.
 <p>Welcome {user}!</p>
 ```
 
-Change the `register` and `login` page to redirect if someone visits it on accident.
+Redirect the authenticated user if they land on the `register` or `login` page.
+
+> 🐿️ When using the `load` function you have to pass `props` from the page endpoint otherwise those values would be `undefined`.
 
 <details>
-  <summary>routes/register/index.svelte</summary>
+  <summary>auth/register/index.svelte</summary>
 
 ```html:routes/register/index.svelte showLineNumbers
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit'
 
-  export const load: Load = ({ session }) => {
+  export const load: Load = ({ session, props }) => {
     if (session.user) {
       return {
         status: 302,
@@ -741,7 +677,7 @@ Change the `register` and `login` page to redirect if someone visits it on accid
       }
     }
 
-    return {}
+    return { props }
   }
 </script>
 
@@ -751,13 +687,13 @@ Change the `register` and `login` page to redirect if someone visits it on accid
 </details>
 
 <details>
-  <summary>routes/login/index.svelte</summary>
+  <summary>auth/login/index.svelte</summary>
 
-```html:routes/login/index.svelte showLineNumbers
+```html:auth/login/index.svelte showLineNumbers
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit'
 
-  export const load: Load = ({ session }) => {
+  export const load: Load = ({ session, props }) => {
     if (session.user) {
       return {
         status: 302,
@@ -765,7 +701,7 @@ Change the `register` and `login` page to redirect if someone visits it on accid
       }
     }
 
-    return {}
+    return { props }
   }
 </script>
 
@@ -774,25 +710,40 @@ Change the `register` and `login` page to redirect if someone visits it on accid
 
 </details>
 
-The last step is to update `__layout.svelte` so it shows and hides the navigation items based on if the user is logged in or not.
+## Logout Users
 
-// todo: add logout
+The logout uses a simple `GET` request that removes the cookie — it's going to cause a page refresh but you can avoid it if you use a form with progresive enhancement.
 
-To trigger the redirect you have to update `$session`.
+Create the `auth/logout/index.ts` endpoint.
 
-<details>
-  <summary>routes/__layout.svelte</summary>
+```ts:auth/logout/index.ts showLineNumbers
+import type { RequestHandler } from '@sveltejs/kit'
+import * as cookie from 'cookie'
+
+export const get: RequestHandler = async () => {
+  return {
+    status: 303,
+    headers: {
+      'Set-Cookie': cookie.serialize('session', '', {
+        path: '/',
+        // the cookie should expire immediately
+        expires: new Date(0),
+      }),
+      location: '/',
+    },
+  }
+}
+```
+
+> 🐿️ This works because `new Date(0)` returns the Epoch time — 1 January 1970.
+
+## Conditional Render If User Is Authenticated
+
+The last step is to update the layout so it renders the navigation items based on if the user is authenticated.
 
 ```html:routes/__layout.svelte showLineNumbers
 <script lang="ts">
   import { session } from '$app/stores'
-  import { goto } from '$app/navigation'
-
-  async function logout() {
-    await fetch('/auth/logout', { method: 'post' })
-    $session = {}
-    await goto('/')
-  }
 </script>
 
 <svelte:head>
@@ -803,27 +754,18 @@ To trigger the redirect you have to update `$session`.
   <a href="/">Home</a>
 
   {#if !$session.user}
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/register">Register</a>
   {/if}
 
   {#if $session.user}
     <a href="/protected">Admin</a>
-
-    <form
-      on:submit|preventDefault={logout}
-      action="/auth/logout"
-      method="post"
-    >
-      <button type="submit">Log out</button>
-    </form>
+    <a href="/auth/logout">Log out</a>
   {/if}
 </nav>
 
 <slot />
 ```
-
-</details>
 
 That's it! 🥳
 
