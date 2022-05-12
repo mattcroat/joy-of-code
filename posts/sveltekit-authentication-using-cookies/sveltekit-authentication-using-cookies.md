@@ -61,6 +61,12 @@ The `id` field uses a unique identifier so we can later set the session ID to th
 
 The worst thing you can do is store plain text passwords so the password should always be hashed in case your database gets compromised.
 
+Install the Prisma client which is awesome because the code it generates is fully typed.
+
+```shell:terminal
+npm i @prisma/client
+```
+
 Create the database from the schema.
 
 ```shell:terminal
@@ -68,12 +74,6 @@ npx prisma db push
 ```
 
 You can look at your database through a graphical user interface with `npx prisma studio` at [http://localhost:5555/](http://localhost:5555/).
-
-Install the Prisma client which is awesome because the code it generates is fully typed.
-
-```shell:terminal
-npm i @prisma/client
-```
 
 Create a `src/lib/database.ts` file so we can export the Prisma client and use it anywhere.
 
