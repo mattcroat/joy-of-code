@@ -101,8 +101,8 @@ First edit the `routes/index.svelte` and create a layout inside `routes/__layout
 <nav>
   <a href="/">Home</a>
 
-  <a href="/login">Login</a>
-  <a href="/register">Register</a>
+  <a href="/auth/login">Login</a>
+  <a href="/auth/register">Register</a>
 
   <a href="/protected">Admin</a>
   <a href="/auth/logout">Log out</a>
