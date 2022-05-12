@@ -16,9 +16,11 @@ draft: true
 
 In this post you're going to learn how to authenticate users securely using cookies and using protected routes.
 
-I'm using a regular SvelteKit skeleton project with TypeScript but if you want to follow along create a new SvelteKit project with `npm init svelte auth` or pick SvelteKit from one of the fullstack options at [StackBlitz](https://stackblitz.com/) (it uses Node.js in the browser 🤯).
+You can find the [project files on GitHub](https://github.com/joysofcode/sveltekit-authentication-using-cookies).
 
-Let's start by creating a SQLite database using [Prisma](https://www.prisma.io/) — it's just a file on your system, so you don't have to think about it.
+I'm using a regular SvelteKit skeleton project with TypeScript but if you want to follow along create a new SvelteKit project with `npm init svelte auth` or pick SvelteKit from one of the fullstack options on [StackBlitz](https://stackblitz.com/) (it's even faster than your local development environment since it uses Node.js in the browser 🤯).
+
+Start by creating a SQLite database using [Prisma](https://www.prisma.io/) — it's just a file on your system, so you don't have to think about it.
 
 ```shell:terminal
 npx prisma init --datasource-provider sqlite
@@ -42,7 +44,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// this turns into SQL and creates the `User` table
+// turns into SQL and creates the `User` table
 
 model User {
   id           String   @id @default(uuid())
@@ -67,13 +69,13 @@ npx prisma db push
 
 You can look at your database through a graphical user interface with `npx prisma studio` at [http://localhost:5555/](http://localhost:5555/).
 
-Install the Prisma client which is awesome because the code it generated is fully typed.
+Install the Prisma client which is awesome because the code it generates is fully typed.
 
 ```shell:terminal
 npm i @prisma/client
 ```
 
-Let's create a `src/lib/database.ts` file so we can export the Prisma client and use it anywhere.
+Create a `src/lib/database.ts` file so we can export the Prisma client and use it anywhere.
 
 ```ts:src/lib/database.ts
 import prisma from '@prisma/client'
@@ -85,7 +87,7 @@ That's it! 😄
 
 ## User Registration
 
-First let's edit the `routes/index.svelte` and create a layout inside `routes/__layout.svelte`.
+First edit the `routes/index.svelte` and create a layout inside `routes/__layout.svelte`.
 
 ```html:index.svelte showLineNumbers
 <h1>Public</h1>
@@ -147,9 +149,11 @@ Using a `<form>` is important for progressive enhancement so the user can use th
 
 Thanks to the `response` which returns a `body` object with an `error` or `success` value sent from the page endpoint we can show it on the client.
 
-Create a `routes/auth/register/index.svelte` file.
+If you're unfamiliar with SvelteKit you create pages inside `routes`.
 
-```html:routes/auth/register/index.svelte showLineNumbers
+Create a `auth/register/index.svelte` page.
+
+```html:auth/register/index.svelte showLineNumbers
 <script lang="ts">
   import { send } from '$lib/api'
 
@@ -235,12 +239,12 @@ npm i -D @types/bcrypt
 
 > 🐿️ For hashing the password `bcrypt` is great because it uses a slow encryption algorithm meaning the attacker is more likely to die of old age than breaking the encryption — learn more by reading [How To Safely Store A Password](https://codahale.com/how-to-safely-store-a-password/).
 
-Create the `routes/auth/register/index.ts` page endpoint.
+Create the `auth/register/index.ts` page endpoint.
 
 <details>
-  <summary>routes/auth/register/index.ts</summary>
+  <summary>auth/register/index.ts</summary>
 
-```ts:routes/auth/register/index.ts showLineNumbers
+```ts:auth/register/index.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
 import * as bcrypt from 'bcrypt'
 
@@ -305,14 +309,14 @@ That's it. 😎
 
 ## User Login
 
-Create the `routes/auth/login/index.svelte` page which is almost identical to the registration page.
+Create the `auth/login/index.svelte` page which is almost identical to the registration page.
 
 You have to set the `session` from the data you get from the page endpoint so it causes the `load` function to rerun.
 
 <details>
-  <summary>routes/auth/login/index.svelte</summary>
+  <summary>auth/login/index.svelte</summary>
 
-```html:routes/auth/login/index.svelte showLineNumbers
+```html:auth/login/index.svelte showLineNumbers
 
 <script lang="ts">
   import { session } from '$app/stores'
@@ -626,9 +630,9 @@ Hope this clears it up!
 
 To check if the user is logged in we can check the `session` for `session.user` — if it doesn't exist it redirects to `/login` otherwise it returns the `username` from the `session`.
 
-Create a `routes/protected/index.svelte` file.
+Create the `protected/index.svelte` page.
 
-```html:routes/protected/index.svelte showLineNumbers
+```html:protected/index.svelte showLineNumbers
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit'
 
@@ -665,7 +669,7 @@ Redirect the authenticated user if they land on the `register` or `login` page.
 <details>
   <summary>auth/register/index.svelte</summary>
 
-```html:routes/register/index.svelte showLineNumbers
+```html:auth/register/index.svelte showLineNumbers
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit'
 
@@ -737,7 +741,7 @@ export const get: RequestHandler = async () => {
 
 > 🐿️ This works because `new Date(0)` returns the Epoch time — 1 January 1970.
 
-## Conditional Render If User Is Authenticated
+## Conditional Rendering Using Session
 
 The last step is to update the layout so it renders the navigation items based on if the user is authenticated.
 
