@@ -1,14 +1,15 @@
 ---
 title: SvelteKit Authentication Using Cookies
-description: Learn SvelteKit authentication using cookies.
+description: Learn SvelteKit user authentication using cookies.
 slug: sveltekit-authentication-using-cookies
 published: 2022-5-10
 category: sveltekit
-series: false
-draft: true
+series: true
 ---
 
 # SvelteKit Authentication Using Cookies
+
+{% embed src="https://www.youtube.com/embed/T935Ya4W5X0" title="SvelteKit Authentication Using Cookies" %}
 
 ## Table of Contents
 
@@ -191,7 +192,7 @@ Create a `auth/register/index.svelte` page.
     <input
       id="username"
       name="username"
-      type="username"
+      type="text"
       required
     />
   </div>
@@ -348,7 +349,7 @@ You have to set the `session` from the data you get from the page endpoint so it
     <input
       id="username"
       name="username"
-      type="username"
+      type="text"
       required
     />
   </div>
@@ -718,7 +719,7 @@ Redirect the authenticated user if they land on the `register` or `login` page.
 
 > 🐿️ When using the `load` function you have to pass `props` from the page endpoint otherwise those values would be `undefined`.
 
-## Logout Users
+## User Logout
 
 The logout uses a simple `GET` request that removes the cookie — it's going to cause a page refresh but you can avoid it if you use a form with progresive enhancement.
 
