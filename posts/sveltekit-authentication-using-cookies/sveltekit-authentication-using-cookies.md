@@ -122,7 +122,7 @@ await fetch('/api', {
 })
 ```
 
-You can still `bind` the `username` and `password` values for client-side validation if you want but let's leverage the web platform and use a `<form>` and progressive enhancement.
+You can still `bind` the `username` and `password` values for client-side validation if you want but let's leverage the web platform by using a `<form>` and progressive enhancement.
 
 Create a `src/lib/api.ts` file.
 
@@ -152,6 +152,9 @@ Thanks to the `response` which returns a `body` object with an `error` or `succe
 If you're unfamiliar with SvelteKit you create pages inside `routes`.
 
 Create a `auth/register/index.svelte` page.
+
+<details>
+  <summary>auth/register/index.svelte</summary>
 
 ```html:auth/register/index.svelte showLineNumbers
 <script lang="ts">
@@ -221,6 +224,8 @@ Create a `auth/register/index.svelte` page.
   }
 </style>
 ```
+
+</details>
 
 You don't have to define an `action` if you're using a page endpoint since it lives on the same path such as `action="/auth/register"` unless you want to be explicit.
 
@@ -299,25 +304,24 @@ export const post: RequestHandler = async ({ request }) => {
 }
 ```
 
+</details>
+
 There's more lines of code for validation than the actual registration logic we need to create a user — you could add even more client side and server side validation. 🙈
 
 The user is unique, so Prisma is going to return an error we can show if the user already exists.
 
 That's it. 😎
 
-</details>
-
 ## User Login
 
 Create the `auth/login/index.svelte` page which is almost identical to the registration page.
 
-You have to set the `session` from the data you get from the page endpoint so it causes the `load` function to rerun.
+You have to set the `session` from the data you get from the page endpoint so it causes the `load` function to rerun which you're going to add later.
 
 <details>
   <summary>auth/login/index.svelte</summary>
 
 ```html:auth/login/index.svelte showLineNumbers
-
 <script lang="ts">
   import { session } from '$app/stores'
   import { send } from '$lib/api'
@@ -375,7 +379,7 @@ You have to set the `session` from the data you get from the page endpoint so it
 
 </details>
 
-Before you add the `login` page yYou're going to need the `cookie` package, so setting and parsing the cookie header is easier.
+Before you add the `login` page you're going to need the `cookie` package, so setting and parsing the cookie header is easier.
 
 ```shell:terminal
 npm i cookie
@@ -385,7 +389,7 @@ npm i -D @types/cookie
 Create the `auth/login/login.ts` page endpoint.
 
 <details>
-  <summary></summary>
+  <summary>auth/login/login.ts</summary>
 
 ```ts:auth/login/login.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
@@ -485,7 +489,7 @@ Open the developer tools and under the **Application** tab you can find **Cookie
 
 ## Passing User Data To Endpoints
 
-SvelteKit has an optional `hooks.ts` file you can use to intercept a `request` and change the `response` — if you're familiar with [Express](https://expressjs.com/) you can think of hooks as middleware.
+SvelteKit [Hooks](https://kit.svelte.dev/docs/hooks) are an optional `hooks.ts` file you can use to intercept a `request` and change the `response` — if you're familiar with [Express](https://expressjs.com/) you can think of hooks as middleware.
 
 Here's the most basic example of using hooks to change the `response`.
 
@@ -499,7 +503,7 @@ export const handle = async ({ event, resolve }) => {
 }
 ```
 
-This is **bananas**!
+This is **bananas**! 🥁
 
 Being able to manipulate the `response` lets you change response headers, the body and create endpoints — read more about [Hooks](https://kit.svelte.dev/docs/hooks).
 
@@ -578,9 +582,9 @@ export const getSession: GetSession = ({ locals }) => {
 }
 ```
 
-There's some TypeScript errors, so let's add the types for the user to `src/app.d.ts` inside your project.
+There's some TypeScript errors, so let's add the types for the user to `src/app.d.ts` inside the project.
 
-```ts:src/app.d.ts
+```ts:src/app.d.ts showLineNumbers
 /// <reference types="@sveltejs/kit" />
 
 declare namespace App {
@@ -598,7 +602,7 @@ declare namespace App {
 }
 ```
 
-Let me explain where you use these values so it makes more sense.
+Let me explain where you use these values so it's going to make a lot more sense.
 
 The `locals` value is available in page endpoints.
 
@@ -610,7 +614,7 @@ export const get = async ({ locals }) => {
 
 The `getSession` function passes the value to `session` that is available in the `load` function and from the SvelteKit store.
 
-```html:example.svelte
+```html:example.svelte showLineNumbers
 <script context="module" lang="ts">
   export const load = ({ session }) => {
     console.log(session)
@@ -664,8 +668,6 @@ Create the `protected/index.svelte` page.
 
 Redirect the authenticated user if they land on the `register` or `login` page.
 
-> 🐿️ When using the `load` function you have to pass `props` from the page endpoint otherwise those values would be `undefined`.
-
 <details>
   <summary>auth/register/index.svelte</summary>
 
@@ -713,6 +715,8 @@ Redirect the authenticated user if they land on the `register` or `login` page.
 ```
 
 </details>
+
+> 🐿️ When using the `load` function you have to pass `props` from the page endpoint otherwise those values would be `undefined`.
 
 ## Logout Users
 
