@@ -13,11 +13,11 @@ series: true
 
 ## Table of Contents
 
-## Setting Up The Database
+## Setting Up The Prisma Database
 
 In this post you're going to learn how to authenticate users securely using cookies and using protected routes.
 
-You can find the [project files on GitHub](https://github.com/joysofcode/sveltekit-authentication-using-cookies).
+You can find the [project files on GitHub](https://github.com/joysofcode/sveltekit-auth-cookies).
 
 I'm using a regular SvelteKit skeleton project with TypeScript but if you want to follow along create a new SvelteKit project with `npm init svelte auth` or pick SvelteKit from one of the fullstack options on [StackBlitz](https://stackblitz.com/) (it's even faster than your local development environment since it uses Node.js in the browser 🤯).
 
