@@ -644,7 +644,7 @@ Create the `protected/index.svelte` page.
     if (!session.user) {
       return {
         status: 302,
-        redirect: '/login',
+        redirect: '/auth/login',
       }
     }
 
