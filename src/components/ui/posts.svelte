@@ -52,6 +52,7 @@
   }
 
   .cards a {
+    display: block;
     color: inherit;
     font-weight: inherit;
     text-decoration: none;
@@ -82,8 +83,7 @@
 
   .card:hover {
     transform: scale(1.02);
-    box-shadow: var(--shadow-md);
-    outline: 4px solid var(--clr-primary);
+    box-shadow: var(--shadow-md), 0 0 0 4px var(--clr-primary);
   }
 
   .card .views {
