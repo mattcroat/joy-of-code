@@ -53,6 +53,12 @@
   border-radius: var(--rounded-20);
 }
 
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--clr-primary);
+  border-radius: var(--rounded-20);
+}
+
 html {
   font-size: 62.5%;
   scroll-padding-top: var(--spacing-32);
