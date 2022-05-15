@@ -88,6 +88,7 @@
 
   .card .views {
     display: flex;
+    align-items: center;
     gap: var(--spacing-4);
     font-weight: 500;
     color: var(--clr-card-txt);
