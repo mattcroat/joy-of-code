@@ -73,11 +73,11 @@
   </section>
 
   <Posts posts={posts.popular}>
-    <h3 slot="title">Popular</h3>
+    <h3 class="popular" slot="title">Popular</h3>
   </Posts>
 
   <Posts posts={posts.latest}>
-    <h3 slot="title">Latest</h3>
+    <h3 class="latest" slot="title">Latest</h3>
     <a slot="see-more" href="/articles">
       <span>See more articles</span>
       <ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
@@ -85,7 +85,7 @@
   </Posts>
 
   <Posts posts={posts.series}>
-    <h3 slot="title">Series</h3>
+    <h3 class="series" slot="title">Series</h3>
     <a slot="see-more" href="/series">
       <span>See more series</span>
       <ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
@@ -93,7 +93,7 @@
   </Posts>
 
   <Posts posts={posts.picks}>
-    <h3 slot="title">Picks</h3>
+    <h3 class="picks" slot="title">Picks</h3>
   </Posts>
 </main>
 
