@@ -88,7 +88,7 @@ export async function getPosts(): Promise<PostsType> {
     })
 
   function sortedPosts(): PostType[] {
-    return [...posts].sort((firstElement, secondElement) => {
+    return posts.sort((firstElement, secondElement) => {
       return (
         new Date(secondElement.published).getTime() -
         new Date(firstElement.published).getTime()
