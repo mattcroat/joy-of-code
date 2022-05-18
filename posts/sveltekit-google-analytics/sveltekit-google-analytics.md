@@ -5,10 +5,11 @@ slug: sveltekit-google-analytics
 published: 2022-5-18
 category: sveltekit
 series: false
-draft: true
 ---
 
 # Google Analytics With SvelteKit
+
+{% embed src="https://www.youtube.com/embed/l-x6H0fnqqQ" title="Google Analytics With SvelteKit" %}
 
 ## Table of Contents
 
