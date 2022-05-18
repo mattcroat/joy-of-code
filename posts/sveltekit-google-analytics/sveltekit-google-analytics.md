@@ -78,6 +78,8 @@ After you get the **Measurement ID** from Google Analytics create a simple `<Ana
 </svelte:head>
 ```
 
+Optional step is to install the type definitions for `gtag.js` with `npm i -D @types/gtag.js`
+
 This is how you can measure information such as the page title and page path using the SvelteKit store.
 
 Because it's using a store value whenever the page gets updated inside the `$: { ... }` reactive block we can submit the new page view if `gtag` exists on `window` meaning it's inside the browser context.
@@ -92,6 +94,8 @@ Include the `<Analytics />` component inside your main layout `__layout.svelte` 
 </script>
 
 <Analytics />
+
+<slot />
 ```
 
 That's it! 🎉
