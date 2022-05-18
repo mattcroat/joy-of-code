@@ -16,23 +16,25 @@ draft: true
 
 In this post you're going to learn how to set up Google Analytics and create a `<Analytics />` component you can use in SvelteKit.
 
+> ⚠️ The post uses code snippets from Google Analytics which might cause some ad blockers to block resources on the page such as the images. 
+
 If you go to the [Google developers section for Google Analytics](https://developers.google.com/analytics) and select "Set up Google Analytics" and then select "Websites and web apps" it leads you to the [Introduction to Google Analytics 4](https://developers.google.com/analytics/devguides/collection/ga4) page.
 
 From the [Get started with Google Analytics](https://developers.google.com/analytics/devguides/collection/ga4/get-started) introduction you have to go to [Set up Analytics for a website and/or app](https://support.google.com/analytics/answer/9304153).
 
-Create an Analytics account by going to **Admin** in [Google Analytics](https://analytics.google.com/) and clicking **Create Account** and fill out the fields.
+1\. Create an Analytics account by going to **Admin** in [Google Analytics](https://analytics.google.com/) and clicking **Create Account** and fill out the fields.
 
 {% img src="account-setup.webp" alt="Google Analytics account creation" %}
 
-After you signed away your soul to Google it's going to prompt you to add a **data stream** which you can always find in the column on the left when you get lost.
+2\. After you signed away your soul to Google it's going to prompt you to add a **data stream** which you can always find in the column on the left when you get lost.
 
 {% img src="data-streams.webp" alt="Set up a data stream to start collecting data prompt" %}
 
-After you select the **Web** as the platform the **data stream** is going to give you a public **Measurement ID** to use for tracking, so you don't have to worry about leaking it.
+3\. After you select the **Web** as the platform the **data stream** is going to give you a public **Measurement ID** to use for tracking, so you don't have to worry about leaking it.
 
 {% img src="set-up-data-stream.webp" alt="Set up your web stream on Google Analytics" %}
 
-You're going to find your **Measurement ID** in **Web stream details** alongside instructions on how to include Google Analytics on your site under **Tagging Instructions**.
+4\. You're going to find your **Measurement ID** in **Web stream details** alongside instructions on how to include Google Analytics on your site under **Tagging Instructions**.
 
 {% img src="tagging-instructions.webp" alt="Tagging instructions on Google Analytics" %}
 
