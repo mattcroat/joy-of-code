@@ -1,5 +1,5 @@
 ---
-title: Testing Your Site In Every Browser
+title: Test Your Site In Every Browser
 description: Learn how to test your site in every browser including Safari on Linux, macOS, Windows.
 slug: test-your-site-in-every-browser
 published: 2022-5-20
@@ -8,57 +8,49 @@ series: false
 draft: true
 ---
 
-# Make Your Site Look Great In Every Browser
+# Test Your Site In Every Browser
 
 ## Table of Contents
 
-## The Browser Engine
+## What Are The Major Browsers?
 
 In this post you're going to learn how to check your site look great in every major browser including Chrome, Firefox and Safari regardless if you're using Linux, macOS or Windows.
 
-If you look at the [browser market share worldwide](https://gs.statcounter.com/) Chrome is leading at **64%** while Safari has close to **20%** and Firefox **4%** of the market share.
+If you look at the [browser market share worldwide](https://gs.statcounter.com/) Chrome is leading at **64%** while Safari has close to **20%** and Firefox **4%** of the market share (rest in peace Internet Explorer 💐).
 
-You might ask "But what about the other browsers?" and the reason we only talk about these browsers is because they're the most popular ones with their own [browser engine](https://en.wikipedia.org/wiki/Browser_engine) (the browser engine is responsible for rendering the page on your screen).
+Why are these the major browsers demanding our attention?
 
-Most browsers such as [Brave](https://brave.com/) and [Microsoft Edge](https://www.microsoft.com/en-us/edge) among others are [Chromium](<https://en.wikipedia.org/wiki/Chromium_(web_browser)>)-based — the same browser that [Google Chrome](https://en.wikipedia.org/wiki/Google_Chrome) uses meaning they are the same in that regard:
+The reason is because these browsers have the highest market share but each has their own [browser engine](https://en.wikipedia.org/wiki/Browser_engine) (the browser engine is responsible for rendering the page on your screen) that makes it different enough resulting in having to test for it.
+
+Most browsers such as [Brave](https://brave.com/) and [Microsoft Edge](https://www.microsoft.com/en-us/edge) among other browsers are [Chromium](<https://en.wikipedia.org/wiki/Chromium_(web_browser)>)-based — the same browser that [Google Chrome](https://en.wikipedia.org/wiki/Google_Chrome) uses meaning they are the same in that regard:
 
 - Chrome uses [Blink](<https://en.wikipedia.org/wiki/Blink_(browser_engine)>) developed as part of the Chromium project as a fork of WebKit
 - Firefox uses [Gecko](<https://en.wikipedia.org/wiki/Gecko_(software)>) developed by [Mozilla](https://en.wikipedia.org/wiki/Mozilla)
 - Safari uses [WebKit](https://en.wikipedia.org/wiki/WebKit) developed by [Apple](https://en.wikipedia.org/wiki/Apple_Inc.)
 
-This explains why we test for these browsers but the problem is that only Chrome and Firefox are available on all platforms.
+This explains why we test for these browsers but the problem is that only Chrome and Firefox are available on all platforms but Safari is [macOS](https://en.wikipedia.org/wiki/MacOS) only, so you're out of luck if you're a Linux or Windows user — so what can you do?
 
-Safari is only available for [macOS](https://en.wikipedia.org/wiki/MacOS) which means you're out of luck if you're a Linux or Windows and your client is going to be upset their site doesn't look great on their shiny Mac — so what can you do?
+## Method That Works For Linux, macOS, Windows
 
-## Cross-Platform Browser Testing
+If you're a Linux user you're in luck because you can use a WebKit based browser such as [Epiphany](https://wiki.gnome.org/Apps/Web) and it works great without any setup — it's not going match all the features of Safari but the browser engine they use is the same.
 
-If you're a Linux user you're in luck because you can use a WebKit based browser such as [Epiphany](https://wiki.gnome.org/Apps/Web) and it works great.
+Windows on the other hand doesn't have any WebKit based browser you can use as far as I'm aware of, so you would have to use a virtual machine or use the latest [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/) that can use a graphical user interface for Epiphany.
 
-Windows on the other hand doesn't have any WebKit based browser you can use as far as I'm aware of, so you would have to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/) to use Epiphany — otherwise you would have to run macOS inside a virtual machine which is out of the question for most people.
+Instead of doing that you can use [Playwright](https://playwright.dev/) which is used for automated testing and has the ability to test every browser — this works because Playwright ships a binary for every browser including Chromium, Firefox and WebKit using their open source builds.
 
-There's also paid services you can use to test how your site looks in different browsers but there has to be a better way.
+This is also useful to have a clean testing environment without extensions.
 
-## Using Playwright
+If you're not familiar with the JavaScript ecosystem you're going to need [Node.js](https://nodejs.org/en/) for the [npm](https://www.npmjs.com/) package manager.
 
-[Playwright](https://playwright.dev/) is used for testing your frontend but it also has the ability to test every browser — after I realized this a light bulb turned on in my head.
-
-This works because Playwright ships a binary for every browser including Chromium, Firefox and WebKit using the open source builds.
-
-These binaries are located in your operating system cache:
-
-- `%USERPROFILE%\AppData\Local\ms-playwright` on Windows
-- `~/Library/Caches/ms-playwright` on macOS
-- `~/.cache/ms-playwright` on Linux
+> ⚠️ For Linux use Epiphany to test for Safari because Playwright only supports Ubuntu 20.04 LTS at the time of writing this, so you would have to use a virtual machine like [Boxes](https://wiki.gnome.org/Apps/Boxes).
 
 Here is how to set up up Playwright.
 
-1\. Initialize a project inside an empty repository.
+1\. Initialize a new project inside an empty repository.
 
 ```shell:terminal
 npm init -y
 ```
-
-> 🐿️ The `-y` flag skips the questions.
 
 2\. Install `@playwright/test` as a development dependency.
 
@@ -72,14 +64,16 @@ npm i -D @playwright/test
 npx playwright install
 ```
 
-4\. The [Playwright CLI](https://playwright.dev/docs/test-cli) has some interesting options we can use like `--headed` and `--browser=webkit` to specify the browser so we can add these as **scripts** to `package.json`.
+4\. Update `package.json`
 
-```json:package.json
+The [Playwright CLI](https://playwright.dev/docs/test-cli) has some interesting options we can use like `--headed` and `--browser=webkit` to specify the browser so we can add these as **scripts** to `package.json`.
+
+```json:package.json showLineNumbers
 {
   "scripts": {
-    "test:chrome": "pnpx playwright test --headed --browser=chromium",
-    "test:firefox": "pnpx playwright test --headed --browser=firefox",
-    "test:safari": "pnpx playwright test --headed --browser=webkit"
+    "test:chrome": "npx playwright test --headed --browser=chromium",
+    "test:firefox": "npx playwright test --headed --browser=firefox",
+    "test:safari": "npx playwright test --headed --browser=webkit"
   },
   "devDependencies": {
     "@playwright/test": "^1.22.1"
@@ -87,16 +81,21 @@ npx playwright install
 }
 ```
 
-5\. Add a test to specify what page to visit and pause the browser so we can look and inspect the page.
+> 🐿️ The `npx` command avoids having to install a package globally by downloading and executing the binary.
 
-```ts:tests/browser.test.ts
+
+5\. Add a test for Playwright
+
+This is only so you can specify what page to visit and pause the browser so you can inspect the page — if you comment out the `page.goto` line it's going to open a blank tab.
+
+```ts:tests/browser.test.ts showLineNumbers
 import { test } from '@playwright/test'
 
 test('test browser', async ({ page }) => {
   // point this to wherever you want
   await page.goto('http://localhost:3000/')
 
-  // pause page
+  // keep browser open
   await page.pause()
 })
 ```
@@ -104,21 +103,19 @@ test('test browser', async ({ page }) => {
 6\. Run the test using one of the scripts.
 
 ```shell:terminal
-npm run test:webkit
+npm run test:safari
 ```
 
 That's it! 🎉
 
+Thanks to [@b1mind](https://twitter.com/b1mind) for testing this on Windows and confirming it works.
+
 You don't have to have those awkward moments anymore hunting someone down with a Mac to test your site and your client is going to be happy.
 
-## Issues With Linux
-
-This method works great if you're using Ubuntu as that's the only supported Linux distribution by Playwright because it uses `sudo apt-get` to install the browser dependencies.
-
-I use an Arch based distribution and even knowing what packages it wants I couldn't find them to make it work for WebKit, so let me know if you figure it out.
+The reason why WebKit doesn't work for Linux using this method unless you're using the latest LTS version of Ubuntu is because Playwright uses the Ubuntu package manager to install the dependencies - I couldn't figure out how to make it work on Arch based distros, or even the [latest Ubuntu LTS that's not supported yet](https://github.com/microsoft/playwright/issues/13738), so let me know if you figured it out!
 
 ```shell:terminal
-npm run test:webkit
+npm run test:safari
 ```
 
 ```shell:terminal
@@ -133,5 +130,13 @@ npm run test:webkit
     libenchant.so.1
     libffi.so.
 ```
+
+Use this if you're on the supported version of Ubuntu.
+
+```shell:terminal
+npx playwright install-deps webkit
+```
+
+Regardless what method works for you now you can have confidence your site looks great in every browser regardless what operating system you're using. 
 
 Thanks for reading! 🏄️
