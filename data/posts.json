@@ -1,6 +1,6 @@
 [
   {
-    "views": 395,
+    "views": 396,
     "title": "How Code Sandboxes Update Content",
     "description": "How do code sandboxes update the iframe without causing flashing?",
     "slug": "avoid-flashing-iframe",
@@ -8,7 +8,7 @@
     "category": "javascript"
   },
   {
-    "views": 245,
+    "views": 248,
     "title": "Clean Git History Using Rebase",
     "description": "How to have a clean Git history using rebase.",
     "slug": "clean-git-history",
@@ -16,7 +16,7 @@
     "category": "git"
   },
   {
-    "views": 2084,
+    "views": 2122,
     "title": "Create a JavaScript Code Sandbox",
     "description": "Create a JavaScript code sandbox using Vite and TypeScript.",
     "slug": "create-a-coding-sandbox",
@@ -24,7 +24,7 @@
     "category": "typescript"
   },
   {
-    "views": 207,
+    "views": 215,
     "title": "Create a Markdown Blog Using Next.js",
     "description": "Learn how to create a Markdown blog using Next.js.",
     "slug": "create-a-markdown-blog",
@@ -32,7 +32,7 @@
     "category": "next"
   },
   {
-    "views": 798,
+    "views": 814,
     "title": "How to Style CSS Focus Outline",
     "description": "Learn the importance of CSS focus outline for accessibility and how to style it.",
     "slug": "css-focus-outline",
@@ -40,7 +40,7 @@
     "category": "css"
   },
   {
-    "views": 358,
+    "views": 372,
     "title": "Favicon That Works for Light and Dark Mode",
     "description": "How to make a favicon that respects the user color scheme preference?",
     "slug": "dark-mode-favicon",
@@ -48,7 +48,7 @@
     "category": "css"
   },
   {
-    "views": 416,
+    "views": 423,
     "title": "Design For Developers",
     "description": "Learn enough visual design to be dangerous with actual tips instead of theory.",
     "slug": "design-for-developers",
@@ -64,7 +64,7 @@
     "category": "typescript"
   },
   {
-    "views": 280,
+    "views": 285,
     "title": "Great Developers Steal",
     "description": "What is open source education? Find out how it can help you learn and improve faster.",
     "slug": "great-developers-steal",
@@ -72,7 +72,7 @@
     "category": "javascript"
   },
   {
-    "views": 237,
+    "views": 239,
     "title": "How to Optimize Images",
     "description": "How to optimize images and automate image optimization using Squoosh.",
     "slug": "how-to-optimize-images",
@@ -88,7 +88,7 @@
     "category": "general"
   },
   {
-    "views": 274,
+    "views": 277,
     "title": "Introduction to React",
     "description": "Why do we use frontend JavaScript frameworks and what problems do they solve?",
     "slug": "intro-to-react",
@@ -96,7 +96,7 @@
     "category": "react"
   },
   {
-    "views": 222,
+    "views": 225,
     "title": "Introduction to Tailwind CSS",
     "description": "What is Tailwind CSS and why it's so beloved?",
     "slug": "introduction-to-tailwind-css",
@@ -104,7 +104,7 @@
     "category": "css"
   },
   {
-    "views": 1660,
+    "views": 1683,
     "title": "Reduce Next.js Bundle Size by Half",
     "description": "Learn how using Preact instead of React can reduce Next.js bundle size by half.",
     "slug": "next-bundle-size",
@@ -112,7 +112,7 @@
     "category": "next"
   },
   {
-    "views": 248,
+    "views": 250,
     "title": "How to Structure Your React Projects",
     "description": "Learn how to keep your React projects organized.",
     "slug": "react-project-structure",
@@ -120,7 +120,7 @@
     "category": "react"
   },
   {
-    "views": 239,
+    "views": 244,
     "title": "Rethink How You Write Git Commits",
     "description": "Write more clear, and meaningful commits, with less effort.",
     "slug": "rethink-how-you-write-git-commits",
@@ -128,7 +128,7 @@
     "category": "git"
   },
   {
-    "views": 221,
+    "views": 222,
     "title": "Use Developer Tools to Screenshot the Entire Page",
     "description": "You don't need extensions to screenshot the page, sections and elements.",
     "slug": "screenshot-page-and-dom-elements",
@@ -136,7 +136,7 @@
     "category": "general"
   },
   {
-    "views": 183,
+    "views": 185,
     "title": "Simple Trick to Debug Your CSS",
     "description": "Learn how to debug your CSS using this simple trick.",
     "slug": "simple-css-debug-trick",
@@ -160,7 +160,7 @@
     "category": "css"
   },
   {
-    "views": 186,
+    "views": 188,
     "title": "Static Pages Without JavaScript",
     "description": "Remove client-side JavaScript in Next.js for production on a per-page basis.",
     "slug": "static-pages-without-javascript",
@@ -168,7 +168,7 @@
     "category": "next"
   },
   {
-    "views": 1147,
+    "views": 1167,
     "title": "Svelte For Beginners",
     "description": "Start building things with the Svelte JavaScript framework today.",
     "slug": "svelte-for-beginners",
@@ -177,7 +177,7 @@
     "series": true
   },
   {
-    "views": 666,
+    "views": 689,
     "title": "Svelte Headless UI Component Library",
     "description": "Svelte Headless UI is an awesome unopinionated component library.",
     "slug": "svelte-headless-ui",
@@ -185,7 +185,7 @@
     "category": "svelte"
   },
   {
-    "views": 479,
+    "views": 497,
     "title": "Make a Svelte Todo App",
     "description": "Learn Svelte by making an awesome Svelte todo app.",
     "slug": "svelte-todo-app",
@@ -194,7 +194,7 @@
     "series": true
   },
   {
-    "views": 348,
+    "views": 408,
     "title": "SvelteKit Authentication Using Cookies",
     "description": "Learn SvelteKit user authentication using cookies.",
     "slug": "sveltekit-authentication-using-cookies",
@@ -203,7 +203,7 @@
     "series": true
   },
   {
-    "views": 809,
+    "views": 821,
     "title": "Using Secret Environment Variables With SvelteKit",
     "description": "Learn how to keep your secret environment variables safe for your API tokens and other secrets.",
     "slug": "sveltekit-environment-variables",
@@ -211,7 +211,7 @@
     "category": "sveltekit"
   },
   {
-    "views": 2578,
+    "views": 2712,
     "title": "Full Stack SvelteKit For Beginners",
     "description": "SvelteKit is an opinionated full stack framework that ties the frontend and backend together delivering the best developer and user experience.",
     "slug": "sveltekit-for-beginners",
@@ -220,7 +220,7 @@
     "series": true
   },
   {
-    "views": 32,
+    "views": 97,
     "title": "Google Analytics With SvelteKit",
     "description": "Set up Google Analytics with SvelteKit.",
     "slug": "sveltekit-google-analytics",
@@ -229,7 +229,7 @@
     "series": false
   },
   {
-    "views": 347,
+    "views": 349,
     "title": "Syntax Highlight Template Strings",
     "description": "Syntax highlight, and code completion inside JavaScript template strings.",
     "slug": "template-strings-syntax-highlight",
@@ -237,7 +237,16 @@
     "category": "javascript"
   },
   {
-    "views": 228,
+    "views": 9,
+    "title": "Test Your Site In Every Browser",
+    "description": "Learn how to test your site in Chrome, Firefox and Safari even on Linux and Windows.",
+    "slug": "test-your-site-in-every-browser",
+    "published": "2022-5-20",
+    "category": "general",
+    "series": false
+  },
+  {
+    "views": 231,
     "title": "Testing User Interfaces For Beginners",
     "description": "Gain confidence your code works and learn how to test user interfaces with Testing Library for any frontend JavaScript framework.",
     "slug": "testing-for-beginners",
@@ -246,7 +255,7 @@
     "series": true
   },
   {
-    "views": 11765,
+    "views": 11810,
     "title": "TypeScript Fundamentals",
     "description": "Learn TypeScript through example — the missing TypeScript reference.",
     "slug": "typescript-fundamentals",
@@ -254,7 +263,7 @@
     "category": "typescript"
   },
   {
-    "views": 524,
+    "views": 529,
     "title": "Best Practices When Using Fonts",
     "description": "Everything I know about best practices when using fonts on the web.",
     "slug": "using-fonts-on-the-web",
@@ -270,7 +279,7 @@
     "category": "css"
   },
   {
-    "views": 278,
+    "views": 299,
     "title": "Using WebSockets With SvelteKit",
     "description": "Learn how to use a custom SvelteKit server for WebSockets.",
     "slug": "using-websockets-with-sveltekit",
