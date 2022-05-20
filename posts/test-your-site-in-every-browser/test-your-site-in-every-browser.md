@@ -32,17 +32,17 @@ This explains why we test for these browsers but the problem is that only Chrome
 
 ## Method That Works For Linux, macOS, Windows
 
-If you're a Linux user you're in luck because you can use a WebKit based browser such as [Epiphany](https://wiki.gnome.org/Apps/Web) and it works great without any setup — it's not going match all the features of Safari but the browser engine they use is the same.
+If you're a Linux user you're in luck because you can use a WebKit based browser such as [Epiphany](https://wiki.gnome.org/Apps/Web) and it works great without any setup — it's not going to match all the features of Safari but the browser engine they use is the same.
 
-Windows on the other hand doesn't have any WebKit based browser you can use as far as I'm aware of, so you would have to use a virtual machine or use the latest [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/) that can use a graphical user interface for Epiphany.
+Windows on the other hand doesn't have any WebKit based browser you can use as far as I'm aware of, so you would have to use a virtual machine or use the latest [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/) that can use a graphical user interface and use Epiphany.
 
 Instead of doing that you can use [Playwright](https://playwright.dev/) which is used for automated testing and has the ability to test every browser — this works because Playwright ships a binary for every browser including Chromium, Firefox and WebKit using their open source builds.
 
-This is also useful to have a clean testing environment without extensions.
+This is also useful to have a clean browser testing environment without extensions that can cause interference.
 
 If you're not familiar with the JavaScript ecosystem you're going to need [Node.js](https://nodejs.org/en/) for the [npm](https://www.npmjs.com/) package manager.
 
-> ⚠️ For Linux use Epiphany to test for Safari because Playwright only supports Ubuntu 20.04 LTS at the time of writing this, so you would have to use a virtual machine like [Boxes](https://wiki.gnome.org/Apps/Boxes).
+> ⚠️ For Linux use Epiphany to test for Safari because Playwright only supports Ubuntu 20.04 LTS at the time of writing this, so you would have to use [Boxes](https://wiki.gnome.org/Apps/Boxes) on unsupported Linux distributions.
 
 Here is how to set up up Playwright.
 
@@ -131,7 +131,7 @@ npm run test:safari
     libffi.so.
 ```
 
-Use this if you're on the supported version of Ubuntu.
+Use this if you're using a supported version of Ubuntu.
 
 ```shell:terminal
 npx playwright install-deps webkit
