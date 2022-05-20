@@ -1,14 +1,15 @@
 ---
 title: Test Your Site In Every Browser
-description: Learn how to test your site in every browser including Safari on Linux, macOS, Windows.
+description: Learn how to test your site in Chrome, Firefox and Safari even on Linux and Windows.
 slug: test-your-site-in-every-browser
 published: 2022-5-20
-category: category
+category: general
 series: false
-draft: true
 ---
 
 # Test Your Site In Every Browser
+
+{% embed src="https://www.youtube.com/embed/WWdZMLCuC4I" title="Test Your Site In Every Browser" %}
 
 ## Table of Contents
 
