@@ -8,6 +8,8 @@ category: typescript
 
 # TypeScript Fundamentals
 
+{% embed src="https://www.youtube.com/embed/Giu1uoiNbGk" title="TypeScript Fundamentals" %}
+
 ## Table of Contents
 
 If you're learning TypeScript for the first time or need a refresher this is the resource for you.
