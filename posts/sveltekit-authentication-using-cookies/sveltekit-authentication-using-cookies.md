@@ -387,10 +387,10 @@ npm i cookie
 npm i -D @types/cookie
 ```
 
-Create the `auth/login/login.ts` page endpoint.
+Create the `auth/login/index.ts` page endpoint.
 
 <details>
-  <summary>auth/login/login.ts</summary>
+  <summary>auth/login/index.ts</summary>
 
 ```ts:auth/login/login.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
@@ -420,7 +420,7 @@ export const post: RequestHandler = async ({ request }) => {
     return {
       status: 400,
       body: {
-        error: 'Username and password is required.',
+        error: 'Username and password are required.',
       },
     }
   }
