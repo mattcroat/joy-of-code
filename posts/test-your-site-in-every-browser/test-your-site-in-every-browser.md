@@ -45,7 +45,7 @@ If you're not familiar with the JavaScript ecosystem you're going to need [Node.
 
 > ⚠️ For Linux use Epiphany to test for Safari because Playwright only supports Ubuntu 20.04 LTS at the time of writing this, so you would have to use [Boxes](https://wiki.gnome.org/Apps/Boxes) on unsupported Linux distributions.
 
-Here is how to set up up Playwright.
+Here is how to set up Playwright.
 
 1\. Initialize a new project inside an empty repository.
 
