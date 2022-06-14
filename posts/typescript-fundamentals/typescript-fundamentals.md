@@ -2947,7 +2947,7 @@ The great thing about TypeScript is that the community can gather around to crea
 
 **Ambient declarations** describe the types that would have been there if the project was written in TypeScript and they have the `.d.ts` file extension that TypeScript picks up.
 
-[DefinitelyTyped](https://definitelytyped.org/) is a project that holds a repository for types that everyone gathered around to contribute types having over **76,000** commits and it's used to [search for types](https://www.typescriptlang.org/dt/search?search=) on the official TypeScript page.
+[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) is a project that holds a repository for types that everyone gathered around to contribute types having over **80,000** commits and it's used to [search for types](https://www.typescriptlang.org/dt/search?search=) on the official TypeScript page.
 
 {% img src="type-search.webp" alt="Type search" %}
 
