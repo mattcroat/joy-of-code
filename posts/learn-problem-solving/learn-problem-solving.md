@@ -1,11 +1,10 @@
 ---
 title: Learn Problem Solving
-description: Turn your ideas into code by learning problem solving.
+description: Learn how to think like a developer and solve problems instead of relying on tutorials.
 slug: learn-problem-solving
 published: 2022-6-14
 category: general
 series: false
-draft: true
 ---
 
 # Learn Problem Solving
