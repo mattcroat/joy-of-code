@@ -9,6 +9,8 @@ series: false
 
 # Learn Problem Solving
 
+{% embed src="https://www.youtube.com/embed/kaHigkGFPv8" title="Learn Problem Solving" %}
+
 ## Table of Contents
 
 ## Learning Problem Solving
