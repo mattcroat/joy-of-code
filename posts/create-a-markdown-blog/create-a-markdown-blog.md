@@ -93,7 +93,7 @@ export default function Home() {
 }
 ```
 
-After you're done you should see **Home** on your page.
+After you're done you should see **Home** on your page. (You might need to manually reload the page in case HMR doesn't work)
 
 Let's also set up [module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases) inside `tsconfig.json`, so we can import things **relative to the root of our project**. This lets us import a file such as `'../../Component'` using `'@/root/components/Component'` instead not having to think about where it's located.
 
@@ -352,7 +352,7 @@ export async function getStaticProps({ params }) {
   // post path
   const currentDirectory = process.cwd()
   const postPath = `${currentDirectory}/posts/${slug}/${slug}.mdx`
-  const markdown = await bundleMDXFile(postPath)
+  const markdown = await bundleMDX({ file: postPath, ...options })
   const { code, frontmatter: metadata } = markdown
 
   return {
@@ -439,7 +439,7 @@ export async function getStaticProps({ params }: Params) {
   // post path
   const currentDirectory = process.cwd()
   const postPath = `${currentDirectory}/posts/${slug}/${slug}.mdx`
-  const markdown = await bundleMDXFile(postPath)
+  const markdown = await bundleMDX({ file: postPath, ...options })
   const { code, frontmatter: metadata } = markdown
 
   return {
@@ -470,6 +470,7 @@ Inside `[slug].tsx` in `getStaticProps` we can pass a second `options` parameter
 
 ```tsx:[pages/slug.tsx] {18-48, 53} showLineNumbers
 import { BundleMDXOptions } from 'mdx-bundler/dist/types'
+import type {ProcessorOptions} from '@mdx-js/esbuild/lib'
 
 // mdx plugins
 import rehypeCodeTitles from 'rehype-code-titles'
@@ -487,8 +488,8 @@ export async function getStaticProps({ params }: Params) {
   const { slug } = params
 
   // markdown plugins
-  const options: BundleMDXOptions = {
-    xdmOptions(options) {
+  const options = {
+    mdxOptions(options: ProcessorOptions) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
         // github flavored markdown
@@ -521,7 +522,7 @@ export async function getStaticProps({ params }: Params) {
   // post path
   const currentDirectory = process.cwd()
   const postPath = `${currentDirectory}/posts/${slug}/${slug}.mdx`
-  const markdown = await bundleMDXFile(postPath, options)
+  const markdown = await bundleMDX({ file: postPath, ...options })
   const { code, frontmatter: metadata } = markdown
 
   return {
@@ -783,7 +784,7 @@ export async function getStaticProps() {
 
   for (let post of posts) {
     const postPath = `${currentDirectory}/posts/${post}/${post}.mdx`
-    const markdown = await bundleMDXFile(postPath)
+    const markdown = await bundleMDX({ file: postPath })
     const { frontmatter } = markdown
 
     const timestamp = new Date(frontmatter.published).valueOf()
@@ -931,7 +932,7 @@ export async function getStaticProps(context: Context) {
   const posts = []
 
   for (let path of postPaths) {
-    const markdown = await bundleMDXFile(path)
+    const markdown = await bundleMDX({ file: path })
     const { frontmatter } = markdown
 
     if (frontmatter.category === category) {
@@ -1017,7 +1018,7 @@ export async function getStaticProps(context: Context) {
   const posts = []
 
   for (let path of postPaths) {
-    const markdown = await bundleMDXFile(path)
+    const markdown = await bundleMDX({ file: path })
     const { frontmatter } = markdown
 
     if (frontmatter.category === category) {
