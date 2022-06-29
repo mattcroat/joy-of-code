@@ -2583,7 +2583,27 @@ const pikachu = new Pokemon('Pikachu', 80, 'Raichu', 120)
 pikachu.evolve()
 ```
 
-You need the `// @ts-nocheck` directive to prevent typescript from complaining that `Property '...' does not exist on type 'PropertyDescriptor'`. Alternately, you can explicitly define the PokemonProps interface and tell the compiler that this class is of type PokemonProps.
+You need the `// @ts-nocheck` directive to prevent typescript from complaining that `Property '...' does not exist on type 'PropertyDescriptor'`. This prevents type check on this entire file. Alternately, you can ignore errors just on the specific lines where we expect errors with the `//@ts-expect-error` directive.
+
+```ts:playground.ts showLineNumbers
+
+...
+      //@ts-expect-error
+      if (this.experience > this.experienceThreshold) {
+        // use original method
+        originalMethod.apply(this, args)
+      } else {
+
+        // otherwise do something else
+        //@ts-expect-error
+        console.log(`${this.name} doesn't have enough experience to evolve into ${this.evolution}. 🚫`)
+      }
+    }
+...
+
+```    
+
+Finally, you can take the longer route and explicitly define the PokemonProps interface and tell the compiler that this class is of type PokemonProps.
 
 ```ts:playground.ts showLineNumbers
 
@@ -2605,9 +2625,10 @@ function requiredExperience() {
 
     // overwrite the method
     descriptor.value = function(...args: any[]) {
-      // if check passes...
-      const thisTyped = this as PokemonProps
 
+      const thisTyped = this as PokemonProps
+      
+      // if check passes...
       if (thisTyped.experience > thisTyped.experienceThreshold) {
         // use original method
         originalMethod.apply(this, args)
