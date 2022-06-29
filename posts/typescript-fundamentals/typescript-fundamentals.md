@@ -2583,7 +2583,64 @@ const pikachu = new Pokemon('Pikachu', 80, 'Raichu', 120)
 pikachu.evolve()
 ```
 
-You need the `// @ts-nocheck` directive to prevent typescript from complaining that `Property '...' does not exist on type 'PropertyDescriptor'`
+You need the `// @ts-nocheck` directive to prevent typescript from complaining that `Property '...' does not exist on type 'PropertyDescriptor'`. Alternately, you can explicitly define the PokemonProps interface and tell the compiler that this class is of type PokemonProps.
+
+```ts:playground.ts showLineNumbers
+
+type PokemonProps = {
+    name: string,
+    experience: number,
+    evolution: string,
+    experienceThreshold: number
+}
+
+function requiredExperience() {
+  return function(
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    // the original method
+    const originalMethod = descriptor.value
+
+    // overwrite the method
+    descriptor.value = function(...args: any[]) {
+      // if check passes...
+      const thisTyped = this as PokemonProps
+
+      if (thisTyped.experience > thisTyped.experienceThreshold) {
+        // use original method
+        originalMethod.apply(this, args)
+      } else {
+        // otherwise do something else
+        console.log(`${thisTyped.name} doesn't have enough experience to evolve into ${thisTyped.evolution}. 🚫`)
+      }
+    }
+
+    return descriptor
+  }
+}
+
+class Pokemon {
+  constructor(
+    private name: string,
+    private experience: number,
+    private evolution: string,
+    private experienceThreshold: number
+  ) {}
+
+  @requiredExperience()
+  evolve() {
+    console.log(`${this.name} evolved to ${this.evolution}. ✨`)
+  }
+}
+
+const pikachu = new Pokemon('Pikachu', 80, 'Raichu', 120)
+
+// "Pikachu doesn't have enough experience to
+// evolve into Raichu." 🚫
+pikachu.evolve()
+```
 
 We barely touched upon **decorators** because it would get lengthy and it's enough you just know about them.
 
