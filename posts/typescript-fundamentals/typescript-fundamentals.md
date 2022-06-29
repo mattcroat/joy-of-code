@@ -411,7 +411,7 @@ async function getPokemon(name: string) {
 }
 
 // shows Pikachu data from the Pokemon API
-getPokemon('Pikachu').then(console.log)
+getPokemon('pikachu').then(console.log)
 ```
 
 If you hover over `getPokemon` you can see TypeScript **infered** the **return type** as `Promise<any>`.
@@ -430,7 +430,7 @@ async function getPokemon(
 }
 
 // shows Pikachu data from the Pokemon API
-getPokemon('Pikachu').then(console.log)
+getPokemon('pikachu').then(console.log)
 ```
 
 Here we're more **explicit** about the **return type** with using the object type `{ id: number, name: string }`.
@@ -2535,6 +2535,8 @@ In the next example we're going to see how we can use a **method decorator** for
 The **decorator** implementation is inside `requiredExperience` that's also known as a **decorator factory** because it returns a function that will be called by the **decorator** at runtime.
 
 ```ts:playground.ts showLineNumbers
+// @ts-nocheck
+
 function requiredExperience() {
   return function(
     target: any,
@@ -2580,6 +2582,8 @@ const pikachu = new Pokemon('Pikachu', 80, 'Raichu', 120)
 // evolve into Raichu." 🚫
 pikachu.evolve()
 ```
+
+You need the `// @ts-nocheck` directive to prevent typescript from complaining that `Property '...' does not exist on type 'PropertyDescriptor'`
 
 We barely touched upon **decorators** because it would get lengthy and it's enough you just know about them.
 
