@@ -411,7 +411,7 @@ async function getPokemon(name: string) {
 }
 
 // shows Pikachu data from the Pokemon API
-getPokemon('Pikachu').then(console.log)
+getPokemon('pikachu').then(console.log)
 ```
 
 If you hover over `getPokemon` you can see TypeScript **infered** the **return type** as `Promise<any>`.
@@ -430,7 +430,7 @@ async function getPokemon(
 }
 
 // shows Pikachu data from the Pokemon API
-getPokemon('Pikachu').then(console.log)
+getPokemon('pikachu').then(console.log)
 ```
 
 Here we're more **explicit** about the **return type** with using the object type `{ id: number, name: string }`.
@@ -2539,7 +2539,7 @@ function requiredExperience() {
   return function(
     target: any,
     propertyKey: string,
-    descriptor: PropertyDescriptor
+    descriptor: any
   ) {
     // the original method
     const originalMethod = descriptor.value
