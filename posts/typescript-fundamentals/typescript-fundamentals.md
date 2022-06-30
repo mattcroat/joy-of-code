@@ -2535,13 +2535,11 @@ In the next example we're going to see how we can use a **method decorator** for
 The **decorator** implementation is inside `requiredExperience` that's also known as a **decorator factory** because it returns a function that will be called by the **decorator** at runtime.
 
 ```ts:playground.ts showLineNumbers
-// @ts-nocheck
-
 function requiredExperience() {
   return function(
     target: any,
     propertyKey: string,
-    descriptor: PropertyDescriptor
+    descriptor: any
   ) {
     // the original method
     const originalMethod = descriptor.value
@@ -2581,9 +2579,7 @@ const pikachu = new Pokemon('Pikachu', 80, 'Raichu', 120)
 // "Pikachu doesn't have enough experience to
 // evolve into Raichu." 🚫
 pikachu.evolve()
-```
-
-You need the `// @ts-nocheck` directive to prevent typescript from complaining that `Property '...' does not exist on type 'PropertyDescriptor'`. This prevents type check on this entire file. 
+``` 
 
 We barely touched upon **decorators** because it would get lengthy and it's enough you just know about them.
 
