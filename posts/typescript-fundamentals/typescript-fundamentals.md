@@ -2579,7 +2579,7 @@ const pikachu = new Pokemon('Pikachu', 80, 'Raichu', 120)
 // "Pikachu doesn't have enough experience to
 // evolve into Raichu." 🚫
 pikachu.evolve()
-``` 
+```
 
 We barely touched upon **decorators** because it would get lengthy and it's enough you just know about them.
 
