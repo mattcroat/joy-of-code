@@ -47,6 +47,8 @@ I'm describing these steps in detail because I want you to understand how I find
 
 After you get the **Measurement ID** from Google Analytics create a simple `<Analytics />` component you can use inside a layout.
 
+> ⚠️ You might not need the reactive statement because by default Google Analytics is going to count the page view when the browser history changes.
+
 ```html:src/lib/analytics.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
@@ -106,5 +108,9 @@ That's it! 🎉
 You should start receiving data in the next 30 minutes if you go to **Reports** under **Realtime** inside Google Analytics.
 
 {% img src="realtime.webp" alt="Realtime view of incoming data inside Google Analytics" %}
+
+If performance is a concern you can use [Partytown](https://partytown.builder.io/) to run third-party scripts from a web worker.
+
+Using Google Analytics is mostly about cost and convenience but if you don't have to use it consider trying [umami](https://umami.is/) that's a lighter alternative.
 
 Thanks for reading! 🏄️
