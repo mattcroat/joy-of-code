@@ -631,10 +631,10 @@ I prefer not to use semicolons and have the line length be shorter so it's easie
 			name="viewport"
 			content="width=device-width, initial-scale=1"
 		/>
-		%svelte.head%
+		%sveltekit.head%
 	</head>
 	<body>
-		<div>%svelte.body%</div>
+		<div>%sveltekit.body%</div>
 	</body>
 </html>
 ```
