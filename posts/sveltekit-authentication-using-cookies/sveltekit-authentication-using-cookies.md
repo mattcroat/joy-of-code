@@ -53,12 +53,15 @@ model User {
   updatedAt    DateTime @updatedAt
   username     String   @unique
   passwordHash String
+  userAuthToken String   @unique @default(cuid())
 }
 ```
 
-The table `User` has a unique `id`, `username` and `passwordHash` field.
+The table `User` has a unique `id`, `username`,  `passwordHash` and `userAuthToken` field.
 
-The `id` field uses a unique identifier so we can later set the session ID to the user `id`.
+The `userAuthToken` field uses a unique identifier so we can later set the session ID to `userAuthToken`.
+
+Thanks to [@mavthedev](https://github.com/mavthedev) for suggesting this safer auth method.
 
 The worst thing you can do is store plain text passwords so the password should always be hashed in case your database gets compromised.
 
@@ -444,25 +447,28 @@ export const post: RequestHandler = async ({ request }) => {
   return {
     status: 200,
     body: {
-      // for updating the session on the client
       user: { username },
       success: 'Success.',
     },
     headers: {
-      'Set-Cookie': cookie.serialize('session', user.id, {
-        // send cookie for every page
-        path: '/',
-        // server side only cookie so you can't use `document.cookie`
-        httpOnly: true,
-        // only requests from same site can send cookies
-        // and serves to protect from CSRF
-        // https://developer.mozilla.org/en-US/docs/Glossary/CSRF
-        sameSite: 'strict',
-        // only sent over HTTPS
-        secure: process.env.NODE_ENV === 'production',
-        // set cookie to expire after a month
-        maxAge: 60 * 60 * 24 * 30,
-      }),
+      'Set-Cookie': cookie.serialize(
+        'session',
+        user.userAuthToken,
+        {
+          // send cookie for every page
+          path: '/',
+          // server side only cookie so you can't use `document.cookie`
+          httpOnly: true,
+          // only requests from same site can send cookies
+          // and serves to protect from CSRF
+          // https://developer.mozilla.org/en-US/docs/Glossary/CSRF
+          sameSite: 'strict',
+          // only sent over HTTPS
+          secure: process.env.NODE_ENV === 'production',
+          // set cookie to expire after a month
+          maxAge: 60 * 60 * 24 * 30,
+        }
+      ),
     },
   }
 }
@@ -472,7 +478,7 @@ export const post: RequestHandler = async ({ request }) => {
 
 To authenticate the user you get the `user` from the database and compare if the passwords match with `bcrypt.compare(password, user.passwordHash)`.
 
-If the passwords match a `Set-Cookie` HTTP response header is set with the `user.id` as the session ID and options.
+If the passwords match a `Set-Cookie` HTTP response header is set with the `user.userAuthToken` as the session ID and options.
 
 > 🐿️ The name `session` for the cookie is arbitrary — you can name the cookie whatever you want.
 
@@ -554,7 +560,7 @@ export const handle: Handle = async ({
   }
 
   const session = await db.user.findUnique({
-    where: { id: cookies.session },
+    where: { userAuthToken: cookies.session },
   })
 
   if (session) {
