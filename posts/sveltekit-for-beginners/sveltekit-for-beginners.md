@@ -191,12 +191,12 @@ I'm going to use TypeScript but it's optional! You can ignore the types if you w
 
 ```shell:terminal
 ✔ Where should we create your project?
-  (leave blank to use current directory) …
+  (leave blank to use current directory) … .
 ✔ Which Svelte app template? › Skeleton project
-✔ Use TypeScript? … No / Yes
-✔ Add ESLint for code linting? … No / Yes
-✔ Add Prettier for code formatting? … No / Yes
-✔ Add Playwright for browser testing? … No / Yes
+✔ Add type checking with TypeScript? › Yes, using TypeScript syntax
+✔ Add ESLint for code linting? … No / [Yes]
+✔ Add Prettier for code formatting? … No / [Yes]
+✔ Add Playwright for browser testing? … [No] / Yes
 ```
 
 > 🐿️ ESLint is like a spellchecker for your code and Prettier helps you format your code so it's neat and tidy.
@@ -221,7 +221,8 @@ Let this simmer for a bit while we explore the file structure.
 │   └── favicon.png
 ├── package.json
 ├── svelte.config.js
-└── tsconfig.json
+├── tsconfig.json
+└── vite.config.js
 ```
 
 **.svelte-kit**  
@@ -243,10 +244,13 @@ Includes some scripts for running the development server and building and previe
 I want you to note `"type": "module"` that means we're using [ES modules](https://nodejs.org/api/esm.html) (`import thing from 'thing'` syntax which you don't have to think about right now but it's good to know 😅).
 
 **svelte.config.js**  
-SvelteKit config where you can also add plugins.
+SvelteKit config where you can add preprocessors, adapters and change Kit options.
 
 **tsconfig.json**  
 The config for the TypeScript compiler that's already set up for you.
+
+**vite.config.js**  
+Vite config where you can add Vite plugins and configure Vite.
 
 There's some other unimportant configuration files you're not going to touch besides `.gitignore` and `.prettierrc`.
 
@@ -569,26 +573,20 @@ You can look at your data inside Prisma Studio.
 
 In this section you're going to learn how to use global styles, nested layouts and catching and showing errors.
 
-Before I start I'm going to update the path alias in the SvelteKit config because I prefer to use `$root` to be able to access the `src` folder from anywhere in the project.
+Before I start I'm going to update the path alias in the Vite config because I prefer to use `$root` to be able to access the `src` folder from anywhere in the project.
 
-```js:svelte.config.js {3,10-16} showLineNumbers
-import adapter from '@sveltejs/adapter-auto'
-import preprocess from 'svelte-preprocess'
+```js:vite.config.js showLineNumbers
+import { sveltekit } from '@sveltejs/kit/vite'
 import path from 'path'
 
+/** @type {import('vite').UserConfig} */
 const config = {
-	preprocess: preprocess(),
-
-	kit: {
-		adapter: adapter(),
-		vite: {
-			resolve: {
-				alias: {
-					$root: path.resolve('./src')
-				}
-			}
-		}
-	}
+	plugins: [sveltekit()],
+	resolve: {
+		alias: {
+			$root: path.resolve('./src'),
+		},
+	},
 }
 
 export default config
@@ -2034,7 +2032,7 @@ This is our form inside `tweet.svelte` for removing a tweet. We're using a 🥷 
 </form>
 ```
 
-🖌️ Let's update the `svelte.config.js`.
+🖌️ Update `svelte.config.js`.
 
 ```js:svelte.config.js showLineNumbers
 // ...
