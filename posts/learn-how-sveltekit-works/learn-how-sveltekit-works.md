@@ -8,7 +8,7 @@ series: false
 draft: true
 ---
 
-# Learn How SvelteKit Works And Where Your Code Runs
+# Learn How SvelteKit SSR and CSR Works
 
 ## Table of Contents
 
@@ -44,7 +44,7 @@ This post assumes you're at least familiar with SvelteKit but if you're not I ha
 
 ## SvelteKit Is A Backend Framework
 
-**Kit** isn't built on top of **Svelte** but it's a **backend web framework** where Svelte is used as the view layer but in theory you could rip it out and replace it with another component framework that supports server-side rendering and the same is true for using Svelte in other web frameworks.
+**Kit** isn't built on top of **Svelte** but it's a **backend web framework** where Svelte is used as the view layer but in theory you could rip it out and replace it with another component framework that supports server-side rendering and the same is true for other web frameworks.
 
 It helps If you're familiar with [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) and have prior experience with backend frameworks like [Express]([https://expressjs.com/](https://expressjs.com/)) but it's not required and you can think of SvelteKit as a replacement because **you don't need a separate backend** — SvelteKit is where you write your frontend and backend logic.
 
@@ -52,7 +52,7 @@ It helps If you're familiar with [HTTP request methods](https://developer.mozill
 
 Here's an example of a [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer) endpoint in Express.
 
-```js:example.js {showLineNumbers}
+```js:example {showLineNumbers}
 import express from 'express'
 
 const app = express()
@@ -62,15 +62,15 @@ app.get('/', (request, response) => {
   response.json({ message: 'Hello' })
 })
 
-// Your frontend app would be at http://localhost:3000/
+// your frontend app would be at http://localhost:3000/
 // where you can consume the JSON response from the API
 app.listen(4000)
 ```
 
 This is the SvelteKit equivalent and they work the same and return a `application/json` content type response header that returns `JSON` data from the API.
 
-```js:example.js {showLineNumbers}
-// You can expose and use this endpoint anywhere
+```js:example {showLineNumbers}
+// you can expose and use this endpoint anywhere
 export async function get({ request }) {
 	return {
 		body: { message: 'Hello' }
@@ -104,11 +104,21 @@ SvelteKit leverages the web platform and uses the regular [Request](https://deve
 
 Here's an example of a simple Request object and fetching the data.
 
-```js:example.js {showLineNumbers}
+```js:example {showLineNumbers}
 const request = new Request('https://pokeapi.co/api/v2/pokemon', {
   method: 'GET',
   headers: { 'content-type': 'application/json' }
 })
+
+console.log(request)
+
+/*
+	Request {
+	  method: 'GET',
+	  headers: { 'content-type': 'application/json' }
+		// ...
+	}
+*/
 
 fetch(request)
   .then(response => response.json())
@@ -117,31 +127,30 @@ fetch(request)
 
 You would see the same request in SvelteKit.
 
-```js:example.js {showLineNumbers}
+```js:example {showLineNumbers}
 export async function get({ request }) {
 	const response = await fetch('https://pokeapi.co/api/v2/pokemon')
 	const pokemon = await response.json()
 
 	console.log(request)
 
+	/*
+		Request {
+	  	method: 'GET',
+	  	headers: { 'content-type': 'application/json'  }
+			// ...
+		}
+	*/
+
 	return {
 		body: pokemon.results,
 	}
 }
-
-/*
-	Request {
-	    method: 'GET',
-	    headers: { 'content-type': 'application/json' }
-			// ...
-	  }
-	}
-*/
 ```
 
 ## Set Up SvelteKit From Scratch
 
-It only takes a couple of steps and is going to help you understand how SvelteKit works and understanding the difference between server-side rendering and client-side rendering and where your code runs.
+It only takes a couple of steps and is going to help you understand how SvelteKit works and the difference between server-side rendering and client-side rendering and where your code runs.
 
 Inside an empty folder create a handcrafted 💪 `package.json` file and specify we're using [ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules) which is the official format to package JavaScript code for reuse and include the scripts to run it.
 
@@ -188,7 +197,7 @@ If you open the link in your browser it won't work yet because we have to add so
         - Add the `routes/index.svelte` file
 
 ```js:svelte.config.js {showLineNumbers}
-// You can add preprocessing and adapters here
+// you can add preprocessing and adapters here
 
 const config = {}
 
@@ -278,7 +287,7 @@ The code is going to be generated based on your pages and the pyramid shape is g
 
 Here's what's going on.
 
-```shell
+```shell:example
 if page
 	layout
 		if page inside named layout
@@ -303,12 +312,12 @@ export const components = [
 	() => import('../runtime/components/layout.svelte'),
 	() => import('../runtime/components/error.svelte'),
 	() => import('../../src/routes/index.svelte"),
-+	() => import('../../src/routes/some/nested/route/index.svelte')
++() => import('../../src/routes/some/nested/route/index.svelte')
 ]
 
 export const dictionary = {
 	"": [[0, 2], [1]],
-+	'some/nested/route': [[0, 3], [1]]
++'some/nested/route': [[0, 3], [1]]
 }
 ```
 
@@ -379,7 +388,7 @@ export async function get() {
 }
 ```
 
-This is a trivial example but it shows the benefits of having a backend because you can cherry-pick data you want before you pass it back to the client without the user having to pay the cost.
+This shows the benefit of having a backend because you can cherry-pick data you want before you pass it back to the client without the user having to pay the cost.
 
 You might be used to doing something like this in a traditional single page application regardless where you fetch the data from.
 
@@ -500,7 +509,7 @@ Here's a brief aside If you don't know how module context works because it's use
 
 In Svelte every component is an instance.
 
-```js:module.js {showLineNumbers}
+```js:example {showLineNumbers}
 // this file is a module
 
 console.log('context module')
@@ -512,7 +521,7 @@ export class Component {
 }
 ```
 
-```js:module.js {showLineNumbers}
+```js:example {showLineNumbers}
 import { Component } from './Component.js'
 
 // logs "context module" once
@@ -602,21 +611,21 @@ I'm going to explain hydration later.
 
 As I previously mentioned when you load a page for the first time it's going to use server-side rendering but after the client gets initialized subsequent navigations use client-side navigation but you can still view the page source.
 
-```html:index.svelte
+```html:index.svelte {showLineNumbers}
 <a href="/pikachu">Pikachu</a>
 ```
 
 You might want to have a special page for every Pokemon so I created `[pokemon].svelte` as an example route that doesn't do anything.
 
-```html:[pokemon].svelte
+```html:[pokemon].svelte {showLineNumbers}
 <a href="/">Home</a>
 ```
 
 Open your **network** tab and check the “**disable cache**” checkbox.
 
-If you navigate from `/` to `/pikachu` you can see a `GET` request to [`http://localhost:3000/src/routes/[pokemon].svelte`](http://localhost:3000/src/routes/%5Bpokemon%5D.svelte) that returns a server-side rendered Svelte component that hydrates the page if you look at the **preview** tab.
+If you navigate from `/` to `/pikachu` you can see a `GET` request to [http://localhost:3000/src/routes/[pokemon].svelte](http://localhost:3000/src/routes/%5Bpokemon%5D.svelte) that returns a server-side rendered Svelte component that hydrates the page if you look at the **preview** tab.
 
-If you navigate from `/pokemon` back to `/` you can see a `GET` request for `[http://localhost:3000/api/pokemon.json](http://localhost:3000/api/pokemon.json)` and if that was a page endpoint it would be `__data.json`.
+If you navigate from `/pokemon` back to `/` you can see a `GET` request for [http://localhost:3000/api/pokemon.json](http://localhost:3000/api/pokemon.json) and if that was a page endpoint it would be `__data.json`.
 
 {% img src="navigation.webp" alt="Page navigation diagram" %}
 
@@ -711,7 +720,12 @@ This takes care of creating, claiming and mounting the elements.
 
 I made the same component in SvelteKit and this is the response from `count.svelte` in the **network** tab after I cleaned it up.
 
+<details>
+	<summary>counter.svelte</summary>
+
 ```js:count.svelte {showLineNumbers}
+// imports
+
 const file = 'src/routes/counter.svelte'
 
 function create_fragment(ctx) {
@@ -800,6 +814,8 @@ export default Counter
 export { hydrate }
 ```
 
+</details>
+
 It's not that hard to read to at least get an idea of what's going on and it looks similar to the code from the Svelte REPL — if you look at the `instance` function you can see the `click_handler` code for our counter.
 
 If you **view page source** you can see the hydrate script added by SvelteKit.
@@ -832,15 +848,15 @@ If you **view page source** you can see the hydrate script added by SvelteKit.
 
 If you go to the **sources tab** in your developer tools inside `counter.svelte` and put a breakpoint on the line that invokes the `start` function you can step through it if you're adventurous.
 
-[debugger.webp](How%20SvelteKit%20works%20d72ccc89186b44a3ba432893f05e95fe/debugger.webp)
+{% img src="debugger.webp" alt="Debugger" %}
 
-This is where the magic happens.
+This is where the magic happens inside `.svelte-kit/runtime/client/start.js`.
 
 ```js:start.js {showLineNumbers}
 async function start({
 	paths, target, session, route, spa, trailing_slash, hydrate
 }) {
-	// CREATE CLIENT
+	// Create client
 	const client = create_client({
 		target,
 		session,
@@ -848,16 +864,16 @@ async function start({
 		trailing_slash
 	});
 
-	// INITIALIZE CLIENT
+	// initialize client
 	init({ client })
 	set_paths(paths)
 
-	// HYDRATION
+	// hydration
 	if (hydrate) {
 		await client._hydrate(hydrate)
 	}
 
-	// ROUTING
+	// routing
 	if (route) {
 		if (spa) client.goto(location.href, { replaceState: true })
 		client._start_router()
