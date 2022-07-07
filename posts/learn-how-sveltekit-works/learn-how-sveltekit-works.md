@@ -122,7 +122,7 @@ console.log(request)
 
 fetch(request)
   .then(response => response.json())
-  .then(response => console.log(response))
+  .then(response => console.log(response.results))
 ```
 
 You would see the same request in SvelteKit.
