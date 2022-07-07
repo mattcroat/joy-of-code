@@ -52,7 +52,7 @@ It helps If you're familiar with [HTTP request methods](https://developer.mozill
 
 Here's an example of a [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer) endpoint in Express.
 
-```js:example {showLineNumbers}
+```js:example showLineNumbers
 import express from 'express'
 
 const app = express()
@@ -69,7 +69,7 @@ app.listen(4000)
 
 This is the SvelteKit equivalent and they work the same and return a `application/json` content type response header that returns `JSON` data from the API.
 
-```js:example {showLineNumbers}
+```js:example showLineNumbers
 // you can expose and use this endpoint anywhere
 export async function get({ request }) {
 	return {
@@ -104,7 +104,7 @@ SvelteKit leverages the web platform and uses the regular [Request](https://deve
 
 Here's an example of a simple Request object and fetching the data.
 
-```js:example {showLineNumbers}
+```js:example showLineNumbers
 const request = new Request('https://pokeapi.co/api/v2/pokemon', {
   method: 'GET',
   headers: { 'content-type': 'application/json' }
@@ -127,7 +127,7 @@ fetch(request)
 
 You would see the same request in SvelteKit.
 
-```js:example {showLineNumbers}
+```js:example showLineNumbers
 export async function get({ request }) {
 	const response = await fetch('https://pokeapi.co/api/v2/pokemon')
 	const pokemon = await response.json()
@@ -154,57 +154,62 @@ It only takes a couple of steps and is going to help you understand how SvelteKi
 
 Inside an empty folder create a handcrafted 💪 `package.json` file and specify we're using [ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules) which is the official format to package JavaScript code for reuse and include the scripts to run it.
 
-```json:package.json {showLineNumbers}
+```json:package.json showLineNumbers
 {
   "type": "module",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "preview": "svelte-kit preview"
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }
 ```
 
-Next we have to install Kit and Svelte as a development dependency.
+Next we have to install Kit, Svelte and Vite as a development dependency.
 
 ```shell:terminal
-npm i -D @sveltejs/kit svelte
+npm i -D @sveltejs/kit svelte vite
 ```
 
 It's namespaced under the same [sveltejs](https://github.com/sveltejs) organization on GitHub.
 
-You can find the packages inside `node_modules` but the `svelte-kit` binary that gets executed when you run `npm run dev` is inside `node_modules/.bin` and is just a script that points to `node_modules/@sveltejs/kit/svelte-kit.js` which points to the `.dist/cli.js` entry point.
+The `svelte-kit` and `vite` binaries are under `node_modules/.bin` that get executed when you run the development server and if you open the file it's just a script that points to the entry point of your app.
 
-After you run the `svelte-kit dev` command the SvelteKit CLI loads the Svelte config and starts the Vite development server and outputs the welcome message in your terminal.
+These files are required for SvelteKit to work:
 
-```shell:terminal
-> svelte-kit dev
+- Add a `vite.config.js` file
+- Add a `svelte.config.js` file
+- Create a `src` folder
+    - Add a `src/app.html` file
+    - Create a `src/routes` folder
+        - Add a `routes/index.svelte` file
 
-SvelteKit v1.0.0
+```js:vite.config.js showLineNumbers
+// you can add plugins and change config options
 
-local:   http://localhost:3000
-network: not exposed
+import { sveltekit } from '@sveltejs/kit/vite'
 
-Use --host to expose server to other devices on this network
+/** @type {import('vite').UserConfig} */
+const config = {
+	plugins: [sveltekit()],
+}
+
+export default config
+
 ```
 
-If you open the link in your browser it won't work yet because we have to add some things:
+```js:svelte.config.js showLineNumbers
+// you can add preprocessors and adapters here
 
-- Add the `svelte.config.js` file
-- Create a `src` folder
-    - Create the `src/app.html` file
-    - Add a `src/routes` folder
-        - Add the `routes/index.svelte` file
-
-```js:svelte.config.js {showLineNumbers}
-// you can add preprocessing and adapters here
-
-const config = {}
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+	kit: {},
+}
 
 export default config
 ```
 
-```html:app.html {showLineNumbers}
+```html:app.html showLineNumbers
 <head>
   %sveltekit.head%
 </head>
@@ -214,8 +219,17 @@ export default config
 </body>
 ```
 
-```html:index.svelte {showLineNumbers}
+```html:index.svelte showLineNumbers
 <h1>Home</h1>
+```
+
+After you run the `npm run dev` command the SvelteKit CLI loads the Svelte config and starts the Vite development server and outputs the welcome message in your terminal.
+
+```shell:terminal
+  vite dev server running at:
+
+  > Local: http://localhost:3000/
+  > Network: use `--host` to expose
 ```
 
 That's everything you need to set up a basic SvelteKit project. 😎
@@ -247,7 +261,7 @@ When you start the development server SvelteKit generates a `.svelte-kit` folder
 
 The `root.svelte` file is interesting because it takes the routes from `client-manifest.js` that are treated as components and besides initializing some page values it's in charge of displaying the components.
 
-```js:client-manifest.js {showLineNumbers}
+```js:client-manifest.js showLineNumbers
 // regenerated when you change pages
 export const components = [
 	// layout is at index 0
@@ -269,7 +283,7 @@ If you logged the values of the components inside `root.svelte` you would get an
 
 The code is going to be generated based on your pages and the pyramid shape is going to be deeper based on how many named layouts you have but I simplified the code so it's easier to understand.
 
-```js:root.svelte {showLineNumbers}
+```js:root.svelte showLineNumbers
 {#if components[1]}
 	<svelte:component this={components[0]}>
 		{#if components[2]}
@@ -307,7 +321,7 @@ A simple way to see what is generated is to git commit the `.svelte-kit` folder 
 
 Here's an example of the the client manifest before and after adding a route.
 
-```diff:client-manifest.js {showLineNumbers}
+```diff:client-manifest.js showLineNumbers
 export const components = [
 	() => import('../runtime/components/layout.svelte'),
 	() => import('../runtime/components/error.svelte'),
@@ -376,7 +390,7 @@ You might have to process a lot of data or want to use [GraphQL](https://bundlep
 
 I created an endpoint inside `routes/api/pokemon.json.js` that uses the [PokeAPI](https://pokeapi.co/) and returns a list of Pokemon.
 
-```js:pokemon.json.js {showLineNumbers}
+```js:pokemon.json.js showLineNumbers
 // server API endpoint
 export async function get() {
 	const response = await fetch('https://pokeapi.co/api/v2/pokemon')
@@ -392,7 +406,7 @@ This shows the benefit of having a backend because you can cherry-pick data you 
 
 You might be used to doing something like this in a traditional single page application regardless where you fetch the data from.
 
-```html:index.svelte {showLineNumbers}
+```html:index.svelte showLineNumbers
 <script>
 	// client-side rendered
 	async function getPokemon() {
@@ -405,7 +419,7 @@ You might be used to doing something like this in a traditional single page appl
 
 {#await getPokemon()}
 	<p>Loading...</p>
-{:then data}
+{:then pokemon}
 	{#each pokemon as pokemon}
 		<li>{pokemon.name}</li>
 	{/each}
@@ -426,7 +440,7 @@ Easy enough, right?
 
 There's one problem when I go and **view page source**.
 
-```html:source {showLineNumbers}
+```html:source showLineNumbers
 <head>
 	<style data-sveltekit>
 		li.s-Uap-jPRb-uiE {
@@ -460,15 +474,11 @@ Client-side rendering is less resilient because JavaScript can fail for whatever
 
 Server-side rendering has improved performance because everything loads when it's ready even if you have to wait for it compared to showing a loading spinner and content loading after causing layout shifts.
 
-“I thought you said SvelteKit server-side renders every page?”
-
-That's true but remember it's also flexible because you can even have pre-rendered static pages that are dynamic because of JavaScript.
-
 To server-side render the Pokemon data we need to fetch the Pokemon on the server instead of the client.
 
 You've probably done it before.
 
-```html:index.svelte {showLineNumbers}
+```html:index.svelte showLineNumbers
 <script context="module">
 	// server-side rendered
 	export async function load({ fetch }) {
@@ -509,7 +519,7 @@ Here's a brief aside If you don't know how module context works because it's use
 
 In Svelte every component is an instance.
 
-```js:example {showLineNumbers}
+```js:example showLineNumbers
 // this file is a module
 
 console.log('context module')
@@ -521,7 +531,7 @@ export class Component {
 }
 ```
 
-```js:example {showLineNumbers}
+```js:example showLineNumbers
 import { Component } from './Component.js'
 
 // logs "context module" once
@@ -540,7 +550,7 @@ Long story short **—** everything happens on the server.
 
 If you open the page it's going to be server-side rendered meaning if you look at the HTML document that the server responds with you're going to see the data.
 
-```html:source {showLineNumbers}
+```html:source showLineNumbers
 <head>
 	<style data-sveltekit>
 		li.s-Uap-jPRb-uiE {
@@ -588,7 +598,7 @@ Another interesting aside is what SvelteKit does with the `fetch` response:
 - During server-side rendering the response will be captured and inlined into the rendered HTML
 - During hydration the response will be read from the HTML preventing an additional network request
 
-```html:source {showLineNumbers}
+```html:source showLineNumbers
 <!-- ... -->
 
 <script
@@ -611,13 +621,13 @@ I'm going to explain hydration later.
 
 As I previously mentioned when you load a page for the first time it's going to use server-side rendering but after the client gets initialized subsequent navigations use client-side navigation but you can still view the page source.
 
-```html:index.svelte {showLineNumbers}
+```html:index.svelte showLineNumbers
 <a href="/pikachu">Pikachu</a>
 ```
 
 You might want to have a special page for every Pokemon so I created `[pokemon].svelte` as an example route that doesn't do anything.
 
-```html:[pokemon].svelte {showLineNumbers}
+```html:[pokemon].svelte showLineNumbers
 <a href="/">Home</a>
 ```
 
@@ -661,7 +671,7 @@ Knowing this makes reading the warning from the SvelteKit documentation for [loa
 
 Let's look at an example of how this works.
 
-```html:counter.svelte {showLineNumbers}
+```html:counter.svelte showLineNumbers
 <script>
 	let count = 0
 </script>
@@ -675,7 +685,7 @@ You can use the [Svelte REPL](https://svelte.dev/repl/hello-world) to see the co
 
 Since we're using server-side rendering we need to turn the component into a string and return it as HTML and that's what the Svelte compiler does if you pass it **SSR** as an option.
 
-```js:REPL {showLineNumbers}
+```js:REPL showLineNumbers
 import { create_ssr_component, escape } from 'svelte/internal'
 
 const App = create_ssr_component(
@@ -694,7 +704,7 @@ This is where the **hydratable** option comes into play and if you switch back t
 
 I simplified the code so we can focus on the interesting part.
 
-```js:REPL {showLineNumbers}
+```js:REPL showLineNumbers
 function create_fragment(ctx) {
 	let button
 	let t
@@ -725,7 +735,7 @@ I made the same component in SvelteKit and this is the response from `count.svel
 <details>
 	<summary>counter.svelte</summary>
 
-```js:count.svelte {showLineNumbers}
+```js:count.svelte showLineNumbers
 // imports
 
 const file = 'src/routes/counter.svelte'
@@ -822,7 +832,7 @@ It's not that hard to read to at least get an idea of what's going on and it loo
 
 If you **view page source** you can see the hydrate script added by SvelteKit.
 
-```html:source {showLineNumbers}
+```html:source showLineNumbers
 <body>
 	<button>0</button>
 
@@ -854,7 +864,7 @@ If you go to the **sources tab** in your developer tools inside `counter.svelte`
 
 This is where the magic happens inside `.svelte-kit/runtime/client/start.js`.
 
-```js:start.js {showLineNumbers}
+```js:start.js showLineNumbers
 async function start({
 	paths, target, session, route, spa, trailing_slash, hydrate
 }) {
@@ -888,7 +898,7 @@ async function start({
 
 If you step into the `_hydrate` function you can see how SvelteKit loads the JavaScript modules required for the page from the manifest.
 
-```js:start.js {showLineNumbers}
+```js:start.js showLineNumbers
 _hydrate: async ({ status, error, nodes, params, routeId }) => {
 	// ...
 
@@ -921,7 +931,7 @@ npm i -D @sveltejs/adapter-node
 
 You can enable source maps for the build output if you want to debug the production build and disable minification to be able to look at the code.
 
-```js:svelte.config.js {showLineNumbers}
+```js:svelte.config.js showLineNumbers
 import adapter from '@sveltejs/adapter-node'
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -997,7 +1007,7 @@ The `client` folder has client code including static assets like HTML, CSS and J
 
 What if you wanted to prerender the Pokemon once and cache it forever instead of having to rebuild it every time someone visits the page?
 
-```js:index.svelte {showLineNumbers}
+```js:index.svelte showLineNumbers
 <script context="module">
 	export let prerender = true
 	// ...
@@ -1017,7 +1027,7 @@ The `pokemon.json` file includes the `fetch` response so when you request the pa
 
 If you want you can even use `adapter-static` to generate a single-page application if you specify a [fallback page](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#spa-mode).
 
-```js:svelte.config.js {showLineNumbers}
+```js:svelte.config.js showLineNumbers
 import adapter from '@sveltejs/adapter-static'
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -1038,7 +1048,7 @@ If I was SvelteKit and had to figure out how to create the output required for [
 
 Let's change the adapter to use `adapter-vercel`.
 
-```js:svelte.config.js {showLineNumbers}
+```js:svelte.config.js showLineNumbers
 import adapter from '@sveltejs/adapter-vercel'
 
 /** @type {import('@sveltejs/kit').Config} */
