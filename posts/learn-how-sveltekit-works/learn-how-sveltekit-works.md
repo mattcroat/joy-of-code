@@ -8,7 +8,7 @@ series: false
 draft: true
 ---
 
-# Learn How SvelteKit SSR and CSR Works
+# Learn How SvelteKit Works As a Framework
 
 ## Table of Contents
 
@@ -678,10 +678,12 @@ Since we're using server-side rendering we need to turn the component into a str
 ```js:REPL {showLineNumbers}
 import { create_ssr_component, escape } from 'svelte/internal'
 
-const App = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-	let count = 0
-	return `<button>${escape(count)}</button>`
-})
+const App = create_ssr_component(
+  ($$result, $$props, $$bindings, slots) => {
+  	let count = 0
+    return `<button>${escape(count)}</button>`
+  }
+)
 ```
 
 This is used for server-side rendering to return the component as HTML and that's why you need hydration.
