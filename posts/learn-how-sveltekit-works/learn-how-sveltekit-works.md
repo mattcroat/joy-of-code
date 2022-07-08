@@ -374,7 +374,7 @@ These parts together make Svexodia.
 
 You can see [vite-plugin-svelte](https://github.com/sveltejs/vite-plugin-svelte) is used to make Svelte work with Vite and pass it plugin options from compiler options, preprocessors to the [inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector) that shows you where the element under your cursor is located and open it in your code editor.
 
-On the other hand I find `vite-plugin-svelte-kit` more interesting because it's not a package but internal to SvelteKit I found inside `kit/dist/chunks/plugin.js` and it's responsible for taking the SvelteKit config, creating routes, server-side rendering and loading the template replacing the `%sveltekit%` placeholders inside `app.html` among other things.
+The `vite-plugin-svelte-kit` is interesting because it's imported from `@sveltejs/kit/vite` as `sveltekit` and it's responsible for taking the SvelteKit config, creating routes, server-side rendering and loading the template replacing the `%sveltekit%` placeholders inside `app.html` among other things.
 
 It exports the plugins that are used inside `kit/dist/cli.js` that returns us to the starting point after you ran `npm run dev`. 
 
@@ -931,19 +931,15 @@ npm i -D @sveltejs/adapter-node
 
 You can enable source maps for the build output if you want to debug the production build and disable minification to be able to look at the code.
 
-```js:svelte.config.js showLineNumbers
-import adapter from '@sveltejs/adapter-node'
+```js:vite.config.js {6-9} showLineNumbers
+import { sveltekit } from '@sveltejs/kit/vite'
 
-/** @type {import('@sveltejs/kit').Config} */
+/** @type {import('vite').UserConfig} */
 const config = {
-	kit: {
-		adapter: adapter(),
-		vite: {
-			build: {
-				sourcemap: false,
-				minify: false,
-			},
-		},
+	plugins: [sveltekit()],
+	build: {
+		sourcemap: false,
+		minify: false,
 	},
 }
 
