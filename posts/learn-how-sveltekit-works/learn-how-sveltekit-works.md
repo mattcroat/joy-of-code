@@ -5,7 +5,6 @@ slug: learn-how-sveltekit-works
 published: 2022-7-6
 category: sveltekit
 series: false
-draft: true
 ---
 
 # Learn How SvelteKit Works As a Framework
