@@ -62,6 +62,17 @@
         htmlElement.dataset.theme = userTheme
       }
 
+      // the user might have a deprecated theme
+      if (userTheme === '🌙 Dusk') {
+        htmlElement.dataset.theme = '🌛 Night'
+        localStorage.theme = '🌛 Night'
+      }
+
+      if (userTheme === '☀️ Light') {
+        htmlElement.dataset.theme = '☀️ Daylight'
+        localStorage.theme = '☀️ Daylight'
+      }
+
       // otherwise check for user preference
       if (!userTheme && prefersDarkMode) {
         htmlElement.dataset.theme = '🌛 Night'
