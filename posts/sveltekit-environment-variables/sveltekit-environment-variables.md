@@ -83,7 +83,7 @@ export const get: RequestHandler = async () => {
   // const secret = import.meta.env.VITE_UNSECURE_SECRET
 
   // we can access the value using `process.env`
-  const secret = process.env.SECURE_SECRET
+  const secret = process.env["SECURE_SECRET"]
 
   if (secret === 'secret') {
     return {
@@ -122,7 +122,7 @@ npm i env-cmd
 import type { RequestHandler } from '@sveltejs/kit'
 
 export const get: RequestHandler = async () => {
-  const secret = process.env.SECURE_SECRET
+  const secret = process.env["SECURE_SECRET"]
 
   if (secret === 'secret') {
     return {
