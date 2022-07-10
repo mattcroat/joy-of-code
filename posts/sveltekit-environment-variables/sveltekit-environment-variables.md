@@ -109,10 +109,10 @@ npm i env-cmd
 ```json:package.json {3,4,6} showLineNumbers
 // ...
 "scripts": {
-  "dev": "env-cmd svelte-kit dev",
-  "build": "env-cmd svelte-kit build",
+  "dev": "env-cmd vite dev",
+  "build": "env-cmd vite build",
   "package": "svelte-kit package",
-  "preview": "env-cmd svelte-kit preview",
+  "preview": "env-cmd vite preview",
   "prepare": "svelte-kit sync"
 }
 // ...
