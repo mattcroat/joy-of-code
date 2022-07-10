@@ -322,17 +322,17 @@ A simple way to see what is generated is to git commit the `.svelte-kit` folder 
 
 Here's an example of the the client manifest before and after adding a route.
 
-```diff:client-manifest.js showLineNumbers
+```js:client-manifest.js {5,10} showLineNumbers
 export const components = [
-	() => import('../runtime/components/layout.svelte'),
-	() => import('../runtime/components/error.svelte'),
-	() => import('../../src/routes/index.svelte"),
-+() => import('../../src/routes/some/nested/route/index.svelte')
+  () => import('../runtime/components/layout.svelte'),
+  () => import('../runtime/components/error.svelte'),
+  () => import('../../src/routes/index.svelte'),
+  () => import('../../src/routes/some/nested/route/index.svelte'),
 ]
 
 export const dictionary = {
-	"": [[0, 2], [1]],
-+'some/nested/route': [[0, 3], [1]]
+  '': [[0, 2], [1]],
+  'some/nested/route': [[0, 3], [1]],
 }
 ```
 
