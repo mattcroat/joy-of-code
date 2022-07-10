@@ -501,7 +501,7 @@ In Svelte you use the `on:` directive to listen to DOM events.
 
 <style>
 	div {
-		height: 100%;
+		height: 100vh;
 	}
 </style>
 ```
