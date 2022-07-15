@@ -72,7 +72,7 @@ The more you look at design the more you're going to pick up on these details.
 
 Alignment is used to **organize information** creating order.
 
-Design decisions should be **intentional** and not arbitrary. When elements are aligned they visually connect to each other and serve as an **anchor** for your eyes through an **invisible line** created from **alignnment**.
+Design decisions should be **intentional** and not arbitrary. When elements are aligned they visually connect to each other and serve as an **anchor** for your eyes through an **invisible line** created from **alignment**.
 
 It's never one thing that makes or breaks a design but a lot of other smaller details.
 
