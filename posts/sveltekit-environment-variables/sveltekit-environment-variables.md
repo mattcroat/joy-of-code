@@ -78,7 +78,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 // `dotenv` loads the environment variables
 import 'dotenv/config'
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
   // it's also safe to use the Vite import here
   // const secret = import.meta.env.VITE_UNSECURE_SECRET
 
@@ -121,7 +121,7 @@ npm i env-cmd
 ```ts:index.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
   const secret = process.env.SECURE_SECRET
 
   if (secret === 'secret') {
