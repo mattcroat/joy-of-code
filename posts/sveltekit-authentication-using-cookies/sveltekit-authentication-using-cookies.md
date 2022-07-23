@@ -259,7 +259,7 @@ import * as bcrypt from 'bcrypt'
 
 import { db } from '$lib/database'
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
   const form = await request.formData()
   const username = form.get('username')
   const password = form.get('password')
@@ -402,7 +402,7 @@ import * as cookie from 'cookie'
 
 import { db } from '$lib/database'
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
   const form = await request.formData()
   const username = form.get('username')
   const password = form.get('password')
@@ -735,7 +735,7 @@ Create the `auth/logout/index.ts` endpoint.
 import type { RequestHandler } from '@sveltejs/kit'
 import * as cookie from 'cookie'
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
   return {
     status: 303,
     headers: {
