@@ -19,12 +19,12 @@ By the end of this post you're going to learn how to make WebSockets work in Sve
 If you're reading this in the future SvelteKit might have native support for WebSockets similar to how it does HTTP request methods so it might be worth checking the documentation.
 
 ```ts:endpoint.ts showLineNumbers
-export const  get: RequestHandler = async () => { /* ... */ }
+export const  GET: RequestHandler = async () => { /* ... */ }
 
-export const  post: RequestHandler = async () => { /* ... */ }
+export const  POST: RequestHandler = async () => { /* ... */ }
 
 // This doesn't exist yet unfortunately 😅
-export const ws: WebSocketRequestHandler = async () => { /* ... */ }
+export const WS: WebSocketRequestHandler = async () => { /* ... */ }
 ```
 
 You can read more about it inside the [discussion about native support for WebSockets inside SvelteKit](https://github.com/sveltejs/kit/issues/1491) if you want.
