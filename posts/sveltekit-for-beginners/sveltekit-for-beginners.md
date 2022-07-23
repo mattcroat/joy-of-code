@@ -203,6 +203,8 @@ I'm going to use TypeScript but it's optional! You can ignore the types if you w
 
 🖌️ Don't forget to install the dependencies after which you can start the development server at [http://localhost:3000/](http://localhost:3000/).
 
+> ⚠️ The port might be different in the latest version of SvelteKit but I changed it to `"dev": "vite dev --port 3000"`  for consistency.
+
 ```shell:terminal
 npm i && npm run dev
 ```
@@ -586,9 +588,9 @@ const config = {
 		adapter: adapter(), 
 		alias: {
 			$root: 'src'
-    		}
+    }
 	}
-};
+}
 
 export default config;
 ```
@@ -1375,10 +1377,10 @@ A `<form>` has an `action` that's the destination that processes the form submis
 
 > 🐿️ If might be unclear when to use **GET** and **POST** but think of **GET** as receiving data and **POST** when you're sending data from a form to change something.
 
-You might have an endpoint inside `routes/api/items.ts` that has a `get` function which returns a list of items in a JSON format when you hit the `/api/items` endpoint.
+You might have an endpoint inside `routes/api/items.ts` that has a `GET` function which returns a list of items in a JSON format when you hit the `/api/items` endpoint.
 
 ```js:example.js showLineNumbers
-export function get() {
+export function GET() {
   // do some compute on the server
   const items = db.getItems()
 
@@ -1482,7 +1484,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 import prisma from '$root/lib/prisma'
 import { timePosted } from '$root/utils/date'
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
 	// get the tweets and the user data (Prisma 😍)
 	const data = await prisma.tweet.findMany({
 		include: { user: true },
@@ -1837,7 +1839,7 @@ Because we designed the API and shaped the data we have complete control of how 
 If you're prerendering pages you don't have to think about caching because they're static so if there's a [CDN](https://developer.mozilla.org/en-US/docs/Glossary/CDN) in front of your site it caches it for you until you rebuild and redeploy the site but if you're using server-side rendering you can set [cache-control HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) in your endpoint and specify when the page should rebuild.
 
 ```js
-export async function get() {
+export async function GET() {
   // ...
 
   return {
@@ -1951,7 +1953,7 @@ Crisis averted! The form is going to **POST** to `/home` so we can start adding 
 ```ts:routes/home/index.ts showLineNumbers
 // ...
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const form = await request.formData()
 	const tweet = String(form.get('tweet'))
 
@@ -2042,7 +2044,7 @@ Stop the development server with <kbd>Ctrl</kbd> + <kbd>C</kbd> and restart it b
 ```ts:routes/home/index.ts
 // ...
 
-export const del: RequestHandler = async ({ request }) => {
+export const DELETE: RequestHandler = async ({ request }) => {
 	const form = await request.formData()
 	const tweetId = +form.get('id')
 
@@ -2058,8 +2060,6 @@ export const del: RequestHandler = async ({ request }) => {
 You get the tweet id from the form and turn it into a number after which you remove it from the database. 🧹
 
 Because **POST** is used for **DELETE** a 303 redirect status is used that means it doesn't link to a new resource.
-
-> 🐿️ You can't use `delete` as the function name because it's a reserved word in JavaScript.
 
 ## Liking a Tweet
 
@@ -2077,7 +2077,7 @@ We can maybe add this to our existing endpoint and figure out what action to tak
 ```ts:routes/home/like.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const form = await request.formData()
 	const id = +form.get('id')
 
@@ -2277,7 +2277,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 import prisma from '$root/lib/prisma'
 import { timePosted } from '$root/utils/date'
 
-export const get: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
 	const profile = await prisma.user.findFirst({
 		where: { name: params.user }
 	})
@@ -2356,7 +2356,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 import prisma from '$root/lib/prisma'
 import { timePosted } from '$root/utils/date'
 
-export const get: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
 	const tweet = await prisma.tweet.findFirst({
 		where: { url: params.tweetId },
 		include: { user: true }
@@ -3335,7 +3335,7 @@ import {
 	removeTweet
 } from '$root/utils/prisma'
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
 	const tweets = await getTweets()
 
 	if (!tweets) {
@@ -3349,13 +3349,13 @@ export const get: RequestHandler = async () => {
 	}
 }
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	await createTweet(request)
 
 	return {}
 }
 
-export const del: RequestHandler = async ({ request }) => {
+export const DELETE: RequestHandler = async ({ request }) => {
 	await removeTweet(request)
 
 	return {
@@ -3375,7 +3375,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 
 import { likeTweet } from '$root/utils/prisma'
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	await likeTweet(request)
 
 	return {
@@ -3396,7 +3396,7 @@ export const post: RequestHandler = async ({ request }) => {
 import type { RequestHandler } from '@sveltejs/kit'
 import { getUserProfile } from '$root/utils/prisma'
 
-export const get: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
 	const { profile, tweets } = await getUserProfile(params)
 
 	return {
@@ -3417,7 +3417,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 
 import { getTweet } from '$root/utils/prisma'
 
-export const get: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
 	const tweet = await getTweet(params)
 
 	if (!tweet) {
