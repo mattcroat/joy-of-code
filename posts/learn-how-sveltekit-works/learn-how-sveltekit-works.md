@@ -72,7 +72,7 @@ This is the SvelteKit equivalent and they work the same and return a `applicatio
 
 ```js:example showLineNumbers
 // you can expose and use this endpoint anywhere
-export async function get({ request }) {
+export async function GET({ request }) {
 	return {
 		body: { message: 'Hello' }
 	}
@@ -129,7 +129,7 @@ fetch(request)
 You would see the same request in SvelteKit.
 
 ```js:example showLineNumbers
-export async function get({ request }) {
+export async function GET({ request }) {
 	const response = await fetch('https://pokeapi.co/api/v2/pokemon')
 	const pokemon = await response.json()
 
@@ -393,7 +393,7 @@ I created an endpoint inside `routes/api/pokemon.json.js` that uses the [PokeAPI
 
 ```js:pokemon.json.js showLineNumbers
 // server API endpoint
-export async function get() {
+export async function GET() {
 	const response = await fetch('https://pokeapi.co/api/v2/pokemon')
 	const pokemon = await response.json()
 
