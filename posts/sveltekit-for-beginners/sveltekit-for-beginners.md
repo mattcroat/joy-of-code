@@ -573,35 +573,24 @@ You can look at your data inside Prisma Studio.
 
 In this section you're going to learn how to use global styles, nested layouts and catching and showing errors.
 
-Before I start I'm going to update the path alias in the Vite config because I prefer to use `$root` to be able to access the `src` folder from anywhere in the project.
+Before I start I'm going to update the path alias in the Svelte config because I prefer to use `$root` to be able to access the `src` folder from anywhere in the project.
 
-```js:vite.config.js showLineNumbers
-import { sveltekit } from '@sveltejs/kit/vite'
-import path from 'path'
+```js:svelte.config.js showLineNumbers
+import adapter from '@sveltejs/adapter-auto';
+import preprocess from 'svelte-preprocess';
 
-/** @type {import('vite').UserConfig} */
+/** @type {import('@sveltejs/kit').Config} */
 const config = {
-	plugins: [sveltekit()],
-	resolve: {
+	preprocess: preprocess(),
+	kit: {
+		adapter: adapter(), 
 		alias: {
-			$root: path.resolve('./src'),
-		},
-	},
-}
-
-export default config
-```
-
-```json:tsconfig.json {4-7} showLineNumbers
-{
-	"compilerOptions": {
-    // ...
-		"baseUrl": ".",
-		"paths": {
-			"$root/*": ["./src/*"]
-		}
+			$root: 'src'
+    		}
 	}
-}
+};
+
+export default config;
 ```
 
 I prefer not to use semicolons and have the line length be shorter so it's easier for me to present code.
