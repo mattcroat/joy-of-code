@@ -2358,7 +2358,7 @@ import { timePosted } from '$root/utils/date'
 
 export const GET: RequestHandler = async ({ params }) => {
 	const tweet = await prisma.tweet.findFirst({
-		where: { url: params.tweetId },
+		where: { id: Number(params.tweetId) },
 		include: { user: true }
 	})
 
