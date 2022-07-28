@@ -35,7 +35,9 @@ const app = express()
 const port = 3000
 
 app.get('/photos', async (req, res) => {
-	const response = await fetch('https://jsonplaceholder.typicode.com/photos')
+	const response = await fetch(
+		'https://jsonplaceholder.typicode.com/photos'
+	)
 	const photos = await response.json()
 	res.json(photos.slice(0, 100))
 })
@@ -71,21 +73,23 @@ export function DELETE(event) {...}
 
 The job of these functions is to return a response that includes the status, headers and body of the response.
 
-Using a modern web framework like SvelteKit you're going to have transferable knowledge because you're going to spend more time learning web fundamentals on [MDN](https://developer.mozilla.org/) than learning framework specific abstractions.
+Using a modern web framework like SvelteKit you knowledge is transferable because you're going to spend more time learning web fundamentals on [MDN](https://developer.mozilla.org/) than learning framework specific abstractions.
 
 ## Standalone Endpoints
 
 In SvelteKit you can create a standalone endpoint like in the Express example that you can expose to the world or consume it yourself.
 
-Standalone endpoints can have an optional file extension such as `photos/index.json.ts` or `photos/index.ts` to access it directly **—** using an extension makes it available at [example.com/photos.json](http://example.com/photos.json) but it could also be other things such as XML or images and it sets the proper response headers where using `photos/index.ts` is directly available at [example.com/photos](http://example.com/photos.json) but both methods are valid.
+Standalone endpoints can have an optional file extension like `photos/index.json.ts` making it available at [example.com/photos.json](http://example.com/photos.json) — it could also be other things such as XML or images and it sets the proper response headers where using `photos/index.ts` is directly available at [example.com/photos](http://example.com/photos.json).
 
-Let's create the same Express example but in SvelteKit using the JSONPlaceholder API.
+Let's look at the same Express example in SvelteKit.
 
 ```ts:photos/index.json.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
 
 export const GET: RequestHandler = async () => {
-	const response = await fetch('https://jsonplaceholder.typicode.com/photos')
+	const response = await fetch(
+		'https://jsonplaceholder.typicode.com/photos'
+	)
 	const photos = await response.json()
 
 	return {
@@ -161,7 +165,7 @@ If your goal isn't to create a public facing API to be consumed by multiple page
 
 {% img src="sveltekit-endpoints.webp" alt="Sveltekit endpoints guide" %}
 
-The only change you have to do is rename the `index.json.ts` to `index.ts` to convert a standalone endpoint to a page endpoint and remove the redundant code from `index.svelte`.
+The only change you have to do is rename the `index.json.ts` to `index.ts` to convert a standalone endpoint to a page endpoint and remove the redundant boilerplate code from `index.svelte`.
 
 ```ts:photos/index.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
@@ -237,13 +241,15 @@ If you want to learn how to use progressive enhancement you can look at the defa
 
 You learned when to use a standalone endpoint and a page endpoint but sometimes you want to use both.
 
-I want to be able to show a single photo when I select one from the photos.
+I want to be able to show a single photo.
 
 ```ts:photos/[id].ts showLineNumbers
 import type { RequestHandler } from './__types/[id]'
 
 export const GET: RequestHandler = async ({ params }) => {
-	const response = await fetch(`https://jsonplaceholder.typicode.com/photos/${params.id}`)
+	const response = await fetch(
+		`https://jsonplaceholder.typicode.com/photos/${params.id}`
+	)
 	const photo = await response.json()
 
 	return {
@@ -267,7 +273,7 @@ If you visit [example.com/photos/1](http://example.com/photos/1) it works great 
 
 {% video src="flicker.mp4" %}
 
-You can pass the `props` from the page endpoint to the `load` function and load the image before navigating to the page **—** pretend `loadImage` is some function imported from utils.
+You can pass the `props` from the page endpoint to the `load` function and load the image before navigating to the page — pretend `loadImage` is some function imported from utils.
 
 ```html:photos/[id].svelte
 <script context="module" lang="ts">
@@ -311,9 +317,9 @@ This solves the flickering because the image wasn't loaded yet.
 
 {% video src="without-flicker.mp4" %}
 
-Another example where I used both was for setting [Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) HTTP headers for the page because you have to set it on the HTML document and not the page endpoint to be cached on a [content-delivery network](https://en.wikipedia.org/wiki/Content_delivery_network).
+Another example is setting [Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) HTTP headers for the page because you have to set it on the HTML document and not the page endpoint to be cached on a [content-delivery network](https://en.wikipedia.org/wiki/Content_delivery_network).
 
-This only caches the data and makes it fresh for 60 seconds.
+This only caches the data.
 
 ```ts:example.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
@@ -323,13 +329,13 @@ export const GET: RequestHandler = async ({ params }) => {
 		status: 200,
 		body: { data: [1, 2, 3, 4] },
 		headers: {
-      'Cache-Control': `s-maxage=60`,
-    },
+      'Cache-Control': 's-maxage=60',
+		},
 	}
 }
 ```
 
-This is going to cache the HTML document and make it fresh for 60 seconds.
+This is going to cache the HTML document.
 
 ```html:example.svelte showLineNumbers
 <script context="module" lang="ts">
@@ -346,6 +352,6 @@ This is going to cache the HTML document and make it fresh for 60 seconds.
 
 I use this method for the page you're reading! I encourage you to open the network tab to see it in action.
 
-Hope you learned about the difference between standalone page endpoints and page endpoints and know when to use each one or both if you need it.
+Hope you learned about the difference between standalone endpoints and page endpoints and know when to use each one or both if you need it.
 
 Thanks for reading! 🏄️
