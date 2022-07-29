@@ -1,16 +1,15 @@
 ---
 title: SvelteKit Endpoints
-description: Learn what are SvelteKit endpoints and when to use standalone endpoints and page endpoints.
+description: Learn what are SvelteKit endpoints and when to use standalone endpoints and page endpoints or both.
 slug: sveltekit-endpoints
 published: 2022-7-28
 category: sveltekit
 series: false
-draft: true
 ---
 
 # SvelteKit Endpoints
 
-{% embed src="https://www.youtube.com/embed/_XnVxDLTgCgo" title="SvelteKit Endpoints" %}
+{% embed src="https://www.youtube.com/embed/XnVxDLTgCgo" title="SvelteKit Endpoints" %}
 
 ## Table of Contents
 
