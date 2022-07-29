@@ -10,7 +10,11 @@ draft: true
 
 # SvelteKit Endpoints
 
+{% embed src="https://www.youtube.com/embed/_XnVxDLTgCgo" title="SvelteKit Endpoints" %}
+
 ## Table of Contents
+
+## Introduction
 
 In this post I'm going to explain what are SvelteKit endpoints and when to use standalone endpoints and page endpoints or both.
 
@@ -292,7 +296,7 @@ You can pass the `props` from the page endpoint to the `load` function and load 
 
 	export const load: Load = async ({ props }) => {
 		if (browser) {
-			loadImage(props.photo.url)
+			await loadImage(props.photo.url)
 		}
 
 		return { props }
