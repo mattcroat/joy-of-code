@@ -3,7 +3,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 import { getPostsData } from '$root/lib/posts'
 import { categories, siteUrl } from '$root/lib/config'
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
   const pages = [
     'articles',
     'series',
