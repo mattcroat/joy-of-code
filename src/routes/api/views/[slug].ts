@@ -2,7 +2,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 
 import { supabase } from '$root/lib/supabase'
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
   const slug = await request.json()
 
   const views = await supabase

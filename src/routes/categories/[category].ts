@@ -3,7 +3,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 import { getPostsByCategory } from '$root/lib/posts'
 import { categories } from '$root/lib/config'
 
-export const get: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
   if (!categories[params.category]) {
     return {
       status: 404,

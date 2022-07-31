@@ -2,7 +2,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 
 import { getPost } from '$root/lib/posts'
 
-export const get: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
   const { content, frontmatter } = await getPost(params.slug)
 
   const day = 60 * 60 * 24 * 1000

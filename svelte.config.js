@@ -7,12 +7,8 @@ const config = {
   preprocess: preprocess(),
   kit: {
     adapter: adapter(),
-    vite: {
-      resolve: {
-        alias: {
-          $root: path.resolve('./src'),
-        },
-      },
+    alias: {
+      $root: 'src',
     },
   },
 }
