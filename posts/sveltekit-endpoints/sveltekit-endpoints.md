@@ -51,7 +51,6 @@ app.listen(port)
 The endpoint returns a set amount of results but you can let the user pass the amount such as `/photos?amount=10` extending the functionality of the original API but also shape the data anyhow you want.
 
 > 🐿️ If you're using an older version of Node that doesn't support the Fetch API you have to install the `node-fetch` package.
-> 
 
 If you visit [api.example.com/photos](http://api.example.com/photos) you can see the JSON response and now you have an API endpoint you can consume on the frontend to display some placeholder images.
 

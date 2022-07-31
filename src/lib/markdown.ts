@@ -19,27 +19,27 @@ import { imagesUrl } from '$root/lib/config'
 import type { FrontMatterType } from '$root/types'
 
 type ContentType = {
-  content: string
-  frontmatter: FrontMatterType
+	content: string
+	frontmatter: FrontMatterType
 }
 
 function searchAndReplace(content: string, slug: string): string {
-  const embeds = /{% embed src="(.*?)" title="(.*?)" %}/g
-  const videos = /{% video src="(.*?)" %}/g
-  const images = /{% img src="(.*?)" alt="(.*?)" %}/g
+	const embeds = /{% embed src="(.*?)" title="(.*?)" %}/g
+	const videos = /{% video src="(.*?)" %}/g
+	const images = /{% img src="(.*?)" alt="(.*?)" %}/g
 
-  return content
-    .replace(embeds, (_, src, title) => {
-      return `
+	return content
+		.replace(embeds, (_, src, title) => {
+			return `
         <iframe
           title="${title}"
           src="${src}"
           loading="lazy"
         ></iframe>
       `.trim()
-    })
-    .replace(videos, (_, src) => {
-      return `
+		})
+		.replace(videos, (_, src) => {
+			return `
         <video controls>
           <source
             src="${imagesUrl}/${slug}/images/${src}"
@@ -47,68 +47,68 @@ function searchAndReplace(content: string, slug: string): string {
           />
         </video>
       `.trim()
-    })
-    .replace(images, (_, src, alt) => {
-      return `
+		})
+		.replace(images, (_, src, alt) => {
+			return `
       <img
         src="${imagesUrl}/${slug}/images/${src}"
         alt="${alt}"
         loading="lazy"
       />
   `.trim()
-    })
+		})
 }
 
 export async function markdownToHTML(markdown: string): Promise<ContentType> {
-  const { content, data } = matter(markdown)
+	const { content, data } = matter(markdown)
 
-  // I could use `compile` from mdsvex to get
-  // Svelte components working inside Markdown
-  const result = await unified()
-    .use(fromMarkdown)
-    .use([
-      // GitHub flavored Markdown
-      remarkGfm,
+	// I could use `compile` from mdsvex to get
+	// Svelte components working inside Markdown
+	const result = await unified()
+		.use(fromMarkdown)
+		.use([
+			// GitHub flavored Markdown
+			remarkGfm,
 
-      // Unique identifier for headings
-      remarkHeadings,
+			// Unique identifier for headings
+			remarkHeadings,
 
-      // Links for headings
-      remarkSlug,
+			// Links for headings
+			remarkSlug,
 
-      // Typographic punctuation like real quotes
-      remarkSmartypants,
+			// Typographic punctuation like real quotes
+			remarkSmartypants,
 
-      // Generates table of contents from headings
-      // `tight` removes <p> from <li> when nested
-      [remarkTableofContents, { tight: true }],
-    ])
-    // To be able to parse a mix of Markdown and HTML
-    // `remark-rehype` is required with `rehype-raw`
-    // https://github.com/rehypejs/rehype-raw
-    .use(fromMarkdownToHtml, { allowDangerousHtml: true })
+			// Generates table of contents from headings
+			// `tight` removes <p> from <li> when nested
+			[remarkTableofContents, { tight: true }],
+		])
+		// To be able to parse a mix of Markdown and HTML
+		// `remark-rehype` is required with `rehype-raw`
+		// https://github.com/rehypejs/rehype-raw
+		.use(fromMarkdownToHtml, { allowDangerousHtml: true })
 
-    // Adds code titles above code blocks
-    .use(rehypeCodeTitles)
+		// Adds code titles above code blocks
+		.use(rehypeCodeTitles)
 
-    // Adds syntax highlight, line numbers and higlight
-    .use(rehypePrism)
+		// Adds syntax highlight, line numbers and higlight
+		.use(rehypePrism)
 
-    // For further processing turn content into a regular syntax tree
-    .use(parseHtmlAndMarkdown)
+		// For further processing turn content into a regular syntax tree
+		.use(parseHtmlAndMarkdown)
 
-    // Remove paragraph around images
-    .use(rehypeUnwrapImages)
+		// Remove paragraph around images
+		.use(rehypeUnwrapImages)
 
-    // Copy code to clipboard
-    .use(rehypeCopyCode)
+		// Copy code to clipboard
+		.use(rehypeCopyCode)
 
-    .use(toHtml)
-    .process(searchAndReplace(content, data.slug))
-  const processedMarkdown = result.value
+		.use(toHtml)
+		.process(searchAndReplace(content, data.slug))
+	const processedMarkdown = result.value
 
-  return {
-    content: processedMarkdown as string,
-    frontmatter: data as FrontMatterType,
-  }
+	return {
+		content: processedMarkdown as string,
+		frontmatter: data as FrontMatterType,
+	}
 }

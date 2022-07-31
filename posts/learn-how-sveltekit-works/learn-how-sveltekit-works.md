@@ -47,7 +47,7 @@ This post assumes you're at least familiar with SvelteKit but if you're not I ha
 
 **Kit** isn't built on top of **Svelte** but it's a **backend web framework** where Svelte is used as the view layer but in theory you could rip it out and replace it with another component framework that supports server-side rendering and the same is true for other web frameworks.
 
-It helps If you're familiar with [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) and have prior experience with backend frameworks like [Express]([https://expressjs.com/](https://expressjs.com/)) but it's not required and you can think of SvelteKit as a replacement because **you don't need a separate backend** — SvelteKit is where you write your frontend and backend logic.
+It helps If you're familiar with [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) and have prior experience with backend frameworks like [Express](<[https://expressjs.com/](https://expressjs.com/)>) but it's not required and you can think of SvelteKit as a replacement because **you don't need a separate backend** — SvelteKit is where you write your frontend and backend logic.
 
 ![https://c.tenor.com/1wJU51jgwSQAAAAC/dbz-dragonball.gif](https://c.tenor.com/1wJU51jgwSQAAAAC/dbz-dragonball.gif)
 
@@ -181,9 +181,9 @@ These files are required for SvelteKit to work:
 - Add a `vite.config.js` file
 - Add a `svelte.config.js` file
 - Create a `src` folder
-    - Add a `src/app.html` file
-    - Create a `src/routes` folder
-        - Add a `routes/index.svelte` file
+  - Add a `src/app.html` file
+  - Create a `src/routes` folder
+    - Add a `routes/index.svelte` file
 
 ```js:vite.config.js showLineNumbers
 // you can add plugins and change config options
@@ -249,14 +249,14 @@ If you look at [packages](https://github.com/sveltejs/kit/tree/master/packages) 
 
 ## Let's Examine The Generated Output
 
-SvelteKit takes your app as the input and creates the output. 
+SvelteKit takes your app as the input and creates the output.
 
 When you start the development server SvelteKit generates a `.svelte-kit` folder that contains a couple of folders:
 
 - generated
-    - `client-manifest.js` regenerates paths
-    - `client-matchers.js` regenerates page matchers
-    - `root.svelte` is the entry point that
+  - `client-manifest.js` regenerates paths
+  - `client-matchers.js` regenerates page matchers
+  - `root.svelte` is the entry point that
 - runtime (client and server code copied from `node_modules/@sveltejs/kit/assets`
 - types (generated for each route)
 
@@ -377,7 +377,7 @@ You can see [vite-plugin-svelte](https://github.com/sveltejs/vite-plugin-svelte)
 
 The `vite-plugin-svelte-kit` is interesting because it's imported from `@sveltejs/kit/vite` as `sveltekit` and it's responsible for taking the SvelteKit config, creating routes, server-side rendering and loading the template replacing the `%sveltekit%` placeholders inside `app.html` among other things.
 
-It exports the plugins that are used inside `kit/dist/cli.js` that returns us to the starting point after you ran `npm run dev`. 
+It exports the plugins that are used inside `kit/dist/cli.js` that returns us to the starting point after you ran `npm run dev`.
 
 Hope I didn't lose you! 😄
 
@@ -458,7 +458,7 @@ There's one problem when I go and **view page source**.
 </body>
 ```
 
-If you look at the **network** tab when the page loads it's going to fetch [`http://localhost:3000/api/pokemon.json`](http://localhost:3000/api/pokemon.json) and return a `200 OK` response with the JSON data that JavaScript is going to use to loop over the list of Pokemon and show it on the page. 
+If you look at the **network** tab when the page loads it's going to fetch [`http://localhost:3000/api/pokemon.json`](http://localhost:3000/api/pokemon.json) and return a `200 OK` response with the JSON data that JavaScript is going to use to loop over the list of Pokemon and show it on the page.
 
 This should be expected because we're not using server-side rendering (don't confuse the API endpoint we made for server-side rendering) but doing the data fetching on the client and using client-side rendering.
 
@@ -469,7 +469,6 @@ Client-side rendering is less resilient because JavaScript can fail for whatever
 [Google says it can crawl sites with JavaScript](https://developers.google.com/search/docs/advanced/javascript/javascript-seo-basics) but it's not cheap to do because you have to open the page in a headless browser and execute JavaScript for millions of sites compared to looking at a HTML page and indexing it, so you're going to get penalized if you want great SEO.
 
 > Once Googlebot's resources **allow**, a headless Chromium renders the page and executes the JavaScript.
-> 
 
 ## Server-Side Rendering
 
@@ -927,7 +926,7 @@ If you don't specify an adapter or use `adapter-auto` SvelteKit is going to outp
 I'm going to install `adapter-node` and import it inside `svelte.config.js`.
 
 ```shell:terminal
-npm i -D @sveltejs/adapter-node  
+npm i -D @sveltejs/adapter-node
 ```
 
 You can enable source maps for the build output if you want to debug the production build and disable minification to be able to look at the code.
@@ -1041,7 +1040,7 @@ Let's look at `adapter-vercel` because instead of a traditional Node server it u
 
 If I was SvelteKit and had to figure out how to create the output required for [Vercel](https://vercel.com/) I would probably start with their [documentation](https://vercel.com/docs/build-output-api/v3) but thankfully we don't have to.
 
-> The Build Output API closely maps to the Vercel product features in a logical and easy-to-understand format.  It is primarily targeted toward authors of web frameworks who would like to utilize all of the Vercel platform features, such as Serverless Functions, Edge Functions, Routing, Caching, etc.
+> The Build Output API closely maps to the Vercel product features in a logical and easy-to-understand format. It is primarily targeted toward authors of web frameworks who would like to utilize all of the Vercel platform features, such as Serverless Functions, Edge Functions, Routing, Caching, etc.
 
 Let's change the adapter to use `adapter-vercel`.
 
@@ -1086,13 +1085,13 @@ This is going to create a `.vercel_build_output` folder at the root.
         └── version.json
 ```
 
-As you can see it's very similar to what we've seen before only it's tailored for Vercel and I hope this makes it more clear how these things work. 
+As you can see it's very similar to what we've seen before only it's tailored for Vercel and I hope this makes it more clear how these things work.
 
 Inside the `config` folder is a `routes.json` files that is responsible for URL overrides and pages are inside the `static` folder with the same structure as before but the endpoints are now inside a serverless `functions` folder that has the server logic.
 
 ## Summary
 
-Hope I didn't lose you but more importantly I hope reading  the post didn't leave an impression like you have to understand everything because I don't even after spending hours looking at the source code.
+Hope I didn't lose you but more importantly I hope reading the post didn't leave an impression like you have to understand everything because I don't even after spending hours looking at the source code.
 
 Here's the takeaway:
 
@@ -1104,4 +1103,3 @@ Here's the takeaway:
 - Adapters are used to deploy to different target platforms
 
 Thank you for reading! 🏄️
-

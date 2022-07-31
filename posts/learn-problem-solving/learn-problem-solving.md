@@ -63,7 +63,7 @@ Requirements help you understand the problem and give you a clear goal what you 
 
 You can turn requirements into tasks and mark some of them as being a stretch goal and focus on what's important.
 
-Since you understand the requirements and have an idea of what you have to do to get from point A to point B you're going to avoid being overwhelmed by unknowns that leads to abandoning projects because you can **manage the level of complexity**. 
+Since you understand the requirements and have an idea of what you have to do to get from point A to point B you're going to avoid being overwhelmed by unknowns that leads to abandoning projects because you can **manage the level of complexity**.
 
 ## Break Down The Problem
 
@@ -116,10 +116,10 @@ You can use comments like [pseudocode](https://en.wikipedia.org/wiki/Pseudocode)
 ```html:example.html showLineNumbers
 <script>
   // get the elements
-  
+
 	// store todos
-  
-	// add event listener  
+
+	// add event listener
     // check if user pressed Enter
       // add todo
       // clear input
@@ -146,29 +146,29 @@ Try doing the above exercise yourself before you look at the code.
   // get the elements
   const todoEl = document.querySelector('.todo')
   const todosEl = document.querySelector('.todos')
-  
+
   // store todos
   const todos = []
-  
+
   // add event listener
   todoEl.addEventListener('keydown', (event) => {
     let todoText = event.target.value
-    
+
     // check if user pressed Enter
     if (event.key === 'Enter') {
       // add todo
       todos.push({ text: todoText })
-      
+
       // clear input
       todoText = ''
-      
+
       // show output
       todosEl.innerHTML = `
         <pre>
           ${JSON.stringify(todos, null, 2)}
         </pre>
       `
-    } 
+    }
   })
 </script>
 ```
@@ -221,14 +221,14 @@ async function fetchPokemon(pokemon) {
   if (!pokemon || typeof pokemon !== 'string') {
     throw new Error('You have to pass a Pokemon.')
   }
-  
+
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-    
+
     if (!response.ok) {
       throw new Error('Something went wrong.')
     }
-    
+
     return await response.json()
   } catch(error) {
     throw new Error(error)
@@ -271,7 +271,7 @@ function expect(value) {
 expect(sum).toBe(expected)
 ```
 
-I remember thinking how jQuery's  `$` syntax is magic until I realized it's just a name for a function and that blew my mind.
+I remember thinking how jQuery's `$` syntax is magic until I realized it's just a name for a function and that blew my mind.
 
 ```js:example.js showLineNumbers
 $('button').click(() => {
@@ -287,14 +287,14 @@ I could look at how it's implemented in jQuery but it's not that different from 
 <script>
 	function $(element) {
 	  const el = document.querySelector(element)
-	  
+
 	  return {
 	    click(callback) {
 	      el.addEventListener('click', callback)
 	    }
 	  }
 	}
-	
+
 	$('button').click(() => {
 	  console.log('Clicked')
 	})
@@ -370,7 +370,7 @@ function play() {
 }
 
 function pause() {
-  playingState = 'paused'  
+  playingState = 'paused'
 	console.log('Paused.')
 }
 
@@ -407,7 +407,7 @@ For me it's easier if I write the static HTML first and go backwards and make it
   <span>Track 2</span>
 </div>
 
-<script>  
+<script>
   function play(event) {
     const songIndex = event.target.dataset.index
     console.log(`You selected Track ${songIndex}`)
@@ -491,7 +491,7 @@ If what you're doing solves a problem you have it's going to be way more engagin
 
 If your first experience reading documentation is negative that's how you're going to think abou every documentation and that's why a lot of people avoid it.
 
-You might prefer watching a video and that's great but they work great together so  have it open and the documentation is always going to be up to date while videos get outdated.
+You might prefer watching a video and that's great but they work great together so have it open and the documentation is always going to be up to date while videos get outdated.
 
 Take for example the [MDN](https://developer.mozilla.org/en-US/) documentation for the array method [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map).
 
@@ -503,7 +503,7 @@ It shows you the call signature for `map` and the parameters you can pass and ex
 
 **Documentation is your best friend.**
 
-If you find reading MDN hard to grok at first you can find a more friendlier version on [W3Schools](https://www.w3schools.com/default.asp) and ignore people who hate on it because it's a great resource. 
+If you find reading MDN hard to grok at first you can find a more friendlier version on [W3Schools](https://www.w3schools.com/default.asp) and ignore people who hate on it because it's a great resource.
 
 Another fantastic documentation resource for JavaScript is [The Modern JavaScript Tutorial](https://javascript.info/) that you can always use as reference.
 

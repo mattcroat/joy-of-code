@@ -1,190 +1,190 @@
 :root {
-  /* Font */
-  --font-sans: 'Poppins', sans-serif;
-  --font-serif: 'Arsenica', serif;
-  --font-mono: Source Code Pro, monospace;
-  --font-dyslexic: OpenDyslexic, sans-serif;
-  --font-dyslexic-mono: OpenDyslexic Mono, monospace;
+	/* Font */
+	--font-sans: 'Poppins', sans-serif;
+	--font-serif: 'Arsenica', serif;
+	--font-mono: Source Code Pro, monospace;
+	--font-dyslexic: OpenDyslexic, sans-serif;
+	--font-dyslexic-mono: OpenDyslexic Mono, monospace;
 
-  --font-16: 1.6rem;
-  --font-24: 2.4rem;
-  --font-32: 3.2rem;
-  --font-48: 4.8rem;
-  --font-96: 9.6rem;
+	--font-16: 1.6rem;
+	--font-24: 2.4rem;
+	--font-32: 3.2rem;
+	--font-48: 4.8rem;
+	--font-96: 9.6rem;
 
-  /* Spacing */
-  --spacing-4: 0.4rem;
-  --spacing-8: 0.8rem;
-  --spacing-16: 1.6rem;
-  --spacing-24: 2.4rem;
-  --spacing-32: 3.2rem;
-  --spacing-64: 6.4rem;
-  --spacing-128: 12.8rem;
+	/* Spacing */
+	--spacing-4: 0.4rem;
+	--spacing-8: 0.8rem;
+	--spacing-16: 1.6rem;
+	--spacing-24: 2.4rem;
+	--spacing-32: 3.2rem;
+	--spacing-64: 6.4rem;
+	--spacing-128: 12.8rem;
 
-  /* Post */
-  --post-txt-size: 18px;
-  --post-txt-length: 70ch;
-  --post-txt-height: 40px;
+	/* Post */
+	--post-txt-size: 18px;
+	--post-txt-length: 70ch;
+	--post-txt-height: 40px;
 
-  /* Scrollbar */
-  --clr-scrollbar-thumb: hsl(173 10% 20%);
+	/* Scrollbar */
+	--clr-scrollbar-thumb: hsl(173 10% 20%);
 
-  /* Shadows */
-  --shadow-sm: 0px 0px 4px 4px hsl(0 0% 0% / 4%);
-  --shadow-md: 0px 0px 10px 4px hsl(0 0% 0% / 10%);
-  --shadow-lg: 0px 0px 20px 8px hsl(0 0% 0% / 20%);
+	/* Shadows */
+	--shadow-sm: 0px 0px 4px 4px hsl(0 0% 0% / 4%);
+	--shadow-md: 0px 0px 10px 4px hsl(0 0% 0% / 10%);
+	--shadow-lg: 0px 0px 20px 8px hsl(0 0% 0% / 20%);
 
-  /* Border radius */
-  --rounded-4: 4px;
-  --rounded-20: 20px;
+	/* Border radius */
+	--rounded-4: 4px;
+	--rounded-20: 20px;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+	width: 8px;
+	height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: none;
+	background-color: none;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--clr-scrollbar-thumb);
-  border-radius: var(--rounded-20);
+	background-color: var(--clr-scrollbar-thumb);
+	border-radius: var(--rounded-20);
 }
 
 *:focus {
-  outline: none;
-  box-shadow: 0 0 0 4px var(--clr-primary);
-  border-radius: var(--rounded-20);
+	outline: none;
+	box-shadow: 0 0 0 4px var(--clr-primary);
+	border-radius: var(--rounded-20);
 }
 
 html {
-  font-size: 62.5%;
-  scroll-padding-top: var(--spacing-32);
-  scrollbar-color: var(--clr-scrollbar-thumb) transparent;
+	font-size: 62.5%;
+	scroll-padding-top: var(--spacing-32);
+	scrollbar-color: var(--clr-scrollbar-thumb) transparent;
 }
 
 html,
 body {
-  height: 100%;
+	height: 100%;
 }
 
 body {
-  font-family: var(--font-sans);
-  font-size: var(--font-16);
-  color: var(--clr-txt);
-  background-color: var(--clr-bg);
+	font-family: var(--font-sans);
+	font-size: var(--font-16);
+	color: var(--clr-txt);
+	background-color: var(--clr-bg);
 }
 
 @media (min-width: 480px) {
-  body {
-    background-image: url('/assets/background.svg'),
-      linear-gradient(hsl(0 0% 10%) 2%, hsl(270 70% 40%), hsl(225 74% 58%));
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
+	body {
+		background-image: url('/assets/background.svg'),
+			linear-gradient(hsl(0 0% 10%) 2%, hsl(270 70% 40%), hsl(225 74% 58%));
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+	}
 }
 
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: var(--bg);
-  opacity: var(--bg-opacity);
-  z-index: -1;
+	content: '';
+	position: fixed;
+	inset: 0;
+	background-image: var(--bg);
+	opacity: var(--bg-opacity);
+	z-index: -1;
 }
 
 html[data-font='dyslexic'] body,
 html[data-font='dyslexic'] h1,
 html[data-font='dyslexic'] h2,
 html[data-font='dyslexic'] h3 {
-  font-family: var(--font-dyslexic);
+	font-family: var(--font-dyslexic);
 }
 
 html[data-font='dyslexic'] h1 {
-  font-size: clamp(var(--font-24), 4vw, var(--font-32));
-  line-height: clamp(32px, 6vw, 48px);
+	font-size: clamp(var(--font-24), 4vw, var(--font-32));
+	line-height: clamp(32px, 6vw, 48px);
 }
 
 html[data-font='dyslexic'] h2 {
-  font-size: var(--font-24);
-  line-height: 32px;
+	font-size: var(--font-24);
+	line-height: 32px;
 }
 
 h1,
 h2 {
-  font-family: var(--font-serif);
-  text-transform: capitalize;
+	font-family: var(--font-serif);
+	text-transform: capitalize;
 }
 
 h1 {
-  font-size: clamp(var(--font-32), 4vw, var(--font-48));
-  line-height: clamp(48px, 6vw, 64px);
+	font-size: clamp(var(--font-32), 4vw, var(--font-48));
+	line-height: clamp(48px, 6vw, 64px);
 }
 
 h2 {
-  font-size: clamp(var(--font-24), 4vw, var(--font-32));
-  line-height: clamp(32px, 6vw, 48px);
+	font-size: clamp(var(--font-24), 4vw, var(--font-32));
+	line-height: clamp(32px, 6vw, 48px);
 }
 
 h3 {
-  font-size: var(--font-24);
-  line-height: 32px;
+	font-size: var(--font-24);
+	line-height: 32px;
 }
 
 p {
-  line-height: 32px;
+	line-height: 32px;
 }
 
 a {
-  position: relative;
-  color: var(--clr-link-txt);
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  z-index: 1;
+	position: relative;
+	color: var(--clr-link-txt);
+	font-weight: 700;
+	text-decoration: none;
+	transition: color 0.3s ease;
+	z-index: 1;
 }
 
 a:hover {
-  color: var(--clr-primary);
+	color: var(--clr-primary);
 }
 
 a::before {
-  content: '';
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-  background-color: var(--clr-link-background);
-  border-radius: 4px;
-  z-index: -1;
+	content: '';
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.3s ease;
+	background-color: var(--clr-link-background);
+	border-radius: 4px;
+	z-index: -1;
 }
 
 a:hover::before {
-  transform: scaleX(1);
+	transform: scaleX(1);
 }
 
 img,
 iframe {
-  border-radius: var(--rounded-20);
+	border-radius: var(--rounded-20);
 }
 
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
 }

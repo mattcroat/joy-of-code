@@ -6,11 +6,11 @@ import { readable } from 'svelte/store'
  */
 
 const sfx = {
-  click() {
-    const click = new Audio('/sfx/click.mp3')
-    click.volume = 0.4
-    click.play()
-  },
+	click() {
+		const click = new Audio('/sfx/click.mp3')
+		click.volume = 0.4
+		click.play()
+	},
 }
 
 export const sounds = readable(sfx)

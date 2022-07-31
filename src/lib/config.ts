@@ -2,7 +2,7 @@ export const siteName = 'Joy Of Code'
 export const siteUrl = 'https://joyofcode.xyz/'
 export const siteTitle = 'Joy of Code'
 export const siteDescription =
-  'Digital garden growing curious minds with articles about HTML, CSS, JavaScript and things related to web development and design.'
+	'Digital garden growing curious minds with articles about HTML, CSS, JavaScript and things related to web development and design.'
 export const siteImage = `${siteUrl}social.png`
 export const postImage = 'https://social-share-images.vercel.app/'
 
@@ -17,16 +17,16 @@ export const repo = 'joy-of-code'
 export const path = 'posts'
 
 export const categories = {
-  javascript: 'JavaScript',
-  react: 'React',
-  css: 'CSS',
-  general: 'General',
-  design: 'Design',
-  git: 'Git & GitHub',
-  next: 'Next.js',
-  typescript: 'TypeScript',
-  svelte: 'Svelte',
-  sveltekit: 'SvelteKit',
+	javascript: 'JavaScript',
+	react: 'React',
+	css: 'CSS',
+	general: 'General',
+	design: 'Design',
+	git: 'Git & GitHub',
+	next: 'Next.js',
+	typescript: 'TypeScript',
+	svelte: 'Svelte',
+	sveltekit: 'SvelteKit',
 }
 
 // https://api.github.com/repos/user/repo/contents/data/posts.json

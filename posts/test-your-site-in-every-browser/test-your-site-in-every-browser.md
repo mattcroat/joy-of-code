@@ -84,7 +84,6 @@ The [Playwright CLI](https://playwright.dev/docs/test-cli) has some interesting 
 
 > 🐿️ The `npx` command avoids having to install a package globally by downloading and executing the binary.
 
-
 5\. Add a test for Playwright
 
 This is only so you can specify what page to visit and pause the browser so you can inspect the page — if you comment out the `page.goto` line it's going to open a blank tab.
@@ -121,7 +120,7 @@ npm run test:safari
 
 ```shell:terminal
   browserType.launch:
-  
+
   Host system is missing dependencies to run browsers.
   Missing libraries:
     libpcre.so.3
@@ -138,6 +137,6 @@ Use this if you're using a supported version of Ubuntu.
 npx playwright install-deps webkit
 ```
 
-Regardless what method works for you now you can have confidence your site looks great in every browser regardless what operating system you're using. 
+Regardless what method works for you now you can have confidence your site looks great in every browser regardless what operating system you're using.
 
 Thanks for reading! 🏄️

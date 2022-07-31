@@ -17,7 +17,7 @@ series: false
 
 In this post you're going to learn how to set up Google Analytics and create a `<Analytics />` component you can use in SvelteKit.
 
-> ⚠️ The post uses code snippets from Google Analytics which might cause some ad blockers to block resources on the page such as the images. 
+> ⚠️ The post uses code snippets from Google Analytics which might cause some ad blockers to block resources on the page such as the images.
 
 If you go to the [Google developers section for Google Analytics](https://developers.google.com/analytics) and select "Set up Google Analytics" and then select "Websites and web apps" it leads you to the [Introduction to Google Analytics 4](https://developers.google.com/analytics/devguides/collection/ga4) page.
 
