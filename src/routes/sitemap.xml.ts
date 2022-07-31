@@ -4,19 +4,19 @@ import { getPostsData } from '$root/lib/posts'
 import { categories, siteUrl } from '$root/lib/config'
 
 export const GET: RequestHandler = async () => {
-  const pages = [
-    'articles',
-    'series',
-    'newsletter',
-    'uses',
-    'about',
-    ...Object.keys(categories).map((category) => `categories/${category}`),
-    ...(await getPostsData()).map((post) => post.slug),
-  ]
+	const pages = [
+		'articles',
+		'series',
+		'newsletter',
+		'uses',
+		'about',
+		...Object.keys(categories).map((category) => `categories/${category}`),
+		...(await getPostsData()).map((post) => post.slug),
+	]
 
-  console.log(pages)
+	console.log(pages)
 
-  const sitemap = `
+	const sitemap = `
     <?xml version="1.0" encoding="UTF-8" ?>
     <urlset
       xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
@@ -27,26 +27,26 @@ export const GET: RequestHandler = async () => {
       xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
     >
       ${pages
-        .map((page) => {
-          return `
+				.map((page) => {
+					return `
             <url>
               <loc>${siteUrl}${page}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>
             </url>
           `
-        })
-        .join('')}
+				})
+				.join('')}
     </urlset>
   `.trim()
 
-  return {
-    status: 200,
-    body: sitemap,
-    headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': `public, max-age=${60 * 60 * 24}, s-maxage=${
-        60 * 60 * 24
-      }`,
-    },
-  }
+	return {
+		status: 200,
+		body: sitemap,
+		headers: {
+			'Content-Type': 'application/xml',
+			'Cache-Control': `public, max-age=${60 * 60 * 24}, s-maxage=${
+				60 * 60 * 24
+			}`,
+		},
+	}
 }

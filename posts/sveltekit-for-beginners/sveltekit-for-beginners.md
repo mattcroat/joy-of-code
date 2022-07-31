@@ -203,7 +203,7 @@ I'm going to use TypeScript but it's optional! You can ignore the types if you w
 
 🖌️ Don't forget to install the dependencies after which you can start the development server at [http://localhost:3000/](http://localhost:3000/).
 
-> ⚠️ The port might be different in the latest version of SvelteKit but I changed it to `"dev": "vite dev --port 3000"`  for consistency.
+> ⚠️ The port might be different in the latest version of SvelteKit but I changed it to `"dev": "vite dev --port 3000"` for consistency.
 
 ```shell:terminal
 npm i && npm run dev
@@ -585,7 +585,7 @@ import preprocess from 'svelte-preprocess';
 const config = {
 	preprocess: preprocess(),
 	kit: {
-		adapter: adapter(), 
+		adapter: adapter(),
 		alias: {
 			$root: 'src'
     }
@@ -1840,14 +1840,14 @@ If you're prerendering pages you don't have to think about caching because they'
 
 ```js
 export async function GET() {
-  // ...
+	// ...
 
-  return {
-    headers: {
-      'Cache-Control': 'max-age=0, s-maxage=60',
-    },
-    body: { data },
-  }
+	return {
+		headers: {
+			'Cache-Control': 'max-age=0, s-maxage=60',
+		},
+		body: { data },
+	}
 }
 ```
 

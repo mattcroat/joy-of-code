@@ -1,97 +1,97 @@
 .prose code[class*='language-'],
 .prose pre[class*='language-'] {
-  color: var(--clr-txt);
-  tab-size: 2;
+	color: var(--clr-txt);
+	tab-size: 2;
 }
 
 .prose pre {
-  padding: var(--spacing-32) 0;
-  line-height: 34px;
-  background-color: var(--clr-code-bg);
-  border: 1px solid var(--clr-code-border);
-  border-top: none;
-  border-bottom-left-radius: var(--rounded-20);
-  border-bottom-right-radius: var(--rounded-20);
-  box-shadow: var(--shadow-sm);
-  white-space: pre-wrap;
+	padding: var(--spacing-32) 0;
+	line-height: 34px;
+	background-color: var(--clr-code-bg);
+	border: 1px solid var(--clr-code-border);
+	border-top: none;
+	border-bottom-left-radius: var(--rounded-20);
+	border-bottom-right-radius: var(--rounded-20);
+	box-shadow: var(--shadow-sm);
+	white-space: pre-wrap;
 }
 
 .prose pre .code-line {
-  padding-left: var(--spacing-24);
+	padding-left: var(--spacing-24);
 }
 
 .prose pre .line-number {
-  padding-left: var(--spacing-8);
+	padding-left: var(--spacing-8);
 }
 
 .prose pre > code {
-  counter-reset: step;
-  counter-increment: step 0;
+	counter-reset: step;
+	counter-increment: step 0;
 }
 
 .prose code:not(pre > code) {
-  padding: var(--spacing-4) var(--spacing-8);
-  color: var(--clr-code-inline-txt);
-  background-color: var(--clr-code-inline-bg);
-  border-radius: var(--rounded-4);
+	padding: var(--spacing-4) var(--spacing-8);
+	color: var(--clr-code-inline-txt);
+	background-color: var(--clr-code-inline-bg);
+	border-radius: var(--rounded-4);
 }
 
 .prose kbd,
 .prose code {
-  font-family: var(--font-mono);
+	font-family: var(--font-mono);
 }
 
 html[data-font='dyslexic'] .prose kbd,
 html[data-font='dyslexic'] .prose code {
-  font-family: var(--font-dyslexic-mono);
+	font-family: var(--font-dyslexic-mono);
 }
 
 .prose kbd {
-  padding: var(--spacing-4);
-  color: var(--clr-code-inline-txt);
-  background-color: var(--clr-code-inline-bg);
-  border: 1px solid var(--clr-primary);
-  border-width: 1px 1px 3px;
-  border-radius: var(--rounded-4);
+	padding: var(--spacing-4);
+	color: var(--clr-code-inline-txt);
+	background-color: var(--clr-code-inline-bg);
+	border: 1px solid var(--clr-primary);
+	border-width: 1px 1px 3px;
+	border-radius: var(--rounded-4);
 }
 
 .prose .rehype-code-title {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--spacing-16) var(--spacing-24) 0 var(--spacing-24);
-  color: var(--clr-code-title);
-  background-color: var(--clr-code-bg);
-  border: 1px solid var(--clr-code-border);
-  border-bottom: none;
-  border-top-left-radius: var(--rounded-20);
-  border-top-right-radius: var(--rounded-20);
-  z-index: 1;
+	display: flex;
+	justify-content: space-between;
+	padding: var(--spacing-16) var(--spacing-24) 0 var(--spacing-24);
+	color: var(--clr-code-title);
+	background-color: var(--clr-code-bg);
+	border: 1px solid var(--clr-code-border);
+	border-bottom: none;
+	border-top-left-radius: var(--rounded-20);
+	border-top-right-radius: var(--rounded-20);
+	z-index: 1;
 }
 
 .prose .line-number::before {
-  content: counter(step);
-  counter-increment: step;
-  width: 1rem;
-  display: inline-block;
-  margin-right: var(--spacing-16);
-  padding: 0 var(--spacing-16);
-  color: var(--clr-code-line-number);
-  text-align: right;
+	content: counter(step);
+	counter-increment: step;
+	width: 1rem;
+	display: inline-block;
+	margin-right: var(--spacing-16);
+	padding: 0 var(--spacing-16);
+	color: var(--clr-code-line-number);
+	text-align: right;
 }
 
 .prose .highlight-line {
-  display: block;
-  background-color: var(--clr-code-line-highlight);
+	display: block;
+	background-color: var(--clr-code-line-highlight);
 }
 
 .prose .code-line.inserted {
-  display: block;
-  background-color: hsl(160 84% 39% / 20%);
+	display: block;
+	background-color: hsl(160 84% 39% / 20%);
 }
 
 .prose .code-line.deleted {
-  display: block;
-  background-color: hsl(0 84% 60% / 20%);
+	display: block;
+	background-color: hsl(0 84% 60% / 20%);
 }
 
 .prose .token.regex,
@@ -100,14 +100,14 @@ html[data-font='dyslexic'] .prose code {
 .prose .token.function,
 .prose .token.class-name,
 .prose .language-css .token.rule {
-  color: var(--clr-token-1);
+	color: var(--clr-token-1);
 }
 
 .prose .token.keyword,
 .prose .language-css .token.variable,
 .prose .language-css .token.selector,
 .prose .language-css .token.pseudo-element {
-  color: var(--clr-token-2);
+	color: var(--clr-token-2);
 }
 
 .prose .token.tag,
@@ -118,7 +118,7 @@ html[data-font='dyslexic'] .prose code {
 .prose .token.entity,
 .prose .token.url,
 .prose .style .token.string {
-  color: var(--clr-token-3);
+	color: var(--clr-token-3);
 }
 
 .prose .token.operator,
@@ -134,12 +134,12 @@ html[data-font='dyslexic'] .prose code {
 .prose .language-css .token.function,
 .prose .token.atrule .token.property,
 .prose .token.atrule .token.rule {
-  color: var(--clr-token-4);
+	color: var(--clr-token-4);
 }
 
 .prose .token.comment,
 .prose .token.prolog,
 .prose .token.doctype,
 .prose .token.cdata {
-  color: var(--clr-token-5);
+	color: var(--clr-token-5);
 }

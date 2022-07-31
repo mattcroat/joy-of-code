@@ -60,7 +60,7 @@ There's more Socket.io code in the final version but you can use any WebSocket l
 
 To avoid backtracking install the [Node adapter](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) with `npm i -D @sveltejs/adapter-node` because it's required for this to work.
 
-Add the plugin code inside `svelte.config.js` or extract it into a separate file. 
+Add the plugin code inside `svelte.config.js` or extract it into a separate file.
 
 ```js:svelte.config.js {1, 4, 6-15, 22-24} showLineNumbers
 import adapter from '@sveltejs/adapter-node'

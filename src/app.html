@@ -1,98 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/assets/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/assets/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/assets/favicon-16x16.png"
-    />
-    <link rel="icon" href="/assets/favicon.svg" />
-    <link rel="manifest" href="/manifest.json" />
-    <script>
-      const htmlElement = document.documentElement
-      const userTheme = localStorage.theme
-      const userFont = localStorage.font
-      const userPostFontSize = localStorage.textSize
-      const userPostTextLength = localStorage.textLength
-      const userPostTextHeight = localStorage.textHeight
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/assets/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/assets/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/assets/favicon-16x16.png"
+		/>
+		<link rel="icon" href="/assets/favicon.svg" />
+		<link rel="manifest" href="/manifest.json" />
+		<script>
+			const htmlElement = document.documentElement
+			const userTheme = localStorage.theme
+			const userFont = localStorage.font
+			const userPostFontSize = localStorage.textSize
+			const userPostTextLength = localStorage.textLength
+			const userPostTextHeight = localStorage.textHeight
 
-      const prefersDarkMode = window.matchMedia(
-        'prefers-color-scheme: dark'
-      ).matches
-      const prefersLightMode = window.matchMedia(
-        'prefers-color-scheme: light'
-      ).matches
+			const prefersDarkMode = window.matchMedia(
+				'prefers-color-scheme: dark'
+			).matches
+			const prefersLightMode = window.matchMedia(
+				'prefers-color-scheme: light'
+			).matches
 
-      // check if the user set a dyslexic font
-      if (userFont) {
-        htmlElement.dataset.font = userFont
-      }
+			// check if the user set a dyslexic font
+			if (userFont) {
+				htmlElement.dataset.font = userFont
+			}
 
-      // check if the user set a font size for posts
-      if (userPostFontSize) {
-        htmlElement.style.setProperty('--post-txt-size', userPostFontSize)
-      }
+			// check if the user set a font size for posts
+			if (userPostFontSize) {
+				htmlElement.style.setProperty('--post-txt-size', userPostFontSize)
+			}
 
-      // check if the user set a text length for posts
-      if (userPostTextLength) {
-        htmlElement.style.setProperty('--post-txt-length', userPostTextLength)
-      }
+			// check if the user set a text length for posts
+			if (userPostTextLength) {
+				htmlElement.style.setProperty('--post-txt-length', userPostTextLength)
+			}
 
-      // check if the user set a text height for posts
-      if (userPostTextLength) {
-        htmlElement.style.setProperty('--post-txt-height', userPostTextHeight)
-      }
+			// check if the user set a text height for posts
+			if (userPostTextLength) {
+				htmlElement.style.setProperty('--post-txt-height', userPostTextHeight)
+			}
 
-      // check if the user set a theme
-      if (userTheme) {
-        htmlElement.dataset.theme = userTheme
-      }
+			// check if the user set a theme
+			if (userTheme) {
+				htmlElement.dataset.theme = userTheme
+			}
 
-      // the user might have a deprecated theme
-      if (userTheme === '🌙 Dusk') {
-        htmlElement.dataset.theme = '🌛 Night'
-        localStorage.theme = '🌛 Night'
-      }
+			// the user might have a deprecated theme
+			if (userTheme === '🌙 Dusk') {
+				htmlElement.dataset.theme = '🌛 Night'
+				localStorage.theme = '🌛 Night'
+			}
 
-      if (userTheme === '☀️ Light') {
-        htmlElement.dataset.theme = '☀️ Daylight'
-        localStorage.theme = '☀️ Daylight'
-      }
+			if (userTheme === '☀️ Light') {
+				htmlElement.dataset.theme = '☀️ Daylight'
+				localStorage.theme = '☀️ Daylight'
+			}
 
-      // otherwise check for user preference
-      if (!userTheme && prefersDarkMode) {
-        htmlElement.dataset.theme = '🌛 Night'
-        localStorage.theme = '🌛 Night'
-      }
+			// otherwise check for user preference
+			if (!userTheme && prefersDarkMode) {
+				htmlElement.dataset.theme = '🌛 Night'
+				localStorage.theme = '🌛 Night'
+			}
 
-      if (!userTheme && prefersLightMode) {
-        htmlElement.dataset.theme = '☀️ Daylight'
-        localStorage.theme = '☀️ Daylight'
-      }
+			if (!userTheme && prefersLightMode) {
+				htmlElement.dataset.theme = '☀️ Daylight'
+				localStorage.theme = '☀️ Daylight'
+			}
 
-      // if nothing is set default to dark mode
-      if (!userTheme && !prefersDarkMode && !prefersLightMode) {
-        htmlElement.dataset.theme = '🌛 Night'
-        localStorage.theme = '🌛 Night'
-      }
-    </script>
-    %sveltekit.head%
-  </head>
-  <body>
-    %sveltekit.body%
-  </body>
+			// if nothing is set default to dark mode
+			if (!userTheme && !prefersDarkMode && !prefersLightMode) {
+				htmlElement.dataset.theme = '🌛 Night'
+				localStorage.theme = '🌛 Night'
+			}
+		</script>
+		%sveltekit.head%
+	</head>
+	<body>
+		%sveltekit.body%
+	</body>
 </html>

@@ -57,7 +57,7 @@ model User {
 }
 ```
 
-The table `User` has a unique `id`, `username`,  `passwordHash` and `userAuthToken` field.
+The table `User` has a unique `id`, `username`, `passwordHash` and `userAuthToken` field.
 
 The `userAuthToken` field uses a unique identifier so we can later set the session ID to `userAuthToken`.
 
