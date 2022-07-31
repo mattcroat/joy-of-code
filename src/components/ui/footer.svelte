@@ -8,7 +8,7 @@
     <ul>
       {#each Object.entries(categories) as [slug, category]}
         <li>
-          <a href="/categories/{slug}">{category}</a>
+          <a sveltekit:prefetch href="/categories/{slug}">{category}</a>
         </li>
       {/each}
     </ul>
@@ -20,7 +20,7 @@
       <li><a href="/newsletter">Newsletter</a></li>
       <li><a href="/rss.xml" target="_blank">RSS</a></li>
       <li>
-        <a href={youtube} target="_blank"> YouTube </a>
+        <a href={youtube} target="_blank">YouTube</a>
       </li>
       <li>
         <a href={twitter} target="_blank">Twitter</a>
@@ -34,8 +34,8 @@
   <div class="other">
     <p>Other</p>
     <ul>
-      <li><a href="/about">About</a></li>
-      <li><a href="/uses">Uses</a></li>
+      <li><a sveltekit:prefetch href="/about">About</a></li>
+      <li><a sveltekit:prefetch href="/uses">Uses</a></li>
     </ul>
   </div>
 

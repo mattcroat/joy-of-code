@@ -54,7 +54,11 @@
       <p class="description">
         {posts.latestPost.description}
       </p>
-      <a class="continue-reading" href={posts.latestPost.slug}>
+      <a
+        sveltekit:prefetch
+        class="continue-reading"
+        href={posts.latestPost.slug}
+      >
         <span>Continue reading</span>
         <ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
       </a>
@@ -66,7 +70,8 @@
       <h2>Subscribe for updates</h2>
       <Newsletter />
       <p>
-        Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a> or
+        Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a>
+        or
         <a href={twitter} target="_blank">Twitter</a> instead.
       </p>
     </div>
