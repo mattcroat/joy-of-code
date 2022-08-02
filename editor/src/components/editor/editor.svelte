@@ -1,11 +1,11 @@
 <script lang="ts">
   import { getContext, onMount } from 'svelte'
-  import type monaco from 'monaco-editor'
   import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
   import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
   import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
   import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
   import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
+  import type monaco from 'monaco-editor'
   import type { EditorPostType } from '$root/types'
 
   let editorEl: HTMLDivElement
@@ -45,12 +45,13 @@
       lineNumbers: 'off',
       theme: 'vs-dark',
       minimap: { enabled: false },
-      fontFamily: 'Poppins',
+      fontFamily: 'MonoLisa',
       fontSize: 18,
       tabSize: 2,
+      useTabStops: true,
       wordWrap: 'on',
       cursorBlinking: 'solid',
-      automaticLayout: true,
+      cursorSmoothCaretAnimation: true,
       scrollBeyondLastLine: true,
       smoothScrolling: true,
       scrollbar: {
@@ -59,6 +60,7 @@
       },
       renderLineHighlight: 'none',
       renderWhitespace: 'all',
+      automaticLayout: true,
     })
 
     loading = false
@@ -67,9 +69,9 @@
       $post.markdown = editor.getValue()
     })
 
-    editor.onDidScrollChange(() => {
-      $post.scrollPosition = editor.getScrollTop()
-    })
+    // editor.onDidScrollChange(() => {
+    //   $post.scrollPosition = editor.getScrollTop()
+    // })
 
     return () => {
       editor.dispose()

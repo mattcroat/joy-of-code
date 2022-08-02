@@ -1,8 +1,7 @@
+import { editPost, getPost } from '$root/lib/posts'
 import type { RequestHandler } from '@sveltejs/kit'
 
-import { editPost, getPost } from '$root/lib/posts'
-
-export const get: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
   const { frontmatter, postMarkdown } = await getPost(params.slug)
 
   return {
@@ -14,7 +13,7 @@ export const get: RequestHandler = async ({ params }) => {
   }
 }
 
-export const post: RequestHandler = async ({ params, request }) => {
+export const POST: RequestHandler = async ({ params, request }) => {
   const form = await request.formData()
   const markdown = String(form.get('markdown'))
 
