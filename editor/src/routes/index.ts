@@ -1,8 +1,7 @@
+import { getPosts, removePost, updatePosts } from '$root/lib/posts'
 import type { RequestHandler } from '@sveltejs/kit'
 
-import { getPosts, removePost, updatePosts } from '$root/lib/posts'
-
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
   const posts = await getPosts()
 
   return {
@@ -12,12 +11,12 @@ export const get: RequestHandler = async () => {
   }
 }
 
-export const post: RequestHandler = async () => {
+export const POST: RequestHandler = async () => {
   updatePosts()
   return {}
 }
 
-export const del: RequestHandler = async ({ request }) => {
+export const DEL: RequestHandler = async ({ request }) => {
   const form = await request.formData()
   const slug = String(form.get('slug'))
 
