@@ -57,7 +57,7 @@ After you get the **Measurement ID** from Google Analytics create a simple `<Ana
     if (typeof gtag !== 'undefined') {
       gtag('config', 'MEASUREMENT_ID', {
         page_title: document.title,
-        page_path: $page.url.href,
+        page_path: $page.url.pathname,
       })
     }
   }
