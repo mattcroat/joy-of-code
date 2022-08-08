@@ -19,11 +19,11 @@ This guide is aimed at React developers to get up to speed learning Svelte or an
 
 While I'm biased towards Svelte this guide isn't going to beat you over the head how what you're using is wrong and is just concerned with comparing the frameworks.
 
-I decided not to use TypeScript in the examples to solely focus on the frameworks but you can find the [complete typed examples on GitHub](https://github.com/JoysOfCode/react-svelte).
+I decided not to use TypeScript in the examples to solely focus on the frameworks but you can find the complete typed examples on [GitHub](https://github.com/JoysOfCode/react-svelte).
 
 ## Components
 
-Let's start with a classic counter example in React!
+Let's start with a classic counter example in React.
 
 ```tsx:Components.tsx showLineNumbers
 import { useState } from 'react'
@@ -48,7 +48,7 @@ To set state we use a `useState` function that returns the state variable `count
 
 You're not going to use inline styles in most cases as in the example and that's why there's a lot of popular CSS solutions for React like [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) where you use JavaScript to style components or [Tailwind CSS](https://tailwindcss.com/).
 
-Here's the same example in Svelte!
+Here's the same example in Svelte.
 
 ```html:Components.svelte showLineNumbers
 <script>
@@ -69,12 +69,14 @@ Svelte uses a single file component similar to [Vue](https://vuejs.org/) that en
 
 The JavaScript logic lives inside the `<script>` tag and the styles inside the `<style>` tag are unique to your component — you can use preprocessors such as [SCSS](https://sass-lang.com/) for CSS or [Pug](https://pugjs.org/api/getting-started.html) for your template and the markup doesn't need a parent element.
 
-In Svelte updates are triggered using assignments `=` so `count + 1` wouldn't work because you need to assign it because `count += 1` is the same as `count = count + 1` and you can also keep variables in sync with each other using reactive declarations `$: doubled = count * 2`.
+In Svelte updates are triggered using assignments `=` so `count + 1` wouldn't work because you need to assign it because `count += 1` is the same as `count = count + 1` .
+
+You can also keep variables in sync with each other using reactive declarations `$: doubled = count * 2`.
 
 > 🐿️ The `$:` syntax is valid JavaScript [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label) syntax but Svelte interprets it as "re-run this code whenever any of the referenced values change".
 > 
 
-The term “magic” is often used in a negative connotation but because Svelte is a compiler it does magic right because it's intuitive.
+The term “magic” is often used in a negative connotation but because Svelte is a compiler it does "magic" right because it's intuitive.
 
 > 🐿️ If you want React to work you have to ship the framework to compare what changed and update the DOM but Svelte is a compiler meaning it generates the equivalent JavaScript code to surgically update the DOM meaning you don't have to ship the framework.
 > 
@@ -534,10 +536,13 @@ Instead of creating a `filteredTodos` state using `useState` it's easier to just
 
 </details>
 
-If you notice performance problems you can use `useMemo` but avoid using it unless you have to because it can hurt your performance in most cases.
+If you notice performance problems you can use `useMemo` but the use is discouraged unless you have to because it hurts your performance in most cases.
 
 ```tsx:Example.tsx
-const filteredTodos = useMemo(() => filterTodos(todos, filter), [todos, filter])
+const filteredTodos = useMemo(
+  () => filterTodos(todos, filter),
+  [todos, filter]
+)
 ```
 
 Here's the same example in Svelte.
@@ -625,7 +630,7 @@ In Svelte you can keep variables that depend on each other in sync using reactiv
 
 Being able to write code in a declarative way enables you to use composition to make your components reusable.
 
-One example would be a map component `<Map>` with markers `<Marker>`.
+One example would be a map component with markers.
 
 ```tsx:Example.tsx showLineNumbers
 <Map lat={45.815399} lon={15.966568} zoom={4}>
@@ -906,7 +911,9 @@ This is the same todo example as before but it uses a different `fly` transition
 
 That's it! 🎉
 
-There's a lot more to learn about Svelte and it has a great interactive [tutorial](https://svelte.dev/tutorial/basics) and [examples](https://svelte.dev/examples/hello-world). I love Svelte because it makes you want to do more for less and it's so enjoyable to use and I believe in the vision of [Rich Harris](https://twitter.com/Rich_Harris).
+There's a lot more to learn about Svelte and it has a great interactive [tutorial](https://svelte.dev/tutorial/basics) and [examples](https://svelte.dev/examples/hello-world).
+
+I love Svelte because it makes you want to do more for less and it's so enjoyable to use and I believe in the vision of [Rich Harris](https://twitter.com/Rich_Harris).
 
 Hope you at least consider trying out Svelte and if you want to learn more I made [Svelte For Beginners](https://joyofcode.xyz/svelte-for-beginners) and [SvelteKit For Beginners](https://joyofcode.xyz/sveltekit-for-beginners) if you want to learn a full stack framework that uses Svelte.
 
