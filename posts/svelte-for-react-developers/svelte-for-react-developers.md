@@ -5,10 +5,11 @@ slug: svelte-for-react-developers
 published: 2022-8-8
 category: svelte
 series: false
-draft: true
 ---
 
 # Svelte Guide For React Developers
+
+{% embed src="https://www.youtube.com/embed/uWDBEUkTRGk" title="Google Analytics With SvelteKit" %}
 
 ## Table of Contents
 
@@ -19,7 +20,7 @@ This guide is aimed at React developers to get up to speed learning Svelte or an
 
 While I'm biased towards Svelte this guide isn't going to beat you over the head how what you're using is wrong and is just concerned with comparing the frameworks.
 
-I decided not to use TypeScript in the examples to solely focus on the frameworks but you can find the complete typed examples on [GitHub](https://github.com/JoysOfCode/react-svelte).
+I decided not to use TypeScript in the examples to solely focus on the frameworks but you can find the complete typed examples on [GitHub](https://github.com/JoysOfCode/svelte-for-react-developers).
 
 ## Components
 
