@@ -1,6 +1,6 @@
 ---
 title: Svelte Guide For React Developers
-description: Description.
+description: Get up to speed with Svelte as a React developer.
 slug: svelte-for-react-developers
 published: 2022-8-8
 category: svelte
@@ -9,8 +9,6 @@ draft: true
 ---
 
 # Svelte Guide For React Developers
-
-{% embed src="image.webp" title="Svelte For React Developers" %}
 
 ## Table of Contents
 
