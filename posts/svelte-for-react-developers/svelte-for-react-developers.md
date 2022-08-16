@@ -70,21 +70,20 @@ Svelte uses a single file component similar to [Vue](https://vuejs.org/) that en
 
 The JavaScript logic lives inside the `<script>` tag and the styles inside the `<style>` tag are unique to your component — you can use preprocessors such as [SCSS](https://sass-lang.com/) for CSS or [Pug](https://pugjs.org/api/getting-started.html) for your template and the markup doesn't need a parent element.
 
-In Svelte updates are triggered using assignments `=` so `count + 1` wouldn't work because you need to assign it because `count += 1` is the same as `count = count + 1` .
+In Svelte updates are triggered using assignments so `count + 1` wouldn't work because you need to assign it where `count += 1` is the same as `count = count + 1` .
 
 You can also keep variables in sync with each other using reactive declarations `$: doubled = count * 2`.
 
 > 🐿️ The `$:` syntax is valid JavaScript [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label) syntax but Svelte interprets it as "re-run this code whenever any of the referenced values change".
 > 
 
-The term “magic” is often used in a negative connotation but because Svelte is a compiler it does "magic" right because it's intuitive.
+The term “magic” is often used in a negative connotation but Svelte does "magic" right because it's intuitive.
 
-> 🐿️ If you want React to work you have to ship the framework to compare what changed and update the DOM but Svelte is a compiler meaning it generates the equivalent JavaScript code to surgically update the DOM meaning you don't have to ship the framework.
-> 
+> 🐿️ Svelte is a compiler that generates the equivalent JavaScript code to surgically update the DOM meaning you don't have to ship the framework.
 
 ## Passing Props To Components
 
-Components use props to communicate with each other where the parent component can pass some information to its child by giving them props and they look like HTML attributes.
+Components use props to communicate with each other where the parent component can pass some information to its child by giving them props that look like HTML attributes.
 
 ```tsx:Props.tsx showLineNumbers
  import { useState } from 'react'
@@ -332,7 +331,7 @@ In Svelte you can use [event modifiers](https://svelte.dev/tutorial/event-modifi
 
 Sometimes you have to synchronize your component state with something outside of it like browser APIs, data fetching and so on. 
 
-The next example shows a video player we have to hook into using `useRef` to get a reference to the element to be able to play and pause it — this is a side effect because we have to synchronize it with our component. 
+The next example shows a video player we have to hook into using `useRef` to get a reference to the element to be able to play and pause it — this is a side effect because we have to synchronize it with our component state. 
 
 ```tsx:Synchronization.tsx showLineNumbers
 import { useEffect, useRef, useState } from 'react'
@@ -405,7 +404,9 @@ This is the same example in Svelte.
 </button>
 ```
 
-It's much simpler and you don't have to use `useEffect` because you don't have to think about dependencies and if you want to start playing the video immediately you can run `play()` inside the `onMount` [lifecyle method](https://svelte.dev/tutorial/onmount).
+It's much simpler and you don't have to think about `useEffect` and dependencies — if you want to start playing the video immediately you can run `play()` inside the `onMount` [lifecyle method](https://svelte.dev/tutorial/onmount).
+
+Here's an example of using the Canvas API in Svelte.
 
 ```html:Example.svelte showLineNumbers
 <script>
@@ -424,7 +425,9 @@ It's much simpler and you don't have to use `useEffect` because you don't have t
 
 ## Derived State
 
-Sometimes you have values that depend on each other often referred to as “derived state” or “computed values” — I'm going to refer to derived from the definition of the word being “obtain something from a specified source” because not everyone agrees on it.
+Sometimes you have values that depend on each other often referred to as “derived state” or “computed values”.
+
+I'm going to refer to derived from the definition of the word being **“obtain something from a specified source”** because not everyone agrees what derived state is.
 
 In the next example I want to derive state from a list of todo items for filtered todos.
 
@@ -635,7 +638,7 @@ One example would be a map component with markers.
 
 ```tsx:Example.tsx showLineNumbers
 <Map lat={45.815399} lon={15.966568} zoom={4}>
-	<MapMarker lat={45.815399} lon={15.966568} label="Zagreb"/>
+	<MapMarker lat={45.815399} lon={15.966568} label="Zagreb" />
 </Map>
 ```
 
@@ -840,7 +843,7 @@ That's most of the examples I wanted to show you but I also want to show you mor
 
 A store is just an object you can subscribe so you get notified when the store values change but instead of showing you some boring example of global state I want to show you how you can make a `useReducer` hook using a custom store because it's going to feel familiar coming from React.
 
-**This is mostly for fun and I wouldn't use React conventions inside Svelte** because it's not the same and I would use Svelte solutions to these problems.
+**This is mostly for fun and I wouldn't use React conventions inside Svelte**.
 
 The `$` syntax in `$count` is just for Svelte to understand to subscribe and unsubscribe to a store making you write less boilerplate code and it's awesome. 
 
@@ -914,7 +917,7 @@ That's it! 🎉
 
 There's a lot more to learn about Svelte and it has a great interactive [tutorial](https://svelte.dev/tutorial/basics) and [examples](https://svelte.dev/examples/hello-world).
 
-I love Svelte because it makes you want to do more for less and it's so enjoyable to use and I believe in the vision of [Rich Harris](https://twitter.com/Rich_Harris).
+I love Svelte because it makes you want to do more for less and it's enjoyable to use and I strongly believe in the vision of [Rich Harris](https://twitter.com/Rich_Harris) after watching ["Rethinking reactivity"](https://www.youtube.com/watch?v=AdNJ3fydeao).
 
 Hope you at least consider trying out Svelte and if you want to learn more I made [Svelte For Beginners](https://joyofcode.xyz/svelte-for-beginners) and [SvelteKit For Beginners](https://joyofcode.xyz/sveltekit-for-beginners) if you want to learn a full stack framework that uses Svelte.
 
