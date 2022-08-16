@@ -116,7 +116,7 @@
 
 	footer blockquote {
 		font-size: clamp(var(--font-24), 3vw, var(--font-32));
-		font-family: var(--font-serif);
+		font-family: var(--font-sans);
 		text-shadow: 2px 2px 10px hsl(0 0% 0% / 10%);
 	}
 

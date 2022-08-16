@@ -99,7 +99,7 @@
 	}
 
 	.card .title {
-		font-family: var(--font-serif);
+		font-family: var(font-sans);
 		font-size: var(--font-32);
 		font-weight: 700;
 		line-height: 48px;
