@@ -146,6 +146,10 @@
 		color: var(--clr-hero-txt);
 	}
 
+	.newsletter h2 {
+		font-size: var(--font-24);
+	}
+
 	@media (min-width: 860px) {
 		.hero {
 			display: grid;
