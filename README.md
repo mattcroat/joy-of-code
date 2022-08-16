@@ -24,7 +24,7 @@ This avoids having to hunt down the issue you have in YouTube comments or places
 
 - 🔌 [GitHub API](https://docs.github.com/en/rest) is used to manage content so GitHub is the content management system
 
-- The editor uses ⚡️ SvelteKit for the frontend and 📜 [Monaco Editor](https://github.com/microsoft/monaco-editor) (code editor which powers [VS Code](https://code.visualstudio.com/)) as the editor to manage content using the 🔌 GitHub API
+- The [editor](https://github.com/mattcroat/editor) uses ⚡️ SvelteKit for the frontend and 📜 [Monaco Editor](https://github.com/microsoft/monaco-editor) (code editor which powers [VS Code](https://code.visualstudio.com/)) as the editor to manage content using the 🔌 GitHub API
 
 - ✍️ Posts are stored inside the `posts` folder and are used to build the page using the 🔌 GitHub API but `data` is where posts metadata is stored in a single `posts.json` to serve as a database
 
