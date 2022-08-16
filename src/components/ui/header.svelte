@@ -28,7 +28,6 @@
 		grid-column: 2 / 3;
 		text-align: center;
 		text-transform: uppercase;
-		font-weight: 900;
 	}
 
 	.logo a::before {

@@ -1,7 +1,6 @@
 :root {
 	/* Font */
 	--font-sans: 'Poppins', sans-serif;
-	--font-serif: 'Arsenica', serif;
 	--font-mono: Source Code Pro, monospace;
 	--font-dyslexic: OpenDyslexic, sans-serif;
 	--font-dyslexic-mono: OpenDyslexic Mono, monospace;
@@ -116,7 +115,7 @@ html[data-font='dyslexic'] h2 {
 
 h1,
 h2 {
-	font-family: var(--font-serif);
+	font-family: var(--font-sans);
 	text-transform: capitalize;
 }
 
