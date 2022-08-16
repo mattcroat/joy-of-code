@@ -1,8 +1,9 @@
+import { env } from '$env/dynamic/private'
 import type { RequestHandler } from '@sveltejs/kit'
 
 export const POST: RequestHandler = async ({ request }) => {
 	const API_URL = 'https://api.buttondown.email/v1/subscribers'
-	const API_KEY = process.env.BUTTONDOWN_API_KEY
+	const API_KEY = env.BUTTONDOWN_API_KEY
 
 	const email = await request.json()
 

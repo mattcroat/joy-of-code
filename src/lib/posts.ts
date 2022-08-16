@@ -1,3 +1,5 @@
+import { env } from '$env/dynamic/private'
+
 import { markdownToHTML } from './markdown'
 import { postsDataUrl, postsUrl } from './config'
 import type {
@@ -10,7 +12,7 @@ import type {
 const headers = {
 	// GitHub suggests to include the API version
 	Accept: 'application/vnd.github.v3+json',
-	Authorization: `token ${process.env.GH_TOKEN}`,
+	Authorization: `token ${env.GH_TOKEN}`,
 }
 
 /**

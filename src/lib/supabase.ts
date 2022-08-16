@@ -1,9 +1,13 @@
+import {
+	PUBLIC_SUPABASE_URL,
+	PUBLIC_SUPABASE_ANON_KEY,
+} from '$env/static/public'
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(
+	PUBLIC_SUPABASE_URL,
+	PUBLIC_SUPABASE_ANON_KEY
+)
 
 interface View {
 	slug: string
