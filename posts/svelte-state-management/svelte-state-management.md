@@ -8,7 +8,7 @@ series: false
 draft: true
 ---
 
-# Svelte state management
+# Svelte State Management
 
 ## Table of Contents
 
@@ -27,7 +27,6 @@ By default the data in your app flows down from parent to child component like a
 You can **co-locate** or **lift state up** to the parent component that's going to pass the props to children.
 
 {% img src="props.webp" alt="Diagram showing how passing props from parent to child component works in Svelte" %}
-
 
 The next example uses a parent  `<Counter>` component to pass the `count`, `increment` and `decrement` props down to its children.
 
@@ -170,11 +169,10 @@ I want to track the `x` and `y` mouse position when the user moves the mouse and
   let y = 0
 
   function updatePosition(event: CustomEvent<MouseEvent>) {
-    let target = event.detail.target as HTMLDivElement
+    const target = event.detail.target as HTMLDivElement
+    const element = target.getBoundingClientRect()
 
     // we only want to measure x, y inside the element
-    let element = target.getBoundingClientRect()
-
     x = event.detail.clientX - element.left
     y = event.detail.clientY - element.top
   }
@@ -182,7 +180,9 @@ I want to track the `x` and `y` mouse position when the user moves the mouse and
 
 <Mouse on:updatePosition={updatePosition} />
 
-<div>x: {x}, y: {y}</div>
+<div>
+  x: {x}, y: {y}
+</div>
 ```
 
 Inside the child component is where you dispatch the event.
@@ -429,15 +429,15 @@ The Context API is powerful but **don't treat it as a solution for everything** 
 
 ## Module Context
 
-Before I confuse you this has nothing to do with the Context API but refers to `<script context="module">` in your Svelte component.
+Before I confuse you **this has nothing to do with the Context API** but refers to `<script context="module">` in your Svelte component.
 
 [Module context](https://svelte.dev/tutorial/sharing-code) is useful when you want to share state between multiple component instances.
 
-[module.webp](Svelte%20state%20management%2090c67fd673624fa6a3f7c9a110e8349e/module.webp)
+{% img src="module.webp" alt="Diagram showing how module context works in Svelte" %}
 
 It might seem magical but it's how JavaScript works! 🪄
 
-```js:module.js showLineNumbers
+```js:component.js showLineNumbers
 // this file is a module
 
 console.log('context module')
@@ -449,7 +449,7 @@ export class Component {
 }
 ```
 
-```js:example.js showLineNumbers
+```js:app.js showLineNumbers
 import { Component } from './Component.js'
 
 // logs "context module" once
