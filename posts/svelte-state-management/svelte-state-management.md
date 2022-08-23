@@ -1,14 +1,15 @@
 ---
-title: Svelte State Management
+title: Svelte State Management Guide
 description: Learn how to manage state in Svelte and ways you can communicate between components.
 slug: svelte-state-management
 published: 2022-8-22
 category: svelte
 series: false
-draft: true
 ---
 
-# Svelte State Management
+# Svelte State Management Guide
+
+{% embed src="https://www.youtube.com/embed/4dDjQiOVrOo" title="Svelte State Management Guide" %}
 
 ## Table of Contents
 
@@ -107,7 +108,7 @@ I've mentioned how data flows down but using the `bind:property` directive we ca
 
 In Svelte you can bind values to properties of DOM elements but also to component props meaning your child component can talk to the parent component.
 
-```html:index.svelte {8} showLineNumbers
+```html:index.svelte {5, 8} showLineNumbers
 <script lang="ts">
   import Input from './input.svelte'
   import Output from './output.svelte'
@@ -161,7 +162,7 @@ In Svelte you dispatch the custom event from a child component and listen for it
 
 I want to track the `x` and `y` mouse position when the user moves the mouse and on the `<Mouse>` component I'm listening for an `updatePosition` event.
 
-```html:index.svelte {18} showLineNumbers
+```html:index.svelte {17} showLineNumbers
  <script lang="ts">
   import Mouse from './mouse.svelte'
 
@@ -383,7 +384,7 @@ Inside the `<Canvas>` component I use `setContext` with a key `canvas` to access
 
 To get the reference to the canvas element I use `getContext` using the key from before and now I have a reference to the canvas.
 
-```html:circle.svelte {4, 14} showLineNumbers
+```html:circle.svelte {2, 4, 14} showLineNumbers
 <script lang="ts">
   import { getContext, onMount } from 'svelte'
 
@@ -530,7 +531,7 @@ Using [SvelteKit](https://kit.svelte.dev/) you can get the parsed query string o
   $: sortedItems = sortItems(order)
 
   function changeOrder() {
-    order === 'asc'	? order = 'desc'	: order = 'asc'
+    order === 'asc' ? order = 'desc' : order = 'asc'
   }
 
   function sortItems(order: Order) {
