@@ -15,7 +15,7 @@ series: false
 
 ## Introduction
 
-The aim of this post is to give you **tools to manage complexity** and learn how to **manage state** in Svelte and ways you can **communicate between components**.
+The aim of this post is to give you **tools to manage complexity** in your app and learn how to **manage state** in Svelte and ways you can **communicate between components**.
 
 You're going to learn about **props, bindings, component events, stores, context** and when you might use them instead of being a prescription.
 
@@ -160,7 +160,7 @@ In Svelte you dispatch the custom event from a child component and listen for it
 
 {% img src="events.webp" alt="Diagram showing how component events work in Svelte" %}
 
-I want to track the `x` and `y` mouse position when the user moves the mouse and on the `<Mouse>` component I'm listening for an `updatePosition` event.
+I want to track the `x` and `y` mouse coordinates when the user moves the mouse and on the `<Mouse>` component I'm listening for an `updatePosition` event.
 
 ```html:index.svelte {17} showLineNumbers
  <script lang="ts">
@@ -204,11 +204,11 @@ Inside the child component is where you dispatch the event.
 
 Component events are awesome but they don't [bubble](https://javascript.info/bubbling-and-capturing) like regular DOM events, so you have to [forward them](https://svelte.dev/tutorial/event-forwarding) but you can do whatever you want like having `on:submit` on your `<Form>` component.
 
-> 🐿️ In Svelte you can also forward DOM events if you have `<Button on:click={handleClick} />` inside the component you can use `<button on:click>Click</button>`.
+> 🐿️ In Svelte you can also forward DOM events for example if you have a component like `<Button on:click={handleClick} />` then inside the component you can forward the event with `<button on:click>Click</button>`.
 
 ## Svelte Stores
 
-[Stores](https://svelte.dev/tutorial/writable-stores) are just objects you can subscribe to and be notified whenever the store value changes and they're great if you have global state as sometimes you have values that need to be accessed by multiple unrelated components.
+[Stores](https://svelte.dev/tutorial/writable-stores) are just objects you can subscribe to and be notified whenever the store value changes and they're great if you have global state as sometimes you have **values that need to be accessed by multiple unrelated components**.
 
 {% img src="stores.webp" alt="Diagram showing how Svelte stores work" %}
 
@@ -227,7 +227,7 @@ Lets start with the most basic example and then I'm excited to show you how simp
 </button>
 ```
 
-> 🐿️ The `$count` syntax is a Svelte convenience that subscribes and unsubscribes to the store for you saving you from writing extra code.
+> 🐿️ The `$count` syntax is a Svelte convenience that subscribes and unsubscribes to the store saving you from writing extra code.
 
 You would use a file like `store.ts` to export the store value `count` from and now when you update it wherever you're using `count` gets updated.
 
@@ -238,20 +238,18 @@ The `toast` method is going to update the `notifications` and the `removeToast` 
 ```ts:notifications.ts showLineNumbers
 import { writable } from 'svelte/store'
 
-export const notifications = writable<string[]>([])
+type Notification = string
+
+export const notifications = writable<Notification[]>([])
 
 export function toast(message: string) {
-  // add notification
   notifications.update((state) => [message, ...state])
-
-  // remove notification
   setTimeout(removeToast, 2000)
 }
 
 function removeToast() {
   notifications.update((state) => {
-    state.shift()
-    return state
+    return [...state.slice(0, state.length - 1)]
   })
 }
 ```
@@ -308,7 +306,7 @@ The [Context API](https://svelte.dev/tutorial/context-api) is useful when you ha
 
 {% img src="context.webp" alt="Diagram showing how the Context API works in Svelte" %}
 
-Let's say I want to use the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) in a more declarative way and this is my dream API I came up with.
+Let's say I want to use the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) in a more declarative way.
 
 ```html:example.svelte showLineNumbers
 <Canvas width={600} height={400}>
@@ -328,7 +326,7 @@ ctx.arc(300, 200, 40, 0, 2 * Math.PI)
 ctx.fill()
 ```
 
-I'm happy with the API I dreamed up and I go implement it but there's one problem and it's passing the reference to the `<canvas>` element around which is tedious. 😫
+I'm happy with the API and I go implement it but there's one problem and it's passing the reference to the `<canvas>` element around which is tedious. 😮‍💨
 
 ```html:example.svelte showLineNumbers
 <Canvas {canvas}>
@@ -508,7 +506,7 @@ I never use it but it's good to aware of it if you need it.
 
 ## The URL
 
-What is the first state manager that ever existed for a page?
+What was the first state manager?
 
 You might not expect it but it's the URL and you can use it for things like coupon codes or referral links but you could also use it to preserve some state over a link.
 
