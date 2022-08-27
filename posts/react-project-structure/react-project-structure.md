@@ -409,7 +409,7 @@ rules: {
 
 I separate imports into groups, so it doesn't treat everything as one thing. You can learn more about [import sorting](https://eslint.org/docs/rules/sort-imports).
 
-If you want, you can have a look at my [ESLint config](https://github.com/mattcroat/joy-of-code/blob/main/.eslintrc.js).
+If you want, you can have a look at my [ESLint config](https://github.com/mattcroat/joy-of-code/blob/main/.eslintrc.cjs).
 
 ## Prettier
 
