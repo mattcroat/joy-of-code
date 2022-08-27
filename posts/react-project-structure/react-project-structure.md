@@ -409,8 +409,6 @@ rules: {
 
 I separate imports into groups, so it doesn't treat everything as one thing. You can learn more about [import sorting](https://eslint.org/docs/rules/sort-imports).
 
-If you want, you can have a look at my [ESLint config](https://github.com/mattcroat/joy-of-code/blob/main/.eslintrc.cjs).
-
 ## Prettier
 
 Since I'm going over code organization, I have to mention the code beautifier [Prettier](https://prettier.io/). If you never used it, don't wait. It's for the same reason I mentioned above. It delegates decision-making.
