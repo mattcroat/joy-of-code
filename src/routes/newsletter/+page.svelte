@@ -1,7 +1,3 @@
-<script context="module" lang="ts">
-	export const prerender = true
-</script>
-
 <script lang="ts">
 	import Heading from '$root/components/ui/heading.svelte'
 	import Newsletter from '$root/components/ui/newsletter.svelte'

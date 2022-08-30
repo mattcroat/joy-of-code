@@ -1,8 +1,8 @@
-import type { RequestHandler } from '@sveltejs/kit'
+import type { PageServerLoad } from './$types'
 
 import { getPost } from '$root/lib/posts'
 
-export const GET: RequestHandler = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, setHeaders }) => {
 	const { content, frontmatter } = await getPost(params.slug)
 
 	const day = 60 * 60 * 24 * 1000
@@ -11,11 +11,9 @@ export const GET: RequestHandler = async ({ params }) => {
 	const days = time / day
 	const maxage = days > 6 ? 60 * 60 * 24 * 6 : 60
 
-	return {
-		status: 200,
-		body: { content, frontmatter, maxage },
-		headers: {
-			'Cache-Control': `public, max-age=${maxage}, s-maxage=${maxage}`,
-		},
-	}
+	setHeaders({
+		'Cache-Control': `public, max-age=${maxage}, s-maxage=${maxage}`,
+	})
+
+	return { content, frontmatter }
 }

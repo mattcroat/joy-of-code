@@ -23,12 +23,10 @@ export const GET: RequestHandler = async () => {
 		})
 	)
 
-	return {
-		status: 200,
-		body: feed.xml({ indent: true }),
+	return new Response(feed.xml({ indent: true }), {
 		headers: {
 			'Content-Type': 'application/xml',
 			'Cache-Control': `public, s-maxage=${60 * 60}, s-maxage=${60 * 60}`,
 		},
-	}
+	})
 }

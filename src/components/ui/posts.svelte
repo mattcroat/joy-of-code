@@ -14,7 +14,7 @@
 	<div class="cards">
 		{#each posts as post, index}
 			<Transition transition={{ type: 'stagger', duration: index, delay: 300 }}>
-				<a sveltekit:prefetch href="/{post.slug}">
+				<a data-sveltekit-prefetch href="/{post.slug}">
 					<article class="card">
 						<span class="views">
 							<EyeIcon width="24" height="24" aria-hidden="true" />

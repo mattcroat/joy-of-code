@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit'
 import type { RequestHandler } from '@sveltejs/kit'
 
 import { supabase } from '$root/lib/supabase'
@@ -8,15 +9,13 @@ export const GET: RequestHandler = async () => {
 		.select('slug, views')
 
 	if (error) {
-		return { response: 400, body: { error: error.message } }
+		return json({ error: error.message })
 	}
 
-	return {
-		response: 202,
-		body: views,
+	return json(views, {
 		headers: {
 			'Content-Type': 'application/json',
 			'Cache-Control': `public, max-age=${60 * 60}, s-maxage=${60 * 60}`,
 		},
-	}
+	})
 }

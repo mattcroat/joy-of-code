@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/env'
+	import { browser } from '$app/environment'
 
 	const rootElement = browser ? document.documentElement : null
 	const userTextSize = browser && localStorage.textSize

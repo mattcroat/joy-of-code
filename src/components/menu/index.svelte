@@ -45,7 +45,9 @@
 						<ul>
 							{#each Object.entries(categories) as [slug, category]}
 								<li>
-									<a sveltekit:prefetch href="/categories/{slug}">{category}</a>
+									<a data-sveltekit-prefetch href="/categories/{slug}"
+										>{category}</a
+									>
 								</li>
 							{/each}
 						</ul>

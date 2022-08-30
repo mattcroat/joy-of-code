@@ -1,3 +1,4 @@
+import { json as json$1 } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit'
 
 import { supabase } from '$root/lib/supabase'
@@ -18,7 +19,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		})
 
 		if (error) {
-			return { response: 400, body: { error: error.message } }
+			return json$1({ error: error.message })
 		}
 	}
 
@@ -31,12 +32,9 @@ export const POST: RequestHandler = async ({ request }) => {
 			.match({ slug })
 
 		if (error) {
-			return { response: 400, body: { error: error.message } }
+			return json$1({ error: error.message })
 		}
 	}
 
-	return {
-		status: 303,
-		headers: { location: '/' },
-	}
+	return new Response(undefined, { status: 303, headers: { location: '/' } })
 }

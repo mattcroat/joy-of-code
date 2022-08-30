@@ -14,8 +14,6 @@ export const GET: RequestHandler = async () => {
 		...(await getPostsData()).map((post) => post.slug),
 	]
 
-	console.log(pages)
-
 	const sitemap = `
     <?xml version="1.0" encoding="UTF-8" ?>
     <urlset
@@ -39,14 +37,12 @@ export const GET: RequestHandler = async () => {
     </urlset>
   `.trim()
 
-	return {
-		status: 200,
-		body: sitemap,
+	return new Response(sitemap, {
 		headers: {
 			'Content-Type': 'application/xml',
 			'Cache-Control': `public, max-age=${60 * 60 * 24}, s-maxage=${
 				60 * 60 * 24
 			}`,
 		},
-	}
+	})
 }

@@ -1,34 +1,23 @@
-<script context="module" lang="ts">
-	import type { Load } from '@sveltejs/kit'
-
-	export const load: Load = ({ props }) => {
-		return {
-			props,
-			cache: { maxage: 60 * 60 },
-		}
-	}
-</script>
-
 <script lang="ts">
 	import Heading from '$root/components/ui/heading.svelte'
 	import Posts from '$root/components/ui/posts.svelte'
-	import type { PostType } from '$root/types'
+	import type { PageServerData } from './$types'
 
-	export let posts: PostType[]
+	export let data: PageServerData
 </script>
 
 <svelte:head>
 	<title>Articles</title>
-	<meta content="List of {posts.length} articles." name="description" />
+	<meta content="List of {data.posts.length} articles." name="description" />
 </svelte:head>
 
 <Heading>Articles</Heading>
 
-<Posts {posts}>
+<Posts posts={data.posts}>
 	<div class="container" slot="title">
 		<h3>Archive</h3>
 		<div>
-			<span class="results">{posts.length}</span> results
+			<span class="results">{data.posts.length}</span> results
 		</div>
 	</div>
 </Posts>

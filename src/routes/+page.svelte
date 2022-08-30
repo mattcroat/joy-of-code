@@ -1,14 +1,3 @@
-<script context="module" lang="ts">
-	import type { Load } from '@sveltejs/kit'
-
-	export const load: Load = ({ props }) => {
-		return {
-			props,
-			cache: { maxage: 60 * 60 },
-		}
-	}
-</script>
-
 <script lang="ts">
 	import { ArrowNarrowRightIcon } from '@rgossiaux/svelte-heroicons/outline'
 
@@ -23,9 +12,9 @@
 		twitter,
 		twitterHandle,
 	} from '$root/lib/config'
-	import type { PostsType } from '$root/types'
+	import type { PageServerData } from './$types'
 
-	export let posts: PostsType
+	export let data: PageServerData
 </script>
 
 <svelte:head>
@@ -50,14 +39,14 @@
 	<section class="hero">
 		<div class="latest-post">
 			<span class="kicker">Latest post</span>
-			<h1 class="title">{posts.latestPost.title}</h1>
+			<h1 class="title">{data.posts.latestPost.title}</h1>
 			<p class="description">
-				{posts.latestPost.description}
+				{data.posts.latestPost.description}
 			</p>
 			<a
-				sveltekit:prefetch
+				data-sveltekit-prefetch
 				class="continue-reading"
-				href={posts.latestPost.slug}
+				href={data.posts.latestPost.slug}
 			>
 				<span>Continue reading</span>
 				<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
@@ -77,11 +66,11 @@
 		</div>
 	</section>
 
-	<Posts posts={posts.popular}>
+	<Posts posts={data.posts.popular}>
 		<h3 class="popular" slot="title">Popular</h3>
 	</Posts>
 
-	<Posts posts={posts.latest}>
+	<Posts posts={data.posts.latest}>
 		<h3 class="latest" slot="title">Latest</h3>
 		<a slot="see-more" href="/articles">
 			<span>See more articles</span>
@@ -89,7 +78,7 @@
 		</a>
 	</Posts>
 
-	<Posts posts={posts.series}>
+	<Posts posts={data.posts.series}>
 		<h3 class="series" slot="title">Series</h3>
 		<a slot="see-more" href="/series">
 			<span>See more series</span>
@@ -97,7 +86,7 @@
 		</a>
 	</Posts>
 
-	<Posts posts={posts.picks}>
+	<Posts posts={data.posts.picks}>
 		<h3 class="picks" slot="title">Picks</h3>
 	</Posts>
 </main>
