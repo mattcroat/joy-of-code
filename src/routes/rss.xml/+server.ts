@@ -1,8 +1,8 @@
 import RSS from 'rss'
 import type { RequestHandler } from '@sveltejs/kit'
 
-import { siteDescription, siteTitle, siteUrl } from '$lib/config'
-import { getPostsData } from '$lib/posts'
+import { siteDescription, siteTitle, siteUrl } from '$lib/api/config'
+import { getPostsData } from '$lib/api/posts'
 
 export const GET: RequestHandler = async () => {
 	const posts = await getPostsData()

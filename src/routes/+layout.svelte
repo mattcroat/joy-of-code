@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Header from '$lib/shared/ui/header.svelte'
+	import Header from '$lib/shared/ui/header/header.svelte'
 	import Footer from '$lib/shared/ui/footer.svelte'
 	import Transition from '$lib/shared/transition/index.svelte'
 	import Analytics from '$lib/analytics/index.svelte'

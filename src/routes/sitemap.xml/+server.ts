@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit'
 
-import { getPostsData } from '$lib/posts'
-import { categories, siteUrl } from '$lib/config'
+import { getPostsData } from '$lib/api/posts'
+import { categories, siteUrl } from '$lib/api/config'
 
 export const GET: RequestHandler = async () => {
 	const pages = [

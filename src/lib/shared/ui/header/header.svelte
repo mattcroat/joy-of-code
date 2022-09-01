@@ -1,7 +1,8 @@
 <script lang="ts">
-	import Menu from '$lib/shared/menu/index.svelte'
-	import Preferences from '$lib/shared/preferences/index.svelte'
-	import { siteName } from '$lib/config'
+	import { siteName } from '$lib/api/config'
+
+	import Menu from './menu.svelte'
+	import Preferences from './preferences/index.svelte'
 </script>
 
 <header>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ArrowNarrowRightIcon } from '@rgossiaux/svelte-heroicons/outline'
+	import type { PageServerData } from './$types'
 
 	import Newsletter from '$lib/shared/ui/newsletter.svelte'
 	import Posts from '$lib/shared/ui/posts.svelte'
@@ -11,8 +12,7 @@
 		siteUrl,
 		twitter,
 		twitterHandle,
-	} from '$lib/config'
-	import type { PageServerData } from './$types'
+	} from '$lib/api/config'
 
 	export let data: PageServerData
 </script>

@@ -1,8 +1,8 @@
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
-import { getPostsByCategory } from '$lib/posts'
-import { categories } from '$lib/config'
+import { getPostsByCategory } from '$lib/api/posts'
+import { categories } from '$lib/api/config'
 
 export const load: PageServerLoad = async ({ params, setHeaders }) => {
 	if (!categories[params.category]) {

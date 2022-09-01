@@ -1,4 +1,4 @@
-import { json as json$1 } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit'
 import type { RequestHandler } from '@sveltejs/kit'
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -8,9 +8,12 @@ export const POST: RequestHandler = async ({ request }) => {
 	const email = await request.json()
 
 	if (!email) {
-		return json$1({ error: 'You forget the email. 😊' }, {
-			status: 400
-		})
+		return json(
+			{ error: 'You forget the email. 😊' },
+			{
+				status: 400,
+			}
+		)
 	}
 
 	try {
@@ -27,23 +30,27 @@ export const POST: RequestHandler = async ({ request }) => {
 			const text = await response.text()
 
 			if (text.includes('already subscribed')) {
-				return json$1({ error: `You're already subscribed. 😊` }, {
-					status: 400
-				})
+				return json(
+					{ error: `You're already subscribed. 😊` },
+					{
+						status: 400,
+					}
+				)
 			}
 
-			return json$1({ error: text }, {
-				status: 400
-			})
+			return json({ error: text }, { status: 400 })
 		}
 
-		return json$1({ success: 'Thank you for subscribing! 🥳' }, {
-			status: 201,
-			headers: { location: '/' }
-		})
+		return json(
+			{ success: 'Thank you for subscribing! 🥳' },
+			{
+				status: 201,
+				headers: { location: '/' },
+			}
+		)
 	} catch (error) {
 		if (error instanceof Error) {
-			return json$1({ error: error.message })
+			return json({ error: error.message })
 		}
 	}
 }

@@ -2,7 +2,7 @@
 	import { fly } from 'svelte/transition'
 	import { page } from '$app/stores'
 
-	interface Transition {
+	type Transition = {
 		type: 'fade' | 'stagger' | 'page'
 		duration?: number
 		delay?: number

@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from '@sveltejs/kit'
 
-import { supabase } from '$lib/supabase'
+import { supabase } from '$lib/database'
 
 export const GET: RequestHandler = async () => {
 	const { data: views, error } = await supabase

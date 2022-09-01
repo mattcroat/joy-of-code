@@ -1,18 +1,20 @@
 <script lang="ts">
 	import { browser, dev } from '$app/environment'
+	import type { PageServerData } from './$types'
 
-	import Card from '$lib/shared/ui/card.svelte'
+	import Card from './card.svelte'
+	import Clipboard from './clipboard.svelte'
+	import Overlay from './overlay.svelte'
+
 	import {
 		fileUrl,
 		postImage,
 		siteName,
 		siteUrl,
 		twitterHandle,
-	} from '$lib/config'
-	import { updateViews } from '$lib/supabase'
-	import Overlay from '$lib/shared/ui/overlay.svelte'
-	import Clipboard from '$lib/shared/ui/clipboard.svelte'
-	import type { PageServerData } from './$types'
+	} from '$lib/api/config'
+
+	import { updateViews } from '$lib/database'
 
 	export let data: PageServerData
 

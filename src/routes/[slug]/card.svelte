@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { twitter } from '$lib/config'
-
 	import {
 		ArrowNarrowRightIcon,
 		MailIcon,
 		PencilAltIcon,
 	} from '@rgossiaux/svelte-heroicons/outline'
-	import Newsletter from './newsletter.svelte'
+
+	import Newsletter from '$lib/shared/ui/newsletter.svelte'
+
+	import { twitter } from '$lib/api/config'
 
 	export let preset: 'edit' | 'newsletter'
 	export let editUrl = ''

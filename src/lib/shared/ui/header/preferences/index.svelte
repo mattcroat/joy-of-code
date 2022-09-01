@@ -6,8 +6,8 @@
 		PopoverPanel,
 	} from '@rgossiaux/svelte-headlessui'
 	import { CogIcon } from '@rgossiaux/svelte-heroicons/outline'
-
 	import { sounds } from '$lib/stores/sfx'
+
 	import Themes from './themes.svelte'
 	import Reading from './reading.svelte'
 	import Dyslexic from './dyslexic.svelte'
