@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { siteName } from '$lib/api/config'
-
 	import Menu from './menu.svelte'
 	import Preferences from './preferences/index.svelte'
+
+	import { siteName } from '$lib/api/config'
 </script>
 
 <header>

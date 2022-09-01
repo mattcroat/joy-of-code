@@ -4,6 +4,7 @@
 
 	import Newsletter from '$lib/shared/ui/newsletter.svelte'
 	import Posts from '$lib/shared/ui/posts.svelte'
+
 	import {
 		siteDescription,
 		siteImage,
