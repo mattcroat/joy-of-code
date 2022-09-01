@@ -2,7 +2,7 @@
 	"name": "joy-of-code",
 	"type": "module",
 	"scripts": {
-		"dev": "env-cmd vite dev --port 3000",
+		"dev": "env-cmd vite dev",
 		"build": "env-cmd vite build",
 		"package": "svelte-kit package",
 		"preview": "env-cmd vite preview",
