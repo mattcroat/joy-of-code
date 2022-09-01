@@ -17,6 +17,7 @@
 		<p>Operating system</p>
 		<a href="https://manjaro.org/" target="_blank">Linux Manjaro (GNOME)</a>
 	</div>
+
 	<div class="category">
 		<p>Terminal</p>
 		<div>
@@ -26,29 +27,58 @@
 			</a>
 		</div>
 	</div>
+
 	<div class="category">
 		<p>Code editor</p>
 		<a href="https://code.visualstudio.com/" target="_blank">
 			Visual Studio Code
 		</a>
 	</div>
+
 	<div class="category">
-		<p>Code editor theme</p>
-		<a
-			href="https://marketplace.visualstudio.com/items?itemName=Matia.night-howl"
-			target="_blank"
-		>
-			Night Howl
-		</a>
+		<p>Editor Theme</p>
+		<div>
+			<a
+				href="https://marketplace.visualstudio.com/items?itemName=Matia.night-howl"
+				target="_blank"
+			>
+				Night Howl
+			</a>
+			<a
+				href="https://marketplace.visualstudio.com/items?itemName=pmndrs.pmndrs"
+				target="_blank"
+			>
+				Poimandres
+			</a>
+		</div>
 	</div>
+
+	<div class="category">
+		<p>Icon Theme</p>
+		<div>
+			<a
+				href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme"
+			>
+				Material Icon Theme
+			</a>
+			<a
+				href="https://marketplace.visualstudio.com/items?itemName=miguelsolorio.symbols"
+			>
+				Symbols
+			</a>
+		</div>
+	</div>
+
 	<div class="category">
 		<p>Coding Font</p>
 		<a href="https://www.monolisa.dev/" target="_blank">
-			MonoLisa (Cascadia Code or Mononoki is a great alternative)
+			MonoLisa (Cascadia Code and Mononoki are free alternatives that look the
+			same)
 		</a>
 	</div>
+
 	<div class="category">
-		<p>Free Coding Fonts I Love (alphabetical order)</p>
+		<p>More Coding Fonts</p>
 		<div>
 			<a
 				href="https://www.marksimonson.com/fonts/view/anonymous-pro"
