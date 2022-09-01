@@ -7,8 +7,8 @@
 	} from '@rgossiaux/svelte-headlessui'
 	import { MenuAlt1Icon } from '@rgossiaux/svelte-heroicons/outline'
 
-	import { categories } from '$root/lib/config'
-	import { sounds } from '$root/stores/sfx'
+	import { categories } from '$lib/config'
+	import { sounds } from '$lib/stores/sfx'
 </script>
 
 <div class="container">

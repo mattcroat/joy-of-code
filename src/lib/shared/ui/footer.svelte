@@ -1,5 +1,5 @@
 <script>
-	import { categories, github, twitter, youtube } from '$root/lib/config'
+	import { categories, github, twitter, youtube } from '$lib/config'
 </script>
 
 <footer>

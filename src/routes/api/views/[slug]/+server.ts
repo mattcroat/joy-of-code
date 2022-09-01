@@ -1,7 +1,7 @@
-import { json as json$1 } from '@sveltejs/kit';
+import { json as json$1 } from '@sveltejs/kit'
 import type { RequestHandler } from '@sveltejs/kit'
 
-import { supabase } from '$root/lib/supabase'
+import { supabase } from '$lib/supabase'
 
 export const POST: RequestHandler = async ({ request }) => {
 	const slug = await request.json()

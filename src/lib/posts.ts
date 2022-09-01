@@ -5,7 +5,7 @@ import type {
 	PostsType,
 	PostType,
 	RateType,
-} from '$root/types'
+} from '$lib/types'
 
 const headers = {
 	// GitHub suggests to include the API version

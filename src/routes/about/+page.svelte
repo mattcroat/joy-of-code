@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Heading from '$root/components/ui/heading.svelte'
+	import Heading from '$lib/shared/ui/heading.svelte'
 </script>
 
 <svelte:head>
@@ -16,14 +16,6 @@
 		<b>JavaScript and</b>
 		🎨
 		<b>UI/UX design</b>.
-	</p>
-	<p>
-		I'm a huge advocate for using the web platform and I love working with <b
-			>React</b
-		>
-		and <b>Svelte</b> using
-		<b>TypeScript</b>
-		and writing <b>plain CSS</b> because I love it.
 	</p>
 	<p>
 		I created <b>Joy of Code</b> because I think a lot of tutorials don't help you

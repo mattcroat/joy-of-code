@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { ArrowNarrowRightIcon } from '@rgossiaux/svelte-heroicons/outline'
 
-	import Newsletter from '$root/components/ui/newsletter.svelte'
-	import Posts from '$root/components/ui/posts.svelte'
+	import Newsletter from '$lib/shared/ui/newsletter.svelte'
+	import Posts from '$lib/shared/ui/posts.svelte'
 	import {
 		siteDescription,
 		siteImage,
@@ -11,7 +11,7 @@
 		siteUrl,
 		twitter,
 		twitterHandle,
-	} from '$root/lib/config'
+	} from '$lib/config'
 	import type { PageServerData } from './$types'
 
 	export let data: PageServerData

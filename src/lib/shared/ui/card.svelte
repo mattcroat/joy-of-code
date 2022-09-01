@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { twitter } from '$root/lib/config'
+	import { twitter } from '$lib/config'
 
 	import {
 		ArrowNarrowRightIcon,

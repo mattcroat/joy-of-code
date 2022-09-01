@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Header from '$root/components/ui/header.svelte'
-	import Footer from '$root/components/ui/footer.svelte'
-	import Transition from '$root/components/transition/index.svelte'
-	import Analytics from '$root/components/analytics/index.svelte'
+	import Header from '$lib/shared/ui/header.svelte'
+	import Footer from '$lib/shared/ui/footer.svelte'
+	import Transition from '$lib/shared/transition/index.svelte'
+	import Analytics from '$lib/analytics/index.svelte'
 
-	import '$root/styles/styles.scss'
+	import '../styles/styles.scss'
 </script>
 
 <Analytics />

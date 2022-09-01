@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Heading from '$root/components/ui/heading.svelte'
-	import Posts from '$root/components/ui/posts.svelte'
+	import Heading from '$lib/shared/ui/heading.svelte'
+	import Posts from '$lib/shared/ui/posts.svelte'
 	import type { PageServerData } from './$types'
 
 	export let data: PageServerData

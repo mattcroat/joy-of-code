@@ -4,9 +4,6 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "Node",
-		"allowSyntheticDefaultImports": true,
-		"paths": {
-			"$root/*": ["./src/*"]
-		}
+		"allowSyntheticDefaultImports": true
 	}
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Heading from '$root/components/ui/heading.svelte'
+	import Heading from '$lib/shared/ui/heading.svelte'
 </script>
 
 <svelte:head>

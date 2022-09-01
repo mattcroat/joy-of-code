@@ -15,8 +15,8 @@ import rehypePrism from 'rehype-prism-plus'
 import rehypeCodeTitles from 'rehype-code-titles'
 import { rehypeCopyCode, rehypeUnwrapImages } from './plugins'
 
-import { imagesUrl } from '$root/lib/config'
-import type { FrontMatterType } from '$root/types'
+import { imagesUrl } from '$lib/config'
+import type { FrontMatterType } from '$lib/types'
 
 type ContentType = {
 	content: string

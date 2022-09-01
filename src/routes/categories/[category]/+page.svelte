@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 
-	import Heading from '$root/components/ui/heading.svelte'
-	import Posts from '$root/components/ui/posts.svelte'
-	import { categories } from '$root/lib/config'
+	import Heading from '$lib/shared/ui/heading.svelte'
+	import Posts from '$lib/shared/ui/posts.svelte'
+	import { categories } from '$lib/config'
 	import type { PageServerData } from './$types'
 
 	export let data: PageServerData
