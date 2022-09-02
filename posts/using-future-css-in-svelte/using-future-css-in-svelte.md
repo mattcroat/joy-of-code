@@ -1,14 +1,15 @@
 ---
 title: Use Future CSS In Svelte Today
-description: Learn how you can use future CSS in Svelte today with PostCSS.
+description: Learn how to use future CSS in Svelte today with PostCSS.
 slug: using-future-css-in-svelte
 published: 2022-9-2
 category: svelte
 series: false
-draft: true
 ---
 
 # Use Future CSS In Svelte Today
+
+{% embed src="https://www.youtube.com/embed/eqwtoaP-0pk" title="Use Future CSS in Svelte" %}
 
 ## Table of Contents
 
@@ -33,14 +34,14 @@ In that case you can use PostCSS that describes itself as “A tool for transfor
 
 [PostCSS](https://postcss.org/) is to CSS what [Babel](https://babeljs.io/) is to JavaScript and it lets you use future CSS today by converting modern CSS to something most browsers can understand using polyfills.
 
-> 🐿️ A [polyfill](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill) is a piece of code used to provide functionality on older browsers that don’t natively support it.
+> 🐿️ A [polyfill](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill) is a piece of code used to provide functionality on older browsers that don't natively support it.
 > 
 
-To start using modern CSS today it’s simple as adding the [postcss-preset-env](https://preset-env.cssdb.org/) plugin for PostCSS in your Svelte project and enabling the options you want.
+To start using modern CSS today it's simple as adding the [postcss-preset-env](https://preset-env.cssdb.org/) plugin for PostCSS in your Svelte project and enabling the options you want.
 
-This works for any Svelte project that uses [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) which has built-in support for PostCSS but I’m going to use a skeleton [SvelteKit](https://kit.svelte.dev/) project.
+This works for any Svelte project that uses [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) which has built-in support for PostCSS but I'm going to use a skeleton [SvelteKit](https://kit.svelte.dev/) project.
 
-The best part about this approach is when these features are supported in every browser you can just remove PostCSS or keep it for future CSS and you don’t have to use [SASS](https://sass-lang.com/) just for nested styles.
+The best part about this approach is when these features are supported in every browser you can just remove PostCSS or keep it for future CSS and you don't have to use [SASS](https://sass-lang.com/) just for nested styles.
 
 To get started install the `postcss-preset-env` and `postcss-load-config` plugin to load the PostCSS config.
 
@@ -89,7 +90,15 @@ const config = {
 export default config
 ```
 
-That’s it! 🎉
+To process the CSS include the `lang="postcss"` attribute inside the `<style>` tag.
+
+```html:+page.svelte
+<style lang="postcss">
+  /* ... */
+</style>
+```
+
+That's it! 🎉
 
 Hope you take advantage of future CSS today and you can find the example on [GitHub](https://github.com/JoysOfCode/svelte-future-css) or play with it on [StackBlitz](https://stackblitz.com/github/joysofcode/svelte-future-css).
 
