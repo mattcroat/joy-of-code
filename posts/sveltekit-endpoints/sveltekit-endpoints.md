@@ -15,6 +15,8 @@ series: false
 
 ## Introduction
 
+> ⚠️ The post is outdated since the [breaking SvelteKit changes](https://www.youtube.com/watch?v=eVFcGA-15LA) but I'm going to update the post once things are more stable.
+
 In this post I'm going to explain what are SvelteKit endpoints and when to use standalone endpoints and page endpoints or both.
 
 If you want to try it out yourself you can [find the repository on GitHub](https://github.com/joysofcode/sveltekit-endpoints) or [open it on StackBlitz](http://stackblitz.com/github/joysofcode/sveltekit-endpoints) requiring no setup.
