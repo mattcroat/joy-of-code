@@ -15,6 +15,8 @@ series: true
 
 ## Introduction
 
+> ⚠️ Since the [breaking SvelteKit changes](https://www.youtube.com/watch?v=eVFcGA-15LA) it's not possible to update the post without a complete rewrite but I migrated the [project files](https://github.com/JoysOfCode/sveltekit-for-beginners/tree/migration) if you're determined and I'm going to update the content once SvelteKit is released.
+
 You're going to make **Twittr** — a social media site for sharing hot takes.
 
 {% video src="twittr.mp4" %}
