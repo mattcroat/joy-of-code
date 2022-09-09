@@ -17,7 +17,7 @@ Wouldn't it be great if you could inspect and open the component inside your edi
 
 {% video src="inspector.mp4" %}
 
-Thanks to the experimental [Svelte inspector]([https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector)) option you can enable in your config you can!
+You can thanks to the experimental [Svelte inspector]([https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector)) option by enabling it inside your config!
 
 For regular Svelte projects using Vite you can enable it inside `vite.config.js`.
 
