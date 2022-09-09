@@ -1,5 +1,5 @@
 ---
-title: Learn How To Use The Svelte Inspector
+title: Use The Svelte Inspector
 description: Learn how to inspect and open Svelte components in your editor.
 slug: svelte-inspector
 published: 2022-9-9
@@ -8,10 +8,12 @@ series: false
 draft: true
 ---
 
-# Learn How To Use The Svelte Inspector
+# Use The Svelte Inspector
 
 
-How many times have you bumbled around your editor looking for the component you want to change — wouldn't it be great if you could point at the area of your site and open the component inside your editor instead?
+How many times have you bumbled around your editor looking for the component you want to change.
+
+Wouldn't it be great if you could inspect and open the component inside your editor from your site?
 
 {% video src="inspector.mp4" %}
 
