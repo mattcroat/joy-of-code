@@ -5,11 +5,11 @@ slug: svelte-inspector
 published: 2022-9-9
 category: svelte
 series: false
-draft: true
 ---
 
 # Use The Svelte Inspector
 
+{% embed src="https://www.youtube.com/embed/OuDSEvplXqY" title="Svelte Inspector" %}
 
 How many times have you bumbled around your editor looking for the component you want to change.
 
