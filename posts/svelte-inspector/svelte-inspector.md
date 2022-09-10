@@ -7,9 +7,13 @@ category: svelte
 series: false
 ---
 
-# The Svelte Inspector
+# Never Search For Svelte Components Again
+
+## Table of Contents
 
 {% embed src="https://www.youtube.com/embed/OuDSEvplXqY" title="Svelte Inspector" %}
+
+## The Svelte Inspector
 
 How many times have you bumbled around your editor looking for the component you want to change.
 
@@ -18,6 +22,8 @@ Wouldn't it be great if you could inspect and open the component inside your edi
 {% video src="inspector.mp4" %}
 
 You can thanks to the experimental [Svelte inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector) option by enabling it inside your config!
+
+## Enable For Svelte
 
 For regular Svelte projects using Vite you can enable it inside `vite.config.js`.
 
@@ -33,6 +39,8 @@ export default defineConfig({
 })
 ```
 
+## Enable For SvelteKit
+
 If you're using SvelteKit you can enable it inside `svelte.config.js`.
 
 ```js:svelte.config.js showLineNumbers
@@ -45,6 +53,8 @@ const config = {
   },
 }
 ```
+
+## Configuration
 
 Using the default options the inspector becomes available using the <kbd>Meta</kbd> + <kbd>Shift</kbd> shortcut but you can change the options.
 
@@ -67,6 +77,6 @@ Using the default options the inspector becomes available using the <kbd>Meta</k
 }
 ```
 
-You unfortunately won't get code completion for the options since it's experimental, so you're going to have to look at the available options in the documentation.
+Unfortunately there's no code completion for the options since it's experimental, so you're going to have to look at the available options in the documentation.
 
 Thank you for reading! 🏄️
