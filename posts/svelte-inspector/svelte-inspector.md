@@ -1,13 +1,13 @@
 ---
-title: Use The Svelte Inspector
-description: Learn how to inspect and open Svelte components in your editor.
+title: Never Search For Svelte Components Again
+description: Hover over elements and open Svelte components in your editor using the Svelte inspector.
 slug: svelte-inspector
 published: 2022-9-9
 category: svelte
 series: false
 ---
 
-# Use The Svelte Inspector
+# The Svelte Inspector
 
 {% embed src="https://www.youtube.com/embed/OuDSEvplXqY" title="Svelte Inspector" %}
 
@@ -17,7 +17,7 @@ Wouldn't it be great if you could inspect and open the component inside your edi
 
 {% video src="inspector.mp4" %}
 
-You can thanks to the experimental [Svelte inspector]([https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector)) option by enabling it inside your config!
+You can thanks to the experimental [Svelte inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector) option by enabling it inside your config!
 
 For regular Svelte projects using Vite you can enable it inside `vite.config.js`.
 
