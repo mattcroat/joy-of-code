@@ -9,9 +9,9 @@ series: false
 
 # Never Search For Svelte Components Again
 
-## Table of Contents
-
 {% embed src="https://www.youtube.com/embed/OuDSEvplXqY" title="Svelte Inspector" %}
+
+## Table of Contents
 
 ## The Svelte Inspector
 
