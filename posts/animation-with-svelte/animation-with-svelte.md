@@ -12,7 +12,7 @@ draft: true
 
 ## Table of Contents
 
-## Animation Beyond Whimsy
+## Beyond Whimsy
 
 There's a lack of reverence for both animation and accessibility where they're treated as “nice to have” instead of being part of a holistic user experience but it's not because of a lack of care but historically being hard — none of us intend to create a bad user experience on purpose.
 
@@ -68,7 +68,9 @@ You can use the same intro and outro transition with `transition:fade` but if yo
 </style>
 ```
 
-Each transition function accepts at least a `delay`, `duration` and `easing` parameter but others might accept more if you consult the [documentation](https://svelte.dev/docs#run-time-svelte-transition). You can specify a custom easing function or use a built-in [Svelte easing functions](https://svelte.dev/docs#run-time-svelte-easing)  to give character to your animations — use the [ease visualiser](https://svelte.dev/examples/easing) to explore different easing options.
+Each transition function accepts at least a `delay`, `duration` and `easing` parameter but others might accept more if you consult the [documentation](https://svelte.dev/docs#run-time-svelte-transition).
+
+You can specify a custom easing function or use a built-in [Svelte easing functions](https://svelte.dev/docs#run-time-svelte-easing)  to give character to your animations — use the [ease visualiser](https://svelte.dev/examples/easing) to explore different easing options.
 
 {% video src="transitions-fly.mp4" %}
 
@@ -79,7 +81,7 @@ I want to split up and animate some text which is simple using a declaractive Ja
 - To get a stagger effect where the next element animating in is delayed you can multiply the `index` of the element by some time `300ms` for the `delay`
 - I want the text to appear from the bottom of the element instead of fading in from the starting `y` position, so I set `overflow: hidden` on the parent
 
-```html:+page.svelte {2, 3, 5-12, 28-32, 50} showLineNumbers
+```html:+page.svelte {2, 3, 5-12, 24-37} showLineNumbers
 <script lang="ts">
   import { fly } from 'svelte/transition'
   import { backOut } from 'svelte/easing'
@@ -143,7 +145,7 @@ I want to split up and animate some text which is simple using a declaractive Ja
 </style>
 ```
 
-Here I'm using the `animate` value to play the transition but if you look at the examples I'm using an `Animate` component I made that does the same thing and gives you a replay button.
+Here I'm using the `animate` value to play the transition but if you look at the finished examples I'm using an `Animate` component I made that does the same thing and gives you a replay button.
 
 > 🐿️ Transitions don't play on first render unless you set `intro: true` for Svelte components. This doesn't work for SvelteKit but you can set  `animate = true` when the component mounts inside `onMount` to achieve the same result.
 
@@ -169,7 +171,7 @@ You can also use [transition events](https://svelte.dev/docs#template-syntax-ele
 
 Some of the transitions are specific to certain things like using `draw` for animating the stroke of an SVG element and we're going to look at what `crossfade` is useful for later.
 
-Here's an example of how effortless animating a SVG of a circle with a check mark in Svelte for microinteractions.
+Here's how you can animate an SVG of a circle with a check mark in Svelte for delightful interactions.
 
 ```html:+page.svelte {2, 24, 28} showLineNumbers
 <script lang="ts">
@@ -1236,11 +1238,11 @@ There's other problems when it comes to FLIP animations like nested transforms (
 
 {% video src="flip-gsap.mp4" %}
 
-The best thing about Svelte is how it's simple to use existing JavaScript libraries because it doesn't require special lifecycle methods to work and makes code reuse easy thanks to [actions](https://svelte.dev/tutorial/actions).
+The best thing about Svelte is the ease of using existing JavaScript libraries because it doesn't require special lifecycle methods to work and makes code reuse easy thanks to [actions](https://svelte.dev/tutorial/actions).
 
 Remember the spring example from before? Here's the same example using Motion One and Svelte actions.
 
-```ts:animations.ts showLineNumbers
+```ts:animations.ts {1, 10-19} showLineNumbers
 import { animate, spring } from 'motion'
 import type { Action } from 'svelte/action'
 
@@ -1289,7 +1291,7 @@ Motion One also has [Motion DevTools](https://motion.dev/tools) you can use to i
 
 ## Accessibility
 
-If you're using any motion you have to be responsible because it can make someone sick and you have to respect if they have set [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).
+If you're using motion you have to be responsible because it can make someone sick and you have to respect their preference for [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).
 
 That being said **reduced motion** doesn't mean **no motion**! You just have to adjust the values to something more sensible for those users.
 
@@ -1301,7 +1303,7 @@ Here's how you do it in CSS.
 }
 ```
 
-Here's how you can do it in JavaScript.
+Here's how you do it in JavaScript.
 
 ```ts:media.ts showLineNumbers
 import { browser } from '$app/environment'
@@ -1333,7 +1335,9 @@ If the user changes their preference it won't update until they refresh the page
 
 You should be a proper Svelte animation wizard by now! 🧙
 
-I hope you take what you learned and delight your users but remember that with great power comes great responsibility and you should consider accessibility from the start and the best animations are subtle and used to frame the piece.
+I hope you take what you learned and delight your users but remember that with great power comes great responsibility.
+
+Consider accessibility from the start and remember animations done right are subtle but impactful.
 
 Thank you for reading! 🏄️
 
