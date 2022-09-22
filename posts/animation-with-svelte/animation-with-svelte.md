@@ -33,6 +33,8 @@ A transition is triggered by an element entering or leaving the page as a result
 
 Svelte exposes seven transition functions `fade`, `blur`, `fly`, `slide`, `scale`, `draw` and `crossfade`.
 
+{% video src="transitions-examples.mp4" %}
+
 You can use the same intro and outro transition with `transition:fade` but if you want to use different intro and outro transitions use `in:` and `out:`.
 
 ```html:+page.svelte {2, 13-15} showLineNumbers
