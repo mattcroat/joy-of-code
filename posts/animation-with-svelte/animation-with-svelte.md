@@ -1011,14 +1011,17 @@ I have a simple box I want to animate using spring physics and I'm going to use 
     const value = { rotate: 0, scale: 1 }
     const options = { stiffness: 0.1, damping: 0.6 }
 
+    // use spring store
     let transition = spring(value, options)
 
+    // subscribe to store
     const unsubscribe = transition.subscribe(
       ({ rotate, scale }) => {
         node.style.transform = `scale(${scale}) rotate(${rotate}deg)`
       }
     )
 
+    // store update starts animation
     transition.update(() => ({ scale, rotate }))
 
     return {
