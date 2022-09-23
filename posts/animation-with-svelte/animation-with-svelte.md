@@ -5,10 +5,11 @@ slug: animation-with-svelte
 published: 2022-9-22
 category: svelte
 series: false
-draft: true
 ---
 
 # Animation With Svelte
+
+{% embed src="https://www.youtube.com/embed/3RlBfUQCiAQ" title="Animation With Svelte" %}
 
 ## Table of Contents
 
