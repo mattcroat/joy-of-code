@@ -1,6 +1,6 @@
 ---
 title: Animation With Svelte
-description: Comprehensive guide for animations in Svelte from regular to custom transitions and using animation libraries.
+description: Master animation with Svelte from regular and custom transitions to using other animation libraries.
 slug: animation-with-svelte
 published: 2022-9-22
 category: svelte
@@ -642,7 +642,6 @@ I have some items I'm sending from one element to another and I want to animate 
 
   const [send, receive] = crossfade({
     duration: 600,
-
     // when you remove an element
     fallback(node) {
       const style = getComputedStyle(node)
@@ -652,9 +651,9 @@ I have some items I'm sending from one element to another and I want to animate 
       return {
         duration: 600,
         easing: quintOut,
-        css: (time) => `
-          opacity: ${time}
-          transform: ${transform} scale(${time});
+        css: (t) => `
+          opacity: ${t}
+          transform: ${transform} scale(${t});
         `
       }
     }
@@ -1011,7 +1010,7 @@ I have a simple box I want to animate using spring physics and I'm going to use 
     const value = { rotate: 0, scale: 1 }
     const options = { stiffness: 0.1, damping: 0.6 }
 
-    // use spring store
+    // create spring store
     let transition = spring(value, options)
 
     // subscribe to store
@@ -1022,7 +1021,7 @@ I have a simple box I want to animate using spring physics and I'm going to use 
     )
 
     // store update starts animation
-    transition.update(() => ({ scale, rotate }))
+    transition.set(({ scale, rotate }))
 
     return {
       destroy: () => unsubscribe()
@@ -1244,19 +1243,23 @@ import { animate, spring } from 'motion'
 import type { Action } from 'svelte/action'
 
 type SpringInParams = {
-  scale?: number
-  rotate?: number
+  scale: number
+  rotate: number
 }
 type SpringInAction = Action<HTMLElement, SpringInParams>
 
 export const springIn: SpringInAction = (node, params) => {
+  if (!params) return
+
   animate(
     node,
     {
-      scale: params?.scale ?? 1,
-      rotate: params?.rotate ?? 0
+      scale: params.scale,
+      rotate: params.rotate
     },
-    { easing: spring() }
+    {
+      easing: spring()
+    }
   )
 }
 ```
