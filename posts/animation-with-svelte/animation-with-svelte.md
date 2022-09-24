@@ -19,7 +19,7 @@ There's a lack of reverence for both animation and accessibility where they're t
 
 Animations can tell stories and help the user not feel disoriented if elements on the page reflect how objects behave in the real world instead of teleporting around and help bring attention to parts of the site that require it.
 
-**In Svelte animations are a first class-citizen** because Svelte was forged by [@Rich_Harris](https://twitter.com/Rich_Harris) in a newsroom for that purpose and is popularly used for but not limited to visual storytelling and data visualizations since then.
+In Svelte animations are a first class-citizen because Svelte was forged by [@Rich_Harris](https://twitter.com/Rich_Harris) in a newsroom for that purpose and is popularly used for but not limited to visual storytelling and data visualizations since then.
 
 {% img src="tweet.webp" alt="Svelte used for graphics at The New York Times" %}
 
@@ -75,7 +75,7 @@ You can specify a custom easing function or use a built-in [Svelte easing functi
 
 {% video src="transitions-fly.mp4" %}
 
-I want to split up and animate some text which is simple using a declaractive JavaScript framework and doesn't require a library:
+I want to animate a title and need to split the lines which is simple using Svelte:
 
 - First I'm going to declare the lines and use empty lines to create a pause between other text that's going to animate in
 - I'm going to use the `in:fly` intro transition and set a starting `y` position using the built-in `backOut` easing function
@@ -170,7 +170,7 @@ You can also use [transition events](https://svelte.dev/docs#template-syntax-ele
 {/if}
 ```
 
-Some of the transitions are specific to certain things like using `draw` for animating the stroke of an SVG element and we're going to look at what `crossfade` is useful for later.
+Some of the transitions are specific to certain things like `draw` for animating the stroke of an SVG element and we're going to look at what `crossfade` is useful for later.
 
 Here's how you can animate an SVG of a circle with a check mark in Svelte for delightful interactions.
 
@@ -362,7 +362,7 @@ Let's say I have notifications and I want to animate the count when it updates.
 
 ## Page Transitions
 
-Because SvelteKit is the default way to build Svelte apps you might wanto know how to do page transitions and it's a great way to use what you learned so far.
+Because SvelteKit is the default way to build Svelte apps you might want to know how to do page transitions and it's a great way to use what you learned so far.
 
 To start create a `<PageTransition>` component that accepts a `key` so it knows when the page changes to play the transition and `duration` as the props.
 
@@ -391,7 +391,7 @@ To start create a `<PageTransition>` component that accepts a `key` so it knows 
 </style>
 ```
 
-To avoid overlap transitions we set the `delay` value to the `duration` and set the position of the element to `absolute` to help avoid issues but it's optional.
+To avoid overlap for the transitions we set the `delay` value to the `duration` and set the position of the element to `absolute` to help avoid issues but it's optional.
 
 Inside `+layout.ts` we're going to pass the `url` that updates when it changes.
 
@@ -422,7 +422,7 @@ Inside `+layout.svelte` receive and pass the prop to the component.
 
 The transitions you've seen so far cover most of what you need but sometimes you want to combine them or do something crazy and that's where custom transitions come in.
 
-You might be thinking how Svelte being a compiler means there's some magic involved with transitions but surprisingly transitions use regular CSS with the help of JavaScript. 
+You might be thinking how Svelte does transitions is some magic but surprisingly transitions use regular CSS with the help of JavaScript. 
 
 Here's how Svelte implements the [fade transition](https://github.com/sveltejs/svelte/blob/d5370f23d3d34f15078ccc8d72b80eea0617f173/src/runtime/transition/index.ts#L49-L62).
 
@@ -452,7 +452,7 @@ It has a similar signature to [Svelte actions](https://svelte.dev/tutorial/actio
 I have a simple modal I want to spice up  when a user opens it by scaling and transforming it:
 
 - For this I created a custom transition function `modal` that's going to take the element and parameters and get the existing `transform` styles of the element and return a `css` function.
-- The `css` function takes a `t` argument that's a value between `0` and `1` after the `easing` function has been applied and and the `u` argument is the opposite and returns a value between `1` to `0`
+- The `css` function takes a `t` argument that's a value between `0` and `1` after the `easing` function has been applied and the `u` argument is the opposite and returns a value from `1` to `0`
 - I use these values to `scale` and `translateY` the element, so it starts to grow from `-100px` on the vertical axis
 
 > 🐿️ The easiest way to think about `t` is that it animates **TO** the value you specified and `u` animates **FROM** the value you specified — if you animate `scale` with `t` it goes from `0` to `1` being the normal state but using `u` it would go from `1` to `0`.
@@ -561,7 +561,7 @@ Time to use the best modal ever.
 </style>
 ```
 
-The Svelte documentation advises to use `css` when possible because of performance reasons but if you want to do something more ambitious like a typewriter effect using JavaScript you can use `tick` called during the transition with the same arguments.
+The Svelte documentation advises to use `css` when possible because of performance reasons but if you want to do something more ambitious like a typewriter effect using JavaScript you can use `tick` with the same arguments.
 
 {% video src="transitions-custom-js.mp4" %}
 
@@ -635,7 +635,7 @@ The `crossfade` function creates a pair of transitions called `send` and `receiv
 
 I have some items I'm sending from one element to another and I want to animate that change using `crossfade` and provide a fallback when the item is removed.
 
-```html:+page.svelte {2-3, 6-24, 49-50, 63-64} showLineNumbers
+```html:+page.svelte {2-3, 6-23, 48-49, 62-63} showLineNumbers
 <script lang="ts">
   import { crossfade } from 'svelte/transition'
   import { quintOut } from 'svelte/easing'
@@ -773,10 +773,9 @@ In the previous example if you remove an element it just leaves an empty space b
 
 {% video src="animate-flip.mp4" %}
 
-```html:+page.svelte {2, 12, 28} showLineNumbers
+```html:+page.svelte {2, 11, 27} showLineNumbers
 <script lang="ts">
   import { flip } from 'svelte/animate'
-
   // ...
 </script>
 
@@ -825,7 +824,7 @@ We take for granted how the browser can interpolate values of an element such as
 
 Unfortunately you can't tap into this power for values outside of CSS but lucky for us Svelte provides you with a way to interpolate between numbers, arrays and objects of the same shape.
 
-You can pass options for `delay`, `duration`, `easing` and an `interpolate` function and the `interpolate` option lets you pass a `(startingValue, targetValue) => time => result` function, so you can use a package like [d3-interpolate](https://github.com/d3/d3-interpolate) to smoothly interpolate between two colors among other things.
+You can pass options for `delay`, `duration`, `easing` and an `interpolate` function. The `interpolate` option lets you pass a `(startingValue, targetValue) => time => result` function, so you can use a package like [d3-interpolate](https://github.com/d3/d3-interpolate) to smoothly interpolate between two colors among other things.
 
 Use `tweened` when you need a smooth transition between two values.
 
@@ -844,7 +843,7 @@ In the next example I made a Pokémon game simulator where the Pokémon receives
     level: 20
   }
 
-  // use tweened store
+  // create tweened store
   let currentHp = tweened(pokemon.hp)
 
   let duration = 2000
@@ -993,7 +992,7 @@ I have a simple box I want to animate using spring physics and I'm going to use 
 
 {% video src="motion-spring.mp4" %}
 
-```html:+page.svelte {2, 11-37, 43} showLineNumbers
+```html:+page.svelte {2, 11-35, 40} showLineNumbers
 <script lang="ts">
   import { spring } from 'svelte/motion'
   import type { Action } from 'svelte/action'
@@ -1022,6 +1021,7 @@ I have a simple box I want to animate using spring physics and I'm going to use 
     )
 
     // store update starts animation
+    // note: use transition.update(state => ...) if you need previous state
     transition.set(({ scale, rotate }))
 
     return {
@@ -1033,7 +1033,7 @@ I have a simple box I want to animate using spring physics and I'm going to use 
 {#if animate}
   <div
     class="box"
-    use:springIn={{ rotate: 90, scale: 2 }}
+    use:springIn={{ scale: 2, rotate: 90 }}
   />
 {/if}
 
@@ -1050,7 +1050,7 @@ I have a simple box I want to animate using spring physics and I'm going to use 
 
 ## Using Other Animation Libraries
 
-Using Svelte is enough for most things but sometimes you need a professional instead of a generalist and you can reach for animation libraries such as [Anime.js](https://animejs.com/), [GSAP](https://greensock.com/gsap/) or [Motion One](https://motion.dev/) that have features like timelines to coordinate animations or you want to use some feature.
+Using Svelte is enough for most things but sometimes you need a specialist instead of a generalist and you can reach for animation libraries such as [Anime.js](https://animejs.com/), [GSAP](https://greensock.com/gsap/) or [Motion One](https://motion.dev/) that have features like timelines to coordinate animations.
 
 So far you have seen what a powerful combination `crossfade` and `flip` make but they have their drawbacks like not working great on elements that are rotated and `flip` can't be used outside an each block.
 
@@ -1239,7 +1239,7 @@ The best thing about Svelte is the ease of using existing JavaScript libraries b
 
 Remember the spring example from before? Here's the same example using Motion One and Svelte actions.
 
-```ts:animations.ts {1, 10-19} showLineNumbers
+```ts:animations.ts {1, 10-23} showLineNumbers
 import { animate, spring } from 'motion'
 import type { Action } from 'svelte/action'
 
