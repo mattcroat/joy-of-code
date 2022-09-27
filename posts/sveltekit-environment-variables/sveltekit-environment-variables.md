@@ -8,8 +8,6 @@ category: 'sveltekit'
 
 # Using Secret Environment Variables With SvelteKit
 
-{% embed src="https://www.youtube.com/embed/_qgRBAua7cE" title="Using Secret Environment Variables With SvelteKit" %}
-
 ## Table of Contents
 
 ## What Are Environment Variables?
@@ -26,121 +24,99 @@ In development you store environment variables inside a `.env` file that should 
 
 To help your future self and others it's a great idea to create a `.env.example` file with placeholder values that's safe to push so you know what keys you need.
 
-## Using Vite to Expose Environment Variables Client-side
 
-SvelteKit uses [Vite](https://vitejs.dev/) so anything regarding environment variables should be consulted reading the [Vite documentation](https://vitejs.dev/guide/env-and-mode.html).
+## Using Environment Variables In SvelteKit
 
-Vite exposes environment variables on the special `import.meta.env` object.
+SvelteKit exposes four different [modules](https://kit.svelte.dev/docs/modules) for handling environment variables:
+- [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules)
+- [`$env/dynamic/public`](https://kit.svelte.dev/docs/modules)
+- [`$env/static/private`](https://kit.svelte.dev/docs/modules)
+- [`$env/static/public`](https://kit.svelte.dev/docs/modules)
 
-This is great for public values like your tracking ID for Google Analytics that you need on the client but if you have sensitive information like your GitHub token in the wrong hands someone could wreak havoc.
+You can load environment variables however you want like using `import.meta.env` from [Vite](https://vitejs.dev/guide/env-and-mode.html#env-variables) or [dotenv](https://github.com/motdotla/dotenv) but it's easier and more secure if you use the built-in modules SvelteKit provides.
 
-Here's an example.
+Another great benefit of SvelteKit managing everything for you is that it won't let you expose sensitive environment variables on the client and throw an error since it knows about the imports and you get great TypeScript support.
 
-```shell:.env
-VITE_UNSECURE_SECRET=secret
+That being said these four options might look confusing but are easy to understand once you understand their purpose.
+
+## Static For Variables That Don't Change
+
+**This is what you want most of the time.**
+
+If you have an `.env` file or store your environment variables somewhere else the next steps are the same.
+
+```text:.env showLineNumbers
+# Private
+SECRET_API_KEY=secret
+
+# Public
+PUBLIC_API_KEY=public
 ```
 
-```html:index.svelte {2} showLineNumbers
-<script lang="ts">
-  const secret = import.meta.env.VITE_UNSECURE_SECRET
-</script>
-```
+Use `$env/static/private` if you want to access environment variables loaded from your `.env` file but only inside `.server` files.
 
-Never expose your secrets like this in your components.
+```ts:+page.ts showLineNumbers
+import { SECRET_API_KEY } from '$env/static/private'
+import type { PageLoad } from './$types'
 
-Only use `import.meta.env` in endpoints or other server-side code because you could leak your secret to the client.
-
-## Safely Loading Environment Variables
-
-In the [SvelteKit FAQ](https://kit.svelte.dev/faq#env-vars) they suggest to load environment variables using [dotenv](https://github.com/motdotla/dotenv).
-
-```shell:terminal
-npm i dotenv
-```
-
-After you install `dotenv` you can load environment variables in your endpoints.
-
-```shell:.env
-SECURE_SECRET=secret
-```
-
-```html:index.svelte showLineNumbers
-<script lang="ts">
-  export let message
-</script>
-
-{message}
-```
-
-```ts:index.ts showLineNumbers
-import type { RequestHandler } from '@sveltejs/kit'
-
-// `dotenv` loads the environment variables
-import 'dotenv/config'
-
-export const GET: RequestHandler = async () => {
-  // it's also safe to use the Vite import here
-  // const secret = import.meta.env.VITE_UNSECURE_SECRET
-
-  // we can access the value using `process.env`
-  const secret = process.env.SECURE_SECRET
-
-  if (secret === 'secret') {
-    return {
-      status: 200,
-      body: { message: 'Success! 🥳' },
-    }
-  }
-
-  throw new Error(`You're a failure. 💩`)
+export const load: PageLoad = () => {
+  console.log(SECRET_API_KEY) // secret
 }
 ```
 
-Don't forget if you're hosting your site on services like [Vercel](https://vercel.com/) you have to set the secret environment variables in your dashboard.
+Use `$env/static/public` if you want to access environment variables prefixed with `PUBLIC_` loaded from your `.env` file.
 
-## The Easiest Method to Load Environment Variables
 
-Using [env-cmd](https://github.com/toddbluhm/env-cmd) you can load environment variables just by passing it to your scripts.
+```ts:+page.server.ts showLineNumbers
+import { PUBLIC_API_KEY } from '$env/static/public'
+import type { PageServerLoad } from './$types'
 
-```shell:terminal
-npm i env-cmd
-```
-
-```json:package.json {3,4,6} showLineNumbers
-// ...
-"scripts": {
-  "dev": "env-cmd vite dev",
-  "build": "env-cmd vite build",
-  "package": "svelte-kit package",
-  "preview": "env-cmd vite preview",
-  "prepare": "svelte-kit sync"
-}
-// ...
-```
-
-```ts:index.ts showLineNumbers
-import type { RequestHandler } from '@sveltejs/kit'
-
-export const GET: RequestHandler = async () => {
-  const secret = process.env.SECURE_SECRET
-
-  if (secret === 'secret') {
-    return {
-      status: 200,
-      body: { message: 'Success! 🥳' },
-    }
-  }
-
-  throw new Error(`You're a failure. 💩`)
+export const load: PageServerLoad = () => {
+  console.log(PUBLIC_API_KEY) // public
 }
 ```
 
-If you're trying it out keep in mind you have to restart the server when you make changes to the `.env` file.
+## Dynamic For Variables That Change
 
-## Conclusion
+Sometimes you have environment variables that change and you have to send them from the server to the client. **Use them only when you need to.**
 
-To summarize only use Vite to import environment variables you're comfortable being exposed on the client or use them only inside endpoints or other server-side code.
+Use `$env/dynamic/private` to get access to environment variables equivalent to `process.env`.
 
-To be safe use a package such as `dotenv` or `env-cmd` to load the environment variables.
+```ts:+page.ts showLineNumbers
+import { env } from '$env/dynamic/private'
+import type { PageLoad } from './$types'
 
-Thanks for reading! 🏄️
+export const load: PageLoad = () => {
+  console.log(env.SECRET_API_KEY) // secret
+}
+```
+
+Use `$env/dynamic/public` to get access to environment variables prefixed with `_PUBLIC`.
+
+```ts:+page.server.ts showLineNumbers
+import { env } from '$env/dynamic/public'
+import type { PageServerLoad } from './$types'
+
+export const load: PageServerLoad = () => {
+  console.log(env.PUBLIC_API_KEY) // public
+}
+```
+
+## Keep Your Own Secrets
+
+You can create a server-only module by adding `.server` to a filename or placing the file inside `$lib/server` to store any other secrets.
+
+```ts:lib/server/secrets.ts showLineNumbers
+export const secret = '🍜'
+```
+
+```ts:+page.server.ts showLineNumbers
+import { secret } from '$lib/server/secrets'
+import type { PageServerLoad } from './$types'
+
+export const load: PageServerLoad = () => {
+  console.log(secret) // 🍜
+}
+```
+
+Thank you for reading! 🏄️
