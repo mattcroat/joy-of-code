@@ -8,6 +8,8 @@ category: 'sveltekit'
 
 # Using Secret Environment Variables With SvelteKit
 
+{% embed src="https://www.youtube.com/embed/h2VzXTfbUpQ" title="Using Secret Environment Variables With SvelteKit" %}
+
 ## Table of Contents
 
 ## What Are Environment Variables?
@@ -55,11 +57,11 @@ PUBLIC_API_KEY=public
 
 Use `$env/static/private` if you want to access environment variables loaded from your `.env` file but only inside `.server` files.
 
-```ts:+page.ts showLineNumbers
+```ts:+page.server.ts showLineNumbers
 import { SECRET_API_KEY } from '$env/static/private'
-import type { PageLoad } from './$types'
+import type { PageServerLoad } from './$types'
 
-export const load: PageLoad = () => {
+export const load: PageServerLoad = () => {
   console.log(SECRET_API_KEY) // secret
 }
 ```
@@ -67,11 +69,11 @@ export const load: PageLoad = () => {
 Use `$env/static/public` if you want to access environment variables prefixed with `PUBLIC_` loaded from your `.env` file.
 
 
-```ts:+page.server.ts showLineNumbers
+```ts:+page.ts showLineNumbers
 import { PUBLIC_API_KEY } from '$env/static/public'
-import type { PageServerLoad } from './$types'
+import type { PageLoad } from './$types'
 
-export const load: PageServerLoad = () => {
+export const load: PageLoad = () => {
   console.log(PUBLIC_API_KEY) // public
 }
 ```
@@ -82,22 +84,22 @@ Sometimes you have environment variables that change and you have to send them f
 
 Use `$env/dynamic/private` to get access to environment variables equivalent to `process.env`.
 
-```ts:+page.ts showLineNumbers
+```ts:+page.server.ts showLineNumbers
 import { env } from '$env/dynamic/private'
-import type { PageLoad } from './$types'
+import type { PageServerLoad } from './$types'
 
-export const load: PageLoad = () => {
+export const load: PageServerLoad = () => {
   console.log(env.SECRET_API_KEY) // secret
 }
 ```
 
-Use `$env/dynamic/public` to get access to environment variables prefixed with `_PUBLIC`.
+Use `$env/dynamic/public` to get access to environment variables prefixed with `PUBLIC_`.
 
-```ts:+page.server.ts showLineNumbers
+```ts:+page.ts showLineNumbers
 import { env } from '$env/dynamic/public'
-import type { PageServerLoad } from './$types'
+import type { PageLoad } from './$types'
 
-export const load: PageServerLoad = () => {
+export const load: PageLoad = () => {
   console.log(env.PUBLIC_API_KEY) // public
 }
 ```
