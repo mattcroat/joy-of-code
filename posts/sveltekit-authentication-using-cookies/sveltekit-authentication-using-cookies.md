@@ -9,6 +9,8 @@ series: true
 
 # SvelteKit Authentication Using Cookies
 
+{% embed src="https://www.youtube.com/embed/E3VG-dLCRUk" title="SvelteKit Authentication Using Cookies" %}
+
 ## Table of Contents
 
 ## Setting Up The Database
@@ -97,7 +99,6 @@ To register the user I'm going to use [form actions](https://kit.svelte.dev/docs
 
 ```html:register/+page.svelte showLineNumbers
 <script lang="ts">
-  import { enhance } from '$app/forms'
   import type { ActionData } from './$types'
 
   export let form: ActionData
@@ -349,7 +350,7 @@ export const load: PageServerLoad = async (event) => {
 
 > 🐿️ `*.server.ts` files only run on the server.
 
-The `event` contains `clientAddress`, `cookies``locals`, `platform` and `request` but to us the most interesting one is `event.locals` to store the user information and make it available wherever you use the `load` function.
+The `event` contains `clientAddress`, `cookies`, `locals`, `platform` and `request` but to us the most interesting one is `event.locals` to store the user information and make it available wherever you use the `load` function.
 
 In the same way to get access to that information on the client you can use `$page.data` from the `$page` store that holds the combined data of all `load` functions.
 
@@ -582,9 +583,9 @@ For the register page we need to rerun the `load` function for the page to updat
 </form>
 ```
 
-The same thing is true for logout page.
+The same goes for logout.
 
-```html:logout/+page.svelte showLineNumbers
+```html:routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import { applyAction, enhance } from '$app/forms'
   import { invalidateAll } from '$app/navigation'
