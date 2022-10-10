@@ -551,9 +551,9 @@ The only thing you have to do is import the `enhance` action from SvelteKit and 
 </form>
 ```
 
-For the register page we need to rerun the `load` function for the page to update it.
+For the login page we need to rerun the `load` function for the page to update it.
 
-```html:register/+page.svelte showLineNumbers
+```html:login/+page.svelte showLineNumbers
 <script lang="ts">
   import { applyAction, enhance } from '$app/forms'
   import { invalidateAll } from '$app/navigation'
