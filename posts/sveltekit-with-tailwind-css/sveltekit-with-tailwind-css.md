@@ -13,9 +13,11 @@ draft: true
 
 ## Set up Tailwind CSS
 
+You can create a new SvelteKit project or add Tailwind to an existing project.
+
 > 🧪 You can find the example repository on [GitHub](https://github.com/joysofcode/sveltekit-tailwind).
 
-Create a new SvelteKit project or skip this step if you want to add Tailwind to an existing project.
+Create new SvelteKit project.
 
 ```shell:terminal
 npm init svelte
@@ -74,7 +76,14 @@ You're done!
 
 ## Automatic Class Sorting With Prettier
 
-You're going to need `prettier` which is one of the options when you create a SvelteKit project.
+Make sure you have the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) installed and it's the default formatter in your VS Code settings.
+
+```json:settings.json showLineNumbers
+"editor.formatOnSave": true,
+"editor.defaultFormatter": "esbenp.prettier-vscode"
+```
+
+You're going to need the `prettier` package which is one of the options when you create a SvelteKit project.
 
 ```shell:terminal
 ✔ Add Prettier for code formatting? … No / [Yes]
@@ -89,7 +98,7 @@ npm i -D prettier
 Install the Prettier plugin for Tailwind CSS.
 
 ```shell:terminal
-npm i -D prettier prettier-plugin-tailwindcss
+npm i -D prettier-plugin-tailwindcss
 ```
 
 SvelteKit uses `prettier-plugin-svelte` which conflicts with the Tailwind CSS plugin and you have to remove it but `prettier-plugin-tailwindcss` includes it for you so everything should work as before.
@@ -130,17 +139,14 @@ You might need to restart your editor.
 
 ```html:routes/+page.svelte showLineNumbers
 <!-- Before -->
-<button class="text-white px-4 sm:px-8 py-2 sm:py-3 bg-sky-700 hover:bg-sky-800">...</button>
+<button class="text-white px-4 sm:px-8 py-2 sm:py-3 bg-sky-700 hover:bg-sky-800">
+  ...
+</button>
 
 <!-- After -->
-<button class="bg-sky-700 px-4 py-2 text-white hover:bg-sky-800 sm:px-8 sm:py-3">...</button>
-```
-
-If you have trouble with Prettier make sure you have the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) installed and it's the default formatter in your VS Code settings.
-
-```json:settings.json showLineNumbers
-"editor.formatOnSave": true,
-"editor.defaultFormatter": "esbenp.prettier-vscode"
+<button class="bg-sky-700 px-4 py-2 text-white hover:bg-sky-800 sm:px-8 sm:py-3">
+  ...
+</button>
 ```
 
 ## Useful Tailwind CSS Tips
