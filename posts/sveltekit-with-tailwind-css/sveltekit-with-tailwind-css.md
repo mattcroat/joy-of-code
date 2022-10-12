@@ -4,10 +4,11 @@ description: Learn how to set up Tailwind CSS and automatic class sorting with S
 slug: sveltekit-with-tailwind-css
 published: 2022-10-12
 category: sveltekit
-draft: true
 ---
 
 # SvelteKit With Tailwind CSS
+
+{% embed src="https://www.youtube.com/embed/J_G_xP0chog" title="SvelteKit With Tailwind CSS" %}
 
 ## Table of Contents
 
