@@ -154,7 +154,7 @@ You might need to restart your editor.
 
 Here are some useful quality of life tips when using Tailwind:
 
-- Use [daisyUI](https://daisyui.com/) if you need a component library for Tailwind
+- Use [SkeletonUI](https://skeleton.brainandbonesllc.com) if you need a component library for Tailwind and Svelte
 - Use the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension to help you with autocomplete so you don't have to look for every value in the documentation
 - Use [Tailwind CSS Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet) to find what you need at a glance
 - Don't forget you can place your long class names inside a variable if you need to reuse them because [the author of Tailwind discourages extracting classes with `@apply`](https://twitter.com/adamwathan/status/1226511611592085504)
