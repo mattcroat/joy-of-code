@@ -431,7 +431,7 @@ declare namespace App {
     user: {
       name: string
       role: string
-    }
+    }?
   }
 
   // interface PageData {}
