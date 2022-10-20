@@ -97,7 +97,7 @@ export const db = new prisma.PrismaClient()
 
 To register the user I'm going to use [form actions](https://kit.svelte.dev/docs/form-actions) that's an easy way to write an action you want your form to take once you submit it and return form validation errors.
 
-```html:register/+page.svelte showLineNumbers
+```html:routes/register/+page.svelte showLineNumbers
 <script lang="ts">
   import type { ActionData } from './$types'
 
@@ -137,7 +137,7 @@ pnpm i -D @types/bcrypt
 
 If there are no validation errors I'm going to create the user by hashing the password, creating the user authentication token and assigning it a role after which I'm going to redirect the user.
 
-```ts:register/+page.server.ts showLineNumbers
+```ts:routes/register/+page.server.ts showLineNumbers
 import { invalid, redirect } from '@sveltejs/kit'
 import type { Action, Actions, PageServerLoad } from './$types'
 import bcrypt from 'bcrypt'
@@ -200,7 +200,7 @@ The user login is similar to the user registration for the page.
 
 > 🐿️ If you have sensitive information be vague with the error messages to not help bad actors who might be trying to abuse it.
 
-```html:login/+page.svelte showLineNumbers
+```html:routes/login/+page.svelte showLineNumbers
 <script lang="ts">
   import type { ActionData } from './$types'
 
@@ -236,7 +236,7 @@ I'm going to check if the user already exists and compare if the passwords match
 
 SvelteKit provides a nice API for interacting with cookies, so you don't have to import it.
 
-```ts:login/+page.server.ts showLineNumbers
+```ts:routes/login/+page.server.ts showLineNumbers
 import { invalid, redirect } from '@sveltejs/kit'
 import bcrypt from 'bcrypt'
 import type { Action, Actions, PageServerLoad } from './$types'
@@ -308,7 +308,7 @@ At first the code might look daunting but if you ignore the user validation the 
 
 To make the user logout work you only need to eat the cookie and redirect the user. 
 
-```ts:logout/+page.server.ts showLineNumbers
+```ts:routes/logout/+page.server.ts showLineNumbers
 import { redirect } from '@sveltejs/kit'
 import type { Actions, PageServerLoad } from './$types'
 
