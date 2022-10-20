@@ -154,7 +154,7 @@ You might need to restart your editor.
 
 Here are some useful quality of life tips when using Tailwind:
 
-- If you need a component library for Svelte you can use [Skeleton](https://skeleton.brainandbonesllc.com) or [daisyUI](https://daisyui.com/) and [Flowbite](https://flowbite.com/) which are framework agnostic
+- If you need a component library for Svelte you can use [Skeleton](https://www.skeleton.dev/) or [daisyUI](https://daisyui.com/) and [Flowbite](https://flowbite.com/) which are framework agnostic
 - Use the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension to help you with autocomplete so you don't have to look for every value in the documentation
 - Use [Tailwind CSS Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet) to find what you need at a glance
 - Don't forget you can place your long class names inside a variable if you need to reuse them because [the author of Tailwind discourages extracting classes with `@apply`](https://twitter.com/adamwathan/status/1226511611592085504)
