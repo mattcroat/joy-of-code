@@ -359,7 +359,7 @@ The simplest solution I found to have a specific number of lines for words is mu
 
 The use of `:global` for the data attributes is required because Svelte removes unused classes if they're not used in the template and it doesn't know they exist.
 
-```html:+page.svelte {5, 6, 8, 22, 26} showLineNumbers
+```html:+page.svelte {5, 6, 9, 23, 27} showLineNumbers
 <!-- ... -->
 
 <style lang="scss">
@@ -403,19 +403,18 @@ The player could skip words on accident, so I want to make sure it doesn't happe
 
 Thanks to using explicit state I can make sure this only happens when the game is in progress.
 
-```html:+page.svelte {3-12, 21-23} showLineNumbers
+```html:+page.svelte {2-11, 19-21} showLineNumbers
 <script lang="ts">
+  function nextWord() {
+    const isNotFirstLetter = letterIndex !== 0
+    const isOneLetterWord = words[wordIndex].length === 1
 
-function nextWord() {
-  const isNotFirstLetter = letterIndex !== 0
-  const isOneLetterWord = words[wordIndex].length === 1
-
-  if (isNotFirstLetter || isOneLetterWord) {
-    wordIndex += 1
-    letterIndex = 0
-    increaseScore()
+    if (isNotFirstLetter || isOneLetterWord) {
+      wordIndex += 1
+      letterIndex = 0
+      increaseScore()
+    }
   }
-}
 
 // ...
 
@@ -451,7 +450,7 @@ We're going to get a reference to the current word `wordEl`, the `Y` position fo
 
 If `wordY > wordsY` we can use the handy [`scrollIntoView`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) method and pass it an argument for vertical alignment.
 
-```html:+page.svelte {6} showLineNumbers
+```html:+page.svelte {4, 15} showLineNumbers
 <script lang="ts">
   function updateGameState() {
     // ...
@@ -486,7 +485,7 @@ Moving the caret is going to be simple as updating the `top` and `left` position
 
 Don't forget to invoke `moveCaret` when updating the game state and going to the next word.
 
-```html:+page.svelte {2, 6, 16, 22-26, 32, 39-56} showLineNumbers
+```html:+page.svelte {2, 6, 16, 22-26, 32} showLineNumbers
 <script lang="ts">
   let caretEl: HTMLDivElement
 
@@ -635,7 +634,9 @@ When the game timer runs out the game state is updated and `getResults` is invok
 
 I'm going to define `wordsPerMinute` and `accuracy` using a [`tweened`](https://svelte.dev/tutorial/tweened) [Svelte store](https://svelte.dev/tutorial/writable-stores) to interpolate the numbers for a nice animation.
 
-To get the words per minute I use an [equation](https://www.speedtypingonline.com/typing-equations) that considers five letters as a word because longer words should have a higher value and then divide it by **0.5 minutes** since the game timer is **30 seconds**. The accuracy equation is simple as taking the amount of correct letters and diving it by total letters to get the percentage.
+To get the words per minute I use an [equation](https://www.speedtypingonline.com/typing-equations) that considers five letters as a word because longer words should have a higher value and then divide it by **0.5 minutes** since the game timer is **30 seconds**.
+
+The accuracy equation is simple as taking the amount of correct letters and diving it by total letters to get the percentage.
 
 To get the total amount of letters I use `reduce` to get the total value by going over each word and adding `words.length` to `count`.
 
@@ -735,9 +736,11 @@ export const GET: RequestHandler = ({ url }) => {
 }
 ```
 
-I do love the simplicity of SvelteKit. It blurs the line between frontend and backend as you just wrote backend code and created an endpoint — I guess you're a fullstack developer now! 🥳
+I do love the simplicity of SvelteKit.
 
-This is exciting. Let's use our new power and replace the placeholder text. You need to do it when the page loads though inside `onMount`.
+It blurs the line between frontend and backend as you just wrote backend code and created an endpoint — I guess you're a fullstack developer now! 🥳
+
+Let's use our new power and replace the placeholder text. You need to do it when the page loads though inside `onMount`.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
