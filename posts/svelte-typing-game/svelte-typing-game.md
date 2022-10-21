@@ -11,15 +11,17 @@ draft: true
 
 ## Table of Contents
 
-## Setup
+## Typing Game
 
 By the end of this post you're going to make a speed typing game if you're familiar with [Monkeytype](https://monkeytype.com/).
 
 {% embed src="https://stackblitz.com/github/mattcroat/sveltype?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltype" title="Sveltype Stackblitz REPL" %}
 
-> 🧪 The project files are available on [GitHub](https://github.com/joysofcode/svelte-typing-game) or [StackBlitz](https://stackblitz.com/joysofcode/svelte-typing-game) for a live example.
+## Setup
 
 I'm going to start a new SvelteKit project with TypeScript (optional) and Sass (optional) for styling.
+
+> 🧪 The project files are available on [GitHub](https://github.com/joysofcode/svelte-typing-game) and you can try it on [StackBlitz](https://stackblitz.com/joysofcode/svelte-typing-game).
 
 ```shell:terminal
 # initialize SvelteKit project
