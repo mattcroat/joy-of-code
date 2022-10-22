@@ -1,13 +1,14 @@
 ---
 title: Make A Typing Game With Svelte
-description: Make a typing game with Svelte.
+description: Learn how to make a typing game with Svelte.
 slug: svelte-typing-game
 published: 2022-10-21
 category: svelte
-draft: true
 ---
 
 # Svelte Typing Game
+
+{% embed src="https://www.youtube.com/embed/kMz_Ba_OF2w" title="Svelte Typing Game" %}
 
 ## Table of Contents
 
@@ -15,7 +16,7 @@ draft: true
 
 By the end of this post you're going to make a speed typing game if you're familiar with [Monkeytype](https://monkeytype.com/).
 
-{% embed src="https://stackblitz.com/github/mattcroat/sveltype?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltype" title="Sveltype Stackblitz REPL" %}
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-typing-game?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltype" title="Sveltype Stackblitz REPL" %}
 
 ## Setup
 
@@ -721,7 +722,7 @@ Your keyboard can find respite from the abuse. 😅
 
 I'm just going to take a JSON file of 1000 common English words I yoinked (you can find it in the [project files on GitHub](https://github.com/joysofcode/svelte-typing-game/blob/main/src/routes/api/words/languages/english.json) and create a standalone endpoint in SvelteKit to get randomized words based on a limit.
 
-Inside `routes` I'm going to create an `api` folder but you can name it anything else since it's not convention and you can download or copy the English words inside `routes/api/words/english/english.json`.
+Inside `routes` I'm going to create an `api` folder but you can name it anything else since it's not convention and you can download or copy the English words inside `routes/api/words/languages/english.json`.
 
 I'm going to import the JSON file inside the SvelteKit endpoint that's going to serve them from `http://localhost:5173/api/words?limit=100` and randomize the words before I return them as a JSON response.
 
