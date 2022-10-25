@@ -14,15 +14,15 @@ category: svelte
 
 ## Typing Game
 
-By the end of this post you're going to make a speed typing game if you're familiar with [Monkeytype](https://monkeytype.com/).
+By the end of this post you're going to make a typing game that measures your typing speed similar to [Monkeytype](https://monkeytype.com/).
 
 {% embed src="https://stackblitz.com/github/joysofcode/svelte-typing-game?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltype" title="Sveltype Stackblitz REPL" %}
 
 ## Setup
 
-I'm going to start a new SvelteKit project with TypeScript (optional) and Sass (optional) for styling.
+I'm going to start a new SvelteKit project with **TypeScript** (optional) and **Sass** (optional) for styling.
 
-> 🧪 The project files are available on [GitHub](https://github.com/joysofcode/svelte-typing-game) and you can try it on [StackBlitz](https://stackblitz.com/joysofcode/svelte-typing-game).
+> 🧪 The project files are available on [GitHub](https://github.com/joysofcode/svelte-typing-game) and you can try it on [StackBlitz](https://stackblitz.com/github/joysofcode/svelte-typing-game).
 
 ```shell:terminal
 # initialize SvelteKit project
@@ -40,7 +40,7 @@ npm run dev
 
 Let's start by adding some global styles.
 
-```scss:src/styles/app.scss showLineNumbers
+```css:src/styles/app.scss showLineNumbers
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
@@ -86,7 +86,7 @@ button {
 }
 ```
 
-Make sure you add `#app` id to the `<div>` inside `app.html` to inherit the height.
+Make sure you add the `#app` id to the `<div>` inside `app.html` to inherit the height.
 
 ```html:src/app.html {11} showLineNumbers
 <!DOCTYPE html>
@@ -143,7 +143,7 @@ Second let's add a layout file to import the styles and define a layout.
 </style>
 ```
 
-That's it for the setup! The rest of the post is going to be inside `+page.svelte` so you can clear it out and add a `<style>` tag.
+The rest of the post is going to be inside `+page.svelte` so you can clear it out and add a `<style>` tag.
 
 ```html:routes/+page.svelte showLineNumbers
 <style lang="scss">
@@ -151,23 +151,31 @@ That's it for the setup! The rest of the post is going to be inside `+page.svelt
 <style>
 ```
 
+That's it for the setup!
+
 ## Let's Think About The Problem
 
-Before we make the mistake of going straight to code let's think about the problem we're trying to solve first.
+Before making the mistake of going straight to code let's think about the problem we're trying to solve first.
 
-I encourage you to inspect [Monkeytype](https://monkeytype.com/) and see what you can find out about how it works — does it work how you thought it worked?
+I encourage you to inspect [Monkeytype](https://monkeytype.com/) and see what you can find out about how it works — does it work how you thought?
 
-Despite being horrendous at math problem solving in coding is very much like it where your goal is to know what information you have and try to come up with a solution.
+Problem solving in coding is similar to math where you need to figure out what information you know to solve a problem.
+
+After thinking about it the variables required to solve the problem are the typed letter and the current word and letter.
 
 {% img src="game.webp" alt="Typing game diagram" %}
 
-Having a rough idea of how the game works I always find it helpful for the next step to think about how to "drive" state using a data structure.
+I always find it helpful to think about how to "drive" state using a data structure and update the user interface based on some logic.
 
 {% img src="state.webp" alt="State diagram" %}
 
-To do that we can turn a sentence **"The quick brown fox jumps over a lazy dog"** into an array `['The', 'quick', 'brown', 'fox', '...']` and get the current word using `words[wordIndex]` and letter `words[wordsIndex][letterIndex]` by using an index.
+Given the sentence **"The quick brown fox jumps over a lazy dog"** you can turn it into an array `['The', 'quick', 'brown', 'fox', '...']` using the `split` method.
 
-If we keep track of that state we can solve the problem by comparing the current letter to the letter the player typed `typedLetter === currentLetter` and based on that set a class or whatever on the current letter element.
+To get the current word you can use an index `words[wordIndex]` to access the value of the array where `words[3]` returns `"Fox"` and use an index again `words[wordIndex][letterIndex]` where `words[3][0]` returns the letter `"F"`.
+
+Once you understand the logic you're done with the hard part and now you have to find a way to do it using code.
+
+If you keep track of that state you can solve the problem by comparing the current letter to the letter the player typed `typedLetter === currentLetter` and based on that set a class or whatever on the current letter element.
 
 This is going to make more sense when you see it!
 
@@ -175,7 +183,9 @@ I want to stress the importance of thinking about solving the problem yourself b
 
 ## Words And Letters
 
-Our game is going to have three states which I'm going to express as explicit state `waiting for input`, `in progress` and `game over` to avoid impossible states using booleans.
+Our game is going to have three states which I'm going to express as explicit state **waiting for input**, **in progress** and **game over** to avoid impossible states using booleans.
+
+> 🐿️ Using booleans it's easy to get into impossible states. For example `let gameStarted = false` has two possible values when `let game = 'started'` can only have one value.
 
 For now let's start simple until we have the logic working and later we're going to replace the placeholder words with our own word API.
 
@@ -229,11 +239,11 @@ For now let's start simple until we have the logic working and later we're going
 
 The reason we bind `this` for the input is so we can focus the input and words to get the element reference to the word and the current letter.
 
-There's an `input` listener to update game state but you could also use a reactive value in Svelte like `$: typedLetter, updateGameState()`
+I'm using an `input` listener to update game state but you could also use a reactive value in Svelte like `$: typedLetter, updateGameState()` that's going to run the function when the value is updated.
 
-On the other hand the `keydown` event is used to detect player input to start the game and when the player presses `space` to move to the next word.
+The `keydown` event is used to detect player input to start the game and when the player presses `space` to move to the next word.
 
-One neat tip is using [data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) to apply styles based on state `data-game={game}` which is simpler than having to do some boolean logic inside your code later.
+I love to use [data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) to apply styles based on state `data-game={game}` which is simpler than having to do some boolean logic inside your code later.
 
 Let's start with `handleKeydown`.
 
@@ -311,11 +321,11 @@ Before I set the letter I want to check if the word is done by checking if the `
 </script>
 ```
 
-This is the reason why I wanted the reference to the words element previously. Using the `children` method it's easy to either get the word element or the letter element.
+This is why I wanted the reference to the words element because using the `children` method it's easy to either get the word element or the letter element.
 
 I'm going to compare the typed letter to the current letter. You can get the letter from the `words` array or `wordsEl` using `innerText` on the letter element.
 
-If the typed letter equals the current letter I'm going to increase the score and set a data attribute `data-letter='correct'` on the `<span>` element for styling but you could also set a class `letterEl.classList.add('correct')`.
+If the typed letter equals the current letter I'm going to increase the score and set a data attribute `data-letter='correct'` on the `<span>` element for styling.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
@@ -358,7 +368,7 @@ Also we need to set the next letter and reset the input.
 
 If you inspect the letters inside the word element you can see the data attribute is applied correctly but we have to add the styles.
 
-The simplest solution I found to have a specific number of lines for words is multiplying the `line-height` with the number of lines you want multiplied by `1.42` for extra padding.
+The simplest solution I found to having a specific number of lines is multiplying the `line-height` with the number of lines you want offset by some value for extra padding.
 
 The use of `:global` for the data attributes is required because Svelte removes unused classes if they're not used in the template and it doesn't know they exist.
 
@@ -398,11 +408,11 @@ The use of `:global` for the data attributes is required because Svelte removes 
 </style>
 ```
 
-Awesome! I love the subtle but beautiful transition for the color and opacity which you can tweak to your liking.
+I love the subtle but beautiful transition for the color and opacity which you can tweak to your liking.
 
-Let's work on going to the next word. To do this we need to increment `wordIndex` and reset the `letterIndex`. This also counts towards the words per minute score.
+To go to the next word you need to increment `wordIndex` and reset the `letterIndex`. Pressing <kbd>Space</kbd> to go to the next word also counts towards the words per minute score.
 
-The player could skip words on accident, so I want to make sure it doesn't happen on the first letter and also take into consideration if it's a one-letter word (remember I have the unfair advantage of doing this before).
+The player could skip words on accident, so I want to make sure it doesn't happen on the first letter and also take into consideration if it's a one-letter word.
 
 Thanks to using explicit state I can make sure this only happens when the game is in progress.
 
@@ -443,11 +453,7 @@ The simplest way I found to do that is taking the `Y` position of the words cont
 
 To get the measurements I'm using [`getBoundingClientRect`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) which gives you the size and position of an element relative to the viewport and is useful for many things.
 
-A picture is worth a thousand words.
-
 {% img src="rect.webp" alt="Visual of the getBoundingClientRect() method" %}
-
-This is a great achievement for someone mathematically challenged as I am. 🤭
 
 We're going to get a reference to the current word `wordEl`, the `Y` position for words `wordsY` and the `Y` position for the current word `wordY`.
 
@@ -474,15 +480,18 @@ If `wordY > wordsY` we can use the handy [`scrollIntoView`](https://developer.mo
 </script>
 ```
 
-That's it! Try it out by copying the placeholder words a bunch of times. I want to say it works most of the time.
+This is a great achievement for someone mathematically challenged as I am. 🤭
+
 
 ## Adding The Caret
 
-Let's create the caret! I know what you're thinking and it's not a 🥕 you silly 🐇. **CARET** is another word for cursor.
+Let's create the caret! I know what you're thinking and it's not a 🥕 you silly 🐇. **Caret** is another word for cursor.
 
-I'm going to add the caret element inside words and absolutely position it with a neat blinking cursor animation.
+I'm going to add the caret element inside the words element and absolutely position it and show you how to make a blinking cursor animation.
 
-Moving the caret is going to be simple as updating the `top` and `left` position. I already have the reference to the letter from `letterEl` and it has some useful properties such as `offsetTop`, `offsetLeft` and `offsetWidth` you can use to move the caret.
+I already have the reference to the letter from `letterEl` and it has some useful properties such as `offsetTop`, `offsetLeft` and `offsetWidth` you can use to move the caret.
+
+Moving the caret is going to be simple as updating the `top` and `left` position.
 
 {% img src="offset.webp" alt="Element offset properties" %}
 
@@ -524,7 +533,7 @@ Don't forget to invoke `moveCaret` when updating the game state and going to the
 </div>
 
 <style lang="scss">
-.words {
+  .words {
     .game {
       &[data-game='in progress'] .caret {
         animation: none;
@@ -720,11 +729,15 @@ Your keyboard can find respite from the abuse. 😅
 
 ## Making Our Words API
 
-I'm just going to take a JSON file of 1000 common English words I yoinked (you can find it in the [project files on GitHub](https://github.com/joysofcode/svelte-typing-game/blob/main/src/routes/api/words/languages/english.json) and create a standalone endpoint in SvelteKit to get randomized words based on a limit.
+I want to create an API `/api/words?limit=100` to get a list of random English words from the server.
 
-Inside `routes` I'm going to create an `api` folder but you can name it anything else since it's not convention and you can download or copy the English words inside `routes/api/words/languages/english.json`.
+I'm going to take a [JSON file of 1000 common English](https://github.com/joysofcode/svelte-typing-game/blob/main/src/routes/api/words/languages/english.json) words I yoinked and create a standalone endpoint in SvelteKit to get randomized words based on a limit.
 
-I'm going to import the JSON file inside the SvelteKit endpoint that's going to serve them from `http://localhost:5173/api/words?limit=100` and randomize the words before I return them as a JSON response.
+> 🐿️ You could also pass the data directly to the page in SvelteKit from the server by creating a [`+page.ts`](https://kit.svelte.dev/docs/routing#page-page-js) endpoint for the page itself and receive it from `export let data`.
+
+Inside `routes` I'm going to create an `api` folder I made up because it's not a convention and you can copy the English words inside `routes/api/words/languages/english.json`.
+
+I'm going to import the JSON file inside the SvelteKit endpoint and randomize the words before I return them as a JSON response.
 
 ```ts:routes/api/words/+server.ts showLineNumbers
 import { json } from '@sveltejs/kit'
@@ -738,10 +751,6 @@ export const GET: RequestHandler = ({ url }) => {
   return json(words)
 }
 ```
-
-I do love the simplicity of SvelteKit.
-
-It blurs the line between frontend and backend as you just wrote backend code and created an endpoint — I guess you're a fullstack developer now! 🥳
 
 Let's use our new power and replace the placeholder text. You need to do it when the page loads though inside `onMount`.
 
@@ -764,9 +773,9 @@ Let's use our new power and replace the placeholder text. You need to do it when
 </script>
 ```
 
-> 🐿️ You could also pass the data directly to the page in SvelteKit from the server by creating a [`+page.ts`](https://kit.svelte.dev/docs/routing#page-page-js) endpoint for the page itself and receive it from `export let data`.
+I do love the simplicity of SvelteKit.
 
-Awesome! 😄
+It blurs the line between frontend and backend as you just wrote backend code and created an endpoint — I guess you're a fullstack developer now! 🥳
 
 ## Game Reset
 
@@ -854,7 +863,7 @@ I'm also going to include a `toggleReset` so you can use a [`{#key ...}`](https:
 </style>
 ```
 
-One worth thing noting is I use a [local transition](https://svelte.dev/tutorial/local-transitions) on words `in:blur|local` to prevent the transition from playing when the parent is added or removed.
+I use a [local transition](https://svelte.dev/tutorial/local-transitions) on words `in:blur|local` to prevent the transition from playing when the parent is added or removed.
 
 You can learn everything I know about [animation with Svelte](https://joyofcode.xyz/animation-with-svelte) in the post I wrote.
 
@@ -878,12 +887,12 @@ I'm going to hide the input since you no longer need it and I want to focus the 
 
 <style lang="scss">
   .game {
-    /* ... */
-
     .input {
       position: absolute;
       opacity: 0;
     }
+
+    /* ... */
   }
 </style>
 ```
@@ -898,11 +907,11 @@ I would be happy to see your improvements or what you learned at [@joyofcodedev]
 
 Here's some ideas:
 
-- Right now the input focus can be easily broken if you press a random key when the page loads so make sure you keep track of the focus and notify the user to click on the area for focus
+- Break the code into components (you can use Svelte [component events](https://svelte.dev/tutorial/component-events) and I wrote a [Svelte state management guide](https://joyofcode.xyz/svelte-state-management) if you need help)
+- The input can lose focus if you press a random key, so make sure you keep track of the focus and improve that experience for the player
 - You can start a game on accident by pressing any key but you could use regex to make sure the input is a letter
-- Add the logic to be able to go back to previous letters by listening for the `Backspace` key
-- Underline skipped words
-- Make the code easier to manage by breaking it into components (use Svelte [component events](https://svelte.dev/tutorial/component-events) to send events from child to parent and if you need it I wrote a [Svelte state management guide](https://joyofcode.xyz/svelte-state-management))
+- Figure out how to edit previous letters for the current word by listening for the `Backspace` key and changing `letterIndex`
+- The caret should animate when it moves to the next word and you can fix it by adding a space between words which would count towards the score, so you could remove the `Space` code
 - If you need more ideas have a look at [Monkeytype](https://monkeytype.com/) where you can get inspired like implementing a replay feature (what?! 😄)
 
 Hope you learned a lot because I surely have and despite not having a lot of experience making games I learned it can teach you a lot about problem solving and coding concepts in general.
