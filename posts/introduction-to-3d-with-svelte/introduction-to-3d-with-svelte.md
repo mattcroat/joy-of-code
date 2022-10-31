@@ -4,10 +4,11 @@ description: Introduction to using 3D in the browser with Svelte and Threlte.
 slug: introduction-to-3d-with-svelte
 published: 2022-10-31
 category: svelte
-draft: true
 ---
 
 # Introduction to 3D With Svelte
+
+{% embed src="https://www.youtube.com/embed/89LYeHOncVk" title="Introduction to 3D With Svelte" %}
 
 ## Table of Contents
 
