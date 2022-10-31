@@ -15,7 +15,7 @@ draft: true
 
 By the end of this post you're going to learn how to spice up your boring site using 3D with Svelte in the browser.
 
-{% embed src="https://stackblitz.com/github/joysofcode/svelte-3d?ctl=1&embed=1&file=src/routes/spooky/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltype" title="Sveltype 3D" %}
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-3d?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte 3D" title="Sveltype 3D" %}
 
 > 🧪 The project files are available on [GitHub](https://github.com/joysofcode/svelte-3d) and you can try it on [StackBlitz](https://stackblitz.com/github/joysofcode/svelte-3d).
 
@@ -73,14 +73,14 @@ npm run dev
 Install Threlte and Three.js.
 
 ```shell:terminal
-# required
+# dependencies
 npm i @threlte/core @threlte/extras three
 
-# if you're using TypeScript
+# TypeScript types
 npm i -D @types/three
 ```
 
-The next step is not that clear to me but from what I understand Vite ignores transforming dependencies when using SSR to speed things up but if you don't want that you can say they shouldn't be ignored.
+The next step is not that clear to me but from what I understand Vite ignores transforming dependencies when using SSR to speed things up but in this case you don't want that.
 
 ```ts:vite.config.ts {6-8} showLineNumbers
 import { sveltekit } from '@sveltejs/kit/vite'
@@ -102,8 +102,8 @@ Let's start by adding a camera, some lights and a mesh to your scene.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
-  import * as Three from 'three'
   import * as Threlte from '@threlte/core'
+  import * as Three from 'three'
   import * as Utils from 'three/src/math/MathUtils'
 </script>
 
@@ -189,7 +189,7 @@ Three.js provides a bunch of useful helpers and I'm going to use the [GridHelper
 
 **This is an important lesson in translating Three.js to Threlte** because you're going to read the Three.js documenation or try something from a Three.js tutorial and want to know how to do the same thing in Threlte.
 
-> 🐿️ Threlte has a friendly [Discord](https://discord.gg/EqUBCfCaGm) server if you ever need help.
+> 🐿️ Threlte has a friendly [Discord server](https://discord.gg/EqUBCfCaGm) if you ever need help.
 
 If you look at the top of the Three.js documentation for the grid helper you can see it extends the `Object3D` class and Threlte has a [`Object3DInstance`](https://threlte.xyz/core/object3d-instance) component just for that.
 
@@ -198,30 +198,29 @@ Let's add the helpers!
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
   // ...
-
   const gridHelper = new Three.GridHelper(20, 10)
-  const axisHelper = new Three.AxesHelper(10)
+  const axesHelper = new Three.AxesHelper(10)
 </script>
 
 <Threlte.Canvas>
   <!-- ... -->
   <Threlte.Object3DInstance object={gridHelper} />
-  <Threlte.Object3DInstance object={axisHelper} />
+  <Threlte.Object3DInstance object={axesHelper} />
   <!-- ... -->
 </Threlte.Canvas>
 ```
 
 Awesome! 😄
 
-If you ever used a game engine you probably know how it has a GUI that lets you control the values. That's what I want!
+If you ever used a game engine you're probably used to a GUI to control the values. That's what I want!
 
-You could just use a HTML `<input />` in Svelte and bind the value but I don't want to build a UI myself and that's what why I'm going to use [Tweakpane](https://cocopon.github.io/tweakpane/).
+You could use a HTML `<input />` in Svelte and bind the value but I don't want to build a UI myself and that's what why I'm going to use [Tweakpane](https://cocopon.github.io/tweakpane/).
 
 ```shell:terminal
-# install tweakpane
+# dependencies
 npm i tweakpane
 
-# types for typescript
+# TypeScript types
 npm i -D @tweakpane/core
 ```
 
@@ -266,7 +265,7 @@ Because SvelteKit runs the code on the server and client you need to check if yo
 
 This already feels so much better! 😄
 
-As an exercise try adding a [directional light helper](https://threejs.org/docs/index.html#api/en/helpers/DirectionalLightHelper) and then add controls for it.
+As an exercise try adding a [directional light helper](https://threejs.org/docs/index.html#api/en/helpers/DirectionalLightHelper) and then add controls for it (this one is tricky because you need to pass the light as reference).
 
 ## Importing 3D Models
 
@@ -274,7 +273,7 @@ You can get free 3D models from [Sketchfab](https://sketchfab.com/) but make sur
 
 There's a lot of options for 3D file formats but you want [GLB](https://www.wikiwand.com/en/GlTF) (GL Transmission Format Binary file) that's more efficient for sharing 3D data on the web (**GLTF** is also fine but **GLB** keeps everything in one binary file).
 
-> 🐿️ I like to drag the downloaded model into the [Three.js editor](https://threejs.org/editor/) to make sure it works because Sketchfab converts them for you from another format causing weird issues in which case I take the original and use Blender to export it (optimizing the assets is also important but that's a post in itself).
+> 🐿️ Drag the downloaded 3D model into the [Three.js editor](https://threejs.org/editor/) to make sure it works because Sketchfab converts them for you from another format which can cause weird issues. If you notice a problem take the original 3D model and use Blender to export it.
 
 Threlte makes it easy to import your 3D model using the `<GLTF>` component and you can also control the exported animations with the [`useGltfAnimations`](https://threlte.xyz/extras/use-gltf-animations) hook.
 
@@ -297,12 +296,12 @@ Threlte makes it easy to import your 3D model using the `<GLTF>` component and y
 
 That's it! 🥳
 
-If you're interested watch the Halloween special video where I make a spooky 3D scene with Svelte and show you how to edit your 3D models using Blender and show you some extra tips.
+If you're interested watch the Halloween special video where I make a spooky 3D scene with Svelte and show you how to edit your 3D models using Blender and share some extra tips.
 
 ## Conclusion
 
 I hope this is just the start of your journey into 3D and I encourage you to learn some game development with [Godot](https://godotengine.org/).
 
-If you're bad at math like I am watch [Math for Game Devs](https://www.youtube.com/watch?v=fjOdtSu4Lm4) by [@FreyaHolmer](https://twitter.com/FreyaHolmer) and you're going to understand for the first time in your life why learning math is useful and expand your horizon.
+If you're bad at math like me watch [Math for Game Devs](https://www.youtube.com/watch?v=fjOdtSu4Lm4) by [@FreyaHolmer](https://twitter.com/FreyaHolmer) and you're going to understand why learning math is useful for the first time in your life and expand your horizon.
 
 Thank you for reading! 🏄️
