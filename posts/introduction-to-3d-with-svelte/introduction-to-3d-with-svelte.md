@@ -21,7 +21,7 @@ By the end of this post you're going to learn how to spice up your boring site u
 > 🧪 The project files are available on [GitHub](https://github.com/joysofcode/svelte-3d) and you can try it on [StackBlitz](https://stackblitz.com/github/joysofcode/svelte-3d).
 
 
-## Threlte
+## What Is Threlte?
 
 Three.js is a popular 3D library for JavaScript that abstracts having to write low-level graphics code yourself and lets you create anything from [immersive 3D experiences](https://www.awwwards.com/sites/kamabokonoheya) to [games](https://bruno-simon.com/) in your browser.
 
@@ -46,7 +46,7 @@ Using declarative code you just state the desired outcome.
 ```
 
 
-## You Still Have To Learn Three.js
+## Learn Three.js
 
 Three.js is powerful and might be intimidating if you've never done 3D or game development before but it's worth learning as the knowledge you gain transfers to web development.
 
@@ -56,7 +56,7 @@ I want to emphasize that **Threlte is a component library and isn't trying to re
 
 The way you learn Three.js is from the [Three.js documentation](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene) and then extend Threlte to do what you have to do.
 
-## Setup
+## Project Setup
 
 I'm using a SvelteKit project with TypeScript (optional).
 
@@ -303,6 +303,6 @@ If you're interested watch the Halloween special video where I make a spooky 3D 
 
 I hope this is just the start of your journey into 3D and I encourage you to learn some game development with [Godot](https://godotengine.org/).
 
-If you're bad at math like me watch [Math for Game Devs](https://www.youtube.com/watch?v=fjOdtSu4Lm4) by [@FreyaHolmer](https://twitter.com/FreyaHolmer) and you're going to understand why learning math is useful for the first time in your life and expand your horizon.
+If you're bad at math like me watch [Math for Game Devs](https://www.youtube.com/watch?v=1NLekEd770w) by [@FreyaHolmer](https://twitter.com/FreyaHolmer) and you're going to understand why learning math is useful for the first time in your life and expand your horizon.
 
 Thank you for reading! 🏄️
