@@ -14,15 +14,15 @@ category: css
 
 ## Inspection Fatigue
 
-Modern browser developer tools are extremely sophisticated and something we can't do without when working on a website from being able to check for **accessibility**, inspecting **CSS Flexbox** and **CSS Grid**, or doing **real-time changes** inside the browser.
+Despite sophisticated developer tools debugging CSS feels painful and taxing on your mental health.
 
-When you're inspecting a problem, or element you're having trouble with the first thing you do is use the **inspect tool** but you can't figure out what are the styles causing it.
+The **inspect tool** is great but sometimes it's even hard finding the element causing the problem.
 
-The cause of the problem might not be obvious, so you get into this infinite hovering over elements and losing context of where you are creating more frustration because you're not even sure where to look.
+You get into this infinite "hovering" state looking for the troublemaker and losing focus of what you were even looking for.
 
 ## Using Outline
 
-It's incredibly helpful to be able to analyze the state and layout of the page when you're looking at it and requires a line of **CSS**.
+It would be helpful if you could look at the layout of the page to understand what's going on.
 
 {% img src="css-debug.webp" alt="Debugging CSS" %}
 
@@ -34,7 +34,9 @@ It's incredibly helpful to be able to analyze the state and layout of the page w
 
 You can use `border` if you specify `box-sizing: border-box` but I prefer `outline` because it doesn't shift the elements on the page.
 
-You can also add a `background` property, or use different `outline` **colors** for **nested elements**. Since the content is always inside the `<body>` tag you can start by selecting `body *` if you want.
+You can also add a `background` property, or use different `outline` **colors** for **nested elements**.
+
+Since the content is always inside the `<body>` tag you can start by selecting `body *` if you want.
 
 ```css:example.css showLineNumbers
 /* the first element is <html> */
@@ -55,13 +57,15 @@ You can also add a `background` property, or use different `outline` **colors** 
 
 ## Creating a Bookmarklet
 
-Maybe you want to inspect the layout of other sites, or don't want to add this code to your project and forget to remove it (obviously not talking from experience 🤭).
+You could leave the previous code in your project on accident which isn't a great look (not talking from experience 🤭).
 
-You can create a **bookmarklet** that's just a regular bookmark but has **JavaScript** code you can execute on a page.
+You can create a **bookmarklet** that's just a regular bookmark that runs **JavaScript** on the page.
 
 {% img src="bookmarklet.webp" alt="Bookmarklet" %}
 
-To do so we need to wrap our code inside an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) (Immediately Invoked Function Expression), create the `<style>` tag and append it to the `<head>` and we also check if the element exists, so we can use the bookmark as a toggle.
+This works by using an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) (Immediately Invoked Function Expression).
+
+I'm going to create a `<style>` tag and append it to the `<head>` and check if the element exists to remove it.
 
 ```js:bookmarklet showLineNumbers
 javascript: (function () {
@@ -77,10 +81,8 @@ javascript: (function () {
 })();
 ```
 
-Semicolons are required because when we add the bookmark everything is going to be on the same line.
+**Semicolons are required** because your code is going to be on the same line.
 
-## Conclusion
-
-Hope you find this technique useful and can identify with more confidence what's causing the problem in your **CSS**.
+I hope this was useful and it helps you debug your CSS and find out what's causing the problem.
 
 Thanks for reading! 🏄‍♂️
