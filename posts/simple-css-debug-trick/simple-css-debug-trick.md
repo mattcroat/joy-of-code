@@ -1,12 +1,14 @@
 ---
 title: Simple Trick to Debug Your CSS
-description: Learn how to debug your CSS using this simple trick.
+description: Learn how to debug CSS using this simple trick.
 slug: simple-css-debug-trick
 published: 2021-10-2
 category: css
 ---
 
 # Simple Trick to Debug Your CSS
+
+{% embed src="https://www.youtube.com/embed/5nrMpCWkncc" title="Debug Your CSS" %}
 
 ## Table of Contents
 
@@ -18,7 +20,7 @@ When you're inspecting a problem, or element you're having trouble with the firs
 
 The cause of the problem might not be obvious, so you get into this infinite hovering over elements and losing context of where you are creating more frustration because you're not even sure where to look.
 
-## Bird's-Eye View
+## Using Outline
 
 It's incredibly helpful to be able to analyze the state and layout of the page when you're looking at it and requires a line of **CSS**.
 
