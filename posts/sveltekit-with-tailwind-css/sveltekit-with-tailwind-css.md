@@ -24,6 +24,8 @@ Create new SvelteKit project.
 npm init svelte
 ```
 
+> 🐿️ You can skip the next part and use `npx svelte-add tailwindcss`
+
 Install the dependencies required by Tailwind.
 
 ```shell:terminal
