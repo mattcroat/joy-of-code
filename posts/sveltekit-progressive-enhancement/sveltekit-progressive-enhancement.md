@@ -14,11 +14,13 @@ draft: true
 
 ## We Forgot How Forms Work
 
+By the end of this post you're going to learn how to use progressive enhancement in SvelteKit and understand the history that led us here.
+
+> 🧪 You can find the code on [GitHub](https://github.com/joysofcode/sveltekit-progressive-enhancement) or try it on [StackBlitz](https://stackblitz.com/github/joysofcode/sveltekit-progressive-enhancement).
+
 Do you know the default behavior of a form?
 
 I encourage you to try it out yourself inside a SvelteKit project and see what happens.
-
-> 🧪 The project files are available on [GitHub](https://github.com/joysofcode/sveltekit-progressive-enhancement) and you can try it on [StackBlitz](https://stackblitz.com/github/joysofcode/sveltekit-progressive-enhancement).
 
 ```html:+page.svelte showLineNumbers
 <form>
