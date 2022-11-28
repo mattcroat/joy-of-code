@@ -89,8 +89,7 @@ This is possible because these frameworks combine the frontend and backend and g
 
 ## Svelte Actions To The Rescue
 
-
-The previous code is a bit tedious to write, so you can use [Svelte actions](https://svelte.dev/tutorial/actions) to make it more reusable.
+The previous code is a bit tedious to write for every form, so you can use [Svelte actions](https://svelte.dev/tutorial/actions) to make it more reusable.
 
 ```ts:src/lib/form.ts showLineNumbers
 export function enhance(form: HTMLFormElement) {
@@ -115,7 +114,7 @@ export function enhance(form: HTMLFormElement) {
 }
 ```
 
-```html:+page.svelte showLineNumbers
+```html:+page.svelte {2, 8} showLineNumbers
 <script lang="ts">
   import { enhance } from '$lib/form'
 </script>
@@ -139,23 +138,21 @@ export function enhance(form: HTMLFormElement) {
 </form>
 ```
 
-This is a slight improvement but it ignores refreshing the page data and error handling among other things which you could do but it's tedious.
+This is a slight improvement but you also have to invalidate the page data and handle errors but thanks to SvelteKit you don't have to do this work.
 
 ## Use The Web Platform
-
-Thanks to SvelteKit you don't have to do this work!
 
 SvelteKit makes working with forms easy with [form actions](https://kit.svelte.dev/docs/form-actions).
 
 Instead of using a standalone endpoint use a page endpoint `+page.server.ts` file alongside `+page.svelte`.
 
-```ts:+page.server.ts showLineNumbers
+```ts:+page.server.ts {12-22} showLineNumbers
 import { redirect } from '@sveltejs/kit'
 import type { Actions, PageServerLoad } from './$types'
 
 let count = 0
 
-// SvelteKit is going to rerun the `load` function and invalidate the data 
+// SvelteKit is going to rerun the `load` function and invalidate the data
 export const load: PageServerLoad = () => {
   console.log('+page.svelte load function')
   return { count: count += 1 }
@@ -176,7 +173,7 @@ export const actions: Actions = {
 
 Try using the form without JavaScript! After you're done add progressive enhancement from SvelteKit.
 
-```html:+page.svelte showLineNumbers
+```html:+page.svelte {2, 9-13} showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
   import type { PageServerData } from './$types'
@@ -206,14 +203,14 @@ Try using the form without JavaScript! After you're done add progressive enhance
 
 That's it! 🔥
 
-SvelteKit also makes [validating form errors](https://kit.svelte.dev/docs/form-actions#anatomy-of-an-action-validation-errors) and redirecting simple which you can learn more about in a future post.
+SvelteKit also makes [validating form errors](https://kit.svelte.dev/docs/form-actions#anatomy-of-an-action-validation-errors) and redirecting simple which I'm going to cover in a future post.
 
 You can also learn how to customize this behavior and manage pending UI state in the [SvelteKit docs](https://kit.svelte.dev/docs/form-actions#progressive-enhancement).
 
 ```html:+page.svelte showLineNumbers
 <form
   method="POST"
-  use:enhance="{({ form, data, action, cancel }) => {
+  use:enhance={({ form, data, action, cancel }) => {
     // `form` is the `<form>` element
     // `data` is its `FormData` object
     // `action` is the URL to which the form is posted
@@ -223,8 +220,8 @@ You can also learn how to customize this behavior and manage pending UI state in
       // `result` is an `ActionResult` object
       // `update` is a function which triggers the logic that would be triggered if this callback wasn't set
     }
-  }}"
+  }}
 >
 ```
 
-The action provided by SvelteKit looks a lot like the Svelte action from before. 😉
+The action provided by SvelteKit looks a lot like the Svelte action from before doesn't it? 😉
