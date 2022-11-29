@@ -5,14 +5,15 @@ slug: sveltekit-progressive-enhancement
 published: 2022-11-28
 category: sveltekit
 series: false
-draft: true
 ---
 
 # Progressive Form Enhancement With SvelteKit
 
+{% embed src="https://www.youtube.com/embed/6pv70d7i-3Q" title="Progressive Form Enhancement With SvelteKit" %}
+
 ## Table of Contents
 
-## We Forgot How Forms Work
+## How Do Forms Work?
 
 By the end of this post you're going to learn how to use progressive enhancement in SvelteKit and understand the history that led us here.
 
