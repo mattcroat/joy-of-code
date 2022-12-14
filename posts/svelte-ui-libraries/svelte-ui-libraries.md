@@ -22,7 +22,7 @@ The pros are that it makes your site look gorgeous and it's easy to theme thanks
 Here's an example of a modal.
 
 ```html:+page.svelte showLineNumbers
-<script lang='ts'>
+<script lang="ts">
   // ...
 </script>
 
@@ -47,7 +47,7 @@ The pros is that you have complete freedom over styling but the cons are that yo
 Here's an example of a modal.
 
 ```html:+page.svelte showLineNumbers
-<script lang='ts'>
+<script lang="ts">
   import {
     Dialog,
     DialogOverlay,
@@ -80,7 +80,7 @@ The pros is that it has a lot of components but cons might be the use of Materia
 Here's an example of a modal.
 
 ```html:+page.svelte showLineNumbers
-<script lang='ts'>
+<script lang="ts">
   import Dialog, { Title, Content, Actions } from '@smui/dialog'
   import Button, { Label } from '@smui/button'
  
@@ -115,7 +115,7 @@ The pros are that it has a lot of components but the cons are is that it's not t
 Here's an example of a modal.
 
 ```html:+page.svelte showLineNumbers
-<script lang='ts'>
+<script lang="ts">
   import {
     ComposedModal,
     ModalHeader,
@@ -169,7 +169,7 @@ The pros is the gorgeous design and components to pick from but the cons are tha
 Here's an example of a modal.
 
 ```html:+page.svelte showLineNumbers
-<script lang='ts'>
+<script lang="ts">
   import { Button, Dialog, Modal } from 'attractions'
 
   let isOpen = false
@@ -200,7 +200,7 @@ The pros is that it's popular and has a lot of components but the cons is having
 Here's an example of a modal.
 
 ```html:+page.svelte showLineNumbers
-<script lang='ts'>
+<script lang="ts">
   // ...
 </script>
 
@@ -252,7 +252,7 @@ Here's an example of a modal.
 
 ```html:+page.svelte showLineNumbers
 // +layout.svelte
-<script lang='ts'>
+<script lang="ts">
   import { Modal } from '@skeletonlabs/skeleton'
 </script>
 
