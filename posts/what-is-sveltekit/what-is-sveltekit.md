@@ -5,10 +5,11 @@ slug: what-is-sveltekit
 published: 2022-12-20
 category: sveltekit
 series: false
-draft: true
 ---
 
 # What Is SvelteKit?
+
+{% embed src="https://www.youtube.com/embed/obmiLi3bhkQ" title="What Is SvelteKit?" %}
 
 ## Table of Contents
 
