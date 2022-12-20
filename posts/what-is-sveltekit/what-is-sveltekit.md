@@ -135,11 +135,46 @@ SvelteKit apps are server-side rendered by default for speed and SEO (search eng
 
 ## SvelteKit Uses The Web Platform
 
+There's no weird wrappers for links because it's just regular HTML.
+
+```html:+page.svelte showLineNumbers
+<a href="/about">About</a>
+```
+
 You're going to spend more time on the [MDN Web Docs](https://developer.mozilla.org/en-US/) learning about the web platform than some weird abstraction that's only useful inside SvelteKit
 
 SvelteKit uses the web platform meaning you're not learning some framework specific abstraction but using web standards like the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects, [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) and [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) for working with forms.
 
-TODO: example of working with forms
+
+```html:+page.svelte showLineNumbers
+<h1>Login</h1>
+
+<form method="POST" action="?/login">
+  <input type="text" name="name" />
+  <input type="password" name="password" />
+  <button>Login</button>
+</form>
+```
+
+```ts:+page.server.ts showLineNumbers
+import type { Actions, PageServerLoad } from './$types'
+
+export const actions: Actions = {
+  login: async ({ request, cookies }) => {
+    const data = await request.formData()
+
+    const credentials = {
+      name: data.get('name'),
+      password: data.get('password'),
+    }
+
+    // do whatever you need
+    console.log(credentials)
+  },
+}
+```
+
+This is how easy working with forms is in SvelteKit.
 
 ## SvelteKit Apps Are More Resilient Using Progressive Enhancement
 
@@ -149,34 +184,16 @@ Instead of disabling the default form behavior and implementing what the browser
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
-	import { enhance } from '$app/forms'
+  import { enhance } from '$app/forms'
 </script>
 
 <h1>Login</h1>
 
 <form method="POST" action="?/login" use:enhance>
-	<input type="text" name="name" />
-	<input type="password" name="password" />
-	<button>Login</button>
+  <input type="text" name="name" />
+  <input type="password" name="password" />
+  <button>Login</button>
 </form>
-```
-
-```ts:+page.server.ts showLineNumbers
-import type { Actions, PageServerLoad } from './$types'
-
-export const actions: Actions = {
-	login: async ({ request, cookies }) => {
-		const data = await request.formData()
-
-		const credentials = {
-			name: data.get('name'),
-			password: data.get('password'),
-		}
-
-		// do whatever you need
-		console.log(credentials)
-	},
-}
 ```
 
 Notice how you didn't have to use a single `fetch` and the form would work without JavaScript but using the `enhance` Svelte action from SvelteKit you can enable progressive enhancement.
