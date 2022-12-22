@@ -1,14 +1,15 @@
 ---
 title: SvelteKit Project Structure Explained
-description: SvelteKit from scratch where you learn what everything does.
+description: Understand how SvelteKit works by creating a SvelteKit project from scratch.
 slug: sveltekit-project-structure
 published: 2022-12-22
 category: sveltekit
 series: false
-draft: true
 ---
 
 # SvelteKit Project Structure Explained
+
+{% embed src="https://www.youtube.com/embed/5VBdyfGhs7A" title="SvelteKit Project Structure Explained" %}
 
 ## Table of Contents
 
