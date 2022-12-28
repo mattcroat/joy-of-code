@@ -27,7 +27,7 @@ I'm going to initialize a skeleton SvelteKit project with TypeScript but even if
 
 ```shell:terminal
 # create SvelteKit project
-npm create svelte
+npm create svelte@latest
 
 # install dependencies
 npm i
