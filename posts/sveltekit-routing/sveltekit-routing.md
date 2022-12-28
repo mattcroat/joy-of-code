@@ -1,14 +1,15 @@
 ---
 title: Everything About SvelteKit Routing
-description: Learn about pages, layouts, dynamic routes, and advanced routing in SvelteKit.
+description: Everything you need to know about SvelteKit routing including pages, layouts, dynamic routes, and advanced routing.
 slug: sveltekit-routing
 published: 2022-12-28
 category: sveltekit
 series: false
-draft: true
 ---
 
 # Everything About SvelteKit Routing
+
+{% embed src="https://www.youtube.com/embed/7hXHbGj6iE0" title="SvelteKit Routing" %}
 
 ## Table of Contents
 
@@ -43,7 +44,7 @@ SvelteKit uses file-based routing where routes of your app are defined by the di
 
 The routes are defined inside a `src/routes` folder. Each directory inside the `routes` folder can have or more route files using the `+` prefix. 
 
-To define a page in SvelteKit you use a `+page.server` file which becomes a route that maps to a URL.
+To define a page in SvelteKit you use a `+page.svelte` file which becomes a route that maps to a URL.
 
 For example the default route `src/routes/+page.svelte` maps to `/` in the browser.
 
