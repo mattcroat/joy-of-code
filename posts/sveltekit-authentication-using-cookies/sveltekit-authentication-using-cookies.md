@@ -138,7 +138,7 @@ pnpm i -D @types/bcrypt
 If there are no validation errors I'm going to create the user by hashing the password, creating the user authentication token and assigning it a role after which I'm going to redirect the user.
 
 ```ts:register/+page.server.ts showLineNumbers
-import { invalid, redirect } from '@sveltejs/kit'
+import { fail, redirect } from '@sveltejs/kit'
 import type { Action, Actions, PageServerLoad } from './$types'
 import bcrypt from 'bcrypt'
 
@@ -166,7 +166,7 @@ const register: Action = async ({ request }) => {
     !username ||
     !password
   ) {
-    return invalid(400, { invalid: true })
+    return fail(400, { invalid: true })
   }
 
   const user = await db.user.findUnique({
@@ -174,7 +174,7 @@ const register: Action = async ({ request }) => {
   })
 
   if (user) {
-    return invalid(400, { user: true })
+    return fail(400, { user: true })
   }
 
   await db.user.create({
@@ -237,7 +237,7 @@ I'm going to check if the user already exists and compare if the passwords match
 SvelteKit provides a nice API for interacting with cookies, so you don't have to import it.
 
 ```ts:login/+page.server.ts showLineNumbers
-import { invalid, redirect } from '@sveltejs/kit'
+import { fail, redirect } from '@sveltejs/kit'
 import bcrypt from 'bcrypt'
 import type { Action, Actions, PageServerLoad } from './$types'
 
@@ -258,19 +258,19 @@ const login: Action = async ({ cookies, request }) => {
     !username ||
     !password
   ) {
-    return invalid(400, { invalid: true })
+    return fail(400, { invalid: true })
   }
 
   const user = await db.user.findUnique({ where: { username } })
 
   if (!user) {
-    return invalid(400, { credentials: true })
+    return fail(400, { credentials: true })
   }
 
   const userPassword = await bcrypt.compare(password, user.passwordHash)
 
   if (!userPassword) {
-    return invalid(400, { credentials: true })
+    return fail(400, { credentials: true })
   }
 
   // generate new auth token just in case
