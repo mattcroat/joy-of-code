@@ -47,7 +47,6 @@ To get started install the `postcss-preset-env` and `postcss-load-config` plugin
 
 ```shell:terminal
 npm i -D postcss-preset-env postcss-load-config @types/postcss-preset-env
-copy
 ```
 
 Create a `postcss.config.cjs` file at the root of your project.
