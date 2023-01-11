@@ -1,14 +1,15 @@
 ---
 title: SvelteKit API Endpoints And Loading Data For Pages
-description: Learn how to create API endpoints and how to fetch data for your page with SvelteKit. 
+description: Learn about API endpoints and loading data for your pages with SvelteKit. 
 slug: sveltekit-loading-data
 published: 2023-1-10
 category: sveltekit
 series: false
-draft: true
 ---
 
 # SvelteKit API Endpoints And Loading Data For Pages
+
+{% embed src="https://www.youtube.com/embed/rsmLu5nmh4g" title="SvelteKit API Endpoints And Loading Data For Pages" %}
 
 ## Table of Contents
 
@@ -332,7 +333,7 @@ This way of showing data on the page where you fetch the data on the client and 
 
 Notice if you refresh the page the caching should work since the data is going to be fresh for a minute and the data is going to be loaded from the disk cache instead (this only works if you uncheck **disable cache** or close the developer tools).
 
-{% img src="cached.webp" alt="Cached response for pots" %}
+{% img src="cached.webp" alt="Cached response for posts" %}
 
 You shouldn't do this though and instead cache the result on a CDN using `s-maxage` which looks something like `'Cache-Control': 'public, max-age=0, s-maxage=60'`.
 
@@ -599,7 +600,7 @@ This data is now available inside `/posts/+layout.svelte` and `/posts/+page.svel
 <style>
   .layout {
     display: grid;
-    grid-template-columns: 200px 60ch;
+    grid-template-columns: 200px minmax(auto, 60ch);
     gap: 4rem;
     margin-top: 2rem;
   }
