@@ -20,13 +20,13 @@
 			<li><a href="/newsletter">Newsletter</a></li>
 			<li><a href="/rss.xml" target="_blank">RSS</a></li>
 			<li>
-				<a href={youtube} target="_blank">YouTube</a>
+				<a href={youtube} target="_blank" rel="noreferrer">YouTube</a>
 			</li>
 			<li>
-				<a href={twitter} target="_blank">Twitter</a>
+				<a href={twitter} target="_blank" rel="noreferrer">Twitter</a>
 			</li>
 			<li>
-				<a href={github} target="_blank">GitHub</a>
+				<a href={github} target="_blank" rel="noreferrer">GitHub</a>
 			</li>
 		</ul>
 	</div>

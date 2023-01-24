@@ -62,7 +62,7 @@
 			<p>
 				Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a>
 				or
-				<a href={twitter} target="_blank">Twitter</a> instead.
+				<a href={twitter} target="_blank" rel="noreferrer">Twitter</a> instead.
 			</p>
 		</div>
 	</section>
