@@ -13,6 +13,10 @@ series: false
 
 ## Table of Contents
 
+## Welcome To The Learn SvelteKit Series
+
+This is the first part in the [Learn SvelteKit](https://www.youtube.com/playlist?list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) series I'm working on writing and publishing on YouTube.
+
 ## SvelteKit Is The Swiss Army Knife Of JavaScript Frameworks
 
 SvelteKit is a **meta-framework** built on top of Svelte for building rich web apps but **it's easier to think of it as a backend framework that uses Svelte as the component framework**.
@@ -220,3 +224,5 @@ SvelteKit is an open source project governed by [@rich_harris](https://twitter.c
 The development is funded by the [Open Collective](https://opencollective.com/svelte) and [Vercel](https://vercel.com/)  but it's not governed by a corporation whose goals and ambitions are unclear.
 
 The future of SvelteKit is bright and I hope you give it a try but be warned in case you do you might not want to use anything else and side effects include a permanent grin on your face.
+
+[In the next part](https://joyofcode.xyz/sveltekit-project-structure) I'm going to set up a SvelteKit project from scratch and explain how it works.
