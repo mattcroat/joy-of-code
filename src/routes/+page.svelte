@@ -44,11 +44,7 @@
 			<p class="description">
 				{data.posts.latestPost.description}
 			</p>
-			<a
-				data-sveltekit-prefetch
-				class="continue-reading"
-				href={data.posts.latestPost.slug}
-			>
+			<a class="continue-reading" href={data.posts.latestPost.slug}>
 				<span>Continue reading</span>
 				<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
 			</a>
