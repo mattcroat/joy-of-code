@@ -1020,8 +1020,6 @@ const submit: SubmitFunction = ({ form, data, action, cancel }) => {
 
 This way you can customize the behavior of `use:enhance` and dip in and out of the regular behavior when you need it.
 
-## Conclusion
-
 That's everything you should know to feel confident working with forms in SvelteKit and I hope you learned how forms work but more importantly how to make your app more resilient.
 
 If you want to continue learning in the next part I'm going to cover groups and how to reset your layout in SvelteKit.
