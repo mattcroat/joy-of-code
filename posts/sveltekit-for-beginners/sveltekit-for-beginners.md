@@ -13,9 +13,15 @@ series: true
 
 ## Table of Contents
 
-## Introduction
+## This Series Is No Longer Updated
 
-> ⚠️ Since the [breaking SvelteKit changes](https://www.youtube.com/watch?v=eVFcGA-15LA) it's not possible to update the post without a complete rewrite but I migrated the [project files](https://github.com/JoysOfCode/sveltekit-for-beginners/tree/migration) if you're determined and I'm going to update the content once SvelteKit is released.
+Since the [breaking SvelteKit changes](https://www.youtube.com/watch?v=eVFcGA-15LA) it's not possible to update the post without a complete rewrite.
+
+**This series is not being updated** in favor of the [Learn SvelteKit](https://www.youtube.com/playlist?list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) series I'm working on writing and releasing on YouTube.
+
+In the future I might revisit the idea of creating a Twitter clone in SvelteKit but until then you can enjoy the Learn SvelteKit series.
+
+## Introduction
 
 You're going to make **Twittr** — a social media site for sharing hot takes.
 
