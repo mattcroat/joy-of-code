@@ -13,6 +13,13 @@ series: false
 
 ## Table of Contents
 
+
+## Previously
+
+This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+- [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
+- [SvelteKit Project Structure](https://joyofcode.xyz/sveltekit-project-structure)
+
 ## Requirements
 
 In the previous parts we explored [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit) and explained the [SvelteKit project structure](https://joyofcode.xyz/sveltekit-project-structure) but things are about to get real.
@@ -416,4 +423,6 @@ To use the new matcher rename `src/routes/posts/[slug]` to `src/routes/posts/[sl
 
 If the route doesn't match SvelteKit returns a `404`.
 
-That's everything you need to know when it comes to routing in SvelteKit! There's more advanced things to go over like group layouts but first we need to learn about data loading in SvelteKit which I'm excited about, so look out for the next part.
+That's everything you need to know when it comes to routing in SvelteKit! There's more advanced things to go over like group layouts but first we need to learn about data loading in SvelteKit.
+
+[In the next part](https://joyofcode.xyz/sveltekit-loading-data) you're going to learn how to create API endpoints and load data for pages in SvelteKit.
