@@ -40,9 +40,7 @@ export const GET: RequestHandler = async () => {
 	return new Response(sitemap, {
 		headers: {
 			'Content-Type': 'application/xml',
-			'Cache-Control': `public, max-age=${60 * 60 * 24}, s-maxage=${
-				60 * 60 * 24
-			}`,
+			'Cache-Control': `public, max-age=0, s-maxage=${60 * 60 * 24}`,
 		},
 	})
 }

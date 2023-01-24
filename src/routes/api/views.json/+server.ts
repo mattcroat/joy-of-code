@@ -15,7 +15,7 @@ export const GET: RequestHandler = async () => {
 	return json(views, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Cache-Control': `public, max-age=${60 * 60}, s-maxage=${60 * 60}`,
+			'Cache-Control': `public, max-age=0, s-maxage=${60 * 60}`,
 		},
 	})
 }
