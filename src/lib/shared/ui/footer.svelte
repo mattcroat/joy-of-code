@@ -8,7 +8,7 @@
 		<ul>
 			{#each Object.entries(categories) as [slug, category]}
 				<li>
-					<a data-sveltekit-prefetch href="/categories/{slug}">{category}</a>
+					<a href="/categories/{slug}">{category}</a>
 				</li>
 			{/each}
 		</ul>
@@ -20,13 +20,13 @@
 			<li><a href="/newsletter">Newsletter</a></li>
 			<li><a href="/rss.xml" target="_blank">RSS</a></li>
 			<li>
-				<a href={youtube} target="_blank">YouTube</a>
+				<a href={youtube} target="_blank" rel="noreferrer">YouTube</a>
 			</li>
 			<li>
-				<a href={twitter} target="_blank">Twitter</a>
+				<a href={twitter} target="_blank" rel="noreferrer">Twitter</a>
 			</li>
 			<li>
-				<a href={github} target="_blank">GitHub</a>
+				<a href={github} target="_blank" rel="noreferrer">GitHub</a>
 			</li>
 		</ul>
 	</div>
@@ -34,8 +34,8 @@
 	<div class="other">
 		<p>Other</p>
 		<ul>
-			<li><a data-sveltekit-prefetch href="/about">About</a></li>
-			<li><a data-sveltekit-prefetch href="/uses">Uses</a></li>
+			<li><a href="/about">About</a></li>
+			<li><a href="/uses">Uses</a></li>
 		</ul>
 	</div>
 

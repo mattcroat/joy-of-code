@@ -23,7 +23,7 @@
 			Every post is a Markdown file so contributing is simple as following the
 			link below and pressing the pencil icon inside GitHub to edit it.
 		</p>
-		<a class="link" href={editUrl} target="_blank">
+		<a class="link" href={editUrl} target="_blank" rel="noreferrer">
 			<span>Edit on GitHub</span>
 			<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
 		</a>
@@ -39,7 +39,7 @@
 		<Newsletter />
 		<span class="subscribe">
 			Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a> or
-			<a href={twitter} target="_blank">Twitter</a> instead.
+			<a href={twitter} target="_blank" rel="noreferrer">Twitter</a> instead.
 		</span>
 	</div>
 {/if}
