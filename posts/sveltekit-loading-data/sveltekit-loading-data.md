@@ -319,13 +319,13 @@ This way of showing data on the page where you fetch the data on the client and 
 {:then posts}
   <p>Showing {posts.length} posts.</p>
 
-  {#each posts as post}
-    <ul>
+  <ul>
+    {#each posts as post}
       <li>
         <a href="/posts/{post.title}">{post.title}</a>
       </li>
-    </ul>
-  {/each}
+    {/each}
+  </ul>
 {:catch error}
   <p>{error.message}</p>
 {/await}
@@ -380,13 +380,13 @@ Here is how you get the data for the page.
 
 <p>Showing {data.posts.length} posts.</p>
 
-{#each data.posts as post}
-  <ul>
+<ul>
+  {#each data.posts as post}
     <li>
       <a href="/posts/{post.slug}">{post.title}</a>
     </li>
-  </ul>
-{/each}
+  {/each}
+</ul>
 ```
 
 If you look at the network tab you're going to see the entire HTML document for your posts and no `fetch` request like before because it was server-side rendered on the first page load — if you navigate from another page you would see a `fetch` request because SvelteKit would behave like a SPA at that point.
@@ -414,13 +414,13 @@ Using `data.whatever` can be tedious, so here's a neat trick you can use to pluc
 
 <p>Showing {posts.length} posts.</p>
 
+<ul>
 {#each posts as { slug, title }}
-  <ul>
-    <li>
-      <a href="/posts/{slug}">{title}</a>
-    </li>
-  </ul>
+  <li>
+    <a href="/posts/{slug}">{title}</a>
+  </li>
 {/each}
+</ul>
 
 <!-- ... -->
 ```
