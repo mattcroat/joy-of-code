@@ -13,6 +13,11 @@ series: false
 
 ## Table of Contents
 
+## Previously
+
+This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+- [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
+
 ## Introduction
 
 I don't know about you but when I'm learning something I want at least a high level understanding of what makes it work.
@@ -228,3 +233,5 @@ There are some files I **ignored** 🥁 like `.gitignore`, `.eslintignore`, `.pr
 If you're newer to development you might be hearing for the first time about some of these things but you can ignore most of them.
 
 I hope this gave you a better understanding of these configuration files in general because you're going to see them in every JavaScript project but now you're a certified SvelteKit connoisseur.
+
+[In the next part](https://joyofcode.xyz/sveltekit-routing) you're going to learn everything about SvelteKit routing including how to create pages, layouts and nested routes.
