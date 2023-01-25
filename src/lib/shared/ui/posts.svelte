@@ -69,6 +69,8 @@
 		grid-template-rows: min-content;
 		padding: var(--spacing-16);
 		background-image: var(--clr-card-bg);
+		border-top: 1px solid var(--clr-menu-border);
+		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-sm);
 		transition: transform 0.2s ease-in-out, box-shadow 0.3s ease,

@@ -5,7 +5,7 @@ html[data-theme='🌛 Night'] {
 	--clr-bg: hsl(210 7% 11%);
 
 	--bg: radial-gradient(hsl(173 100% 4%), var(--clr-bg));
-	--bg-opacity: 0.6;
+	--bg-opacity: 0.4;
 
 	/* Menu */
 	--clr-menu-text: hsl(0 0% 78%);
@@ -49,7 +49,7 @@ html[data-theme='🌛 Night'] {
 
 	/* Footer */
 	--clr-footer-txt: hsl(0 0% 78%);
-	--clr-footer-bg: hsl(210 5% 7%);
+	--clr-footer-bg: hsl(210 7% 11%);
 
 	/* Post */
 	--post-overlay-bg: radial-gradient(hsl(173 100% 4% / 80%), var(--clr-bg));

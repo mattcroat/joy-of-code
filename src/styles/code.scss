@@ -8,7 +8,7 @@
 	padding: var(--spacing-32) 0;
 	line-height: 34px;
 	background-color: var(--clr-code-bg);
-	border: 1px solid var(--clr-code-border);
+	border-left: 1px solid var(--clr-code-border);
 	border-top: none;
 	border-bottom-left-radius: var(--rounded-20);
 	border-bottom-right-radius: var(--rounded-20);
@@ -61,7 +61,8 @@ html[data-font='dyslexic'] .prose code {
 	padding: var(--spacing-16) var(--spacing-24) 0 var(--spacing-24);
 	color: var(--clr-code-title);
 	background-color: var(--clr-code-bg);
-	border: 1px solid var(--clr-code-border);
+	border-top: 1px solid var(--clr-code-border);
+	border-left: 1px solid var(--clr-code-border);
 	border-bottom: none;
 	border-top-left-radius: var(--rounded-20);
 	border-top-right-radius: var(--rounded-20);

@@ -60,6 +60,8 @@
 		margin-top: var(--spacing-64);
 		padding: var(--spacing-32);
 		background-color: var(--clr-footer-bg);
+		border-top: 1px solid var(--clr-menu-border);
+		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20) var(--rounded-20) 0 0;
 	}
 
