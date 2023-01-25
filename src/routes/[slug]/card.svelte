@@ -8,10 +8,33 @@
 	import Newsletter from '$lib/shared/ui/newsletter.svelte'
 
 	import { twitter } from '$lib/api/config'
+	import Heart from '@rgossiaux/svelte-heroicons/outline/Heart'
 
-	export let preset: 'edit' | 'newsletter'
+	export let preset: 'support' | 'edit' | 'newsletter'
 	export let editUrl = ''
 </script>
+
+{#if preset === 'support'}
+	<div class="card">
+		<div class="decorative">
+			<Heart width="24" height="24" aria-hidden="true" />
+		</div>
+		<span class="title">Support</span>
+		<p class="text">
+			If you want to support the content you're reading or watching on YouTube
+			consider becoming a patreon starting low as <b>1$ per month</b>.
+		</p>
+		<a
+			class="link"
+			href="https://www.patreon.com/joyofcode"
+			target="_blank"
+			rel="noreferrer"
+		>
+			<span>Become a patreon</span>
+			<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
+		</a>
+	</div>
+{/if}
 
 {#if preset === 'edit'}
 	<div class="card">

@@ -54,8 +54,9 @@
 	</div>
 
 	<div class="cards">
-		<Card preset="edit" {editUrl} />
+		<Card preset="support" />
 		<Card preset="newsletter" />
+		<Card preset="edit" {editUrl} />
 	</div>
 </main>
 
