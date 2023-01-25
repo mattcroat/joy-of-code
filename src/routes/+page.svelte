@@ -93,6 +93,8 @@
 		margin-top: var(--spacing-64);
 		padding: var(--spacing-24);
 		background: var(--clr-hero-bg);
+		border-top: 1px solid var(--clr-menu-border);
+		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-sm);
 	}

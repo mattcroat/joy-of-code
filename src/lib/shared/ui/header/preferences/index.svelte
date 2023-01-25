@@ -82,7 +82,8 @@
 	.preferences {
 		background-image: var(--clr-menu-bg);
 		padding: var(--spacing-24);
-		border: 1px solid var(--clr-menu-border);
+		border-top: 1px solid var(--clr-menu-border);
+		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-lg);
 	}
