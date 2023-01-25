@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ params, setHeaders }) => {
 	const maxage = days > 6 ? 60 * 60 * 24 * 6 : 60
 
 	setHeaders({
-		'Cache-Control': `public, max-age=0, s-maxage=${maxage}`,
+		'Cache-Control': `max-age=0, s-maxage=${maxage}`,
 	})
 
 	return { content, frontmatter }
