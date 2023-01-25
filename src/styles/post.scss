@@ -12,6 +12,11 @@
 	color: var(--clr-primary);
 }
 
+.prose p > a {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
 .prose p,
 .prose li {
 	font-size: var(--post-txt-size);
