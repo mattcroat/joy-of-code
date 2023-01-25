@@ -52,12 +52,6 @@
 	border-radius: var(--rounded-20);
 }
 
-*:focus {
-	outline: none;
-	box-shadow: 0 0 0 4px var(--clr-primary);
-	border-radius: var(--rounded-20);
-}
-
 html {
 	font-size: 62.5%;
 	scroll-padding-top: var(--spacing-32);
@@ -74,6 +68,13 @@ body {
 	font-size: var(--font-16);
 	color: var(--clr-txt);
 	background-color: var(--clr-bg);
+}
+
+/* fixes issue where safari applies focus to body  */
+body *:focus {
+	outline: none;
+	box-shadow: 0 0 0 4px var(--clr-primary);
+	border-radius: var(--rounded-20);
 }
 
 @media (min-width: 480px) {
