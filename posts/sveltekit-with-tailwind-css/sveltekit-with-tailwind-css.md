@@ -8,7 +8,7 @@ category: sveltekit
 
 # SvelteKit With Tailwind CSS
 
-{% embed src="https://www.youtube.com/embed/J_G_xP0chog" title="SvelteKit With Tailwind CSS" %}
+{% youtube id="J_G_xP0chog" title="SvelteKit With Tailwind CSS" %}
 
 ## Table of Contents
 

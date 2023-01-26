@@ -8,7 +8,7 @@ category: typescript
 
 # TypeScript Fundamentals
 
-{% embed src="https://www.youtube.com/embed/Giu1uoiNbGk" title="TypeScript Fundamentals" %}
+{% youtube id="Giu1uoiNbGk" title="TypeScript Fundamentals" %}
 
 ## Table of Contents
 
@@ -2587,7 +2587,7 @@ Hooking into code like this is called [metaprogramming](https://en.wikipedia.org
 
 There's a great video by [Fireship](https://fireship.io/) on [The Magic of TypeScript Decorators](https://www.youtube.com/watch?v=O6A-u_FoEX8) you should watch. 🍿
 
-{% embed src="https://www.youtube.com/embed/O6A-u_FoEX8" title="The Magic of TypeScript Decorators" %}
+{% youtube id="O6A-u_FoEX8" title="The Magic of TypeScript Decorators" %}
 
 If you want to dive deep into **decorators** you can read [Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) from the TypeScript Handbook.
 

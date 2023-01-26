@@ -9,7 +9,7 @@ series: false
 
 # Animation With Svelte
 
-{% embed src="https://www.youtube.com/embed/3RlBfUQCiAQ" title="Animation With Svelte" %}
+{% youtube id="3RlBfUQCiAQ" title="Animation With Svelte" %}
 
 ## Table of Contents
 

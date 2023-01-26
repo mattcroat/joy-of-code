@@ -8,7 +8,7 @@ category: 'sveltekit'
 
 # Using Environment Variables With SvelteKit
 
-{% embed src="https://www.youtube.com/embed/h2VzXTfbUpQ" title="Using Environment Variables With SvelteKit" %}
+{% youtube id="h2VzXTfbUpQ" title="Using Environment Variables With SvelteKit" %}
 
 ## Table of Contents
 

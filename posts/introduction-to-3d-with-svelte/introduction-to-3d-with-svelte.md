@@ -8,7 +8,7 @@ category: svelte
 
 # Introduction to 3D With Svelte
 
-{% embed src="https://www.youtube.com/embed/89LYeHOncVk" title="Introduction to 3D With Svelte" %}
+{% youtube id="89LYeHOncVk" title="Introduction to 3D With Svelte" %}
 
 ## Table of Contents
 

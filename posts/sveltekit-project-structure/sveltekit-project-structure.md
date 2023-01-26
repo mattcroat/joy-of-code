@@ -9,7 +9,7 @@ series: false
 
 # SvelteKit Project Structure Explained
 
-{% embed src="https://www.youtube.com/embed/5VBdyfGhs7A" title="SvelteKit Project Structure Explained" %}
+{% youtube id="5VBdyfGhs7A" title="SvelteKit Project Structure Explained" %}
 
 ## Table of Contents
 

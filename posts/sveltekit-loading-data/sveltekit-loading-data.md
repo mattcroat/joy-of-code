@@ -9,7 +9,7 @@ series: false
 
 # SvelteKit API Endpoints And Loading Data For Pages
 
-{% embed src="https://www.youtube.com/embed/rsmLu5nmh4g" title="SvelteKit API Endpoints And Loading Data For Pages" %}
+{% youtube id="rsmLu5nmh4g" title="SvelteKit API Endpoints And Loading Data For Pages" %}
 
 ## Table of Contents
 

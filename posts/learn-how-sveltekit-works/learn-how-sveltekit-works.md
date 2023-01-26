@@ -9,7 +9,7 @@ series: false
 
 # Learn How SvelteKit Works As a Framework
 
-{% embed src="https://www.youtube.com/embed/VizuTy3uSNE" title="Learn How SvelteKit Works" %}
+{% youtube id="VizuTy3uSNE" title="Learn How SvelteKit Works" %}
 
 ## Table of Contents
 

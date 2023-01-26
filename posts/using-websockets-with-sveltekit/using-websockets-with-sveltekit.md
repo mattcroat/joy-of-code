@@ -8,7 +8,7 @@ category: sveltekit
 
 # Using WebSockets With SvelteKit
 
-{% embed src="https://www.youtube.com/embed/mAcKzdW5fR8" title="Using WebSockets With SvelteKit" %}
+{% youtube id="mAcKzdW5fR8" title="Using WebSockets With SvelteKit" %}
 
 ## Table of Contents
 

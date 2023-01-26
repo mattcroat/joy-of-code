@@ -9,7 +9,7 @@ series: false
 
 # Everything About SvelteKit Routing
 
-{% embed src="https://www.youtube.com/embed/7hXHbGj6iE0" title="SvelteKit Routing" %}
+{% youtube id="7hXHbGj6iE0" title="SvelteKit Routing" %}
 
 ## Table of Contents
 

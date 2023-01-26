@@ -9,7 +9,7 @@ series: true
 
 # Make a Svelte Todo App
 
-{% embed src="https://www.youtube.com/embed/cQYLPhBmqG8" title="Make a Svelte Todo App" %}
+{% youtube id="cQYLPhBmqG8" title="Make a Svelte Todo App" %}
 
 ## Table of Contents
 

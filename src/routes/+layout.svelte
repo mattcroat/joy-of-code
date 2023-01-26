@@ -2,9 +2,12 @@
 	import Header from '$lib/shared/ui/header/header.svelte'
 	import Footer from '$lib/shared/ui/footer.svelte'
 	import Transition from '$lib/shared/transition/index.svelte'
+	import LiteYouTubeEmbed from '$lib/embed/youtube.svelte'
 
 	import '../styles/styles.scss'
 </script>
+
+<LiteYouTubeEmbed />
 
 <Transition transition={{ type: 'fade', duration: 250 }}>
 	<div class="grid">

@@ -38,6 +38,7 @@
 		"@rgossiaux/svelte-heroicons": "^0.1.2",
 		"@supabase/supabase-js": "^2.4.1",
 		"gray-matter": "^4.0.3",
+		"lite-youtube-embed": "^0.2.0",
 		"rehype-code-titles": "^1.1.0",
 		"rehype-prism-plus": "^1.5.0",
 		"rehype-raw": "^6.1.1",

@@ -9,7 +9,7 @@ series: false
 
 # Svelte State Management Guide
 
-{% embed src="https://www.youtube.com/embed/4dDjQiOVrOo" title="Svelte State Management Guide" %}
+{% youtube id="4dDjQiOVrOo" title="Svelte State Management Guide" %}
 
 ## Table of Contents
 

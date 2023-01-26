@@ -8,7 +8,7 @@ category: svelte
 
 # Svelte Headless UI Component Library
 
-{% embed src="https://www.youtube.com/embed/7mE1UbRwU3w" title="Svelte Headless UI Component Library" %}
+{% youtube id="7mE1UbRwU3w" title="Svelte Headless UI Component Library" %}
 
 ## Table of Contents
 

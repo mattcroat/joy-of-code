@@ -9,7 +9,7 @@ series: true
 
 # SvelteKit Authentication Using Cookies
 
-{% embed src="https://www.youtube.com/embed/E3VG-dLCRUk" title="SvelteKit Authentication Using Cookies" %}
+{% youtube id="E3VG-dLCRUk" title="SvelteKit Authentication Using Cookies" %}
 
 ## Table of Contents
 

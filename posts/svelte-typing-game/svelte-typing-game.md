@@ -8,7 +8,7 @@ category: svelte
 
 # Svelte Typing Game
 
-{% embed src="https://www.youtube.com/embed/kMz_Ba_OF2w" title="Svelte Typing Game" %}
+{% youtube id="kMz_Ba_OF2w" title="Svelte Typing Game" %}
 
 ## Table of Contents
 

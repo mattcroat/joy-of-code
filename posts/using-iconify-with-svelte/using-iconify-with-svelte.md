@@ -9,7 +9,7 @@ series: false
 
 # The Best Icon Library For Svelte
 
-{% embed src="https://www.youtube.com/embed/iGVhzsTZSa8" title="The Best Icon Library For Svelte" %}
+{% youtube id="iGVhzsTZSa8" title="The Best Icon Library For Svelte" %}
 
 ## Table of Contents
 
