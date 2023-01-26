@@ -2,12 +2,9 @@
 	import Header from '$lib/shared/ui/header/header.svelte'
 	import Footer from '$lib/shared/ui/footer.svelte'
 	import Transition from '$lib/shared/transition/index.svelte'
-	import Analytics from '$lib/analytics/index.svelte'
 
 	import '../styles/styles.scss'
 </script>
-
-<Analytics />
 
 <Transition transition={{ type: 'fade', duration: 250 }}>
 	<div class="grid">
