@@ -9,7 +9,7 @@ series: false
 
 # List Of Svelte UI Libraries
 
-{% embed src="https://www.youtube.com/embed/O0mNU0maItY" title="List Of Svelte UI Libraries" %}
+{% youtube id="O0mNU0maItY" title="List Of Svelte UI Libraries" %}
 
 ## Table of Contents
 

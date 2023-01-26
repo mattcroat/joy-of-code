@@ -9,7 +9,7 @@ series: false
 
 # Test Your Site In Every Browser
 
-{% embed src="https://www.youtube.com/embed/WWdZMLCuC4I" title="Test Your Site In Every Browser" %}
+{% youtube id="WWdZMLCuC4I" title="Test Your Site In Every Browser" %}
 
 ## Table of Contents
 

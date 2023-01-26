@@ -9,7 +9,7 @@ series: false
 
 # Google Analytics With SvelteKit
 
-{% embed src="https://www.youtube.com/embed/l-x6H0fnqqQ" title="Google Analytics With SvelteKit" %}
+{% youtube id="l-x6H0fnqqQ" title="Google Analytics With SvelteKit" %}
 
 ## Table of Contents
 

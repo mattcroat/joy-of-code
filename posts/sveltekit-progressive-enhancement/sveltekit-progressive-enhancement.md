@@ -9,7 +9,7 @@ series: false
 
 # Progressive Form Enhancement With SvelteKit
 
-{% embed src="https://www.youtube.com/embed/6pv70d7i-3Q" title="Progressive Form Enhancement With SvelteKit" %}
+{% youtube id="6pv70d7i-3Q" title="Progressive Form Enhancement With SvelteKit" %}
 
 ## Table of Contents
 

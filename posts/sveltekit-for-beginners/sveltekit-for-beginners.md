@@ -9,7 +9,7 @@ series: true
 
 # Full Stack SvelteKit For Beginners
 
-{% embed src="https://www.youtube.com/embed/bLBHecY4-ak" title="SvelteKit For Beginners" %}
+{% youtube id="bLBHecY4-ak" title="SvelteKit For Beginners" %}
 
 ## Table of Contents
 

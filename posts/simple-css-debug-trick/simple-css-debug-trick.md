@@ -8,7 +8,7 @@ category: css
 
 # Simple Trick to Debug Your CSS
 
-{% embed src="https://www.youtube.com/embed/5nrMpCWkncc" title="Debug Your CSS" %}
+{% youtube id="5nrMpCWkncc" title="Debug Your CSS" %}
 
 ## Table of Contents
 

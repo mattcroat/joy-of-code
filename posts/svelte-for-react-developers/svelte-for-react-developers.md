@@ -9,7 +9,7 @@ series: false
 
 # Svelte Guide For React Developers
 
-{% embed src="https://www.youtube.com/embed/uWDBEUkTRGk" title="Google Analytics With SvelteKit" %}
+{% youtube id="uWDBEUkTRGk" title="Google Analytics With SvelteKit" %}
 
 ## Table of Contents
 

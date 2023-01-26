@@ -24,12 +24,13 @@ type ContentType = {
 }
 
 function searchAndReplace(content: string, slug: string): string {
-	const embeds = /{% embed src="(.*?)" title="(.*?)" %}/g
-	const videos = /{% video src="(.*?)" %}/g
-	const images = /{% img src="(.*?)" alt="(.*?)" %}/g
+	const embed = /{% embed src="(.*?)" title="(.*?)" %}/g
+	const video = /{% video src="(.*?)" %}/g
+	const image = /{% img src="(.*?)" alt="(.*?)" %}/g
+	const youtube = /{% youtube id="(.*?)" title="(.*?)" %}/g
 
 	return content
-		.replace(embeds, (_, src, title) => {
+		.replace(embed, (_, src, title) => {
 			return `
         <iframe
           title="${title}"
@@ -38,7 +39,7 @@ function searchAndReplace(content: string, slug: string): string {
         ></iframe>
       `.trim()
 		})
-		.replace(videos, (_, src) => {
+		.replace(video, (_, src) => {
 			return `
         <video controls>
           <source
@@ -48,7 +49,7 @@ function searchAndReplace(content: string, slug: string): string {
         </video>
       `.trim()
 		})
-		.replace(images, (_, src, alt) => {
+		.replace(image, (_, src, alt) => {
 			return `
       <img
         src="${imagesUrl}/${slug}/images/${src}"
@@ -56,6 +57,11 @@ function searchAndReplace(content: string, slug: string): string {
         loading="lazy"
       />
   `.trim()
+		})
+		.replace(youtube, (_, id, title) => {
+			return `
+				<lite-youtube videoid="${id}" playlabel="${title}"></lite-youtube>
+			`.trim()
 		})
 }
 

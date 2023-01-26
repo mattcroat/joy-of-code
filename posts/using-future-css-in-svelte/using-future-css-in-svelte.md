@@ -9,7 +9,7 @@ series: false
 
 # Use Future CSS In Svelte Today
 
-{% embed src="https://www.youtube.com/embed/eqwtoaP-0pk" title="Use Future CSS in Svelte" %}
+{% youtube id="eqwtoaP-0pk" title="Use Future CSS in Svelte" %}
 
 ## Table of Contents
 

@@ -9,7 +9,7 @@ series: false
 
 # What Is SvelteKit?
 
-{% embed src="https://www.youtube.com/embed/obmiLi3bhkQ" title="What Is SvelteKit?" %}
+{% youtube id="obmiLi3bhkQ" title="What Is SvelteKit?" %}
 
 ## Table of Contents
 

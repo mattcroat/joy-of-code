@@ -9,7 +9,7 @@ series: false
 
 # The Best CSS Framework For Svelte
 
-{% embed src="https://www.youtube.com/embed/-n84EMKIXQM" title="The Best CSS Framework For Svelte" %}
+{% youtube id="-n84EMKIXQM" title="The Best CSS Framework For Svelte" %}
 
 ## Table of Contents
 

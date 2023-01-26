@@ -9,7 +9,7 @@ series: false
 
 # Working With Forms In SvelteKit
 
-{% embed src="https://www.youtube.com/embed/XNbCp7ZJi-8" title="Working With Forms In SvelteKit" %}
+{% youtube id="XNbCp7ZJi-8" title="Working With Forms In SvelteKit" %}
 
 ## Table of Contents
 

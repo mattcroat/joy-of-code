@@ -9,7 +9,7 @@ series: true
 
 # Testing User Interfaces For Beginners Regardless What JavaScript Framework You're Using
 
-{% embed src="https://www.youtube.com/embed/y53wwdBr5AI" title="Make a Svelte Todo App" %}
+{% youtube id="y53wwdBr5AI" title="Make a Svelte Todo App" %}
 
 ## Table of Contents
 

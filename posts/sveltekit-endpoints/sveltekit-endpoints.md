@@ -10,7 +10,7 @@ draft: true
 
 # SvelteKit Endpoints
 
-{% embed src="https://www.youtube.com/embed/XnVxDLTgCgo" title="SvelteKit Endpoints" %}
+{% youtube id="XnVxDLTgCgo" title="SvelteKit Endpoints" %}
 
 ## Table of Contents
 

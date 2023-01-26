@@ -9,7 +9,7 @@ series: true
 
 # Svelte For Beginners
 
-{% embed src="https://www.youtube.com/embed/BrkrOjknC_E" title="Svelte For Beginners" %}
+{% youtube id="BrkrOjknC_E" title="Svelte For Beginners" %}
 
 ## Table of Contents
 

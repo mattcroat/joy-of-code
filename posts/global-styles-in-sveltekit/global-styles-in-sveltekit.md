@@ -9,7 +9,7 @@ series: false
 
 # How To Use Global Styles In SvelteKit
 
-{% embed src="https://www.youtube.com/embed/jHSwChkx3TQ" title="Global Styles In SvelteKit" %}
+{% youtube id="jHSwChkx3TQ" title="Global Styles In SvelteKit" %}
 
 ## Table of Contents
 
