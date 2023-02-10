@@ -1,14 +1,15 @@
 ---
 title: Using Advanced Layouts In SvelteKit
-description: Learn how to use group layouts and break out of layouts in SvelteKit.
+description: Learn how to have more control over layouts and how to reset layouts using group layouts in SvelteKit.
 slug: sveltekit-advanced-layouts
 published: 2023-2-10
 category: sveltekit
 series: false
-draft: true
 ---
 
 # Using Advanced Layouts In SvelteKit
+
+{% youtube id="9UpaKEVuErs" title="Using Advanced Layouts In SvelteKit" %}
 
 ## Table of Contents
 
@@ -23,7 +24,7 @@ This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ
 
 ## Project Setup
 
-If you want to follow along the easiest method is to [open the starting project on StackBlitz](stackblitz.com/github/joysocode/sveltekit-layout-reset) but if you prefer the comfort of your editor I provided a [repository on GitHub](https://github.com/joysofcode/advanced-layouts) with the starting and final example.
+If you want to follow along the easiest method is to [open the starting project on StackBlitz](https://stackblitz.com/github/joysofcode/advanced-layouts) but if you prefer the comfort of your editor I provided a [repository on GitHub](https://github.com/joysofcode/advanced-layouts) with the starting and final example.
 
 Clone the project.
 
