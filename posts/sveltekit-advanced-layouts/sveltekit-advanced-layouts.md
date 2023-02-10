@@ -85,17 +85,17 @@ Yikes! But that's not everything.
 
 Notice the `/quotes` route? I want a layout that shows more quotes at the end of the page if I go to other child routes like `/quotes/id/[quoteId]` but I might not want that layout for `/quotes/tags`.
 
-Sure, I could move the `/tags` route outside the `/quotes` route which would solve the problem but I don't want to do that. Because every child route in `/quotes` shares the same layout from `/quotes/+layout.svelte` if you go to `/quotes/tags` it shows other quotes. 
-
 {% img src="tags-layout.webp" alt="Tags route layout problem" %}
+
+Sure, I could move the `/tags` route outside the `/quotes` route which would solve the problem but I don't want to do that. Because every child route in `/quotes` shares the same layout from `/quotes/+layout.svelte` if you go to `/quotes/tags` it shows other quotes. 
 
 This is where group layouts help.
 
-## Using Group Layouts To Reset A Layout
+## Using Group Layouts To Group Related Routes
 
-[Group layouts](https://kit.svelte.dev/docs/advanced-routing#advanced-layouts) let you group routes inside a directory wrapped in parenthesis but **doesn't** create a new route and instead acts like a separator.
+[Group layouts](https://kit.svelte.dev/docs/advanced-routing#advanced-layouts) let you group routes inside a directory wrapped in parenthesis but they **don't** create a new route.
 
-In our example we can fix the first problem by creating an `(app)` and `(dashboard)` group. If you want the group to be the root (`/`) of your app you can put the `+page.svelte` file inside the group.
+To fix the **admin layout** I'm going to create an `(app)` and `(dashboard)` group. If you want the group to be the root (`/`) of your app you can put the `+page.svelte` file inside the group.
 
 I'm going to keep the global styles inside `/routes/+layout.svelte` but move everything else which is going to leave us with a **blank root layout**.
 
@@ -137,7 +137,7 @@ Wonderful!
 
 {% img src="admin-group-layout.webp" alt="Admin route using app group layout" %}
 
-I'm going to use a group layout to create separate groups for `(quote)` and `(tags)` under the `/quotes` route and move the `/quotes/id` route inside `quotes/(quote)` and the `/quotes/tags` route inside `/quotes/(tags)`.
+To fix the **tags layout** I'm going to use a group layout to create separate groups for `(quote)` and `(tags)` under the `/quotes` route and move the `/quotes/id` route inside `quotes/(quote)` and the `/quotes/tags` route inside `/quotes/(tags)`.
 
 ```txt:routes {4, 10}
 routes
@@ -169,9 +169,9 @@ That's it!
 
 I think what makes group layouts confusing is when you start nesting layouts because you can think of group layouts as buckets to put things into but if you're not confident in using layouts yet this is going to be hard to wrap your head around.
 
-You don't have to use group layouts, so put this away in your pocket in case you need it and focus on the fundamentals instead.
-
 If you're not sure when to use a layout ask yourself if the child routes of a given route have some repeating content you want to show — also remember we previously learned that data returned from layout `load` functions is available to child routes on the `data` prop which is useful.
+
+You don't have to use group layouts, so put this away in your pocket in case you need it and focus on the fundamentals instead.
 
 If you thought this was mind-bending in the next section I'm going to show you that individual pages and layouts can also change layouts.
 
@@ -179,7 +179,7 @@ If you thought this was mind-bending in the next section I'm going to show you t
 
 Group layouts are nice if you want some pages and their children to have a different layout but you can also use a different layout for a specific page and layout.
 
-Right now the `/(app)/quotes/(quote)/id/[quoteId]/+page.svelte` route shares the **app layout** and **quotes layout** but if you didn't want to use the **quotes layout** and show more quotes you can use the **app layout** instead and rename `+page.svelte` to `+page@(app).svelte`.
+Right now the `/(app)/quotes/(quote)/id/[quoteId]/+page.svelte` route shares the **app layout** and **quotes layout** but if you didn't want to use the **quotes layout** for showing more quotes you can use the **app layout** instead and rename `+page.svelte` to `+page@(app).svelte`.
 
 ```txt:routes {8}
 routes
