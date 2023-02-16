@@ -672,7 +672,7 @@ export const actions: Actions = {
 
 Using what we know I'm going to set `loading = true` before the form submits and when it's done we can set `loading = false`.
 
-```html:routes/todos/+page.svelte {8, 11, 13-16, 37-39} showLineNumbers
+```html:routes/todos/+page.svelte {8, 11, 13-16, 38-40} showLineNumbers
 <script lang="ts">
   import { enhance, type SubmitFunction } from '$app/forms'
   import type { ActionData, PageData } from './$types'
@@ -962,7 +962,7 @@ Let's try using the `update` method and see if it works.
 
 That won't work because `update` can't update `form` and `$form.page` from anywhere else but you can use `applyAction` and pass it `result` to customize the `use:enhance` behavior further.
 
-```html:routes/+page.svelte {2, 8-11} showLineNumbers
+```html:routes/+page.svelte {2, 8-10} showLineNumbers
 <script lang="ts">
   import { applyAction, enhance, type SubmitFunction } from '$app/forms'
   import type { ActionData } from './$types'
