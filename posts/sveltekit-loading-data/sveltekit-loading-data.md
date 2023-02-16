@@ -69,7 +69,7 @@ I want to have some placeholder posts in the database using [DummyJSON](https://
 ```json:package.json showLineNumbers
 {
   "prisma": {
-    "seed": "pnpx vite-node prisma/seed.ts"
+    "seed": "npx vite-node prisma/seed.ts"
   }
   // ...
 }
