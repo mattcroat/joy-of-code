@@ -181,8 +181,17 @@ a:hover::before {
 }
 
 img,
-iframe {
+iframe,
+lite-youtube {
 	border-radius: var(--rounded-20);
+}
+
+lite-youtube {
+	box-shadow: var(--shadow-lg);
+}
+
+lite-youtube::before {
+	background: none;
 }
 
 .sr-only {
