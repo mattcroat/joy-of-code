@@ -1,6 +1,6 @@
 [
   {
-    "views": 5219,
+    "views": 6016,
     "title": "Animation With Svelte",
     "description": "Master animation with Svelte from regular and custom transitions to using other animation libraries.",
     "slug": "animation-with-svelte",
@@ -9,7 +9,7 @@
     "series": false
   },
   {
-    "views": 1217,
+    "views": 1271,
     "title": "How Code Sandboxes Update Content",
     "description": "How do code sandboxes update the iframe without causing flashing?",
     "slug": "avoid-flashing-iframe",
@@ -17,7 +17,7 @@
     "category": "javascript"
   },
   {
-    "views": 763,
+    "views": 789,
     "title": "Clean Git History Using Rebase",
     "description": "How to have a clean Git history using rebase.",
     "slug": "clean-git-history",
@@ -25,7 +25,7 @@
     "category": "git"
   },
   {
-    "views": 7312,
+    "views": 7528,
     "title": "Create a JavaScript Code Sandbox",
     "description": "Create a JavaScript code sandbox using Vite and TypeScript.",
     "slug": "create-a-coding-sandbox",
@@ -33,7 +33,7 @@
     "category": "typescript"
   },
   {
-    "views": 2499,
+    "views": 2573,
     "title": "Create a Markdown Blog Using Next.js",
     "description": "Learn how to create a Markdown blog using Next.js.",
     "slug": "create-a-markdown-blog",
@@ -41,7 +41,7 @@
     "category": "next"
   },
   {
-    "views": 5679,
+    "views": 5975,
     "title": "How to Style CSS Focus Outline",
     "description": "Learn the importance of CSS focus outline for accessibility and how to style it.",
     "slug": "css-focus-outline",
@@ -49,7 +49,7 @@
     "category": "css"
   },
   {
-    "views": 11102,
+    "views": 12359,
     "title": "Favicon That Works for Light and Dark Mode",
     "description": "How to make a favicon that respects the user color scheme preference?",
     "slug": "dark-mode-favicon",
@@ -57,7 +57,7 @@
     "category": "css"
   },
   {
-    "views": 1501,
+    "views": 1576,
     "title": "Design For Developers",
     "description": "Learn enough visual design to be dangerous with actual tips instead of theory.",
     "slug": "design-for-developers",
@@ -65,7 +65,7 @@
     "category": "design"
   },
   {
-    "views": 1574,
+    "views": 1644,
     "title": "Dynamic Social Share Images",
     "description": "Automate creating social share images for social media sites.",
     "slug": "dynamic-social-share-images",
@@ -73,7 +73,7 @@
     "category": "typescript"
   },
   {
-    "views": 3798,
+    "views": 4710,
     "title": "How To Use Global Styles In SvelteKit",
     "description": "How to use global styles in SvelteKit.",
     "slug": "global-styles-in-sveltekit",
@@ -82,7 +82,7 @@
     "series": false
   },
   {
-    "views": 646,
+    "views": 669,
     "title": "Great Developers Steal",
     "description": "What is open source education? Find out how it can help you learn and improve faster.",
     "slug": "great-developers-steal",
@@ -90,7 +90,7 @@
     "category": "javascript"
   },
   {
-    "views": 1015,
+    "views": 1084,
     "title": "How to Optimize Images",
     "description": "How to optimize images and automate image optimization using Squoosh.",
     "slug": "how-to-optimize-images",
@@ -98,7 +98,7 @@
     "category": "general"
   },
   {
-    "views": 534,
+    "views": 538,
     "title": "How to Think Like a Developer",
     "description": "Learn how to develop problem solving skills.",
     "slug": "how-to-think-like-a-developer",
@@ -106,7 +106,7 @@
     "category": "general"
   },
   {
-    "views": 734,
+    "views": 763,
     "title": "Introduction to React",
     "description": "Why do we use frontend JavaScript frameworks and what problems do they solve?",
     "slug": "intro-to-react",
@@ -114,7 +114,7 @@
     "category": "react"
   },
   {
-    "views": 1970,
+    "views": 2196,
     "title": "Introduction To 3D With Svelte",
     "description": "Introduction to using 3D in the browser with Svelte and Threlte.",
     "slug": "introduction-to-3d-with-svelte",
@@ -122,7 +122,7 @@
     "category": "svelte"
   },
   {
-    "views": 1195,
+    "views": 1245,
     "title": "Introduction to Tailwind CSS",
     "description": "What is Tailwind CSS and why it's so beloved?",
     "slug": "introduction-to-tailwind-css",
@@ -130,7 +130,7 @@
     "category": "css"
   },
   {
-    "views": 9638,
+    "views": 10234,
     "title": "Learn How SvelteKit Works",
     "description": "Find the answer where your SvelteKit code runs and the difference between SSR and CSR.",
     "slug": "learn-how-sveltekit-works",
@@ -139,7 +139,7 @@
     "series": false
   },
   {
-    "views": 765,
+    "views": 791,
     "title": "Learn Problem Solving",
     "description": "Learn how to think like a developer and solve problems instead of relying on tutorials.",
     "slug": "learn-problem-solving",
@@ -148,7 +148,7 @@
     "series": false
   },
   {
-    "views": 6268,
+    "views": 6453,
     "title": "Reduce Next.js Bundle Size by Half",
     "description": "Learn how using Preact instead of React can reduce Next.js bundle size by half.",
     "slug": "next-bundle-size",
@@ -156,7 +156,7 @@
     "category": "next"
   },
   {
-    "views": 1837,
+    "views": 2132,
     "title": "How to Structure Your React Projects",
     "description": "Learn how to keep your React projects organized.",
     "slug": "react-project-structure",
@@ -164,7 +164,7 @@
     "category": "react"
   },
   {
-    "views": 715,
+    "views": 739,
     "title": "Rethink How You Write Git Commits",
     "description": "Write more clear, and meaningful commits, with less effort.",
     "slug": "rethink-how-you-write-git-commits",
@@ -172,7 +172,7 @@
     "category": "git"
   },
   {
-    "views": 1142,
+    "views": 1217,
     "title": "Use Developer Tools to Screenshot the Entire Page",
     "description": "You don't need extensions to screenshot the page, sections and elements.",
     "slug": "screenshot-page-and-dom-elements",
@@ -180,7 +180,7 @@
     "category": "general"
   },
   {
-    "views": 1021,
+    "views": 1115,
     "title": "Simple Trick to Debug Your CSS",
     "description": "Learn how to debug CSS using this simple trick.",
     "slug": "simple-css-debug-trick",
@@ -188,7 +188,7 @@
     "category": "css"
   },
   {
-    "views": 401,
+    "views": 421,
     "title": "Use The Simpler CSS Color Syntax",
     "description": "Learn how to write simpler CSS color syntax thanks to CSS Color Module Level 4.",
     "slug": "simpler-color-syntax",
@@ -196,7 +196,7 @@
     "category": "css"
   },
   {
-    "views": 309,
+    "views": 313,
     "title": "Space Elements With Flexbox Instead of Margin",
     "description": "Find out how using Flexbox to space elements is easier than using margin.",
     "slug": "space-elements-with-flexbox",
@@ -204,7 +204,7 @@
     "category": "css"
   },
   {
-    "views": 987,
+    "views": 1042,
     "title": "Static Pages Without JavaScript",
     "description": "Remove client-side JavaScript in Next.js for production on a per-page basis.",
     "slug": "static-pages-without-javascript",
@@ -212,7 +212,7 @@
     "category": "next"
   },
   {
-    "views": 5167,
+    "views": 5408,
     "title": "Svelte For Beginners",
     "description": "Start building things with the Svelte JavaScript framework today.",
     "slug": "svelte-for-beginners",
@@ -221,7 +221,7 @@
     "series": true
   },
   {
-    "views": 912,
+    "views": 988,
     "title": "Svelte Guide For React Developers",
     "description": "Get up to speed with Svelte as a React developer.",
     "slug": "svelte-for-react-developers",
@@ -230,7 +230,7 @@
     "series": false
   },
   {
-    "views": 3791,
+    "views": 3918,
     "title": "Svelte Headless UI Component Library",
     "description": "Svelte Headless UI is an awesome unopinionated component library.",
     "slug": "svelte-headless-ui",
@@ -238,7 +238,7 @@
     "category": "svelte"
   },
   {
-    "views": 2260,
+    "views": 2415,
     "title": "Never Search For Svelte Components Again",
     "description": "Hover over elements and open Svelte components in your editor using the Svelte inspector.",
     "slug": "svelte-inspector",
@@ -247,7 +247,7 @@
     "series": false
   },
   {
-    "views": 4915,
+    "views": 5302,
     "title": "Svelte State Management Guide",
     "description": "Learn how to manage state in Svelte and ways you can communicate between components.",
     "slug": "svelte-state-management",
@@ -256,7 +256,7 @@
     "series": false
   },
   {
-    "views": 3745,
+    "views": 3950,
     "title": "Make a Svelte Todo App",
     "description": "Learn Svelte by making an awesome Svelte todo app.",
     "slug": "svelte-todo-app",
@@ -265,7 +265,7 @@
     "series": true
   },
   {
-    "views": 1318,
+    "views": 1403,
     "title": "Make A Typing Game With Svelte",
     "description": "Learn how to make a typing game with Svelte.",
     "slug": "svelte-typing-game",
@@ -273,7 +273,7 @@
     "category": "svelte"
   },
   {
-    "views": 4659,
+    "views": 6740,
     "title": "List Of Svelte UI Libraries",
     "description": "I tried every Svelte UI library, so you don't have to.",
     "slug": "svelte-ui-libraries",
@@ -282,7 +282,7 @@
     "series": false
   },
   {
-    "views": 16,
+    "views": 471,
     "title": "Using Advanced Layouts In SvelteKit",
     "description": "Learn how to have more control over layouts and how to reset layouts using group layouts in SvelteKit.",
     "slug": "sveltekit-advanced-layouts",
@@ -291,7 +291,7 @@
     "series": false
   },
   {
-    "views": 24570,
+    "views": 26609,
     "title": "SvelteKit Authentication Using Cookies",
     "description": "Learn SvelteKit user authentication using cookies.",
     "slug": "sveltekit-authentication-using-cookies",
@@ -300,7 +300,7 @@
     "series": true
   },
   {
-    "views": 10589,
+    "views": 11499,
     "title": "SvelteKit Endpoints",
     "description": "Learn what are SvelteKit endpoints and when to use standalone endpoints and page endpoints or both.",
     "slug": "sveltekit-endpoints",
@@ -310,7 +310,7 @@
     "draft": true
   },
   {
-    "views": 20921,
+    "views": 23382,
     "title": "Using Environment Variables With SvelteKit",
     "description": "Learn how to manage your environment variables with SvelteKit.",
     "slug": "sveltekit-environment-variables",
@@ -318,7 +318,7 @@
     "category": "sveltekit"
   },
   {
-    "views": 34945,
+    "views": 36569,
     "title": "Full Stack SvelteKit For Beginners",
     "description": "SvelteKit is an opinionated full stack framework that ties the frontend and backend together delivering the best developer and user experience.",
     "slug": "sveltekit-for-beginners",
@@ -327,7 +327,7 @@
     "series": true
   },
   {
-    "views": 3136,
+    "views": 3461,
     "title": "Google Analytics With SvelteKit",
     "description": "Set up Google Analytics with SvelteKit.",
     "slug": "sveltekit-google-analytics",
@@ -336,7 +336,16 @@
     "series": false
   },
   {
-    "views": 2965,
+    "views": 15,
+    "title": "Learn SvelteKit Hooks Through Example",
+    "description": "Learn what are SvelteKit hooks and how they're used through practical examples.",
+    "slug": "sveltekit-hooks",
+    "published": "2023-2-22",
+    "category": "sveltekit",
+    "series": false
+  },
+  {
+    "views": 4307,
     "title": "SvelteKit API Endpoints And Loading Data For Pages",
     "description": "Learn about API endpoints and loading data for your pages with SvelteKit.",
     "slug": "sveltekit-loading-data",
@@ -345,7 +354,7 @@
     "series": false
   },
   {
-    "views": 1589,
+    "views": 1904,
     "title": "Progressive Form Enhancement With SvelteKit",
     "description": "Progressively enhance your forms in SvelteKit for a better user experience.",
     "slug": "sveltekit-progressive-enhancement",
@@ -354,7 +363,7 @@
     "series": false
   },
   {
-    "views": 1315,
+    "views": 1619,
     "title": "SvelteKit Project Structure Explained",
     "description": "Understand how SvelteKit works by creating a SvelteKit project from scratch.",
     "slug": "sveltekit-project-structure",
@@ -363,7 +372,7 @@
     "series": false
   },
   {
-    "views": 2082,
+    "views": 2832,
     "title": "Everything About SvelteKit Routing",
     "description": "Everything you need to know about SvelteKit routing including pages, layouts, dynamic routes, and advanced routing.",
     "slug": "sveltekit-routing",
@@ -372,7 +381,7 @@
     "series": false
   },
   {
-    "views": 1806,
+    "views": 2490,
     "title": "How To Deal With \"Window Is Not Defined\" In SvelteKit",
     "description": "How to deal with the \"window is not defined\" error in SvelteKit.",
     "slug": "sveltekit-window-is-not-defined",
@@ -381,7 +390,7 @@
     "series": false
   },
   {
-    "views": 3005,
+    "views": 3454,
     "title": "SvelteKit With Tailwind CSS",
     "description": "Learn how to set up Tailwind CSS and automatic class sorting with SvelteKit.",
     "slug": "sveltekit-with-tailwind-css",
@@ -389,7 +398,7 @@
     "category": "sveltekit"
   },
   {
-    "views": 1284,
+    "views": 1319,
     "title": "Syntax Highlight Template Strings",
     "description": "Syntax highlight, and code completion inside JavaScript template strings.",
     "slug": "template-strings-syntax-highlight",
@@ -397,7 +406,7 @@
     "category": "javascript"
   },
   {
-    "views": 7964,
+    "views": 8471,
     "title": "Test Your Site In Every Browser",
     "description": "Learn how to test your site in Chrome, Firefox and Safari even on Linux and Windows.",
     "slug": "test-your-site-in-every-browser",
@@ -406,7 +415,7 @@
     "series": false
   },
   {
-    "views": 1254,
+    "views": 1309,
     "title": "Testing User Interfaces For Beginners",
     "description": "Gain confidence your code works and learn how to test user interfaces with Testing Library for any frontend JavaScript framework.",
     "slug": "testing-for-beginners",
@@ -415,7 +424,7 @@
     "series": true
   },
   {
-    "views": 19908,
+    "views": 20362,
     "title": "TypeScript Fundamentals",
     "description": "Learn TypeScript through example — the missing TypeScript reference.",
     "slug": "typescript-fundamentals",
@@ -423,7 +432,7 @@
     "category": "typescript"
   },
   {
-    "views": 2547,
+    "views": 2649,
     "title": "Best Practices When Using Fonts",
     "description": "Everything I know about best practices when using fonts on the web.",
     "slug": "using-fonts-on-the-web",
@@ -431,7 +440,7 @@
     "category": "general"
   },
   {
-    "views": 1378,
+    "views": 1473,
     "title": "Use Future CSS In Svelte Today",
     "description": "Learn how to use future CSS in Svelte today with PostCSS.",
     "slug": "using-future-css-in-svelte",
@@ -440,7 +449,7 @@
     "series": false
   },
   {
-    "views": 554,
+    "views": 754,
     "title": "The Best Icon Library For Svelte",
     "description": "Iconify is a framework agnostic icon library that includes every popular icon set.",
     "slug": "using-iconify-with-svelte",
@@ -449,7 +458,7 @@
     "series": false
   },
   {
-    "views": 1894,
+    "views": 2265,
     "title": "The Best CSS Framework For Svelte",
     "description": "How to set up and customize Pico.css with Svelte.",
     "slug": "using-pico-css-with-svelte",
@@ -458,7 +467,7 @@
     "series": false
   },
   {
-    "views": 4047,
+    "views": 4439,
     "title": "Using Tailwind With Vite",
     "description": "Learn how to set up Vite and Tailwind.",
     "slug": "using-tailwind-with-vite",
@@ -466,7 +475,7 @@
     "category": "css"
   },
   {
-    "views": 7992,
+    "views": 8833,
     "title": "Using WebSockets With SvelteKit",
     "description": "Learn how to use a custom SvelteKit server for WebSockets.",
     "slug": "using-websockets-with-sveltekit",
@@ -474,7 +483,7 @@
     "category": "sveltekit"
   },
   {
-    "views": 327,
+    "views": 335,
     "title": "Web Development Podcasts",
     "description": "Stay up to date with web development and entertained.",
     "slug": "web-development-podcasts",
@@ -482,7 +491,7 @@
     "category": "general"
   },
   {
-    "views": 626,
+    "views": 720,
     "title": "What Is SvelteKit?",
     "description": "SvelteKit is the swiss army knife of JavaScript frameworks and blurs the line between frontend and backend.",
     "slug": "what-is-sveltekit",
@@ -491,7 +500,7 @@
     "series": false
   },
   {
-    "views": 1344,
+    "views": 2401,
     "title": "Working With Forms In SvelteKit",
     "description": "Learn how to work with forms in SvelteKit using form actions, progressive form enhancement and how to do validation.",
     "slug": "working-with-forms-in-sveltekit",
