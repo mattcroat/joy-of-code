@@ -1,16 +1,15 @@
 ---
 title: Learn SvelteKit Hooks Through Example
-description: Learn what are SvelteKit hooks and how they're used through example.
+description: Learn what are SvelteKit hooks and how they're used through practical examples.
 slug: sveltekit-hooks
 published: 2023-2-22
 category: sveltekit
 series: false
-draft: true
 ---
 
 # Learn SvelteKit Hooks Through Example
 
-{% youtube id="" title="Learn SvelteKit Hooks Through Example" %}
+{% youtube id="Kzrz7GZ9pIg" title="Learn SvelteKit Hooks Through Example" %}
 
 ## Table of Contents
 
