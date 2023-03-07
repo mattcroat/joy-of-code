@@ -12,7 +12,7 @@ category: css
 
 ## Prefers Color Scheme
 
-Majority of modern operating systems let the user choose between a **light** and **dark** mode preference (besides **Linux** as far as I know 😢).
+The majority of modern operating systems let the user choose between a **light** and **dark** mode preference (besides **Linux** as far as I know 😢).
 
 {% img src="comparison.webp" alt="Comparison between light and dark favicon" %}
 
@@ -24,13 +24,13 @@ We can take advantage of this by using the [prefers-color-scheme](https://develo
 }
 ```
 
-If we look at [caniuse](https://caniuse.com/) the `prefers-color-scheme` media query is [supported across 91% of browsers](https://caniuse.com/prefers-color-scheme).
+If we look at [caniuse](https://caniuse.com/), the `prefers-color-scheme` media query is [supported across 91% of browsers](https://caniuse.com/prefers-color-scheme).
 
 {% img src="prefers-color-scheme.webp" alt="Prefers color scheme browser usage" %}
 
 ## Using JavaScript
 
-The first method is using **JavaScript** to change the favicon based on the user's preference using the [matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) API that can **listen** for changes and return `true` or `false` if the media query **matches**.
+You can use **JavaScript** to change the favicon based on the user's preference using the [matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) API that can **listen** for changes and return `true` or `false` if the media query **matches**.
 
 ```js:example.js showLineNumbers
 // select the favicon 👉
@@ -77,7 +77,7 @@ I prefer using a **SVG** favicon since it's easy to change and you don't have to
 
 {% img src="svg-favicons.webp" alt="SVG favicons browser usage" %}
 
-{% img src="safari.webp" alt="Person shouting at Safari" %}
+{% img src="safari.webp" alt="Person shouting at Safari to be normal" %}
 
 ```html:example.html showLineNumbers
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -104,7 +104,7 @@ I prefer using a **SVG** favicon since it's easy to change and you don't have to
 </svg>
 ```
 
-If you want [Prettier](https://prettier.io/) to format your SVG nicely temporarily rename it to use the **\*.html** extension, or specify inside your editor to treat it as a **HTML** file. You can also use [SVGOMG](https://jakearchibald.github.io/svgomg/) to optimize your SVG before — which helps a lot to reduce the amount of markup inside caused by exporting it.
+If you want [Prettier](https://prettier.io/) to format your SVG nicely, temporarily rename it to use the **\*.html** extension or tell your editor to treat it as a **HTML** file. You can also use [SVGOMG](https://jakearchibald.github.io/svgomg/), which reduces the amount of markup created inside SVGs when you export them, to optimize your SVG beforehand.
 
 ## Conclusion
 
