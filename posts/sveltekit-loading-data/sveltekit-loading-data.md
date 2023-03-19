@@ -850,7 +850,7 @@ export const load: PageLoad = async ({ parent }) => {
 
 As long as you keep this in mind you should be fine.
 
-## The Secret Life Of Load Functions
+## How Load Functions Work
 
 You should understand how `load` functions work because you're going to rerun a `load` function for the page which SvelteKit already does for your in certain cases but in some cases you might want to do it yourself.
 
