@@ -965,4 +965,6 @@ Let's repeat what makes a `load` function rerun:
 
 This doesn't cause the component to be recreated but it just updates the `data` prop inside a `+page.svelte` or `+layout.svelte` component but if you want to reset it you can use `afterNavigate` or wrap your component in a `{#key ...}` block. 
 
-That's everything you should know about API endpoints and loading data in SvelteKit.In the next one you're going to learn about working with forms.
+That's everything you should know about API endpoints and loading data in SvelteKit.
+
+In the next part you're going to [learn how to work with forms in SvelteKit](https://joyofcode.xyz/working-with-forms-in-sveltekit).
