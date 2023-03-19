@@ -1,13 +1,13 @@
 ---
-title: Animation With Svelte
-description: Master animation with Svelte from regular and custom transitions to using other animation libraries.
+title: Create Amazing User Interfaces Using Animation With Svelte
+description: Learn how to create amazing user interfaces with Svelte.
 slug: animation-with-svelte
 published: 2022-9-22
 category: svelte
 series: false
 ---
 
-# Animation With Svelte
+# Create Amazing User Interfaces Using Animation With Svelte
 
 {% youtube id="3RlBfUQCiAQ" title="Animation With Svelte" %}
 
