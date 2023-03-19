@@ -225,4 +225,4 @@ The development is funded by the [Open Collective](https://opencollective.com/sv
 
 The future of SvelteKit is bright and I hope you give it a try but be warned in case you do you might not want to use anything else and side effects include a permanent grin on your face.
 
-[In the next part](https://joyofcode.xyz/sveltekit-project-structure) I'm going to set up a SvelteKit project from scratch and explain how it works.
+In the next part [learn how to set up a SvelteKit project from scratch](https://joyofcode.xyz/sveltekit-project-structure) and understand how it works.
