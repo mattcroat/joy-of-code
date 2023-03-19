@@ -1022,4 +1022,4 @@ This way you can customize the behavior of `use:enhance` and dip in and out of t
 
 That's everything you should know to feel confident working with forms in SvelteKit and I hope you learned how forms work but more importantly how to make your app more resilient.
 
-If you want to continue learning in the next part I'm going to cover groups and how to reset your layout in SvelteKit.
+In the next part you're going to [learn about using advanced layouts in SvelteKit](https://joyofcode.xyz/sveltekit-advanced-layouts).
