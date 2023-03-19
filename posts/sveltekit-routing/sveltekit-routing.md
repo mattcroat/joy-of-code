@@ -425,4 +425,4 @@ If the route doesn't match SvelteKit returns a `404`.
 
 That's everything you need to know when it comes to routing in SvelteKit! There's more advanced things to go over like group layouts but first we need to learn about data loading in SvelteKit.
 
-[In the next part](https://joyofcode.xyz/sveltekit-loading-data) you're going to learn how to create API endpoints and load data for pages in SvelteKit.
+In the next part you're going to [learn how to create API endpoints and load data for pages in SvelteKit](https://joyofcode.xyz/sveltekit-loading-data).
