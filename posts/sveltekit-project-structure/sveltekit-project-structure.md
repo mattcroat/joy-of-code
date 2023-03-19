@@ -234,4 +234,4 @@ If you're newer to development you might be hearing for the first time about som
 
 I hope this gave you a better understanding of these configuration files in general because you're going to see them in every JavaScript project but now you're a certified SvelteKit connoisseur.
 
-[In the next part](https://joyofcode.xyz/sveltekit-routing) you're going to learn everything about SvelteKit routing including how to create pages, layouts and nested routes.
+In the next part you're going to [learn everything about SvelteKit routing](https://joyofcode.xyz/sveltekit-routing) including how to create pages, layouts and nested routes.
