@@ -1,8 +1,6 @@
-import type { PageServerLoad } from './$types'
-
 import { getPosts } from '$lib/api/posts'
 
-export const load: PageServerLoad = async ({ setHeaders }) => {
+export const load = async ({ setHeaders }) => {
 	const posts = await getPosts()
 
 	setHeaders({

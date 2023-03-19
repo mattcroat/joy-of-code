@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { browser, dev } from '$app/environment'
-	import type { PageServerData } from './$types'
 
 	import Card from './card.svelte'
 	import Clipboard from './clipboard.svelte'
@@ -16,7 +15,7 @@
 
 	import { updateViews } from '$lib/database'
 
-	export let data: PageServerData
+	export let data
 
 	let editUrl = `${fileUrl}/${data.frontmatter.slug}/${data.frontmatter.slug}.md`
 	let image = `${postImage}${encodeURIComponent(data.frontmatter.title)}.png`
