@@ -245,3 +245,5 @@ routes
 {% img src="layout-reset.webp" alt="Example showing a layout reset" %}
 
 Now you know how to break out of layouts if you have to.
+
+In the next part you're going to [learn about SvelteKit hooks](https://joyofcode.xyz/sveltekit-hooks) before you learn how to deploy a SvelteKit project.
