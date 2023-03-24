@@ -147,7 +147,7 @@ If you do internalization you want to be able to change the `<html>` language at
 <html lang="%lang%">
 ```
 
-The `resolve` function has a second parameter that gives you more control how to render the response. One of the options is the `transformPageChunks` function that you can use to change the HTML.
+The `resolve` function has a second parameter that gives you more control how to render the response. One of the options is the `transformPageChunk` function that you can use to change the HTML.
 
 ```ts:src/hooks.server.ts showLineNumbers
 import type { Handle } from '@sveltejs/kit'
