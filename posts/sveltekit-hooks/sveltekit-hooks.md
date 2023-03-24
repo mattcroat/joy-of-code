@@ -399,3 +399,5 @@ export const handle = sequence(auth, i18n)
 That's it! 😄
 
 SvelteKit hooks are very powerful and I hope you now understand how they work and when to reach for them if you have to.
+
+In the next part you're going to [learn how to deploy your SvelteKit project](https://joyofcode.xyz/how-to-deploy-sveltekit).
