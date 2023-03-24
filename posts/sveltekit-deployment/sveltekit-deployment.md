@@ -1,13 +1,14 @@
 ---
 title: Deploy A Full Stack SvelteKit App
-description: Learn how to deploy a full stack SvelteKit app with a database and authentication for free.
+description: Learn how to deploy a full stack SvelteKit app with a database and authentication.
 slug: sveltekit-deployment
 published: 2023-3-24
 category: sveltekit
-draft: true
 ---
 
 # Deploy A Full Stack SvelteKit App
+
+{% youtube id="uAF4Yd-gddo" title="Deploy A Full Stack SvelteKit App" %}
 
 ## Table of Contents
 
