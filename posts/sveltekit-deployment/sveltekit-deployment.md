@@ -24,9 +24,9 @@ This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ
 
 ## Web Hosting Types
 
-{% img src="blog.webp" alt="SvelteKit blog" %}
-
 By the end of this post you're going to learn how to host a full stack SvelteKit app using Prisma with a PostgreSQL database and authentication on Supabase and Vercel.
+
+{% img src="blog.webp" alt="SvelteKit blog" %}
 
 If you're not interested in learning more about web hosting options and why I picked these solutions I'm not going to take it personal, so skip to [deploying your SvelteKit project](https://joyofcode.xyz/deploying-sveltekit/#deploying-a-sveltekit-project) but I promise it's worth your time.
 
