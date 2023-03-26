@@ -98,7 +98,7 @@ If you want to have control over everything you can host your own **platform as 
 
 ## Deploying A SvelteKit Project
 
-I have prepared a full stack [SvelteKit blog example](https://github.com/joysofcode/sveltekit-blog) that uses Prisma for the database with PostgreSQL and authentication because real projects are more complicated and it's not much harder to host compared to a static blog.
+I have prepared a full stack [SvelteKit blog example](https://github.com/joysofcode/sveltekit-deploy) that uses Prisma for the database with PostgreSQL and authentication because real projects are more complicated and it's not much harder to host compared to a static blog.
 
 You're going to need to create these accounts:
 - [GitHub](https://github.com/) account
