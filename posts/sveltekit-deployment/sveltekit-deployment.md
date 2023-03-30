@@ -23,11 +23,13 @@ This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ
 - [Using Advanced Layouts In SvelteKit](https://joyofcode.xyz/sveltekit-advanced-layouts)
 - [Learn SvelteKit Hooks Through Example](https://joyofcode.xyz/sveltekit-hooks)
 
-## Web Hosting Types
+## Introduction
 
 By the end of this post you're going to learn how to host a full stack SvelteKit app using Prisma with a PostgreSQL database and authentication on Supabase and Vercel.
 
 {% img src="blog.webp" alt="SvelteKit blog" %}
+
+## Web Hosting Types
 
 If you're not interested in learning more about web hosting options and why I picked these solutions I'm not going to take it personal, so skip to [deploying your SvelteKit project](https://joyofcode.xyz/deploying-sveltekit/#deploying-a-sveltekit-project) but I promise it's worth your time.
 
@@ -38,19 +40,13 @@ There are several types of affordable web hosting you can use that is great for 
 
 This web hosting lore is mostly so we can understand things moving on and you shouldn't concern yourself with infrastructure and scaling because if scale ever becomes a problem for you then you're a more serious business that can afford to pay someone else to manage the infrastructure.
 
-## Specialized Cloud Providers
-
 {% img src="specialized.webp" alt="Specialized hosting solutions" %}
 
 You might be familiar with traditional hosting solutions like [Digital Ocean](https://www.digitalocean.com/), [Linode](https://www.linode.com/) or [Vultr](https://www.vultr.com/) but I'm going to refer to them as specialized hosting solutions since they're all cloud providers which can get you started for a cool **$5**/month and have integrations with popular services.
 
-## Generalist Cloud Providers
-
 {% img src="generalist.webp" alt="Generalist hosting solutions" %}
 
 Besides the specialized cloud providers that are focused on consumers you have the titans of infrastructure such as [Amazon Web Services (AWS)](https://aws.amazon.com/), [Google Cloud Platform (GCP)](https://cloud.google.com/) or [Microsoft Azure](https://azure.microsoft.com/) that offer a lot more services and are aimed at large enterprise. This might sound boring but important to help us understand how the next tier of hosting came to be.
-
-## Serverless Providers
 
 {% img src="serverless.webp" alt="Serverless hosting solutions" %}
 
@@ -70,8 +66,6 @@ You might be just starting your web development journey or don't have an income 
 
 The site you're on uses Vercel and I haven't paid anything so far and what's more awesome is if your project is open source and non-commercial [Vercel can sponsor your project](https://vercel.com/guides/can-vercel-sponsor-my-open-source-project). 
 
-## Full Stack Platforms
-
 {% img src="full-stack.webp" alt="Full stack platforms" %}
 
 You might have heard of [Heroku](https://www.heroku.com/) because they take the amazing developer experience of Vercel but do it for the entire stack by having instant deploys configured.
@@ -79,8 +73,6 @@ You might have heard of [Heroku](https://www.heroku.com/) because they take the 
 Heroku has fallen out of favor recently because of their changes to their business model but there's also a lot more alternative to take their place including [Railway](https://railway.app/), [Render](https://render.com/) and [Fly.io](https://fly.io/) which is unique because it deploys your app across the globe so it's close to your users.
 
 The reason why I haven't picked any of these is because while they have a free tier most of them require a credit card to prevent abuse because the moment you give someone a real server they're going to do nefarious things but it doesn't mean they're not awesome.
-
-## Serverless Databases
 
 {% img src="databases.webp" alt="Serverless databases" %}
 
@@ -91,8 +83,6 @@ That being said I'm not a huge fan of [Firebase](https://firebase.google.com/) b
 There's also other options like [Fauna](https://fauna.com/) and [Hasura](https://hasura.io/) which I haven't looked into because it seems tied to GraphQL but you might be interested in that and there's also some new and exciting databases like [Xata](https://xata.io/) (PostgreSQL) and [Upstash](https://upstash.com/) (Redis).
 
 The database you pick doesn't matter as long as it's SQL if you use [Prisma](https://www.prisma.io/) because instead of writing raw SQL you write a schema that looks like TypeScript and [you can use any of the supported database connectors](https://www.prisma.io/docs/concepts/database-connectors).
-
-## Hosting Your Own Platform As A Service
 
 If you want to have control over everything you can host your own **platform as a service** (PaaS) using [Coolify](https://coolify.io/) and [CapRover](https://caprover.com/) using a cheap **$5**/month VPS which gives you an awesome self-hosted alternative to Heroku with one-click installs.
 
@@ -113,6 +103,7 @@ I'm going to use Supabase just to provision a PostgreSQL database to use with Pr
 - Copy the password you generated
 - On the right sidebar go straight to **settings** and pick **database** and scroll to the **connection string** section
 - Select **URI** which starts with `postgresql://` and copy it then replace `[YOUR_PASSWORD]` including brackets with the generated password
+- Add `?pgbouncer=true` to the end of the connection URL to avoid issues with [connection pooling](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer)
 
 > 🛑 **Don't** under any circumstance share your database **connection string** with anyone and make sure in your future projects you don't commit the **.env** file on accident but in case you do make sure you **reset** everything.
 
@@ -161,7 +152,7 @@ You just deployed a full stack SvelteKit application with a database and authent
 
 You can stop here or continue reading the next section where I'm going to show you how to optimize your site.
 
-## Optimizing Your Site
+## Optimizing Your Site With Caching
 
 Our site looks fresh but did you notice it uses server-side rendering and if the database region you picked is close to you it's also super fast.
 
@@ -204,8 +195,7 @@ I promise that's everything! You learn it once and you're set for life because y
 
 To set headers in SvelteKit you can use the `setHeaders` method you have access to in `+page.server.ts` and `+server.ts` files.
 
-```ts:routes.ts showLineNumbers
-// routes/+page.server.ts
+```ts:routes/+page.server.ts showLineNumbers
 export const load = async ({ setHeaders }) => {
   setHeaders({
     'Cache-Control': `max-age=0, s-maxage=${60 * 60}`,
@@ -213,8 +203,9 @@ export const load = async ({ setHeaders }) => {
 
   // ...
 }
+```
 
-// routes/blog/+page.server.ts
+```ts:routes/blog/+page.server.ts showLineNumbers
 export const load = async ({ setHeaders }) => {
   setHeaders({
     'Cache-Control': `max-age=0, s-maxage=${60 * 60}`,
@@ -222,8 +213,9 @@ export const load = async ({ setHeaders }) => {
 
   // ...
 }
+```
 
-// routes/blog/[slug]/+page.server.ts
+```ts:routes/blog/[slug]/+page.server.ts showLineNumbers
 export const load = async ({ params, setHeaders }) => {
   setHeaders({
     'Cache-Control': `max-age=0, s-maxage=60`,
@@ -231,8 +223,9 @@ export const load = async ({ params, setHeaders }) => {
 
   // ...
 }
+```
 
-// routes/rss.xml/+server.ts
+```ts:routes/rss.xml/+server.ts showLineNumbers
 export const GET = async ({ url }) => {
   // ...
 
