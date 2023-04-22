@@ -1,23 +1,24 @@
 <script lang="ts">
-	import Header from '$lib/shared/ui/header/header.svelte'
-	import Footer from '$lib/shared/ui/footer.svelte'
-	import Transition from '$lib/shared/transition/index.svelte'
+	import { fly } from 'svelte/transition'
+	import Header from '$lib/ui/header/header.svelte'
+	import Footer from '$lib/ui/footer.svelte'
 	import LiteYouTubeEmbed from '$lib/embed/youtube.svelte'
-
 	import '../styles/styles.scss'
+
+	export let data
 </script>
 
 <LiteYouTubeEmbed />
 
-<Transition transition={{ type: 'fade', duration: 250 }}>
-	<div class="grid">
-		<Header />
-		<Transition transition={{ type: 'page' }}>
+<div class="grid">
+	<Header />
+	{#key data.url}
+		<div in:fly={{ y: -50, duration: 250 }}>
 			<slot />
-		</Transition>
-		<Footer />
-	</div>
-</Transition>
+		</div>
+	{/key}
+	<Footer />
+</div>
 
 <style>
 	:global(.grid) {

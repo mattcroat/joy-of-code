@@ -1,14 +1,19 @@
 import { error } from '@sveltejs/kit'
-
-import { getPostsByCategory } from '$lib/api/posts'
-import { categories } from '$lib/api/config'
+import * as config from '$lib/site/config'
+import { getPosts } from '$lib/site/posts'
 
 export async function load({ params }) {
-	if (!categories[params.category]) {
-		throw error(404)
+	const category = params.category
+
+	if (!config.categories[category]) {
+		throw error(404, 'Category does not exist')
 	}
 
-	return {
-		posts: await getPostsByCategory(params.category),
+	try {
+		return {
+			posts: await getPosts({ category }),
+		}
+	} catch (e) {
+		throw error(404, `Failed to load posts`)
 	}
 }

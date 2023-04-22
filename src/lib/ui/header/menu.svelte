@@ -7,8 +7,8 @@
 	} from '@rgossiaux/svelte-headlessui'
 	import { MenuAlt1Icon } from '@rgossiaux/svelte-heroicons/outline'
 
+	import * as config from '$lib/site/config'
 	import { sounds } from '$lib/stores/sfx'
-	import { categories } from '$lib/api/config'
 </script>
 
 <div class="container">
@@ -43,7 +43,7 @@
 
 						<span class="title">Categories</span>
 						<ul>
-							{#each Object.entries(categories) as [slug, category]}
+							{#each Object.entries(config.categories) as [slug, category]}
 								<li>
 									<a href="/categories/{slug}">{category}</a>
 								</li>

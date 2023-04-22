@@ -1,8 +1,10 @@
 import { json } from '@sveltejs/kit'
 import { supabase } from '$lib/database'
 
+export const prerender = false
+
 export async function GET() {
-	const { data: views, error } = await supabase
+	const { data: posts, error } = await supabase
 		.from('views')
 		.select('slug, views')
 
@@ -12,5 +14,11 @@ export async function GET() {
 
 	const headers = { 'Content-Type': 'application/json' }
 
-	return json(views, { headers })
+	const postViews = {}
+
+	posts.forEach(({ slug, views }) => {
+		postViews[slug] = { views }
+	})
+
+	return json(postViews, { headers })
 }

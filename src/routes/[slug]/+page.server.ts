@@ -1,6 +1,12 @@
-import { getPost } from '$lib/api/posts'
+import { error } from '@sveltejs/kit'
+import { getPost } from '$lib/site/posts'
 
 export async function load({ params }) {
-	const { content, frontmatter } = await getPost(params.slug)
-	return { content, frontmatter }
+	try {
+		return {
+			post: await getPost(params.slug),
+		}
+	} catch (e) {
+		throw error(404, `Post does not exist`)
+	}
 }

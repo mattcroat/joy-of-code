@@ -47,7 +47,7 @@ This post assumes you're at least familiar with SvelteKit but if you're not I ha
 
 **Kit** isn't built on top of **Svelte** but it's a **backend web framework** where Svelte is used as the view layer but in theory you could rip it out and replace it with another component framework that supports server-side rendering and the same is true for other web frameworks.
 
-It helps If you're familiar with [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) and have prior experience with backend frameworks like [Express](<[https://expressjs.com/](https://expressjs.com/)>) but it's not required and you can think of SvelteKit as a replacement because **you don't need a separate backend** — SvelteKit is where you write your frontend and backend logic.
+It helps If you're familiar with [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) and have prior experience with backend frameworks like [Express](https://expressjs.com/) but it's not required and you can think of SvelteKit as a replacement because **you don't need a separate backend** — SvelteKit is where you write your frontend and backend logic.
 
 ![https://c.tenor.com/1wJU51jgwSQAAAAC/dbz-dragonball.gif](https://c.tenor.com/1wJU51jgwSQAAAAC/dbz-dragonball.gif)
 

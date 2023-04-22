@@ -4,11 +4,10 @@
 		MailIcon,
 		PencilAltIcon,
 	} from '@rgossiaux/svelte-heroicons/outline'
-
-	import Newsletter from '$lib/shared/ui/newsletter.svelte'
-
-	import { twitter } from '$lib/api/config'
 	import Heart from '@rgossiaux/svelte-heroicons/outline/Heart'
+
+	import * as config from '$lib/site/config'
+	import Newsletter from '$lib/ui/newsletter.svelte'
 
 	export let preset: 'support' | 'edit' | 'newsletter'
 	export let editUrl = ''
@@ -62,7 +61,7 @@
 		<Newsletter />
 		<span class="subscribe">
 			Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a> or
-			<a href={twitter} target="_blank" rel="noreferrer">Twitter</a> instead.
+			<a href={config.twitter} target="_blank" rel="noreferrer">Twitter</a> instead.
 		</span>
 	</div>
 {/if}

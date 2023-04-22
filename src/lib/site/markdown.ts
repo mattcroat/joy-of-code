@@ -15,12 +15,12 @@ import rehypePrism from 'rehype-prism-plus'
 import rehypeCodeTitles from 'rehype-code-titles'
 import { rehypeCopyCode, rehypeUnwrapImages } from './plugins'
 
-import { imagesUrl } from './config'
-import type { FrontMatterType } from '$lib/types'
+import * as config from './config'
+import type { Frontmatter } from '$lib/types'
 
 type ContentType = {
 	content: string
-	frontmatter: FrontMatterType
+	frontmatter: Frontmatter
 }
 
 function searchAndReplace(content: string, slug: string): string {
@@ -43,7 +43,7 @@ function searchAndReplace(content: string, slug: string): string {
 			return `
         <video controls>
           <source
-            src="${imagesUrl}/${slug}/images/${src}"
+            src="${config.imagesUrl}/${slug}/images/${src}"
             type="video/mp4"
           />
         </video>
@@ -52,7 +52,7 @@ function searchAndReplace(content: string, slug: string): string {
 		.replace(image, (_, src, alt) => {
 			return `
       <img
-        src="${imagesUrl}/${slug}/images/${src}"
+        src="${config.imagesUrl}/${slug}/images/${src}"
         alt="${alt}"
         loading="lazy"
       />
@@ -115,6 +115,6 @@ export async function markdownToHTML(markdown: string): Promise<ContentType> {
 
 	return {
 		content: processedMarkdown as string,
-		frontmatter: data as FrontMatterType,
+		frontmatter: data as Frontmatter,
 	}
 }

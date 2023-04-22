@@ -11,9 +11,9 @@ test.describe('pages', () => {
 		expect(page.locator('h1')).toBeTruthy()
 	})
 
-	test('should show articles page', async ({ page }) => {
-		await page.goto('/articles')
-		expect(page.locator('text=articles'))
+	test('should show archive page', async ({ page }) => {
+		await page.goto('/archive')
+		expect(page.locator('text=archive'))
 	})
 
 	test('should show series page', async ({ page }) => {

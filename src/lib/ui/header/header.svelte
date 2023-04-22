@@ -1,13 +1,13 @@
 <script lang="ts">
+	import * as config from '$lib/site/config'
+
 	import Menu from './menu.svelte'
 	import Preferences from './preferences/index.svelte'
-
-	import { siteName } from '$lib/api/config'
 </script>
 
 <header>
 	<div class="logo">
-		<a href="/">{siteName}</a>
+		<a href="/">{config.siteName}</a>
 	</div>
 
 	<nav>
