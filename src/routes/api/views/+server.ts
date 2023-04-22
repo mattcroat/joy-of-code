@@ -10,9 +10,7 @@ export async function GET() {
 		return json({ error: error.message })
 	}
 
-	const headers = {
-		'Content-Type': 'application/json',
-	}
+	const headers = { 'Content-Type': 'application/json' }
 
 	return json(views, { headers })
 }
