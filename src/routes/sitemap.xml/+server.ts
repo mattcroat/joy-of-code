@@ -1,9 +1,7 @@
-import type { RequestHandler } from '@sveltejs/kit'
-
 import { getPostsData } from '$lib/api/posts'
 import { categories, siteUrl } from '$lib/api/config'
 
-export const GET: RequestHandler = async () => {
+export async function GET() {
 	const pages = [
 		'articles',
 		'series',
@@ -37,10 +35,7 @@ export const GET: RequestHandler = async () => {
     </urlset>
   `.trim()
 
-	return new Response(sitemap, {
-		headers: {
-			'Content-Type': 'application/xml',
-			'Cache-Control': `public, max-age=0, s-maxage=${60 * 60 * 24}`,
-		},
-	})
+	const headers = { 'Content-Type': 'application/xml' }
+
+	return new Response(sitemap, { headers })
 }

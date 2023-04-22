@@ -1,10 +1,9 @@
 import RSS from 'rss'
-import type { RequestHandler } from '@sveltejs/kit'
 
 import { siteDescription, siteTitle, siteUrl } from '$lib/api/config'
 import { getPostsData } from '$lib/api/posts'
 
-export const GET: RequestHandler = async () => {
+export async function GET() {
 	const posts = await getPostsData()
 
 	const feed = new RSS({
@@ -23,10 +22,7 @@ export const GET: RequestHandler = async () => {
 		})
 	)
 
-	return new Response(feed.xml({ indent: true }), {
-		headers: {
-			'Content-Type': 'application/xml',
-			'Cache-Control': `max-age=0, s-maxage=${60 * 60}`,
-		},
-	})
+	const headers = { 'Content-Type': 'application/xml' }
+
+	return new Response(feed.xml(), { headers })
 }
