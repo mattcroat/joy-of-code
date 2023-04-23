@@ -4,7 +4,6 @@ description: Learn what are SvelteKit endpoints and when to use standalone endpo
 slug: sveltekit-endpoints
 published: 2022-7-28
 category: sveltekit
-series: false
 draft: true
 ---
 

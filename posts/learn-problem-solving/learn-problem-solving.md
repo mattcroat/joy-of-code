@@ -4,7 +4,6 @@ description: Learn how to think like a developer and solve problems instead of r
 slug: learn-problem-solving
 published: 2022-6-14
 category: general
-series: false
 ---
 
 # Learn Problem Solving

@@ -4,7 +4,6 @@ description: Find the answer where your SvelteKit code runs and the difference b
 slug: learn-how-sveltekit-works
 published: 2022-7-6
 category: sveltekit
-series: false
 ---
 
 # Learn How SvelteKit Works As a Framework

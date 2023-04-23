@@ -4,7 +4,6 @@ description: Start building things with the Svelte JavaScript framework today.
 slug: svelte-for-beginners
 published: 2021-12-16
 category: svelte
-series: true
 ---
 
 # Svelte For Beginners

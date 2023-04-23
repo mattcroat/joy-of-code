@@ -4,7 +4,6 @@ description: Learn how to create amazing user interfaces with Svelte.
 slug: animation-with-svelte
 published: 2022-9-22
 category: svelte
-series: false
 ---
 
 # Create Amazing User Interfaces Using Animation With Svelte

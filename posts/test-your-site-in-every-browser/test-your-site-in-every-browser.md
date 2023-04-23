@@ -4,7 +4,6 @@ description: Learn how to test your site in Chrome, Firefox and Safari even on L
 slug: test-your-site-in-every-browser
 published: 2022-5-20
 category: general
-series: false
 ---
 
 # Test Your Site In Every Browser

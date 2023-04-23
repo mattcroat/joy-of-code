@@ -4,7 +4,6 @@ description: SvelteKit is the swiss army knife of JavaScript frameworks and blur
 slug: what-is-sveltekit
 published: 2022-12-20
 category: sveltekit
-series: false
 ---
 
 # What Is SvelteKit?

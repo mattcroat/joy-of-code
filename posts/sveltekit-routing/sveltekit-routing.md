@@ -4,7 +4,6 @@ description: Everything you need to know about SvelteKit routing including pages
 slug: sveltekit-routing
 published: 2022-12-28
 category: sveltekit
-series: false
 ---
 
 # Everything About SvelteKit Routing

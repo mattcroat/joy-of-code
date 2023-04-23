@@ -4,7 +4,6 @@ description: Learn how to have more control over layouts and how to reset layout
 slug: sveltekit-advanced-layouts
 published: 2023-2-10
 category: sveltekit
-series: false
 ---
 
 # Using Advanced Layouts In SvelteKit
