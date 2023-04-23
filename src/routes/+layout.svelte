@@ -14,33 +14,31 @@
 <Analytics />
 <LiteYouTubeEmbed />
 
-<div class="grid">
+<div>
 	<Header />
-	{#key data.url}
-		<div in:fly={{ y: -50, duration: 250 }}>
-			<slot />
-		</div>
-	{/key}
-	<Footer />
+
+	<div class="layout">
+		{#key data.url}
+			<div in:fly={{ y: -50, duration: 250 }}>
+				<slot />
+			</div>
+		{/key}
+
+		<Footer />
+	</div>
 </div>
 
 <style>
-	:global(.grid) {
-		height: 100%;
-		max-width: 1200px;
+	.layout {
+		max-inline-size: 1200px;
 		display: grid;
-		grid-template-columns: repeat(12, [column-start] 1fr);
 		column-gap: var(--spacing-24);
 		margin-inline: auto;
 		padding: 0 var(--spacing-16);
 	}
 
-	:global(.grid > *) {
-		grid-column: column-start / span 12;
-	}
-
 	@media (min-width: 1240px) {
-		.grid {
+		.layout {
 			padding: 0;
 		}
 	}

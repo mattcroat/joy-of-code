@@ -33,7 +33,7 @@
 		type="email"
 		id="email"
 		name="email"
-		placeholder="unix@chad.com"
+		placeholder="you@email.com"
 	/>
 	<button type="submit">
 		<MailIcon width="24" height="24" aria-hidden="true" />

@@ -102,23 +102,6 @@ body *:focus {
 	border-radius: var(--rounded-20);
 }
 
-// body::before {
-// 	content: '';
-// 	position: fixed;
-// 	inset: 0;
-// 	background-image: var(--bg);
-// 	opacity: var(--bg-opacity);
-// 	z-index: -1;
-// }
-
-// body::after {
-// 	content: '';
-// 	position: fixed;
-// 	inset: 0;
-// 	backdrop-filter: blur(10px);
-// 	z-index: -1;
-// }
-
 html[data-font='dyslexic'] body,
 html[data-font='dyslexic'] h1,
 html[data-font='dyslexic'] h2,
