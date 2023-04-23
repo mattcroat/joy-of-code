@@ -36,7 +36,7 @@ I use [GitHub Discussions](https://github.com/mattcroat/joy-of-code/discussions)
 
 - I use [social-share-images](https://github.com/mattcroat/social-share-images) to create dynamic social share images (I plan on using `@vercel/og` instead)
 
-- For analytics I plan on using [Umami](https://umami.is/)
+- For analytics I use [Vercel Web Analytics](https://vercel.com/analytics)
 
 ## 📜 Setup
 
