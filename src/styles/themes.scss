@@ -57,8 +57,9 @@ html[data-theme='🌛 Night'] {
 	--post-blockquote-bg: hsl(173 60% 4%);
 	--post-blockquote-border: hsl(173 10% 10%);
 
-	--clr-code-bg: hsl(173 60% 4%);
+	--clr-code-bg: linear-gradient(hsl(173 60% 6%), hsl(173 60% 8%));
 	--clr-code-title: hsl(173 100% 94%);
+	--clr-code-title-bg: hsl(173 60% 6%);
 	--clr-code-border: hsl(173 10% 10%);
 	--clr-code-line-number: hsl(173 20% 20%);
 	--clr-code-line-highlight: hsl(173 40% 8%);
@@ -119,8 +120,9 @@ html[data-theme='☀️ Daylight'] {
 	--post-blockquote-bg: hsl(0 0% 98%);
 	--post-blockquote-border: hsl(0 0% 84%);
 
-	--clr-code-bg: hsl(0 0% 98%);
+	--clr-code-bg: linear-gradient(hsl(0 0% 94%), hsl(0 0% 98%));
 	--clr-code-title: hsl(0 0% 40%);
+	--clr-code-title-bg: hsl(0 0% 94%);
 	--clr-code-border: hsl(0 0% 84%);
 	--clr-code-line-number: hsl(0 0% 60%);
 	--clr-code-line-highlight: hsl(0 0% 94%);
@@ -193,8 +195,9 @@ html[data-theme='🐺 Night Howl'] {
 	--post-blockquote-bg: hsl(210 47% 14%);
 	--post-blockquote-border: hsl(210 40% 20%);
 
-	--clr-code-bg: hsl(210 47% 14%);
+	--clr-code-bg: linear-gradient(hsl(210 47% 14%), hsl(210 47% 18%));
 	--clr-code-title: hsl(210 40% 60%);
+	--clr-code-title-bg: hsl(210 47% 14%);
 	--clr-code-border: hsl(210 40% 20%);
 	--clr-code-line-number: hsl(210 40% 40%);
 	--clr-code-line-highlight: hsl(210 40% 16%);
@@ -267,8 +270,9 @@ html[data-theme='🧠 Night Mind'] {
 	--post-blockquote-bg: hsl(265 28% 10%);
 	--post-blockquote-border: hsl(265 28% 18%);
 
-	--clr-code-bg: hsl(265 28% 10%);
+	--clr-code-bg: linear-gradient(hsl(265 28% 8%), hsl(265 28% 10%));
 	--clr-code-title: hsl(265 28% 80%);
+	--clr-code-title-bg: hsl(265 28% 8%);
 	--clr-code-border: hsl(265 28% 18%);
 	--clr-code-line-number: hsl(265 20% 34%);
 	--clr-code-line-highlight: hsl(265 28% 14%);

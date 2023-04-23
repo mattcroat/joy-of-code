@@ -43,9 +43,9 @@
 <main>
 	<Overlay />
 
-	<div class="prose">
+	<article class="prose">
 		{@html content}
-	</div>
+	</article>
 
 	<div class="cards">
 		<Card preset="support" />
