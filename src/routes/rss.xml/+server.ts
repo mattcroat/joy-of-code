@@ -17,6 +17,7 @@ export async function GET({ fetch }) {
 					config.siteUrl
 				}/rss.xml" rel="self" type="application/rss+xml"/>
 				${posts
+					.reverse()
 					.map(
 						(post) => `
 						<item>
