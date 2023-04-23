@@ -1,45 +1,40 @@
 <script lang="ts">
 	import { browser, dev } from '$app/environment'
 
+	import { updateViews } from '$lib/database'
+	import * as config from '$lib/site/config'
+
 	import Card from './card.svelte'
 	import Clipboard from './clipboard.svelte'
 	import Overlay from './overlay.svelte'
 
-	import {
-		fileUrl,
-		postImage,
-		siteName,
-		siteUrl,
-		twitterHandle,
-	} from '$lib/api/config'
-
-	import { updateViews } from '$lib/database'
-
 	export let data
 
-	let editUrl = `${fileUrl}/${data.frontmatter.slug}/${data.frontmatter.slug}.md`
-	let image = `${postImage}${encodeURIComponent(data.frontmatter.title)}.png`
+	const { content, frontmatter } = data.post
+
+	let editUrl = `${config.fileUrl}/${frontmatter.slug}/${frontmatter.slug}.md`
+	let image = `${config.postImage}${encodeURIComponent(frontmatter.title)}.png`
 
 	if (!dev && browser) {
-		updateViews(data.frontmatter.slug)
+		updateViews(frontmatter.slug)
 	}
 </script>
 
 <svelte:head>
-	<title>{data.frontmatter.title}</title>
+	<title>{frontmatter.title}</title>
 
-	<meta content={data.frontmatter.description} name="description" />
+	<meta content={frontmatter.description} name="description" />
 
-	<meta content={data.frontmatter.title} property="og:title" />
+	<meta content={frontmatter.title} property="og:title" />
 	<meta content={image} property="og:image" />
-	<meta content={siteUrl} property="og:url" />
-	<meta content={data.frontmatter.description} property="og:description" />
-	<meta content={siteName} property="og:site_name" />
+	<meta content={config.siteUrl} property="og:url" />
+	<meta content={frontmatter.description} property="og:description" />
+	<meta content={config.siteName} property="og:site_name" />
 
-	<meta content={twitterHandle} name="twitter:creator" />
+	<meta content={config.twitterHandle} name="twitter:creator" />
 	<meta content="summary_large_image" name="twitter:card" />
-	<meta content={data.frontmatter.title} name="twitter:title" />
-	<meta content={data.frontmatter.description} name="twitter:description" />
+	<meta content={frontmatter.title} name="twitter:title" />
+	<meta content={frontmatter.description} name="twitter:description" />
 	<meta content={image} name="twitter:image" />
 </svelte:head>
 
@@ -48,9 +43,9 @@
 <main>
 	<Overlay />
 
-	<div class="prose">
-		{@html data.content}
-	</div>
+	<article class="prose">
+		{@html content}
+	</article>
 
 	<div class="cards">
 		<Card preset="support" />

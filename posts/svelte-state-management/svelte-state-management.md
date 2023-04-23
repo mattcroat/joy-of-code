@@ -4,7 +4,6 @@ description: Learn how to manage state in Svelte and ways you can communicate be
 slug: svelte-state-management
 published: 2022-8-22
 category: svelte
-series: false
 ---
 
 # Svelte State Management Guide

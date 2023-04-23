@@ -4,7 +4,6 @@ description: I tried every Svelte UI library, so you don't have to.
 slug: svelte-ui-libraries
 published: 2022-12-11
 category: svelte
-series: false
 ---
 
 # List Of Svelte UI Libraries

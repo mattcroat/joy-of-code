@@ -9,28 +9,25 @@ export const supabase = createClient(
 	PUBLIC_SUPABASE_ANON_KEY
 )
 
-type View = {
-	slug: string
-	views: number
-}
-
-export async function getViews(): Promise<View[]> {
+export async function getViews() {
 	try {
-		const response = await fetch(`/api/views.json`)
+		const response = await fetch(`/api/views`)
 		return await response.json()
-	} catch (error) {
-		console.error(`getViews: ${error.message}`)
+	} catch (e) {
+		console.error(`getViews: ${(e as Error).message}`)
 	}
 }
 
-export async function updateViews(slug: string): Promise<void> {
+export async function updateViews(slug: string) {
 	try {
 		await fetch(`/api/views/${slug}`, {
-			method: 'post',
+			method: 'POST',
 			body: JSON.stringify(slug),
 			headers: { 'Content-Type': 'application/json' },
 		})
-	} catch (error) {
-		console.error(`Update views: ${error.message} for /api/views/${slug}`)
+	} catch (e) {
+		console.error(
+			`Update views: ${(e as Error).message} for /api/views/${slug}`
+		)
 	}
 }

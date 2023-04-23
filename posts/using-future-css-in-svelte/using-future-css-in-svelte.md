@@ -4,7 +4,6 @@ description: Learn how to use future CSS in Svelte today with PostCSS.
 slug: using-future-css-in-svelte
 published: 2022-9-2
 category: svelte
-series: false
 ---
 
 # Use Future CSS In Svelte Today

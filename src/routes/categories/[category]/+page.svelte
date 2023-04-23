@@ -1,30 +1,30 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+	import * as config from '$lib/site/config'
 
-	import Heading from '$lib/shared/ui/heading.svelte'
-	import Posts from '$lib/shared/ui/posts.svelte'
-
-	import { categories } from '$lib/api/config'
+	import Heading from '$lib/ui/heading.svelte'
+	import Posts from '$lib/ui/posts.svelte'
 
 	export let data
 
+	const { posts } = data
 	const category = $page.params.category
 </script>
 
 <svelte:head>
-	<title>{categories[category]}</title>
-	<meta content="{categories[category]} category." name="description" />
+	<title>{config.categories[category]}</title>
+	<meta content="{config.categories[category]} category." name="description" />
 </svelte:head>
 
-<Heading>{categories[category]}</Heading>
+<Heading>{config.categories[category]}</Heading>
 
-<Posts posts={data.posts}>
+<Posts {posts}>
 	<div class="container" slot="title">
 		<div>
 			<span class="tag">{category}</span>
 		</div>
 		<div>
-			<span class="results">{data.posts.length}</span> results
+			<span class="results">{posts.length}</span> results
 		</div>
 	</div>
 </Posts>

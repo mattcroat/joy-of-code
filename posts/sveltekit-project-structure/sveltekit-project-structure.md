@@ -4,7 +4,6 @@ description: Understand how SvelteKit works by creating a SvelteKit project from
 slug: sveltekit-project-structure
 published: 2022-12-22
 category: sveltekit
-series: false
 ---
 
 # SvelteKit Project Structure Explained

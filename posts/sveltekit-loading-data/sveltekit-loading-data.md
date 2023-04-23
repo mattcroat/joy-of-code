@@ -4,7 +4,6 @@ description: Learn about API endpoints and loading data for your pages with Svel
 slug: sveltekit-loading-data
 published: 2023-1-10
 category: sveltekit
-series: false
 ---
 
 # SvelteKit API Endpoints And Loading Data For Pages

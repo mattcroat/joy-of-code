@@ -4,7 +4,6 @@ description: Learn how to work with forms in SvelteKit using form actions, progr
 slug: working-with-forms-in-sveltekit
 published: 2023-1-20
 category: sveltekit
-series: false
 ---
 
 # Working With Forms In SvelteKit

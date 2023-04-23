@@ -4,7 +4,6 @@ description: How to deal with the "window is not defined" error in SvelteKit.
 slug: sveltekit-window-is-not-defined
 published: 2022-12-14
 category: sveltekit
-series: false
 ---
 
 # How To Deal With "Window Is Not Defined" In SvelteKit

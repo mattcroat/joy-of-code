@@ -1,12 +1,12 @@
 <script>
-	import { categories, github, twitter, youtube } from '$lib/api/config'
+	import * as config from '$lib/site/config'
 </script>
 
 <footer>
 	<div class="categories">
 		<p>Categories</p>
 		<ul>
-			{#each Object.entries(categories) as [slug, category]}
+			{#each Object.entries(config.categories) as [slug, category]}
 				<li>
 					<a href="/categories/{slug}">{category}</a>
 				</li>
@@ -20,13 +20,13 @@
 			<li><a href="/newsletter">Newsletter</a></li>
 			<li><a href="/rss.xml" target="_blank">RSS</a></li>
 			<li>
-				<a href={youtube} target="_blank" rel="noreferrer">YouTube</a>
+				<a href={config.youtube} target="_blank" rel="noreferrer">YouTube</a>
 			</li>
 			<li>
-				<a href={twitter} target="_blank" rel="noreferrer">Twitter</a>
+				<a href={config.twitter} target="_blank" rel="noreferrer">Twitter</a>
 			</li>
 			<li>
-				<a href={github} target="_blank" rel="noreferrer">GitHub</a>
+				<a href={config.github} target="_blank" rel="noreferrer">GitHub</a>
 			</li>
 		</ul>
 	</div>

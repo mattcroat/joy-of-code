@@ -4,7 +4,6 @@ description: Learn Svelte by making an awesome Svelte todo app.
 slug: svelte-todo-app
 published: '2022-1-12'
 category: svelte
-series: true
 ---
 
 # Make a Svelte Todo App

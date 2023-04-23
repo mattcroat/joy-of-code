@@ -4,7 +4,6 @@ description: How to use global styles in SvelteKit.
 slug: global-styles-in-sveltekit
 published: 2022-11-24
 category: sveltekit
-series: false
 ---
 
 # How To Use Global Styles In SvelteKit

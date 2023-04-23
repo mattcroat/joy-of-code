@@ -4,7 +4,6 @@ description: Hover over elements and open Svelte components in your editor using
 slug: svelte-inspector
 published: 2022-9-9
 category: svelte
-series: false
 ---
 
 # Never Search For Svelte Components Again

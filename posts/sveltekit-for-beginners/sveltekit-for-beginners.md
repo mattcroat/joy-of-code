@@ -4,7 +4,6 @@ description: SvelteKit is an opinionated full stack framework that ties the fron
 slug: sveltekit-for-beginners
 published: 2022-2-28
 category: sveltekit
-series: true
 ---
 
 # Full Stack SvelteKit For Beginners

@@ -1,28 +1,6 @@
-export type RateType = {
-	limit: number
-	used: number
-	remaining: number
-	remainingMinutes: number
-	reset: string
-	resetTimeLocale: string
-}
+import type * as config from '$lib/site/config'
 
-export type FrontMatterType = {
-	title: string
-	description: string
-	slug: string
-	published: string
-	category: string
-}
-
-export type PostMarkdownType = {
-	content: string
-	frontmatter: FrontMatterType
-	postMarkdown: string
-}
-
-export type PostType = {
-	views: number
+export type Post = {
 	title: string
 	description: string
 	slug: string
@@ -32,11 +10,17 @@ export type PostType = {
 	draft?: string
 }
 
-export type PostsType = {
-	posts: PostType[]
-	latestPost: PostType
-	popular: PostType[]
-	latest: PostType[]
-	series: PostType[]
-	picks: PostType[]
+export type Frontmatter = {
+	title: string
+	description: string
+	slug: string
+	published: string
+	category: string
 }
+
+export type Fetch = (
+	input: RequestInfo | URL,
+	init?: RequestInit
+) => Promise<Response>
+
+export type Categories = keyof typeof config.categories

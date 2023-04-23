@@ -4,7 +4,6 @@ description: Gain confidence your code works and learn how to test user interfac
 slug: testing-for-beginners
 published: 2022-1-28
 category: javascript
-series: true
 ---
 
 # Testing User Interfaces For Beginners Regardless What JavaScript Framework You're Using

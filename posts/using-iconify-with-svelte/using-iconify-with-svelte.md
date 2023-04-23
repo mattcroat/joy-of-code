@@ -4,7 +4,6 @@ description: Iconify is a framework agnostic icon library that includes every po
 slug: using-iconify-with-svelte
 published: 2022-12-11
 category: category
-series: false
 ---
 
 # The Best Icon Library For Svelte

@@ -1,38 +1,52 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
+	import { fade } from 'svelte/transition'
 	import { EyeIcon } from '@rgossiaux/svelte-heroicons/outline'
+	import { fetchJSON } from '$lib/site/posts'
+	import type { Post } from '$lib/types'
 
-	import Transition from '$lib/shared/transition/index.svelte'
-	import { views } from '$lib/stores/views'
-	import type { PostType } from '$lib/types'
+	export let posts: Post[]
 
-	export let posts: PostType[]
+	let views: Promise<Response>
+
+	onMount(async () => {
+		views = await fetchJSON('/api/views')
+	})
 </script>
 
 <section>
 	<slot name="title" />
 
 	<div class="cards">
-		{#each posts as post, index}
-			<Transition transition={{ type: 'stagger', duration: index, delay: 300 }}>
+		{#each posts as post, i}
+			<div
+				in:fade={{
+					duration: 300,
+					delay: i < 4 ? 100 * i : 100 * 4,
+				}}
+			>
 				<a href="/{post.slug}">
 					<article class="card">
 						<span class="views">
 							<EyeIcon width="24" height="24" aria-hidden="true" />
-							{#if $views.length > 0}
-								<span>
-									{$views
-										.find((data) => data.slug === post.slug)
-										?.views.toLocaleString() ?? 0}
-								</span>
-							{/if}
+							<span>
+								{#if views}
+									{#await views}
+										⌛️
+									{:then views}
+										{views[post.slug].views}
+									{/await}
+								{/if}
+							</span>
 						</span>
+
 						<div class="details">
 							<span class="title">{post.title}</span>
 							<p class="description">{post.description}</p>
 						</div>
 					</article>
 				</a>
-			</Transition>
+			</div>
 		{/each}
 	</div>
 

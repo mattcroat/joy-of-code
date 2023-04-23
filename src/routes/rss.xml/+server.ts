@@ -1,32 +1,38 @@
-import RSS from 'rss'
-import type { RequestHandler } from '@sveltejs/kit'
+import { fetchJSON } from '$lib/site/posts.js'
+import * as config from '$lib/site/config'
+import type { Post } from '$lib/types/index.js'
 
-import { siteDescription, siteTitle, siteUrl } from '$lib/api/config'
-import { getPostsData } from '$lib/api/posts'
+export async function GET({ fetch }) {
+	const posts: Post[] = await fetchJSON('api/posts', fetch)
 
-export const GET: RequestHandler = async () => {
-	const posts = await getPostsData()
+	const headers = { 'Content-Type': 'application/xml' }
 
-	const feed = new RSS({
-		title: `${siteTitle} RSS Feed`,
-		description: siteDescription,
-		site_url: siteUrl,
-		feed_url: `${siteUrl}rss.xml`,
-	})
+	const xml = `
+		<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+			<channel>
+				<title>${config.siteName}</title>
+				<description>${config.siteDescription}</description>
+				<link>${config.siteUrl}</link>
+				<atom:link href="${
+					config.siteUrl
+				}/rss.xml" rel="self" type="application/rss+xml"/>
+				${posts
+					.reverse()
+					.map(
+						(post) => `
+						<item>
+							<title>${post.title}</title>
+							<description>${post.description}</description>
+							<link>${config.siteUrl}/${post.slug}</link>
+							<guid isPermaLink="true">${config.siteUrl}/${post.slug}</guid>
+							<pubDate>${new Date(post.published).toUTCString()}</pubDate>
+						</item>
+					`
+					)
+					.join('')}
+			</channel>
+		</rss>
+	`.trim()
 
-	posts.forEach((post) =>
-		feed.item({
-			title: post.title,
-			description: post.description,
-			url: `${siteUrl}${post.slug}`,
-			date: post.published,
-		})
-	)
-
-	return new Response(feed.xml({ indent: true }), {
-		headers: {
-			'Content-Type': 'application/xml',
-			'Cache-Control': `max-age=0, s-maxage=${60 * 60}`,
-		},
-	})
+	return new Response(xml, { headers })
 }

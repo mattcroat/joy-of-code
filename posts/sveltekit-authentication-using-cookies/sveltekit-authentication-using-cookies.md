@@ -4,7 +4,6 @@ description: Learn SvelteKit user authentication using cookies.
 slug: sveltekit-authentication-using-cookies
 published: 2022-5-12
 category: sveltekit
-series: true
 ---
 
 # SvelteKit Authentication Using Cookies

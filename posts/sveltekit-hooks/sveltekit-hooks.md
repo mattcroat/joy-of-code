@@ -4,7 +4,6 @@ description: Learn what are SvelteKit hooks and how they're used through practic
 slug: sveltekit-hooks
 published: 2023-2-22
 category: sveltekit
-series: false
 ---
 
 # Learn SvelteKit Hooks Through Example

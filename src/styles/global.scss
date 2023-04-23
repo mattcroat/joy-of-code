@@ -1,9 +1,9 @@
 :root {
 	/* Font */
 	--font-sans: 'Poppins', sans-serif;
-	--font-mono: Source Code Pro, monospace;
-	--font-dyslexic: OpenDyslexic, sans-serif;
-	--font-dyslexic-mono: OpenDyslexic Mono, monospace;
+	--font-mono: 'JetBrains Mono', monospace;
+	--font-dyslexic: 'OpenDyslexic', sans-serif;
+	--font-dyslexic-mono: 'OpenDyslexic Mono', monospace;
 
 	--font-16: 1.6rem;
 	--font-24: 2.4rem;
@@ -68,6 +68,31 @@ body {
 	font-size: var(--font-16);
 	color: var(--clr-txt);
 	background-color: var(--clr-bg);
+	background-image: linear-gradient(
+		to bottom,
+		hsl(225 74% 40%),
+		hsl(270 70% 40%)
+	);
+	background-attachment: fixed;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: linear-gradient(
+				135deg,
+				hsl(237 92% 62%) 25%,
+				transparent 25%
+			),
+			linear-gradient(225deg, hsl(237 92% 62%) 25%, transparent 25%),
+			linear-gradient(45deg, hsl(237 92% 62%) 25%, transparent 25%),
+			linear-gradient(315deg, hsl(237 92% 62%) 25%, transparent 25%);
+		background-position: 40px 0, 40px 0, 0 0, 0 0;
+		background-size: 80px 80px;
+		background-repeat: repeat;
+		opacity: 0.2;
+		z-index: -1;
+	}
 }
 
 /* fixes issue where safari applies focus to body  */
@@ -75,34 +100,6 @@ body *:focus {
 	outline: none;
 	box-shadow: 0 0 0 4px var(--clr-primary);
 	border-radius: var(--rounded-20);
-}
-
-@media (min-width: 480px) {
-	body {
-		background-image: url('/assets/background.svg'),
-			linear-gradient(hsl(0 0% 10%) 2%, hsl(270 70% 40%), hsl(225 74% 58%));
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		background-attachment: fixed;
-	}
-}
-
-body::before {
-	content: '';
-	position: fixed;
-	inset: 0;
-	background-image: var(--bg);
-	opacity: var(--bg-opacity);
-	z-index: -1;
-}
-
-body::after {
-	content: '';
-	position: fixed;
-	inset: 0;
-	backdrop-filter: blur(10px);
-	z-index: -1;
 }
 
 html[data-font='dyslexic'] body,

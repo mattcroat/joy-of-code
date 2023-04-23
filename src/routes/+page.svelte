@@ -1,49 +1,42 @@
 <script lang="ts">
 	import { ArrowNarrowRightIcon } from '@rgossiaux/svelte-heroicons/outline'
 
-	import Newsletter from '$lib/shared/ui/newsletter.svelte'
-	import Posts from '$lib/shared/ui/posts.svelte'
-
-	import {
-		siteDescription,
-		siteImage,
-		siteName,
-		siteTitle,
-		siteUrl,
-		twitter,
-		twitterHandle,
-	} from '$lib/api/config'
+	import Newsletter from '$lib/ui/newsletter.svelte'
+	import Posts from '$lib/ui/posts.svelte'
+	import * as config from '$lib/site/config'
 
 	export let data
+
+	const { posts } = data
 </script>
 
 <svelte:head>
-	<title>{siteTitle}</title>
+	<title>{config.siteTitle}</title>
 
-	<meta content={siteDescription} name="description" />
+	<meta content={config.siteDescription} name="description" />
 
-	<meta content={siteTitle} property="og:title" />
-	<meta content={siteImage} property="og:image" />
-	<meta content={siteUrl} property="og:url" />
-	<meta content={siteDescription} property="og:description" />
-	<meta content={siteName} property="og:site_name" />
+	<meta content={config.siteTitle} property="og:title" />
+	<meta content={config.siteImage} property="og:image" />
+	<meta content={config.siteUrl} property="og:url" />
+	<meta content={config.siteDescription} property="og:description" />
+	<meta content={config.siteName} property="og:site_name" />
 
-	<meta content={twitterHandle} name="twitter:creator" />
+	<meta content={config.twitterHandle} name="twitter:creator" />
 	<meta content="summary_large_image" name="twitter:card" />
-	<meta content={siteTitle} name="twitter:title" />
-	<meta content={siteDescription} name="twitter:description" />
-	<meta content={siteImage} name="twitter:image" />
+	<meta content={config.siteTitle} name="twitter:title" />
+	<meta content={config.siteDescription} name="twitter:description" />
+	<meta content={config.siteImage} name="twitter:image" />
 </svelte:head>
 
 <main>
 	<section class="hero">
 		<div class="latest-post">
 			<span class="kicker">Latest post</span>
-			<h1 class="title">{data.posts.latestPost.title}</h1>
+			<h1 class="title">{posts[0].title}</h1>
 			<p class="description">
-				{data.posts.latestPost.description}
+				{posts[0].description}
 			</p>
-			<a class="continue-reading" href={data.posts.latestPost.slug}>
+			<a class="continue-reading" href={posts[0].slug}>
 				<span>Continue reading</span>
 				<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
 			</a>
@@ -57,33 +50,17 @@
 			<p>
 				Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a>
 				or
-				<a href={twitter} target="_blank" rel="noreferrer">Twitter</a> instead.
+				<a href={config.twitter} target="_blank" rel="noreferrer">Twitter</a> instead.
 			</p>
 		</div>
 	</section>
 
-	<Posts posts={data.posts.popular}>
-		<h3 class="popular" slot="title">Popular</h3>
-	</Posts>
-
-	<Posts posts={data.posts.latest}>
+	<Posts {posts}>
 		<h3 class="latest" slot="title">Latest</h3>
-		<a slot="see-more" href="/articles">
-			<span>See more articles</span>
+		<a slot="see-more" href="/archive">
+			<span>See more posts</span>
 			<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
 		</a>
-	</Posts>
-
-	<Posts posts={data.posts.series}>
-		<h3 class="series" slot="title">Series</h3>
-		<a slot="see-more" href="/series">
-			<span>See more series</span>
-			<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
-		</a>
-	</Posts>
-
-	<Posts posts={data.posts.picks}>
-		<h3 class="picks" slot="title">Picks</h3>
 	</Posts>
 </main>
 

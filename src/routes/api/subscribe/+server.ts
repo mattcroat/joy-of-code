@@ -1,8 +1,7 @@
 import { json } from '@sveltejs/kit'
 import { BUTTONDOWN_API_KEY } from '$env/static/private'
-import type { RequestHandler } from '@sveltejs/kit'
 
-export const POST: RequestHandler = async ({ request }) => {
+export async function POST({ request }) {
 	const API_URL = 'https://api.buttondown.email/v1/subscribers'
 	const API_KEY = BUTTONDOWN_API_KEY
 

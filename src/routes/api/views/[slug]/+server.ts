@@ -1,9 +1,7 @@
 import { json } from '@sveltejs/kit'
-import type { RequestHandler } from '@sveltejs/kit'
-
 import { supabase } from '$lib/database'
 
-export const POST: RequestHandler = async ({ request }) => {
+export async function POST({ request }) {
 	const slug = await request.json()
 
 	const views = await supabase
@@ -36,5 +34,8 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 	}
 
-	return new Response(undefined, { status: 303, headers: { location: '/' } })
+	return new Response(undefined, {
+		status: 303,
+		headers: { location: '/' },
+	})
 }

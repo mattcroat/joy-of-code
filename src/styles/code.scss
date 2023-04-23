@@ -5,15 +5,15 @@
 }
 
 .prose pre {
-	padding: var(--spacing-32) 0;
+	padding: var(--spacing-16) 0;
 	line-height: 34px;
-	background-color: var(--clr-code-bg);
+	background-image: var(--clr-code-bg);
 	border-left: 1px solid var(--clr-code-border);
 	border-top: none;
 	border-bottom-left-radius: var(--rounded-20);
 	border-bottom-right-radius: var(--rounded-20);
 	box-shadow: var(--shadow-sm);
-	white-space: pre-wrap;
+	overflow-x: auto;
 }
 
 .prose pre .code-line {
@@ -60,7 +60,7 @@ html[data-font='dyslexic'] .prose code {
 	justify-content: space-between;
 	padding: var(--spacing-16) var(--spacing-24) 0 var(--spacing-24);
 	color: var(--clr-code-title);
-	background-color: var(--clr-code-bg);
+	background-color: var(--clr-code-title-bg);
 	border-top: 1px solid var(--clr-code-border);
 	border-left: 1px solid var(--clr-code-border);
 	border-bottom: none;

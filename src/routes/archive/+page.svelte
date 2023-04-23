@@ -1,19 +1,20 @@
 <script lang="ts">
-	import Heading from '$lib/shared/ui/heading.svelte'
-	import Posts from '$lib/shared/ui/posts.svelte'
+	import Heading from '$lib/ui/heading.svelte'
+	import Posts from '$lib/ui/posts.svelte'
 
 	export let data
 </script>
 
 <svelte:head>
-	<title>Series</title>
+	<title>Archive</title>
+	<meta content="List of {data.posts.length} posts." name="description" />
 </svelte:head>
 
-<Heading>Series</Heading>
+<Heading>Archive</Heading>
 
 <Posts posts={data.posts}>
 	<div class="container" slot="title">
-		<h3>Entries</h3>
+		<h3>Posts</h3>
 		<div>
 			<span class="results">{data.posts.length}</span> results
 		</div>

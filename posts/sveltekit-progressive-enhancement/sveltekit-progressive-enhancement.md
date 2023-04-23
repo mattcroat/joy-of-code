@@ -4,7 +4,6 @@ description: Progressively enhance your forms in SvelteKit for a better user exp
 slug: sveltekit-progressive-enhancement
 published: 2022-11-28
 category: sveltekit
-series: false
 ---
 
 # Progressive Form Enhancement With SvelteKit
