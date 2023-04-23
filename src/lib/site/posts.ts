@@ -1,42 +1,82 @@
+import fs from 'fs/promises'
+import path from 'path'
 import matter from 'gray-matter'
-
 import { markdownToHTML } from './markdown'
 import type { Fetch, Post } from '$lib/types'
 
+// type PostsOptions = {
+// 	limit?: number
+// 	category?: string
+// }
+
 export async function fetchJSON(url: string, fetchFn: Fetch = fetch) {
 	const response = await fetchFn(url)
-
-	if (!response.ok) {
-		throw new Error(`Error fetching JSON from ${response.url}`)
-	}
-
+	if (!response.ok) throw new Error(`Error fetching JSON from ${response.url}`)
 	return await response.json()
 }
 
-export async function getPosts({
-	limit,
-	category,
-}: {
-	limit?: number
-	category?: string
-}) {
-	let posts: Post[] = []
+async function parseMarkdownFiles() {
+	try {
+		const posts: Post[] = []
+		const postsPath = path.resolve('posts')
+		const folders = await fs.readdir(postsPath)
 
-	const paths = import.meta.glob('/posts/*/*.md', {
-		as: 'raw',
-		eager: true,
-	})
+		for (const folder of folders) {
+			const markdownFilePath = path.join(postsPath, folder, `${folder}.md`)
+			const markdownContent = await fs.readFile(markdownFilePath, 'utf-8')
+			const { data } = matter(markdownContent)
+			posts.push(data as Post)
+		}
 
-	for (const path in paths) {
-		const { data } = matter(paths[path])
-		posts.push(data as Post)
+		return posts
+	} catch (e) {
+		throw new Error('Could not parse Markdown files')
 	}
+}
 
-	// for (const path in paths) {
-	// 	const markdown = await paths[path]()
-	// 	const { data } = matter(markdown)
-	// 	posts.push(data as Post)
-	// }
+async function parseMarkdownFile(slug: string) {
+	try {
+		const postPath = path.resolve(`posts/${slug}/${slug}.md`)
+		const markdownContent = await fs.readFile(postPath, 'utf-8')
+		return markdownToHTML(markdownContent)
+	} catch (e) {
+		throw new Error(`Could not parse ${slug}.md`)
+	}
+}
+
+// export async function getPosts({ limit, category }: PostsOptions) {
+// 	let posts = await parseMarkdownFiles()
+
+// 	posts = posts.sort((firstItem, secondItem) => {
+// 		return (
+// 			new Date(secondItem.published).getTime() -
+// 			new Date(firstItem.published).getTime()
+// 		)
+// 	})
+
+// 	if (limit > 0 && !category) {
+// 		posts = posts.slice(0, limit)
+// 		return posts
+// 	}
+
+// 	if (category && limit > 0) {
+// 		posts = posts
+// 			.filter((post) => !post.draft && post.category === category)
+// 			.slice(0, limit)
+
+// 		return posts
+// 	}
+
+// 	if (category && !limit) {
+// 		posts = posts.filter((post) => !post.draft && post.category === category)
+// 		return posts
+// 	}
+
+// 	return posts
+// }
+
+export async function getPosts() {
+	let posts = await parseMarkdownFiles()
 
 	posts = posts.sort((firstItem, secondItem) => {
 		return (
@@ -45,35 +85,14 @@ export async function getPosts({
 		)
 	})
 
-	if (limit > 0 && !category) {
-		posts = posts.slice(0, limit)
-		return posts
-	}
-
-	if (category && limit > 0) {
-		posts = posts
-			.filter((post) => !post.draft && post.category === category)
-			.slice(0, limit)
-
-		return posts
-	}
-
-	if (category && !limit) {
-		posts = posts.filter((post) => !post.draft && post.category === category)
-		return posts
-	}
-
 	return posts
 }
 
+export async function getPostsByCategory(category: string) {
+	const posts = await getPosts()
+	return posts.filter((post) => !post.draft && post.category === category)
+}
+
 export async function getPost(slug: string) {
-	const posts = import.meta.glob('/posts/*/*.md', {
-		as: 'raw',
-	})
-
-	const postLoader = posts[`/posts/${slug}/${slug}.md`];
-	if (!postLoader) throw new Error('Post does not exist');
-
-	const markdown = await postLoader();
-	return markdownToHTML(markdown)
+	return parseMarkdownFile(slug)
 }

@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit'
+import { getPostsByCategory } from '$lib/site/posts'
 import * as config from '$lib/site/config'
-import { getPosts } from '$lib/site/posts'
 
 export async function load({ params }) {
 	const category = params.category
@@ -11,7 +11,7 @@ export async function load({ params }) {
 
 	try {
 		return {
-			posts: await getPosts({ category }),
+			posts: await getPostsByCategory(category),
 		}
 	} catch (e) {
 		throw error(404, `Failed to load posts`)
