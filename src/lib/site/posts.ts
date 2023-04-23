@@ -4,11 +4,6 @@ import matter from 'gray-matter'
 import { markdownToHTML } from './markdown'
 import type { Fetch, Post } from '$lib/types'
 
-// type PostsOptions = {
-// 	limit?: number
-// 	category?: string
-// }
-
 export async function fetchJSON(url: string, fetchFn: Fetch = fetch) {
 	const response = await fetchFn(url)
 	if (!response.ok) throw new Error(`Error fetching JSON from ${response.url}`)
@@ -25,7 +20,10 @@ async function parseMarkdownFiles() {
 			const markdownFilePath = path.join(postsPath, folder, `${folder}.md`)
 			const markdownContent = await fs.readFile(markdownFilePath, 'utf-8')
 			const { data } = matter(markdownContent)
-			posts.push(data as Post)
+
+			if (!data.draft) {
+				posts.push(data as Post)
+			}
 		}
 
 		return posts
@@ -43,37 +41,6 @@ async function parseMarkdownFile(slug: string) {
 		throw new Error(`Could not parse ${slug}.md`)
 	}
 }
-
-// export async function getPosts({ limit, category }: PostsOptions) {
-// 	let posts = await parseMarkdownFiles()
-
-// 	posts = posts.sort((firstItem, secondItem) => {
-// 		return (
-// 			new Date(secondItem.published).getTime() -
-// 			new Date(firstItem.published).getTime()
-// 		)
-// 	})
-
-// 	if (limit > 0 && !category) {
-// 		posts = posts.slice(0, limit)
-// 		return posts
-// 	}
-
-// 	if (category && limit > 0) {
-// 		posts = posts
-// 			.filter((post) => !post.draft && post.category === category)
-// 			.slice(0, limit)
-
-// 		return posts
-// 	}
-
-// 	if (category && !limit) {
-// 		posts = posts.filter((post) => !post.draft && post.category === category)
-// 		return posts
-// 	}
-
-// 	return posts
-// }
 
 export async function getPosts() {
 	let posts = await parseMarkdownFiles()
