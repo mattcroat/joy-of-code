@@ -67,8 +67,13 @@ export async function getPosts({
 }
 
 export async function getPost(slug: string) {
-	const markdown = import.meta.glob(`/posts/${slug}/${slug}.md`, {
+	const posts = import.meta.glob('/posts/*/*.md', {
 		as: 'raw',
 	})
+
+	const postLoader = posts[`/posts/${slug}/${slug}.md`];
+	if (!postLoader) throw new Error('Post does not exist');
+
+	const markdown = await postLoader();
 	return markdownToHTML(markdown)
 }
