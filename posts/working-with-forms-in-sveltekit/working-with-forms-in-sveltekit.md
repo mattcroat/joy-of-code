@@ -531,7 +531,7 @@ Try to add or remove a to-do item from the list and pay attention to the icon in
 
 You're going to notice each time you add or remove a to-do the page reloads. This is the default form behavior once you submit it — this means the form works without JavaScript!
 
-The point is not that your site should work without JavaScript but before it because JavaScript can fail loading for various reasons and this is what makes your app more resilient — instead of relying on JavaScript you can use it to progressive enhance the form and the user experience when JavaScript is available on the page.
+[JavaScript can fail to load for many reasons](https://www.kryogenix.org/code/browser/everyonehasjs.html) but I'm not advocating that every site should work without JavaScript and should instead work before JavaScript is loaded on the page. This approach to development makes your app more resilient and you can use JavaScript once it's available on the page to improve the user experience using progressive enhancement as intended.
 
 Remember the first example how we had to do everything by hand? SvelteKit does that for you and wraps everything in a neat `use:enhance` [Svelte action](https://svelte.dev/tutorial/actions) (unrelated to form actions) that does the same thing.
 
