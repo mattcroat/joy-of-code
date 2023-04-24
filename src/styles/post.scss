@@ -107,14 +107,13 @@
 	font-weight: 700;
 }
 
-
 .prose {
 	display: grid;
 	grid-template-columns:
 		1fr
 		[gutter-start]
 		40px
-		[content-start] 
+		[content-start]
 		minmax(0px, var(--post-txt-length))
 		[content-end]
 		40px
@@ -129,4 +128,3 @@
 .prose h1 {
 	margin: var(--spacing-128) 0;
 }
-
