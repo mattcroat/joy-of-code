@@ -1,9 +1,8 @@
 import * as config from '$lib/site/config'
-import { fetchJSON } from '$lib/site/posts'
-import type { Post } from '$lib/types'
+import { getPosts } from '$lib/site/posts'
 
-export async function GET({ fetch }) {
-	const posts: Post[] = await fetchJSON('api/posts', fetch)
+export async function GET() {
+	const posts = await getPosts()
 
 	const headers = { 'Content-Type': 'application/xml' }
 
