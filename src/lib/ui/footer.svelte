@@ -17,8 +17,12 @@
 	<div class="follow">
 		<p>Follow</p>
 		<ul>
-			<li><a href="/newsletter">Newsletter</a></li>
-			<li><a href="/rss.xml" target="_blank">RSS</a></li>
+			<li>
+				<a href="/newsletter">Newsletter</a>
+			</li>
+			<li>
+				<a href="/rss.xml" target="_blank">RSS</a>
+			</li>
 			<li>
 				<a href={config.youtube} target="_blank" rel="noreferrer">YouTube</a>
 			</li>

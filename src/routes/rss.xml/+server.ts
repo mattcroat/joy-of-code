@@ -1,6 +1,8 @@
 import { getPosts } from '$lib/site/posts.js'
 import * as config from '$lib/site/config'
 
+export const prerender = true
+
 export async function GET() {
 	const posts = await getPosts()
 
