@@ -2,11 +2,9 @@
 title: How to Think Like a Developer
 description: Learn how to develop problem solving skills.
 slug: how-to-think-like-a-developer
-published: 2020-12-24
+published: '2020-12-24'
 category: general
 ---
-
-# How to Think Like a Developer
 
 ## Table of Contents
 

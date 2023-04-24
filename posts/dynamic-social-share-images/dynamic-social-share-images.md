@@ -2,11 +2,9 @@
 title: Dynamic Social Share Images
 description: Automate creating social share images for social media sites.
 slug: dynamic-social-share-images
-published: 2021-10-7
+published: '2021-10-7'
 category: typescript
 ---
-
-# Dynamic Social Share Images
 
 ## Table of Contents
 

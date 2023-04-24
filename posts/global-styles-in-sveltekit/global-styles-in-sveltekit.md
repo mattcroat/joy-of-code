@@ -2,11 +2,9 @@
 title: How To Use Global Styles In SvelteKit
 description: How to use global styles in SvelteKit.
 slug: global-styles-in-sveltekit
-published: 2022-11-24
+published: '2022-11-24'
 category: sveltekit
 ---
-
-# How To Use Global Styles In SvelteKit
 
 {% youtube id="jHSwChkx3TQ" title="Global Styles In SvelteKit" %}
 
@@ -46,7 +44,7 @@ h1 {
 <slot />
 ```
 
-The base layout wraps the entire SvelteKit app. 
+The base layout wraps the entire SvelteKit app.
 
 ## :global
 

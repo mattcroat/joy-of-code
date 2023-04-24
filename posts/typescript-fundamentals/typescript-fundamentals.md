@@ -2,11 +2,9 @@
 title: TypeScript Fundamentals
 description: Learn TypeScript through example — the missing TypeScript reference.
 slug: typescript-fundamentals
-published: 2021-7-7
+published: '2021-7-7'
 category: typescript
 ---
-
-# TypeScript Fundamentals
 
 {% youtube id="Giu1uoiNbGk" title="TypeScript Fundamentals" %}
 

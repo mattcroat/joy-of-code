@@ -2,11 +2,9 @@
 title: Introduction to React
 description: Why do we use frontend JavaScript frameworks and what problems do they solve?
 slug: intro-to-react
-published: 2021-2-13
+published: '2021-2-13'
 category: react
 ---
-
-# Introduction to React and Frontend Frameworks
 
 ## Table of Contents
 

@@ -2,11 +2,9 @@
 title: Use The Simpler CSS Color Syntax
 description: Learn how to write simpler CSS color syntax thanks to CSS Color Module Level 4.
 slug: simpler-color-syntax
-published: 2021-4-11
+published: '2021-4-11'
 category: css
 ---
-
-# Use The Simpler CSS Color Syntax
 
 ## Table of Contents
 

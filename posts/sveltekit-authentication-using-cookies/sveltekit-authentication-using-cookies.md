@@ -2,11 +2,9 @@
 title: SvelteKit Authentication Using Cookies
 description: Learn SvelteKit user authentication using cookies.
 slug: sveltekit-authentication-using-cookies
-published: 2022-5-12
+published: '2022-5-12'
 category: sveltekit
 ---
-
-# SvelteKit Authentication Using Cookies
 
 {% youtube id="E3VG-dLCRUk" title="SvelteKit Authentication Using Cookies" %}
 
@@ -305,7 +303,7 @@ At first the code might look daunting but if you ignore the user validation the 
 
 ## User Logout
 
-To make the user logout work you only need to eat the cookie and redirect the user. 
+To make the user logout work you only need to eat the cookie and redirect the user.
 
 ```ts:logout/+page.server.ts showLineNumbers
 import { redirect } from '@sveltejs/kit'

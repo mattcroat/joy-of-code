@@ -2,11 +2,9 @@
 title: Using Environment Variables With SvelteKit
 description: Learn how to manage your environment variables with SvelteKit.
 slug: sveltekit-environment-variables
-published: 2022-3-24
-category: 'sveltekit'
+published: '2022-3-24'
+category: sveltekit
 ---
-
-# Using Environment Variables With SvelteKit
 
 {% youtube id="h2VzXTfbUpQ" title="Using Environment Variables With SvelteKit" %}
 
@@ -26,10 +24,10 @@ In development you store environment variables inside a `.env` file that should 
 
 To help your future self and others it's a great idea to create a `.env.example` file with placeholder values that's safe to push so you know what keys you need.
 
-
 ## Using Environment Variables In SvelteKit
 
 SvelteKit exposes four different [modules](https://kit.svelte.dev/docs/modules) for handling environment variables:
+
 - [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules)
 - [`$env/dynamic/public`](https://kit.svelte.dev/docs/modules)
 - [`$env/static/private`](https://kit.svelte.dev/docs/modules)
@@ -67,7 +65,6 @@ export const load: PageServerLoad = () => {
 ```
 
 Use `$env/static/public` if you want to access environment variables prefixed with `PUBLIC_` loaded from your `.env` file.
-
 
 ```ts:+page.ts showLineNumbers
 import { PUBLIC_API_KEY } from '$env/static/public'

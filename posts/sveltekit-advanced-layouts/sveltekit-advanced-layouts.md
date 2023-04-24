@@ -2,11 +2,9 @@
 title: Using Advanced Layouts In SvelteKit
 description: Learn how to have more control over layouts and how to reset layouts using group layouts in SvelteKit.
 slug: sveltekit-advanced-layouts
-published: 2023-2-10
+published: '2023-2-10'
 category: sveltekit
 ---
-
-# Using Advanced Layouts In SvelteKit
 
 {% youtube id="9UpaKEVuErs" title="Using Advanced Layouts In SvelteKit" %}
 
@@ -15,6 +13,7 @@ category: sveltekit
 ## Previously
 
 This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+
 - [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
 - [SvelteKit Project Structure](https://joyofcode.xyz/sveltekit-project-structure)
 - [SvelteKit Routing](https://joyofcode.xyz/sveltekit-routing)
@@ -87,7 +86,7 @@ Notice the `/quotes` route? I want a layout that shows more quotes at the end of
 
 {% img src="tags-layout.webp" alt="Tags route layout problem" %}
 
-Sure, I could move the `/tags` route outside the `/quotes` route which would solve the problem but I don't want to do that. Because every child route in `/quotes` shares the same layout from `/quotes/+layout.svelte` if you go to `/quotes/tags` it shows other quotes. 
+Sure, I could move the `/tags` route outside the `/quotes` route which would solve the problem but I don't want to do that. Because every child route in `/quotes` shares the same layout from `/quotes/+layout.svelte` if you go to `/quotes/tags` it shows other quotes.
 
 This is where group layouts help.
 
@@ -113,7 +112,7 @@ I'm going to keep the global styles inside `/routes/+layout.svelte` but move eve
 <slot />
 ```
 
-I'm going to move the navigation from  `/routes/+layout.svelte` and `/routes/+page.svelte` including the `/quotes` route inside the `(app)` directory and then I only have to drag the `/admin` route inside the `(dashboard)` directory.
+I'm going to move the navigation from `/routes/+layout.svelte` and `/routes/+page.svelte` including the `/quotes` route inside the `(app)` directory and then I only have to drag the `/admin` route inside the `(dashboard)` directory.
 
 ```txt:routes {2, 10, 15}
 routes

@@ -1,12 +1,10 @@
 ---
-title: Syntax Highlight Template Strings
+title: Syntax Highlight JavaScript Template Strings
 description: Syntax highlight, and code completion inside JavaScript template strings.
 slug: template-strings-syntax-highlight
-published: 2021-9-7
+published: '2021-9-7'
 category: javascript
 ---
-
-# Syntax Highlight JavaScript Template Strings
 
 One of my favorite things when working with vanilla **JavaScript** is using [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) because it makes working with the **Document Object Model** (DOM) faster and more fun than using the **imperative** browser API.
 

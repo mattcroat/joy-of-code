@@ -2,11 +2,9 @@
 title: Favicon That Works for Light and Dark Mode
 description: How to make a favicon that respects the user color scheme preference?
 slug: dark-mode-favicon
-published: 2021-8-29
+published: '2021-8-29'
 category: css
 ---
-
-# Favicon That Works for Light and Dark Mode
 
 ## Table of Contents
 

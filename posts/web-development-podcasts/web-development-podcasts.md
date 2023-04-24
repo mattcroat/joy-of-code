@@ -6,8 +6,6 @@ published: '2021-1-31'
 category: 'general'
 ---
 
-# Web Development Podcasts
-
 ## 1. Career Chats
 
 {% img src="career-chats.webp" alt="Career Chats" %}

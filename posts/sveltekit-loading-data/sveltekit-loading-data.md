@@ -1,12 +1,10 @@
 ---
 title: SvelteKit API Endpoints And Loading Data For Pages
-description: Learn about API endpoints and loading data for your pages with SvelteKit. 
+description: Learn about API endpoints and loading data for your pages with SvelteKit.
 slug: sveltekit-loading-data
-published: 2023-1-10
+published: '2023-1-10'
 category: sveltekit
 ---
-
-# SvelteKit API Endpoints And Loading Data For Pages
 
 {% youtube id="rsmLu5nmh4g" title="SvelteKit API Endpoints And Loading Data For Pages" %}
 
@@ -15,6 +13,7 @@ category: sveltekit
 ## Previously
 
 This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+
 - [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
 - [SvelteKit Project Structure](https://joyofcode.xyz/sveltekit-project-structure)
 - [SvelteKit Routing](https://joyofcode.xyz/sveltekit-routing)
@@ -74,7 +73,7 @@ I want to have some placeholder posts in the database using [DummyJSON](https://
 }
 ```
 
-Instead of writing SQL you write a schema with Prisma that gets turned into SQL. I'm going to create a  `Post` table with some fields in `schema.prisma`.
+Instead of writing SQL you write a schema with Prisma that gets turned into SQL. I'm going to create a `Post` table with some fields in `schema.prisma`.
 
 ```ts:prisma/schema.prisma showLineNumbers
 // ...
@@ -203,7 +202,7 @@ export const POST: RequestHandler = async (event) => {
 }
 ```
 
-Navigating to `/api/newsletter` is going to do a `GET` request and you can see some amusing headers for the request in the network tab — [you can learn more about the origins of the 418 response here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418). 
+Navigating to `/api/newsletter` is going to do a `GET` request and you can see some amusing headers for the request in the network tab — [you can learn more about the origins of the 418 response here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418).
 
 In this example I'm using an API endpoint for a newsletter form but SvelteKit has a nicer method for working with forms which I'm going to cover in another part.
 
@@ -230,7 +229,7 @@ When the user submits the form it's going to make a `POST` request to `/api/news
 </form>
 ```
 
-The network tab is going to show the `fetch` request and you can see the headers and response which returns `{ "success": true }` that you can use to show the user a success message. 
+The network tab is going to show the `fetch` request and you can see the headers and response which returns `{ "success": true }` that you can use to show the user a success message.
 
 It's not important where you place the `+server.ts` inside file but I prefer to keep it inside `routes/api` if it's used across the app just so I know where to find it.
 
@@ -253,7 +252,7 @@ export const GET: RequestHandler = async (event) => {
 
 If you go to `/api/posts` you can see the posts. If you're using a Chromium based browser I recommend the [JSON Viewer](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh) extension.
 
-The `event`  argument is very useful because it provides access to some properties describing the event but also some useful helpers.
+The `event` argument is very useful because it provides access to some properties describing the event but also some useful helpers.
 
 ```ts:+server.ts showLineNumbers
 import type { RequestHandler } from '@sveltejs/kit'
@@ -265,7 +264,8 @@ export const GET: RequestHandler = async (event) => {
 ```
 
 Here are some of the `event` properties and methods that are relevant to us now (some are best saved to savor later):
-- `cookies` method to get and set cookies 
+
+- `cookies` method to get and set cookies
 - `fetch` with extra features like inheriting `cookie` and `authorization` headers for the page request, doing relative and internal requests on the server and preventing additional network requests because it reads the response from the HTML
 - `params` of the current page like `/posts/[slug]`
 - `request` gives you the original `Request` object
@@ -339,6 +339,7 @@ You shouldn't do this though and instead cache the result on a CDN using `s-maxa
 ## Showing Page Data Using Server-Side Rendering
 
 There's a couple of problem with client-side rendering:
+
 - If you view the page source the posts are nowhere to be found because we fetched the data on the client which harms SEO
 - The JavaScript has to load first which can fail for whatever reason before you even start fetching the data which is not a great user experience
 
@@ -398,7 +399,7 @@ If you view the page source you can see how SvelteKit saves the data in the HTML
 </script>
 ```
 
-Using `data.whatever` can be tedious, so here's a neat trick you can use to pluck values from `data`  and update the value using a reactive declaration.
+Using `data.whatever` can be tedious, so here's a neat trick you can use to pluck values from `data` and update the value using a reactive declaration.
 
 ```html:routes/+page.svelte showLineNumbers
 <script lang="ts">
@@ -694,6 +695,7 @@ The URL was the first state manager before any of these fancy JavaScript framewo
 A stateful URL means you can use query parameters from the URL for providing options like filtering and sorting data.
 
 SvelteKit makes working with the URL simple and that's why the `load` function provides you with:
+
 - `url` which is an instance of `URL` and has properties like `origin`, `hostname`, `pathname` and `searchParams` (has the parsed query string as a `URLSearchParams` object)
 - `route` contains the name of the current directory relative to `src/routes`
 - `params` is derived from `url.pathname` and `route.id`
@@ -763,12 +765,12 @@ Instead of having to manage some state you can just share the link with anyone `
 
 If this sparked your interest here's the entire [working example on StackBlitz](https://stackblitz.com/edit/sveltejs-kit-template-default-bauvcn) you can try out and learn how it works.
 
-There's also packages that make this a lot easier such as [sveltekit-search-params]([https://github.com/paoloricciuti/sveltekit-search-params](https://github.com/paoloricciuti/sveltekit-search-params "https://github.com/paoloricciuti/sveltekit-search-params") which you should check out if you're going to do any URL fu.
+There's also packages that make this a lot easier such as [sveltekit-search-params]([https://github.com/paoloricciuti/sveltekit-search-params](https://github.com/paoloricciuti/sveltekit-search-params 'https://github.com/paoloricciuti/sveltekit-search-params') which you should check out if you're going to do any URL fu.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
     import { queryParam } from 'sveltekit-search-params'
-    
+
     const search = queryParam('search')
 </script>
 
@@ -891,7 +893,7 @@ export const load: PageLoad = async ({ fetch }) => {
 
 A `load` function that calls `await parent()` will also rerun if a parent `load` function reruns.
 
-You can rerun  `load` functions for the current page using `invalidate(url)` or `invalidateAll()` which reruns every `load` function, so be careful.
+You can rerun `load` functions for the current page using `invalidate(url)` or `invalidateAll()` which reruns every `load` function, so be careful.
 
 The `load` function depends on `url` if it uses `fetch(url)` or `depends(url)` which can be a custom identifier.
 
@@ -937,13 +939,13 @@ If you use a random URL then option `b` won't work because you can't invalidate 
   function rerunLoadFunction() {
     // a)
     invalidate('posts')
-    
+
     // b)
     invalidate('api/posts')
 
     // c)
     invalidate(url => url.href.includes('posts'))
-    
+
     // d)
     invalidateAll()
   }
@@ -957,12 +959,13 @@ If you use a random URL then option `b` won't work because you can't invalidate 
 Open the network tab in the developer tools and try out every option. It should rerun the `load` functions for the page and you should see a `fetch` request that has the data from the new response.
 
 Let's repeat what makes a `load` function rerun:
-- Any reference to a property of `params` or  `url`
+
+- Any reference to a property of `params` or `url`
 - If the `load` function calls `await parent()` and the parent reran
 - You declared a dependency with `fetch` or `depends` and marked the URL invalid with `invalidate(url)`
 - You used `invalidateAll()` to force every `load` function to rerun
 
-This doesn't cause the component to be recreated but it just updates the `data` prop inside a `+page.svelte` or `+layout.svelte` component but if you want to reset it you can use `afterNavigate` or wrap your component in a `{#key ...}` block. 
+This doesn't cause the component to be recreated but it just updates the `data` prop inside a `+page.svelte` or `+layout.svelte` component but if you want to reset it you can use `afterNavigate` or wrap your component in a `{#key ...}` block.
 
 That's everything you should know about API endpoints and loading data in SvelteKit.
 

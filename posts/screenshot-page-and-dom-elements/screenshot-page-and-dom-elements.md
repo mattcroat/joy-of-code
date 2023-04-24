@@ -1,12 +1,10 @@
 ---
-title: Use Developer Tools to Screenshot the Entire Page
+title: How To Screenshot The Entire Page
 description: You don't need extensions to screenshot the page, sections and elements.
 slug: screenshot-page-and-dom-elements
-published: 2021-10-4
+published: '2021-10-4'
 category: general
 ---
-
-# How to Take Screenshot of Entire Pages and DOM Elements
 
 ## Firefox
 

@@ -2,11 +2,9 @@
 title: Google Analytics With SvelteKit
 description: Set up Google Analytics with SvelteKit.
 slug: sveltekit-google-analytics
-published: 2022-5-18
+published: '2022-5-18'
 category: sveltekit
 ---
-
-# Google Analytics With SvelteKit
 
 {% youtube id="l-x6H0fnqqQ" title="Google Analytics With SvelteKit" %}
 

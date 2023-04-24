@@ -2,11 +2,9 @@
 title: Svelte Guide For React Developers
 description: Get up to speed with Svelte as a React developer.
 slug: svelte-for-react-developers
-published: 2022-8-8
+published: '2022-8-8'
 category: svelte
 ---
-
-# Svelte Guide For React Developers
 
 {% youtube id="uWDBEUkTRGk" title="Google Analytics With SvelteKit" %}
 
@@ -15,7 +13,6 @@ category: svelte
 ## Introduction
 
 This guide is aimed at React developers to get up to speed learning Svelte or anyone interested in comparing React and Svelte requiring only basic knowledge of JavaScript frameworks.
-
 
 While I'm biased towards Svelte this guide isn't going to beat you over the head how what you're using is wrong and is just concerned with comparing the frameworks.
 
@@ -74,7 +71,6 @@ In Svelte updates are triggered using assignments so `count + 1` wouldn't work b
 You can also keep variables in sync with each other using reactive declarations `$: doubled = count * 2`.
 
 > 🐿️ The `$:` syntax is valid JavaScript [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label) syntax but Svelte interprets it as "re-run this code whenever any of the referenced values change".
-> 
 
 The term “magic” is often used in a negative connotation but Svelte does "magic" right because it's intuitive.
 
@@ -133,7 +129,7 @@ If the value you're passing has the same name as the prop you can make it more c
 	let count = 10
 </script>
 
-<CounterWithProps {count} /> 
+<CounterWithProps {count} />
 ```
 
 ## Passing Children To Components
@@ -199,7 +195,7 @@ In React you don't have a lot of control where you can place `children` but `slo
 
 You can't express logic in regular HTML such as looping over values and using conditionals but you can using a JavaScript framework.
 
-In the React example we loop over a list of todo items and check if the todo item is completed to give it some styles and the 🎉 emoji to celebrate completing it. 
+In the React example we loop over a list of todo items and check if the todo item is completed to give it some styles and the 🎉 emoji to celebrate completing it.
 
 ```tsx:Logic.tsx showLineNumbers
 const todos = [
@@ -328,9 +324,9 @@ In Svelte you can use [event modifiers](https://svelte.dev/tutorial/event-modifi
 
 ## Synchronization
 
-Sometimes you have to synchronize your component state with something outside of it like browser APIs, data fetching and so on. 
+Sometimes you have to synchronize your component state with something outside of it like browser APIs, data fetching and so on.
 
-The next example shows a video player we have to hook into using `useRef` to get a reference to the element to be able to play and pause it — this is a side effect because we have to synchronize it with our component state. 
+The next example shows a video player we have to hook into using `useRef` to get a reference to the element to be able to play and pause it — this is a side effect because we have to synchronize it with our component state.
 
 ```tsx:Synchronization.tsx showLineNumbers
 import { useEffect, useRef, useState } from 'react'
@@ -410,9 +406,9 @@ Here's an example of using the Canvas API in Svelte.
 ```html:Example.svelte showLineNumbers
 <script>
 	import { onMount } from 'svelte'
-	
+
 	let canvasEl = null
-	
+
 	onMount(() => {
 		let context = canvasEl.getContext('2d')
 		// ...
@@ -435,107 +431,107 @@ Instead of creating a `filteredTodos` state using `useState` it's easier to just
 <details>
   <summary>Derived.tsx</summary>
 
-  ```tsx:Derived.tsx {13} showLineNumbers
-  import { useState } from 'react'
+```tsx:Derived.tsx {13} showLineNumbers
+import { useState } from 'react'
 
-  export default function FilteredTodos() {
-    const [todos, setTodos] = useState([
-      { id: 1, text: 'Todo 1', completed: false },
-      { id: 2, text: 'Todo 2', completed: false },
-      { id: 3, text: 'Todo 3', completed: false },
-      { id: 4, text: 'Todo 4', completed: false }
-    ])
-    const [todo, setTodo] = useState('')
-    const [filter, setFilter] = useState('all')
+export default function FilteredTodos() {
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Todo 1', completed: false },
+    { id: 2, text: 'Todo 2', completed: false },
+    { id: 3, text: 'Todo 3', completed: false },
+    { id: 4, text: 'Todo 4', completed: false }
+  ])
+  const [todo, setTodo] = useState('')
+  const [filter, setFilter] = useState('all')
 
-    const filteredTodos = filterTodos(todos, filter)
+  const filteredTodos = filterTodos(todos, filter)
 
-    function addTodo(
-      event: React.KeyboardEvent,
-      todo: string
-    ) {
-      if (event.key === 'Enter') {
-        setTodos([
-          ...todos,
-          { id: Date.now(), text: todo, completed: false }
-        ])
-        setTodo('')
-      }
+  function addTodo(
+    event: React.KeyboardEvent,
+    todo: string
+  ) {
+    if (event.key === 'Enter') {
+      setTodos([
+        ...todos,
+        { id: Date.now(), text: todo, completed: false }
+      ])
+      setTodo('')
     }
-
-    function completeTodo(id) {
-      const updatedTodos = todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, completed: !todo.completed }
-        }
-        return todo
-      })
-      setTodos(updatedTodos)
-    }
-
-    function removeTodo(id) {
-      setTodos(todos.filter((todo) => todo.id !== id))
-    }
-
-    function filterTodos(todos, filter) {
-      switch (filter) {
-        case 'all':
-          return todos
-        case 'active':
-          return todos.filter((todo) => !todo.completed)
-        case 'completed':
-          return todos.filter((todo) => todo.completed)
-      }
-    }
-
-    return (
-      <div className="todos">
-        <input
-          onKeyPress={(event) => addTodo(event, todo)}
-          onChange={(event) => setTodo(event.target.value)}
-          value={todo}
-          type="text"
-          name="todo"
-          id="todo"
-          placeholder="What needs to be done?"
-        />
-
-        {filteredTodos.map(({ id, text, completed }) => (
-          <div key={id} className="todo">
-            <input
-              type="checkbox"
-              onChange={() => completeTodo(id)}
-              checked={completed}
-            />
-            <label
-              htmlFor="todo"
-              style={{
-                textDecoration: completed
-                  ? 'line-through'
-                  : ''
-              }}
-            >
-              {text}
-            </label>
-            <button onClick={() => removeTodo(id)}>❌</button>
-          </div>
-        ))}
-
-        <div className="filters">
-          <button onClick={() => setFilter('all')}>
-            All
-          </button>
-          <button onClick={() => setFilter('active')}>
-            Active
-          </button>
-          <button onClick={() => setFilter('completed')}>
-            Completed
-          </button>
-        </div>
-      </div>
-    )
   }
-  ```
+
+  function completeTodo(id) {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed }
+      }
+      return todo
+    })
+    setTodos(updatedTodos)
+  }
+
+  function removeTodo(id) {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
+
+  function filterTodos(todos, filter) {
+    switch (filter) {
+      case 'all':
+        return todos
+      case 'active':
+        return todos.filter((todo) => !todo.completed)
+      case 'completed':
+        return todos.filter((todo) => todo.completed)
+    }
+  }
+
+  return (
+    <div className="todos">
+      <input
+        onKeyPress={(event) => addTodo(event, todo)}
+        onChange={(event) => setTodo(event.target.value)}
+        value={todo}
+        type="text"
+        name="todo"
+        id="todo"
+        placeholder="What needs to be done?"
+      />
+
+      {filteredTodos.map(({ id, text, completed }) => (
+        <div key={id} className="todo">
+          <input
+            type="checkbox"
+            onChange={() => completeTodo(id)}
+            checked={completed}
+          />
+          <label
+            htmlFor="todo"
+            style={{
+              textDecoration: completed
+                ? 'line-through'
+                : ''
+            }}
+          >
+            {text}
+          </label>
+          <button onClick={() => removeTodo(id)}>❌</button>
+        </div>
+      ))}
+
+      <div className="filters">
+        <button onClick={() => setFilter('all')}>
+          All
+        </button>
+        <button onClick={() => setFilter('active')}>
+          Active
+        </button>
+        <button onClick={() => setFilter('completed')}>
+          Completed
+        </button>
+      </div>
+    </div>
+  )
+}
+```
 
 </details>
 
@@ -553,79 +549,78 @@ Here's the same example in Svelte.
 <details>
   <summary>Derived.svelte</summary>
 
-  ```html:Derived.svelte showLineNumbers
-  <script>
-    let todos = [
-      { id: 1, text: 'Todo 1', completed: false },
-      { id: 2, text: 'Todo 2', completed: false },
-      { id: 3, text: 'Todo 3', completed: false },
-      { id: 4, text: 'Todo 4', completed: false }
-    ]
+```html:Derived.svelte showLineNumbers
+<script>
+  let todos = [
+    { id: 1, text: 'Todo 1', completed: false },
+    { id: 2, text: 'Todo 2', completed: false },
+    { id: 3, text: 'Todo 3', completed: false },
+    { id: 4, text: 'Todo 4', completed: false }
+  ]
 
-    function addTodo(event) {
-      if (event.key === 'Enter') {
-        todos = [
-          ...todos,
-          { id: Date.now(), text: todo, completed: false }
-        ]
-        todo = ''
-      }
+  function addTodo(event) {
+    if (event.key === 'Enter') {
+      todos = [
+        ...todos,
+        { id: Date.now(), text: todo, completed: false }
+      ]
+      todo = ''
     }
+  }
 
-    function removeTodo(id) {
-      todos = todos.filter((todo) => todo.id !== id)
+  function removeTodo(id) {
+    todos = todos.filter((todo) => todo.id !== id)
+  }
+
+  function filterTodos(todos, filter) {
+    switch (filter) {
+      case 'all':
+        return todos
+      case 'active':
+        return todos.filter((todo) => !todo.completed)
+      case 'completed':
+        return todos.filter((todo) => todo.completed)
     }
+  }
 
-    function filterTodos(todos, filter) {
-      switch (filter) {
-        case 'all':
-          return todos
-        case 'active':
-          return todos.filter((todo) => !todo.completed)
-        case 'completed':
-          return todos.filter((todo) => todo.completed)
-      }
-    }
+  let todo = ''
+  let filter: Filters = 'all'
+  $: filteredTodos = filterTodos(todos, filter)
+</script>
 
-    let todo = ''
-    let filter: Filters = 'all'
-    $: filteredTodos = filterTodos(todos, filter)
-  </script>
+<div class="todos">
+  <input
+    on:keypress={addTodo}
+    bind:value={todo}
+    type="text"
+    name="todo"
+    id="todo"
+    placeholder="What needs to be done?"
+  />
 
-  <div class="todos">
-    <input
-      on:keypress={addTodo}
-      bind:value={todo}
-      type="text"
-      name="todo"
-      id="todo"
-      placeholder="What needs to be done?"
-    />
-
-    {#each filteredTodos as { id, text, completed } (id)}
-      <div class="todo">
-        <input type="checkbox" bind:checked={completed} />
-        <label class:completed for="todo">{text}</label>
-        <button on:click={() => removeTodo(id)}>❌</button>
-      </div>
-    {/each}
-
-    <div class="filters">
-      <button on:click={() => (filter = 'all')}>All</button>
-      <button on:click={() => (filter = 'active')}>Active</button>
-      <button on:click={() => (filter = 'completed')}>Completed</button>
+  {#each filteredTodos as { id, text, completed } (id)}
+    <div class="todo">
+      <input type="checkbox" bind:checked={completed} />
+      <label class:completed for="todo">{text}</label>
+      <button on:click={() => removeTodo(id)}>❌</button>
     </div>
-  </div>
+  {/each}
 
-  <style>
-    .completed {
-      text-decoration: line-through;
-    }
-  </style>
-  ```
+  <div class="filters">
+    <button on:click={() => (filter = 'all')}>All</button>
+    <button on:click={() => (filter = 'active')}>Active</button>
+    <button on:click={() => (filter = 'completed')}>Completed</button>
+  </div>
+</div>
+
+<style>
+  .completed {
+    text-decoration: line-through;
+  }
+</style>
+```
 
 </details>
-
 
 In Svelte you can keep variables that depend on each other in sync using reactive declarations using the `$:` syntax where `$: filteredTodos = filterTodos(todos, filter)` means whatever values you have on the right are tracked, so `filteredTodos` is going to get updated if `todos` or `filter` changes.
 
@@ -641,7 +636,7 @@ One example would be a map component with markers.
 </Map>
 ```
 
-Another example would be a `<List>` component.  
+Another example would be a `<List>` component.
 
 ```tsx:Example.tsx showLineNumbers
 <List>
@@ -658,179 +653,178 @@ In that case we can use the `useContext` hook at the top level of our component 
 <details>
   <summary>useContext</summary>
 
-  ```tsx:context.ts showLineNumbers
-  import { createContext } from 'react'
+```tsx:context.ts showLineNumbers
+import { createContext } from 'react'
 
-  export const ListContext = createContext(null)
-  ```
+export const ListContext = createContext(null)
+```
 
-  ```tsx:List.tsx showLineNumbers
-  import { useState } from 'react'
-  import { ListContext } from './context'
+```tsx:List.tsx showLineNumbers
+import { useState } from 'react'
+import { ListContext } from './context'
 
-  export function List({ children, listItems }) {
-    const [items, setListItems] = useState(listItems)
+export function List({ children, listItems }) {
+  const [items, setListItems] = useState(listItems)
 
-    function addItem() {
-      setListItems((items) => [...items, items.length + 1])
-    }
+  function addItem() {
+    setListItems((items) => [...items, items.length + 1])
+  }
 
-    function removeItem() {
-      setListItems((items) =>
-        items.slice(0, items.length - 1)
-      )
-    }
-
-    return (
-      <ListContext.Provider
-        value={{ items, addItem, removeItem }}
-      >
-        <ul>{children}</ul>
-      </ListContext.Provider>
+  function removeItem() {
+    setListItems((items) =>
+      items.slice(0, items.length - 1)
     )
   }
-  ```
 
-  ```tsx:Items.tsx showLineNumbers
-  import { useContext } from 'react'
-  import { ListContext } from './context'
+  return (
+    <ListContext.Provider
+      value={{ items, addItem, removeItem }}
+    >
+      <ul>{children}</ul>
+    </ListContext.Provider>
+  )
+}
+```
 
-  export function Items() {
-    const { items } = useContext(ListContext)
+```tsx:Items.tsx showLineNumbers
+import { useContext } from 'react'
+import { ListContext } from './context'
 
-    return (
-      <>
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </>
-    )
-  }
-  ```
+export function Items() {
+  const { items } = useContext(ListContext)
 
-  ```tsx:AddItem.tsx showLineNumbers
-  import { useContext } from 'react'
-  import { ListContext } from './context'
+  return (
+    <>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </>
+  )
+}
+```
 
-  export function AddItem() {
-    const { addItem } = useContext(ListContext)
+```tsx:AddItem.tsx showLineNumbers
+import { useContext } from 'react'
+import { ListContext } from './context'
 
-    return <button onClick={addItem}>Add</button>
-  }
-  ```
+export function AddItem() {
+  const { addItem } = useContext(ListContext)
 
-  ```tsx:RemoveItem.tsx showLineNumbers
-  import { useContext } from 'react'
-  import { ListContext } from './context'
+  return <button onClick={addItem}>Add</button>
+}
+```
 
-  export function RemoveItem() {
-    const { removeItem } = useContext(ListContext)
+```tsx:RemoveItem.tsx showLineNumbers
+import { useContext } from 'react'
+import { ListContext } from './context'
 
-    return <button onClick={removeItem}>Remove</button>
-  }
-  ```
+export function RemoveItem() {
+  const { removeItem } = useContext(ListContext)
 
-  Instead of passing items and methods to every component we can just import the components and use composition. 
+  return <button onClick={removeItem}>Remove</button>
+}
+```
 
-  ```tsx:index.tsx showLineNumbers
-  import { List } from './List'
-  import { Items } from './Items'
-  import { AddItem } from './AddItem'
-  import { RemoveItem } from './RemoveItem'
+Instead of passing items and methods to every component we can just import the components and use composition.
 
-  export function Composition() {
-    return (
-      <List listItems={[1, 2, 3, 4]}>
-        <Items />
-        <AddItem />
-        <RemoveItem />
-      </List>
-    )
-  }
-  ```
+```tsx:index.tsx showLineNumbers
+import { List } from './List'
+import { Items } from './Items'
+import { AddItem } from './AddItem'
+import { RemoveItem } from './RemoveItem'
+
+export function Composition() {
+  return (
+    <List listItems={[1, 2, 3, 4]}>
+      <Items />
+      <AddItem />
+      <RemoveItem />
+    </List>
+  )
+}
+```
 
 </details>
-
 
 In Svelte you can do the same thing using the [Context API](https://svelte.dev/tutorial/context-api) by passing values to `setContext` and receive it using `getContext` — if you need reactive values you can use a [store](https://svelte.dev/tutorial/writable-stores) and pass the value.
 
 <details>
   <summary>Context API</summary>
 
-  ```html:List.svelte showLineNumbers
-  <script>
-    import { setContext } from 'svelte'
-    import { writable } from 'svelte/store'
-    export let listItems = []
+```html:List.svelte showLineNumbers
+<script>
+  import { setContext } from 'svelte'
+  import { writable } from 'svelte/store'
+  export let listItems = []
 
-    const items = writable(listItems)
+  const items = writable(listItems)
 
-    setContext('items', items)
-    setContext('addItem', addItem)
-    setContext('removeItem', removeItem)
+  setContext('items', items)
+  setContext('addItem', addItem)
+  setContext('removeItem', removeItem)
 
-    function addItem() {
-      $items = [...$items, $items.length + 1]
-    }
+  function addItem() {
+    $items = [...$items, $items.length + 1]
+  }
 
-    function removeItem() {
-      $items = $items.slice(0, $items.length - 1)
-    }
-  </script>
+  function removeItem() {
+    $items = $items.slice(0, $items.length - 1)
+  }
+</script>
 
-  <ul>
-    <slot />
-  </ul>
-  ```
+<ul>
+  <slot />
+</ul>
+```
 
-  ```html:Items.svelte showLineNumbers
-  <script>
-    import { getContext } from 'svelte'
+```html:Items.svelte showLineNumbers
+<script>
+  import { getContext } from 'svelte'
 
-    const items = getContext('items')
-  </script>
+  const items = getContext('items')
+</script>
 
-  {#each $items as item}
-    <li>{item}</li>
-  {/each}
-  ```
+{#each $items as item}
+  <li>{item}</li>
+{/each}
+```
 
-  ```html:AddItem.svelte showLineNumbers
-  <script lang="ts">
-    import { getContext } from 'svelte'
+```html:AddItem.svelte showLineNumbers
+<script lang="ts">
+  import { getContext } from 'svelte'
 
-    const addItem = getContext('addItem')
-  </script>
+  const addItem = getContext('addItem')
+</script>
 
-  <button on:click={addItem}>Add</button>
-  ```
+<button on:click={addItem}>Add</button>
+```
 
-  ```html:RemoveItem.svelte showLineNumbers
-  <script>
-    import { getContext } from 'svelte'
+```html:RemoveItem.svelte showLineNumbers
+<script>
+  import { getContext } from 'svelte'
 
-    const removeItem = getContext('removeItem')
-  </script>
+  const removeItem = getContext('removeItem')
+</script>
 
-  <button on:click={removeItem}>Remove</button>
-  ```
+<button on:click={removeItem}>Remove</button>
+```
 
-  As before we can import the components and use them.
+As before we can import the components and use them.
 
-  ```html:index.svelte showLineNumbers
-  <script>
-    import List from './List.svelte'
-    import Items from './Items.svelte'
-    import AddItem from './AddItem.svelte'
-    import RemoveItem from './RemoveItem.svelte'
-  </script>
+```html:index.svelte showLineNumbers
+<script>
+  import List from './List.svelte'
+  import Items from './Items.svelte'
+  import AddItem from './AddItem.svelte'
+  import RemoveItem from './RemoveItem.svelte'
+</script>
 
-  <List listItems={[1, 2, 3, 4]}>
-    <Items />
-    <AddItem />
-    <RemoveItem />
-  </List>
-  ```
+<List listItems={[1, 2, 3, 4]}>
+  <Items />
+  <AddItem />
+  <RemoveItem />
+</List>
+```
 
 </details>
 
@@ -844,7 +838,7 @@ A store is just an object you can subscribe so you get notified when the store v
 
 **This is mostly for fun and I wouldn't use React conventions inside Svelte**.
 
-The `$` syntax in `$count` is just for Svelte to understand to subscribe and unsubscribe to a store making you write less boilerplate code and it's awesome. 
+The `$` syntax in `$count` is just for Svelte to understand to subscribe and unsubscribe to a store making you write less boilerplate code and it's awesome.
 
 ```html:Example.svelte showLineNumbers
 <script>

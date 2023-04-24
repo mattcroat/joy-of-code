@@ -2,11 +2,9 @@
 title: SvelteKit With Tailwind CSS
 description: Learn how to set up Tailwind CSS and automatic class sorting with SvelteKit.
 slug: sveltekit-with-tailwind-css
-published: 2022-10-12
+published: '2022-10-12'
 category: sveltekit
 ---
-
-# SvelteKit With Tailwind CSS
 
 {% youtube id="J_G_xP0chog" title="SvelteKit With Tailwind CSS" %}
 
@@ -107,7 +105,7 @@ npm i -D prettier-plugin-tailwindcss
 SvelteKit uses `prettier-plugin-svelte` which conflicts with the Tailwind CSS plugin and you have to remove it but `prettier-plugin-tailwindcss` includes it for you so everything should work as before.
 
 ```shell:terminal
-npm uninstall prettier-plugin-svelte 
+npm uninstall prettier-plugin-svelte
 ```
 
 Remove plugins from your Prettier config.
@@ -161,7 +159,7 @@ Here are some useful quality of life tips when using Tailwind:
 - Use [Tailwind CSS Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet) to find what you need at a glance
 - Don't forget you can place your long class names inside a variable if you need to reuse them because [the author of Tailwind discourages extracting classes with `@apply`](https://twitter.com/adamwathan/status/1226511611592085504)
 - Enable word wrap in your editor with <kbd>Alt</kbd> + <kbd>Z</kbd> to make it easier to work with long class names
-- Another way to get class sorting in Tailwind is with the [Headwind](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind) extension if other methods don't work for you 
+- Another way to get class sorting in Tailwind is with the [Headwind](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind) extension if other methods don't work for you
 
 ## Conclusion
 

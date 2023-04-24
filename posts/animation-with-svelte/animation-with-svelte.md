@@ -2,11 +2,9 @@
 title: Create Amazing User Interfaces Using Animation With Svelte
 description: Learn how to create amazing user interfaces with Svelte.
 slug: animation-with-svelte
-published: 2022-9-22
+published: '2022-9-22'
 category: svelte
 ---
-
-# Create Amazing User Interfaces Using Animation With Svelte
 
 {% youtube id="3RlBfUQCiAQ" title="Animation With Svelte" %}
 
@@ -23,7 +21,6 @@ In Svelte animations are a first class-citizen because Svelte was forged by [@Ri
 {% img src="tweet.webp" alt="Svelte used for graphics at The New York Times" %}
 
 > 🧪 The code is available on [GitHub](https://github.com/joysofcode/animation-with-svelte) or you can view the examples on [StackBlitz](http://stackblitz.com/github/joysofcode/animation-with-svelte).
-> 
 
 I hope you're ready to become an animation wizard and delight your users!
 
@@ -70,7 +67,7 @@ You can use the same intro and outro transition with `transition:fade` but if yo
 
 Each transition function accepts at least a `delay`, `duration` and `easing` parameter but others might accept more if you consult the [documentation](https://svelte.dev/docs#run-time-svelte-transition).
 
-You can specify a custom easing function or use a built-in [Svelte easing functions](https://svelte.dev/docs#run-time-svelte-easing)  to give character to your animations — use the [ease visualiser](https://svelte.dev/examples/easing) to explore different easing options.
+You can specify a custom easing function or use a built-in [Svelte easing functions](https://svelte.dev/docs#run-time-svelte-easing) to give character to your animations — use the [ease visualiser](https://svelte.dev/examples/easing) to explore different easing options.
 
 {% video src="transitions-fly.mp4" %}
 
@@ -147,11 +144,11 @@ I want to animate a title and need to split the lines which is simple using Svel
 
 Here I'm using the `animate` value to play the transition but if you look at the finished examples I'm using an `Animate` component I made that does the same thing and gives you a replay button.
 
-> 🐿️ Transitions don't play on first render unless you set `intro: true` for Svelte components. This doesn't work for SvelteKit but you can set  `animate = true` when the component mounts inside `onMount` to achieve the same result.
+> 🐿️ Transitions don't play on first render unless you set `intro: true` for Svelte components. This doesn't work for SvelteKit but you can set `animate = true` when the component mounts inside `onMount` to achieve the same result.
 
 If you use `transition:fly` the transition would play in reverse when the component unmounts but if you use an intro transition `in:fly` you can use an outro transition `out:fly` which doesn't even have to be the same transition.
 
-> 🐿️ Terms such as “mount” and “unmount” refer to when the component gets created and destroyed. 
+> 🐿️ Terms such as “mount” and “unmount” refer to when the component gets created and destroyed.
 
 You can also use [transition events](https://svelte.dev/docs#template-syntax-element-directives-transition-fn-transition-events) and other standard DOM events.
 
@@ -289,7 +286,7 @@ You're not going to encounter this problem often but when you do it's useful to 
 
 ## Key Blocks
 
-Sometimes you want to play a transition whenever a value changes and the  `{#key ...}` block exists for that purpose as key blocks destroy and recreate their contents when the value changes.
+Sometimes you want to play a transition whenever a value changes and the `{#key ...}` block exists for that purpose as key blocks destroy and recreate their contents when the value changes.
 
 {% video src="transitions-key.mp4" %}
 
@@ -421,7 +418,7 @@ Inside `+layout.svelte` receive and pass the prop to the component.
 
 The transitions you've seen so far cover most of what you need but sometimes you want to combine them or do something crazy and that's where custom transitions come in.
 
-You might be thinking how Svelte does transitions is some magic but surprisingly transitions use regular CSS with the help of JavaScript. 
+You might be thinking how Svelte does transitions is some magic but surprisingly transitions use regular CSS with the help of JavaScript.
 
 Here's how Svelte implements the [fade transition](https://github.com/sveltejs/svelte/blob/d5370f23d3d34f15078ccc8d72b80eea0617f173/src/runtime/transition/index.ts#L49-L62).
 
@@ -442,20 +439,19 @@ export function fade(node: Element, {
 }
 ```
 
-It has a similar signature to [Svelte actions](https://svelte.dev/tutorial/actions) but returns a `css`  or `tick` function and we can use the same signature to create custom transitions.
+It has a similar signature to [Svelte actions](https://svelte.dev/tutorial/actions) but returns a `css` or `tick` function and we can use the same signature to create custom transitions.
 
 > 🐿️ Svelte transitions use CSS instead of JavaScript, so they don't cause jank because they can run separately and not block the main thread.
 
 {% video src="transitions-custom-css.mp4" %}
 
-I have a simple modal I want to spice up  when a user opens it by scaling and transforming it:
+I have a simple modal I want to spice up when a user opens it by scaling and transforming it:
 
 - For this I created a custom transition function `modal` that's going to take the element and parameters and get the existing `transform` styles of the element and return a `css` function.
 - The `css` function takes a `t` argument that's a value between `0` and `1` after the `easing` function has been applied and the `u` argument is the opposite and returns a value from `1` to `0`
 - I use these values to `scale` and `translateY` the element, so it starts to grow from `-100px` on the vertical axis
 
 > 🐿️ The easiest way to think about `t` is that it animates **TO** the value you specified and `u` animates **FROM** the value you specified — if you animate `scale` with `t` it goes from `0` to `1` being the normal state but using `u` it would go from `1` to `0`.
-> 
 
 ```html:modal.svelte {3, 12-29, 37} showLineNumbers
 <script lang="ts">
@@ -1340,4 +1336,3 @@ I hope you take what you learned and delight your users but remember that with g
 Consider accessibility from the start and remember animations done right are subtle but impactful.
 
 Thank you for reading! 🏄️
-

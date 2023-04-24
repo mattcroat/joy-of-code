@@ -2,11 +2,9 @@
 title: The Best Icon Library For Svelte
 description: Iconify is a framework agnostic icon library that includes every popular icon set.
 slug: using-iconify-with-svelte
-published: 2022-12-11
+published: '2022-12-11'
 category: category
 ---
-
-# The Best Icon Library For Svelte
 
 {% youtube id="iGVhzsTZSa8" title="The Best Icon Library For Svelte" %}
 

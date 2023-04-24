@@ -2,11 +2,9 @@
 title: Design For Developers
 description: Learn enough visual design to be dangerous with actual tips instead of theory.
 slug: design-for-developers
-published: 2021-11-5
+published: '2021-11-5'
 category: design
 ---
-
-# Design For Developers
 
 ## Table of Contents
 

@@ -2,11 +2,9 @@
 title: Space Elements With Flexbox Instead of Margin
 description: Find out how using Flexbox to space elements is easier than using margin.
 slug: space-elements-with-flexbox
-published: 2021-8-31
+published: '2021-8-31'
 category: css
 ---
-
-# Space Elements Using Flexbox Instead of Margin
 
 In your **HTML** markup you often have repeating blocks such as **lists**, **cards**, and **posts**.
 

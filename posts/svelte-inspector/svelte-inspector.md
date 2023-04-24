@@ -2,11 +2,9 @@
 title: Never Search For Svelte Components Again
 description: Hover over elements and open Svelte components in your editor using the Svelte inspector.
 slug: svelte-inspector
-published: 2022-9-9
+published: '2022-9-9'
 category: svelte
 ---
-
-# Never Search For Svelte Components Again
 
 {% youtube id="OuDSEvplXqY" title="Svelte Inspector" %}
 
@@ -65,7 +63,7 @@ Using the default options the inspector becomes available using the <kbd>Meta</k
       inspector: {
         // change shortcut
         toggleKeyCombo: 'meta-shift',
-        // hold and release key to toggle inspector mode 
+        // hold and release key to toggle inspector mode
         holdMode: true,
         // show or hide the inspector option
         showToggleButton: 'always',

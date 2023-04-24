@@ -2,11 +2,9 @@
 title: What Is SvelteKit?
 description: SvelteKit is the swiss army knife of JavaScript frameworks and blurs the line between frontend and backend.
 slug: what-is-sveltekit
-published: 2022-12-20
+published: '2022-12-20'
 category: sveltekit
 ---
-
-# What Is SvelteKit?
 
 {% youtube id="obmiLi3bhkQ" title="What Is SvelteKit?" %}
 
@@ -149,7 +147,6 @@ You're going to spend more time on the [MDN Web Docs](https://developer.mozilla.
 
 SvelteKit uses the web platform meaning you're not learning some framework specific abstraction but using web standards like the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects, [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) and [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) for working with forms.
 
-
 ```html:+page.svelte showLineNumbers
 <h1>Login</h1>
 
@@ -220,7 +217,7 @@ A component library is similar to a SvelteKit app in structure but it uses `src/
 
 SvelteKit is an open source project governed by [@rich_harris](https://twitter.com/Rich_Harris) and a team of core contributors.
 
-The development is funded by the [Open Collective](https://opencollective.com/svelte) and [Vercel](https://vercel.com/)  but it's not governed by a corporation whose goals and ambitions are unclear.
+The development is funded by the [Open Collective](https://opencollective.com/svelte) and [Vercel](https://vercel.com/) but it's not governed by a corporation whose goals and ambitions are unclear.
 
 The future of SvelteKit is bright and I hope you give it a try but be warned in case you do you might not want to use anything else and side effects include a permanent grin on your face.
 

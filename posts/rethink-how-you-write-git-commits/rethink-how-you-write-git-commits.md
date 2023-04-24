@@ -2,11 +2,9 @@
 title: Rethink How You Write Git Commits
 description: Write more clear, and meaningful commits, with less effort.
 slug: rethink-how-you-write-git-commits
-published: 2021-5-29
+published: '2021-5-29'
 category: git
 ---
-
-# Rethink How You Write Git Commits
 
 ## Table of Contents
 

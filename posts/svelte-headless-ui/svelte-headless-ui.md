@@ -2,11 +2,9 @@
 title: Svelte Headless UI Component Library
 description: Svelte Headless UI is an awesome unopinionated component library.
 slug: svelte-headless-ui
-published: 2022-4-29
+published: '2022-4-29'
 category: svelte
 ---
-
-# Svelte Headless UI Component Library
 
 {% youtube id="7mE1UbRwU3w" title="Svelte Headless UI Component Library" %}
 

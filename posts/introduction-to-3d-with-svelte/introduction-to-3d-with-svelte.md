@@ -2,11 +2,9 @@
 title: Introduction To 3D With Svelte
 description: Introduction to using 3D in the browser with Svelte and Threlte.
 slug: introduction-to-3d-with-svelte
-published: 2022-10-31
+published: '2022-10-31'
 category: svelte
 ---
-
-# Introduction to 3D With Svelte
 
 {% youtube id="89LYeHOncVk" title="Introduction to 3D With Svelte" %}
 
@@ -19,7 +17,6 @@ By the end of this post you're going to learn how to spice up your boring site u
 {% embed src="https://stackblitz.com/github/joysofcode/svelte-3d?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte 3D" title="Sveltype 3D" %}
 
 > 🧪 The project files are available on [GitHub](https://github.com/joysofcode/svelte-3d) and you can try it on [StackBlitz](https://stackblitz.com/github/joysofcode/svelte-3d).
-
 
 ## What Is Threlte?
 
@@ -44,7 +41,6 @@ Using declarative code you just state the desired outcome.
 ```html:+page.svelte showLineNumbers
 <h1>Hello</h1>
 ```
-
 
 ## Learn Three.js
 

@@ -2,11 +2,9 @@
 title: How Code Sandboxes Update Content
 description: How do code sandboxes update the iframe without causing flashing?
 slug: avoid-flashing-iframe
-published: 2021-9-29
+published: '2021-9-29'
 category: javascript
 ---
-
-# How Code Sandboxes Avoid Flashing Iframe Updates
 
 In a [previous post](https://joyofcode.xyz/create-a-coding-sandbox) we created a simple **code sandbox** from scratch using plain **TypeScript** and it works great but then I noticed something interesting.
 

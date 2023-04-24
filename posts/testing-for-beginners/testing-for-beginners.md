@@ -2,11 +2,9 @@
 title: Testing User Interfaces For Beginners
 description: Gain confidence your code works and learn how to test user interfaces with Testing Library for any frontend JavaScript framework.
 slug: testing-for-beginners
-published: 2022-1-28
+published: '2022-1-28'
 category: javascript
 ---
-
-# Testing User Interfaces For Beginners Regardless What JavaScript Framework You're Using
 
 {% youtube id="y53wwdBr5AI" title="Make a Svelte Todo App" %}
 

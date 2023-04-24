@@ -2,11 +2,9 @@
 title: Simple Trick to Debug Your CSS
 description: Learn how to debug CSS using this simple trick.
 slug: simple-css-debug-trick
-published: 2021-10-2
+published: '2021-10-2'
 category: css
 ---
-
-# Simple Trick to Debug Your CSS
 
 {% youtube id="5nrMpCWkncc" title="Debug Your CSS" %}
 

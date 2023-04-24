@@ -2,11 +2,9 @@
 title: Deploy A Full Stack SvelteKit App
 description: Learn how to deploy a full stack SvelteKit app with a database and authentication.
 slug: sveltekit-deployment
-published: 2023-3-24
+published: '2023-3-24'
 category: sveltekit
 ---
-
-# Deploy A Full Stack SvelteKit App
 
 {% youtube id="uAF4Yd-gddo" title="Deploy A Full Stack SvelteKit App" %}
 
@@ -15,6 +13,7 @@ category: sveltekit
 ## Previously
 
 This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+
 - [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
 - [SvelteKit Project Structure](https://joyofcode.xyz/sveltekit-project-structure)
 - [SvelteKit Routing](https://joyofcode.xyz/sveltekit-routing)
@@ -34,6 +33,7 @@ By the end of this post you're going to learn how to host a full stack SvelteKit
 If you're not interested in learning more about web hosting options and why I picked these solutions I'm not going to take it personal, so skip to [deploying your SvelteKit project](https://joyofcode.xyz/deploying-sveltekit/#deploying-a-sveltekit-project) but I promise it's worth your time.
 
 There are several types of affordable web hosting you can use that is great for a beginner or small business:
+
 - **Shared hosting** where multiple websites share the same server resources such as CPU, RAM, and disk space with not much customization (the hosting provider sets the limits on resource usage and what you can install and how you can configure the server)
 - **Virtual Private Server** (VPS) hosting is similar to shared hosting but spins up a virtual machine on the same hardware that can be dedicated to you or shared with others but is more customizable (you can do whatever you want since you have control over everything from the operating system you use to allocating resources as you see fit)
 - **Cloud hosting** is arguably the cheapest because you only pay for how much you use and it does the scaling for you because it works at a large scale and is very competitive
@@ -64,7 +64,7 @@ If you think about the last paragraph this answers the question people often ask
 
 You might be just starting your web development journey or don't have an income and the reason I picked serverless is because most of these providers have a generous free tier without any gotchas like requiring a credit card.
 
-The site you're on uses Vercel and I haven't paid anything so far and what's more awesome is if your project is open source and non-commercial [Vercel can sponsor your project](https://vercel.com/guides/can-vercel-sponsor-my-open-source-project). 
+The site you're on uses Vercel and I haven't paid anything so far and what's more awesome is if your project is open source and non-commercial [Vercel can sponsor your project](https://vercel.com/guides/can-vercel-sponsor-my-open-source-project).
 
 {% img src="full-stack.webp" alt="Full stack platforms" %}
 
@@ -91,6 +91,7 @@ If you want to have control over everything you can host your own **platform as 
 I have prepared a full stack [SvelteKit blog example](https://github.com/joysofcode/sveltekit-deploy) that uses Prisma for the database with PostgreSQL and authentication because real projects are more complicated and it's not much harder to host compared to a static blog.
 
 You're going to need to create these accounts:
+
 - [GitHub](https://github.com/) account
 - [Supabase](https://supabase.com/) account
 - [Vercel](https://vercel.com/) account
@@ -172,11 +173,11 @@ This is what [edge computing](https://en.wikipedia.org/wiki/Edge_computing) is t
 
 I'm not going to use the edge but I'm going to show you how to set [Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) HTTP headers.
 
-The reason why you want to use caching is because if you have a popular post each request means work for the server but if you use caching it can serve the post from the CDN which is faster. 
+The reason why you want to use caching is because if you have a popular post each request means work for the server but if you use caching it can serve the post from the CDN which is faster.
 
 Let's think about how we want to cache individual routes of our site:
 
--  The `/` route can be cached for an hour because it's not important but maybe a minute is more reasonable
+- The `/` route can be cached for an hour because it's not important but maybe a minute is more reasonable
 - The `/blog` route where you can search for posts can also be cached for an hour because it's not important
 - The `/blog/[slug]` route can be cached for a minute because it's important but you can also cache older posts longer
 - The `/dashboard` is the content management system and I always want fresh data, so we don't have to do anything here
@@ -186,10 +187,9 @@ Let's think about how we want to cache individual routes of our site:
 
 Caching sounds complicated but it's not and it makes you think about your content. This kind of experience would not be possible with a pure static site and server-side rendering let's you do more and is fast enough to not even be noticeable.
 
-The only thing you have to know is that we need to set `Cache-Control` headers with `max-age=0, s-maxage=60`.  The `max-age=0` directive says to never cache the content on disk and `s-maxage=60` let's a shared cache like a CDN know how long to cache something in seconds which is `60 seconds` here.
+The only thing you have to know is that we need to set `Cache-Control` headers with `max-age=0, s-maxage=60`. The `max-age=0` directive says to never cache the content on disk and `s-maxage=60` let's a shared cache like a CDN know how long to cache something in seconds which is `60 seconds` here.
 
 > 🐿️ If you're hosting a static site on Vercel or Netlify they set the cache control headers for you to `s-maxage=31536000` which is the maximum value of one year. If you need to bust the cache you have to redeploy.
-
 
 I promise that's everything! You learn it once and you're set for life because you're using the web platform that's going to work the same in a hundred years if AI doesn't replace us.
 

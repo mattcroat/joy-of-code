@@ -6,8 +6,6 @@ published: '2022-1-12'
 category: svelte
 ---
 
-# Make a Svelte Todo App
-
 {% youtube id="cQYLPhBmqG8" title="Make a Svelte Todo App" %}
 
 ## Table of Contents
@@ -212,82 +210,83 @@ export default defineConfig({
 <details>
 	<summary>src/styles/global.css</summary>
 
-  ```css:global.css showLineNumbers
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+```css:global.css showLineNumbers
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
-  *,
-  *::before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  :root {
-    --sans-serif: 'Inter', sans-serif;
+:root {
+  --sans-serif: 'Inter', sans-serif;
 
-    --color-bg: hsl(220, 20%, 14%);
-    --color-text: hsl(0, 0%, 2%);
-    --color-title: hsl(357, 49%, 48%);
-    --color-highlight: hsl(0, 33%, 64%);
-    --color-gray-28: hsl(0, 0%, 28%);
-    --color-gray-58: hsl(0, 0%, 58%);
-    --color-gray-90: hsl(0, 0%, 90%);
+  --color-bg: hsl(220, 20%, 14%);
+  --color-text: hsl(0, 0%, 2%);
+  --color-title: hsl(357, 49%, 48%);
+  --color-highlight: hsl(0, 33%, 64%);
+  --color-gray-28: hsl(0, 0%, 28%);
+  --color-gray-58: hsl(0, 0%, 58%);
+  --color-gray-90: hsl(0, 0%, 90%);
 
-    --font-24: 1.5rem;
-    --font-32: 2rem;
-    --font-80: 5rem;
+  --font-24: 1.5rem;
+  --font-32: 2rem;
+  --font-80: 5rem;
 
-    --spacing-4: 0.25rem;
-    --spacing-8: 0.5rem;
-    --spacing-16: 1rem;
+  --spacing-4: 0.25rem;
+  --spacing-8: 0.5rem;
+  --spacing-16: 1rem;
 
-    --shadow-1: hsl(0, 0%, 0%, 0.1);
+  --shadow-1: hsl(0, 0%, 0%, 0.1);
 
-    --radius-base: 4px;
-  }
+  --radius-base: 4px;
+}
 
-  html,
-  body {
-    height: 100%;
-  }
+html,
+body {
+  height: 100%;
+}
 
-  body {
-    display: grid;
-    place-content: center;
-    font-family: var(--sans-serif);
-    font-weight: 300;
-    line-height: 1.4;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-  }
+body {
+  display: grid;
+  place-content: center;
+  font-family: var(--sans-serif);
+  font-weight: 300;
+  line-height: 1.4;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
 
-  label,
-  input,
-  button {
-    font-family: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    color: inherit;
-  }
+label,
+input,
+button {
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
 
-  button {
-    background: none;
-    border: 0;
-    cursor: pointer;
-  }
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
 
-  .hidden {
-    visibility: hidden;
-  }
+.hidden {
+  visibility: hidden;
+}
 
-  :focus,
-  .toggle:focus + label,
-  .toggle-all:focus + label {
-    box-shadow: 0 0 2px 2px var(--color-highlight);
-    outline: 0;
-  }
-  ```
+:focus,
+.toggle:focus + label,
+.toggle-all:focus + label {
+  box-shadow: 0 0 2px 2px var(--color-highlight);
+  outline: 0;
+}
+```
+
 </details>
 
 You can include the styles inside `index.html` but you wouldn't benefit from HMR (hot module replacement) meaning you won't see updates instantly as you make changes so let's include the styles inside `App.svelte`.
@@ -363,203 +362,204 @@ First let's create a `Todos.svelte` file in `src/components` and then import it 
 <details>
   <summary>Todos.svelte</summary>
 
-  ```html:App.svelte showLineNumbers
-  <style>
-    /* Todos */
+```html:App.svelte showLineNumbers
+<style>
+  /* Todos */
 
-    .title {
-      font-size: var(--font-80);
-      font-weight: inherit;
-      text-align: center;
-      color: var(--color-title);
-    }
+  .title {
+    font-size: var(--font-80);
+    font-weight: inherit;
+    text-align: center;
+    color: var(--color-title);
+  }
 
-    .todos {
-      --width: 500px;
-      --todos-bg: hsl(0 0% 98%);
-      --todos-text: hsl(220 20% 14%);
+  .todos {
+    --width: 500px;
+    --todos-bg: hsl(0 0% 98%);
+    --todos-text: hsl(220 20% 14%);
 
-      width: var(--width);
-      color: var(--todos-text);
-      background-color: var(--todos-bg);
-      border-radius: var(--radius-base);
-      border: 1px solid var(--color-gray-90);
-      box-shadow: 0 0 4px var(--shadow-1);
-    }
+    width: var(--width);
+    color: var(--todos-text);
+    background-color: var(--todos-bg);
+    border-radius: var(--radius-base);
+    border: 1px solid var(--color-gray-90);
+    box-shadow: 0 0 4px var(--shadow-1);
+  }
 
-    .todo-list {
-      list-style: none;
-    }
+  .todo-list {
+    list-style: none;
+  }
 
-    .actions {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--spacing-8) var(--spacing-16);
-      font-size: 0.9rem;
-      border-top: 1px solid var(--color-gray-90);
-    }
+  .actions {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-8) var(--spacing-16);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--color-gray-90);
+  }
 
-    .actions:before {
-      content: '';
-      height: 40px;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.2), 0 8px 0 -3px hsl(0, 0%, 96%),
-        0 9px 1px -3px hsla(0, 0%, 0%, 0.2), 0 16px 0 -6px hsl(0, 0%, 96%),
-        0 17px 2px -6px hsla(0, 0%, 0%, 0.2);
-      z-index: -1;
-    }
+  .actions:before {
+    content: '';
+    height: 40px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.2), 0 8px 0 -3px hsl(0, 0%, 96%),
+      0 9px 1px -3px hsla(0, 0%, 0%, 0.2), 0 16px 0 -6px hsl(0, 0%, 96%),
+      0 17px 2px -6px hsla(0, 0%, 0%, 0.2);
+    z-index: -1;
+  }
 
-    /* Add todo */
+  /* Add todo */
 
-    .toggle-all {
-      width: 1px;
-      height: 1px;
-      position: absolute;
-      opacity: 0;
-    }
+  .toggle-all {
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    opacity: 0;
+  }
 
-    .toggle-all + label {
-      position: absolute;
-      font-size: 0;
-    }
+  .toggle-all + label {
+    position: absolute;
+    font-size: 0;
+  }
 
-    .toggle-all + label:before {
-      content: '❯';
-      display: block;
-      padding: var(--spacing-16);
-      font-size: var(--font-24);
-      color: var(--color-gray-58);
-      transform: rotate(90deg);
-    }
+  .toggle-all + label:before {
+    content: '❯';
+    display: block;
+    padding: var(--spacing-16);
+    font-size: var(--font-24);
+    color: var(--color-gray-58);
+    transform: rotate(90deg);
+  }
 
-    .toggle-all:checked + label:before {
-      color: var(--color-gray-28);
-    }
+  .toggle-all:checked + label:before {
+    color: var(--color-gray-28);
+  }
 
-    .new-todo {
-      width: 100%;
-      padding: var(--spacing-16);
-      padding-left: 60px;
-      font-size: var(--font-24);
-      border: none;
-      border-bottom: 1px solid var(--shadow-1);
-    }
+  .new-todo {
+    width: 100%;
+    padding: var(--spacing-16);
+    padding-left: 60px;
+    font-size: var(--font-24);
+    border: none;
+    border-bottom: 1px solid var(--shadow-1);
+  }
 
-    /* Todo */
+  /* Todo */
 
-    .todo {
-      font-size: var(--font-24);
-      font-weight: 400;
-      border-bottom: 1px solid #ededed;
-    }
+  .todo {
+    font-size: var(--font-24);
+    font-weight: 400;
+    border-bottom: 1px solid #ededed;
+  }
 
-    .todo:last-child {
-      border-bottom: none;
-    }
+  .todo:last-child {
+    border-bottom: none;
+  }
 
-    .todo-check,
-    .todo-text {
-      display: block;
-      padding: var(--spacing-16);
-      color: var(--color-gray-28);
-      transition: color 0.4s;
-    }
+  .todo-check,
+  .todo-text {
+    display: block;
+    padding: var(--spacing-16);
+    color: var(--color-gray-28);
+    transition: color 0.4s;
+  }
 
-    .todo-check {
-      border-radius: 100%;
-    }
+  .todo-check {
+    border-radius: 100%;
+  }
 
-    .completed {
-      color: var(--color-gray-58);
-      text-decoration: line-through;
-    }
+  .completed {
+    color: var(--color-gray-58);
+    text-decoration: line-through;
+  }
 
-    .todo-item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      padding: 0 var(--spacing-8);
-    }
+  .todo-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-8);
+  }
 
-    .editing .todo-item {
-      display: none;
-    }
+  .editing .todo-item {
+    display: none;
+  }
 
-    .edit {
-      width: 100%;
-      padding: var(--spacing-8);
-      font-size: var(--font-24);
-      border: 1px solid #999;
-      border-radius: var(--radius-base);
-      box-shadow: inset 0 -1px 5px 0 var(--shadow-1);
-    }
+  .edit {
+    width: 100%;
+    padding: var(--spacing-8);
+    font-size: var(--font-24);
+    border: 1px solid #999;
+    border-radius: var(--radius-base);
+    box-shadow: inset 0 -1px 5px 0 var(--shadow-1);
+  }
 
-    .toggle {
-      position: absolute;
-      top: 26px;
-      left: 13px;
-      transform: scale(2);
-      opacity: 0;
-    }
+  .toggle {
+    position: absolute;
+    top: 26px;
+    left: 13px;
+    transform: scale(2);
+    opacity: 0;
+  }
 
-    .toggle + label {
-      background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23949494%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');
-      background-repeat: no-repeat;
-      background-position: 84% 50%;
-    }
+  .toggle + label {
+    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23949494%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: 84% 50%;
+  }
 
-    .toggle:checked + label {
-      background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%2359A193%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20fill%3D%22%233EA390%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22%2F%3E%3C%2Fsvg%3E');
-    }
+  .toggle:checked + label {
+    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%2359A193%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20fill%3D%22%233EA390%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22%2F%3E%3C%2Fsvg%3E');
+  }
 
-    .remove {
-      display: none;
-      margin-left: auto;
-      font-size: var(--font-32);
-      color: var(--color-gray-58);
-      transition: color 0.2s ease-out;
-    }
+  .remove {
+    display: none;
+    margin-left: auto;
+    font-size: var(--font-32);
+    color: var(--color-gray-58);
+    transition: color 0.2s ease-out;
+  }
 
-    .remove:hover {
-      color: var(--color-highlight);
-    }
+  .remove:hover {
+    color: var(--color-highlight);
+  }
 
-    .remove:after {
-      content: '×';
-    }
+  .remove:after {
+    content: '×';
+  }
 
-    .todo:hover .remove {
-      display: block;
-    }
+  .todo:hover .remove {
+    display: block;
+  }
 
-    /* Filters */
+  /* Filters */
 
-    .filters {
-      display: flex;
-      gap: var(--spacing-4);
-    }
+  .filters {
+    display: flex;
+    gap: var(--spacing-4);
+  }
 
-    .filter {
-      text-transform: capitalize;
-      padding: var(--spacing-4) var(--spacing-8);
-      border: 1px solid transparent;
-      border-radius: var(--radius-base);
-    }
+  .filter {
+    text-transform: capitalize;
+    padding: var(--spacing-4) var(--spacing-8);
+    border: 1px solid transparent;
+    border-radius: var(--radius-base);
+  }
 
-    .filter:hover {
-      border: 1px solid var(--color-highlight);
-    }
+  .filter:hover {
+    border: 1px solid var(--color-highlight);
+  }
 
-    .selected {
-      border-color: var(--color-highlight);
-    }
-  </style>
-  ```
+  .selected {
+    border-color: var(--color-highlight);
+  }
+</style>
+```
+
 </details>
 
 🖌️ Update `App.svelte`.

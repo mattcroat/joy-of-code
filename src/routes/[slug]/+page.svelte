@@ -2,6 +2,7 @@
 	import { browser, dev } from '$app/environment'
 
 	import { updateViews } from '$lib/database'
+	import { formatDate } from '$lib/utils'
 	import * as config from '$lib/site/config'
 
 	import Card from './card.svelte'
@@ -44,6 +45,11 @@
 	<Overlay />
 
 	<article class="prose">
+		<hgroup>
+			<h1>{frontmatter.title}</h1>
+			<p>Published {formatDate(frontmatter.published)}</p>
+		</hgroup>
+
 		{@html content}
 	</article>
 
@@ -59,7 +65,7 @@
 		display: grid;
 		row-gap: var(--spacing-32);
 		max-width: var(--post-txt-length);
-		margin: var(--spacing-32) 0;
+		margin: var(--spacing-64) 0;
 		margin-inline: auto;
 	}
 </style>

@@ -2,11 +2,9 @@
 title: Use Future CSS In Svelte Today
 description: Learn how to use future CSS in Svelte today with PostCSS.
 slug: using-future-css-in-svelte
-published: 2022-9-2
+published: '2022-9-2'
 category: svelte
 ---
-
-# Use Future CSS In Svelte Today
 
 {% youtube id="eqwtoaP-0pk" title="Use Future CSS in Svelte" %}
 
@@ -34,7 +32,6 @@ In that case you can use PostCSS that describes itself as “A tool for transfor
 [PostCSS](https://postcss.org/) is to CSS what [Babel](https://babeljs.io/) is to JavaScript and it lets you use future CSS today by converting modern CSS to something most browsers can understand using polyfills.
 
 > 🐿️ A [polyfill](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill) is a piece of code used to provide functionality on older browsers that don't natively support it.
-> 
 
 To start using modern CSS today it's simple as adding the [postcss-preset-env](https://preset-env.cssdb.org/) plugin for PostCSS in your Svelte project and enabling the options you want.
 

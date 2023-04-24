@@ -2,11 +2,9 @@
 title: How To Deal With "Window Is Not Defined" In SvelteKit
 description: How to deal with the "window is not defined" error in SvelteKit.
 slug: sveltekit-window-is-not-defined
-published: 2022-12-14
+published: '2022-12-14'
 category: sveltekit
 ---
-
-# How To Deal With "Window Is Not Defined" In SvelteKit
 
 {% youtube id="l1AB5f0Xyd4" title="How To Solve Window Is Not Defined In SvelteKit" %}
 
@@ -54,7 +52,7 @@ You could also use [Svelte actions](https://svelte.dev/tutorial/actions) since t
 ```html:+page.svelte showLineNumbers
 <script>
   import { greet } from 'greet'
-</script>  
+</script>
 
 <div use:greet />
 ```
@@ -66,7 +64,7 @@ What do you do when the import already runs some code that causes trouble?
 ```ts:greet.ts showLineNumbers
 export function greet() {
   window.alert('Hello')
-}  
+}
 
 window.alert('💩')
 ```

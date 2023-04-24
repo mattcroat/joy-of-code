@@ -2,11 +2,9 @@
 title: How to Structure Your React Projects
 description: Learn how to keep your React projects organized.
 slug: react-project-structure
-published: 2021-6-12
+published: '2021-6-12'
 category: react
 ---
-
-# How to Structure Your React Projects
 
 ## Table of Contents
 

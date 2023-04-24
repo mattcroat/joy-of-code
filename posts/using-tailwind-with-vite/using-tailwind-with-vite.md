@@ -2,11 +2,9 @@
 title: Using Tailwind With Vite
 description: Learn how to set up Vite and Tailwind.
 slug: using-tailwind-with-vite
-published: 2021-10-3
+published: '2021-10-3'
 category: css
 ---
-
-# Using Tailwind With Vite
 
 ## Table of Contents
 

@@ -2,11 +2,9 @@
 title: Test Your Site In Every Browser
 description: Learn how to test your site in Chrome, Firefox and Safari even on Linux and Windows.
 slug: test-your-site-in-every-browser
-published: 2022-5-20
+published: '2022-5-20'
 category: general
 ---
-
-# Test Your Site In Every Browser
 
 {% youtube id="WWdZMLCuC4I" title="Test Your Site In Every Browser" %}
 

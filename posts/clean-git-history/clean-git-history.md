@@ -2,11 +2,9 @@
 title: Clean Git History Using Rebase
 description: How to have a clean Git history using rebase.
 slug: clean-git-history
-published: 2021-6-7
+published: '2021-6-7'
 category: git
 ---
-
-# Clean Git History Using Rebase
 
 ## Table of Contents
 

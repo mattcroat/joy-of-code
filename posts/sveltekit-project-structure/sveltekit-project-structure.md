@@ -2,11 +2,9 @@
 title: SvelteKit Project Structure Explained
 description: Understand how SvelteKit works by creating a SvelteKit project from scratch.
 slug: sveltekit-project-structure
-published: 2022-12-22
+published: '2022-12-22'
 category: sveltekit
 ---
-
-# SvelteKit Project Structure Explained
 
 {% youtube id="5VBdyfGhs7A" title="SvelteKit Project Structure Explained" %}
 
@@ -15,6 +13,7 @@ category: sveltekit
 ## Previously
 
 This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+
 - [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
 
 ## Introduction
@@ -98,7 +97,7 @@ const config = {
 export default config
 ```
 
-You can include a Svelte config if you want to use a preprocessor and adapter. 
+You can include a Svelte config if you want to use a preprocessor and adapter.
 
 ```js:svelte.config.js showLineNumbers
 import adapter from '@sveltejs/adapter-auto';
@@ -158,7 +157,7 @@ I'm going with TypeScript and selecting ESLint, Prettier, Playwright and Vitest 
 Welcome to SvelteKit!
 
 ✔ Where should we create your project?
-  (leave blank to use current directory) … 
+  (leave blank to use current directory) …
 ✔ Which Svelte app template? › Skeleton project
 ✔ Add type checking with TypeScript? › [Yes], using TypeScript syntax
 ✔ Add ESLint for code linting? … No / [Yes]
@@ -175,7 +174,7 @@ You can use [JSDoc](https://jsdoc.app/) with regular JavaScript or TypeScript fo
 
 [Playwright](https://playwright.dev/) is used for end-to-end testing. You can test how your user might use the site using a real browser and check for example if some content is showing or test your registration or checkout process.
 
-[Vitest](https://vitest.dev/) is used for unit testing. That means you're testing one unit of your code. For example you can use Playwright to test your site using a real browser and see if your content works but you would use Vite to test the input and output of the function responsible for sorting the content in some order. 
+[Vitest](https://vitest.dev/) is used for unit testing. That means you're testing one unit of your code. For example you can use Playwright to test your site using a real browser and see if your content works but you would use Vite to test the input and output of the function responsible for sorting the content in some order.
 
 After everything is done you're going to inherit this beautiful tree (you might have to run `npm i` and `npm run dev` to generate some files).
 

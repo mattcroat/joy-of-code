@@ -2,11 +2,9 @@
 title: Working With Forms In SvelteKit
 description: Learn how to work with forms in SvelteKit using form actions, progressive form enhancement and how to do validation.
 slug: working-with-forms-in-sveltekit
-published: 2023-1-20
+published: '2023-1-20'
 category: sveltekit
 ---
-
-# Working With Forms In SvelteKit
 
 {% youtube id="XNbCp7ZJi-8" title="Working With Forms In SvelteKit" %}
 
@@ -15,6 +13,7 @@ category: sveltekit
 ## Previously
 
 This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+
 - [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
 - [SvelteKit Project Structure](https://joyofcode.xyz/sveltekit-project-structure)
 - [SvelteKit Routing](https://joyofcode.xyz/sveltekit-routing)
@@ -348,11 +347,12 @@ Let's go back to `+page.svelte` and create `addTodo` and `removeTodo` functions 
 {/if}
 ```
 
-If you add or remove a to-do you can see the `fetch` request and the payload in the network tab — the request also returns a JSON response that has `success` and `errors` which is then used on the front-end to update the UI for the user. 
+If you add or remove a to-do you can see the `fetch` request and the payload in the network tab — the request also returns a JSON response that has `success` and `errors` which is then used on the front-end to update the UI for the user.
 
 This taught us a lot about about forms but...
 
 This is not a great user and developer experience because:
+
 - It only works with JavaScript
 - You had to invent your own wonky validation
 - Using `fetch` and `invalidate` is weird and the framework should do more for you
@@ -440,9 +440,9 @@ export const actions: Actions = {
   removeTodo: async ({ request }) => {
     const formData = await request.formData()
     const todoId = Number(formData.get('id'))
-    
+
     removeTodo(todoId)
-    
+
     return { success: true }
   },
   clearTodos: () => {
@@ -579,6 +579,7 @@ Remember the first example how we had to do everything by hand? SvelteKit does t
 It only takes one line of code if you count the import and everything works the same but instead of reloading the page it's going to prevent the default form behavior and use JavaScript — if you look at the network tab you should see the `fetch` request.
 
 When you submit the form the `use:enhance` action is going to:
+
 - Update the `form`, `$page.form` and `$page.status` property
 - Reset the `<form>` element and rerun the `load` function for the page by using `invalidateAll`
 - Use `goto` for a redirect response
@@ -612,6 +613,7 @@ You can customize the behavior of `use:enhance` by providing a submit function t
 ```
 
 The `input` contains:
+
 - `action` for the URL details
 - `cancel` to prevent the submission
 - `controller` is the `AbortController` you can use to cancel a request
@@ -619,8 +621,9 @@ The `input` contains:
 - `form` is the `<form>` element
 
 The `options` contains:
-- `action` for the URL details 
-- `form`  is the `<form>` element
+
+- `action` for the URL details
+- `form` is the `<form>` element
 - `result` which is an `ActionResult` object
 - `update` function that runs the regular logic, otherwise you would have to do it yourself
 
@@ -712,7 +715,7 @@ Using what we know I'm going to set `loading = true` before the form submits and
   <button aria-busy={loading} class:secondary={loading} type="submit">
     {#if !loading}+ Add todo{/if}
   </button>
-    
+
   <button	formaction="?/clearTodos" class="secondary" type="submit">
     Clear
   </button>
@@ -905,7 +908,7 @@ const { data, errors } = validate(formData)
 
 You might want to reproduce a part of the default `use:enhance` behavior in which case you can use `applyAction`.
 
-I mentioned how actions can be invoked from other pages and in this example I want to reuse the `/login` endpoint in `routes/+page.svelte` and I copied over everything from  `routes/login/+page.svelte`.
+I mentioned how actions can be invoked from other pages and in this example I want to reuse the `/login` endpoint in `routes/+page.svelte` and I copied over everything from `routes/login/+page.svelte`.
 
 If you submit the form it kinda works but you don't get the validation data back because `form` is never updated.
 
@@ -983,11 +986,13 @@ That won't work because `update` can't update `form` and `$form.page` from anywh
 If you submit the form `form` and `$page.form` is going to get updated.
 
 As I mentioned previously `result` is an `ActionResult` object but I haven't talk about its properties which are:
+
 - `data` returned from the action
 - `status` code
 - `type` which can be `succes`, `failure`, `redirect`, `error`
 
 Using `applyAction(result)` is going to do different things based on `result.type`:
+
 - `success` and `failure` is going to update `form`, `$page.form` and `$page.status` regardless where you're submitting from
 - `redirect` is going to invoke `goto(result.location)`
 - `error` is going to render the nearest `+error.svelte` page
@@ -1000,18 +1005,18 @@ const submit: SubmitFunction = ({ form, data, action, cancel }) => {
 
   return async ({ result }) => {
     // do something after the form submits
-    
+
     if (result.type === 'success') {
       // do something...
 
       // use the default behavior for this result type
       await applyAction(result)
     }
-    
+
     if (result.type === 'failure') { /* ... */ }
 
     if (result.type === 'redirect') { /* ... */ }
-    
+
     if (result.type === 'error') { /* ... */ }
   }
 }

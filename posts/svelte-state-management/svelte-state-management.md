@@ -2,11 +2,9 @@
 title: Svelte State Management Guide
 description: Learn how to manage state in Svelte and ways you can communicate between components.
 slug: svelte-state-management
-published: 2022-8-22
+published: '2022-8-22'
 category: svelte
 ---
-
-# Svelte State Management Guide
 
 {% youtube id="4dDjQiOVrOo" title="Svelte State Management Guide" %}
 
@@ -28,7 +26,7 @@ You can **co-locate** or **lift state up** to the parent component that's going 
 
 {% img src="props.webp" alt="Diagram showing how passing props from parent to child component works in Svelte" %}
 
-The next example uses a parent  `<Counter>` component to pass the `count`, `increment` and `decrement` props down to its children.
+The next example uses a parent `<Counter>` component to pass the `count`, `increment` and `decrement` props down to its children.
 
 The common state is lifted up to the parent component.
 
@@ -150,12 +148,12 @@ You can try out the example anywhere where you can run JavaScript like the conso
 ```js:example.js showLineNumbers
 const message = new CustomEvent('message', { detail: 'Hello 👋' })
 
-addEventListener('message', (event) => alert(event.detail)) 
+addEventListener('message', (event) => alert(event.detail))
 
 dispatchEvent(message)
 ```
 
-In Svelte you dispatch the custom event from a child component and listen for it in the parent component. 
+In Svelte you dispatch the custom event from a child component and listen for it in the parent component.
 
 {% img src="events.webp" alt="Diagram showing how component events work in Svelte" %}
 
@@ -488,7 +486,6 @@ Because we're inside a module context the value isn't going to be reactive but w
 ```
 
 Regardless from what processing plant you add or remove the banana it's going to update the produce.
-  
 
 ```html:index.svelte showLineNumbers
 import Production, { banana } from './production.svelte'
@@ -549,17 +546,17 @@ Using [SvelteKit](https://kit.svelte.dev/) you can get the parsed query string o
 
 ## Summary
 
-I want to avoid the famous “it depends” answer and that means I have to give you an opinion that doesn't represent every use case and it's more general to help you pick a solution. 
+I want to avoid the famous “it depends” answer and that means I have to give you an opinion that doesn't represent every use case and it's more general to help you pick a solution.
 
 {% img src="guide.webp" alt="Svelte state management guide" %}
 
 - Do you have deeply nested components that depends on some state?
-    - YES: Is the same state shared among your nested components?
-        - YES: Use Context API + Stores
-        - NO: Use Stores
-    - NO: Do you need to share state across component instances?
-        - YES: Use module context
-        - NO: Use props, bindings, component events
+  - YES: Is the same state shared among your nested components?
+    - YES: Use Context API + Stores
+    - NO: Use Stores
+  - NO: Do you need to share state across component instances?
+    - YES: Use module context
+    - NO: Use props, bindings, component events
 
 I spent a lot of thought and research writing this post but I can't decide what state management method to pick for you and I hope at least you have more confidence to make an informed decision.
 

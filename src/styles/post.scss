@@ -1,7 +1,10 @@
-.prose h1 {
-	margin: var(--spacing-64) 0;
-	color: var(--clr-primary);
+.prose hgroup {
+	margin: var(--spacing-128) 0;
 	text-align: center;
+}
+
+.prose h1 {
+	color: var(--clr-primary);
 }
 
 .prose h2 {
@@ -62,7 +65,7 @@
 }
 
 .prose ul li::before {
-	content: '👉️';
+	content: '🔥';
 	padding-right: var(--spacing-8);
 }
 
@@ -123,8 +126,4 @@
 
 .prose > * {
 	grid-column: content-start / content-end;
-}
-
-.prose h1 {
-	margin: var(--spacing-128) 0;
 }

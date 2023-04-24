@@ -2,11 +2,9 @@
 title: Svelte For Beginners
 description: Start building things with the Svelte JavaScript framework today.
 slug: svelte-for-beginners
-published: 2021-12-16
+published: '2021-12-16'
 category: svelte
 ---
-
-# Svelte For Beginners
 
 {% youtube id="BrkrOjknC_E" title="Svelte For Beginners" %}
 

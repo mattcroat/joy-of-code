@@ -2,11 +2,9 @@
 title: Best Practices When Using Fonts
 description: Everything I know about best practices when using fonts on the web.
 slug: using-fonts-on-the-web
-published: 2021-5-15
+published: '2021-5-15'
 category: general
 ---
-
-# Best Practices When Using Fonts
 
 ## Table of Contents
 

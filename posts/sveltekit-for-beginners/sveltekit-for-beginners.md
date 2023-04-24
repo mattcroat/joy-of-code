@@ -2,11 +2,9 @@
 title: Full Stack SvelteKit For Beginners
 description: SvelteKit is an opinionated full stack framework that ties the frontend and backend together delivering the best developer and user experience.
 slug: sveltekit-for-beginners
-published: 2022-2-28
+published: '2022-2-28'
 category: sveltekit
 ---
-
-# Full Stack SvelteKit For Beginners
 
 {% youtube id="bLBHecY4-ak" title="SvelteKit For Beginners" %}
 

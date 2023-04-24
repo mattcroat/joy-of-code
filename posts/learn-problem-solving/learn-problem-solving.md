@@ -2,11 +2,9 @@
 title: Learn Problem Solving
 description: Learn how to think like a developer and solve problems instead of relying on tutorials.
 slug: learn-problem-solving
-published: 2022-6-14
+published: '2022-6-14'
 category: general
 ---
-
-# Learn Problem Solving
 
 {% youtube id="kaHigkGFPv8" title="Learn Problem Solving" %}
 

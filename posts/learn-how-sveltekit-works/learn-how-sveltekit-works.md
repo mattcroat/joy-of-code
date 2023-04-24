@@ -2,11 +2,9 @@
 title: Learn How SvelteKit Works
 description: Find the answer where your SvelteKit code runs and the difference between SSR and CSR.
 slug: learn-how-sveltekit-works
-published: 2022-7-6
+published: '2022-7-6'
 category: sveltekit
 ---
-
-# Learn How SvelteKit Works As a Framework
 
 {% youtube id="VizuTy3uSNE" title="Learn How SvelteKit Works" %}
 

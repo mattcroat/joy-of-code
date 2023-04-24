@@ -2,11 +2,9 @@
 title: Learn SvelteKit Hooks Through Example
 description: Learn what are SvelteKit hooks and how they're used through practical examples.
 slug: sveltekit-hooks
-published: 2023-2-22
+published: '2023-2-22'
 category: sveltekit
 ---
-
-# Learn SvelteKit Hooks Through Example
 
 {% youtube id="Kzrz7GZ9pIg" title="Learn SvelteKit Hooks Through Example" %}
 
@@ -15,6 +13,7 @@ category: sveltekit
 ## Previously
 
 This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+
 - [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
 - [SvelteKit Project Structure](https://joyofcode.xyz/sveltekit-project-structure)
 - [SvelteKit Routing](https://joyofcode.xyz/sveltekit-routing)
@@ -31,6 +30,7 @@ Middleware is a name for a function that intercepts a **request** to the server 
 {% img src="hooks.webp" alt="Diagram describing how hooks work" %}
 
 Here are some of the things hooks are used for:
+
 - Authentication
 - Modifying the response
 - Error and performance logging
@@ -42,7 +42,7 @@ Instead of boring you with theory I want to show you some real world examples of
 
 ## Creating Routes
 
-The most used and powerful hook is the **handle** hook which runs each time the SvelteKit server receives a [request](https://developer.mozilla.org/en-US/docs/Web/API/Request)  and determines the [response](https://developer.mozilla.org/en-US/docs/Web/API/Response).
+The most used and powerful hook is the **handle** hook which runs each time the SvelteKit server receives a [request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and determines the [response](https://developer.mozilla.org/en-US/docs/Web/API/Response).
 
 I'm going to create a file inside `src/hooks.server.ts` and use the `handle` hook from SvelteKit.
 
@@ -127,7 +127,7 @@ In a previous part we learned that data sent from a layout `load` function gets 
 ```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
-</script>  
+</script>
 
 {#if $page.data.user}
   Welcome {$page.data.user}!
@@ -167,7 +167,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 The HTML is just a string, so you have to be careful you return proper HTML.
 
-##  Measuring Page Load Speed
+## Measuring Page Load Speed
 
 You can use hooks to measure how long a response takes and provide logs in development, so you're aware of potential problems.
 
@@ -273,7 +273,7 @@ export const handleFetch: HandleFetch = ({ request, fetch }) => {
   if (request.url.startsWith('http')) {
     const url = request.url.replace('http', 'https')
     request = new Request(url, request)
-    
+
     console.log(request.url) // https://joyofcode.xyz/ 👍
 
     // you can set the request headers
@@ -351,7 +351,7 @@ import type { Actions } from '@sveltejs/kit'
 export const actions: Actions = {
   default: async ({ locals }) => {
     console.log(locals.formData) // { username: 'Test', password: '1234', remember: true }
-    
+
     // ...
   },
 }

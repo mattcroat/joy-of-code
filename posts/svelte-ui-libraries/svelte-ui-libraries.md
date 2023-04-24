@@ -2,11 +2,9 @@
 title: List Of Svelte UI Libraries
 description: I tried every Svelte UI library, so you don't have to.
 slug: svelte-ui-libraries
-published: 2022-12-11
+published: '2022-12-11'
 category: svelte
 ---
-
-# List Of Svelte UI Libraries
 
 {% youtube id="O0mNU0maItY" title="List Of Svelte UI Libraries" %}
 
@@ -82,7 +80,7 @@ Here's an example of a modal.
 <script lang="ts">
   import Dialog, { Title, Content, Actions } from '@smui/dialog'
   import Button, { Label } from '@smui/button'
- 
+
   let isOpen = false
 </script>
 
@@ -98,12 +96,11 @@ Here's an example of a modal.
     </Button>
   </Actions>
 </Dialog>
- 
+
 <Button on:click={() => (isOpen = true)}>
   <Label>Open</Label>
 </Button>
 ```
-
 
 ## Carbon Components Svelte
 
@@ -226,7 +223,7 @@ The pros is that it looks great and has a lot of components but the con is that 
 ```html:+page.svelte showLineNumbers
 <script>
   import { Button, Modal } from 'flowbite-svelte'
-  
+
   let isOpen = false
 </script>
 
@@ -279,6 +276,7 @@ Here's an example of a modal.
 ## Honorable Mentions
 
 Here are some framework agnostic UI libraries that deserve a honorable mention:
+
 - [AgnosticUI](https://www.agnosticui.com/)
 - [Bootstrap](https://getbootstrap.com/)
 - [Bulma](https://bulma.io/)

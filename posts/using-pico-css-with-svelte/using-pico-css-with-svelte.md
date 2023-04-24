@@ -2,11 +2,9 @@
 title: The Best CSS Framework For Svelte
 description: How to set up and customize Pico.css with Svelte.
 slug: using-pico-css-with-svelte
-published: 2022-12-11
+published: '2022-12-11'
 category: svelte
 ---
-
-# The Best CSS Framework For Svelte
 
 {% youtube id="-n84EMKIXQM" title="The Best CSS Framework For Svelte" %}
 

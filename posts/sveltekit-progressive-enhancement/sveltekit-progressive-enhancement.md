@@ -2,11 +2,9 @@
 title: Progressive Form Enhancement With SvelteKit
 description: Progressively enhance your forms in SvelteKit for a better user experience.
 slug: sveltekit-progressive-enhancement
-published: 2022-11-28
+published: '2022-11-28'
 category: sveltekit
 ---
-
-# Progressive Form Enhancement With SvelteKit
 
 {% youtube id="6pv70d7i-3Q" title="Progressive Form Enhancement With SvelteKit" %}
 

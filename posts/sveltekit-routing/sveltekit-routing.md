@@ -2,20 +2,18 @@
 title: Everything About SvelteKit Routing
 description: Everything you need to know about SvelteKit routing including pages, layouts, dynamic routes, and advanced routing.
 slug: sveltekit-routing
-published: 2022-12-28
+published: '2022-12-28'
 category: sveltekit
 ---
-
-# Everything About SvelteKit Routing
 
 {% youtube id="7hXHbGj6iE0" title="SvelteKit Routing" %}
 
 ## Table of Contents
 
-
 ## Previously
 
 This is part of a [SvelteKit series](https://www.youtube.com/watch?v=obmiLi3bhkQ&list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) and while each part is meant to be self-contained here are the previous parts in case you want to catch up:
+
 - [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
 - [SvelteKit Project Structure](https://joyofcode.xyz/sveltekit-project-structure)
 
@@ -48,7 +46,7 @@ SvelteKit uses file-based routing where routes of your app are defined by the di
 
 {% img src="routing.webp" alt="SvelteKit routing" %}
 
-The routes are defined inside a `src/routes` folder. Each directory inside the `routes` folder can have or more route files using the `+` prefix. 
+The routes are defined inside a `src/routes` folder. Each directory inside the `routes` folder can have or more route files using the `+` prefix.
 
 To define a page in SvelteKit you use a `+page.svelte` file which becomes a route that maps to a URL.
 
@@ -144,7 +142,7 @@ If you navigate between the pages you should see the output in your console. You
 
 Notice how the only thing that loads when navigating between the pages is the data for the page because it's using CSR (client-side rendering) but if you refresh the page it's going to SSR (server-side render) the page and load the client-side router for a SPA (single page application) experience.
 
-The data preloading is thanks to the  `data-sveltekit-preload-data="hover"` attribute on `<body>` in `src/app.html` which means when your mouse hovers over a link it's going to start preloading the data for the page which you can set for the entire app or individual links.
+The data preloading is thanks to the `data-sveltekit-preload-data="hover"` attribute on `<body>` in `src/app.html` which means when your mouse hovers over a link it's going to start preloading the data for the page which you can set for the entire app or individual links.
 
 ## Layout
 
@@ -262,7 +260,6 @@ I can create another `+layout.svelte` file inside `src/routes/posts/+layout.svel
 </style>
 ```
 
-
 {% img src="slug.webp" alt="Slug route" %}
 
 You can create child routes for `posts` like `/posts/create` or `/posts/edit` and it would inherit the `src/routes/posts/+layout.svelte` layout.
@@ -338,7 +335,7 @@ For example `src/routes/posts/[slug]/+page.svelte` creates a route that matches 
 
 I'm using the `page` store from SvelteKit to output the page params to see the slug for each page.
 
-Right now if you navigate to any post the content is going to be the same but later when we get to loading data I'm going to show you how to use the dynamic parameter to show a post. 
+Right now if you navigate to any post the content is going to be the same but later when we get to loading data I'm going to show you how to use the dynamic parameter to show a post.
 
 ## Multiple Route Parameters
 
@@ -374,7 +371,7 @@ Note that this a simplified example because we haven't learned about some things
 
 You might receive an unknown number of path segments in case which you can use a `[...rest]` parameter but be careful you do checks in your code because it could be anything.
 
-Let's take a contrived example where I have an image API that takes a path to an image and dimensions you want such as  `media/[...file]/[width]/[height]`.
+Let's take a contrived example where I have an image API that takes a path to an image and dimensions you want such as `media/[...file]/[width]/[height]`.
 
 ```html:src/routes/media/[...file]/[width]/[height] showLineNumbers
 <script lang="ts">
@@ -404,7 +401,7 @@ If you go to the post route `/posts/[slug]` right now it matches whatever but yo
 
 You can do that using matching parameters by creating a `src/params` directory and create a new file that exports a `match` function.
 
-> 🐿️ If you have trouble with regular expressions don't fret because [ChatGPT](https://chat.openai.com/) makes it easy by giving it a prompt like "Can you write a `match` function in JavaScript that just checks if  `param` is a slug?".
+> 🐿️ If you have trouble with regular expressions don't fret because [ChatGPT](https://chat.openai.com/) makes it easy by giving it a prompt like "Can you write a `match` function in JavaScript that just checks if `param` is a slug?".
 
 ```ts:src/params/slug.ts showLineNumbers
 import type { ParamMatcher } from '@sveltejs/kit'

@@ -2,11 +2,9 @@
 title: Make A Typing Game With Svelte
 description: Learn how to make a typing game with Svelte.
 slug: svelte-typing-game
-published: 2022-10-21
+published: '2022-10-21'
 category: svelte
 ---
-
-# Svelte Typing Game
 
 {% youtube id="kMz_Ba_OF2w" title="Svelte Typing Game" %}
 
@@ -481,7 +479,6 @@ If `wordY > wordsY` we can use the handy [`scrollIntoView`](https://developer.mo
 ```
 
 This is a great achievement for someone mathematically challenged as I am. 🤭
-
 
 ## Adding The Caret
 

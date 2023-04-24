@@ -1,12 +1,10 @@
 ---
-title: Static Pages Without JavaScript
+title: Static Pages Without JavaScript Using Next.js
 description: Remove client-side JavaScript in Next.js for production on a per-page basis.
 slug: static-pages-without-javascript
-published: 2021-9-4
+published: '2021-9-4'
 category: next
 ---
-
-# Static Pages Without JavaScript Inside Next.js
 
 [Next.js](https://nextjs.org/) isn't a pure **HTML static site generator** since **JavaScript** is required for many interactive parts of the site.
 

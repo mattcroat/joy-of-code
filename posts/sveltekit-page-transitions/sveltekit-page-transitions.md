@@ -2,13 +2,13 @@
 title: SvelteKit Page Transitions
 description: Learn how to do page transitions in SvelteKit.
 slug: sveltekit-page-transitions
-published: 2023-4-7
+published: '2023-4-7'
 category: sveltekit
 ---
 
-# SvelteKit Page Transitions
-
 {% youtube id="gkw1wFIXM_8" title="SvelteKit Page Transitions" %}
+
+## Table of Contents
 
 ## SvelteKit Transitions
 

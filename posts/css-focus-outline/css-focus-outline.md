@@ -2,11 +2,9 @@
 title: How to Style CSS Focus Outline
 description: Learn the importance of CSS focus outline for accessibility and how to style it.
 slug: css-focus-outline
-published: 2021-3-28
+published: '2021-3-28'
 category: css
 ---
-
-# How to Style CSS Focus Outline
 
 ## Table of Contents
 
