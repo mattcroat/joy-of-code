@@ -54,15 +54,15 @@ html[data-theme='🌛 Night'] {
 	/* Post */
 	--post-overlay-bg: radial-gradient(hsl(173 100% 4% / 80%), var(--clr-bg));
 	--post-blockquote-txt: hsl(173 100% 94%);
-	--post-blockquote-bg: hsl(173 60% 4%);
+	--post-blockquote-bg: hsl(173 60% 8%);
 	--post-blockquote-border: hsl(173 10% 10%);
 
-	--clr-code-bg: linear-gradient(hsl(173 60% 6%), hsl(173 60% 8%));
+	--clr-code-bg: linear-gradient(hsl(173 60% 12%), hsl(173 60% 14%));
 	--clr-code-title: hsl(173 100% 94%);
-	--clr-code-title-bg: hsl(173 60% 6%);
+	--clr-code-title-bg: hsl(173 60% 12%);
 	--clr-code-border: hsl(173 10% 10%);
-	--clr-code-line-number: hsl(173 20% 20%);
-	--clr-code-line-highlight: hsl(173 40% 8%);
+	--clr-code-line-number: hsl(173 20% 40%);
+	--clr-code-line-highlight: hsl(173 40% 20%);
 	--clr-code-inline-txt: hsl(173 100% 94%);
 	--clr-code-inline-bg: hsl(173 60% 4%);
 
@@ -125,7 +125,7 @@ html[data-theme='☀️ Daylight'] {
 	--clr-code-title-bg: hsl(0 0% 94%);
 	--clr-code-border: hsl(0 0% 84%);
 	--clr-code-line-number: hsl(0 0% 60%);
-	--clr-code-line-highlight: hsl(0 0% 94%);
+	--clr-code-line-highlight: hsl(0 0% 90%);
 	--clr-code-inline-txt: hsl(0 0% 98%);
 	--clr-code-inline-bg: hsl(0 0% 20%);
 
@@ -200,7 +200,7 @@ html[data-theme='🐺 Night Howl'] {
 	--clr-code-title-bg: hsl(210 47% 14%);
 	--clr-code-border: hsl(210 40% 20%);
 	--clr-code-line-number: hsl(210 40% 40%);
-	--clr-code-line-highlight: hsl(210 40% 16%);
+	--clr-code-line-highlight: hsl(210 40% 20%);
 	--clr-code-inline-txt: hsl(210 47% 98%);
 	--clr-code-inline-bg: hsl(210 47% 10%);
 
@@ -267,7 +267,7 @@ html[data-theme='🧠 Night Mind'] {
 	/* Post */
 	--post-overlay-bg: radial-gradient(hsl(265 28% 20% / 60%), var(--clr-bg));
 	--post-blockquote-txt: hsl(265 28% 90%);
-	--post-blockquote-bg: hsl(265 28% 10%);
+	--post-blockquote-bg: hsl(265 28% 14%);
 	--post-blockquote-border: hsl(265 28% 18%);
 
 	--clr-code-bg: linear-gradient(hsl(265 28% 8%), hsl(265 28% 10%));
@@ -275,7 +275,7 @@ html[data-theme='🧠 Night Mind'] {
 	--clr-code-title-bg: hsl(265 28% 8%);
 	--clr-code-border: hsl(265 28% 18%);
 	--clr-code-line-number: hsl(265 20% 34%);
-	--clr-code-line-highlight: hsl(265 28% 14%);
+	--clr-code-line-highlight: hsl(265 28% 18%);
 	--clr-code-inline-txt: hsl(265 28% 98%);
 	--clr-code-inline-bg: hsl(265 28% 10%);
 

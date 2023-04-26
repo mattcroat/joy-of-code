@@ -13,9 +13,16 @@
 	color: var(--clr-primary);
 }
 
-.prose p > a {
+.prose #table-of-contents + ul a {
+	text-decoration: none;
+	font-weight: inherit;
+}
+
+.prose p > a,
+.prose li > a {
 	text-decoration: underline;
 	text-underline-offset: 4px;
+	word-break: break-all;
 }
 
 .prose p,
@@ -58,10 +65,6 @@
 	row-gap: var(--spacing-8);
 	list-style-type: none;
 	list-style-position: inside;
-}
-
-.prose li a {
-	font-weight: inherit;
 }
 
 .prose ul li::before {
