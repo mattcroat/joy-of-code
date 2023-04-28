@@ -62,11 +62,6 @@ pnpm run dev
 
 For styling I'm using [Open Props](https://open-props.style/) which provides design tokens as CSS variables — it's like Tailwind CSS but instead of utility classes you get CSS variables.
 
-- wow such a [great list of things](google.com)
-- another one
-- wow
-- ye
-
 I also want beautiful and consistent icons and [Lucide](https://lucide.dev/) is my favorite choice.
 
 For the fonts I'm going to use **Manrope** as the sans serif font for the entire site and **JetBrains Mono** as the monospace font for code blocks.
