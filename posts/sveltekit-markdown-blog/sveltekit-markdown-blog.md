@@ -1,17 +1,20 @@
 ---
 title: Build a SvelteKit Markdown blog
-description: Learn how to build and extend a blazingly fast SvelteKit Markdown blog for poets.
+description: Learn how to build a blazingly fast and extendable SvelteKit Markdown blog for poets.
 slug: sveltekit-markdown-blog
 published: '2023-04-28'
 category: sveltekit
-draft: true
 ---
+
+{% youtube id="RhScu3uqGd0" title="SvelteKit Markdown blog" %}
 
 ## Table of Contents
 
 ## Project Setup
 
 You're going to make a blazingly fast SvelteKit Markdown blog you can use for writing or as your portfolio and you're going to learn how to extend it using plugins and deploy it at no cost at the end.
+
+{% embed src="https://stackblitz.com/github/joysofcode/sveltekit-markdown-blog?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=SvelteKit Markdown blog" title="SvelteKit Markdown blog" %}
 
 > 🔥 If you want to learn SvelteKit you can watch [The Complete SvelteKit Course For Building Modern Web Apps](https://www.youtube.com/watch?v=MoGkX4RvZ38) on YouTube.
 
@@ -523,7 +526,7 @@ Awesome! You created an API endpoint for posts you can reuse across your app (yo
 
 Now you can use the posts endpoint you just created to server-side render the posts for the page.
 
-```ts:src/routes/+page.ts.ts showLineNumbers
+```ts:src/routes/+page.ts showLineNumbers
 import type { Post } from '$lib/types'
 
 export async function load({ fetch }) {
