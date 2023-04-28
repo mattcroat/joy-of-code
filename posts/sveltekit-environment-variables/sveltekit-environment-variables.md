@@ -39,9 +39,10 @@ Another great benefit of SvelteKit managing everything for you is that it won't 
 
 That being said these four options might look confusing but are easy to understand once you understand their purpose.
 
-## Static For Variables That Don't Change
+## Static For Variables During The Build Process
 
-**This is what you want most of the time.**
+**This is what you want most of the time, because it can be better optimized by Vite**
+You can import environment variables that are present during the build of your app with the `$env/static` imports.
 
 If you have an `.env` file or store your environment variables somewhere else the next steps are the same.
 
@@ -75,9 +76,9 @@ export const load: PageLoad = () => {
 }
 ```
 
-## Dynamic For Variables That Change
+## Dynamic For Variables During Runtime
 
-Sometimes you have environment variables that change and you have to send them from the server to the client. **Use them only when you need to.**
+Sometimes you have environment variables that change or you can not set them during the build. With the `$env/dynamic` imports, you can access environment variables from the platform that your app is running on. **Use them only when you need to.**
 
 Use `$env/dynamic/private` to get access to environment variables equivalent to `process.env`.
 
@@ -101,20 +102,30 @@ export const load: PageLoad = () => {
 }
 ```
 
+## Secure By Default
+
+Note that you can only import environment variables from `$env/.../public` into client-side files. If you would try to import environment variables from `$env/.../private` somewhere unsafe, SvelteKit will throw an error. This forces you to you to explicitly make environment variables public with the `PUBLIC_` prefix. All other environment variable will not be accessible from the client by default.
+
 ## Keep Your Own Secrets
 
-You can create a server-only module by adding `.server` to a filename or placing the file inside `$lib/server` to store any other secrets.
+You can create a server-only module by adding `.server` to a filename or placing the file inside `$lib/server` to handle secrets from environment variables.
 
-```ts:lib/server/secrets.ts showLineNumbers
-export const secret = '🍜'
+Files that are in `$lib/server` can only be imported into other files that are also in `$lib/server` or that are `.server` files. This is a security feature that prevents you from accidentally importing something that handles secrets into client-side code. `$lib/server` and `.server` files run only on the server and are never sent to the client.
+
+
+```ts:lib/server/data.ts showLineNumbers
+import { env } from '$env/dynamic/private'  // Only works because we're in $lib/server
+
+export function getData() {
+  return fetchAPIWithSecret(env.SECRET_API_KEY)
+}
 ```
 
 ```ts:+page.server.ts showLineNumbers
-import { secret } from '$lib/server/secrets'
-import type { PageServerLoad } from './$types'
+import { getData } from '$lib/server/data'  // Only works because we're in a .server file
 
-export const load: PageServerLoad = () => {
-  console.log(secret) // 🍜
+export const load = () => {
+  console.log(getData()) // 🍜
 }
 ```
 
