@@ -12,9 +12,11 @@ category: sveltekit
 
 ## Project Setup
 
-You're going to make a blazingly fast SvelteKit Markdown blog you can use for writing or as your portfolio and you're going to learn how to extend it using plugins and deploy it at no cost at the end.
+You're going to make a blazingly fast and extendable SvelteKit Markdown blog you can be proud of and deploy it to Vercel at no cost.
 
 {% embed src="https://stackblitz.com/github/joysofcode/sveltekit-markdown-blog?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=SvelteKit Markdown blog" title="SvelteKit Markdown blog" %}
+
+You can find the finished project [on GitHub](https://github.com/joysofcode/sveltekit-markdown-blog).
 
 > 🔥 If you want to learn SvelteKit you can watch [The Complete SvelteKit Course For Building Modern Web Apps](https://www.youtube.com/watch?v=MoGkX4RvZ38) on YouTube.
 
@@ -60,6 +62,11 @@ pnpm run dev
 
 For styling I'm using [Open Props](https://open-props.style/) which provides design tokens as CSS variables — it's like Tailwind CSS but instead of utility classes you get CSS variables.
 
+- wow such a [great list of things](google.com)
+- another one
+- wow
+- ye
+
 I also want beautiful and consistent icons and [Lucide](https://lucide.dev/) is my favorite choice.
 
 For the fonts I'm going to use **Manrope** as the sans serif font for the entire site and **JetBrains Mono** as the monospace font for code blocks.
@@ -92,7 +99,7 @@ import { dev } from '$app/environment'
 
 export const title = 'Shakespeare'
 export const description = 'SvelteKit blog for poets'
-export const url = dev ? 'http://localhost:5173/' : 'https://shakespeare.pages.dev'
+export const url = dev ? 'http://localhost:5173/' : 'https://joyofcode.xyz/'
 ```
 
 > 🐿️ If SvelteKit doesn't detect the `$lib` alias after you added it restart the development server.
@@ -115,8 +122,8 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
   <!-- Header -->
 	<Header />
 
-  <!-- Everything else -->
 	<main>
+		<!-- Black hole for other content -->
 		<slot />
 	</main>
 
@@ -170,7 +177,7 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 		</li>
 	</ul>
 
-  <!-- Theme toggle -->
+  <!-- Theme -->
   <button>Toggle</button>
 </nav>
 
@@ -362,7 +369,7 @@ li {
 }
 ```
 
-{% img src="sveltekit-blog.webp" alt="Start of the SvelteKit blog" %}
+{% img src="setup.webp" alt="Start of the SvelteKit blog" %}
 
 > 💪 As an exercise try adding the `/about` and `/contact` routes yourself since they're mostly used as placeholders.
 
@@ -407,7 +414,9 @@ export default config
 
 Svelte by default handles `.svelte` files but adding `.md` to `extensions` inside `config` lets you treat `+page.md` as a page alongside `+page.svelte`.
 
-Svelte is able to show `+page.md` as a page but **you need mdsvex to preprocess Markdown**. You have to specify the extension inside the `extensions` array for `mdsvexOptions` which you name name whatever you want like `.md`, `.svx` or `.banana`.
+Svelte is able to show `+page.md` as a page but **you need mdsvex to preprocess Markdown**.
+
+You have to specify the extension inside the `extensions` array for `mdsvexOptions` which you name name whatever you want like `.md`, `.svx` or `.banana`.
 
 Instead of using `+page.md` files you can import a Markdown post as a module and render it as a regular Svelte component with [<svelte:component>](https://svelte.dev/tutorial/svelte-component) which is what I'm going to do later.
 
@@ -457,7 +466,7 @@ Media inside the **static** folder is served from `/`.
 
 You could write the logic to get the posts data for each page in their respective `+page.ts` or `+page.server.ts` file but you would end up duplicating the logic.
 
-I'm going to create a `routes/api/posts/+server.ts` endpoint instead where I'm going to write the logic once and use it anywhere inside the app.
+I'm going to create a `routes/api/posts/+server.ts` endpoint instead where I'm going to write the logic once I can use anywhere in the app.
 
 ```ts:src/routes/api/posts/+server.ts showLineNumbers
 import { json } from '@sveltejs/kit'
@@ -493,11 +502,11 @@ export async function GET() {
 ```
 
 - `import.meta.glob` is a useful Vite feature to get all the posts using a glob (`eager` reads the contents of the file avoiding `await paths[path]()`)
-- next I loop over the `paths` and get the slug `post.md` but replace `.md` since we only want the slug
+- I loop over the `paths` and get the slug `post.md` but replace `.md` since we only want the slug
 - I'm checking if `file` has a `metadata` property inside of it and if the `slug` exists to be safe and then I'm going to get the `metadata` or **frontmatter** from the post
 - I'm creating a `post` that includes `metadata` and the `slug`
 - I only want to add the post if `published` is set to `true`
-- Sort `posts` by date and return them
+- sort `posts` by date and return them
 
 If you're using TypeScript here are the types.
 
@@ -518,7 +527,7 @@ I often see developers split everything into separate files but I prefer to keep
 
 {% img src="endpoint.webp" alt="API endpoint for posts" %}
 
-> 🐿️ I'm using the [JSON Viewer](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh?hl=en-US) extension in Chrome for the highlighting.
+> 🐿️ You can use the [JSON Viewer](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh?hl=en-US) Chrome extension for the highlighting.
 
 Awesome! You created an API endpoint for posts you can reuse across your app (you can even make it public for others to consume). 🔥
 
@@ -633,7 +642,7 @@ export async function load({ params }) {
 }
 ```
 
-Because the Markdown file is imported and processed by mdsvex you can pass `data.content` as a Svelte component to `<svelte:component this={data.content} />`.
+Because the Markdown file is imported as a module and processed by mdsvex you can pass `data.content` as a Svelte component to `<svelte:component this={data.content} />`.
 
 ```html:src/routes/[slug]/+page.svelte showLineNumbers
 <script lang="ts">
@@ -737,9 +746,9 @@ Everything looks great!
 
 ## Syntax Highlighting
 
-mdsvex uses [Prism](https://prismjs.com/) by default for syntax highlighting and you can have a look at [Prism themes](https://github.com/PrismJS/prism-themes) you can include in your styles.
+mdsvex uses [Prism](https://prismjs.com/) by default for syntax highlighting and you can have a look at [Prism themes](https://github.com/PrismJS/prism-themes) which you can include in your styles.
 
-You can do that and be done but I want to use a modern syntax highlighter like [Shiki](https://github.com/shikijs/shiki) that uses the same highlighter as VS Code which means you can use real themes.
+You can use a Prism theme and be done but I want to use a modern syntax highlighter like [Shiki](https://github.com/shikijs/shiki) that uses the same highlighter as VS Code which means you can use real themes.
 
 To use Shiki I'm going to create a custom highlighter which is only going to be a couple of lines of code.
 
@@ -774,11 +783,11 @@ const mdsvexOptions = {
 - first I create the highlighter using `shiki.getHighlighter` and pass one of the [VS Code themes](https://github.com/shikijs/shiki/blob/main/docs/themes.md) you want (you can also give it a path to your theme)
 - you have to use `escapeSvelte` to escape some characters like `{` that are going to cause a problem in Svelte
 - Shiki is going to generate HTML that looks like your code in VS Code using the `code` and `lang` you passed
-- because we need to return `` {@html `html`} `` it's important to escape backticks to avoid issues
+- I want to insert `{@html html}` in the Svelte component to output the code block but we need to escape the backticks with `\`
 
-I would love to take credit but I figured everything out by [reading this response](https://github.com/pngwn/MDsveX/issues/212#issuecomment-937548885) inside a GitHub issue.
+I would love to take credit as a genius but I figured everything out by [reading this response](https://github.com/pngwn/MDsveX/issues/212#issuecomment-937548885) inside an mdsvex GitHub issue.
 
-You can do a lot more with Shiki but if you want line numbers and highligthing you're going to have to [look through the Shiki issues on GitHub](https://github.com/shikijs/shiki/issues).
+You can do a lot more with Shiki by reading their docs but if you want line numbers and highligthing you're going to have to [look through the Shiki issues on GitHub](https://github.com/shikijs/shiki/issues).
 
 ## Using Components Inside Markdown
 
@@ -809,9 +818,9 @@ The counter is rendered inside Markdown.
 <Counter />
 ```
 
-Another great feature is being able to replace elements with [custom components](https://mdsvex.pngwn.io/docs#custom-components).
+Another great mdsvex feature is being able to replace elements with [custom components](https://mdsvex.pngwn.io/docs#custom-components).
 
-One example where this is useful is the `<img>` or `<iframe>` element where you might want set `loading="lazy"` to only load it when it's in view but you can't set attributes on an image like `![Text](image.webp)` inside Markdown.
+One example where this is useful is for the `<img>` or `<iframe>` element where you might want set `loading="lazy"` to only load it when it's in view but you can't set attributes on an image like `![Text](image.webp)` inside Markdown.
 
 First you need to create a default [mdsvex layout](https://mdsvex.pngwn.io/docs#layout) that's going to wrap the Markdown files and you can name it anything but I'm going to name it `mdsvex.svelte` to avoid confusion with `+layout.svelte`.
 
@@ -847,7 +856,7 @@ The custom component receives the attributes of the element you want to replace 
 Inside the layout you have to import and export the custom component **with the same name** as the element you want to replace.
 
 ```html:src/mdsvex.svelte showLineNumbers
-<script context="module" lang="ts">
+<script lang="ts" context="module">
 	import { img } from '$lib/components/custom'
 	export { img }
 </script>
@@ -855,19 +864,19 @@ Inside the layout you have to import and export the custom component **with the 
 <slot />
 ```
 
-Your images should be placed inside the `static` folder at the root of your project.
+Images and other media should be placed inside the `static` folder at the root of your project.
 
 You can use images inside Markdown with `![Text](image.webp)` and you should see that it was replaced with the custom component.
 
-mdsvex also has useful configuration options like **smartypants** that replaces **"Fake quotes"** with real typographic punctuation **“Real quotes”**. You can [explore more of the options](https://mdsvex.pngwn.io/docs#options).
+You can [explore more of the options](https://mdsvex.pngwn.io/docs#options) mdsvex offers like **smartypants** that replaces quotes with **“real typographic punctuation”**.
 
 ## Using Markdown Plugins
 
-There's an entire world of [abstract syntax trees](https://www.wikiwand.com/en/Abstract_syntax_tree) (ASTs) which is what something like HTML or Markdown get turned into to be easily manipulated instead of regular expressions.
+There's an entire world of [abstract syntax trees](https://www.wikiwand.com/en/Abstract_syntax_tree) (ASTs) which is what HTML or Markdown get turned into to be easily manipulated instead of using regular expressions.
 
 For **transforming HTML** with plugins you can use [rehype](https://github.com/rehypejs/rehype) and for **transforming Markdown** with plugins you use [remark](https://github.com/remarkjs/remark).
 
-I'm going to refer to them as Markdown plugins even if they're general plugins for transforming HTML and Markdown.
+I'm going to refer to them as **Markdown plugins** even if they're general plugins for transforming HTML and Markdown.
 
 mdsvex first parses the Markdown into a Markdown AST (MDAST) where **remark** plugins run and then it converts it into a HTML AST (HAST) where **rehype** plugins run.
 
@@ -879,7 +888,7 @@ You can find these plugins on [npm](https://www.npmjs.com/) and in the [reposito
 
 I'm going to show you a couple of plugins, so you get an idea how simple it is to extend your Markdown blog:
 
-- one of the things that bothers me is how images are wrapped in a `<p>` tag in Markdown and even by using a custom component we didn't get rid of it but we can use the `remark-unwrap-images` plugin for that
+- I'm going to use `remark-unwrap-images` to remove `<p>` tags around images because they're annoying for styling
 - I want to add slugs to headings like `<h2 id="section">` to make it linkable as `example.com/post#section` using `rehype-slug`
 - I want to generate a table of contents based on the headings using `remark-toc`
 
@@ -915,7 +924,9 @@ Earlier we set ourselves up for success by using CSS variables which respects th
 
 To make a theme toggle we need to write some JavaScript that's going to check when the page loads if the user has a theme set in [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) and set the attribute on `<html>` based on their preference and if not default to using the dark theme.
 
-I'm going to write the code that checks for the theme in `app.html` because it's going to load first and prevent issues like flashing which happens because when you start loading the page it doesn't know what your preference is until JavaScript is loaded and goes to `localStorage` to check if you set a theme.
+I'm going to write the code that checks for the theme in `app.html` because it's going to load first and prevent issues like flashing.
+
+Flashing happens when JavaScript is not loaded on the page and because of it when your component mounts it only then goes to `localStorage` to check if you set a theme.
 
 ```html:src/app.html {5-11} showLineNumbers
 <!DOCTYPE html>
@@ -1084,7 +1095,9 @@ The site is a smooth operator! 🎷
 
 ## RSS Feed
 
-A lot of people prefer to get notified about updates in their RSS reader. Creating an RSS feed in SvelteKit is simple as creating an API endpoint that returns XML.
+A lot of people prefer to get notified about updates in their RSS reader.
+
+Creating an RSS feed in SvelteKit is simple as creating an API endpoint that returns XML.
 
 ```ts:src/routes/rss.xml/+server.ts showLineNumbers
 import * as config from '$lib/config'
