@@ -34,6 +34,7 @@
 	color: var(--clr-code-inline-txt);
 	background-color: var(--clr-code-inline-bg);
 	border-radius: var(--rounded-4);
+	word-break: break-all;
 }
 
 .prose kbd,
