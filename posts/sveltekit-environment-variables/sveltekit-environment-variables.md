@@ -41,8 +41,7 @@ That being said these four options might look confusing but are easy to understa
 
 ## Static For Variables During The Build Process
 
-**This is what you want most of the time, because it can be better optimized by Vite**
-You can import environment variables that are present during the build of your app with the `$env/static` imports.
+If you're not sure which one to pick you probably want to use `$env/static` variables which are imported during build time.
 
 If you have an `.env` file or store your environment variables somewhere else the next steps are the same.
 
@@ -58,10 +57,9 @@ Use `$env/static/private` if you want to access environment variables loaded fro
 
 ```ts:+page.server.ts showLineNumbers
 import { SECRET_API_KEY } from '$env/static/private'
-import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = () => {
-  console.log(SECRET_API_KEY) // secret
+export async function load() {
+  console.log(SECRET_API_KEY) // secret 🤫
 }
 ```
 
@@ -69,25 +67,25 @@ Use `$env/static/public` if you want to access environment variables prefixed wi
 
 ```ts:+page.ts showLineNumbers
 import { PUBLIC_API_KEY } from '$env/static/public'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = () => {
-  console.log(PUBLIC_API_KEY) // public
+export async function load() {
+  console.log(PUBLIC_API_KEY) // public 📣
 }
 ```
 
 ## Dynamic For Variables During Runtime
 
-Sometimes you have environment variables that change or you can not set them during the build. With the `$env/dynamic` imports, you can access environment variables from the platform that your app is running on. **Use them only when you need to.**
+If you have environment variables that change or you can not set them during the build you can use the `$env/dynamic` import which lets you access environment variables from the platform that your app is running on.
+
+**Use them only if you need to.**
 
 Use `$env/dynamic/private` to get access to environment variables equivalent to `process.env`.
 
 ```ts:+page.server.ts showLineNumbers
 import { env } from '$env/dynamic/private'
-import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = () => {
-  console.log(env.SECRET_API_KEY) // secret
+export async function load() {
+  console.log(env.SECRET_API_KEY) // secret 🤫
 }
 ```
 
@@ -95,37 +93,34 @@ Use `$env/dynamic/public` to get access to environment variables prefixed with `
 
 ```ts:+page.ts showLineNumbers
 import { env } from '$env/dynamic/public'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = () => {
-  console.log(env.PUBLIC_API_KEY) // public
+export async function load() {
+  console.log(env.PUBLIC_API_KEY) // public 📣
 }
 ```
 
-## Secure By Default
+## Private Modules
 
-Note that you can only import environment variables from `$env/.../public` into client-side files. If you would try to import environment variables from `$env/.../private` somewhere unsafe, SvelteKit will throw an error. This forces you to you to explicitly make environment variables public with the `PUBLIC_` prefix. All other environment variable will not be accessible from the client by default.
+SvelteKit prevents you from exposing secrets on accident using `private` variables but you can also use **server-only** modules if you have secrets.
 
-## Keep Your Own Secrets
+You can create a **server-only** module by adding `.server` to a filename or placing the file inside `$lib/server` to handle secrets from environment variables.
 
-You can create a server-only module by adding `.server` to a filename or placing the file inside `$lib/server` to handle secrets from environment variables.
-
-Files that are in `$lib/server` can only be imported into other files that are also in `$lib/server` or that are `.server` files. This is a security feature that prevents you from accidentally importing something that handles secrets into client-side code. `$lib/server` and `.server` files run only on the server and are never sent to the client.
+Files located in `$lib/server` can only be imported into other **server-only** modules. This prevents you from accidentally importing secrets into client-side code because they only run on the server.
 
 
 ```ts:lib/server/data.ts showLineNumbers
-import { env } from '$env/dynamic/private'  // Only works because we're in $lib/server
+import { env } from '$env/dynamic/private'
 
-export function getData() {
-  return fetchAPIWithSecret(env.SECRET_API_KEY)
+export async function getData() {
+  return fetchAPIWithSecret(env.SECRET_API_KEY) // 🤫
 }
 ```
 
 ```ts:+page.server.ts showLineNumbers
-import { getData } from '$lib/server/data'  // Only works because we're in a .server file
+import { getData } from '$lib/server/data'
 
-export const load = () => {
-  console.log(getData()) // 🍜
+export async function load() {
+  const data = await getData() // 📣
 }
 ```
 
