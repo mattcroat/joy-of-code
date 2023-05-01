@@ -485,8 +485,9 @@ I have a simple modal I want to spice up when a user opens it by scaling and tra
   }
 
   const dispatch = createEventDispatcher()
+  
   function closeModal() {
-		dispatch('close', {});
+		dispatch('close')
 	}
 </script>
 
