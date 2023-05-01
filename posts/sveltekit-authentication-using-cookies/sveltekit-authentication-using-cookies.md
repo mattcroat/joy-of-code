@@ -539,7 +539,6 @@ The only thing you have to do is import the `enhance` action from SvelteKit and 
 ```html:register/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
-
   // ...
 </script>
 
@@ -552,30 +551,13 @@ For the login page we need to rerun the `load` function for the page to update i
 
 ```html:login/+page.svelte showLineNumbers
 <script lang="ts">
-  import { applyAction, enhance } from '$app/forms'
-  import { invalidateAll } from '$app/navigation'
-
+  import { enhance } from '$app/forms'
   // ...
 </script>
 
 <h1>Login</h1>
 
-<form
-  action="?/login"
-  method="POST"
-  use:enhance={() => {
-    return async ({ result }) => {
-      // rerun the `load` function for the page
-      // https://kit.svelte.dev/docs/modules#$app-navigation-invalidateall
-      invalidateAll()
-
-      // since we're customizing the default behaviour
-      // we don't want to reimplement what `use:enhance` does
-      // so we can use `applyResult` and pass the `result`
-      await applyAction(result)
-    }
-  }}
->
+<form action="?/login" method="POST" use:enhance>
   <!-- ... -->
 </form>
 ```
@@ -584,22 +566,13 @@ The same goes for logout.
 
 ```html:routes/+layout.svelte showLineNumbers
 <script lang="ts">
-  import { applyAction, enhance } from '$app/forms'
-
+  import { enhance } from '$app/forms'
   // ...
 </script>
 
 <!-- ... -->
 
-<form
-  action="/logout"
-  method="POST"
-  use:enhance={() => {
-    return async ({ result }) => {
-      await applyAction(result)
-    }
-  }}
->
+<form class="logout" action="/logout" method="POST" use:enhance>
   <button type="submit">Log out</button>
 </form>
 ```
