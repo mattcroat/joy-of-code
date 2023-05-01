@@ -585,7 +585,6 @@ The same goes for logout.
 ```html:routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import { applyAction, enhance } from '$app/forms'
-  import { invalidateAll } from '$app/navigation'
 
   // ...
 </script>
@@ -597,7 +596,6 @@ The same goes for logout.
   method="POST"
   use:enhance={() => {
     return async ({ result }) => {
-      invalidateAll()
       await applyAction(result)
     }
   }}
