@@ -485,9 +485,12 @@ I have a simple modal I want to spice up when a user opens it by scaling and tra
   }
 
   const dispatch = createEventDispatcher()
+  function closeModal() {
+		dispatch('close', {});
+	}
 </script>
 
-<div class="modal-background" on:click={close} />
+<div class="modal-background" on:click={closeModal} />
 
 <div
   transition:modal={{ duration: 1000 }}
