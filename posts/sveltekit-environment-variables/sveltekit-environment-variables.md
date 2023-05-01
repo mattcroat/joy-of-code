@@ -39,9 +39,9 @@ Another great benefit of SvelteKit managing everything for you is that it won't 
 
 That being said these four options might look confusing but are easy to understand once you understand their purpose.
 
-## Static For Variables That Don't Change
+## Static For Variables During The Build Process
 
-**This is what you want most of the time.**
+If you're not sure which one to pick you probably want to use `$env/static` variables which are imported during build time.
 
 If you have an `.env` file or store your environment variables somewhere else the next steps are the same.
 
@@ -57,10 +57,9 @@ Use `$env/static/private` if you want to access environment variables loaded fro
 
 ```ts:+page.server.ts showLineNumbers
 import { SECRET_API_KEY } from '$env/static/private'
-import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = () => {
-  console.log(SECRET_API_KEY) // secret
+export async function load() {
+  console.log(SECRET_API_KEY) // secret 🤫
 }
 ```
 
@@ -68,25 +67,25 @@ Use `$env/static/public` if you want to access environment variables prefixed wi
 
 ```ts:+page.ts showLineNumbers
 import { PUBLIC_API_KEY } from '$env/static/public'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = () => {
-  console.log(PUBLIC_API_KEY) // public
+export async function load() {
+  console.log(PUBLIC_API_KEY) // public 📣
 }
 ```
 
-## Dynamic For Variables That Change
+## Dynamic For Variables During Runtime
 
-Sometimes you have environment variables that change and you have to send them from the server to the client. **Use them only when you need to.**
+If you have environment variables that change or you can not set them during the build you can use the `$env/dynamic` import which lets you access environment variables from the platform that your app is running on.
+
+**Use them only if you need to.**
 
 Use `$env/dynamic/private` to get access to environment variables equivalent to `process.env`.
 
 ```ts:+page.server.ts showLineNumbers
 import { env } from '$env/dynamic/private'
-import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = () => {
-  console.log(env.SECRET_API_KEY) // secret
+export async function load() {
+  console.log(env.SECRET_API_KEY) // secret 🤫
 }
 ```
 
@@ -94,27 +93,34 @@ Use `$env/dynamic/public` to get access to environment variables prefixed with `
 
 ```ts:+page.ts showLineNumbers
 import { env } from '$env/dynamic/public'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = () => {
-  console.log(env.PUBLIC_API_KEY) // public
+export async function load() {
+  console.log(env.PUBLIC_API_KEY) // public 📣
 }
 ```
 
-## Keep Your Own Secrets
+## Private Modules
 
-You can create a server-only module by adding `.server` to a filename or placing the file inside `$lib/server` to store any other secrets.
+SvelteKit prevents you from exposing secrets on accident using `private` variables but you can also use **server-only** modules if you have secrets.
 
-```ts:lib/server/secrets.ts showLineNumbers
-export const secret = '🍜'
+You can create a **server-only** module by adding `.server` to a filename or placing the file inside `$lib/server` to handle secrets from environment variables.
+
+Files located in `$lib/server` can only be imported into other **server-only** modules. This prevents you from accidentally importing secrets into client-side code because they only run on the server.
+
+
+```ts:lib/server/data.ts showLineNumbers
+import { env } from '$env/dynamic/private'
+
+export async function getData() {
+  return fetchAPIWithSecret(env.SECRET_API_KEY) // 🤫
+}
 ```
 
 ```ts:+page.server.ts showLineNumbers
-import { secret } from '$lib/server/secrets'
-import type { PageServerLoad } from './$types'
+import { getData } from '$lib/server/data'
 
-export const load: PageServerLoad = () => {
-  console.log(secret) // 🍜
+export async function load() {
+  const data = await getData() // 📣
 }
 ```
 
