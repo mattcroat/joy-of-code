@@ -35,7 +35,7 @@ npm run dev
 
 I'm going to add a root layout with some navigation.
 
-```html:routes/+layout.svelte showLineNumbers
+```html:src/routes/+layout.svelte showLineNumbers
 <nav>
   <ul>
     <li>
@@ -165,12 +165,12 @@ When you visit the link it does a `GET` **request method** to a server which the
 
 SvelteKit makes creating an API endpoint simple by using a `+server.ts` file that exports a function that corresponds to a HTTP verb like `GET`, `POST`, `PATCH`, `PUT` and `DELETE` that take a request and return a `response` object.
 
-```ts:routes/api/newsletter/+server.ts showLineNumbers
-import { json, type RequestHandler } from '@sveltejs/kit'
+```ts:src/routes/api/newsletter/+server.ts showLineNumbers
+import { json } from '@sveltejs/kit'
 
 // /api/newsletter GET
 
-export const GET: RequestHandler = async (event) => {
+export async function GET(event) {
   const options: ResponseInit = {
     status: 418,
     headers: {
@@ -183,7 +183,7 @@ export const GET: RequestHandler = async (event) => {
 
 // /api/newsletter POST
 
-export const POST: RequestHandler = async (event) => {
+export async function POST(event) {
   const data = await event.request.formData()
   const email = data.get('email')
 
@@ -208,7 +208,7 @@ In this example I'm using an API endpoint for a newsletter form but SvelteKit ha
 
 When the user submits the form it's going to make a `POST` request to `/api/newsletter`.
 
-```html:routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   async function subscribe(event: Event) {
     const form = event.target as HTMLFormElement
@@ -239,12 +239,11 @@ I want to take the posts from our database and create an API at `/api/posts` tha
 
 I'm going to create a `+server.ts` file at `routes/api/posts/+server.ts`.
 
-```ts:routes/api/posts/+server.ts showLineNumbers
-import { json, type RequestHandler } from '@sveltejs/kit'
-
+```ts:src/routes/api/posts/+server.ts showLineNumbers
+import { json } from '@sveltejs/kit'
 import db from '$lib/database'
 
-export const GET: RequestHandler = async (event) => {
+export async function GET(event) {
   const posts = await db.post.findMany()
   return json(posts)
 }
@@ -255,9 +254,7 @@ If you go to `/api/posts` you can see the posts. If you're using a Chromium base
 The `event` argument is very useful because it provides access to some properties describing the event but also some useful helpers.
 
 ```ts:+server.ts showLineNumbers
-import type { RequestHandler } from '@sveltejs/kit'
-
-export const GET: RequestHandler = async (event) => {
+export async function GET(event) {
   console.log(event)
   // ...
 }
@@ -274,12 +271,11 @@ Here are some of the `event` properties and methods that are relevant to us now 
 
 The post you're reading is cached on a CDN and how long it's cached is based on the age of the post. Here's an example of how you can set up caching.
 
-```ts:routes/api/posts/+server.ts showLineNumbers
-import { json, type RequestHandler } from '@sveltejs/kit'
-
+```ts:src/routes/api/posts/+server.ts showLineNumbers
+import { json } from '@sveltejs/kit'
 import db from '$lib/database'
 
-export const GET: RequestHandler = async (event) => {
+export async function GET(event) {
   const posts = await db.post.findMany({
     // get random numbers of posts to test caching
     take: Math.round(Math.random() * 30)
@@ -300,7 +296,7 @@ First let's learn how to show the data on the page.
 
 This way of showing data on the page where you fetch the data on the client and show a loading state until you have the data might look familiar.
 
-```html:routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import type { Post } from '@prisma/client'
 
@@ -347,11 +343,10 @@ Instead of using client-side rendering (CSR) I want to take advantage of server-
 
 In SvelteKit a `+page.svelte` can have a sibling `+page.ts` file that exports a `load` function which returns data for the page and nothing else.
 
-```ts:routes/+page.ts showLineNumbers
+```ts:src/routes/+page.ts showLineNumbers
 import type { Post } from '@prisma/client'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = async ({ fetch }) => {
+export async function load({ fetch }) {
   // `fetch` understands the relative path and saves the response
   // inside the HTML to be reused avoiding additional requests
   const response = await fetch('/api/posts')
@@ -364,16 +359,13 @@ export const load: PageLoad = async ({ fetch }) => {
 }
 ```
 
-Remember how I said you're going to see the `event` argument everywhere? Same story for the `load` function but here I'm using destructuring.
+Remember how I said you're going to see the `event` argument everywhere? Same story for the `load` function but using [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
 Here is how you get the data for the page.
 
-```html:routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { PageData } from './$types'
-
-  // using the generated types
-  export let data: PageData
+  export let data
 </script>
 
 <h1>Posts</h1>
@@ -393,7 +385,7 @@ If you look at the network tab you're going to see the entire HTML document for 
 
 If you view the page source you can see how SvelteKit saves the data in the HTML because you used `event.fetch`.
 
-```html:source.html showLineNumbers
+```html:example.html showLineNumbers
 <script type="application/json" data-sveltekit-fetched data-url="/api/posts">
   // here is the page data as JSON
 </script>
@@ -401,11 +393,9 @@ If you view the page source you can see how SvelteKit saves the data in the HTML
 
 Using `data.whatever` can be tedious, so here's a neat trick you can use to pluck values from `data` and update the value using a reactive declaration.
 
-```html:routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { PageData } from './$types'
-
-  export let data: PageData
+  export let data
 
   $: ({ posts } = data)
 </script>
@@ -431,14 +421,13 @@ The `+page.ts` file is great for fetching data for the page but because it runs 
 
 I'm going to create a `routes/posts/[slug]/+page.svelte` route that should get the post from the database using the `slug` parameter.
 
-```html:routes/posts/[slug]/+page.svelte showLineNumbers
+```html:src/routes/posts/[slug]/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { PageData } from './$types'
-
-  export let data: PageData
+  export let data
 
   function formatDate(date: Date) {
-    return new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(date)
+    const formatter = new IntlDateTimeFormat('en', { dateStyle: 'long' })
+    return formatter.format(date)
   }
 </script>
 
@@ -452,13 +441,11 @@ I'm going to create a `routes/posts/[slug]/+page.svelte` route that should get t
 </div>
 ```
 
-```ts:routes/posts/[slug]/+page.ts showLineNumbers
+```ts:src/routes/posts/[slug]/+page.ts showLineNumbers
 import { error } from '@sveltejs/kit'
-import type { PageLoad } from './$types'
-
 import db from '$lib/database'
 
-export const load: PageLoad = async ({ params }) => {
+export async function load({ params }) {
   const post = await db.post.findUnique({
     where: { slug: params.slug }
   })
@@ -481,13 +468,11 @@ Yikes! 💩
 
 When you need to do something on the server like using a secret or talking to the file system or database rename `+page.ts` to `+page.server.ts` instead.
 
-```ts:routes/posts/[slug]/+page.server.ts showLineNumbers
+```ts:src/routes/posts/[slug]/+page.server.ts showLineNumbers
 import { error } from '@sveltejs/kit'
-import type { PageServerLoad } from './$types'
-
 import db from '$lib/database'
 
-export const load: PageServerLoad = async ({ params }) => {
+export async function load({ params }) {
   const post = await db.post.findUnique({
     where: { slug: params.slug }
   })
@@ -516,10 +501,8 @@ Why would you do that? 🤔
 
 Data returned from layout `load` functions is available to child routes and not just the layout it belongs to meaning you can pass data like a hot potato through your routes.
 
-```ts:routes/+layout.ts showLineNumbers
-import type { LayoutLoad } from './$types'
-
-export const load: LayoutLoad = async () => {
+```ts:src/routes/+layout.ts showLineNumbers
+export async function load() {
   return {
     message: 'Hello'
   }
@@ -543,7 +526,7 @@ routes
 
 This is what you see when you visit `/posts`.
 
-```html:routes/posts/+page.svelte showLineNumbers
+```html:src/routes/posts/+page.svelte showLineNumbers
 <h1>Posts</h1>
 
 <p>You can browse posts here.</p>
@@ -551,11 +534,10 @@ This is what you see when you visit `/posts`.
 
 I only want a certain amount of posts that only have the `title` and `slug` fields from the database.
 
-```ts:routes/posts/+layout.server.ts showLineNumbers
-import type { LayoutServerLoad } from './$types'
+```ts:src/routes/posts/+layout.server.ts showLineNumbers
 import db from '$lib/database'
 
-export const load: LayoutServerLoad = async () => {
+export async function load() {
   const posts = await db.post.findMany({
     select: {
       title: true,
@@ -570,11 +552,9 @@ export const load: LayoutServerLoad = async () => {
 
 This data is now available inside `/posts/+layout.svelte` and `/posts/+page.svelte` but also any child routes through the `data` prop.
 
-```html:routes/posts/+layout.svelte showLineNumbers
+```html:src/routes/posts/+layout.svelte showLineNumbers
 <script lang="ts">
-  import type { LayoutData } from './$types'
-
-  export let data: LayoutData
+  export let data
 </script>
 
 <div class="layout">
@@ -609,12 +589,9 @@ This data is now available inside `/posts/+layout.svelte` and `/posts/+page.svel
 
 The same `posts` data is available inside the `/posts/[slug]/+page.svelte` child route.
 
-```html:routes/posts/[slug]/+page.svelte showLineNumbers
+```html:src/routes/posts/[slug]/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { PageData } from './$types'
-
-  export let data: PageData
-
+  export let data
   // ...
 </script>
 
@@ -645,7 +622,7 @@ So far we've seen how data flows in one direction but the `$page` store makes yo
 
 You could use the `$page` store to set the title for the page inside `routes/+layout.svelte`.
 
-```html:routes/+layout.svelte showLineNumbers
+```html:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
 
@@ -665,10 +642,8 @@ Here's a [real world example](https://authjs.dev/reference/sveltekit/modules/mai
 
 The following code sets the session data in the `$page` store to be available to all routes inside the root layout.
 
-```ts:+layout.server.ts showLineNumbers
-import type { LayoutServerLoad } from './$types';
-
-export const load: LayoutServerLoad = async (event) => {
+```ts:src/routes/+layout.server.ts showLineNumbers
+export async function load(event) {
   return {
     // `$page.data` slurps it up 😋
     session: await event.locals.getSession()
@@ -678,7 +653,7 @@ export const load: LayoutServerLoad = async (event) => {
 
 If there's a session show the user information.
 
-```html:+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { page } from "$app/stores"
 </script>
@@ -702,12 +677,11 @@ SvelteKit makes working with the URL simple and that's why the `load` function p
 
 I want to improve the existing posts API so I'm able to specify the amount of posts I want and set the order such as `/api/posts?limit=4&order=desc`.
 
-```ts:routes/api/posts/+server.ts showLineNumbers
-import { json, type RequestHandler } from '@sveltejs/kit'
-
+```ts:src/routes/api/posts/+server.ts showLineNumbers
+import { json } from '@sveltejs/kit'
 import db from '$lib/database'
 
-export const GET: RequestHandler = async ({ url }) => {
+export async function GET({ url }) {
   console.log(url.searchParams) // { 'limit' => '4', 'order' => 'desc' }
 
   const limit = Number(url.searchParams.get('limit') ?? 30)
@@ -730,12 +704,11 @@ You're used to having component state for something like search but you can't sh
 
 In SvelteKit you can use `goto` to update the search params which is also going to rerun the `load` function for the page.
 
-```html:+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import type { PageData } from './$types'
 
-  export let data: PageData
+  export let data
 
   function search(event: Event) {
     const data = new FormData(event.target)
@@ -752,10 +725,8 @@ In SvelteKit you can use `goto` to update the search params which is also going 
 <!-- ... -->
 ```
 
-```ts:+server.ts showLineNumbers
-import { type PageLoad } from '@sveltejs/kit'
-
-export const load: PageLoad = async ({ url }) => {
+```ts:src/routes/+server.ts showLineNumbers
+export async function load({ url }) {
   const search = url.searchParams.get('search') // "banana"
   // ...
 }
@@ -767,7 +738,7 @@ If this sparked your interest here's the entire [working example on StackBlitz](
 
 There's also packages that make this a lot easier such as [sveltekit-search-params]([https://github.com/paoloricciuti/sveltekit-search-params](https://github.com/paoloricciuti/sveltekit-search-params 'https://github.com/paoloricciuti/sveltekit-search-params') which you should check out if you're going to do any URL fu.
 
-```html:+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
     import { queryParam } from 'sveltekit-search-params'
 
@@ -787,10 +758,8 @@ In case you need data from a parent layout `load` function inside a child `load`
 
 I'm going to go to our deepest route for showing a post.
 
-```ts:routes/posts/[slug]/+page.server.ts showLineNumbers
-import type { PageServerLoad } from './$types'
-
-export const load: PageServerLoad = async ({ parent }) => {
+```ts:src/routes/posts/[slug]/+page.server.ts showLineNumbers
+export async function load({ parent }) {
   const parentData = await parent()
   console.log(parentData)
   // ...
@@ -803,10 +772,8 @@ If you guessed the four posts from `routes/posts/+layout.server.ts` you would be
 
 You have to be careful to not introduce waterfalls if your data doesn't depend on the result of the parent because `load` functions run in parallel.
 
-```ts:+page.server.ts showLineNumbers
-import type { PageLoad } from './$types'
-
-export const load: PageLoad = async ({ parent }) => {
+```ts:src/routes/+page.server.ts showLineNumbers
+export async function load({ parent }) {
   // 1. get the data from the parent first
   const parentData = await parent()
 
@@ -819,10 +786,8 @@ export const load: PageLoad = async ({ parent }) => {
 
 In the next example you don't need the parent data and you're going to cause a waterfall in your network tab which you can think of as a traffic jam.
 
-```ts:+page.server.ts showLineNumbers
-import type { PageLoad } from './$types'
-
-export const load: PageLoad = async ({ parent }) => {
+```ts:src/routes/+page.server.ts showLineNumbers
+export async function load({ parent }) {
   // 1. parent `load` function runs first ⏳️
   const parentData = await parent()
 
@@ -835,10 +800,8 @@ export const load: PageLoad = async ({ parent }) => {
 
 Let the `load` functions run in parallel instead.
 
-```ts:+page.server.ts showLineNumbers
-import type { PageLoad } from './$types'
-
-export const load: PageLoad = async ({ parent }) => {
+```ts:src/routes/+page.server.ts showLineNumbers
+export async function load({ parent }) {
   // 1. this `load` function fires off 🏃
   const data = await getData()
 
@@ -859,13 +822,11 @@ SvelteKit tracks the dependencies of each `load` function to avoid having to do 
 
 Take for example the `load` function responsible for returning the data for a post — it's going to rerun each time `params.slug` has changed.
 
-```ts:routes/posts/[slug]/+page.server.ts showLineNumbers
+```ts:src/routes/posts/[slug]/+page.server.ts showLineNumbers
 import { error } from '@sveltejs/kit'
-import type { PageServerLoad } from './$types'
-
 import db from '$lib/database'
 
-export const load: PageServerLoad = async ({ params, parent }) => {
+export async function load({ params, parent }) {
   const post = await db.post.findFirst({
     where: { slug: params.slug }
   })
@@ -880,11 +841,10 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 
 The posts data hasn't changed, so SvelteKit doesn't have to rerun the `load` function.
 
-```ts:routes/+page.ts showLineNumbers
+```ts:src/routes/+page.ts showLineNumbers
 import type { Post } from '@prisma/client'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = async ({ fetch }) => {
+export async function load({ fetch }) {
   const response = await fetch('api/posts')
   const posts: Post[] = await response.json()
   return { posts }
@@ -897,11 +857,10 @@ You can rerun `load` functions for the current page using `invalidate(url)` or `
 
 The `load` function depends on `url` if it uses `fetch(url)` or `depends(url)` which can be a custom identifier.
 
-```ts:routes/+page.ts showLineNumbers
+```ts:src/routes/+page.ts showLineNumbers
 import type { Post } from '@prisma/client'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = async ({ fetch, depends }) => {
+export async function load({ fetch, depends }) {
   // a) invalidate('api/posts') would rerun the `load` function
   const response = await fetch('api/posts')
 
@@ -914,11 +873,10 @@ export const load: PageLoad = async ({ fetch, depends }) => {
 
 You can modify the API slightly to return a random number of posts.
 
-```ts:routes/+page.ts showLineNumbers
+```ts:src/routes/+page.ts showLineNumbers
 import type { Post } from '@prisma/client'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = async ({ fetch, depends }) => {
+export async function load({ fetch, depends }) {
   const random = Math.round(Math.random() * 30)
   const response = await fetch(`api/posts?limit=${random}`)
   const posts: Post[] = await response.json()
@@ -931,10 +889,9 @@ export const load: PageLoad = async ({ fetch, depends }) => {
 
 If you use a random URL then option `b` won't work because you can't invalidate a random URL using that method.
 
-```html:routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { invalidate, invalidateAll } from '$app/navigation'
-  import type { PageData } from './$types'
 
   function rerunLoadFunction() {
     // a)

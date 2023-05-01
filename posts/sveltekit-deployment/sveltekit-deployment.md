@@ -195,8 +195,8 @@ I promise that's everything! You learn it once and you're set for life because y
 
 To set headers in SvelteKit you can use the `setHeaders` method you have access to in `+page.server.ts` and `+server.ts` files.
 
-```ts:routes/+page.server.ts showLineNumbers
-export const load = async ({ setHeaders }) => {
+```ts:src/routes/+page.server.ts showLineNumbers
+export async function load({ setHeaders }) {
   setHeaders({
     'Cache-Control': `max-age=0, s-maxage=${60 * 60}`,
   })
@@ -205,8 +205,8 @@ export const load = async ({ setHeaders }) => {
 }
 ```
 
-```ts:routes/blog/+page.server.ts showLineNumbers
-export const load = async ({ setHeaders }) => {
+```ts:src/routes/blog/+page.server.ts showLineNumbers
+export async function load({ setHeaders }) {
   setHeaders({
     'Cache-Control': `max-age=0, s-maxage=${60 * 60}`,
   })
@@ -215,8 +215,8 @@ export const load = async ({ setHeaders }) => {
 }
 ```
 
-```ts:routes/blog/[slug]/+page.server.ts showLineNumbers
-export const load = async ({ params, setHeaders }) => {
+```ts:src/routes/blog/[slug]/+page.server.ts showLineNumbers
+export async function load({ params, setHeaders }) {
   setHeaders({
     'Cache-Control': `max-age=0, s-maxage=60`,
   })
@@ -225,8 +225,8 @@ export const load = async ({ params, setHeaders }) => {
 }
 ```
 
-```ts:routes/rss.xml/+server.ts showLineNumbers
-export const GET = async ({ url }) => {
+```ts:src/routes/rss.xml/+server.ts showLineNumbers
+export async function GET({ url }) {
   // ...
 
   return new Response(feed.xml({ indent: true }), {
@@ -240,7 +240,7 @@ export const GET = async ({ url }) => {
 
 For the `/about` page we can use [SvelteKit page options](https://kit.svelte.dev/docs/page-options) to prerender it and even disable server-side rendering since we don't need JavaScript.
 
-```ts:routes/about/+page.ts showLineNumbers
+```ts:src/routes/about/+page.ts showLineNumbers
 // prerender page
 export const prerender = true
 

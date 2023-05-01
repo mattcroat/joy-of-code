@@ -81,7 +81,7 @@ Notice also if you look at the `localhost` response in your developer tools it r
 
 If you look at the response for the HTML document you can see a script at the bottom of the page responsible for hydration and initializing the client-side router.
 
-```html:localhost showLineNumbers
+```html:example showLineNumbers
 <!-- ... -->
 
 <script type="module" data-sveltekit-hydrate="hz9k9a">
@@ -103,7 +103,7 @@ If you look at the response for the HTML document you can see a script at the bo
 
 I'm going to add a second route `src/routes/posts/+page.svelte` which maps to `/posts`.
 
-```html:routes/posts/+page.svelte showLineNumbers
+```html:src/routes/posts/+page.svelte showLineNumbers
 <nav>
   <a href="/">Home</a>
   <a href="/posts">Posts</a>
@@ -274,9 +274,8 @@ The real superpower of nested routes is that SvelteKit knows what data to fetch 
 
 ```ts:src/routes/posts/create/+page.ts showLineNumbers
 import { error } from '@sveltejs/kit'
-import type { PageLoad } from './$types'
 
-export const load: PageLoad = async () => {
+export async function load () {
   // unexpected errors can contain sensitive information
   // so the error message and stack trace is not exposed to users
   // and shows a more generic error message { message: "Internal error" }
@@ -404,9 +403,7 @@ You can do that using matching parameters by creating a `src/params` directory a
 > 🐿️ If you have trouble with regular expressions don't fret because [ChatGPT](https://chat.openai.com/) makes it easy by giving it a prompt like "Can you write a `match` function in JavaScript that just checks if `param` is a slug?".
 
 ```ts:src/params/slug.ts showLineNumbers
-import type { ParamMatcher } from '@sveltejs/kit'
-
-export const match: ParamMatcher = (param) => {
+export function match(param) {
   return /^[a-z0-9-]+$/.test(param)
 }
 ```

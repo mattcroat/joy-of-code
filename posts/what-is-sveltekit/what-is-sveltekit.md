@@ -12,7 +12,20 @@ category: sveltekit
 
 ## Welcome To The Learn SvelteKit Series
 
-This is the first part in the [Learn SvelteKit](https://www.youtube.com/playlist?list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) series I'm working on writing and publishing on YouTube.
+> **🔥 Update:** In the past you had to type special SvelteKit values which is no longer required. I updated the posts and removed those types. If you want to learn more watch [Stop Using Types In SvelteKit](https://www.youtube.com/watch?v=Xk3vjociFt4) but you can ignore it.
+
+This is the first part of the [Learn SvelteKit](https://www.youtube.com/playlist?list=PLA9WiRZ-IS_zfHpxmztJQLeBISsQkh9-M) series.
+
+Each part is self-contained and doesn't depend on previous parts but I recommend you read or watch them in order:
+
+- [What is SvelteKit?](https://joyofcode.xyz/what-is-sveltekit)
+- [SvelteKit Project Structure](https://joyofcode.xyz/sveltekit-project-structure)
+- [SvelteKit Routing](https://joyofcode.xyz/sveltekit-routing)
+- [SvelteKit API Endpoints And Loading Data For Pages](https://joyofcode.xyz/sveltekit-loading-data)
+- [Working With Forms In SvelteKit](https://joyofcode.xyz/working-with-forms-in-sveltekit)
+- [Using Advanced Layouts In SvelteKit](https://joyofcode.xyz/sveltekit-advanced-layouts)
+- [Learn SvelteKit Hooks Through Example](https://joyofcode.xyz/sveltekit-hooks)
+- [Deploy A Full Stack SvelteKit App](https://joyofcode.xyz/sveltekit-deployment)
 
 ## SvelteKit Is The Swiss Army Knife Of JavaScript Frameworks
 
@@ -28,10 +41,10 @@ SvelteKit blurs the line between frontend and backend and makes the integration 
 
 You can use SvelteKit to create an API just like you can with [Express](https://expressjs.com/).
 
-```ts:api/posts/+server.ts showLineNumbers
-import { json, type RequestHandler } from '@sveltejs/kit'
+```ts:src/routes/api/posts/+server.ts showLineNumbers
+import { json } from '@sveltejs/kit'
 
-export const GET: RequestHandler = async () => {
+export function GET() {
   // get posts from database
   const posts = [
     {
@@ -49,10 +62,8 @@ export const GET: RequestHandler = async () => {
 
 SvelteKit shines when it comes to data fetching for your pages because of how seamless the integration between the backend and frontend is while giving you type safety like [tRPC](https://trpc.io/). 🤯
 
-```ts:+page.server.ts showLineNumbers
-import type { PageServerLoad } from './$types'
-
-export const load: PageServerLoad = () => {
+```ts:src/routes/+page.server.ts showLineNumbers
+export function load() {
   // get post from database
   const post = {
     slug: 'sveltekit',
@@ -66,31 +77,13 @@ export const load: PageServerLoad = () => {
 }
 ```
 
-```html:+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { PageData } from './$types'
-
-  // SvelteKit generates the types for you
-  export let data: PageData
+  export let data // 👈️ typed
 </script>
 
+<!-- You get autocompletion as you type -->
 {@html data.post.content}
-```
-
-You can decide between using [JSDoc](https://jsdoc.app/) with regular JavaScript or [TypeScript](https://www.typescriptlang.org/) for types and the SvelteKit docs make it easy by having a toggle for both in the code examples.
-
-```js:+page.server.js showLineNumbers
-/** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
-  // ...
-}
-```
-
-```html:+page.svelte showLineNumbers
-<script>
-  /** @type {import('./$types').PageData} */
-  export let data
-</script>
 ```
 
 ## Convention Over Configuration
@@ -110,7 +103,7 @@ I mentioned how SvelteKit is a Vite plugin but that's an oversimplification (and
 
 One of the most powerful things about SvelteKit is the flexibility in how you build your app — you can **prerender** your about page, use **SSR** (server-side rendering) for dynamic pages and your app section can be a **SPA** (single page application) inside the same app.
 
-```ts:+layout.ts showLineNumbers
+```ts:src/routes/+layout.ts showLineNumbers
 // turns app into a SPA
 export const ssr = false
 
@@ -139,7 +132,7 @@ SvelteKit apps are server-side rendered by default for speed and SEO (search eng
 
 There's no weird wrappers for links because it's just regular HTML.
 
-```html:+page.svelte showLineNumbers
+```html:src/routes/about/+page.svelte showLineNumbers
 <a href="/about">About</a>
 ```
 
@@ -147,7 +140,7 @@ You're going to spend more time on the [MDN Web Docs](https://developer.mozilla.
 
 SvelteKit uses the web platform meaning you're not learning some framework specific abstraction but using web standards like the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects, [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) and [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) for working with forms.
 
-```html:+page.svelte showLineNumbers
+```html:src/routes/login/+page.svelte showLineNumbers
 <h1>Login</h1>
 
 <form method="POST" action="?/login">
@@ -157,10 +150,8 @@ SvelteKit uses the web platform meaning you're not learning some framework speci
 </form>
 ```
 
-```ts:+page.server.ts showLineNumbers
-import type { Actions, PageServerLoad } from './$types'
-
-export const actions: Actions = {
+```ts:src/routes/login/+page.server.ts showLineNumbers
+export const actions = {
   login: async ({ request, cookies }) => {
     const data = await request.formData()
 
@@ -183,7 +174,7 @@ SvelteKit apps are more resilient because they work before JavaScript if you use
 
 Instead of disabling the default form behavior and implementing what the browser does yourself SvelteKit makes it simple to use the web platform and progressively enhance the user experience when JavaScript is available on the page.
 
-```html:+page.svelte showLineNumbers
+```html:src/routes/login/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
 </script>

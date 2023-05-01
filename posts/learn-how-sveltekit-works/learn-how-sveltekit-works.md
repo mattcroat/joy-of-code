@@ -616,7 +616,7 @@ I'm going to explain hydration later.
 
 ## Client-Side Navigation
 
-As I previously mentioned when you load a page for the first time it's going to use server-side rendering but after the client gets initialized subsequent navigations use client-side navigation but you can still view the page source.
+Loading a SvelteKit page for the first is going to use **server-side rendering** (SSR) but after the SvelteKit router gets initialized, any further navigations are going to use JavaScript for **client-side rendering** (CSR) like a regular **single page application** (SPA).
 
 ```html:index.svelte showLineNumbers
 <a href="/pikachu">Pikachu</a>

@@ -154,16 +154,23 @@ npm create svelte
 I'm going with TypeScript and selecting ESLint, Prettier, Playwright and Vitest from the options.
 
 ```shell:terminal
-Welcome to SvelteKit!
-
-✔ Where should we create your project?
-  (leave blank to use current directory) …
-✔ Which Svelte app template? › Skeleton project
-✔ Add type checking with TypeScript? › [Yes], using TypeScript syntax
-✔ Add ESLint for code linting? … No / [Yes]
-✔ Add Prettier for code formatting? … No / [Yes]
-✔ Add Playwright for browser testing? … No / [Yes]
-✔ Add Vitest for unit testing? … No / [Yes]
+┌  Welcome to SvelteKit!
+│
+◆ Where should we create your project?
+│  sveltekit
+│
+◇  Which Svelte app template?
+│  Skeleton project
+│
+◇  Add type checking with TypeScript?
+│  Yes, using TypeScript syntax
+│
+◆  Select additional options (use arrow keys/space bar)
+│  ◼ Add ESLint for code linting
+│  ◼ Add Prettier for code formatting
+│  ◼ Add Playwright for browser testing
+│  ◼ Add Vitest for unit testing
+└
 ```
 
 You can use [JSDoc](https://jsdoc.app/) with regular JavaScript or TypeScript for types but I leave that up to you.

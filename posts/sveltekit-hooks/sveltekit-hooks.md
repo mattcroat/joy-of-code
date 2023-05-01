@@ -47,9 +47,7 @@ The most used and powerful hook is the **handle** hook which runs each time the 
 I'm going to create a file inside `src/hooks.server.ts` and use the `handle` hook from SvelteKit.
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { Handle } from '@sveltejs/kit'
-
-export const handle: Handle = async ({ event, resolve }) => {
+export async function handle({ event, resolve }) {
   return resolve(event)
 }
 ```
@@ -61,9 +59,7 @@ The `handle` function takes an `input` object that has `event` and `resolve`. Th
 If you wanted you could turn every route in your app into a banana.
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { Handle } from '@sveltejs/kit'
-
-export const handle: Handle = async ({ event, resolve }) => {
+export async function handle({ event, resolve }) {
   return new Response('🍌')
 }
 ```
@@ -71,9 +67,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 Notice that even if you go to a route that doesn't exist it's going to return a banana — in that case you might want to be more precise.
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { Handle } from '@sveltejs/kit'
-
-export const handle: Handle = async ({ event, resolve }) => {
+export async function handle({ event, resolve }) {
   // if route matches "/banana" return banana
   if (event.url.pathname.startsWith('/banana')) {
     return new Response('🍌')
@@ -95,9 +89,7 @@ Since hooks happen on every request they're a perfect candidate for authenticati
 I have an entire post on [authentication using cookies in SvelteKit](https://joyofcode.xyz/sveltekit-authentication-using-cookies) if you want to learn more but if you use an auth library it's going to provide a hook that has the auth logic.
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { Handle } from '@sveltejs/kit'
-
-export const handle: Handle = async ({ event, resolve }) => {
+export async function handle({ event, resolve }) {
   // this cookie would be set inside a login route
   // const session = event.cookies.get('session')
 
@@ -115,9 +107,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 You can pass any data you want like user data in this example to a request. The populated `event.locals` object becomes available inside server `load` functions and handlers inside `+page.ts`.
 
 ```ts:src/routes/+layout.server.ts showLineNumbers
-import type { LayoutServerLoad } from './$types'
-
-export const load: LayoutServerLoad = async ({ locals }) => {
+export async function load({ locals }) {
   return { user: locals.user }
 }
 ```
@@ -149,9 +139,7 @@ If you do internalization you want to be able to change the `<html>` language at
 The `resolve` function has a second parameter that gives you more control how to render the response. One of the options is the `transformPageChunk` function that you can use to change the HTML.
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { Handle } from '@sveltejs/kit'
-
-export const handle: Handle = async ({ event, resolve }) => {
+export async function handle({ event, resolve }) {
   // you can get the locale from `event.cookies`
   const locale = 'hr'
 
@@ -172,9 +160,7 @@ The HTML is just a string, so you have to be careful you return proper HTML.
 You can use hooks to measure how long a response takes and provide logs in development, so you're aware of potential problems.
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { Handle } from '@sveltejs/kit'
-
-export const handle: Handle = async ({ event, resolve }) => {
+export async function handle({ event, resolve }) {
   const route = event.url
 
   let start = performance.now()
@@ -206,9 +192,7 @@ This is a perfect use case for the `handleError` hook in SvelteKit which is a sh
 The `handleError` function is going to run if an unexpected error is thrown during loading or rendering.
 
 ```ts:src/routes/+page.server.ts
-import type { PageServerLoad } from './$types'
-
-export const load: PageServerLoad = async () => {
+export async function load() {
   // this error message including the stack trace
   // can be handled securely on the server
   throw new Error('The secret phrase is banana')
@@ -216,9 +200,7 @@ export const load: PageServerLoad = async () => {
 ```
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { HandleServerError } from '@sveltejs/kit'
-
-export const handleError: HandleServerError = async ({ error, event }) => {
+export async function handleError({ error, event })  {
   // you can capture the `error` and `event` from the server
   console.log(error)
 
@@ -234,9 +216,7 @@ You can log or pass the error to some error tracking service and you can show a 
 One thing you should know is that the `handleError` inside `hooks.client.ts` only runs if the unexpected error happens inside `+page.ts` which is a current limitation of Svelte despite the SvelteKit docs saying otherwise.
 
 ```ts:src/hooks.client.ts showLineNumbers
-import type { HandleClientError } from '@sveltejs/kit'
-
-export const handleError: HandleClientError = async ({ error, event }) => {
+export async function handleError({ error, event }) {
   // you can capture the `error` and `event` from the client
   // but it only runs if the unexpected error comes from `+page.ts`
   console.log(error)
@@ -257,9 +237,7 @@ To be honest I don't know a lot of use cases for this one other than to make a d
 Let's say I want every request to use [HTTPS](https://www.wikiwand.com/en/HTTPS).
 
 ```ts:src/routes/+page.server.ts showLineNumbers
-import type { PageServerLoad } from './$types'
-
-export const load: PageServerLoad = async ({ fetch }) => {
+export async function load({ fetch }) {
   await fetch('http://joyofcode.xyz/') // yikes! 👎️
 }
 ```
@@ -267,9 +245,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 I'm going to listen to any request URL that starts with `http` and create a new [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request).
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { HandleFetch } from '@sveltejs/kit'
-
-export const handleFetch: HandleFetch = ({ request, fetch }) => {
+export async function handleFetch({ request, fetch }) {
   if (request.url.startsWith('http')) {
     const url = request.url.replace('http', 'https')
     request = new Request(url, request)
@@ -296,10 +272,9 @@ This is something cool I learned from [@stolinski](https://twitter.com/stolinski
 There's a lot of boilerplate when working with forms because you have to parse individual values using [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData) or loop over the values but you can make a hook that listens to a `POST` request and gives you the parsed form data you can validate using [Zod](https://zod.dev/).
 
 ```ts:src/hooks.server.ts showLineNumbers
-import type { Handle } from '@sveltejs/kit'
 import { parseFormData } from 'parse-nested-form-data'
 
-export const handle: Handle = async ({ event, resolve }) => {
+export async function handle({ event, resolve }) {
   // listen to a "POST" request
   if (event.request.method === 'POST') {
     // get the form data from the request
@@ -346,9 +321,7 @@ Use a form the same as you would before and keep in mind the `name` attribute is
 Inside your form actions you get access to the parsed form data.
 
 ```ts:src/routes/+page.server.ts showLineNumbers
-import type { Actions } from '@sveltejs/kit'
-
-export const actions: Actions = {
+export const actions = {
   default: async ({ locals }) => {
     console.log(locals.formData) // { username: 'Test', password: '1234', remember: true }
 

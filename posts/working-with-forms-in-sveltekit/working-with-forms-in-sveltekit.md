@@ -97,7 +97,7 @@ export function clearTodos() {
 
 A `form` is a way to exchange information between the browser and server — it's just a container for form controls with some optional attributes to configure how the form behaves.
 
-```html:routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <form method="GET" action="/login">
   <input type="text" name="user" />
   <input type="password" name="password" />
@@ -109,7 +109,7 @@ The `action` attribute defines the location (URL) where the form's collected dat
 
 The `GET` method requests a resource from the server and appends the form data at the end of the URL like `http://example.com/?user=test&password=1234` since the body is empty and it not great for sending a large amount of data and is not secure.
 
-```html:routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <form method="POST" action="/login">
   <input type="text" name="user" />
   <input type="password" name="password" />
@@ -146,12 +146,10 @@ routes
 
 First I'm going to get the data for the page which is the currently empty to-do list.
 
-```ts:routes/todos/+page.server.ts
-import type { PageServerLoad } from './$types'
-
+```ts:src/routes/todos/+page.server.ts
 import { getTodos } from '$lib/server/database'
 
-export const load: PageServerLoad = async () => {
+export async function load() {
   const todos = getTodos()
   return { todos }
 }
@@ -159,11 +157,9 @@ export const load: PageServerLoad = async () => {
 
 Let's loop over the to-do items and add the form.
 
-```html:routes/todos/+page.svelte showLineNumbers
+```html:src/routes/todos/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { PageData } from './$types'
-
-  export let data: PageData
+  export let data
 
   // todo
   async function addTodo(event: Event) {}
@@ -222,10 +218,8 @@ The `action` attribute is optional because we're going to use the same endpoint 
 
 I'm going to create a `POST` and `DELETE` function inside `+server.ts` that should get the data from the form and do the appropriate action — I'm going to use a `formData` object to send `success` and `errors` to update the UI for the user.
 
-```ts:routes/todos/+server.ts showLineNumbers
+```ts:src/routes/todos/+server.ts showLineNumbers
 import { json } from '@sveltejs/kit'
-import type { RequestHandler } from './$types'
-
 import { addTodo, removeTodo } from '$lib/server/database'
 
 type Data = {
@@ -233,7 +227,7 @@ type Data = {
   errors: Record<string, string>
 }
 
-export const POST: RequestHandler = async ({ request }) => {
+export async function POST({ request }) {
   const formData = await request.formData()
   const todo = String(formData.get('todo'))
 
@@ -253,7 +247,7 @@ export const POST: RequestHandler = async ({ request }) => {
   return json(data)
 }
 
-export const DELETE: RequestHandler = async ({ request }) => {
+export async function DELETE({ request }) {
   const formData = await request.formData()
   const todoId = Number(formData.get('id'))
 
@@ -267,10 +261,9 @@ For the `todoId` I used a hidden input field to get the id for the to-do when lo
 
 Let's go back to `+page.svelte` and create `addTodo` and `removeTodo` functions and update the UI based on the response.
 
-```html:routes/todos/+page.svelte showLineNumbers
+```html:src/routes/todos/+page.svelte showLineNumbers
 <script lang="ts">
   import { invalidateAll } from '$app/navigation'
-  import type { PageData } from './$types'
 
   // we need the same type
   type Data = {
@@ -278,7 +271,7 @@ Let's go back to `+page.svelte` and create `addTodo` and `removeTodo` functions 
     errors: Record<string, string>
   }
 
-  export let data: PageData
+  export let data
 
   // used in the template
   let form: Data
@@ -364,10 +357,8 @@ This is why you should use SvelteKit form actions and in the next section I'm go
 
 Inside a standalone `+server.ts` endpoint you can use functions that map to HTTP verbs like `GET` or `POST` but [form actions](https://kit.svelte.dev/docs/form-actions) take this idea a step further and you can define methods that map to an action inside a `+page.server.ts` file.
 
-```ts:+page.server.ts showLineNumbers
-import type { Actions } from './$types'
-
-export const actions: Actions = {
+```ts:src/routes/+page.server.ts showLineNumbers
+export const actions = {
   default: async (event) => {
   // ...
   }
@@ -413,18 +404,17 @@ Fetching data for the page using the `load` function is the same but now you can
 
 Let's start with creating actions for adding, removing and clear to-do items.
 
-```ts:routes/todos/+page.server.ts showLineNumbers
-import type { PageServerLoad } from './$types'
-import { fail, type Actions } from '@sveltejs/kit'
+```ts:src/routes/todos/+page.server.ts showLineNumbers
+import { fail } from '@sveltejs/kit'
 
 import { addTodo, clearTodos, getTodos, removeTodo } from '$lib/server/database'
 
-export const load: PageServerLoad = async () => {
+export async function load() {
   const todos = getTodos()
   return { todos }
 }
 
-export const actions: Actions = {
+export const actions = {
   addTodo: async ({ request }) => {
     const formData = await request.formData()
     const todo = String(formData.get('todo'))
@@ -455,12 +445,10 @@ You can already see how much less code you have to write and SvelteKit handles r
 
 The action responds with data that's available through the `form` property and `$page.form` store and reruns the `load` function for the page.
 
-```html:routes/todos/+page.svelte showLineNumbers
+```html:src/routes/todos/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { ActionData, PageData } from './$types'
-
-  export let data: PageData
-  export let form: ActionData
+  export let data
+  export let form
 </script>
 
 <ul>
@@ -535,13 +523,12 @@ You're going to notice each time you add or remove a to-do the page reloads. Thi
 
 Remember the first example how we had to do everything by hand? SvelteKit does that for you and wraps everything in a neat `use:enhance` [Svelte action](https://svelte.dev/tutorial/actions) (unrelated to form actions) that does the same thing.
 
-```html:routes/todos/+page.svelte {2, 13, 21} showLineNumbers
+```html:src/routes/todos/+page.svelte {2, 12, 20} showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
-  import type { ActionData, PageData } from './$types'
 
-  export let data: PageData
-  export let form: ActionData
+  export let data
+  export let form
 </script>
 
 <ul>
@@ -590,13 +577,12 @@ If you want to learn how it works you can look at [form.js](https://github.com/s
 
 You can customize the behavior of `use:enhance` by providing a submit function that runs before the form is submitted and can return a callback that has access to the result.
 
-```html:routes/todos/+page.svelte showLineNumbers
+```html:src/routes/todos/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance, type SubmitFunction } from '$app/forms'
-  import type { ActionData, PageData } from './$types'
 
-  export let data: PageData
-  export let form: ActionData
+  export let data
+  export let form
 
   const addTodo: SubmitFunction = (input) => {
     // do something before the form submits
@@ -631,13 +617,12 @@ You can't always rely on a fast response from the server in which case the user 
 
 I defined a `sleep` function to simulate a slow response which I'm going to use inside the `addTodo` action.
 
-```ts:routes/todos/+page.server.ts {11-13, 24} showLineNumbers
-import type { PageServerLoad } from './$types'
-import { fail, type Actions } from '@sveltejs/kit'
+```ts:src/routes/todos/+page.server.ts {10-12, 23} showLineNumbers
+import { fail } from '@sveltejs/kit'
 
 import { addTodo, getTodos, removeTodo } from '$lib/server/database'
 
-export const load: PageServerLoad = async () => {
+export async function load() {
   const todos = getTodos()
   return { todos }
 }
@@ -646,7 +631,7 @@ async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-export const actions: Actions = {
+export const actions = {
   addTodo: async ({ request }) => {
     const formData = await request.formData()
     const todo = String(formData.get('todo'))
@@ -674,13 +659,12 @@ export const actions: Actions = {
 
 Using what we know I'm going to set `loading = true` before the form submits and when it's done we can set `loading = false`.
 
-```html:routes/todos/+page.svelte {8, 11, 13-16, 38-40} showLineNumbers
+```html:src/routes/todos/+page.svelte {7, 10, 12-15, 37-39} showLineNumbers
 <script lang="ts">
   import { enhance, type SubmitFunction } from '$app/forms'
-  import type { ActionData, PageData } from './$types'
 
-  export let data: PageData
-  export let form: ActionData
+  export let data
+  export let form
 
   let loading = false
 
@@ -738,7 +722,7 @@ I'm going to show you how you can validate a form using the popular schema valid
 
 I'm going to create a `routes/login` route using the first example but I'm going to add the `required` attribute for the input fields.
 
-```html:routes/login/+page.svelte showLineNumbers
+```html:src/routes/login/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
 </script>
@@ -771,10 +755,10 @@ As you can see there is no rule what you should return and now you can do `form?
 
 Let's add the validation inside the default form action.
 
-```ts:routes/login/+page.server.ts showLineNumbers
-import { fail, redirect, type Actions } from '@sveltejs/kit'
+```ts:src/routes/login/+page.server.ts showLineNumbers
+import { fail, redirect } from '@sveltejs/kit'
 
-export const actions: Actions = {
+export const actions = {
   default: async ({ request }) => {
     // get the form data
     const formData = await request.formData()
@@ -811,12 +795,11 @@ export const actions: Actions = {
 
 This can now we be used in the template.
 
-```html:routes/login/+page.svelte showLineNumbers
+```html:src/routes/login/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
-  import type { ActionData } from './$types'
 
-  export let form: ActionData
+  export let form
 </script>
 
 <form method="POST" use:enhance>
@@ -854,11 +837,11 @@ npm i z zod-form-data
 
 I'm going to change the previous example to use Zod for validation.
 
-```ts:routes/login/+page.server.ts showLineNumbers
-import { fail, redirect, type Actions } from '@sveltejs/kit'
+```ts:src/routes/login/+page.server.ts showLineNumbers
+import { fail, redirect } from '@sveltejs/kit'
 import { zfd } from 'zod-form-data'
 
-export const actions: Actions = {
+export const actions = {
   default: async ({ request }) => {
     // get the form data
     const formData = await request.formData()
@@ -912,12 +895,11 @@ I mentioned how actions can be invoked from other pages and in this example I wa
 
 If you submit the form it kinda works but you don't get the validation data back because `form` is never updated.
 
-```html:routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
-  import type { ActionData } from './$types'
 
-  export let form: ActionData
+  export let form
 </script>
 
 <form method="POST" action="/login" use:enhance>
@@ -943,12 +925,11 @@ If you submit the form it kinda works but you don't get the validation data back
 
 Let's try using the `update` method and see if it works.
 
-```html:routes/+page.svelte {2, 7-11, 14} showLineNumbers
+```html:src/routes/+page.svelte {2, 6-10, 13} showLineNumbers
 <script lang="ts">
   import { enhance, type SubmitFunction } from '$app/forms'
-  import type { ActionData } from './$types'
 
-  export let form: ActionData
+  export let form
 
   const login: SubmitFunction = () => {
     return async ({ update }) => {
@@ -964,12 +945,11 @@ Let's try using the `update` method and see if it works.
 
 That won't work because `update` can't update `form` and `$form.page` from anywhere else but you can use `applyAction` and pass it `result` to customize the `use:enhance` behavior further.
 
-```html:routes/+page.svelte {2, 8-10} showLineNumbers
+```html:src/routes/+page.svelte {2, 7-9} showLineNumbers
 <script lang="ts">
   import { applyAction, enhance, type SubmitFunction } from '$app/forms'
-  import type { ActionData } from './$types'
 
-  export let form: ActionData
+  export let form
 
   const login: SubmitFunction = () => {
     return async ({ result }) => {
