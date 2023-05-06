@@ -94,7 +94,7 @@ export async function load() {
 }
 ```
 
-```html:src/routes/+page.ts showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <!--
   A component gets rendered twice:
   - first time on the server to get data using SSR
