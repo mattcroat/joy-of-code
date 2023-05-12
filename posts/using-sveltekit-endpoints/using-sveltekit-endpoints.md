@@ -403,7 +403,7 @@ export async function GET({ url }) {
 
 You can pass the max range you want like `/api/random-number?max=10` or it defaults to `1`.
 
-```html:src/routes/+server.ts showLineNumbers
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	let randomNumber = 0
 

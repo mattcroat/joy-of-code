@@ -591,7 +591,7 @@ I made an awesome SvelteKit data flow cheat sheet to go over what we learned whi
 
 You can get the SVG version of the SvelteKit data flow cheat sheet as a light or dark version:
 
-- [SvelteKit Data Flow (Light)](https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts/sveltekit-data-flow/assets/sveltekit-data-flow-light.svg)
-- [SvelteKit Data Flow (Dark)](https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts/sveltekit-data-flow/assets/sveltekit-data-flow-dark.svg)
+- [SvelteKit Data Flow (Light)](https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts/sveltekit-data-flow/cheatsheet/sveltekit-data-flow-light.svg)
+- [SvelteKit Data Flow (Dark)](https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts/sveltekit-data-flow/cheatsheet/sveltekit-data-flow-dark.svg)
 
 I had a lot of fun working on this and I think it's a huge missing piece in the SvelteKit education out there, so I hope it was helpful.
