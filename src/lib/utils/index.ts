@@ -5,5 +5,8 @@ export function formatDate(
 	dateStyle: DateStyle = 'medium',
 	locales = 'en'
 ) {
-	return new Intl.DateTimeFormat(locales, { dateStyle }).format(new Date(date))
+	// safari is mad about dashes in the date
+	const dateToFormat = new Date(date.replaceAll('-', '/'))
+	const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle })
+	return dateFormatter.format(dateToFormat)
 }
