@@ -2,7 +2,7 @@
 title: Understand How Data Flows In SvelteKit
 description: Learn how data flows in your SvelteKit app.
 slug: sveltekit-data-flow
-published: 2023-05-12
+published: '2023-05-12'
 category: sveltekit
 ---
 
@@ -14,9 +14,9 @@ category: sveltekit
 
 Understanding how data flows through your app in SvelteKit can be confusing because SvelteKit blurs the line between your backend and frontend.
 
-In another post I wrote about [page versus standalone endpoints in SvelteKit](https://joyofcode.xyz/using-sveltekit-endpoints) if you need a better understanding through examples when to use each.
+> 🔥 If you want to learn SvelteKit you can watch the [Complete SvelteKit Course For Building Modern Web Apps](https://www.youtube.com/watch?v=MoGkX4RvZ38) on YouTube and [support my work by becoming a patron](https://www.patreon.com/joyofcode).
 
-> 🔥 If you want to learn SvelteKit you can watch the [Complete SvelteKit Course For Building Modern Web Apps](https://www.youtube.com/watch?v=MoGkX4RvZ38) on YouTube. You can support my work and [become a patron](https://www.patreon.com/joyofcode).
+In another post I wrote about [page versus standalone endpoints in SvelteKit](https://joyofcode.xyz/using-sveltekit-endpoints) if you need a better understanding through examples when to use each.
 
 By the end you should have a clear understanding how data flows through your routes but also how you can pass data around in SvelteKit.
 
@@ -24,13 +24,13 @@ By the end you should have a clear understanding how data flows through your rou
 
 Before I start talking about data flow it's important you understand what each file related to routing in SvelteKit does.
 
-SvelteKit uses file-based routing and splits routes in directories where `src/routes/posts` creates a new route `/posts`.
-
-> 🐿️ I have included `app.html` because you can include scripts inside which run before anything else on the client which is useful if you need to get a user's preference from [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to set a theme.
+SvelteKit uses file-based routing and splits routes in directories where `src/routes/posts/+page.svelte` creates a new `/posts` route.
 
 | File     | Responsibility                          |
 | -------- | --------------------------------------- |
 | app.html | HTML template SvelteKit uses for routes |
+
+> 🐿️ `app.html` is useful if you need to run some code before the page component mounts, like checking the user's theme from [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to set a theme.
 
 A page is just a Svelte component. The `load` function inside `+page.ts` runs on the server and client but if you need to use a secret, talk to a database, or write to a file add `.server`, so the `load` function only runs on the server.
 
@@ -42,7 +42,11 @@ A page is just a Svelte component. The `load` function inside `+page.ts` runs on
 | +page.ts        | Data for `+page.svelte`                      |
 | +page.svelte    | Page with `export let data` prop from `load` |
 
-Layout wraps around everything using `<slot />` and you can have nested layouts. It also passes the data to child routes through `export let data`. Use `+layout.ts` to get the data for the page but if you need to use a secret, talk to a database, or write to a file add `.server` same as for a page.
+Layout wraps around your page using `<slot />` and you can have nested layouts.
+
+Layouts also pass the data to child routes through `export let data`.
+
+Use `+layout.ts` to get the data for the page but if you need to use a secret, talk to a database, or write to a file append `.server` to the file.
 
 | File              | Responsibility                                 |
 | ----------------- | ---------------------------------------------- |
@@ -52,7 +56,7 @@ Layout wraps around everything using `<slot />` and you can have nested layouts.
 
 A standalone API endpoint named `+server.ts` can return **anything** and can be used by multiple routes. You can export `GET`, `POST`, `PUT`, `PATCH`, `DELETE` functions that map to the same [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).
 
-> 🐿️ If you need to send data from the browser to the server use [SvelteKit form actions](https://learn.svelte.dev/tutorial/the-form-element).
+> 🐿️ If you need to send data from the browser to the server it's easier to use [SvelteKit form actions](https://learn.svelte.dev/tutorial/the-form-element).
 
 | File       | Responsibility          |
 | ---------- | ----------------------- |
@@ -85,13 +89,22 @@ To understand the order in which things run I've created an example with every f
 
 I've included a working example (you have to enable cookies) you can play around with. You can [find the project files on GitHub](https://github.com/joysofcode/sveltekit-data-flow).
 
-I'm using the package `chalk` to style the output in the terminal with some helper functions I wrote inside `lib/utils/log.ts` but you can use a regular `console.log()` method.
+I'm using the package `chalk` to style the output in the terminal and browser console with some helper functions I wrote inside `lib/utils/log.ts` but you can use a regular `console.log()` method.
 
 Here is the SvelteKit project structure.
 
 ```shell:project structure
 src/
+src/
 ├── routes/
+│   ├── actions
+│   ├── api/secret
+│   ├── error
+│   ├── locals
+│   ├── nested/route
+│   ├── redirect
+│   ├── stores
+│   ├── +error.svelte
 │   ├── +layout.server.ts
 │   ├── +layout.svelte
 │   ├── +layout.ts
@@ -105,11 +118,11 @@ src/
 
 There's a lot of files, so I'm only going to reference the relevant code here but you can open the example, or look at the project repository.
 
-When you enter a URL in the browser like [https://joyofcode.xyz/](https://joyofcode.xyz/) and navigate to it you make a `GET` request to the server (SvelteKit).
+When you enter a URL in the browser like [https://joyofcode.xyz/](https://joyofcode.xyz/) you're making a `GET` request to the server (SvelteKit).
 
-The first that runs is the optional `hooks.server.ts` file where the `handle` function listens to **requests** and sends a **response**.
+You can listen to every **request** using the optional `hooks.server.ts` file inside the `handle` function which listens to **requests** and sends a **response** based on the request.
 
-If you don't have a `hooks.server.ts` file the default behavior is to resolve the request.
+The default behavior is to resolve the request.
 
 ```ts:src/hooks.server.ts showLineNumbers
 export async function handle({ event, resolve }) {
@@ -117,11 +130,11 @@ export async function handle({ event, resolve }) {
 }
 ```
 
-> 🐿️ Notice how the `event` object is the default argument for `load` functions and functions inside `+server.ts` files. You can send extra data to routes through `event.locals`.
+> 🐿️ The `event` object is the default argument for `load` functions and functions inside `+server.ts` files. You can send extra data to routes through `event.locals`.
 
-I'm going to use it as an entry point to log when a request has been made. Everything else in our app is going to happen in-between the start of the request until it's resolved and the page is ready to be shown.
+Everything in a SvelteKit app is going to happen in-between the **request** and **response** until the page or resource is ready.
 
-> 🐿️ If you want to learn how to use SvelteKit hooks you can [learn SvelteKit hooks through example](https://joyofcode.xyz/sveltekit-hooks).
+> 🐿️ You can learn more about [SvelteKit hooks through example](https://joyofcode.xyz/sveltekit-hooks).
 
 ```ts:src/hooks.server.ts showLineNumbers
 import log from '$lib/utils/log'
@@ -137,9 +150,9 @@ export async function handle({ event, resolve }) {
 }
 ```
 
-Assuming the development server is running, if you open `http://localhost:5173/` what order do you expect the logs to be in?
+Start the development server with `pnpm run dev` and open `http://localhost:5173/`.
 
-First the server-only code is going to run which you can observe in the terminal.
+First the **server-only** code runs which you can observe in the terminal.
 
 ```shell:terminal
 📣 NEW REQUEST IS BEING MADE FROM /
@@ -163,7 +176,7 @@ As expected the order is:
 
 The server-only files run first, after that other `load` functions, then the layout and pages. This is because pages are rendered twice, once on the server (SSR) and the second time on the client (hydration).
 
-After this is done we start doing work in the client. You can see the order if you look at the console inside your developer tools.
+Time to start work in the browser where you can see the order if you look at the browser console inside your developer tools which you can open with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>.
 
 ```shell:console showLineNumbers
 app.html
@@ -181,7 +194,7 @@ app.html
 
 As you might expect `+layout.ts` should run before `+page.ts` and `+layout.svelte` should be mounted before `+page.svelte`.
 
-If you're curious this is an approximation of how it works.
+If you're curious this is an approximation of how a layout and components work in SvelteKit.
 
 ```html:example.html showLineNumbers
 <Layout {data}>
@@ -198,11 +211,11 @@ If you're curious this is an approximation of how it works.
 </Layout>
 ```
 
-## SvelteKit Does Server-Side Rendering (SSR) And Client-Side Routing (CSR)
+## SvelteKit Does Server-Side Rendering (SSR) And Client-Side Rendering (CSR)
 
 By default when you open a page for the first time meaning you enter it in the URL and press enter (or refresh a page) SvelteKit is going to server-side render your page meaning it has everything it needs to return the HTML.
 
-This is awesome but once you're on the page and if you navigate to another link it would cause a refresh using SSR, because you're not using JavaScript for rendering (this is how PHP behaves).
+This is awesome but if you navigate to another page it would cause a refresh using SSR if you're not using JavaScript for client-side navigation (this is how a multi-page app or MPA like PHP behaves).
 
 To demonstrate this I'm going to type `http://localhost:5173/` in the browser and press enter which should give us what we've seen before.
 
@@ -228,7 +241,7 @@ app.html
 
 When the SvelteKit app loads it's going to initialize a client-side router that uses JavaScript and client-side rendering (CSR) but only does server-side rendering (SSR) when you visit the page for the first time or refresh it.
 
-To demonstrate this I'm going to go to any other route and from there I'm going to navigate to **Home** inside the browser which is going to use client-side navigation.
+To demonstrate this I'm going to go to any other route and from there I'm going to navigate to **home** inside the browser which is going to use client-side navigation.
 
 ```shell:terminal showLineNumbers
 📣 NEW REQUEST IS BEING MADE FROM /
@@ -242,7 +255,7 @@ hooks.server.ts
 +page.svelte
 ```
 
-Hooks run because it's a new request and SvelteKit is smart enough to only run the `load` functions it has to and `+layout.svelte` is already mounted, so on navigation the only thing that gets destroyed (unmounted) and created (mounted) is the `+page.svelte` component.
+SvelteKit is smart enough to only run the `load` functions it has to and `+layout.svelte` is already mounted, so on navigation the only thing that gets destroyed (unmounted) and created (mounted) is the `+page.svelte` component.
 
 > 🐿️ SvelteKit tucks the data in the HTML page for reuse inside a `<script>` tag. If you look at the page source you can find the JSON for the page data inside `data`. This is your page endpoint that starts with `__data.json` in the network tab and you open it by going to `http://localhost:5173/__data.json`.
 
@@ -252,9 +265,9 @@ I want to emphasize how the point is not that your site should work **without Ja
 
 ## How Data Is Passed Through Routes
 
-99% of the time you're going to have a `+page|layout.svelte` file and either use `+page|layout.ts`, or `+page|layout.server.ts` for a given route (one `load` function).
+Most of the time you're going to have a `+page|layout.svelte` file and a `+page|layout.ts`, or `+page|layout.server.ts` file for a given route (using one `load` function).
 
-That being said if you have `+page|layout.svelte`, `+page|layout.server.ts` and `+page|layout.ts` you have multiple `load` functions that return data in which case the **last** `load` function that runs wins.
+That being said you could have multiple `load` functions if you have `+page|layout.svelte`, `+page|layout.server.ts` and `+page|layout.ts` in which case the **last `load` function always wins**.
 
 The data flows top to bottom:
 
@@ -307,36 +320,38 @@ export async function load({ data }) {
 }
 ```
 
-The same is true for `+page.server.ts` and `+page.ts`.
+On the other hand **server `load`** functions don't have a `data` prop but receive the data from the layout.
 
 ```ts:src/routes/+page.server.ts showLineNumbers
-export async function load({ data }) {
-  // return new data
+export async function load() {
   return {
-    ...data,
     c: 3
   }
 }
 ```
 
-The last `load` function that runs **wins**.
+The return from the `load` function is going to have the data from the layout and the new prop `{ a: 1, b: 2, c: 3 }`.
+
+You could change everything you received so far, or combine the received data with new data.
 
 ```ts:src/routes/+page.ts showLineNumbers
 export async function load({ data }) {
-  // you could change everything so far
-  // return {
-  //   a: 10,
-  //   b: 20,
-  //   c: 30,
-  // }
+  // a) change the props
+  return {
+    a: 10,
+    b: 20,
+    c: 30,
+  }
 
-  // ...or return new data
+  // b) return new data
   return {
     ...data,
     d: 4
   }
 }
 ```
+
+The last `load` function that runs **wins**.
 
 The page output should be the same for `+page.server` data and the `$page.data` store.
 
@@ -433,7 +448,7 @@ export async function handle({ event, resolve }) {
 
 Now you can use validation methods from `auth` inside `load` functions and `+server.ts` handlers through `locals.auth`.
 
-> 🚨 Careful that you **never** send sensitive information using `event.locals`. If you're doing your own authentication **never** return the password but only the user information.
+> 🚨 Careful that you **never** send sensitive information using `event.locals` and only send the information for the user.
 
 Let's say I have a secret route and I only want to show it to the user if the secret is banana, otherwise I'm going to redirect them.
 
@@ -454,8 +469,6 @@ declare global {
     }
 	}
 }
-
-export {}
 ```
 
 Inside `+page.server.ts` we can check `locals` and show data on the page or redirect the user.
@@ -594,4 +607,6 @@ You can get the SVG version of the SvelteKit data flow cheat sheet as a light or
 - [SvelteKit Data Flow (Light)](https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts/sveltekit-data-flow/cheatsheet/sveltekit-data-flow-light.svg)
 - [SvelteKit Data Flow (Dark)](https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts/sveltekit-data-flow/cheatsheet/sveltekit-data-flow-dark.svg)
 
-I had a lot of fun working on this and I think it's a huge missing piece in the SvelteKit education out there, so I hope it was helpful.
+I hope this helped you understand how data flows in SvelteKit and answered any questions you might have.
+
+There's always more than one way of doing things, so don't concern yourself with the "right way" of doing things and go make some happy accidents.

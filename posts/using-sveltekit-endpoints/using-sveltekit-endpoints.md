@@ -2,7 +2,7 @@
 title: Page Versus Standalone Endpoints In SvelteKit
 description: Learn when to use page versus standalone API endpoints in SvelteKit.
 slug: using-sveltekit-endpoints
-published: 2023-05-05
+published: '2023-05-05'
 category: sveltekit
 ---
 
@@ -12,32 +12,36 @@ category: sveltekit
 
 ## Oops, I Guess We’re Full-Stack Developers Now
 
-{% embed src="https://stackblitz.com/github/joysofcode/using-sveltekit-endpoints?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Using SvelteKit Endpoints" title="Using SvelteKit Endpoints" %}
+Based on the amount of questions I get the most confusing part of SvelteKit is when to use standalone endpoints versus using page endpoints.
 
-Based on the amount of questions I get the most confusing part of SvelteKit for most people is when to use standalone endpoints compared to using page endpoints.
-
-> 🔥 If you started learning SvelteKit and feel lost you can watch [Complete SvelteKit Course For Building Modern Web Apps](https://www.youtube.com/watch?v=MoGkX4RvZ38) on YouTube or read and watch the parts here. You can support my work by subscribing or [becoming a Patreon](https://patreon.com/joyofcode).
+> 🔥 If you started learning SvelteKit and feel lost you can watch [Complete SvelteKit Course For Building Modern Web Apps](https://www.youtube.com/watch?v=MoGkX4RvZ38) on YouTube or read and watch the parts here. You can support my work by subscribing and [becoming a patron](https://patreon.com/joyofcode).
 
 This is not surprising because SvelteKit blurs the line between frontend and backend which means it's not clear how the data flows.
 
-There's a great talk by [@chriscoyier](https://twitter.com/chriscoyier) titled [Oops, I Guess We’re Full-Stack Developers Now](https://www.youtube.com/watch?v=lFOfQsi5ye0) you should watch which observed this trend early.
+There's a great talk by [@chriscoyier](https://twitter.com/chriscoyier) titled [Oops, I Guess We’re Full-Stack Developers Now](https://www.youtube.com/watch?v=lFOfQsi5ye0) worth watching which observed this trend early.
 
-In the next section I'm going to briefly go over rendering methods you might see and why they're used and how data loading fits into it.
+{% youtube id="lFOfQsi5ye0" title="Oops, I Guess We’re Full-Stack Developers Now" %}
 
 **Before you continue** I want to you to take a deep breath, relax and stop caring about best practices because it's a pointless pursuit many are paralyzed by when learning and instead **try and break things**.
 
+## Try It Yourself
+
+If you're reading this post and haven't seen the video here are the examples for everything I used in the video, so you can try it out yourself.
+
+{% embed src="https://stackblitz.com/github/joysofcode/using-sveltekit-endpoints?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Using SvelteKit Endpoints" title="Using SvelteKit Endpoints" %}
+
 ## Client-Side Rendering
 
-You might be familiar with the next example if you worked on a single page application (SPA) which uses client-side rendering (CSR).
+I'm going to briefly go over rendering methods, so you understand how data loading fits into it.
+
+You might be familiar with the next example if you ever worked on a single page application (SPA) which uses client-side rendering (CSR).
 
 {% img src="csr.webp" alt="Client-side rendering" %}
 
-```html:src/routes/+page.svelte showLineNumbers
-<!--
-  Typical single-page application style which uses JavaScript
-  to render content which is known as client-side rendering
--->
+This is a typical single-page application style which uses JavaScript
+to render content also known as client-side rendering.
 
+```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	async function getPosts() {
 		const response = await fetch('https://jsonplaceholder.typicode.com/posts')
@@ -60,8 +64,6 @@ You might be familiar with the next example if you worked on a single page appli
 {/await}
 ```
 
-This separation is clear but when you're using SvelteKit the line between the frontend and backend is blurred.
-
 Keep in mind this is a **valid** approach even in SvelteKit that has a focus on **server-side rendering** if you ever need to run some code on the client (I use this method to get the [latest views count for the posts](https://github.com/mattcroat/joy-of-code/blob/5bc65f2fed2ae81f67a9f28c3c2b74dfe8bf8069/src/lib/ui/posts.svelte) while the posts are prerendered).
 
 That being said this is is a worse user experience because JavaScript has to load for the page first and you can't make credentialed requests without a server.
@@ -70,18 +72,16 @@ That being said this is is a worse user experience because JavaScript has to loa
 
 A page in SvelteKit follows the rule of two like the Sith in Star Wars where the master `+page.svelte` file always has an apprentice `+page.ts` or `+page.server.ts` file to get the data for the page.
 
-> 🐿️ I want to emphasize how these two files are always together. While you can use `+page.svelte` on its own a `+page.ts` or `+page.server.ts` file does **nothing** on its own.
+> 🐿️ While you can use `+page.svelte` on its own a `+page.ts` or `+page.server.ts` file does **nothing** on its own.
 
-If you want to load the data before rendering it you have to use a **page endpoint** which returns HTML on the first page visit. It also has JSON data used when the client-side router loads in SvelteKit for a SPA experience.
+If you want to load the data before rendering the page you have to use a **page endpoint** which returns HTML on the first page visit and uses JSON data when the client-side router loads in SvelteKit for a SPA experience.
 
 {% img src="ssr.webp" alt="Server-side rendering" %}
 
-```ts:src/routes/+page.ts showLineNumbers
-/*
-  use `+page.server.ts` if you need access to the
-  file system, database, or have secrets
-*/
+You can use use `+page.server.ts` if you need access to the
+file system, database, or have secrets.
 
+```ts:src/routes/+page.ts showLineNumbers
 async function getPosts() {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts')
   return response.json()
@@ -94,14 +94,13 @@ export async function load() {
 }
 ```
 
-```html:src/routes/+page.svelte showLineNumbers
-<!--
-  A component gets rendered twice:
-  - first time on the server to get data using SSR
-  - second time on the client to restore JavaScript on the page
-    in a process called hydration
--->
+The page component gets rendered twice:
 
+- first time on the server to get data using SSR
+- second time on the client to restore JavaScript on the page
+  in a process called hydration
+
+```html:src/routes/+page.svelte showLineNumbers
 <script>
   export let data
 </script>
@@ -113,7 +112,7 @@ export async function load() {
 </ul>
 ```
 
-Page endpoints are great to render dynamic data.
+Page endpoints are great for rendering dynamic data.
 
 {% img src="dynamic.webp" alt="Dynamic data" %}
 
@@ -240,7 +239,7 @@ This is awesome because besides returning regular data you can use `+page.ts` to
 ```html:src/routes/counter.svelte showLineNumbers
 <script lang="ts">
 	let count = 0
-	let increment = () => (count += 1)
+	let increment = () => count += 1
 </script>
 
 <button on:click={increment}>
@@ -269,7 +268,7 @@ export async function load() {
 <svelte:component this={data.component} />
 ```
 
-And using `+page.server.ts` you can only return data that can be serialized with **devalue**.
+Using `+page.server.ts` you can only return data that can be serialized with **devalue**.
 
 ```ts:src/routes/+page.server.ts showLineNumbers
 export async function load() {
@@ -377,11 +376,11 @@ You could use a **standalone endpoint** for forms but then you have to manage da
 
 ## Standalone Endpoints
 
-A standalone endpoint can be used by **multiple routes** of your app and it can even serve as a **REST API** inside your app our outside your app if you include [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) headers.
+A standalone endpoint can be used by **multiple routes** of your app and can even serve as a **REST API** inside your app our outside your app if you include [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) headers.
 
 {% img src="standalone.webp" alt="Standalone endpoint" %}
 
-You have access to every [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) inside `+server.ts` to make a complete REST API and it only runs on the server.
+You have access to every [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) inside `+server.ts` to make a complete REST API.
 
 ```ts:src/routes/example/+server.ts showLineNumbers
 export async function GET(requestEvent) {}
@@ -452,7 +451,6 @@ export async function GET() {
 	pdf.text('Hey friends! 👋', 100, 100)
 	pdf.end()
 
-	// @ts-ignore
 	return new Response(pdf, {
 		headers: {
 			'Content-type': 'application/pdf',
@@ -497,3 +495,7 @@ One last thing worth mentioning are **server-only modules** which are great for 
 I have an entire post on [using environment variables with SvelteKit](https://joyofcode.xyz/sveltekit-environment-variables) if you need it.
 
 Besides using environment variables for secrets you can also make using them more secure by using a `.server` file like `secrets.server.ts` or placing them inside a `lib/server` folder you can import as `$lib/server/secrets.ts`.
+
+You should now have more confidence and understanding how to use SvelteKit endpoints.
+
+You can learn more about [SvelteKit API endpoints and loading data for pages](https://joyofcode.xyz/sveltekit-loading-data) and [understand how data flows in SvelteKit](https://joyofcode.xyz/sveltekit-data-flow).
