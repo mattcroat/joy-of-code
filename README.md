@@ -2,7 +2,7 @@
 
 ![Bob Ross](https://i.giphy.com/media/d31vTpVi1LAcDvdm/giphy.gif)
 
-## 🧑‍🎨 What is Joy of Code?
+## 🧑‍🎨 About
 
 [Joy of Code](https://joyofcode.xyz/) is a digital garden growing curious minds focused on web development and web design.
 
