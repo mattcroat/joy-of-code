@@ -2,9 +2,14 @@
 	import Menu from './menu.svelte'
 	import Preferences from './preferences/index.svelte'
 	import * as config from '$lib/site/config'
+
+	let scrollY: number
+	$: sticky = scrollY > 0
 </script>
 
-<header>
+<svelte:window bind:scrollY />
+
+<header class:sticky>
 	<div class="container">
 		<div class="logo">
 			<a href="/">{config.siteName}</a>
@@ -22,8 +27,14 @@
 		position: sticky;
 		top: 0;
 		padding: var(--spacing-16);
-		background-image: linear-gradient(hsl(0 0% 0% / 40%), transparent);
 		z-index: 10;
+	}
+
+	.sticky {
+		background-color: var(--clr-bg);
+		color: var(--clr-primary);
+		box-shadow: var(--shadow-md);
+		transition: background-color 0.3s ease, color 0.3s ease;
 	}
 
 	.container {
