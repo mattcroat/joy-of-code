@@ -283,7 +283,7 @@ import type { Writable } from 'svelte/store'
 
 export type AccordionOptions = { collapse: boolean }
 export type ActiveId = string | null
-export type collapseContext = boolean
+export type CollapseContext = boolean
 export type ActiveIdContext = Writable<ActiveId>
 ```
 
@@ -294,18 +294,18 @@ import type {
 	AccordionOptions,
 	ActiveId,
 	ActiveIdContext,
-	collapseContext
+	CollapseContext
 } from './types'
 
 const activeComponentId = writable<ActiveId>(null)
 
 export function setAccordionOptions({ collapse }: AccordionOptions) {
-	setContext<collapseContext>('collapse', collapse)
+	setContext<CollapseContext>('collapse', collapse)
 	setContext<ActiveIdContext>('active', activeComponentId)
 }
 
 export function getAccordionOptions() {
-	const collapse = getContext<collapseContext>('collapse')
+	const collapse = getContext<CollapseContext>('collapse')
 	const activeComponentId = getContext<ActiveIdContext>('active')
 	return { collapse, activeComponentId }
 }
