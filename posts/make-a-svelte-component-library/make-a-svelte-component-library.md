@@ -73,10 +73,10 @@ In this case I prefer this approach because you're in control of rendering whate
 
 If you're just learning Svelte you're not going to know what you don't know but the more you learn, or if you have any experience with other JavaScript frameworks you're going to develop an intuition for what you can do over time.
 
-Another feature I want is to be able to pass a `colapse` prop to the `<Accordion />` component if I want one `<AccordionItem />` open at a time, and I want to be able to pass an `open` prop to the `<AccordionItem />` item I want to be open by default.
+Another feature I want is to be able to pass a `collapse` prop to the `<Accordion />` component if I want one `<AccordionItem />` open at a time, and I want to be able to pass an `open` prop to the `<AccordionItem />` item I want to be open by default.
 
 ```html:example.svelte showLineNumbers
-<Accordion colapse>
+<Accordion collapse>
   <AccordionItem open>
     <!-- ... -->
   </AccordionItem>
@@ -122,7 +122,7 @@ export { default as AccordionItem } from './accordion-item.svelte'
 	]
 </script>
 
-<Accordion colapse --accordion-width="60ch">
+<Accordion collapse --accordion-width="60ch">
   {#each items as item, i}
     <AccordionItem open={i === 0}>
       <svelte:fragment slot="title">{item.title}</svelte:fragment>
@@ -143,7 +143,7 @@ First edit the `<Accordion />` component.
 ```html:src/lib/components/accordion/accordion.svelte showLineNumbers
 <script lang="ts">
 	// by default more than one accordion can be open
-	export let colapse = false
+	export let collapse = false
 </script>
 
 <div class="accordion">
@@ -222,14 +222,14 @@ That's not so bad, right? 😄
 
 ## Using The Context API
 
-If you want one accordion item open at a time you have to pass `colapse` to every `<AccordionItem />` component. 😅
+If you want one accordion item open at a time you have to pass `collapse` to every `<AccordionItem />` component. 😅
 
 ```html:example.svelte showLineNumbers
 <Accordion>
-  <AccordionItem colapse />
-  <AccordionItem colapse />
-  <AccordionItem colapse />
-  <AccordionItem colapse />
+  <AccordionItem collapse />
+  <AccordionItem collapse />
+  <AccordionItem collapse />
+  <AccordionItem collapse />
 </Accordion>
 ```
 
@@ -238,7 +238,7 @@ To avoid passing data as props to every child component you can use the [context
 The way how the context API works is instead of passing props, you set the context inside a parent component which only the child components can access.
 
 ```html:example.svelte showLineNumbers
-<Accordion colapse>
+<Accordion collapse>
   <AccordionItem />
   <AccordionItem />
   <AccordionItem />
@@ -258,15 +258,15 @@ import { setContext, getContext } from 'svelte'
 
 const activeComponentId = writable(null)
 
-export function setAccordionOptions({ colapse }) {
-	setContext('colapse', colapse)
+export function setAccordionOptions({ collapse }) {
+	setContext('collapse', collapse)
 	setContext('active', activeComponentId)
 }
 
 export function getAccordionOptions() {
-	const colapse = getContext('colapse')
+	const collapse = getContext('collapse')
 	const activeComponentId = getContext('active')
-	return { colapse, activeComponentId }
+	return { collapse, activeComponentId }
 }
 ```
 
@@ -281,9 +281,9 @@ Here's the typed version for the TypeScript nerds.
 ```ts:src/lib/components/accordion/types.ts showLineNumbers
 import type { Writable } from 'svelte/store'
 
-export type AccordionOptions = { colapse: boolean }
+export type AccordionOptions = { collapse: boolean }
 export type ActiveId = string | null
-export type ColapseContext = boolean
+export type collapseContext = boolean
 export type ActiveIdContext = Writable<ActiveId>
 ```
 
@@ -294,20 +294,20 @@ import type {
 	AccordionOptions,
 	ActiveId,
 	ActiveIdContext,
-	ColapseContext
+	collapseContext
 } from './types'
 
 const activeComponentId = writable<ActiveId>(null)
 
-export function setAccordionOptions({ colapse }: AccordionOptions) {
-	setContext<ColapseContext>('colapse', colapse)
+export function setAccordionOptions({ collapse }: AccordionOptions) {
+	setContext<collapseContext>('collapse', collapse)
 	setContext<ActiveIdContext>('active', activeComponentId)
 }
 
 export function getAccordionOptions() {
-	const colapse = getContext<ColapseContext>('colapse')
+	const collapse = getContext<collapseContext>('collapse')
 	const activeComponentId = getContext<ActiveIdContext>('active')
-	return { colapse, activeComponentId }
+	return { collapse, activeComponentId }
 }
 ```
 
@@ -319,10 +319,10 @@ Set the context inside the `<Accordion />` component.
 <script lang="ts">
 	import { setAccordionOptions } from './context'
 
-	export let colapse = false
+	export let collapse = false
 
 	// the context API avoids passing data through components as props
-	setAccordionOptions({ colapse })
+	setAccordionOptions({ collapse })
 </script>
 ```
 
@@ -338,7 +338,7 @@ Get the context values inside `<AccordionItem />` but we also need to give the c
 	const componentId = crypto.randomUUID()
 
 	// get the accordion options using the context api
-	const { colapse, activeComponentId } = getAccordionOptions()
+	const { collapse, activeComponentId } = getAccordionOptions()
 </script>
 ```
 
@@ -358,16 +358,16 @@ I'm going to update the logic inside the `<AccordionItem />` component.
 	}
 
 	function handleClick() {
-		// if `colapse` is passed only one item can be active
-		colapse ? setActive() : toggleOpen()
+		// if `collapse` is passed only one item can be active
+		collapse ? setActive() : toggleOpen()
 	}
 
 	// the accordion item to be open by default
-	$: open && colapse && setActive()
+	$: open && collapse && setActive()
 	// compare if the active id matches the component id
 	$: isActive = $activeComponentId === componentId
-	// if `colapse`, set one item as active, otherwise use `open`
-	$: isOpen = colapse ? isActive : open
+	// if `collapse`, set one item as active, otherwise use `open`
+	$: isOpen = collapse ? isActive : open
 </script>
 
 <div class="accordion-item">
