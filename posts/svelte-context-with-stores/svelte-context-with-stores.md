@@ -1,6 +1,6 @@
 ---
 title: Using The Svelte Context API With Stores
-description: Learn when to use the Svelte context API with stores
+description: Take advantage of composition in Svelte and learn how to use the Svelte context API with Svelte stores.
 slug: svelte-context-with-stores
 published: '2023-06-02'
 category: svelte
@@ -249,7 +249,7 @@ The data from context is only available to the component and its descendants.
 	setCount()
 
   // get the count
-	const count = getCount('count')
+	const count = getCount()
 
 	function updateCount(event: WheelEvent) {
 		event.deltaY < 0 ? ($count += 1) : ($count -= 1)
@@ -266,7 +266,7 @@ The data from context is only available to the component and its descendants.
 <script lang="ts">
 	import { getCount } from './context'
 
-	const count = getCount('count')
+	const count = getCount()
 </script>
 
 <div class="container">
@@ -279,7 +279,7 @@ The data from context is only available to the component and its descendants.
 <script lang="ts">
 	import { getCount } from './context'
 
-	const count = getCount('count')
+	const count = getCount()
 </script>
 
 <div class="container">
