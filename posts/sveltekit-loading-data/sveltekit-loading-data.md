@@ -157,7 +157,7 @@ export default db
 
 You probably used an API like [https://dummyjson.com/posts](https://dummyjson.com/posts) but how does that even work?
 
-Open your developer tools with <kbd>Ctrl</kbd> + <kbd>Shit</kbd> + <kbd>I</kbd> and go to the network tab to examine it (check **disable cache** and reload the page).
+Open your developer tools with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> and go to the network tab to examine it (check **disable cache** and reload the page).
 
 {% img src="headers.webp" alt="DummyJSON headers" %}
 

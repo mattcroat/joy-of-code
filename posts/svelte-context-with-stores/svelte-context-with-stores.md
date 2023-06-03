@@ -14,47 +14,47 @@ category: svelte
 
 In this post I'm mostly going to focus on when you should use the Svelte context API versus Svelte stores, so I assume you at least know what they are.
 
-They might seem like they do the same thing at a glance when using a simple example but at the end of this post you're going to understand what problems they solve.
-
-If you don't know about the [Svelte context API](https://learn.svelte.dev/tutorial/writable-stores) and [Svelte stores](https://learn.svelte.dev/tutorial/context-api) the links should take you to the Svelte tutorial.
+If you're not confident in what the [Svelte context API](https://learn.svelte.dev/tutorial/writable-stores) or [Svelte stores](https://learn.svelte.dev/tutorial/context-api) is, the links should take you to the Svelte tutorial.
 
 I also have a [Svelte state management guide](https://joyofcode.xyz/svelte-state-management) you can watch or read that explains these concepts in detail.
 
-## The Difference Between The Context API And Stores
+If you're familiar, they might seem like they do the same thing at a glance but at the end of this post you're going to understand what problems they solve.
 
-Svelte stores in general are great for global state like a theme set by the user or notifications shared by multiple unrelated components.
+## Context Versus Stores
 
-```ts:example.ts showLineNumbers
+**Svelte stores** are useful if you want reactive values you can subscribe to and update the value when it changes anywhere in your app.
+
+```ts:store.ts showLineNumbers
 import { writable } from 'svelte/store'
 
-// reactive value
-const count = writable(0)
+// subscribable store
+export const count = writable(0)
 
 // update the store
-function updateCount() {
+export function updateCount() {
   count.update(currentCount => currentCount += 1)
 }
 ```
 
-The Context API on the other hand is meant to avoid passing data through components as props to avoid what's known as \*_prop drilling_ and the data is only available to the component and its children.
+The Context API on the other hand is meant to avoid passing data through components as props to avoid what's known as **prop drilling**. The data is only available to the component and its children.
 
-```ts:example.ts showLineNumbers
+```ts:context.ts showLineNumbers
 import { setContext, getContext } from 'svelte'
 
 // sets the value in parent component
 setContext('count', 0)
 
 // access the value inside a child component
-const count = getContext('count')
+export const count = getContext('count')
 ```
 
-**The context isn't reactive**, so you can also pass a Svelte store inside of it.
+**Context isn't reactive**, so you can also pass a Svelte store inside of it.
 
 Let's look at a problem and how it's solved using the Svelte context API with Svelte stores.
 
 ## The Problem
 
-You have probably seen an example that uses component composition like the next example in Svelte.
+You have probably seen an example that uses component composition in Svelte before.
 
 ```html:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
@@ -68,7 +68,7 @@ You have probably seen an example that uses component composition like the next 
 </Grandparent>
 ```
 
-Inside the `<Grandparent />` component I have a simple count variable I update using the mouse scroll wheel.
+Inside the `<Grandparent />` component there's a count variable that's updated by using the mouse scroll wheel.
 
 ```html:src/lib/components/grandparent.svelte showLineNumbers
 <script lang="ts">
@@ -85,9 +85,9 @@ Inside the `<Grandparent />` component I have a simple count variable I update u
 </div>
 ```
 
-If you want to show a value like `count` you have to pass it to every component.
+If you want to show the `count` value in the child components you have to pass it to every child component.
 
-```html:src/routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte {4, 7-9} showLineNumbers
 <script lang="ts">
 	import { Grandparent, Parent, Child } from '$lib/components'
 
@@ -139,7 +139,7 @@ export const count = writable(0)
 
 This cleans up the code nicely.
 
-```html:src/routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte {2, 5-7} showLineNumbers
 <script lang="ts">
 	import { Grandparent, Parent, Child } from '$lib/components'
 </script>
@@ -151,7 +151,7 @@ This cleans up the code nicely.
 </Grandparent>
 ```
 
-```html:src/lib/components/grandparent.svelte showLineNumbers
+```html:src/lib/components/grandparent.svelte {2,5,10} showLineNumbers
 <script lang="ts">
   import { count } from './store'
 
@@ -166,7 +166,7 @@ This cleans up the code nicely.
 </div>
 ```
 
-```html:src/lib/components/parent.svelte showLineNumbers
+```html:src/lib/components/parent.svelte {2,6} showLineNumbers
 <script lang="ts">
     import { count } from './store'
 </script>
@@ -177,7 +177,7 @@ This cleans up the code nicely.
 </div>
 ```
 
-```html:src/lib/components/child.svelte showLineNumbers
+```html:src/lib/components/child.svelte {2,6} showLineNumbers
 <script lang="ts">
   import { count } from './store'
 </script>
@@ -190,7 +190,7 @@ This cleans up the code nicely.
 
 So what is the downside?
 
-```html:src/routes/+page.svelte showLineNumbers
+```html:src/routes/+page.svelte {11-15} showLineNumbers
 <script lang="ts">
 	import { Grandparent, Parent, Child } from '$lib/components'
 </script>
@@ -208,9 +208,9 @@ So what is the downside?
 </Grandparent>
 ```
 
-If you update the value in one component instance, it's going to update the value in other component instances.
+If you update the `count` value in one component instance, it's going to update the `count` value in other component instances.
 
-Every instance of the `<Grandparent />` component and it's descendants shares the same store. 😱
+Every instance of the `<Grandparent />` component and it's descendants shares the same store. 😅
 
 You can solve this problem using the context API.
 
@@ -218,7 +218,7 @@ You can solve this problem using the context API.
 
 The context API is great if you only want to pass data down a component and its descendants.
 
-Because context isn't reactive you can pass a Svelte store you can subscribe to as a value.
+Because **context isn't reactive** you can pass it a Svelte store you can subscribe to.
 
 ```ts:src/lib/components/context.ts showLineNumbers
 import { writable, type Writable } from 'svelte/store'
@@ -237,11 +237,11 @@ export function getCount() {
 }
 ```
 
-Make sure you don't define the `count` store outside the `setCount` function because it's going to be shared by everyone since it's inside the same module.
+Make sure you don't define the `count` store outside the `setCount` function because it's going to be shared by every component instance since it's inside the same module.
 
-The data from context is only available to the component and its descendants.
+The data from context is **only** available to the **component** and its **descendants**.
 
-```html:src/lib/components/grandparent.svelte showLineNumbers
+```html:src/lib/components/grandparent.svelte {2,5,8,16} showLineNumbers
 <script lang="ts">
 	import { setCount, getCount } from './context'
 
@@ -262,7 +262,7 @@ The data from context is only available to the component and its descendants.
 </div>
 ```
 
-```html:src/lib/components/parent.svelte showLineNumbers
+```html:src/lib/components/parent.svelte {2,4,8} showLineNumbers
 <script lang="ts">
 	import { getCount } from './context'
 
@@ -275,7 +275,7 @@ The data from context is only available to the component and its descendants.
 </div>
 ```
 
-```html:src/lib/components/child.svelte showLineNumbers
+```html:src/lib/components/child.svelte {2,4,8} showLineNumbers
 <script lang="ts">
 	import { getCount } from './context'
 
@@ -290,4 +290,4 @@ The data from context is only available to the component and its descendants.
 
 That's it! 😄
 
-I hope you're more confident when to reach for a Svelte store and the Svelte Context API, or both when you need to.
+I hope you're more confident when to reach for a store or context in Svelte, or both when you need to.

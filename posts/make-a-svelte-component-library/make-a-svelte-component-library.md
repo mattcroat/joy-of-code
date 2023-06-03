@@ -256,9 +256,8 @@ I get it if you're not into TypeScript, so here's the version without types firs
 import { writable } from 'svelte/store'
 import { setContext, getContext } from 'svelte'
 
-const activeComponentId = writable(null)
-
 export function setAccordionOptions({ collapse }) {
+	const activeComponentId = writable(null)
 	setContext('collapse', collapse)
 	setContext('active', activeComponentId)
 }
@@ -297,9 +296,9 @@ import type {
 	CollapseContext
 } from './types'
 
-const activeComponentId = writable<ActiveId>(null)
 
 export function setAccordionOptions({ collapse }: AccordionOptions) {
+	const activeComponentId = writable<ActiveId>(null)
 	setContext<CollapseContext>('collapse', collapse)
 	setContext<ActiveIdContext>('active', activeComponentId)
 }
@@ -388,26 +387,23 @@ That's it! 🎉
 
 ## Animating The Accordion
 
-The Svelte `class:name` directive is an easy way to add, or remove a class.
+The Svelte `class:name` directive is an easy way to add, or remove a class for animation.
 
 ```html:src/lib/components/accordion/accordion-item.svelte showLineNumbers
 <div
   class="accordion-caret"
   class:open={isOpen}
-  class:close={!isOpen}
 >
   👉️
 </div>
 
 <style>
-	.open {
-		rotate: 90deg;
+	.accordion-caret {
 		transition: rotate 0.3s ease;
 	}
 
-	.close {
-		rotate: 0deg;
-		transition: rotate 0.3s ease;
+	.open {
+		rotate: 90deg;
 	}
 </style>
 ```
