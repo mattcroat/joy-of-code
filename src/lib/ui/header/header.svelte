@@ -28,13 +28,13 @@
 		top: 0;
 		padding: var(--spacing-16);
 		z-index: 10;
+		transition: background-color 0.3s ease, color 0.3s ease;
 	}
 
 	.sticky {
 		background-color: var(--clr-bg);
 		color: var(--clr-primary);
 		box-shadow: var(--shadow-md);
-		transition: background-color 0.3s ease, color 0.3s ease;
 	}
 
 	.container {
