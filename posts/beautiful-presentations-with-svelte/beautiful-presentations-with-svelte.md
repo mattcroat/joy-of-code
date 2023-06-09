@@ -2,7 +2,7 @@
 title: Create Beautiful Presentations With Svelte
 description: Learn how to create beautiful presentations with Svelte using the HTML presentation framework Reveal.js and Tailwind CSS.
 slug: beautiful-presentations-with-svelte
-published: '2023-06-08'
+published: '2023-06-09'
 category: svelte
 ---
 
@@ -12,9 +12,11 @@ category: svelte
 
 ## Everyone Loves Making Presentations
 
+No one likes making boring presentations and learning an unfamiliar tool at the same time but what if you could use technologies you know and love like HTML, CSS and JavaScript?
+
 {% embed src="https://stackblitz.com/github/joysofcode/beautiful-presentations-with-svelte?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte Deck" title="Svelte Deck" %}
 
-No one likes making presentations because it's boring and you're also learning how to use some unfamiliar tool at the same time but what if you could use technologies you know and love like HTML, CSS and JavaScript?
+You might need to **enable cookies** for the example but the code is also available on [GitHub](https://github.com/joysofcode/beautiful-presentations-with-svelte).
 
 You're going to learn how to make beautiful looking presentations in Svelte with minimal effort using the HTML presentation framework [Reveal.js](https://revealjs.com/) and [Tailwind CSS](https://tailwindcss.com/).
 
@@ -256,9 +258,9 @@ Let's start with creating the `<Slide />` component.
 </section>
 ```
 
-- the `data-auto-animate-id` attribute is useful when you want to break out of an animated slide into a new slide
-- the `data-auto-animate` attribute marks the slide to be animated
-- the `data-auto-animate-restart` option is useful if you want to break from the same group you're animating into a new slide
+- `data-auto-animate-id` attribute is useful when you want to break out of an animated slide into a new slide
+- `data-auto-animate` attribute marks the slide to be animated
+- `data-auto-animate-restart` option is useful if you want to break from the same group you're animating into a new slide
 
 Using `null` is crucial otherwise the data attribute is always going to be present on the element. By saying `animate || null` we check if the prop is passed in which case the data attribute is used otherwise it's not.
 
@@ -319,10 +321,10 @@ The code component is straightforward.
 </pre>
 ```
 
-- the `data-id` attribute is used again to mark the code that needs to be animated
-- the `data-trim` attribute removes whitespace around the code
-- the `data-line-numbers` toggles lines numbers and you can also pass a string to highlight the code
-- the `data-noescape` attribute is useful if you don't want to escape HTML characters (this might be redundant in Svelte's case)
+- `data-id` attribute is used again to mark the code that needs to be animated
+- `data-trim` attribute removes whitespace around the code
+- `data-line-numbers` toggles lines numbers and you can also pass a string to highlight the code
+- `data-noescape` attribute is useful if you don't want to escape HTML characters (this might be redundant in Svelte's case)
 
 Here is how you can use the `<Code />` component to animate a code block.
 
