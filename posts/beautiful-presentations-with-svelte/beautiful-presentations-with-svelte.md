@@ -67,7 +67,7 @@ pnpx svelte-add tailwindcss
 Install Reveal.js including the optional types and fonts.
 
 ```shell:terminal showLineNumbers
-pnpm i reveal.js @types/reveal.js @fontsource/manrop @fontsource/jetbrains-mono
+pnpm i reveal.js @types/reveal.js @fontsource/manrope @fontsource/jetbrains-mono
 ```
 
 Start the development server.
