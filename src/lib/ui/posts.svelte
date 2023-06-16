@@ -61,7 +61,7 @@
 	.cards {
 		display: grid;
 		gap: var(--spacing-24);
-		grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		margin-top: var(--spacing-32);
 	}
 
@@ -78,7 +78,7 @@
 	}
 
 	.card {
-		height: 400px;
+		height: 480px;
 		display: grid;
 		grid-template-rows: min-content;
 		padding: var(--spacing-16);
