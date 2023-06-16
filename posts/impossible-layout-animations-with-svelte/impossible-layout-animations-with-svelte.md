@@ -246,7 +246,7 @@ I don't know about you but I don't want to write and maintain a FLIP library and
 
 If you already don't know, GSAP is a popular JavaScript animation library with many great features such as timelines for complex animations and a lot of useful plugins.
 
-I'm going to use the [GSAP Flip plugin](<(https://greensock.com/docs/v3/Plugins/Flip/)>) which makes using the FLIP animation technique easy and gives you the power of GSAP at your fingertips.
+I'm going to use the [GSAP Flip plugin](https://greensock.com/docs/v3/Plugins/Flip/) which makes using the FLIP animation technique easy and gives you the power of GSAP at your fingertips.
 
 In the next example I want to animate a stack of circles to a grid of squares.
 
