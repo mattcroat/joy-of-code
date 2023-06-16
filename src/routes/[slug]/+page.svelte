@@ -8,6 +8,7 @@
 	import Card from './card.svelte'
 	import Clipboard from './clipboard.svelte'
 	import Overlay from './overlay.svelte'
+	import TableOfContents from './toc.svelte'
 
 	export let data
 
@@ -43,6 +44,7 @@
 
 <main>
 	<Overlay />
+	<TableOfContents />
 
 	<article class="prose">
 		<hgroup>
