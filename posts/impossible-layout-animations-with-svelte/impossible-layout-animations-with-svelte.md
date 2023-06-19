@@ -16,7 +16,7 @@ There are animations that are straight up impossible using CSS alone but also ex
 
 {% video src="circle-teleport.mp4" %}
 
-In the example above I'm repareting the circle element which can be disorienting for the user and there's no way to animate that change unless you're using the **View Transitions API**.
+In the example above I'm repareting the circle element which can be disorienting for the user and there's no way to animate the change unless you're using the **View Transitions API**.
 
 > 🐿️ At the time of writing the [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) is experimental and only available in Chrome.
 
@@ -41,7 +41,7 @@ If this sounds complicated don't worry because not only are you going to underst
 
 You might need to **enable cookies** for the example but the code is also available on [GitHub](https://github.com/joysofcode/svelte-gsap-flip).
 
-## Doesn't Svelte Already Do FLIP Animations?
+## Doesn't Svelte Already Have FLIP Animations?
 
 Doing FLIP animations in Svelte is possible using the `flip` animate directive but limited to keyed each blocks and using `crossfade` to complete the illusion.
 
@@ -55,16 +55,14 @@ The FLIP animation technique looks like magic but it's simple math and you're go
 
 {% video src="how-flip-works.mp4" %}
 
-In the next example I'm listening for clicks on the document to swap the container that holds the circle element.
+In the example I'm listening for clicks on the document to swap the container that holds the circle element.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
-	// stable reference to the circle element
+	// reference to the circle element
 	let circleEl: HTMLDivElement
 
 	function flip() {
-    // you can use `document.querySelector('.circle') but
-    // it's not a stable reference when it changes position
     // ...
 	}
 
@@ -127,9 +125,9 @@ In the next example I'm listening for clicks on the document to swap the contain
 </style>
 ```
 
-You don't have to name the function `flip()` but something that makes more sense like `swapContainer()`.
+You don't have to name the function `flip()` but can use a more descriptive name like `swapContainer()`.
 
-The important part of understanding how to FLIP is to not think about FLIP and just do the changes to the UI as usual.
+The important part of understanding how to use FLIP is to not think about FLIP and just do the changes to the UI as usual.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
@@ -146,16 +144,13 @@ After you're done apply the FLIP animation technique.
 <script lang="ts">
 	function flip() {
     // get the FIRST position
-    // ...
 
     // make change
     swap = !swap
 
     // get the LAST position
-    // ...
 
     // PLAY from the inverted position to last
-    // ..
 	}
 </script>
 ```
@@ -248,13 +243,13 @@ If you already don't know, GSAP is a popular JavaScript animation library with m
 
 I'm going to use the [GSAP Flip plugin](https://greensock.com/docs/v3/Plugins/Flip/) which makes using the FLIP animation technique easy and gives you the power of GSAP at your fingertips.
 
-In the next example I want to animate a stack of circles to a grid of squares.
+For the next example I want to animate items going from a stack of circles to a grid of squares.
 
 {% video src="flip-circles.mp4" %}
 
 This demonstrates how GSAP handles animating values like the border radius and rotations with ease.
 
-This is the code for the example in question before doing any animation.
+This is the code in question before doing any animation.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
@@ -332,7 +327,7 @@ Using literal values `stack` and `grid` for the state instead of a boolean value
 Go ahead and install GSAP alongside the types if you're using TypeScript. You can use any package manager but I prefer [pnpm](https://pnpm.io/).
 
 ```shell:terminal showLineNumbers
-pnpm i gsap @types/gsap
+pnpm add gsap @types/gsap
 ```
 
 Besides importing GSAP and the Flip plugin you also have to load the plugin.
@@ -350,7 +345,7 @@ Besides importing GSAP and the Flip plugin you also have to load the plugin.
 
 Using the FLIP animation technique with GSAP works the same way but it does everything for you.
 
-```html:+page.svelte showLineNumbers
+```html:+page.svelte {2-4,6,10,16,19-26} showLineNumbers
 <script lang="ts">
 	import { tick } from 'svelte'
 	import { gsap } from 'gsap/dist/gsap'
@@ -383,7 +378,7 @@ Using the FLIP animation technique with GSAP works the same way but it does ever
 
 You can pass a variety of options for the animation like using `absolute` positioning during the animation and `scale` for smoother animations if you have to.
 
-> 🐿️ You should read the [GSAP Flip documentation](https://greensock.com/docs/v3/Plugins/Flip/) but in general avoid `scale` if you have text because GSAP animates the width and height by default making the text reflow in a natural way instead of using scale.
+> 🐿️ You should read the [GSAP Flip documentation](https://greensock.com/docs/v3/Plugins/Flip/) but in general avoid `scale` if you have text because GSAP animates the width and height by default making the text reflow in a natural way.
 
 ## Using FLIP To Animate CSS Grid
 
@@ -393,16 +388,16 @@ In the next example I want to FLIP a CSS Grid layout.
 
 You're not animating CSS Grid values of course but using the FLIP animation technique to animate the transition from one state to another.
 
-> 🐿️ Animating some CSS Grid and CSS Flexbox values is now possible with CSS but it's not as powerful.
+> 🐿️ As of late it's possible to animate some CSS Flexbox and CSS Grid values with CSS before you reach for JavaScript.
 
 The example uses a simple grid and uses the `.details` class which makes the image span two rows and two columns.
 
-```html:+page.svelte {3,7,13,18} showLineNumbers
+```html:+page.svelte {3,7,13,18,70-73} showLineNumbers
 <script lang="ts">
 	// selected image
 	let selected = 0
 
-	async function flip(id: number) {
+	function flip(id: number) {
 		// change selected image
 		selected = id
 	}
@@ -489,7 +484,7 @@ The example uses a simple grid and uses the `.details` class which makes the ima
 
 Let's FLIP it!
 
-```html:+page.svelte showLineNumbers
+```html:+page.svelte {2-4,6,13,19,22-26} showLineNumbers
 <script lang="ts">
 	import { tick } from 'svelte'
 	import { gsap } from 'gsap/dist/gsap'
@@ -522,7 +517,7 @@ Let's FLIP it!
 
 The `Flip` method returns a GSAP timeline you can use to fade in the title and I'm also going to use the `onStart()` callback to fade out any other titles.
 
-```html:+page.svelte showLineNumbers
+```html:+page.svelte {9-16,19-23} showLineNumbers
 <script lang="ts">
 	// ...
 	async function flip(id: number) {
@@ -669,6 +664,8 @@ This won't work yet because GSAP needs more help to understand what elements it 
 
 That's it! 😄
 
-You can look at the complete example on StackBlitz and find the code on GitHub.
+You can look at the complete [example on StackBlitz](https://stackblitz.com/github/joysofcode/svelte-gsap-flip) and find the [code on GitHub](https://github.com/joysofcode/svelte-gsap-flip).
 
-The upcoming View Transitions API is going to enable us to create amazing native user experiences on the web without requiring JavaScript but it's not going to completely replace the need for the FLIP animation technique, so FLIP your animations. (╯°□°)╯︵ ┻━┻
+The upcoming View Transitions API is going to enable us to create amazing native user experiences on the web without requiring JavaScript but it won't replace the FLIP animation technique.
+
+I hope you FLIP your animations. (╯°□°)╯︵ ┻━┻
