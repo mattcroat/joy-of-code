@@ -22,11 +22,15 @@
 				: (showSidebar = false)
 		})
 		observer.observe(targetEl)
+
+		return () => {
+			observer.unobserve(targetEl)
+		}
 	}
 
 	onMount(() => {
 		getTableOfContents()
-		openSidebar()
+		return openSidebar()
 	})
 
 	function toggleSidebar() {
@@ -66,12 +70,10 @@
 <style>
 	aside {
 		max-width: 280px;
-		display: grid;
-		align-content: center;
 		position: fixed;
-		top: 0px;
+		top: 50%;
 		right: 8px;
-		bottom: 0px;
+		translate: 0% -50%;
 		z-index: 10;
 	}
 
@@ -94,8 +96,8 @@
 	}
 
 	.table-of-contents-title {
-		text-transform: uppercase;
 		font-size: var(--font-16);
+		text-transform: uppercase;
 	}
 
 	:global(.table-of-contents ul) {
