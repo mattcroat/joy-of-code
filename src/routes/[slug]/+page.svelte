@@ -47,10 +47,10 @@
 	<TableOfContents />
 
 	<article class="prose">
-		<hgroup>
+		<header>
 			<h1>{frontmatter.title}</h1>
 			<p>Published {formatDate(frontmatter.published)}</p>
-		</hgroup>
+		</header>
 
 		{@html content}
 	</article>
