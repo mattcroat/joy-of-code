@@ -33,7 +33,7 @@ If you're one of those weird people that want to understand how SvelteKit works 
 I'm going to initialize an empty `package.json` file using the `y` flag to skip questions.
 
 ```shell:terminal
-npm i -y
+npm init -y
 ```
 
 SvelteKit needs these development dependencies at least to work.
