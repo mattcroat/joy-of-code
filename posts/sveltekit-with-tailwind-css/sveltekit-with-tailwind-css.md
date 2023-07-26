@@ -1,5 +1,5 @@
 ---
-title: SvelteKit With Tailwind CSS
+title: Set Up SvelteKit With Tailwind CSS
 description: Learn how to set up Tailwind CSS and automatic class sorting with SvelteKit.
 slug: sveltekit-with-tailwind-css
 published: '2022-10-12'
@@ -10,69 +10,24 @@ category: sveltekit
 
 ## Table of Contents
 
-## Set up Tailwind CSS
+## Using Svelte Add
 
-You can create a new SvelteKit project or add Tailwind to an existing project.
-
-> 🧪 You can find the example repository on [GitHub](https://github.com/joysofcode/sveltekit-tailwind).
-
-Create new SvelteKit project.
+The easiest way to set up Tailwind CSS inside of an existing SvelteKit project is with [svelte-add](https://github.com/svelte-add/svelte-add).
 
 ```shell:terminal
-npm init svelte
-```
-
-> 🐿️ You can skip the next part and use `npx svelte-add tailwindcss`
-
-Install the dependencies required by Tailwind.
-
-```shell:terminal
-npm i -D tailwindcss postcss autoprefixer
-```
-
-Create the Tailwind CSS config.
-
-```shell:terminal
-npx tailwindcss init tailwind.config.cjs -p
-```
-
-Give Tailwind the path to your template files.
-
-```js:tailwind.config.cjs showLineNumbers
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
-    extend: {}
-  },
-  plugins: []
-}
-```
-
-Add the Tailwind directives to your CSS.
-
-```css:app.css showLineNumbers
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-Import the CSS file.
-
-```html:routes/+layout.svelte showLineNumbers
-<script>
-  import '../app.css'
-</script>
-
-<slot />
+npx svelte-add tailwindcss
 ```
 
 You're done!
 
-```html:routes/+page.svelte showLineNumbers
-<h1 class="grid h-screen place-content-center text-8xl">
-  Heading
-</h1>
+Notice this creates a `app.postcss` file which is imported inside the root layout.
+
+```html:src/routes/+layout.svelte showLineNumbers
+<script>
+	import '../app.postcss'
+</script>
+
+<slot />
 ```
 
 ## Automatic Class Sorting With Prettier
@@ -84,56 +39,16 @@ Make sure you have the [Prettier extension](https://marketplace.visualstudio.com
 "editor.defaultFormatter": "esbenp.prettier-vscode"
 ```
 
-You're going to need the `prettier` package which is one of the options when you create a SvelteKit project.
+Skip this step if you have `prettier` in your project.
 
 ```shell:terminal
-✔ Add Prettier for code formatting? … No / [Yes]
-```
-
-Skip this step if you have Prettier.
-
-```shell:terminal
-npm i -D prettier
+npm i -D prettier prettier-plugin-svelte
 ```
 
 Install the Prettier plugin for Tailwind CSS.
 
 ```shell:terminal
 npm i -D prettier-plugin-tailwindcss
-```
-
-SvelteKit uses `prettier-plugin-svelte` which conflicts with the Tailwind CSS plugin and you have to remove it but `prettier-plugin-tailwindcss` includes it for you so everything should work as before.
-
-```shell:terminal
-npm uninstall prettier-plugin-svelte
-```
-
-Remove plugins from your Prettier config.
-
-```diff:.prettierrc showLineNumbers
-{
-  "semi": false,
-  "useTabs": true,
-  "singleQuote": true,
-  "trailingComma": "none",
-  "printWidth": 60,
-- "plugins": ["prettier-plugin-svelte"],
-  "pluginSearchDirs": ["."],
-  "overrides": [
-    {
-      "files": "*.svelte",
-      "options": { "parser": "svelte" }
-    }
-  ]
-}
-```
-
-You also don't have to change the formatter for your Svelte files.
-
-```json:settings.json showLineNumbers
-"[svelte]": {
-  "editor.defaultFormatter": "svelte.svelte-vscode"
-}
 ```
 
 You might need to restart your editor.
@@ -160,11 +75,3 @@ Here are some useful quality of life tips when using Tailwind:
 - Don't forget you can place your long class names inside a variable if you need to reuse them because [the author of Tailwind discourages extracting classes with `@apply`](https://twitter.com/adamwathan/status/1226511611592085504)
 - Enable word wrap in your editor with <kbd>Alt</kbd> + <kbd>Z</kbd> to make it easier to work with long class names
 - Another way to get class sorting in Tailwind is with the [Headwind](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind) extension if other methods don't work for you
-
-## Conclusion
-
-Despite the drama around it Tailwind CSS is a great way for moving quick without distractions and feels great because of it but it doesn't compensate for not understanding CSS because a Tailwind class is just a line of regular CSS and it's not a UI component framework.
-
-If you decide at a later point in your project that you don't want to use Tailwind anymore that's perfectly fine because it's a great prototyping tool and you can replace it with regular CSS using [Open Props](https://open-props.style/) if you want.
-
-Thank you for reading! 🏄️

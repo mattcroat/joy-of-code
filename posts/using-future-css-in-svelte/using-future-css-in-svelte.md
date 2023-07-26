@@ -35,66 +35,46 @@ In that case you can use PostCSS that describes itself as “A tool for transfor
 
 To start using modern CSS today it's simple as adding the [postcss-preset-env](https://preset-env.cssdb.org/) plugin for PostCSS in your Svelte project and enabling the options you want.
 
-This works for any Svelte project that uses [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) which has built-in support for PostCSS but I'm going to use a skeleton [SvelteKit](https://kit.svelte.dev/) project.
-
-The best part about this approach is when these features are supported in every browser you can just remove PostCSS or keep it for future CSS and you don't have to use [SASS](https://sass-lang.com/) just for nested styles.
-
-To get started install the `postcss-preset-env` and `postcss-load-config` plugin to load the PostCSS config.
+To get started install the `postcss-preset-env` plugin.
 
 ```shell:terminal
-npm i -D postcss-preset-env postcss-load-config @types/postcss-preset-env
+npm i -D postcss-preset-env
 ```
 
-Create a `postcss.config.cjs` file at the root of your project.
+Create a `postcss.config.js` file at the root of your project.
 
-```js:postcss.config.cjs showLineNumbers
-const postcssPresetEnv = require('postcss-preset-env')
+```js:postcss.config.js showLineNumbers
+import postcssPresetEnv from 'postcss-preset-env'
 
+/** @type {import('postcss-preset-env').Config} */
 const config = {
-  plugins: [
-    postcssPresetEnv({
-      stage: 3,
-      features: {
-        'nesting-rules': true,
-        'custom-media-queries': true,
-        'media-query-ranges': true
-      }
-    })
-  ]
-}
-
-module.exports = config
-```
-
-Here we specified the CSS features using the `stage` option and enabled the nesting rule and you can [learn more from the documentation](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env).
-
-The last step is to enable loading the config in `svelte.config.js`.
-
-```js:svelte.config.js {6} showLineNumbers
-import adapter from '@sveltejs/adapter-auto'
-import preprocess from 'svelte-preprocess'
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-	preprocess: preprocess({ postcss: true }),
-	kit: {
-		adapter: adapter()
-	}
+	plugins: [
+		postcssPresetEnv({
+			features: { 'nested-rules': true },
+		}),
+	],
 }
 
 export default config
 ```
 
-To process the CSS include the `lang="postcss"` attribute inside the `<style>` tag.
+[Stage 2 features](https://preset-env.cssdb.org/features/#stage-2) are enabled by default but you can enable other features and look at more options from [postcss-preset-env](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env).
+
+Don't forget to include the `lang="postcss"` attribute inside the `<style>` tag.
 
 ```html:+page.svelte
 <style lang="postcss">
-  /* ... */
+  @custom-media --md (min-width: 768px);
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media (--md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 </style>
 ```
 
 That's it! 🎉
-
-Hope you take advantage of future CSS today and you can find the example on [GitHub](https://github.com/JoysOfCode/svelte-future-css) or play with it on [StackBlitz](https://stackblitz.com/github/joysofcode/svelte-future-css).
-
-Thank you for reading! 🏄️

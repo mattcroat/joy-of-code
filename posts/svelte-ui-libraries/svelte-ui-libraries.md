@@ -218,7 +218,7 @@ Here's an example of a modal.
 
 [Flowbite-Svelte](https://flowbite-svelte.com/) is another UI component library based on Tailwind CSS but made for Svelte.
 
-The pros is that it looks great and has a lot of components but the con is that it the Svelte integrations seems like an afterthought.
+The pros are that it has great looking components but the con is that it's a work in progress at the time of writing.
 
 ```html:+page.svelte showLineNumbers
 <script>
