@@ -116,7 +116,7 @@ Page endpoints are great for rendering dynamic data.
 
 {% img src="dynamic.webp" alt="Dynamic data" %}
 
-```ts:src/routes/+page.ts showLineNumbers
+```ts:src/routes/[id]/+page.ts showLineNumbers
 async function getPost(id: string) {
 	const response = await fetch(
 		`https://jsonplaceholder.typicode.com/posts/${id}`
@@ -131,7 +131,7 @@ export async function load({ params }) {
 }
 ```
 
-```html:src/routes/[id]/+page.ts showLineNumbers
+```html:src/routes/[id]/+page.svelte showLineNumbers
 <script>
 	export let data
 </script>
