@@ -1,6 +1,6 @@
 ---
-title: Make Your Content Look and Sound Great
-description: The workflow I use for creating educational content for YouTube.
+title: How I Make Educational Content For YouTube
+description: Learn how to make any recorded content from tutorials to presentations look and sound great.
 slug: creating-content
 published: '2023-07-28'
 category: general
@@ -16,9 +16,9 @@ From creating educational content to recording a presentation, you probably want
 
 I'm going to show you the simple workflow I use to make videos for YouTube with some tips along the way, like what inexpensive type of microphone to get and how to make your presentation look and sound great.
 
-Everything I use is **free** and **cross-platform** (not because of some morals but I have no choice on Linux) and you can take what you learned and apply it to your workflow regardless what software you're using.
+Everything I use is **free** and **cross-platform** (I use Linux by the way) and you can take what you learned and apply it to your workflow regardless what software you're using.
 
-Keep in mind **this isn't a tutorial** on how to use the software I mention and some things are going to require research but it's going to save your hours.
+**This isn't a tutorial** on how to use the software I mention but it should save you hours of research.
 
 ## Tools Of The Trade
 
@@ -29,7 +29,9 @@ These are the tools I use:
 - [Kdenlive](https://kdenlive.org/en/) (editing)
 - [FFmpeg](https://ffmpeg.org/) (optional)
 
-You can use [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve/) and probably replace Audacity and Kdenlive — I can't use DaVinci Resolve on Linux because the free version doesn't support the most used video format on the planet. 🤦
+You can use [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve/) and replace Audacity and Kdenlive — I can't use DaVinci Resolve on Linux because the free version doesn't support the most used video format on the planet. 🤦
+
+I included an **updated section** on using OBS **audio filters** for processing audio which replaced Audacity for me and **improved** the audio since I wrote the post.
 
 ## Plan Out Your Content
 
@@ -45,7 +47,7 @@ If you don't know how to start, write down the concepts you want to explain — 
 
 I prefer to dump my brain on the page and let the prose flow before I tidy things up.
 
-## You don't Need A Fancy Microphone
+## You Don't Need A Fancy Microphone
 
 Almost every professional uses the [Shure SM7B](https://www.shure.com/en-US/products/microphones/sm7b?variant=SM7B) microphone which is reflected in the price costing around **$400** dollars, but you don't need an expensive microphone.
 
@@ -57,7 +59,7 @@ There's also a hidden cost because these professional microphones require phanto
 
 You can't just get an expensive microphone and plug it in, expecting you're going to sound amazing, if you don't know what you're doing.
 
-For this reason I recommend you get an inexpensive USB dynamic microphone in the **$50-$100** range because you have to be close to them and it won't pick up outside noise. It's the same type of microphone as the Shure SM7B, but keep in mind not every microphone is equal — do your research and listen to how it sounds before you purchase it.
+For this reason I recommend you get an inexpensive USB dynamic microphone in the **$50-$100** range because you have to be close and it won't pick up outside noise. It's the same type of microphone as the Shure SM7B, but keep in mind not every microphone is equal — do your research and listen to how it sounds before you purchase it.
 
 You can get a great deal and pick up a microphone bundle with a microphone arm and a pop filter. **Avoid having the microphone stand on your desk** because it might pick up desk vibrations and using a microphone arm makes it easier to move around.
 
@@ -71,7 +73,7 @@ You might have heard about OBS when it comes to live streaming but it's also a g
 
 {% img src="obs-1.webp" alt="OBS" %}
 
-OBS has this concept of scenes where you can have multiple different layouts you can transition between using a keyboard shortcut — for example I have different scenes with overlays for recording windows side by side, recording a single window, and the third layout that records the entire desktop.
+OBS has this concept of **scenes** where you can have multiple different layouts you can transition between using a keyboard shortcut — for example I have different scenes with overlays for recording windows side by side, recording a single window, and the third layout that records the entire desktop.
 
 The settings aren't that important to be honest, so don't overthink it but here is what I use.
 
@@ -108,9 +110,17 @@ Trust me on this one and plan out your content in advance and break it into part
 
 Audio is more important than anything else because you could record at **720p** with **30 fps** and no one would notice, but having bad audio is the worst.
 
-What is even bad audio?
-
 You might think of bad audio as sound caused by a cheap microphone, but it's more subtle like static noise in the background to uneven audio levels, which an expensive microphone isn't going to fix for you.
+
+You can use **OBS audio filters** to apply audio effects which make an inexpensive microphone sound premium and you can use [VSTs](https://www.wikiwand.com/en/Virtual_Studio_Technology) for more effects. You can also separate your audio sources and pipe your audio with the effects to other apps.
+
+{% img src="audio-filters.webp" alt="OBS audio filters" %}
+
+Every microphone and voice is different, but here is an informative YouTube video where you can learn how to apply OBS audio effects and adjust them for your setup.
+
+{% youtube id="G1VzeT9t24Y" title="Make Any Mic Sound Expensive In OBS" %}
+
+You can use Audacity if you're using something else to record, or you already have footage that needs work to be done with this method I used before.
 
 I drag the **mp4** file directly into Audacity to apply some effects after which I export it as an **mp3** file at 320 kbps.
 
@@ -152,6 +162,8 @@ This is what I do before I start editing:
 - Ungroup the video and audio from the recording
 - Replace the audio and align the tracks
 - Group everything together
+
+**Skip replacing the audio** if you used OBS to apply audio effects.
 
 This is entering some obsessive-compulsive behavior and you don't have to do it, but I also mute sounds I don't like such as sharp inhales which no one is even going to notice.
 
