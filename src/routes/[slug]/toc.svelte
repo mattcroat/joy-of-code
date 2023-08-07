@@ -30,7 +30,12 @@
 
 	onMount(() => {
 		getTableOfContents()
-		return openSidebar()
+
+		const isLargeScreen = window.innerWidth >= 1440
+
+		if (isLargeScreen) {
+			return openSidebar()
+		}
 	})
 
 	function toggleSidebar() {
