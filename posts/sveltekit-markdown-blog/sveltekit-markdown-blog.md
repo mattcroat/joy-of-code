@@ -599,14 +599,16 @@ At this point you just need to loop over the posts and that's it.
 </style>
 ```
 
-I use this function to format dates often which is just using the built-in browser API.
+I love using this function which uses the built-in browser API to format dates.
 
 ```ts:src/lib/utils.ts showLineNumbers
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
 
 export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en') {
-	const formatter = new Intl.DateTimeFormat(locales, { dateStyle })
-	return formatter.format(new Date(date))
+	// Safari is mad about dashes in the date
+	const dateToFormat = new Date(date.replaceAll('-', '/'))
+	const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle })
+	return dateFormatter.format(dateToFormat)
 }
 ```
 
