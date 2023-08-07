@@ -1,2 +1,3 @@
 User-agent: *
+Disallow: /drafts/
 Sitemap: https://joyofcode.xyz/sitemap.xml

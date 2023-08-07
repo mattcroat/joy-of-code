@@ -21,9 +21,7 @@ async function parseMarkdownFiles() {
 			const markdownContent = await fs.readFile(markdownFilePath, 'utf-8')
 			const { data } = matter(markdownContent)
 
-			if (!data.draft) {
-				posts.push(data as Post)
-			}
+			posts.push(data as Post)
 		}
 
 		return posts
