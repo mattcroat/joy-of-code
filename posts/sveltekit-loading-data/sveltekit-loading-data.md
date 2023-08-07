@@ -426,7 +426,7 @@ I'm going to create a `routes/posts/[slug]/+page.svelte` route that should get t
   export let data
 
   function formatDate(date: Date) {
-    const formatter = new IntlDateTimeFormat('en', { dateStyle: 'long' })
+    const formatter = new Intl.DateTimeFormat('en', { dateStyle: 'long' })
     return formatter.format(date)
   }
 </script>
