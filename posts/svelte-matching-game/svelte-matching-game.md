@@ -1,11 +1,12 @@
 ---
-title: Svelte Matching Game
+title: Learn Svelte By Making A Matching Game
 description: Learn state management and reactivity in Svelte by making a matching game.
 slug: svelte-matching-game
 published: '2023-08-08'
 category: svelte
-draft: true
 ---
+
+{% youtube id="w2q9caYXgkg" title="Learn Svelte By Making A Matching Game" %}
 
 ## Table of Contents
 
@@ -13,9 +14,9 @@ draft: true
 
 You're going to make a fun matching game and learn more about state management and reactivity in Svelte.
 
-{% embed src="https://www.sveltelab.dev/9txtaruj8y5fmcx" title="Matching game" %}
+{% embed src="https://www.sveltelab.dev/23ecr9zxtm5juw2" title="Matching game" %}
 
-[Try the game](https://www.sveltelab.dev/23ecr9zxtm5juw2) in your browser (you might need to enable cookies).
+[Try the game](https://www.sveltelab.dev/23ecr9zxtm5juw2) in your browser (you might need to enable cookies) and you can also find the code on [GitHub](https://github.com/joysofcode/svelte-matching-game).
 
 I'm going to [create a SvelteKit project](https://kit.svelte.dev/docs/creating-a-project) with TypeScript which is optional, but you can code along using [SvelteLab](https://www.sveltelab.dev/) in your browser.
 
@@ -280,13 +281,13 @@ If the cards match we can update `matches` and if `maxMatches === matches.length
 	<div class="cards">
 		{#each grid as card, cardIndex}
 			{@const isSelected = selected.includes(cardIndex)}
-			{@const isSelectedOrMatched = selected.includes(cardIndex) || matches.includes(card)}
+			{@const isSelectedOrMatch = selected.includes(cardIndex) || matches.includes(card)}
 			{@const match = matches.includes(card)}
 
 			<button
 				class="card"
 				class:selected={isSelected}
-				disabled={isSelectedOrMatched}
+				disabled={isSelectedOrMatch}
 				on:click={() => selectCard(cardIndex)}
 			>
 				<div class:match>{card}</div>
@@ -313,8 +314,8 @@ Let's show the matched cards.
 ```html:src/routes/+page.svelte showLineNumbers
 {#if state === 'playing'}
 	<div class="matches">
-		{#each matches as card}
-			<div>{card}</div>
+		{#each matches as match}
+			<div>{match}</div>
 		{/each}
 	</div>
 	<!-- .. -->
@@ -351,7 +352,6 @@ Let's add a game timer. When it reaches zero it ends the game.
 
 	function gameLost() {
 		state = 'lost'
-		resetGame()
 	}
 
 	// ...
