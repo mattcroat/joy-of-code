@@ -22,7 +22,7 @@
 
 	/* Post */
 	--post-txt-size: 18px;
-	--post-txt-length: 70ch;
+	--post-txt-length: 90ch;
 	--post-txt-height: 40px;
 
 	/* Scrollbar */
@@ -198,6 +198,7 @@ lite-youtube {
 
 lite-youtube {
 	box-shadow: var(--shadow-lg);
+	margin-inline: auto;
 }
 
 lite-youtube::before {

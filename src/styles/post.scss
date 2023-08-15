@@ -1,5 +1,5 @@
 .prose header {
-	margin: var(--spacing-128) 0;
+	margin: var(--spacing-128) 0 var(--spacing-64) 0;
 	text-align: center;
 }
 
@@ -62,7 +62,7 @@
 .prose ul,
 .prose ol {
 	display: grid;
-	row-gap: var(--spacing-8);
+	row-gap: var(--spacing-16);
 	list-style-type: none;
 	list-style-position: inside;
 }

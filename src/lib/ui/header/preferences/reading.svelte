@@ -7,7 +7,7 @@
 	const userTextHeight = browser && localStorage.textHeight
 
 	let textSize = userTextSize ? userTextSize.replace('px', '') : 18
-	let textLength = userTextLength ? userTextLength.replace('ch', '') : 70
+	let textLength = userTextLength ? userTextLength.replace('ch', '') : 90
 	let textHeight = userTextHeight ? userTextHeight.replace('px', '') : 40
 
 	function handleFontSizeChange() {

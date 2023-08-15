@@ -9,7 +9,7 @@
 
 		localStorage.theme = '🌛 Night'
 		localStorage.textSize = '18px'
-		localStorage.textLength = '70ch'
+		localStorage.textLength = '90ch'
 		localStorage.textHeight = '40px'
 		localStorage.removeItem('font')
 	}

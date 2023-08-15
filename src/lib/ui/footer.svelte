@@ -44,7 +44,6 @@
 	</div>
 
 	<figure>
-		<div class="decorative" />
 		<blockquote>
 			<span>
 				“Talent is a pursued interest. Anything that you're willing to practice,
@@ -103,26 +102,10 @@
 		justify-self: center;
 	}
 
-	footer figure > * {
-		grid-column: 1 / 1;
-		grid-row: 1 / 1;
-	}
-
-	footer figure .decorative {
-		width: 240px;
-		height: 240px;
-		justify-self: center;
-		background-image: linear-gradient(
-			120deg,
-			hsl(270 70% 60%),
-			hsl(225 74% 58%)
-		);
-		border-radius: 100%;
-	}
-
 	footer blockquote {
 		font-size: clamp(var(--font-24), 3vw, var(--font-32));
 		font-family: var(--font-sans);
+		color: var(--clr-card-txt);
 		text-shadow: 2px 2px 10px hsl(0 0% 0% / 10%);
 	}
 

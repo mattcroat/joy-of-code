@@ -1,5 +1,6 @@
 .prose code[class*='language-'],
 .prose pre[class*='language-'] {
+	font-size: var(--post-txt-size);
 	color: var(--clr-txt);
 	tab-size: 2;
 }
@@ -59,6 +60,7 @@ html[data-font='dyslexic'] .prose code {
 	display: flex;
 	justify-content: space-between;
 	padding: var(--spacing-16) var(--spacing-24) 0 var(--spacing-24);
+	font-size: var(--post-txt-size);
 	color: var(--clr-code-title);
 	background-color: var(--clr-code-title-bg);
 	border-top: 1px solid var(--clr-code-border);
