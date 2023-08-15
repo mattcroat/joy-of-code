@@ -18,9 +18,9 @@ You're going to make a fun matching game and learn more about state management a
 
 [Try the game](https://www.sveltelab.dev/23ecr9zxtm5juw2) in your browser (you might need to enable cookies) and you can also find the code on [GitHub](https://github.com/joysofcode/svelte-matching-game).
 
-I'm going to [create a SvelteKit project](https://kit.svelte.dev/docs/creating-a-project) with TypeScript which is optional, but you can code along using [SvelteLab](https://www.sveltelab.dev/) in your browser.
+You can code along using [SvelteLab](https://www.sveltelab.dev/) in your browser, or [create a SvelteKit project](https://kit.svelte.dev/docs/creating-a-project) with TypeScript (optional).
 
-Let's get the base styles out of the way to focus on the fun things.
+Let's get the base styles out of the way by copying them over to `src/app.css`.
 
 ```css:src/app.css showLineNumbers
 @import '@fontsource/poppins';
@@ -334,7 +334,7 @@ Let's show the matched cards.
 
 ## Game Timer
 
-Let's add a game timer. When it reaches zero it ends the game.
+Let's add a game timer — when it reaches zero, the game is over.
 
 ```html:src/routes/+page.svelte {3-4,7,14,20,25,29-31,37-50} showLineNumbers
 <script lang="ts">

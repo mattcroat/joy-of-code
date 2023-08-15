@@ -12,9 +12,9 @@ category: svelte
 
 ## Introduction
 
-> ⚠️ The video uses an **outdated** version of Threlte 4 but the post has been **updated** to the newest Threlte 6 version.
-
 By the end of this post you're going to learn how to spice up your boring site using 3D with Svelte in the browser.
+
+> ⚠️ The video is **outdated** but the post has been updated to the newest **Threlte 6** version.
 
 {% embed src="https://stackblitz.com/github/joysofcode/svelte-3d?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte 3D" title="Sveltype 3D" %}
 
