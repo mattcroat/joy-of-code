@@ -26,8 +26,8 @@
 
 	<article class="prose">
 		<header>
-			<h1>{frontmatter.title}</h1>
-			<p>Published {formatDate(frontmatter.published)}</p>
+			<h1 class="title">{frontmatter.title}</h1>
+			<p class="published">Published {formatDate(frontmatter.published)}</p>
 		</header>
 
 		{@html content}
@@ -47,5 +47,14 @@
 		max-width: var(--post-txt-length);
 		margin: var(--spacing-64) 0;
 		margin-inline: auto;
+	}
+
+	.title {
+		max-width: 600px;
+		margin-inline: auto;
+	}
+
+	.published {
+		margin-top: var(--spacing-24);
 	}
 </style>
