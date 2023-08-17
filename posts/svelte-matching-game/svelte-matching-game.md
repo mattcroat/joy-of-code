@@ -336,7 +336,7 @@ Let's show the matched cards.
 
 Let's add a game timer — when it reaches zero, the game is over.
 
-```html:src/routes/+page.svelte {3-4,7,14,20,25,29-31,37-50} showLineNumbers
+```html:src/routes/+page.svelte {3-4,7,14,21,24,28-30,36-49} showLineNumbers
 <script lang="ts">
 	// ...
 	let timerId: number | null = null
