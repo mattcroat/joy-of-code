@@ -1,26 +1,24 @@
-# Joy of Code
+<br>
+<div align="center">
+ <img width="400" src="https://i.giphy.com/media/d31vTpVi1LAcDvdm/giphy.gif" alt="Bob Ross">
+</div>
+<br>
 
-![Bob Ross](https://i.giphy.com/media/d31vTpVi1LAcDvdm/giphy.gif)
-
-## 🧑‍🎨 About
+## Joy of Code
 
 [Joy of Code](https://joyofcode.xyz/) is a digital garden growing curious minds focused on web development and web design.
+
+## 🙏 Support
+
+You can support my work by [becoming a patron](https://www.patreon.com/joyofcode) or [becoming a YouTube member](https://youtube.com/@joyofcodedev/join) starting low as **$1/month**.
 
 ## ▶️ YouTube
 
 You can find my videos on [YouTube](https://www.youtube.com/@joyofcodedev).
 
-## 💰️ Support
-
-You can support my work by [becoming a patron](https://www.patreon.com/joyofcode) or [becoming a YouTube member](https://youtube.com/@joyofcodedev/join) starting low as **$1/month**.
-
 ## 🤗 Contributing
 
 At the end of each post there's a direct link to the **Markdown** file of the post you can edit within GitHub. Read the [contributing guidelines](CONTRIBUTING.md) to learn more.
-
-## 💬 GitHub Discussions
-
-I use [GitHub Discussions](https://github.com/mattcroat/joy-of-code/discussions) to track breaking changes for posts which you can use to report issues.
 
 ## 🧭 Uses
 
