@@ -12,7 +12,7 @@ category: svelte
 
 ## Learning Svelte
 
-The best way to learn Svelte is to go through the [Svelte tutorial](https://svelte.dev/tutorial/basics) which is great but also contains information overload if you just want to get started writing Svelte. I'm going to show you everything you should know for the majority of things you're going to build.
+The best way to learn Svelte is to go through the [Svelte tutorial](https://learn.svelte.dev/) which is great but also contains information overload if you just want to get started writing Svelte. I'm going to show you everything you should know for the majority of things you're going to build.
 
 I'm not going to assume your knowledge and try to explain everything along the way so if you're new to JavaScript frameworks or Svelte you should learn a lot.
 
@@ -594,7 +594,7 @@ Instead of using `event.target.value` which we could also do in Svelte we can bi
 </ul>
 ```
 
-You can have text, numeric, checkbox, group and textarea among other bindings. Instead of overwhelming you with examples you lack context for to find useful right now you can learn more about [bindings in the Svelte documentation](https://svelte.dev/docs#template-syntax-element-directives-bind-property) or by following the [Svelte tutorial](https://svelte.dev/tutorial/text-inputs) when you encounter it in your project.
+You can have text, numeric, checkbox, group and textarea among other bindings. Instead of overwhelming you with examples you lack context for to find useful right now you can learn more about [bindings in the Svelte documentation](https://svelte.dev/docs#template-syntax-element-directives-bind-property) or by following the [Svelte tutorial](https://learn.svelte.dev/tutorial/text-inputs) when you encounter it in your project.
 
 ## Components
 
@@ -845,7 +845,7 @@ To use a transition use `transition:fade`. You can specify parameters such as `d
 
 You can specify a enter animation with `in:fade` and exit animation with `out:fade` but you're not limited to one transition.
 
-In Svelte you can define custom animations such as this [typewriter effect](https://svelte.dev/tutorial/custom-js-transitions), use [spring and tweened motion](https://svelte.dev/tutorial/tweened) and make smooth transitions between elements using [flip animations](https://svelte.dev/tutorial/animate).
+In Svelte you can define custom animations such as this [typewriter effect](https://svelte.dev/tutorial/custom-js-transitions), use [spring and tweened motion](https://learn.svelte.dev/tutorial/tweens) and make smooth transitions between elements using [flip animations](https://learn.svelte.dev/tutorial/animate).
 
 ## Svelte Store
 
@@ -916,7 +916,7 @@ $message = 'Bye 👋'
 {$message}
 ```
 
-The Svelte store is incredibly powerful and deserves an entire post so I encourage you to go through the [Svelte tutorial](https://svelte.dev/tutorial/writable-stores) and [consult the documentation](https://svelte.dev/docs#run-time-svelte-store) to learn more.
+The Svelte store is incredibly powerful and deserves an entire post so I encourage you to go through the [Svelte tutorial](https://learn.svelte.dev/tutorial/writable-stores) and [consult the documentation](https://svelte.dev/docs#run-time-svelte-store) to learn more.
 
 ## Further Reading
 
@@ -924,14 +924,14 @@ Join me in the next post where we take what we learned to build a [Svelte todo a
 
 You're ready to build some Svelte apps! 👏 When you get more comfortable or encounter problems that require these solutions then you should learn and reach for them:
 
-- [Lifecycle functions](https://svelte.dev/tutorial/onmount)
+- [Lifecycle functions](https://learn.svelte.dev/tutorial/onmount)
 - [Tick](https://svelte.dev/docs#run-time-svelte-tick)
-- [Actions](https://svelte.dev/tutorial/actions)
-- [Event forwarding](https://svelte.dev/tutorial/event-forwarding)
-- [Context API](https://svelte.dev/tutorial/context-api)
-- [Module context](https://svelte.dev/tutorial/sharing-code)
-- [Special Elements](https://svelte.dev/tutorial/svelte-self)
-- [The @debug tag](https://svelte.dev/tutorial/debug)
+- [Actions](https://learn.svelte.dev/tutorial/actions)
+- [Event forwarding](https://learn.svelte.dev/tutorial/event-forwarding)
+- [Context API](https://learn.svelte.dev/tutorial/context-api)
+- [Module context](https://learn.svelte.dev/tutorial/sharing-code)
+- [Special Elements](https://learn.svelte.dev/tutorial/svelte-self)
+- [The @debug tag](https://learn.svelte.dev/tutorial/debug)
 
 ## Conclusion
 
