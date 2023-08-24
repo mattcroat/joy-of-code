@@ -1,11 +1,12 @@
 ---
 title: Using SvelteKit For Web Scraping
-description: Learn how to use SvelteKit for web scraping and make an API for GitHub contributions.
+description: Using SvelteKit for web scraping to make an API for GitHub contributions.
 slug: sveltekit-web-scraping
 published: '2023-08-24'
 category: sveltekit
-draft: true
 ---
+
+{% youtube id="T-lBPpeokfY" title="Using SvelteKit For Web Scraping" %}
 
 ## Table of Contents
 
@@ -16,6 +17,8 @@ I was working on a project where I used [Threlte](https://threlte.xyz/) to make 
 That one is on me, but the other options I had looked lame, and required authentication to use the GitHub API for a worse result.
 
 Using scraping responsibly is a great excuse to practice DOM and data manipulation, which is most of what you do as a web developer, and you only get the data you care about.
+
+You can find the code on [GitHub](https://github.com/joysofcode/sveltekit-web-scraping).
 
 ## The Mark
 
@@ -138,7 +141,7 @@ function parseContributions(html: string) {
 					name: data[3].replace(',', ''),
 					month: data[4],
 					day: +data[5].replace(',', ''),
-					year: data[6],
+					year: +data[6],
 					level: +day.dataset.level!,
 				}
 				currentRow.push(contribution)
