@@ -14,7 +14,7 @@ category: svelte
 
 In this post I'm mostly going to focus on when you should use the Svelte context API versus Svelte stores, so I assume you at least know what they are.
 
-If you're not confident in what the [Svelte context API](https://learn.svelte.dev/tutorial/writable-stores) or [Svelte stores](https://learn.svelte.dev/tutorial/context-api) is, the links should take you to the Svelte tutorial.
+If you're not confident in what the [Svelte context API](https://learn.svelte.dev/tutorial/context-api) or [Svelte stores](https://learn.svelte.dev/tutorial/writable-stores) is, the links should take you to the Svelte tutorial.
 
 I also have a [Svelte state management guide](https://joyofcode.xyz/svelte-state-management) you can watch or read that explains these concepts in detail.
 
