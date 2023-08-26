@@ -845,7 +845,7 @@ To use a transition use `transition:fade`. You can specify parameters such as `d
 
 You can specify a enter animation with `in:fade` and exit animation with `out:fade` but you're not limited to one transition.
 
-In Svelte you can define custom animations such as this [typewriter effect](https://svelte.dev/tutorial/custom-js-transitions), use [spring and tweened motion](https://learn.svelte.dev/tutorial/tweens) and make smooth transitions between elements using [flip animations](https://learn.svelte.dev/tutorial/animate).
+In Svelte you can define custom animations such as this [typewriter effect](https://learn.svelte.dev/tutorial/custom-js-transitions), use [spring and tweened motion](https://learn.svelte.dev/tutorial/tweens) and make smooth transitions between elements using [flip animations](https://learn.svelte.dev/tutorial/animate).
 
 ## Svelte Store
 

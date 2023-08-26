@@ -521,7 +521,7 @@ You're going to notice each time you add or remove a to-do the page reloads. Thi
 
 [JavaScript can fail to load for many reasons](https://www.kryogenix.org/code/browser/everyonehasjs.html) but I'm not advocating that every site should work without JavaScript and should instead work before JavaScript is loaded on the page. This approach to development makes your app more resilient and you can use JavaScript once it's available on the page to improve the user experience using progressive enhancement as intended.
 
-Remember the first example how we had to do everything by hand? SvelteKit does that for you and wraps everything in a neat `use:enhance` [Svelte action](https://svelte.dev/tutorial/actions) (unrelated to form actions) that does the same thing.
+Remember the first example how we had to do everything by hand? SvelteKit does that for you and wraps everything in a neat `use:enhance` [Svelte action](https://learn.svelte.dev/tutorial/actions) (unrelated to form actions) that does the same thing.
 
 ```html:src/routes/todos/+page.svelte {2, 12, 20} showLineNumbers
 <script lang="ts">

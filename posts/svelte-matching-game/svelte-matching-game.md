@@ -246,7 +246,7 @@ I'm going to add more things to track the state of the game including the HTML a
 
 ## Matching Cards
 
-Using `selected` we can keep track of the selected variables and trigger `matchCards()` using [reactive statements](https://svelte.dev/tutorial/reactive-statements) when `selected.length === 2`.
+Using `selected` we can keep track of the selected variables and trigger `matchCards()` using [reactive statements](https://learn.svelte.dev/tutorial/reactive-statements) when `selected.length === 2`.
 
 If the cards match we can update `matches` and if `maxMatches === matches.length` then the game is won.
 

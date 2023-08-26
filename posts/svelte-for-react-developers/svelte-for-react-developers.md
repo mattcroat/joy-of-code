@@ -189,7 +189,7 @@ Here is the same example in Svelte.
 
 You could also use inline styles here but I wanted to showcase the `style` directive that lets you set a CSS value dynamically using [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) or properties such as `style:color={color}` or the shorthand `style:color` if the value has the same name.
 
-In React you don't have a lot of control where you can place `children` but `slots` are more flexible and you can have multiple slots with [named slots](https://svelte.dev/tutorial/named-slots) among other things.
+In React you don't have a lot of control where you can place `children` but `slots` are more flexible and you can have multiple slots with [named slots](https://learn.svelte.dev/tutorial/named-slots) among other things.
 
 ## Expressing Logic
 
@@ -320,7 +320,7 @@ In Svelte you can use two-way binding using the `bind:value` directive for text 
 
 > 🐿️ You don't have to use `value` as the variable. If you have a `name` variable then it would be `bind:value={name}`.
 
-In Svelte you can use [event modifiers](https://svelte.dev/tutorial/event-modifiers) like `preventDefault` using the `|` symbol to save you some time.
+In Svelte you can use [event modifiers](https://learn.svelte.dev/tutorial/event-modifiers) like `preventDefault` using the `|` symbol to save you some time.
 
 ## Synchronization
 
@@ -399,7 +399,7 @@ This is the same example in Svelte.
 </button>
 ```
 
-It's much simpler and you don't have to think about `useEffect` and dependencies — if you want to start playing the video immediately you can run `play()` inside the `onMount` [lifecyle method](https://svelte.dev/tutorial/onmount).
+It's much simpler and you don't have to think about `useEffect` and dependencies — if you want to start playing the video immediately you can run `play()` inside the `onMount` [lifecyle method](https://learn.svelte.dev/tutorial/onmount).
 
 Here's an example of using the Canvas API in Svelte.
 
@@ -746,7 +746,7 @@ export function Composition() {
 
 </details>
 
-In Svelte you can do the same thing using the [Context API](https://svelte.dev/tutorial/context-api) by passing values to `setContext` and receive it using `getContext` — if you need reactive values you can use a [store](https://svelte.dev/tutorial/writable-stores) and pass the value.
+In Svelte you can do the same thing using the [Context API](https://learn.svelte.dev/tutorial/context-api) by passing values to `setContext` and receive it using `getContext` — if you need reactive values you can use a [store](https://learn.svelte.dev/tutorial/writable-stores) and pass the value.
 
 <details>
   <summary>Context API</summary>
@@ -832,7 +832,7 @@ That's most of the examples I wanted to show you but I also want to show you mor
 
 ## Global State Management
 
-[Stores](https://svelte.dev/tutorial/writable-stores) are Svelte's answer to global state management when you have values that need to be accessed by unrelated components but it's a lot more fascinating because you can create custom stores.
+[Stores](https://learn.svelte.dev/tutorial/writable-stores) are Svelte's answer to global state management when you have values that need to be accessed by unrelated components but it's a lot more fascinating because you can create custom stores.
 
 A store is just an object you can subscribe so you get notified when the store values change but instead of showing you some boring example of global state I want to show you how you can make a `useReducer` hook using a custom store because it's going to feel familiar coming from React.
 
@@ -884,7 +884,7 @@ I hope this sparked your imagination how powerful Svelte stores are! 😄
 
 ## Animations
 
-Animations are just part of Svelte and you can start from simple transitions to animating between items that change with one line of code including [custom transitions](https://svelte.dev/tutorial/custom-css-transitions).
+Animations are just part of Svelte and you can start from simple transitions to animating between items that change with one line of code including [custom transitions](https://learn.svelte.dev/tutorial/custom-css-transitions).
 
 This is the same todo example as before but it uses a different `fly` transition when the todo item is added with `in:fly` and removed with `out:fly` and a `flip` function to animate the elements when they change position.
 
@@ -908,7 +908,7 @@ This is the same todo example as before but it uses a different `fly` transition
 
 That's it! 🎉
 
-There's a lot more to learn about Svelte and it has a great interactive [tutorial](https://svelte.dev/tutorial/basics) and [examples](https://svelte.dev/examples/hello-world).
+There's a lot more to learn about Svelte and it has a great interactive [tutorial](https://learn.svelte.dev/tutorial/basics) and [examples](https://svelte.dev/examples/hello-world).
 
 I love Svelte because it makes you want to do more for less and it's enjoyable to use and I strongly believe in the vision of [Rich Harris](https://twitter.com/Rich_Harris) after watching ["Rethinking reactivity"](https://www.youtube.com/watch?v=AdNJ3fydeao).
 

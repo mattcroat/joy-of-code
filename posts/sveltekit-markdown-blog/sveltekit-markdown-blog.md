@@ -413,7 +413,7 @@ Svelte is able to show `+page.md` as a page but **you need mdsvex to preprocess 
 
 You have to specify the extension inside the `extensions` array for `mdsvexOptions` which you name name whatever you want like `.md`, `.svx` or `.banana`.
 
-Instead of using `+page.md` files you can import a Markdown post as a module and render it as a regular Svelte component with [<svelte:component>](https://svelte.dev/tutorial/svelte-component) which is what I'm going to do later.
+Instead of using `+page.md` files you can import a Markdown post as a module and render it as a regular Svelte component with [<svelte:component>](https://learn.svelte.dev/tutorial/svelte-component) which is what I'm going to do later.
 
 I'm going to add some posts in `/src/posts`.
 
@@ -942,7 +942,7 @@ Flashing happens when JavaScript is not loaded on the page and because of it whe
 </html>
 ```
 
-I'm going to make a simple [Svelte store](https://svelte.dev/tutorial/writable-stores) that's going to export the active `theme` so you can subscribe to it anywhere and get notified when it changes including `toggleTheme` to update it and `setTheme` to set the theme in case you want to use it.
+I'm going to make a simple [Svelte store](https://learn.svelte.dev/tutorial/writable-stores) that's going to export the active `theme` so you can subscribe to it anywhere and get notified when it changes including `toggleTheme` to update it and `setTheme` to set the theme in case you want to use it.
 
 ```ts:src/lib/theme.ts showLineNumbers
 import { writable } from 'svelte/store'

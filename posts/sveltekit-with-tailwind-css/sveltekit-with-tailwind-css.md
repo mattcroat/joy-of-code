@@ -1,6 +1,6 @@
 ---
 title: Set Up SvelteKit With Tailwind CSS
-description: Learn how to set up Tailwind CSS and automatic class sorting with SvelteKit.
+description: Learn how to set up Tailwind CSS with automatic class sorting using SvelteKit.
 slug: sveltekit-with-tailwind-css
 published: '2022-10-12'
 category: sveltekit
@@ -15,12 +15,12 @@ category: sveltekit
 The easiest way to set up Tailwind CSS inside of an existing SvelteKit project is with [svelte-add](https://github.com/svelte-add/svelte-add).
 
 ```shell:terminal
-npx svelte-add tailwindcss
+npx svelte-add@latest tailwindcss
 ```
 
-You're done!
+You're done! 😄
 
-Notice this creates a `app.postcss` file which is imported inside the root layout.
+This creates a `app.postcss` file which is imported inside the root layout.
 
 ```html:src/routes/+layout.svelte showLineNumbers
 <script>
@@ -51,7 +51,7 @@ Install the Prettier plugin for Tailwind CSS.
 npm i -D prettier-plugin-tailwindcss
 ```
 
-You might need to restart your editor.
+After you save it should sort the classes.
 
 ```html:routes/+page.svelte showLineNumbers
 <!-- Before -->
@@ -69,9 +69,8 @@ You might need to restart your editor.
 
 Here are some useful quality of life tips when using Tailwind:
 
-- If you need a component library for Svelte you can use [Skeleton](https://www.skeleton.dev/) or [daisyUI](https://daisyui.com/) and [Flowbite](https://flowbite.com/) which are framework agnostic
-- Use the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension to help you with autocomplete so you don't have to look for every value in the documentation
-- Use [Tailwind CSS Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet) to find what you need at a glance
-- Don't forget you can place your long class names inside a variable if you need to reuse them because [the author of Tailwind discourages extracting classes with `@apply`](https://twitter.com/adamwathan/status/1226511611592085504)
+- If you need a Svelte component library you can use [Skeleton](https://www.skeleton.dev/), [Flowbite Svelte](https://flowbite-svelte.com/) or something more framework agnostic like [daisyUI](https://daisyui.com/)
+- Use the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension to help you with autocomplete
+- Use the [Tailwind CSS Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet) to find what you need at a glance
+- [Avoid using `@apply`](https://twitter.com/adamwathan/status/1226511611592085504) and abstract long class names inside a variable if you want to reuse them
 - Enable word wrap in your editor with <kbd>Alt</kbd> + <kbd>Z</kbd> to make it easier to work with long class names
-- Another way to get class sorting in Tailwind is with the [Headwind](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind) extension if other methods don't work for you

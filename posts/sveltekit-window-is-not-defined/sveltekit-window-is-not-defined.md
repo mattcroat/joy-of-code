@@ -47,7 +47,7 @@ You can use the `onMount` lifecycle function or the `browser` module from Svelte
 </script>
 ```
 
-You could also use [Svelte actions](https://svelte.dev/tutorial/actions) since they're element-level lifecycle functions.
+You could also use [Svelte actions](https://learn.svelte.dev/tutorial/actions) since they're element-level lifecycle functions.
 
 ```html:+page.svelte showLineNumbers
 <script>

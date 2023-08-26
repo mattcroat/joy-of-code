@@ -439,7 +439,7 @@ export function fade(node: Element, {
 }
 ```
 
-It has a similar signature to [Svelte actions](https://svelte.dev/tutorial/actions) but returns a `css` or `tick` function and we can use the same signature to create custom transitions.
+It has a similar signature to [Svelte actions](https://learn.svelte.dev/tutorial/actions) but returns a `css` or `tick` function and we can use the same signature to create custom transitions.
 
 > 🐿️ Svelte transitions use CSS instead of JavaScript, so they don't cause jank because they can run separately and not block the main thread.
 
@@ -485,7 +485,7 @@ I have a simple modal I want to spice up when a user opens it by scaling and tra
   }
 
   const dispatch = createEventDispatcher()
-  
+
   function closeModal() {
 		dispatch('close')
 	}
@@ -817,7 +817,7 @@ Having FLIP inside Svelte is amazing but it's limited to an each block and later
 
 ## Motion
 
-Svelte exposes two writable [stores](https://svelte.dev/tutorial/writable-stores) `tweened` and `spring` that are useful for values that change over time.
+Svelte exposes two writable [stores](https://learn.svelte.dev/tutorial/writable-stores) `tweened` and `spring` that are useful for values that change over time.
 
 We take for granted how the browser can interpolate values of an element such as `opacity` going from `0` to `1` just by specifying a `transition` because the browser has to smoothly **interpolate** those values by creating intermediate values from `0.1` to `0.9`.
 
@@ -1234,7 +1234,7 @@ There's other problems when it comes to FLIP animations like nested transforms (
 
 {% video src="flip-gsap.mp4" %}
 
-The best thing about Svelte is the ease of using existing JavaScript libraries because it doesn't require special lifecycle methods to work and makes code reuse easy thanks to [actions](https://svelte.dev/tutorial/actions).
+The best thing about Svelte is the ease of using existing JavaScript libraries because it doesn't require special lifecycle methods to work and makes code reuse easy thanks to [actions](https://learn.svelte.dev/tutorial/actions).
 
 Remember the spring example from before? Here's the same example using Motion One and Svelte actions.
 

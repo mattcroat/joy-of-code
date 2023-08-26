@@ -141,7 +141,7 @@ With great power comes great responsibility so be careful to not abuse bind beca
 
 ## Component Events
 
-[Component events](https://svelte.dev/tutorial/component-events) are another way to send data upstream based on the [CustomEvent API](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent).
+[Component events](https://learn.svelte.dev/tutorial/component-events) are another way to send data upstream based on the [CustomEvent API](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent).
 
 You can try out the example anywhere where you can run JavaScript like the console in your developer tools! 😄
 
@@ -199,13 +199,13 @@ Inside the child component is where you dispatch the event.
 <div class="mousearea" on:mousemove={handleMouseMove} />
 ```
 
-Component events are awesome but they don't [bubble](https://javascript.info/bubbling-and-capturing) like regular DOM events, so you have to [forward them](https://svelte.dev/tutorial/event-forwarding) but you can do whatever you want like having `on:submit` on your `<Form>` component.
+Component events are awesome but they don't [bubble](https://javascript.info/bubbling-and-capturing) like regular DOM events, so you have to [forward them](https://learn.svelte.dev/tutorial/event-forwarding) but you can do whatever you want like having `on:submit` on your `<Form>` component.
 
 > 🐿️ In Svelte you can also forward DOM events for example if you have a component like `<Button on:click={handleClick} />` then inside the component you can forward the event with `<button on:click>Click</button>`.
 
 ## Svelte Stores
 
-[Stores](https://svelte.dev/tutorial/writable-stores) are just objects you can subscribe to and be notified whenever the store value changes and they're great if you have global state as sometimes you have **values that need to be accessed by multiple unrelated components**.
+[Stores](https://learn.svelte.dev/tutorial/writable-stores) are just objects you can subscribe to and be notified whenever the store value changes and they're great if you have global state as sometimes you have **values that need to be accessed by multiple unrelated components**.
 
 {% img src="stores.webp" alt="Diagram showing how Svelte stores work" %}
 
@@ -293,13 +293,13 @@ We just need to import the `<Toast>` component and the `toast` method from the s
 
 You can extend it further and provide some configuration options like a notification type and duration before it disappears.
 
-> ⚠️ Be careful if you have a large store because if you update a value it's going to update everything else that might not be related to it, so it's a great to have separate stores or derive the value from the store using [derived stores](https://svelte.dev/tutorial/derived-stores).
+> ⚠️ Be careful if you have a large store because if you update a value it's going to update everything else that might not be related to it, so it's a great to have separate stores or derive the value from the store using [derived stores](https://learn.svelte.dev/tutorial/derived-stores).
 
 This just scratches the surface what you can do with Svelte stores but I hope you understand when you would use it.
 
 ## The Context API
 
-The [Context API](https://svelte.dev/tutorial/context-api) is useful when you have nested components that share state to avoid passing the same props around also known as prop drilling but also sharing logic.
+The [Context API](https://learn.svelte.dev/tutorial/context-api) is useful when you have nested components that share state to avoid passing the same props around also known as prop drilling but also sharing logic.
 
 {% img src="context.webp" alt="Diagram showing how the Context API works in Svelte" %}
 
@@ -427,7 +427,7 @@ The Context API is powerful but **don't treat it as a solution for everything** 
 
 Before I confuse you **this has nothing to do with the Context API** but refers to `<script context="module">` in your Svelte component.
 
-[Module context](https://svelte.dev/tutorial/sharing-code) is useful when you want to share state between multiple component instances.
+[Module context](https://learn.svelte.dev/tutorial/sharing-code) is useful when you want to share state between multiple component instances.
 
 {% img src="module.webp" alt="Diagram showing how module context works in Svelte" %}
 

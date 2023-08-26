@@ -91,7 +91,7 @@ This is possible because these frameworks combine the frontend and backend and g
 
 ## Svelte Actions To The Rescue
 
-The previous code is a bit tedious to write for every form, so you can use [Svelte actions](https://svelte.dev/tutorial/actions) to make it more reusable.
+The previous code is a bit tedious to write for every form, so you can use [Svelte actions](https://learn.svelte.dev/tutorial/actions) to make it more reusable.
 
 ```ts:src/lib/form.ts showLineNumbers
 export function enhance(form: HTMLFormElement) {

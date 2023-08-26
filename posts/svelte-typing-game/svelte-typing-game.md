@@ -641,7 +641,7 @@ I set up the next section here after the game is over where it gets the result t
 
 When the game timer runs out the game state is updated and `getResults` is invoked.
 
-I'm going to define `wordsPerMinute` and `accuracy` using a [`tweened`](https://svelte.dev/tutorial/tweened) [Svelte store](https://svelte.dev/tutorial/writable-stores) to interpolate the numbers for a nice animation.
+I'm going to define `wordsPerMinute` and `accuracy` using a [`tweened`](https://learn.svelte.dev/tutorial/tweened) [Svelte store](https://learn.svelte.dev/tutorial/writable-stores) to interpolate the numbers for a nice animation.
 
 To get the words per minute I use an [equation](https://www.speedtypingonline.com/typing-equations) that considers five letters as a word because longer words should have a higher value and then divide it by **0.5 minutes** since the game timer is **30 seconds**.
 
@@ -778,7 +778,7 @@ It blurs the line between frontend and backend as you just wrote backend code an
 
 I want to give the player a way to reset the game if they don't like the words or want to play again.
 
-I'm also going to include a `toggleReset` so you can use a [`{#key ...}`](https://svelte.dev/tutorial/key-blocks) block to play a transition when it happens.
+I'm also going to include a `toggleReset` so you can use a [`{#key ...}`](https://learn.svelte.dev/tutorial/key-blocks) block to play a transition when it happens.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
@@ -860,7 +860,7 @@ I'm also going to include a `toggleReset` so you can use a [`{#key ...}`](https:
 </style>
 ```
 
-I use a [local transition](https://svelte.dev/tutorial/local-transitions) on words `in:blur|local` to prevent the transition from playing when the parent is added or removed.
+I use a [local transition](https://learn.svelte.dev/tutorial/local-transitions) on words `in:blur|local` to prevent the transition from playing when the parent is added or removed.
 
 You can learn everything I know about [animation with Svelte](https://joyofcode.xyz/animation-with-svelte) in the post I wrote.
 
@@ -904,7 +904,7 @@ I would be happy to see your improvements or what you learned at [@joyofcodedev]
 
 Here's some ideas:
 
-- Break the code into components (you can use Svelte [component events](https://svelte.dev/tutorial/component-events) and I wrote a [Svelte state management guide](https://joyofcode.xyz/svelte-state-management) if you need help)
+- Break the code into components (you can use Svelte [component events](https://learn.svelte.dev/tutorial/component-events) and I wrote a [Svelte state management guide](https://joyofcode.xyz/svelte-state-management) if you need help)
 - The input can lose focus if you press a random key, so make sure you keep track of the focus and improve that experience for the player
 - You can start a game on accident by pressing any key but you could use regex to make sure the input is a letter
 - Figure out how to edit previous letters for the current word by listening for the `Backspace` key and changing `letterIndex`
