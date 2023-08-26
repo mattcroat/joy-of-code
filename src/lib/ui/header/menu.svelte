@@ -68,10 +68,10 @@
 	}
 
 	.container :global(.popover-panel) {
+		isolation: isolate;
 		position: absolute;
 		top: 48px;
 		right: -16px;
-		z-index: 10;
 	}
 
 	.menu {

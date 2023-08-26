@@ -27,7 +27,7 @@
 		position: sticky;
 		top: 0;
 		padding: var(--spacing-16);
-		z-index: 10;
+		z-index: 20;
 		transition: background-color 0.3s ease, color 0.3s ease;
 	}
 
