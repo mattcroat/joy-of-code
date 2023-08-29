@@ -8,13 +8,13 @@
 
 [Joy of Code](https://joyofcode.xyz/) is a digital garden growing curious minds focused on web development and web design.
 
-## 🙏 Support
-
-You can support my work by [becoming a patron](https://www.patreon.com/joyofcode) or [becoming a YouTube member](https://youtube.com/@joyofcodedev/join) starting low as **$1/month**.
-
 ## ▶️ YouTube
 
 You can find my videos on [YouTube](https://www.youtube.com/@joyofcodedev).
+
+## 🙏 Support
+
+You can support my work by [becoming a patron](https://www.patreon.com/joyofcode) starting low as **$1/month**.
 
 ## 🤗 Contributing
 
@@ -34,8 +34,6 @@ At the end of each post there's a direct link to the **Markdown** file of the po
 
 - I use [social-share-images](https://github.com/mattcroat/social-share-images) to create dynamic social share images (I plan on using `@vercel/og` instead)
 
-- For analytics I use [Vercel Web Analytics](https://vercel.com/analytics)
-
 ## 📜 Setup
 
 These instructions are mostly if you want to learn how the code works but in general **I don't accept pull requests that aren't related to posts** but you can always raise an issue.
@@ -48,7 +46,7 @@ The project uses 📦️ [pnpm](https://pnpm.io/) but any package manager should
 git clone https://github.com/mattcroat/joy-of-code.git
 ```
 
-### ⚙️ Rename `.env.example` to `.env` and change
+### ⚙️ Rename `.env.example` to `.env`
 
 ```text
 # Private
@@ -65,7 +63,7 @@ PUBLIC_SUPABASE_URL=SUPABASE_URL
 pnpm i
 ```
 
-### 💿️ Run the development server with `pnpm run dev` or build and preview the project with `pnpm run build && pnpm run preview`.
+### 💿️ Run the development server
 
 ```sh
 pnpm run dev
