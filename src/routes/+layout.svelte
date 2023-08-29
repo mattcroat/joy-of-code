@@ -4,14 +4,12 @@
 	import Header from '$lib/ui/header/header.svelte'
 	import Footer from '$lib/ui/footer.svelte'
 	import LiteYouTubeEmbed from '$lib/embed/youtube.svelte'
-	import Analytics from './analytics.svelte'
 
 	import '../styles/styles.scss'
 
 	export let data
 </script>
 
-<Analytics />
 <LiteYouTubeEmbed />
 
 <div>
