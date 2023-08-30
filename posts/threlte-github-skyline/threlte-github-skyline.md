@@ -1,15 +1,18 @@
 ---
 title: Visualize GitHub Contributions In 3D With Svelte
 description: Learn how to use Threlte to make a 3D visualization of your GitHub contributions.
-slug: threlte-github-contributions
-published: '2023-08-18'
+slug: threlte-github-skyline
+published: '2023-08-30'
 category: svelte
-draft: true
 ---
+
+{% youtube id="f9fd1L1FEts" title="Visualize GitHub Contributions In 3D With Svelte" %}
 
 ## Table of Contents
 
 ## GitHub Skyline
+
+{% embed src="https://www.sveltelab.dev/w82i29p7zcpbn6b" title="GitHub Contributions" %}
 
 We're going to visualize the GitHub contributions graph in 3D using [Threlte](https://threlte.xyz/) inspired by [GitHub Skyline](https://skyline.github.com/).
 
@@ -45,7 +48,7 @@ Inside `routes/+page.svelte` I'm going to set up a 3D scene.
 	.scene {
 		position: absolute;
 		inset: 0;
-		background: hsl(200 10% 10%);
+		background-color: hsl(200 10% 10%);
 	}
 </style>
 ```
@@ -58,7 +61,7 @@ You don't have to read it but in another post on [using SvelteKit for web scrapi
 
 Here is the [GitHub repository](https://github.com/mattcroat/github-contributions-api) which you can host yourself in case the API ever goes down, or create an API endpoint in SvelteKit and copy the code.
 
-## Displaying The Data
+## Showing The Contributions
 
 I want to get the types out of the way, which you can ignore if you're not using TypeScript.
 
@@ -146,14 +149,14 @@ Everything in Threlte extends Three.js from the `<T>` component.
 
 Right now the cubes are white, but I'm going to create a `getColor()` function to get the color based on the day level from the API.
 
-```html:src/routes/scene.svelte showLineNumbers
+```html:src/routes/scene.svelte {23,28} showLineNumbers
 <script lang="ts">
 	function getColor(level: number) {
 		switch (level) {
 			case 0:
 				return '#0e0e0e'
 			case 1:
-				return '#00442A'
+				return '#00442a'
 			case 2:
 				return '#006d35'
 			case 3:
@@ -165,14 +168,29 @@ Right now the cubes are white, but I'm going to create a `getColor()` function t
 </script>
 
 <!-- ... -->
-<T.MeshStandardMaterial color={getColor(day.level)} />
+<Center autoCenter position.y={40}>
+	{#each contributions as row, i}
+		{#each row as day, j}
+			{#if day}
+				{@const color = getColor(day.level)}
+
+				<T.Group position={[0, 0, 12 * i]}>
+					<T.Mesh position={[12 * j, y / 2, 0]}>
+						<T.BoxGeometry args={[10, y, 10]} />
+						<T.MeshStandardMaterial {color} />
+					</T.Mesh>
+				</T.Group>
+			{/if}
+		{/each}
+	{/each}
+</Center>
 ```
 
 ## Make It Look More Interesting
 
 I want to make the visualization more interesting by having a base height for the contributions, multiply the existing height for more visual interest, and set a limit for the height.
 
-```html:src/routes/scene.svelte {19,22,23} showLineNumbers
+```html:src/routes/scene.svelte {20,23,24} showLineNumbers
 <script lang="ts">
 	function normalize(count: number, base = 4, offset = 2) {
 		switch (true) {
@@ -191,6 +209,7 @@ I want to make the visualization more interesting by having a base height for th
 	{#each contributions as row, i}
 		{#each row as day, j}
 			{#if day}
+				{@const color = getColor(day.level)}
 				{@const y = normalize(day.count)}
 
 				<T.Group position={[0, 0, 12 * i]}>
@@ -211,7 +230,7 @@ To animate the cube height we can use the `tweened` store from Svelte and interp
 
 If you try and set the scale on the mesh itself it's going to scale from the center, and for that reason we set it on the group.
 
-```html:src/routes/scene.svelte {3,4,9,11-13,23} showLineNumbers
+```html:src/routes/scene.svelte {3,4,9,11-13,24} showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { tweened } from 'svelte/motion'
@@ -232,6 +251,7 @@ If you try and set the scale on the mesh itself it's going to scale from the cen
 	{#each contributions as row, i}
 		{#each row as day, j}
 			{#if day}
+				{@const color = getColor(day.level)}
 				{@const y = normalize(day.count)}
 
 				<T.Group position={[0, 0, 12 * i]} scale.y={$scaleY}>
