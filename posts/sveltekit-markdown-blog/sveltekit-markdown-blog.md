@@ -1157,7 +1157,7 @@ Let's customize the error page before we deploy the site by adding `+error.svelt
 
 > 🐿️ You can add `+error.svelte` inside other routes if you want but since we don't have a lot of nested layouts this is fine.
 
-```html:src/routes/+error.html showLineNumbers
+```html:src/routes/+error.svelte showLineNumbers
 <script>
 	import { page } from '$app/stores'
 </script>
