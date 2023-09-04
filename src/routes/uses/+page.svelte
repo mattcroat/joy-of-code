@@ -43,13 +43,6 @@
 		<p>Editor Theme</p>
 		<div>
 			<a
-				href="https://marketplace.visualstudio.com/items?itemName=Matia.night-howl"
-				target="_blank"
-				rel="noreferrer"
-			>
-				Night Howl
-			</a>
-			<a
 				href="https://marketplace.visualstudio.com/items?itemName=pmndrs.pmndrs"
 				target="_blank"
 				rel="noreferrer"
@@ -63,11 +56,6 @@
 		<p>Icon Theme</p>
 		<div>
 			<a
-				href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme"
-			>
-				Material Icon Theme
-			</a>
-			<a
 				href="https://marketplace.visualstudio.com/items?itemName=miguelsolorio.symbols"
 			>
 				Symbols
@@ -78,13 +66,12 @@
 	<div class="category">
 		<p>Coding Font</p>
 		<a href="https://www.monolisa.dev/" target="_blank" rel="noreferrer">
-			MonoLisa (Cascadia Code and Mononoki are free alternatives that look the
-			same)
+			MonoLisa
 		</a>
 	</div>
 
 	<div class="category">
-		<p>More Coding Fonts</p>
+		<p>Alternative Coding Fonts</p>
 		<div>
 			<a
 				href="https://www.marksimonson.com/fonts/view/anonymous-pro"
