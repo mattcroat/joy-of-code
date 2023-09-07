@@ -304,7 +304,7 @@ It doesn't look bad but I think we can do better. This is the same example using
 
 Awesome, right? I want to emphasize how close Svelte is to HTML and I hope you're excited about it.
 
-There's more logic blocks like `#if`, `#each`, `#await`, and `#key` for you to play around with.
+There's more logic blocks like [`#if`](https://learn.svelte.dev/tutorial/if-blocks), [`#each`](https://learn.svelte.dev/tutorial/each-blocks), [`#await`](https://learn.svelte.dev/tutorial/await-blocks), and [`#key`](https://learn.svelte.dev/tutorial/key-blocks) for you to play around with.
 
 This is using JavaScript to loop over a list of items and render them.
 
