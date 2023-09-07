@@ -303,7 +303,7 @@ How awesome is that? 😄
 
 The code component is straightforward.
 
-```html:src/lib/deck/presentation.svelte showLineNumbers
+```html:src/lib/deck/code.svelte showLineNumbers
 <script lang="ts">
 	export let id: string | null = null
 	export let lines: string | boolean | null = null
