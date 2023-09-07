@@ -293,13 +293,13 @@ It doesn't look bad but I think we can do better. This is the same example using
 	}
 </script>
 
-{#if user.loggedIn}
-  <button on:click={toggle}>Log out</button>
-{/if}
-
-{#if !user.loggedIn}
-  <button on:click={toggle}>Log in</button>
-{/if}
+<button on:click={toggle}>
+	{#if user.loggedIn}
+		Log out
+	{:else}
+		Log in
+	{/if}
+</button>
 ```
 
 Awesome, right? I want to emphasize how close Svelte is to HTML and I hope you're excited about it.
