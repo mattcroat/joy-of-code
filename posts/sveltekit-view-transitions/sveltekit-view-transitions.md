@@ -4,26 +4,25 @@ description: Learn how to animate state and page transitions with ease using the
 slug: sveltekit-view-transitions
 published: '2023-09-08'
 category: sveltekit
-draft: true
 ---
 
-## Table of Contents
+{% youtube id="q_2irZO4SS8" title="Native Page Transitions With SvelteKit" %}
 
-https://github.com/paoloricciuti/sveltekit-view-transition
+## Table of Contents
 
 ## What Is The View Transitions API?
 
 The [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) is a new browser API that lets you easily create animated transitions between different states in your app.
 
+{% embed src="https://stackblitz.com/github/joysofcode/sveltekit-view-transitions?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Native Page Transitions With SvelteKit" title="Native Page Transitions With SvelteKit" %}
+
+You can find the source code on [GitHub](https://github.com/joysofcode/sveltekit-view-transitions).
+
 In the past you had to reach for the [FLIP animation technique](https://aerotwist.com/blog/flip-your-animations/) if you wanted to do [impossible layout animations](https://joyofcode.xyz/impossible-layout-animations-with-svelte) but it wasn't easy until now.
 
-The View Transitions API makes it easy to create state and page transitions for single-page (SPA) and traditional multi-page applications (MPA).
+The View Transitions API makes it easy to create state and page transitions for single-page (SPA) and traditional multi-page applications (MPA). It works by creating a snapshot of the DOM before and after the change and does a cross-fade by default, but it can be customized with CSS transitions.
 
-It works by creating a snapshot of the DOM before and after the change and does a cross-fade by default, but it can be customized with CSS transitions.
-
-You can read [Smooth and simple transitions with the View Transitions API](https://developer.chrome.com/docs/web-platform/view-transitions/) which includes a lot of examples to learn everything about the View Transitions API.
-
-At the time of writing the View Transitions API is only [supported](https://caniuse.com/view-transitions) in Chromium based browsers, but Safari and Firefox are working on implementing it.
+You can read [Smooth and simple transitions with the View Transitions API](https://developer.chrome.com/docs/web-platform/view-transitions/) which includes a lot of examples to learn everything about the View Transitions API. At the time of writing the View Transitions API is only [supported](https://caniuse.com/view-transitions) in Chromium based browsers, but Safari and Firefox are working on implementing it.
 
 That being said Chrome has the majority share of the browser market at over 60%. If a browser doesn't support the View Transitions API your site is going to work as normal.
 
@@ -162,7 +161,7 @@ You need to give the `view-transition-name` a unique name to know what changed w
 
 The same goes for the new elements your old elements are going to transition to.
 
-```html:src/routes/planets/[planet]/+page.svelte {3,21,37,48} showLineNumbers
+```html:src/routes/planets/[planet]/+page.svelte {3,21-25,41,52} showLineNumbers
 <div class="container">
   <div class="description">
     <h1 style:--title="title-{planet.name}">{planet.name}</h1>
@@ -183,7 +182,11 @@ The same goes for the new elements your old elements are going to transition to.
     </div>
   </div>
 
-  <img src={planet.image} alt={planet.name} style:--planet="image-{planet.name}" />
+  <img
+		src={planet.image}
+		alt={planet.name}
+		style:--planet="image-{planet.name}"
+	/>
 </div>
 
 <style>
@@ -311,9 +314,15 @@ Let's use the View Transitions API to animate the state change when a user does 
 </style>
 ```
 
-That's how simple that was and it only required a couple of lines of code.
+That's how simple animating state transitions is, and it only required a couple of lines of code.
 
-## Prefers Reduced Motion
+SvelteKit gives you complete control over the View Transitions API but in the future there might be an abstraction you can like the [sveltekit-view-transition](https://github.com/paoloricciuti/sveltekit-view-transition) project from [@PaoloRicciuti](https://twitter.com/PaoloRicciuti).
+
+## Respect The Motion Preference For Users
+
+With great power comes great responsibility.
+
+Don't forget to respect the motion preference for users but keep in mind that `prefers-reduced-motion` doesn't mean no motion.
 
 ```css:src/app.css showLineNumbers
 @media (prefers-reduced-motion) {
@@ -324,3 +333,5 @@ That's how simple that was and it only required a couple of lines of code.
 	}
 }
 ```
+
+That's it! 😄
