@@ -117,7 +117,7 @@ export default config
 
 A preprocessor transforms your `.svelte` files before passing them to the compiler. In this case `vitePreprocess` handles TypeScript, PostCSS and SCSS as some of the language flavors which you can read more about in the [SvelteKit documentation](https://kit.svelte.dev/docs/integrations#preprocessors-vitepreprocess).
 
-An adapter is is used to **adapt** 🥁 your SvelteKit app to the deployment target. You could write your own adapter but the supported adapters include [Cloudflare Pages](https://developers.cloudflare.com/pages/), [Netlify](https://www.netlify.com/), [Vercel](https://vercel.com/) including Node.js and a static adapter or community adapters for platforms like Deno.
+An adapter is used to **adapt** 🥁 your SvelteKit app to the deployment target. You could write your own adapter but the supported adapters include [Cloudflare Pages](https://developers.cloudflare.com/pages/), [Netlify](https://www.netlify.com/), [Vercel](https://vercel.com/) including Node.js and a static adapter or community adapters for platforms like Deno.
 
 Next I'm going to add the HTML page template with placeholders SvelteKit uses and replaces for your pages.
 
