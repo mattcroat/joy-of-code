@@ -24,9 +24,11 @@ The easiest way to get started is using the Threlte CLI which is going to scaffo
 npm create threlte
 ```
 
-Select the `@threlte/core` package and `@threlte/extras` for some helpful utilities. The Threlte CLI is also going to install `three` and `@types/three` because it uses [Three.js](https://threejs.org/).
+Select the `@threlte/extras` optional package for some helpful utilities. The Threlte CLI is also going to install `three` and `@types/three` because it uses [Three.js](https://threejs.org/).
 
-Threlte uses [pnpm](https://pnpm.io/) and you can install the dependencies with `pnpm i` in case you skipped it during the setup, and start the development server with `pnpm run dev`. I'm going to remove everything inside `lib` and `routes` to start from scratch.
+Install the dependencies with `npm i` if you skipped it during the setup and start the development server with `npm run dev`.
+
+I'm going to start from scratch and remove everything inside `lib` and `routes`.
 
 ## Scene Setup
 
@@ -102,7 +104,7 @@ Everything in Threlte extends Three.js from the `<T>` component.
 <script lang="ts">
 	import { onMount } from 'svelte'
   import { T } from '@threlte/core'
-	import { Center, Grid, OrbitControls } from '@threlte/extras'
+	import { Align, Grid, OrbitControls } from '@threlte/extras'
 	import type { Contributions } from '$lib/types'
 
 	let contributions: Contributions[] = []
@@ -129,7 +131,7 @@ Everything in Threlte extends Three.js from the `<T>` component.
 <T.DirectionalLight position={[0, 200, 200]} intensity={2} color="#fff" />
 <T.DirectionalLight position={[0, 200, -200]} color="#fff" intensity={2} />
 
-<Center autoCenter position.y={100}>
+<Align auto position.y={100}>
 	{#each contributions as row, i}
 		{#each row as day, j}
 			{#if day}
@@ -142,7 +144,7 @@ Everything in Threlte extends Three.js from the `<T>` component.
 			{/if}
 		{/each}
 	{/each}
-</Center>
+</Align>
 ```
 
 ## Changing The Colors
@@ -168,7 +170,7 @@ Right now the cubes are white, but I'm going to create a `getColor()` function t
 </script>
 
 <!-- ... -->
-<Center autoCenter position.y={40}>
+<Align auto position.y={40}>
 	{#each contributions as row, i}
 		{#each row as day, j}
 			{#if day}
@@ -183,7 +185,7 @@ Right now the cubes are white, but I'm going to create a `getColor()` function t
 			{/if}
 		{/each}
 	{/each}
-</Center>
+</Align>
 ```
 
 ## Make It Look More Interesting
@@ -205,7 +207,7 @@ I want to make the visualization more interesting by having a base height for th
 </script>
 
 <!-- ... -->
-<Center autoCenter position.y={40}>
+<Align auto position.y={40}>
 	{#each contributions as row, i}
 		{#each row as day, j}
 			{#if day}
@@ -221,7 +223,7 @@ I want to make the visualization more interesting by having a base height for th
 			{/if}
 		{/each}
 	{/each}
-</Center>
+</Align>
 ```
 
 ## Animating The Contributions
@@ -236,7 +238,7 @@ If you try and set the scale on the mesh itself it's going to scale from the cen
 	import { tweened } from 'svelte/motion'
 	import { quadInOut } from 'svelte/easing'
 	import { T } from '@threlte/core'
-	import { Center, Grid, OrbitControls } from '@threlte/extras'
+	import { Align, Grid, OrbitControls } from '@threlte/extras'
 	import type { Contributions } from '$lib/types'
 
 	const scaleY = tweened(0, { duration: 2000, easing: quadInOut })
@@ -247,7 +249,7 @@ If you try and set the scale on the mesh itself it's going to scale from the cen
 </script>
 
 <!-- ... -->
-<Center autoCenter position.y={40}>
+<Align auto position.y={40}>
 	{#each contributions as row, i}
 		{#each row as day, j}
 			{#if day}
@@ -255,15 +257,15 @@ If you try and set the scale on the mesh itself it's going to scale from the cen
 				{@const y = normalize(day.count)}
 
 				<T.Group position={[0, 0, 12 * i]} scale.y={$scaleY}>
-					<T.Mesh position={[12 * j, day.count / 2, 0]}>
-						<T.BoxGeometry args={[10, day.count, 10]} />
+					<T.Mesh position={[12 * j, y / 2, 0]}>
+						<T.BoxGeometry args={[10, y, 10]} />
 						<T.MeshStandardMaterial color={getColor(day.level)} />
 					</T.Mesh>
 				</T.Group>
 			{/if}
 		{/each}
 	{/each}
-</Center>
+</Align>
 ```
 
 That's it! 🎉
