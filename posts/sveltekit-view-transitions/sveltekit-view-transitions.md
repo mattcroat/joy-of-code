@@ -31,10 +31,10 @@ That being said Chrome has the majority share of the browser market at over 60%.
 Using the View Transitions API is simple.
 
 ```ts:example.ts
-// snapshot of old DOM 📸
+// snapshot old DOM 📸
 document.startViewTransition(() => {
   // DOM update
-  // snapshot of new DOM 📸
+  // snapshot new DOM 📸
 })
 ```
 
@@ -161,9 +161,15 @@ You need to give the `view-transition-name` a unique name to know what changed w
 
 The same goes for the new elements your old elements are going to transition to.
 
-```html:src/routes/planets/[planet]/+page.svelte {3,21-25,41,52} showLineNumbers
+```html:src/routes/planets/[planet]/+page.svelte {3-7,9,35,46} showLineNumbers
 <div class="container">
   <div class="description">
+		<img
+			src={planet.image}
+			alt={planet.name}
+			style:--planet="image-{planet.name}"
+		/>
+
     <h1 style:--title="title-{planet.name}">{planet.name}</h1>
 
     <p>{planet.description}</p>
@@ -181,27 +187,15 @@ The same goes for the new elements your old elements are going to transition to.
       {/if}
     </div>
   </div>
-
-  <img
-		src={planet.image}
-		alt={planet.name}
-		style:--planet="image-{planet.name}"
-	/>
 </div>
 
 <style>
 	.container {
-		display: grid;
-		grid-template-columns: 50ch 1fr;
-		max-width: 1024px;
-		margin-top: 12rem;
-		margin-inline: auto;
+		/* ... */
 
 		& img {
 			width: 100%;
-			height: 100%;
-			scale: 1.4;
-			z-index: -1;
+			margin-block: 4rem;
 			view-transition-name: var(--planet);
 		}
 	}
@@ -215,8 +209,8 @@ The same goes for the new elements your old elements are going to transition to.
 			text-transform: capitalize;
 			view-transition-name: var(--title);
 		}
-    /* ... */
-  }
+		/* ... */
+	}
 </style>
 ```
 
@@ -226,13 +220,16 @@ The View Transitions API is not only useful for animating page transitions but a
 
 Let's use the View Transitions API to animate the state change when a user does a reservation for a flight to some planet.
 
-```html:src/routes/[planet]/button.svelte {5-8,13,16,17,19,36-41,55} showLineNumbers
+```html:src/routes/[planet]/button.svelte {5-11,16,19,20,22,41-46,60} showLineNumbers
 <script lang="ts">
 	type State = 'idle' | 'loading' | 'success' | 'error'
 	let state: State = 'idle'
 
 	function transition(action: () => void) {
-		if (!document.startViewTransition) return
+		if (!document.startViewTransition) {
+			action()
+			return
+		}
 		document.startViewTransition(action)
 	}
 
@@ -253,8 +250,10 @@ Let's use the View Transitions API to animate the state change when a user does 
 	{#if state === 'idle'}
 		Make reservation
 	{:else if state === 'loading'}
+		<LoadingIcon />
 		Making reservation...
 	{:else if state === 'success'}
+		<CheckIcon />
 		Your ticket has been reserved
 	{:else if state === 'error'}
 		No tickets available
@@ -300,16 +299,6 @@ Let's use the View Transitions API to animate the state change when a user does 
 		&[data-state='error'] {
 			--background: hsl(9 40% 28%);
 		}
-	}
-
-	@keyframes loading {
-		to {
-			rotate: 1turn;
-		}
-	}
-
-	.loading {
-		animation: loading 1s infinite;
 	}
 </style>
 ```
