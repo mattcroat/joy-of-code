@@ -1,17 +1,20 @@
 ---
 title: Using JavaScript Libraries In Svelte
-description: Learn how to use third party JavaScript libraries in Svelte.
+description: The Svelte ecosystem covers the entire JavaScript ecosystem since Svelte gives you control over the DOM without requiring any glue code compared to React.
 slug: using-javascript-libraries-in-svelte
-published: '2023-09-14'
+published: '2023-09-15'
 category: svelte
-draft: true
 ---
+
+{% youtube id="N9OjaQ0XtKQ" title="Using JavaScript Libraries In Svelte" %}
 
 ## Table of Contents
 
 ## The Svelte Ecosystem
 
-Unlike some other JavaScript frameworks, using Svelte you don't need special wrappers around third party JavaScript libraries because you don't have to think about rerenders and effects meaning you can take advantage of the entire [npm](https://www.npmjs.com/) JavaScript ecosystem.
+The Svelte ecosystem covers the entire JavaScript ecosystem because Svelte gives you control over the DOM without requiring any glue code compared to a framework like React.
+
+You don't need a specific Svelte library for something if it doesn't exist — instead you can take advantage of the entire [npm](https://www.npmjs.com/) JavaScript ecosystem, and use an existing JavaScript library.
 
 In this post I'm going to cover how to use third party JavaScript libraries in SvelteKit and ways to solve problems you're going to encounter along the way.
 
@@ -76,7 +79,7 @@ To solve this problem you can use a [dynamic import](https://developer.mozilla.o
 
 	onMount(async () => {
 		const { greet } = await import('$lib')
-		greet()
+		greet() // 👍️
 	})
 </script>
 ```
@@ -117,11 +120,11 @@ Most JavaScript libraries need to query the DOM for an element to perform a task
 	})
 </script>
 
-<div class="letters">
+<h1 class="letters">
 	{#each 'Svelte'.split('') as letter}
 		<span class="letter">{letter}</span>
 	{/each}
-</div>
+</h1>
 
 <style>
 	.letters {
@@ -172,13 +175,13 @@ This works great for a single element but in this case we need to use an array.
 	})
 </script>
 
-<div class="letters">
+<h1 class="letters">
 	{#each 'Svelte'.split('') as letter, i}
 		<span bind:this={letters[i]} class="letter">
 			{letter}
 		</span>
 	{/each}
-</div>
+</h1>
 <!-- ... -->
 ```
 
@@ -192,7 +195,7 @@ A Svelte action is just a reusable piece of code used to attach some behavior to
 
 ```html:example.svelte showLineNumbers
 <h1 use:animateText>
-  Svelte
+	Svelte
 </h1>
 ```
 
@@ -211,11 +214,11 @@ I'm going to create an `animateText` action and use it on the container with `us
 	}
 </script>
 
-<div use:animateText class="letters">
+<h1 use:animateText class="letters">
 	{#each 'Svelte'.split('') as letter}
 		<span class="letter">{letter}</span>
 	{/each}
-</div>
+</h1>
 <!-- ... -->
 ```
 
@@ -226,11 +229,11 @@ You can take this a step further and have the entire logic inside the `animateTe
 	import { animate, stagger } from 'motion'
 
 	function animateText(element: HTMLDivElement) {
-		const text = element.innerText.split('')
+		const text = element.innerText.trim().split('')
 
 		element.innerHTML = ''
 
-		text.forEach((letter) => {
+		text.forEach(letter => {
 			element.innerHTML += `
         <span class="letter">${letter}</span>
       `
@@ -245,7 +248,7 @@ You can take this a step further and have the entire logic inside the `animateTe
 </script>
 
 <h1 use:animateText class="letters">
-  Svelte
+	Svelte
 </h1>
 <!-- ... -->
 ```
@@ -290,5 +293,3 @@ You can also pass parameters to the Svelte action.
 You can even include the styles inside the Svelte action if you want, but I think you already understand the power of Svelte actions.
 
 Svelte actions are another easy way to get a reference to an element, and then inside your action you can do regular DOM manipulations since it's just JavaScript.
-
-Hope you learned something! 😄
