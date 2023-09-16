@@ -33,6 +33,7 @@
 		"vite": "^4.4.9"
 	},
 	"dependencies": {
+		"@melt-ui/svelte": "^0.49.1",
 		"@rgossiaux/svelte-headlessui": "^2.0.0",
 		"@supabase/supabase-js": "^2.33.2",
 		"gray-matter": "^4.0.3",
