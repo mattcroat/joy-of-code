@@ -56,6 +56,8 @@ html {
 	font-size: 62.5%;
 	scroll-padding-top: var(--spacing-32);
 	scrollbar-color: var(--clr-scrollbar-thumb) transparent;
+	scroll-behavior: smooth;
+	scroll-padding-top: 8rem;
 }
 
 html,
@@ -76,7 +78,11 @@ body {
 		linear-gradient(225deg, hsl(237 92% 62%) 25%, transparent 25%),
 		linear-gradient(45deg, hsl(237 92% 62%) 25%, transparent 25%),
 		linear-gradient(315deg, hsl(237 92% 62%) 25%, transparent 25%);
-	background-position: 40px 0, 40px 0, 0 0, 0 0;
+	background-position:
+		40px 0,
+		40px 0,
+		0 0,
+		0 0;
 	background-size: 80px 80px;
 	background-repeat: repeat;
 	background-attachment: fixed;
@@ -151,7 +157,6 @@ a {
 	font-weight: 700;
 	text-decoration: none;
 	transition: color 0.3s ease;
-	z-index: 1;
 }
 
 a:hover {
