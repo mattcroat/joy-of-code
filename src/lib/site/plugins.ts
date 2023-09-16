@@ -1,11 +1,10 @@
 import { visit, SKIP } from 'unist-util-visit'
-import type { Root, Element } from 'hast'
 
 export function rehypeUnwrapImages() {
-	function containsImage(node: Element) {
+	function containsImage(node: any) {
 		return (
 			node.tagName === 'p' &&
-			node.children.some((child) => {
+			node.children.some((child: any) => {
 				if (child.type === 'element') {
 					return child.tagName === 'img'
 				}
@@ -13,7 +12,7 @@ export function rehypeUnwrapImages() {
 		)
 	}
 
-	return (tree: Root) => {
+	return (tree: any) => {
 		visit(tree, containsImage, (node, index, parent) => {
 			if (node.type === 'element') {
 				parent.children.splice(index, 1, ...node.children)
@@ -24,13 +23,13 @@ export function rehypeUnwrapImages() {
 }
 
 export function rehypeCopyCode() {
-	function codeTitle(node: Element) {
+	function codeTitle(node: any) {
 		if (node.tagName === 'div') {
 			return node.properties.className[0] === 'rehype-code-title'
 		}
 	}
 
-	return (tree: Root) => {
+	return (tree: any) => {
 		visit(tree, codeTitle, (node) => {
 			if (node.type !== 'element') return
 
