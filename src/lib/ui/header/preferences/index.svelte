@@ -5,7 +5,7 @@
 		PopoverButton,
 		PopoverPanel,
 	} from '@rgossiaux/svelte-headlessui'
-	import { CogIcon } from '@rgossiaux/svelte-heroicons/outline'
+	import { Cog } from '$lib/icons'
 
 	import Themes from './themes.svelte'
 	import Reading from './reading.svelte'
@@ -18,7 +18,7 @@
 <div class="container">
 	<Popover let:open class="popover">
 		<PopoverButton aria-label="Preferences" on:click={() => $sounds.click()}>
-			<CogIcon width="24" height="24" />
+			<Cog width={24} height={24} aria-hidden={true} />
 		</PopoverButton>
 
 		{#if open}

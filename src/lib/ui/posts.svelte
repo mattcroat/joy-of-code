@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
-	import { EyeIcon } from '@rgossiaux/svelte-heroicons/outline'
+	import { Eye } from '$lib/icons'
 	import { fetchJSON } from '$lib/site/posts'
 	import type { Post } from '$lib/types'
 
@@ -28,7 +28,7 @@
 				<a href="/{post.slug}">
 					<article class="card">
 						<span class="views">
-							<EyeIcon width="24" height="24" aria-hidden="true" />
+							<Eye width={24} height={24} aria-hidden={true} />
 							<span>
 								{#if views}
 									{#await views}
@@ -87,7 +87,9 @@
 		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-sm);
-		transition: transform 0.2s ease-in-out, box-shadow 0.3s ease,
+		transition:
+			transform 0.2s ease-in-out,
+			box-shadow 0.3s ease,
 			outline 0.1s ease;
 
 		/*
@@ -99,7 +101,9 @@
 
 	.card:hover {
 		transform: scale(1.02);
-		box-shadow: var(--shadow-md), 0 0 0 4px var(--clr-primary);
+		box-shadow:
+			var(--shadow-md),
+			0 0 0 4px var(--clr-primary);
 	}
 
 	.card .views {

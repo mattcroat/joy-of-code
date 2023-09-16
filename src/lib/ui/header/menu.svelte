@@ -5,7 +5,7 @@
 		PopoverButton,
 		PopoverPanel,
 	} from '@rgossiaux/svelte-headlessui'
-	import { MenuAlt1Icon } from '@rgossiaux/svelte-heroicons/outline'
+	import { Menu } from '$lib/icons'
 
 	import * as config from '$lib/site/config'
 	import { sounds } from '$lib/stores/sfx'
@@ -14,7 +14,7 @@
 <div class="container">
 	<Popover let:open class="popover">
 		<PopoverButton aria-label="Categories" on:click={() => $sounds.click()}>
-			<MenuAlt1Icon width="24" height="24" />
+			<Menu width={24} height={24} aria-hidden={true} />
 		</PopoverButton>
 
 		{#if open}

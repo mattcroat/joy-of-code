@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Heading from '$lib/ui/heading.svelte'
-	import { PencilAltIcon } from '@rgossiaux/svelte-heroicons/outline'
-
 	import { fade } from 'svelte/transition'
+	import Heading from '$lib/ui/heading.svelte'
+	import { PencilSquare } from '$lib/icons'
 
 	export let data
 </script>
@@ -33,7 +32,7 @@
 				<a href="/drafts/{post.slug}">
 					<article class="card">
 						<span class="views">
-							<PencilAltIcon width="24" height="24" aria-hidden="true" /> Draft
+							<PencilSquare width={24} height={24} aria-hidden={true} /> Draft
 						</span>
 
 						<div class="details">
@@ -90,14 +89,18 @@
 		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-sm);
-		transition: transform 0.2s ease-in-out, box-shadow 0.3s ease,
+		transition:
+			transform 0.2s ease-in-out,
+			box-shadow 0.3s ease,
 			outline 0.1s ease;
 		transform: translateZ(0);
 	}
 
 	.card:hover {
 		transform: scale(1.02);
-		box-shadow: var(--shadow-md), 0 0 0 4px var(--clr-primary);
+		box-shadow:
+			var(--shadow-md),
+			0 0 0 4px var(--clr-primary);
 	}
 
 	.card .views {

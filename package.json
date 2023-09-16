@@ -34,7 +34,6 @@
 	},
 	"dependencies": {
 		"@rgossiaux/svelte-headlessui": "^2.0.0",
-		"@rgossiaux/svelte-heroicons": "^0.1.2",
 		"@supabase/supabase-js": "^2.33.2",
 		"gray-matter": "^4.0.3",
 		"lite-youtube-embed": "^0.2.0",

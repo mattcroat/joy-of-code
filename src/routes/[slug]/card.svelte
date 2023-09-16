@@ -1,13 +1,7 @@
 <script lang="ts">
-	import {
-		ArrowNarrowRightIcon,
-		MailIcon,
-		PencilAltIcon,
-	} from '@rgossiaux/svelte-heroicons/outline'
-	import Heart from '@rgossiaux/svelte-heroicons/outline/Heart'
-
-	import * as config from '$lib/site/config'
 	import Newsletter from '$lib/ui/newsletter.svelte'
+	import { ArrowRight, Envelope, PencilSquare, Heart } from '$lib/icons'
+	import * as config from '$lib/site/config'
 
 	export let preset: 'support' | 'edit' | 'newsletter'
 	export let editUrl = ''
@@ -16,7 +10,7 @@
 {#if preset === 'support'}
 	<div class="card">
 		<div class="decorative">
-			<Heart width="24" height="24" aria-hidden="true" />
+			<Heart width={24} height={24} aria-hidden={true} />
 		</div>
 		<span class="title">Support</span>
 		<p class="text">
@@ -30,7 +24,7 @@
 			rel="noreferrer"
 		>
 			<span>Become a patreon</span>
-			<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
+			<ArrowRight width={24} height={24} aria-hidden={true} />
 		</a>
 	</div>
 {/if}
@@ -38,7 +32,7 @@
 {#if preset === 'edit'}
 	<div class="card">
 		<div class="decorative">
-			<PencilAltIcon width="24" height="24" aria-hidden="true" />
+			<PencilSquare width={24} height={24} aria-hidden={true} />
 		</div>
 		<span class="title">Found a mistake?</span>
 		<p class="text">
@@ -47,7 +41,7 @@
 		</p>
 		<a class="link" href={editUrl} target="_blank" rel="noreferrer">
 			<span>Edit on GitHub</span>
-			<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
+			<ArrowRight width={24} height={24} aria-hidden={true} />
 		</a>
 	</div>
 {/if}
@@ -55,7 +49,7 @@
 {#if preset === 'newsletter'}
 	<div class="card">
 		<div class="decorative">
-			<MailIcon width="24" height="24" aria-hidden="true" />
+			<Envelope width={24} height={24} aria-hidden={true} />
 		</div>
 		<span class="title">Subscribe For Updates</span>
 		<Newsletter />
