@@ -8,9 +8,6 @@ dependencies:
   '@melt-ui/svelte':
     specifier: ^0.49.1
     version: 0.49.1(svelte@4.2.0)
-  '@rgossiaux/svelte-headlessui':
-    specifier: ^2.0.0
-    version: 2.0.0(svelte@4.2.0)
   '@supabase/supabase-js':
     specifier: ^2.33.2
     version: 2.33.2
@@ -490,14 +487,6 @@ packages:
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
     dev: true
-
-  /@rgossiaux/svelte-headlessui@2.0.0(svelte@4.2.0):
-    resolution: {integrity: sha512-ksh245HqMM8yqkzd/OyAK2FCHZYOSA3ldLIHab7C9S60FmifqT24JFVgi8tZpsDEMk3plbfQvfah93n5IEi8sg==}
-    peerDependencies:
-      svelte: ^3.47.0
-    dependencies:
-      svelte: 4.2.0
-    dev: false
 
   /@rollup/pluginutils@4.2.1:
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
