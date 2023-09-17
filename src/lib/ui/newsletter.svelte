@@ -34,6 +34,7 @@
 		id="email"
 		name="email"
 		placeholder="you@email.com"
+		autocomplete="on"
 	/>
 	<button type="submit">
 		<Envelope width={24} height={24} aria-hidden={true} />
