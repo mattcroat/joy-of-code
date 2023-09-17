@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { ArrowNarrowRightIcon } from '@rgossiaux/svelte-heroicons/outline'
-
 	import Newsletter from '$lib/ui/newsletter.svelte'
 	import Posts from '$lib/ui/posts.svelte'
+	import { ArrowRight } from '$lib/icons'
 	import * as config from '$lib/site/config'
 
 	export let data
@@ -38,7 +37,7 @@
 			</p>
 			<a class="continue-reading" href={posts[0].slug}>
 				<span>Continue reading</span>
-				<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
+				<ArrowRight width={24} height={24} aria-hidden={true} />
 			</a>
 		</div>
 
@@ -59,7 +58,7 @@
 		<h3 class="latest" slot="title">Latest</h3>
 		<a slot="see-more" href="/archive">
 			<span>See more posts</span>
-			<ArrowNarrowRightIcon width="24" height="24" aria-hidden="true" />
+			<ArrowRight width="24" height="24" aria-hidden="true" />
 		</a>
 	</Posts>
 </main>

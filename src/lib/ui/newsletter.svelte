@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
-	import { MailIcon } from '@rgossiaux/svelte-heroicons/outline'
+	import { Envelope } from '$lib/icons'
 
 	let email = ''
 	let error = ''
@@ -34,9 +34,10 @@
 		id="email"
 		name="email"
 		placeholder="you@email.com"
+		autocomplete="on"
 	/>
 	<button type="submit">
-		<MailIcon width="24" height="24" aria-hidden="true" />
+		<Envelope width={24} height={24} aria-hidden={true} />
 		<span>Subscribe</span>
 	</button>
 </form>

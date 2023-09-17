@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
-	import { Switch, SwitchGroup } from '@rgossiaux/svelte-headlessui'
+	import { createSwitch } from '@melt-ui/svelte'
 
 	let enabled = false
 
@@ -22,80 +22,66 @@
 			delete htmlElement.dataset.font
 		}
 	}
+
+	const {
+		elements: { root, input },
+	} = createSwitch()
 </script>
 
-<div class="dyslexia">
-	<span>Use font for dyslexia</span>
+<form>
+	<div class="container">
+		<label for="dyslexic-font"> Use font for dyslexia</label>
 
-	<SwitchGroup>
-		<div class="switch-container">
-			<Switch
-				checked={enabled}
-				on:change={handleChange}
-				class={enabled ? 'switch switch-enabled' : 'switch switch-disabled'}
-			>
-				<span
-					class="toggle"
-					class:toggle-on={enabled}
-					class:toggle-off={!enabled}
-				/>
-			</Switch>
-		</div>
-	</SwitchGroup>
-</div>
+		<button
+			{...$root}
+			use:root
+			class="toggle"
+			aria-labelledby="dyslexic-font"
+			on:click={handleChange}
+		>
+			<span class="thumb" />
+		</button>
+
+		<input {...$input} use:input id="dyslexic-font" />
+	</div>
+</form>
 
 <style>
-	.switch-container {
-		--switch-width: 6.8rem;
-		--switch-height: 3.6rem;
-		--toggle-width: 3.4rem;
-		--toggle-height: var(--toggle-width);
-		--toggle-off: 0.1rem;
-		--toggle-on: calc(
-			var(--switch-width) - (var(--toggle-width) + var(--toggle-off))
-		);
+	.container {
+		width: 100%;
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
-		gap: var(--spacing-16);
-	}
-
-	.switch-container :global(.switch) {
-		width: var(--switch-width);
-		height: var(--switch-height);
-		position: relative;
-		display: inline-flex;
-		align-items: center;
-		border-radius: 9999px;
-		transition-property: color, background-color, border-color,
-			text-decoration-color, fill, stroke;
-		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-		transition-duration: 150ms;
-	}
-
-	.switch-container :global(.switch-enabled) {
-		background-color: var(--clr-switch-on-bg);
-	}
-
-	.switch-container :global(.switch-disabled) {
-		background-color: var(--clr-switch-off-bg);
 	}
 
 	.toggle {
-		width: var(--toggle-width);
-		height: var(--toggle-height);
-		display: inline-block;
-		background-color: var(--clr-primary);
+		--width: 6.8rem;
+		--padding: 1rem;
+		--background: var(--clr-switch-off-bg);
+
+		width: var(--width);
+		height: 3.6rem;
+		background-color: var(--background);
 		border-radius: 9999px;
-		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-		transition-duration: 150ms;
-		transition-property: transform;
-	}
+		transition: background-color 0.15s ease;
 
-	.toggle-on {
-		transform: translateX(var(--toggle-on));
-	}
+		& .thumb {
+			--size: 3.4rem;
 
-	.toggle-off {
-		transform: translateX(var(--toggle-off));
+			display: block;
+			width: var(--size);
+			height: var(--size);
+			background-color: var(--clr-primary);
+			border-radius: 50%;
+			transition: translate 0.15s ease;
+		}
+
+		&[data-state='checked'] {
+			--background: var(--clr-switch-on-bg);
+
+			& .thumb {
+				translate: calc(var(--width) - var(--size)) 0px;
+			}
+		}
 	}
 </style>

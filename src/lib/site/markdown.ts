@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { unified } from 'unified'
 import fromMarkdown from 'remark-parse'
 import fromMarkdownToHtml from 'remark-rehype'

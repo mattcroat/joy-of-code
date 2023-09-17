@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { fly } from 'svelte/transition'
-	import ChevronDoubleLeft from '@rgossiaux/svelte-heroicons/outline/ChevronDoubleLeft'
-	import ChevronDoubleRight from '@rgossiaux/svelte-heroicons/outline/ChevronDoubleRight'
+	import { ChevronDoubleLeft, ChevronDoubleRight } from '$lib/icons'
 
 	let tableOfContents = null
 	let showSidebar = false
@@ -52,7 +51,7 @@
 				class="sidebar-toggle"
 				aria-label="Show table of contents"
 			>
-				<ChevronDoubleLeft width="24" height="24" aria-hidden="true" />
+				<ChevronDoubleLeft width={24} height={24} aria-hidden={true} />
 			</button>
 		{/if}
 
@@ -62,7 +61,7 @@
 				transition:fly={{ x: '100%', duration: 300 }}
 			>
 				<button on:click={toggleSidebar} aria-label="Hide table of contents">
-					<ChevronDoubleRight width="24" height="24" aria-hidden="true" />
+					<ChevronDoubleRight width={24} height={24} aria-hidden={true} />
 				</button>
 
 				<h2 class="table-of-contents-title">Table of contents</h2>
