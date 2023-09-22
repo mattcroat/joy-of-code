@@ -16,6 +16,8 @@ The Svelte ecosystem covers the entire JavaScript ecosystem because Svelte gives
 
 You don't need a specific Svelte library for something if it doesn't exist — instead you can take advantage of the entire [npm](https://www.npmjs.com/) JavaScript ecosystem, and use an existing JavaScript library.
 
+{% embed src="https://www.sveltelab.dev/3ukxxq4a3fss7dd" title="Using JavaScript Libraries In Svelte" %}
+
 In this post I'm going to cover how to use third party JavaScript libraries in SvelteKit and ways to solve problems you're going to encounter along the way.
 
 That being said you can Sveltify any JavaScript library and publish it as a package which I'm going to cover in another post.
