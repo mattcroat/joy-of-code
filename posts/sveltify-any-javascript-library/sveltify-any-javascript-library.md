@@ -14,7 +14,7 @@ category: svelte
 
 [Svelte makes it easy to work with any existing JavaScript library](https://joyofcode.xyz/using-javascript-libraries-in-svelte) since it gives you control over the DOM and doesn't require mental gymnastics.
 
-Instead of using regular JavaScript you can take advantage of the declarative nature of Svelte and **sveltify** any JavaScript library for a nicer developer experience — which you can also publish on [npm](https://www.npmjs.com/) if you want.
+Instead of using regular JavaScript you can take advantage of the declarative nature of Svelte and **Sveltify** any JavaScript library for a nicer developer experience — which you can also publish on [npm](https://www.npmjs.com/) if you want.
 
 {% embed src="https://stackblitz.com/github/joysofcode/sveltify?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltify" title="Sveltify" %}
 
@@ -28,7 +28,7 @@ You don't need special Svelte version of a library to use it, but it can teach y
 
 [Floating UI](https://floating-ui.com/) is used to create tooltips, popovers, dropdown and more but for our use case I'm only interested in using it for tooltips.
 
-You might look at the code of some **sveltified** libraries and think it looks complicated, but that's only because they're trying to make a general abstraction for everyone to use — you don't have to, so only sveltify the parts you need.
+You might look at the code of some **sveltified** libraries and think it looks complicated, but that's only because they're trying to make a general abstraction for everyone to use — you don't have to, so only Sveltify the parts you need.
 
 Here is the regular code required for creating a Floating UI tooltip using the `bind` directive to get a reference to the element.
 
