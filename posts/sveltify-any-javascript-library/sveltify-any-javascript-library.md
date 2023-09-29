@@ -194,7 +194,7 @@ Using a Svelte action we abstracted the tooltip logic into a `tooltip` action wh
 
 [Leaflet](https://leafletjs.com/) is a great JavaScript library for interactive maps, and has some of the most common problems you're going to run into when using a JavaScript library with SvelteKit.
 
-For some reason Leaflet doesn't include installation instructions for npm, but doing a quick search on npm you can find [Leaflet](<(https://www.npmjs.com/package/leaflet)>), and use `npm i leaflet` to install the package.
+For some reason Leaflet doesn't include installation instructions for npm, but doing a quick search on npm you can find [Leaflet](https://www.npmjs.com/package/leaflet), and use `npm i leaflet` to install the package.
 
 If you use TypeScript, besides the name of the package you can see Leaflet has type definitions available from `npm i @types/leaflet` since it's not written in TypeScript.
 
