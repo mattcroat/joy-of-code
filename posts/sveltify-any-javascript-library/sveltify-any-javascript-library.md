@@ -4,18 +4,21 @@ description: Learn how to Sveltify any JavaScript library using Svelte actions a
 slug: sveltify-any-javascript-library
 published: '2023-09-29'
 category: svelte
-draft: true
 ---
+
+{% youtube id="RuM4KHTZqD4" title="Sveltify Any JavaScript Library" %}
 
 ## Table of Contents
 
 ## Sveltify Any JavaScript Library
 
-[Svelte makes it easy to work with any existing JavaScript library](https://joyofcode.xyz/using-javascript-libraries-in-svelte) since it gives you control over the DOM.
+[Svelte makes it easy to work with any existing JavaScript library](https://joyofcode.xyz/using-javascript-libraries-in-svelte) since it gives you control over the DOM and doesn't require mental gymnastics.
 
 Instead of using regular JavaScript you can take advantage of the declarative nature of Svelte and **sveltify** any JavaScript library for a nicer developer experience — which you can also publish on [npm](https://www.npmjs.com/) if you want.
 
-You can find the [source code on GitHub](https://github.com/joysofcode/sveltify).
+{% embed src="https://stackblitz.com/github/joysofcode/sveltify?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltify" title="Sveltify" %}
+
+You can find the source code on [GitHub](https://github.com/joysofcode/sveltify).
 
 First we're going to use [Svelte actions](https://learn.svelte.dev/tutorial/actions) to create a reusable tooltip from [Floating UI](https://floating-ui.com/), and then use component composition to turn a [Leaflet](https://leafletjs.com/) map into a simple library we can use.
 
@@ -358,7 +361,9 @@ The key in `setContext()` can be anything like the string `map`, but to ensure t
 export const key = Symbol()
 ```
 
-You can dispatch custom events by using `createEventDispatcher` from Svelte.
+## Dispatching Custom Events
+
+You can dispatch custom events by using the [createEventDispatcher](https://svelte.dev/docs/svelte#createeventdispatcher) from Svelte.
 
 ```html:src/lib/map/marker.svelte showLineNumbers
 <script lang="ts">
@@ -371,7 +376,7 @@ You can dispatch custom events by using `createEventDispatcher` from Svelte.
 </script>
 ```
 
-This way you can trigger any behavior.
+You can listen for the custom event using the [on:eventname](https://svelte.dev/docs/element-directives#on-eventname) directive.
 
 ```html:src/routes/map/+page.svelte {7-8} showLineNumbers
 <script lang="ts">
