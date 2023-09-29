@@ -405,7 +405,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 After the user is authenticated and the cookie is created we can populate `event.locals.user` with the user `name` and `role`.
 
-> 🐿️ The `event.local.user` naming is arbitrary. You can name it `event.local.banana` and pass `event.local.banana = '🍌'` if you wanted.
+> 🐿️ The `event.locals.user` naming is arbitrary. You can name it `event.locals.banana` and pass `event.locals.banana = '🍌'` if you wanted.
 
 Since the `locals.user` is populated we can pass it to the `$page` store from `+layout.server.ts`.
 
