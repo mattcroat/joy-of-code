@@ -1,17 +1,22 @@
 ---
-title: The Ultimate Svelte Actions Guide
-description: Svelte actions are the most underrated and powerful Svelte feature which sets it apart from other JavaScript frameworks.
+title: Svelte Actions Guide
+description: Svelte actions are the most underrated and powerful feature of Svelte which sets it apart from other JavaScript frameworks.
 slug: svelte-actions-guide
 published: '2023-10-06'
 category: svelte
-draft: true
 ---
+
+{% youtube id="LGOqg0Y7sAc" title="Svelte Actions Guide" %}
 
 ## Table of Contents
 
-## What Are Svelte Actions?
+## Svelte Actions
 
 [Svelte actions](https://svelte.dev/docs/svelte-action) are just regular JavaScript functions that are called when an element is created, and give you a reference to the element itself, so you can attach any behavior to that element using regular JavaScript.
+
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-actions?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte Actions Guide" title="Svelte Actions Guide" %}
+
+You can find the repo with the examples on [GitHub](https://github.com/joysofcode/svelte-actions).
 
 ```html:example.svelte showLineNumbers
 <script lang="ts">
@@ -102,7 +107,9 @@ Svelte actions only work with JavaScript enabled, and **don't** run on the serve
 
 Let's go over some examples first, and then I'm also going to show you how to type your actions if you're using TypeScript.
 
-## Tooltip
+## Tooltip Action
+
+The next example uses [Tippy.js](https://atomiks.github.io/tippyjs/) to make a reusable tooltip with Svelte actions.
 
 ```html:src/routes/tooltip/+page.svelte showLineNumbers
 <script lang="ts">
@@ -114,13 +121,16 @@ Let's go over some examples first, and then I'm also going to show you how to ty
   let content = 'Tooltip'
 
   function tooltip(element: HTMLElement, options: Options) {
+    // create tooltip
     const tooltip = tippy(element, options)
 
     return {
       update(options: Options) {
+        // update options
         tooltip.setProps(options)
       },
       destroy() {
+        // cleanup
         tooltip.destroy()
       },
     }
@@ -132,14 +142,18 @@ Let's go over some examples first, and then I'm also going to show you how to ty
 <button use:tooltip={{ content }}>Hover</button>
 ```
 
-## Modal
+There is nothing wrong with using a `<Tooltip />` component if you want but in this case a Svelte action makes more sense because it gives you a direct reference to the element and avoids the `onMount` and `bind` directive boilerplate.
+
+## Click Outside Action
+
+Most of the time you're going to need a simple action where you need a bit of JavaScript to do something like knowing when a user clicks outside of an element.
 
 ```html:src/routes/modal/+page.svelte showLineNumbers
 <script lang="ts">
   import { scale } from 'svelte/transition'
   import type { Action } from 'svelte/action'
 
-  interface Attributes {
+  type Attributes = {
     'on:outside'?: (event: CustomEvent) => void
   }
   type clickOutsideAction = Action<HTMLElement, any, Attributes>
@@ -177,11 +191,11 @@ Let's go over some examples first, and then I'm also going to show you how to ty
 {#if open}
   <div class="background">
     <div
-			class="modal"
-			on:outside={closeModal}
-			use:clickOutside
-			transition:scale
-		>
+      class="modal"
+      on:outside={closeModal}
+      use:clickOutside
+      transition:scale
+    >
       <h2>Modal</h2>
       <p>What's up?</p>
     </div>
@@ -189,7 +203,7 @@ Let's go over some examples first, and then I'm also going to show you how to ty
 {/if}
 
 <button on:click={openModal}>
-	Open
+  Open
 </button>
 
 <style>
@@ -217,7 +231,15 @@ Let's go over some examples first, and then I'm also going to show you how to ty
 </style>
 ```
 
-## Motion
+> 🐿️ If you're making a modal you should use the [dialog](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) element instead.
+
+You can close the modal ny dispatching and listening for a custom `on:outside` event on the modal, and the logic isn't tied to that specific modal, so we can reuse the `use:clickOutside` action on any element.
+
+Knowing how to make a quick Svelte action like this is always useful, regardless if you need to know if a user clicked outside of an element, or if you need to know if an element is sticky.
+
+## Text Animation Action
+
+The next example uses the JavaScript animation library [Motion One](https://motion.dev/) to create a reusable `use:text` Svelte action to create elements as letters from any text, and animate it on the screen.
 
 ```html:src/routes/motion/+page.svelte showLineNumbers
 <script lang="ts">
@@ -225,10 +247,10 @@ Let's go over some examples first, and then I'm also going to show you how to ty
   import type { Action } from 'svelte/action'
 
   type Options = {
-    options: AnimationOptions
-    action: ({ animation }: { animation: AnimationControls }) => void
+    options?: AnimationOptions
+    action?: ({ animation }: { animation: AnimationControls }) => void
   }
-  interface Attributes {
+  type Attributes = {
     'on:finished'?: (event: CustomEvent) => void
   }
   type TextAction = Action<HTMLElement, Options, Attributes>
@@ -257,11 +279,13 @@ Let's go over some examples first, and then I'm also going to show you how to ty
         y: [0, 30, -60, 0],
         rotate: 360,
       },
-      { duration: 0.3, delay: stagger(0.1), ...options }
+      { duration: 1, delay: stagger(0.1), ...options }
     )
 
     // invoke callback
-    action({ animation })
+    if (action) {
+      action({ animation })
+    }
 
     // dispatch event when animation is finished
     animation.finished.then(() => {
@@ -301,10 +325,19 @@ Let's go over some examples first, and then I'm also going to show you how to ty
 {/if}
 ```
 
-## Forms
+Here we use a `action` callback to get a reference to `animation` which we use to scrub through the animation.
+
+## Progressive Form Enhancement Action
+
+Svelte actions are great for progressive enhancement.
+
+SvelteKit already has an [action for progressive form enhancement](https://kit.svelte.dev/docs/form-actions#progressive-enhancement-use-enhance) but here is how it works.
 
 ```html:src/routes/forms/+page.svelte showLineNumbers
 <script lang="ts">
+  // please use this instead
+  // import { enhance } from '$app/forms'
+
   type Submit = (params: SubmitParams) => void
   type SubmitParams = {
     formElement: HTMLFormElement
@@ -362,4 +395,21 @@ Let's go over some examples first, and then I'm also going to show you how to ty
 </style>
 ```
 
-## Examples
+Thanks to passing the `submit` callback to the Svelte action, we can get the current `<form>` element and form data, or whatever else you want.
+
+## Svelte Actions Examples
+
+Here is a list of some great libraries and set of utilities that use Svelte actions you can use and learn from.
+
+Libraries:
+
+- [Neocodemirror](https://github.com/PuruVJ/neocodemirror)
+- [Neodrag](https://github.com/puruvj/neodrag)
+- [Neoconfetti](https://github.com/PuruVJ/neoconfetti)
+- [Flatpickr](https://github.com/kodaicoder/svelte-flatpickr-plus)
+- [Maskify](https://github.com/Hugos68/svelte-maskify)
+
+Utils:
+
+- [Svelte actions](https://github.com/swyxio/svelte-actions)
+- [Svelte UX](https://github.com/techniq/svelte-ux)
