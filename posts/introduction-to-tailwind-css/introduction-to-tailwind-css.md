@@ -305,13 +305,13 @@ It's a fixable problem, but I opted for this solution instead since it varies ac
 
 I mentioned earlier how I enjoy writing CSS, but it doesn't mean I enjoy repetition. How many times do we write out the same things over again?
 
-I mean the tedious nature of curly brackets, semicolons, and coming up with class names, which leads to using metodologies like [BEM](http://getbem.com/introduction/), but we're only fooling ourselves believing this approach is truly a separation of concerns when our markup becomes dependant on the class names we assign it.
+I mean the tedious nature of curly brackets, semicolons, and coming up with class names, which leads to using methodologies like [BEM](http://getbem.com/introduction/), but we're only fooling ourselves believing this approach is truly a separation of concerns when our markup becomes dependent on the class names we assign it.
 
-I love [SASS](https://sass-lang.com/), but truth be told, I rarely find use for it nowadays with CSS variables being a thing, and how everything is componetized if you're using a JavaScript framework, or having the option of using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) in popular frameworks such as [React](https://reactjs.org/).
+I love [SASS](https://sass-lang.com/), but truth be told, I rarely find use for it nowadays with CSS variables being a thing, and how everything is componentized if you're using a JavaScript framework, or having the option of using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) in popular frameworks such as [React](https://reactjs.org/).
 
 ## The Tailwind CSS Approach
 
-To get up and going, we're going to use [Tailwind Play](https://play.tailwindcss.com/) which is an official playground provided by the Tailwind team. It has everything set up. Once you open it, clear the example in the HTML file, so we can work from a blank slate.
+To get up and going, we're going to use [Tailwind Play](https://play.tailwindcss.com/), the official playground provided by the Tailwind team. It has everything set up. Once you open it, clear the example in the HTML file, so we can work from a blank slate.
 
 If you want to use Tailwind in your project you can read the [installation steps](https://tailwindcss.com/docs/installation) from the documentation.
 
@@ -323,7 +323,7 @@ Tailwind uses a `tailwind.config.js` config file that uses [PostCSS](https://pos
 - components (component classes)
 - utilities (utiliy classes)
 
-Don't panic! This is just an explanation of how it works. To set it up is straightforward, and doesn't require any configuration.
+Don't panic! This is just an explanation of how it works. Setting it up is straightforward, and doesn't require any configuration.
 
 The amount of utility classes can lead to huge files, but Tailwind purges unused styles for you creating a tiny file in production. You can learn more about it if you read [optimizing for production](https://tailwindcss.com/docs/optimizing-for-production).
 
@@ -349,7 +349,7 @@ In the CSS section of Tailwind Play, we can import our font. Don't think it's an
 
 We can declare the font here like you would. Instead, let's modify the config instead. Tailwind by default doesn't come with everything enabled due to file size concerns (Tailwind Play has everything enabled).
 
-That means we can also specify the base Tailwind colors we want to use. We can look at [available Tailwind colors](https://tailwindcss.com/docs/customizing-colors) for example, but we can also add our own under config.
+That means we can also specify the base Tailwind colors we want to use. We can look at [available Tailwind colors](https://tailwindcss.com/docs/customizing-colors) for example, but we can also add ours into the config file.
 
 ```js:tailwind.config.js showLineNumbers
 const colors = require('tailwindcss/colors')
@@ -400,7 +400,7 @@ Let's do the same for the card.
 </div>
 ```
 
-Notice how simple adding dark mode is with the `dark` variant, and the use of media queries. Tailwind uses a mobile first approach with the [default breakpoints](https://tailwindcss.com/docs/breakpoints) being `sm`, `md`, `lg`, `xl`, `2xl`.
+Notice how simple adding dark mode is with the `dark` variant and the use of media queries. Tailwind uses a mobile first approach with the [default breakpoints](https://tailwindcss.com/docs/breakpoints) being `sm`, `md`, `lg`, `xl`, `2xl`.
 
 We can even remove most of the styles from the image, because of Tailwind defaults.
 
@@ -565,7 +565,7 @@ There's more you can do with hover, focus, and other states. You can look at the
 
 Often people are overwhelmed with just the amount of regular CSS properties to remember. Tailwind requires you to understand CSS, unlike other frameworks which is a great way to learn.
 
-You can have an easier time if you read the documentation, but I also recommend you dump the entire config file so you can reference it. This is done easily from the [configuration step](https://tailwindcss.com/docs/configuration).
+You will have an easier time if you read the documentation, but I also recommend dumping the entire config file so you can reference it. This is done easily from the [configuration step](https://tailwindcss.com/docs/configuration).
 
 ```shell:terminal
 npx tailwindcss init tailwindcss-full-config.js --full
