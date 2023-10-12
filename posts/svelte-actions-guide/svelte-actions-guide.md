@@ -1,12 +1,12 @@
 ---
-title: Svelte Actions Guide
+title: Svelte Actions Make Svelte The Best JavaScript Framework
 description: Svelte actions are the most underrated and powerful feature of Svelte which sets it apart from other JavaScript frameworks.
 slug: svelte-actions-guide
 published: '2023-10-06'
 category: svelte
 ---
 
-{% youtube id="LGOqg0Y7sAc" title="Svelte Actions Guide" %}
+{% youtube id="LGOqg0Y7sAc" title="Svelte Actions" %}
 
 ## Table of Contents
 
@@ -235,7 +235,7 @@ Most of the time you're going to need a simple action where you need a bit of Ja
 
 You can close the modal ny dispatching and listening for a custom `on:outside` event on the modal, and the logic isn't tied to that specific modal, so we can reuse the `use:clickOutside` action on any element.
 
-Knowing how to make a quick Svelte action like this is always useful, regardless if you need to know if a user clicked outside of an element, or if you need to know if an element is sticky.
+Knowing how to make a quick Svelte action like this is always useful, regardless if you need to know if a user clicked outside of an element, or if you need to [know if an element is sticky](https://twitter.com/branmcconnell/status/1709670088344060303).
 
 ## Text Animation Action
 
