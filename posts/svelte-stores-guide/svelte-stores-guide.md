@@ -1,39 +1,41 @@
 ---
-title: The Svelte Stores Guide
-description: Svelte stores are a simple way to share reactive state across multiple components and handle global state.
+title: Svelte Makes Global State Easy Using Stores
+description: Svelte stores are a simple way to share reactive state across components and handle global state.
 slug: svelte-stores-guide
 published: '2023-10-12'
 category: svelte
-draft: true
 ---
 
 ## Table of Contents
 
+{% youtube id="L3uBfL-4dDM" title="Svelte Stores" %}
+
 ## Sharing Reactive State Across Components
 
-Let's say you have some unrelated state like a `count` value you want to share across multiple components, or regular JavaScript modules.
+Let's say you have some state like a `counter` value that is used by multiple unrelated components, or regular JavaScript modules.
 
 ```ts:lib/counter.ts showLineNumbers
-export let count = 0
+export let counter = 0
 ```
 
 Even if you import `count` and try to change it, you can't because imports are read-only.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
-  import { count } from '$lib/counter'
+  import { counter } from '$lib/counter'
 
-  count += 1 // Cannot assign to 'count' because it is an import
+	// 💩 Cannot assign to 'count' because it is an import
+  counter = 10
 </script>
 ```
 
-How can you update and share the `count` value then? 🤔
+How can you update and share the `counter` value then? 🤔
 
-It would be great if there was a way that anyone interested in `count` changing can get notified by subscribing to `counter`.
+It would be great if there was a way that anyone interested in `counter` changing can get notified by subscribing to it.
 
 ```ts:lib/counter.ts showLineNumbers
 function createCounter(count) {
-  // only keep track of unique subscribers
+  // keep track of unique subscribers
 	const subscribers = new Set()
 
   // add subscriber
@@ -41,7 +43,7 @@ function createCounter(count) {
 		subscribers.add(subscriber)
 	}
 
-  // notify the subscribers when you update the value
+  // notify the subscribers when `count` updates
 	function update(updater) {
     count = updater(count)
 		subscribers.forEach((subscriber) => subscriber(count))
@@ -55,6 +57,8 @@ export const counter = createCounter(0)
 ```
 
 This is also known as the [observer pattern](https://www.patterns.dev/posts/observer-pattern) which is just an object with subscribers who get notified when a value they're subscribed to updates — you might have heard of it as the **publish-subscribe**, or **pub/sub** pattern.
+
+{% img src="observer.webp" alt="Observer pattern" %}
 
 You can subscribe to the `counter` inside a component or regular JavaScript module.
 
@@ -120,7 +124,7 @@ You can update the `count` value from anywhere, and it's going to be reactive.
 
 You might have noticed how `createCounter` has nothing specific to a counter inside of it — let's rename it to something more generic like `writable`, add a `set` method, and return a cleanup function inside the `subscribe` method.
 
-```ts:lib/counter.ts {1,5-8,11-13,18-21,24} showLineNumbers
+```ts:lib/counter.ts {1,5-8,10-12,18-20,23} showLineNumbers
 export function writable(value) {
 	const subscribers = new Set()
 
@@ -196,6 +200,8 @@ So what is a Svelte store?
 
 A Svelte store is an object with a `subscribe`, `update`, and `set` method that allows you to manage and share reactive state across multiple components. It provides a straightforward way to handle data that needs to be accessed globally, enabling components to subscribe to changes and automatically re-render when the store's value changes.
 
+{% img src="store.webp" alt="Svelte store" %}
+
 You can import a `writable`, `readable`, or `derived` store from `svelte/store`.
 
 ```ts:lib/counter.ts showLineNumbers
@@ -204,7 +210,7 @@ import { writable } from 'svelte/store'
 const counter = writable(0)
 ```
 
-A store accepts a function as a second argument that only runs once after the first subscriber, and return a cleanup function when there are no subscriber anymore.
+A store accepts a function as a second argument that only runs once after the first subscriber, and returns a cleanup function when there are no subscribers anymore.
 
 ```ts:lib/counter.ts showLineNumbers
 import { writable } from 'svelte/store'
@@ -215,9 +221,11 @@ const counter = writable(0, () => {
 	return () => console.log('No more subscribers')
 })
 
-const unsubscribe = counter.subscribe(count => console.log(count)) // "Got a subscriber"
+// "Got a subscriber"
+const unsubscribe = counter.subscribe(count => console.log(count))
 
-unsubscribe() // "No more subscribers"
+// "No more subscribers"
+unsubscribe()
 ```
 
 The second argument also accepts a `set` and `update` method as arguments.
@@ -226,7 +234,7 @@ The second argument also accepts a `set` and `update` method as arguments.
 import { writable } from 'svelte/store'
 
 const counter = writable(0, (set, update) => {
-	set(10) // logs 10
+	set(10)
 	update(prevCount => prevCount * 2) // logs 20
 })
 
@@ -358,7 +366,7 @@ Inside Svelte components, you can reference a store using the `$` prefix which s
 
 You can also bind the store value if it's writable.
 
-```html:+page.svelte showLineNumbers
+```html:+page.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 </script>
@@ -406,7 +414,7 @@ export const counter = createCounter(0)
 
 Let's update the previous `counter` example.
 
-```html:increment.svelte showLineNumbers
+```html:increment.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 </script>
@@ -414,7 +422,7 @@ Let's update the previous `counter` example.
 <button on:click={counter.increment}>+</button>
 ```
 
-```html:decrement.svelte showLineNumbers
+```html:decrement.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 </script>
@@ -422,7 +430,7 @@ Let's update the previous `counter` example.
 <button on:click={counter.decrement}>-</button>
 ```
 
-```html:reset.svelte showLineNumbers
+```html:reset.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 </script>
@@ -442,63 +450,39 @@ Stores are designed to manage state on the client. On the server, each request i
 
 At best you're going to run into weird behavior, and at the worst you might have data leakage, where one user's data is exposed to another user.
 
-```ts:lib/user.ts showLineNumbers
-import { writable } from 'svelte/store'
+```ts:routes/server/+page.server.ts showLineNumbers
+import { counter } from '$lib/counter'
 
-export const user = writable('')
-```
+export async function load() {
+	counter.subscribe((count) => console.log(count))
 
-```ts:+page.server.ts showLineNumbers
-import { user } from '$lib/user'
-
-export async function load({ fetch }) {
-	const response = await fetch('/api/user')
-	const userData = await response.json()
-
-	// 💩 avoid using a store on the server
-	user.set(userData)
-}
-```
-
-```html:+page.svelte showLineNumbers
-<script lang="ts">
-	import { user } from '$lib/user'
-
-	// 💩 this doesn't get updated
-	console.log('$user: ' + $user)
-</script>
-
-<h1>Server</h1>
-```
-
-Instead of using stores on the server, pass the data to the component that needs it, or use the `$page` store.
-
-```ts:+page.server.ts showLineNumbers
-export async function load({ fetch }) {
-	const response = await fetch('/api/user')
-	const userData = await response.json()
+	// 💩 avoid mutating shared state on the server
+	counter.update((count) => count + 1)
 
 	return {
 		// 👍️ pass the data to the component
-		user: userData,
+		count: 10,
 	}
 }
 ```
 
-```html:+page.svelte showLineNumbers
+Instead of using stores on the server, pass the data to the component that needs it, or use the `$page` store.
+
+```html:routes/server/+page.svelte showLineNumbers
 <script lang="ts">
 	import { page } from '$app/stores'
+	import { counter } from '$lib/counter'
 
 	export let data
 
 	// 👍️ pass the data to the component
-	console.log('data: ' + data.user.name)
+	console.log('data: ' + data.count)
 
 	// 👍️ or use the `$page.data` store
-	console.log('$page.data: ' + $page.data.user.name)
+	console.log('$page.data: ' + $page.data.count)
 </script>
 
-<h1>Server</h1>
+<h1>The count is {$counter}</h1>
 ```
 
 Importing `$page.data` is useful if you have a component on the page that needs the data. Instead of passing the data as a prop like `<Component user={$page.data.user}`, you can get the value returned from the `load` function inside the component from `$page.data`.
@@ -507,7 +491,7 @@ Importing `$page.data` is useful if you have a component on the page that needs 
 
 Stores have great interoperability with most libraries that use observables like [XState](https://xstate.js.org/), or [RxJS](https://rxjs.dev/).
 
-```html:example.html showLineNumbers
+```html:example.html {22-25,31,35} showLineNumbers
 <script lang="ts">
 	import { createMachine, interpret } from 'xstate'
 
@@ -546,7 +530,7 @@ Stores have great interoperability with most libraries that use observables like
 </button>
 ```
 
-Please use the [offical `@xstate/svelte` package](https://stately.ai/docs/xstate-svelte).
+This is only an example, please use the offical [@xstate/svelte](<(https://stately.ai/docs/xstate-svelte)>) package.
 
 ## Signals Are The Future
 
