@@ -530,7 +530,7 @@ Stores have great interoperability with most libraries that use observables like
 </button>
 ```
 
-This is only an example, please use the offical [@xstate/svelte](<(https://stately.ai/docs/xstate-svelte)>) package.
+This is only an example, please use the offical [@xstate/svelte](https://stately.ai/docs/xstate-svelte) package.
 
 ## Signals Are The Future
 
