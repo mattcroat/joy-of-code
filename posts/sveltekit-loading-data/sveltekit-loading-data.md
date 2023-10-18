@@ -638,7 +638,7 @@ You could use the `$page` store to set the title for the page inside `routes/+la
 
 If you look at the output you're going to see the `post` and `posts` data returned from their respective `load` functions `routes/posts/[slug]/+page.server.ts` and `routes/posts/+layout.server.ts`.
 
-Here's a [real world example](https://authjs.dev/reference/sveltekit/modules/main) how `$page.data` is used by [Auth.js](https://authjs.dev/) to make sure the user is authenticated.
+Here's a [real world example](https://authjs.dev/reference/sveltekit) how `$page.data` is used by [Auth.js](https://authjs.dev/) to make sure the user is authenticated.
 
 The following code sets the session data in the `$page` store to be available to all routes inside the root layout.
 
