@@ -8,7 +8,8 @@
 
 [Joy of Code](https://joyofcode.xyz/) is a digital garden growing curious minds focused on web development and web design.
 
-## ▶️ YouTube
+## ▶️ YouTube ![YouTube Subscribers](https://img.shields.io/youtube/channel/subscribers/UC6wpjLSLn2dhlaDjn6_V0rw)
+
 
 You can find my videos on [YouTube](https://www.youtube.com/@joyofcodedev).
 
