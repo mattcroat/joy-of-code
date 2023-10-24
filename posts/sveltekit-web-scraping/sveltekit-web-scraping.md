@@ -138,10 +138,8 @@ function parseContributions(html: string) {
 			if (data.length > 1) {
 				const contribution = {
 					count: data[0] === 'No' ? 0 : +data[0],
-					name: data[3].replace(',', ''),
-					month: data[4],
-					day: +data[5].replace(',', ''),
-					year: +data[6],
+					month: data[3],
+					day: data[4].replace('.', ''),
 					level: +day.dataset.level!,
 				}
 				currentRow.push(contribution)
