@@ -579,4 +579,4 @@ You no longer have to remember where you can use `$` for stores and other rules,
 
 The greatest tragedy of only knowing JavaScript frameworks instead of JavaScript is [mistaking runes for other frameworks instead of understanding that you can do anything](https://x.com/joyofcodedev/status/1711718344473129319).
 
-I hope this inspires you to ask question how JavaScript framework work, and you realize it's not magic — you're going to be more resilient to changes, and gain a deeper understanding and passion for your craft.
+I hope this inspires you to ask the question of how JavaScript frameworks work, and you realize it's not magic — you're going to be more resilient to changes, and gain a deeper understanding and passion for your craft.
