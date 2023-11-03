@@ -1,15 +1,16 @@
 ---
-title: Create A SVG Animation Library With Svelte
-description: Learn how to make a SVG animation library with Svelte inspired by Motion Canvas.
-slug: svelte-svg-animation-library
-published: '2023-11-02'
+title: The Best Svelte SVG Animation Library
+description: Learn how to make a SVG animation library with Svelte.
+slug: svg-animation-library
+published: '2023-11-03'
 category: svelte
-draft: true
 ---
+
+{% youtube id="_jWnyJRKOvU" title="The Best Svelte SVG Animation Library" %}
 
 ## Table of Contents
 
-## Great Artists Steal
+## The Motivation
 
 Inspired by [Motion Canvas](https://motioncanvas.io/), I made the presentational framework [Animotion](https://animotion.pages.dev/) to suit my needs for making animated videos using code, instead of having to learn animation software.
 
@@ -17,13 +18,15 @@ Animotion isn't sophisticated as Motion Canvas but it's simple to use. You creat
 
 That being said I wanted a way to create animations that complements Animotion.
 
-I thought about it for months and explored everything I could think of using the [The Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API), but I could not get it right.
+{% embed src="https://stackblitz.com/github/joysofcode/motion-svg?embed=1&file=src%2Froutes%2F%2Bpage.svelte" title="Motion SVG" %}
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I made a declarative SVG timeline in Svelte with ease thanks to <a href="https://twitter.com/motiondotdev?ref_src=twsrc%5Etfw">@motiondotdev</a> since I don&#39;t have to think about timelines and reap the power of the Web Animations API.<br><br>How beautiful is this friends? 😄 <a href="https://t.co/PWLUjgvkui">pic.twitter.com/PWLUjgvkui</a></p>&mdash; Matia (@joyofcodedev) <a href="https://twitter.com/joyofcodedev/status/1716406230074171538?ref_src=twsrc%5Etfw">October 23, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+You can find the code on [GitHub](https://github.com/joysofcode/motion-svg).
 
-Using the process of elimination, I felt closer to the solution each time I failed, only to realize the answer was right in front of me, and that Motion Canvas was right all along.
+I thought about it for months and explored everything I could think of [using the Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API), but I could not get it right.
 
-## The Building Blocks
+Using the process of elimination, I felt closer to the solution each time I failed, only to realize that Motion Canvas was right all along.
+
+## Animation Library Foundations
 
 In Motion Canvas you can define values that change over time, and it uses [generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) to describe and play animations.
 
@@ -53,12 +56,11 @@ Motion Canvas uses the [Canvas API](https://developer.mozilla.org/en-US/docs/Web
 
 Svelte has a built-in `tweened` and `spring` store used to define values that change over time, which I'm going to use to recreate the Motion Canvas example (you can [learn more about Svelte stores](https://joyofcode.xyz/svelte-stores-guide) in a separate post).
 
-```html:example.svelte {2,4,6,10} showLineNumbers
+```html:example.svelte showLineNumbers
 <script>
 	import { tweened } from 'svelte/motion'
 
 	const circle = tweened({ cx: -300 })
-
 	circle.set({ cx: 300 }, { duration: 2000 })
 </script>
 
@@ -129,7 +131,7 @@ To avoid repeating the values for every animation I'm going to use the `update` 
 
 Being able to tween values and run animations in sequence is the foundation of every animation library.
 
-## Creating The Perfect Animation Library
+## The Animation Library
 
 This is great, but doing any slightly more complex animation is going to be tedious.
 
@@ -165,7 +167,7 @@ The `animate` function is just a wrapper around `onMount` to make things prettie
 
 I'm going to wrap the `tweened` store inside of a `signal` function, creating a custom Svelte store (stores are similar to [signals](https://www.solidjs.com/tutorial/introduction_signals), but they're not the same).
 
-```html:+page.svelte {6-15} showLineNumbers
+```html:+page.svelte {6-15,17,20} showLineNumbers
 <script lang="ts">
 	import { tweened } from 'svelte/motion'
 	import { cubicInOut } from 'svelte/easing'
@@ -291,7 +293,7 @@ That's it! 😄
 
 ## Playing Animations At The Same Time
 
-To play animations at the same time we can use the [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method, which takes promises and returns a single Promise.
+To play animations at the same time we can use the [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method, which takes an array of promises, and returns a single Promise.
 
 ```html:+page.svelte {6-9} showLineNumbers
 <script lang="ts">
@@ -323,7 +325,7 @@ To play animations at the same time we can use the [Promise.all()](https://devel
 
 This is tedious to write, so we can create a helper function.
 
-```html:+page.svelte {6-9} showLineNumbers
+```html:+page.svelte {2-4,7-10} showLineNumbers
 <script lang="ts">
 	function all(...animations) {
   	return Promise.all(animations)
@@ -340,9 +342,9 @@ This is tedious to write, so we can create a helper function.
 
 That's it! 😄
 
-## Playing Sound Effects
+## Creating Stories With Sound
 
-I also want to be able to play sounds alongside animations to craft engaging stores like [Vox](https://www.youtube.com/@Vox) does with their productions.
+The last feature I want is to be able to play sounds alongside animations, to create engaging stores like [Vox](https://www.youtube.com/@Vox) does with their productions.
 
 Inside `signal` I'm going to create a `sfx` method that is also chainable.
 
@@ -369,9 +371,9 @@ Inside `signal` I'm going to create a `sfx` method that is also chainable.
 </script>
 ```
 
-## Tying Everything Together
+## Animation Example
 
-I'm going to show you how to create the example from the start of the post using the animation library we created.
+How beautiful is this? 😄
 
 ```html:+page.svete showLineNumbers
 <script lang="ts">
@@ -428,5 +430,3 @@ I'm going to show you how to create the example from the start of the post using
   }
 </style>
 ```
-
-How beautiful is this? 😄
