@@ -1,6 +1,6 @@
 ---
 title: The Best Svelte SVG Animation Library
-description: Learn how to make a SVG animation library with Svelte.
+description: Learn how to make the best SVG animation library using existing Svelte features inspired by other animation libraries.
 slug: svg-animation-library
 published: '2023-11-03'
 category: svelte
@@ -12,13 +12,13 @@ category: svelte
 
 ## The Motivation
 
-Inspired by [Motion Canvas](https://motioncanvas.io/), I made the presentational framework [Animotion](https://animotion.pages.dev/) to suit my needs for making animated videos using code, instead of having to learn animation software.
+Inspired by [Motion Canvas](https://motioncanvas.io/), I made the presentational framework [Animotion](https://animotion.pages.dev/) for making animated videos using code, instead of having to learn animation software.
 
-Animotion isn't sophisticated as Motion Canvas but it's simple to use. You create the presenation, and record the voiceover in one take. You don't have to record the audio separately and sync it to the presentation.
+Animotion is only responsible for animating layout transitions and code blocks between slides. Instead of recording and matching the audio to a timeline, you record the voicover over the slides.
 
-That being said I wanted a way to create animations that complements Animotion.
+You can use any JavaScript animation library in your slides, but I always wanted a bespoke animation library that complements Animotion.
 
-{% embed src="https://stackblitz.com/github/joysofcode/motion-svg?embed=1&file=src%2Froutes%2F%2Bpage.svelte" title="Motion SVG" %}
+{% embed src="https://stackblitz.com/github/joysofcode/motion-svg?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Motion SVG" title="Motion SVG" %}
 
 You can find the code on [GitHub](https://github.com/joysofcode/motion-svg).
 
@@ -28,9 +28,9 @@ Using the process of elimination, I felt closer to the solution each time I fail
 
 ## Animation Library Foundations
 
-In Motion Canvas you can define values that change over time, and it uses [generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) to describe and play animations.
+In Motion Canvas every animatable value is a [signal](https://motioncanvas.io/docs/signals/), which represents a value that changes over time. It uses [generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) to describe and play animations.
 
-```ts:example.ts showLineNumbers
+```ts:example.ts {14-16} showLineNumbers
 export default makeScene2D(function* (view) {
   const circle = createRef<Circle>()
 
@@ -50,17 +50,20 @@ export default makeScene2D(function* (view) {
 })
 ```
 
-You don't have to understand generators but the example above animates the `x` coordinate of the circle from `-300` to `300` over `2` seconds by creating a tween that yields the value over time.
+You don't have to understand generators, but the example above animates the `x` coordinate of the circle from `-300` to `300` over `2` seconds by creating a tween that yields the value over time.
 
-Motion Canvas uses the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) to draw graphics, but I'm going to use [SVGs](https://developer.mozilla.org/en-US/docs/Web/SVG) because it already has everything you need to draw shapes and animate their values over time.
+Motion Canvas uses the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) to draw graphics, but I'm going to use [SVGs](https://developer.mozilla.org/en-US/docs/Web/SVG) because it already has everything you need to draw shapes and animate their values.
 
-Svelte has a built-in `tweened` and `spring` store used to define values that change over time, which I'm going to use to recreate the Motion Canvas example (you can [learn more about Svelte stores](https://joyofcode.xyz/svelte-stores-guide) in a separate post).
+Svelte has a built-in `tweened` and `spring` [Svelte store](https://joyofcode.xyz/svelte-stores-guide) to define values that change over time, which I'm going to use to recreate the Motion Canvas example.
 
 ```html:example.svelte showLineNumbers
 <script>
 	import { tweened } from 'svelte/motion'
 
+	// value that changes over time
 	const circle = tweened({ cx: -300 })
+
+	// update value over 2 seconds
 	circle.set({ cx: 300 }, { duration: 2000 })
 </script>
 
@@ -69,7 +72,9 @@ Svelte has a built-in `tweened` and `spring` store used to define values that ch
 </svg>
 ```
 
-I quickly learned that animating CSS keyframes using The Web Animations API isn't enough, because you can't tween every value like the SVG `viewBox` to create interesting camera effects. Svelte also gives you the option to pass in your own interpolation function. This means you can use the [d3-interpolate](https://github.com/d3/d3-interpolate) package to interpolate between numbers, colors, strings, arrays, and objects.
+I quickly learned that animating CSS keyframes using The Web Animations API isn't enough, because you can't tween every value like the SVG `viewBox` to create interesting camera effects.
+
+Svelte also gives you the option to pass in your own interpolation function. This means you can use the [d3-interpolate](https://github.com/d3/d3-interpolate) package to interpolate between numbers, colors, strings, arrays, and objects.
 
 ```html:example.svelte {4,8} showLineNumbers
 <script>
@@ -91,9 +96,9 @@ I quickly learned that animating CSS keyframes using The Web Animations API isn'
 </svg>
 ```
 
-The `tweened` store also returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) you can `await` until it ends.
+The `tweened` store returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), which means you can use `await` to wait until the animation is done.
 
-```html:example.svelte {13-16} showLineNumbers
+```html:example.svelte {14-15} showLineNumbers
 <script>
 	import { onMount } from 'svelte'
 	import { tweened } from 'svelte/motion'
@@ -117,11 +122,10 @@ The `tweened` store also returns a [Promise](https://developer.mozilla.org/en-US
 </svg>
 ```
 
-To avoid repeating the values for every animation I'm going to use the `update` method on the store to merge the old values with the new values.
+To avoid repeating the values for every animation, I'm going to use the `update` method on the store to merge the old and new values.
 
 ```html:example.svelte showLineNumbers
 <script>
-	// ...
 	onMount(async () => {
 		await circle.update(prev => ({ ...prev, cx: 300, fill: '#e13238' }))
 		await circle.update(prev => ({ ...prev, cx: -300 }))
@@ -129,7 +133,7 @@ To avoid repeating the values for every animation I'm going to use the `update` 
 </script>
 ```
 
-Being able to tween values and run animations in sequence is the foundation of every animation library.
+Being able to tween values, and run animations in sequence is the foundation of every animation library.
 
 ## The Animation Library
 
@@ -165,7 +169,7 @@ The `animate` function is just a wrapper around `onMount` to make things prettie
 </script>
 ```
 
-I'm going to wrap the `tweened` store inside of a `signal` function, creating a custom Svelte store (stores are similar to [signals](https://www.solidjs.com/tutorial/introduction_signals), but they're not the same).
+I'm going to wrap the `tweened` store inside of a `signal` function, creating a custom Svelte store.
 
 ```html:+page.svelte {6-15,17,20} showLineNumbers
 <script lang="ts">
@@ -196,7 +200,7 @@ To chain animations we simply return `this`, which returns a reference to itself
 
 Making the `.to` method `async` and using `await` would not work because you return a Promise.
 
-```ts:example.ts showLineNumbers
+```ts:example.svelte showLineNumbers
 async function to(values, options) {
 	await update(prev => ({ ...prev, ...values }))
 	return this
@@ -207,9 +211,8 @@ To solve this problem I'm going to create a `tasks` queue, and push the animatio
 
 Using `.to` we push animations into a queue, and then we can run them in sequence using `await` because the object is thenable.
 
-```html:+page.svelte {6,9,13-18,20} showLineNumbers
+```html:+page.svelte {5,8,12-17,19} showLineNumbers
 <script lang="ts">
-	// ...
 	function signal(values, options = { duration: 1000, interpolate: interpolate, easing: cubicInOut }) {
 		const { subscribe, update } = tweened(values, options)
 
@@ -240,9 +243,9 @@ Using `.to` we push animations into a queue, and then we can run them in sequenc
 </script>
 ```
 
-If you log `tasks` you can see `then` runs after the last task has been pushed using `.to`.
+If you log `tasks`, you can see `then` runs after the last task has been pushed using `.to`.
 
-```ts:example.ts showLineNumbers
+```ts:example.svelte showLineNumbers
 async function then(resolve) {
 	console.log(tasks) // [() => update(...), () => update(...)]
 }
@@ -250,7 +253,7 @@ async function then(resolve) {
 
 The same animation is going to play three times because we forgot to clear the `tasks`.
 
-```ts:example.ts showLineNumbers
+```ts:example.svelte showLineNumbers
 	animate(async () => {
 		await circle
 			.to({ cx: 300, fill: '#e13238' })
@@ -262,11 +265,11 @@ The same animation is going to play three times because we forgot to clear the `
 	})
 ```
 
-You're probably used to using `console.log`, but I wanted to include an extra tip to use the debugger instead to understand how your code runs.
+You're probably used to using `console.log`, but I wanted to include an extra tip to use the debugger instead, to understand how your code runs.
 
-```ts:example.ts {2} showLineNumbers
+```ts:example.svelte {2} showLineNumbers
 async function then(resolve) {
-	debugger;
+	debugger
 	for (const task of tasks) {
 		await task()
 	}
@@ -276,24 +279,21 @@ async function then(resolve) {
 
 You can look at the entire application state and find the problem quicker.
 
-```html:+page.svelte {8} showLineNumbers
-<script lang="ts">
-	// ...
-	async function then(resolve) {
-		for (const task of tasks) {
-			await task()
-		}
-		resolve()
-		tasks = []
+```ts:+page.svelte {6} showLineNumbers
+async function then(resolve) {
+	for (const task of tasks) {
+		await task()
 	}
-</script>
+	resolve()
+	tasks = []
+}
 ```
 
 That's it! 😄
 
 ## Playing Animations At The Same Time
 
-To play animations at the same time we can use the [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method, which takes an array of promises, and returns a single Promise.
+To play animations at the same time, we can use the [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method, which takes an array of promises, and returns a single Promise.
 
 ```html:+page.svelte {6-9} showLineNumbers
 <script lang="ts">
@@ -325,7 +325,7 @@ To play animations at the same time we can use the [Promise.all()](https://devel
 
 This is tedious to write, so we can create a helper function.
 
-```html:+page.svelte {2-4,7-10} showLineNumbers
+```html:+page.svelte showLineNumbers
 <script lang="ts">
 	function all(...animations) {
   	return Promise.all(animations)
@@ -344,23 +344,20 @@ That's it! 😄
 
 ## Creating Stories With Sound
 
-The last feature I want is to be able to play sounds alongside animations, to create engaging stores like [Vox](https://www.youtube.com/@Vox) does with their productions.
+The last feature I want is to be able to play sounds alongside animations, to create engaging stories like [Vox](https://www.youtube.com/@Vox) does with their productions.
 
-Inside `signal` I'm going to create a `sfx` method that is also chainable.
+Inside `signal`, I'm going to create a `sfx` method that is also chainable.
 
-```html:+page.svelte {3-16,18} showLineNumbers
+```html:+page.svelte {4-13,15} showLineNumbers
 <script lang="ts">
 	function signal(values, options) {
+		// ...
 		function sfx(sound, { volume = 0.5 } = {}) {
 			const audio = new Audio(sound)
 			audio.volume = volume
 
 			tasks.push(async () => {
-				try {
-					audio.play()
-				} catch (e) {
-					console.error('To play sounds interact with the page first.')
-				}
+				audio.play().catch(() => console.error('To play sounds interact with the page first.'))
 			})
 
 			return this
@@ -371,7 +368,9 @@ Inside `signal` I'm going to create a `sfx` method that is also chainable.
 </script>
 ```
 
-## Animation Example
+## Tidying Things Up
+
+I'm going to move the library code to `lib/motion.ts` and export the functions.
 
 How beautiful is this? 😄
 
@@ -380,7 +379,7 @@ How beautiful is this? 😄
   import { animate, signal, all } from '$lib/motion'
   import { formatNumber } from '$lib/utils'
 
-  let sfx = {
+  const sfx = {
     transition: 'sfx/transition.mp3',
     tally: 'sfx/tally.mp3',
   }
@@ -430,3 +429,5 @@ How beautiful is this? 😄
   }
 </style>
 ```
+
+I hope you learned something, but more importantly feel inspired, and have fun coding.
