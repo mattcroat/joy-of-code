@@ -12,9 +12,11 @@ category: svelte
 
 ## GitHub Skyline
 
-{% embed src="https://www.sveltelab.dev/w82i29p7zcpbn6b" title="GitHub Contributions" %}
+In this post I'm going to show you how to visualize your GitHub contributions graph in 3D using [Threlte](https://threlte.xyz/) inspired by [GitHub Skyline](https://skyline.github.com/).
 
-We're going to visualize the GitHub contributions graph in 3D using [Threlte](https://threlte.xyz/) inspired by [GitHub Skyline](https://skyline.github.com/).
+{% embed src="https://stackblitz.com/github/joysofcode/github-skyline?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=GitHub Skyline" title="GitHub Skyline" %}
+
+You can find the code on [GitHub](https://github.com/joysofcode/github-skyline).
 
 ## Project Setup
 

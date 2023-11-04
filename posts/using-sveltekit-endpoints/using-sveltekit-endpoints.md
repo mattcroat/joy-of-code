@@ -28,7 +28,7 @@ There's a great talk by [@chriscoyier](https://twitter.com/chriscoyier) titled [
 
 If you're reading this post and haven't seen the video here are the examples for everything I used in the video, so you can try it out yourself.
 
-{% embed src="https://stackblitz.com/github/joysofcode/using-sveltekit-endpoints?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Using SvelteKit Endpoints" title="Using SvelteKit Endpoints" %}
+{% embed src="https://stackblitz.com/github/joysofcode/using-sveltekit-endpoints?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Using SvelteKit Endpoints" title="Using SvelteKit Endpoints" %}
 
 ## Client-Side Rendering
 

@@ -16,7 +16,7 @@ category: svelte
 
 Instead of using regular JavaScript you can take advantage of the declarative nature of Svelte and **Sveltify** any JavaScript library for a nicer developer experience — which you can also publish on [npm](https://www.npmjs.com/) if you want.
 
-{% embed src="https://stackblitz.com/github/joysofcode/sveltify?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltify" title="Sveltify" %}
+{% embed src="https://stackblitz.com/github/joysofcode/sveltify?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Sveltify Any JavaScript Library" title="Sveltify Any JavaScript Library" %}
 
 You can find the source code on [GitHub](https://github.com/joysofcode/sveltify).
 

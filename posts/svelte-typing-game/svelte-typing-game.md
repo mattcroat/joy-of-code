@@ -14,7 +14,7 @@ category: svelte
 
 By the end of this post you're going to make a typing game that measures your typing speed similar to [Monkeytype](https://monkeytype.com/).
 
-{% embed src="https://stackblitz.com/github/joysofcode/svelte-typing-game?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Sveltype" title="Sveltype Stackblitz REPL" %}
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-typing-game?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Svelte Typing Game" title="Svelte Typing Game" %}
 
 ## Setup
 

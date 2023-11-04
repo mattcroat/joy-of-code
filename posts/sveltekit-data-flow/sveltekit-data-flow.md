@@ -85,7 +85,7 @@ Files that include `load` functions can also export [page options](https://learn
 
 To understand the order in which things run I've created an example with every file related to SvelteKit routing.
 
-{% embed src="https://stackblitz.com/github/joysofcode/sveltekit-data-flow?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=SvelteKit Data Flow" title="SvelteKit Data Flow" %}
+{% embed src="https://stackblitz.com/github/joysofcode/sveltekit-data-flow?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=SvelteKit Data Flow" title="SvelteKit Data Flow" %}
 
 I've included a working example (you have to enable cookies) you can play around with. You can [find the project files on GitHub](https://github.com/joysofcode/sveltekit-data-flow).
 

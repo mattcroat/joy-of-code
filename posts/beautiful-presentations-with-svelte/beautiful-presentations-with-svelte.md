@@ -14,7 +14,7 @@ category: svelte
 
 No one likes making boring presentations and learning an unfamiliar tool at the same time but what if you could use technologies you know and love like HTML, CSS and JavaScript?
 
-{% embed src="https://stackblitz.com/github/joysofcode/svelte-deck?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte Deck" title="Svelte Deck" %}
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-deck?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Svelte Deck" title="Svelte Deck" %}
 
 You might need to **enable cookies** for the example but the code is also available on [GitHub](https://github.com/joysofcode/svelte-deck).
 

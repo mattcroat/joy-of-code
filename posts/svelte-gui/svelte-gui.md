@@ -14,7 +14,7 @@ category: svelte
 
 You have probably seen [Tweakpane](https://cocopon.github.io/tweakpane/), or [dat.GUI](https://github.com/dataarts/dat.gui) on [CodePen](https://codepen.io/) as it's an awesome and quick way to create knobs to control the UI.
 
-{% embed src="https://stackblitz.com/github/joysofcode/svelte-gui?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte GUI" title="Svelte GUI" %}
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-gui?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Svelte GUI" title="Svelte GUI" %}
 
 The code is available on [GitHub](https://github.com/joysofcode/svelte-gui).
 

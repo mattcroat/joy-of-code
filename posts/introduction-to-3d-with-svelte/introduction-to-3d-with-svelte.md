@@ -16,7 +16,7 @@ By the end of this post you're going to learn how to spice up your boring site u
 
 > ⚠️ The video is **outdated** but the post has been updated to the newest **Threlte 6** version.
 
-{% embed src="https://stackblitz.com/github/joysofcode/svelte-3d?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte 3D" title="Sveltype 3D" %}
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-3d?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Svelte 3D" title="Svelte 3D" %}
 
 > 🧪 The project files are available on [GitHub](https://github.com/joysofcode/svelte-3d) and you can try it on [StackBlitz](https://stackblitz.com/github/joysofcode/svelte-3d).
 

@@ -37,7 +37,7 @@ The result of using the FLIP animation technique is a buttery smooth 60 frames p
 
 If this sounds complicated don't worry because not only are you going to understand how to implement the FLIP animation technique but I'm going to show you how to use the [Flip plugin](https://greensock.com/docs/v3/Plugins/Flip/) from [GSAP](https://greensock.com/gsap/) that does everything for you.
 
-{% embed src="https://stackblitz.com/github/joysofcode/svelte-gsap-flip?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Impossible Layout Animations With Svelte" title="Impossible Layout Animations With Svelte" %}
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-gsap-flip?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Impossible Layout Animations With Svelte" title="Impossible Layout Animations With Svelte" %}
 
 You might need to **enable cookies** for the example but the code is also available on [GitHub](https://github.com/joysofcode/svelte-gsap-flip).
 

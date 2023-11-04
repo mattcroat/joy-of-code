@@ -16,7 +16,7 @@ Svelte sparks joy because it has everything you want for creating reusable compo
 
 You're going to learn how to build and compose reusable Svelte components which you can use to make your own component library by making an accessible Svelte accordion.
 
-{% embed src="https://stackblitz.com/github/joysofcode/svelte-accordion?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=Svelte Accordion" title="Svelte Accordion" %}
+{% embed src="https://stackblitz.com/github/joysofcode/svelte-accordion?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Svelte Accordion" title="Svelte Accordion" %}
 
 ## Building Accessible Components
 

@@ -6,9 +6,9 @@ published: '2023-10-12'
 category: svelte
 ---
 
-## Table of Contents
-
 {% youtube id="L3uBfL-4dDM" title="Svelte Stores" %}
+
+## Table of Contents
 
 ## Sharing Reactive State Across Components
 

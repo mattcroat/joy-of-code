@@ -14,7 +14,7 @@ category: sveltekit
 
 You're going to make a blazingly fast and extendable SvelteKit Markdown blog you can be proud of and deploy it to Vercel at no cost.
 
-{% embed src="https://stackblitz.com/github/joysofcode/sveltekit-markdown-blog?ctl=1&embed=1&file=src/routes/+page.svelte&hideExplorer=1&hideNavigation=1&view=preview&title=SvelteKit Markdown blog" title="SvelteKit Markdown blog" %}
+{% embed src="https://stackblitz.com/github/joysofcode/sveltekit-markdown-blog?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=SvelteKit Markdown Blog" title="SvelteKit Markdown Blog" %}
 
 You can find the finished project [on GitHub](https://github.com/joysofcode/sveltekit-markdown-blog).
 
