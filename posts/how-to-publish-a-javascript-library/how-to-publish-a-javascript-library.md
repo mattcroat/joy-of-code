@@ -1,11 +1,12 @@
 ---
-title: Using SvelteKit To Package And Publish Your JavaScript Library
-description: SvelteKit is mostly used as a meta-framework, but it also makes it easy to test, package, and publish JavaScript packages.
+title: How To Create And Publish Your JavaScript Library With SvelteKit
+description: Learn how to publish a JavaScript package to npm, and how to use SvelteKit to test, package, and publish a Svelte, or JavaScript library.
 slug: how-to-publish-a-javascript-library
 published: '2023-11-10'
 category: sveltekit
-draft: true
 ---
+
+{% youtube id="Xvq8rCl1lIM" title="How To Create And Publish Your JavaScript Library With SvelteKit" %}
 
 ## Table of Contents
 
@@ -17,7 +18,7 @@ The [npm registry](https://www.npmjs.com/) is a public collection of packages of
 
 `npm` is the command line client that allows developers to install and publish those packages.
 
-In this post I'm going to explain the basics of publishing a package to npm, but also how you to use [SvelteKit](https://kit.svelte.dev/) ([Svelte](https://svelte.dev/) meta-framework) to make packaging and publishing a library to npm easier.
+In this post I'm going to explain the basics of publishing a package to npm, and how using [SvelteKit](https://kit.svelte.dev/) can make testing, packaging and publishing a Svelte, or JavaScript library to npm easier.
 
 ## Creating Your First Package
 
@@ -33,11 +34,11 @@ You can use `npm init`, which is going to prompt you to answer questions related
 npm init
 ```
 
-I'm going to create a basic `package.json` by hand instead, because most [package.json fields](https://docs.npmjs.com/cli/v10/configuring-npm/package-json) aren't relevant.
+I'm going to create a basic `package.json` file instead, because most [package.json fields](https://docs.npmjs.com/cli/v10/configuring-npm/package-json) aren't relevant to us.
 
-The only important field inside `package.json` is the name of the package, and the version number.
+The only important field inside `package.json` is the **name** of the package, and the **version** number.
 
-```json:greet/package.json showLineNumbers
+```json:greet/package.json {2-3} showLineNumbers
 {
   "name": "greet",
 	"version": "0.0.1",
@@ -48,11 +49,11 @@ The only important field inside `package.json` is the name of the package, and t
 
 You should respect [semantic versioning](https://semver.org/) when updating your package, but it's not enforced by npm.
 
-If you have a build step, you can change the default entry point of your program from `index.js`, to another path such as `dist/index.js`.
+If you have a build step, you can change the **main** entry point of your program from `index.js`, to another path, such as `dist/index.js`.
 
-To use the modern JavaScript `import` syntax, you have to specify the `type` of your package as a `module`.
+To use the modern JavaScript `import` syntax, you have to specify that the **type** of your package is a `module`.
 
-I'm going to create and export a simple `greet` function from `index.js`.
+Create and export a simple `greet` function from `index.js`.
 
 ```js:greet/index.js showLineNumbers
 export function greet() {
@@ -60,13 +61,15 @@ export function greet() {
 }
 ```
 
-You can run the script with `node index.js`, but it would be easier if you could import `greet` inside of another project as a regular package, to make sure it works.
+You can run the script with `node index.js`.
+
+It would be easier if you could import `greet` inside of another project as a regular package, to make sure it works.
 
 ## Testing Your Package
 
-I'm going to create a `test` folder with a `package.json` file, which also needs to be a module to work with the `greet` package.
+Create a `test` folder with a `package.json` file, which also needs to be a **module** to work with the `greet` package.
 
-To test a package, you can use [npm link](https://docs.npmjs.com/cli/v9/commands/npm-link).
+To test a package, you can use [npm link](https://docs.npmjs.com/cli/v9/commands/npm-link), which links a package globally, and lets you use it anywhere.
 
 Inside the `greet` package folder, run `npm link` to create a global link to the `greet` package.
 
@@ -80,7 +83,7 @@ You can run `npm ls --link --global` to see your linked packages.
 └── greet@0.0.1 -> ./../../../../../greet
 ```
 
-To link the `greet` package in your project, run `npm link greet` inside `test`, which is going to link the `greet` package inside `node_modules`.
+To link the `greet` package in `test`, run `npm link greet`, which is going to link the `greet` package inside `node_modules`.
 
 ```shell:terminal
 npm link greet
@@ -91,7 +94,7 @@ You can use `greet` like a regular package inside `test/index.js`.
 ```js:test/index.js
 import { greet } from 'greet'
 
-greet() // hi
+greet() // "hi"
 ```
 
 You can run `npm unlink greet`, to remove the linked package from `test`.
@@ -100,7 +103,7 @@ You can run `npm unlink greet`, to remove the linked package from `test`.
 npm unlink greet
 ```
 
-You can run `npm uninstall -g greet`, to completely remove the package.
+To completely remove the package, run `npm uninstall -g greet`.
 
 ```shell:terminal
 npm uninstall -g greet
@@ -110,15 +113,13 @@ If you use [pnpm](https://pnpm.io/), you can use [pnpm link](https://pnpm.io/cli
 
 ## Publishing Your Package
 
-To publish a package to the npm registry, run the `npm publish` command in your terminal.
-
-If you aren't signed in to npm, you're going to be prompted to do so.
+To publish a package to npm, run `npm publish` (if you aren't signed in to npm, you're going to be prompted to do so).
 
 ```shell:terminal
 npm publish
 ```
 
-There's one problem though.
+You might run into this problem.
 
 ```shell:terminal
 403 Forbidden
@@ -128,11 +129,11 @@ You do not have permission to publish "greet".
 
 This package already exists!
 
-So what now, do we have to rename the `greet` package to something unique? The answer is no — you can scope the package by [creating an organization on npm](https://www.npmjs.com/org/create).
+You can rename the package to something more unique, but it's easier to scope the package to an organization, by [creating an organization on npm](https://www.npmjs.com/org/create).
 
 Use the name of the organization you created.
 
-```shell:terminal
+```shell:terminal {2}
 {
 	"name": "@joyofcode/greet",
 	"version": "0.0.1",
@@ -141,7 +142,7 @@ Use the name of the organization you created.
 }
 ```
 
-If you try to publish the package now, it won't work because scoped packaged are private by default, which is a paid feature of npm.
+If you try to publish the package now, it won't work because scoped packages are private by default, which is a paid feature of npm.
 
 ```shell:terminal
  402 Payment Required
@@ -149,13 +150,13 @@ If you try to publish the package now, it won't work because scoped packaged are
  You must sign up for private packages.
 ```
 
-To [make your scoped package public](https://docs.npmjs.com/cli/v8/commands/npm-publish#access), you have to pass the `--access=public` flag.
+You have to pass the `--access=public` flag, to [make your package public](https://docs.npmjs.com/cli/v8/commands/npm-publish#access).
 
 ```shell:terminal
 npm publish --access=public
 ```
 
-Your package is now available on npm, and ready to be installed with `npm i @joyofcode/greet`.
+Your package is now available on npm, and ready to be installed.
 
 ```shell:terminal
 Publishing to https://registry.npmjs.org/ with tag latest and public access
@@ -166,35 +167,35 @@ Congrats! 🎉
 
 ## Unpublishing Your Package
 
-If no project depends on your package, you have 72 hours to [unpublish your package from npm](https://docs.npmjs.com/unpublishing-packages-from-the-registry).
+You have 72 hours to [unpublish your package from npm](https://docs.npmjs.com/unpublishing-packages-from-the-registry).
 
 ```shell:terminal
 npm unpublish @joyofcode/greet -f
 ```
 
-This is because in the past some random person unpublished [left-pad](https://www.npmjs.com/package/left-pad), and broke the internet.
+This is because someone in the past removed [left-pad](https://www.npmjs.com/package/left-pad), and broke the internet, so npm decided to not let anyone delete a package someone depends on anymore.
 
 ## Using SvelteKit To Package Libraries
 
 In most cases your library isn't this simple, and you want things like TypeScript, testing, linting and formatting, which is a pain to set up.
 
-Not only does SvelteKit make this easy, but you can also run the `package` command to package the `src/lib` contents into a `dist` directory, with your transpiled JavaScript files, and generated types.
+Not only does SvelteKit make this easy, but you can run the `package` command to package the `src/lib` contents into a `dist` directory, with your transpiled JavaScript files, and generated types.
 
 To get started, run `npm create svelte`, pick the **library** template, and select the options you want.
 
 ```shell:terminal showLineNumbers
 ┌  Welcome to SvelteKit!
 │
-◇  Where should we create your project?
-│    (hit Enter to use current directory)
+◇ Where should we create your project?
+│  (hit Enter to use current directory)
 │
-◇  Which Svelte app template?
+◇ Which Svelte app template?
 │  Library project
 │
-◇  Add type checking with TypeScript?
+◇ Add type checking with TypeScript?
 │  Yes, using TypeScript syntax
 │
-◆  Select additional options (use arrow
+◆ Select additional options (use arrow
 keys/space bar)
 │  ◻ Add ESLint for code linting
 │  ◻ Add Prettier for code formatting
@@ -205,11 +206,11 @@ keys/space bar)
 
 Using the **library** template, `src/lib` becomes the main part of your app, and `src/routes` can be used for testing, and documentation.
 
-Everything is already set up for you inside `package.json`. You can [read more about packaging](https://kit.svelte.dev/docs/packaging) in the SvelteKit docs.
+Everything is already set up inside `package.json`, which you can [learn more about](https://kit.svelte.dev/docs/packaging) in the SvelteKit docs.
 
 The most important fields are `exports` and `files`:
 
-- `exports` help TypeScript and Svelte tooling know where their respective files are
+- `exports` helps TypeScript and Svelte tooling know what to do
 - `files` is to let npm know what files to upload, and which ones to ignore
 
 ```json:package.json showLineNumbers
@@ -228,8 +229,6 @@ The most important fields are `exports` and `files`:
 }
 ```
 
-There are legacy fields for `svelte`, and `types` which are safe to remove.
-
 If you're not publishing a Svelte library, rename the **svelte** field to **default**.
 
 ```json:package.json {5} showLineNumbers
@@ -243,18 +242,15 @@ If you're not publishing a Svelte library, rename the **svelte** field to **defa
 }
 ```
 
-You can also link and test your package the same way as before with `npm link`.
-
-To package your library run `npm run package`.
+You can link and test your package the same way as before with `npm link`. If you're satisfied with everything, run `npm run package` to package your library.
 
 ```shell:terminal
 npm run package
 ```
 
-This is going to create a `dist` folder at the root, which is going to be uploaded to npm.
+This is going to create a `dist` folder at the root.
 
 To publish the package, run `npm publish`, or `npm publish --access=public` if you have a scoped package.
-
 You can build your docs with `npm run build`, and host it anywhere, like any regular SvelteKit site.
 
 That's it! 😄
