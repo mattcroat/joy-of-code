@@ -24,9 +24,12 @@
 
 <style>
 	header {
+		max-width: 800px;
 		position: sticky;
-		top: 0;
+		top: 10px;
+		margin-inline: auto;
 		padding: var(--spacing-16);
+		border-radius: 1rem;
 		z-index: 20;
 		transition:
 			background-color 0.3s ease,
@@ -37,6 +40,7 @@
 		background-color: var(--clr-bg);
 		color: var(--clr-primary);
 		box-shadow: var(--shadow-md);
+		box-shadow: 1px 1px 10px hsl(0 0% 0% / 40%);
 	}
 
 	.container {
