@@ -26,7 +26,12 @@
 </button>
 
 {#if open}
-	<div {...$content} use:content transition:fade={{ duration: 100 }}>
+	<div
+		{...$content}
+		use:content
+		transition:fade={{ duration: 100 }}
+		class="content"
+	>
 		<div class="menu">
 			<span class="title">Categories</span>
 			<ul>
@@ -41,6 +46,10 @@
 {/if}
 
 <style>
+	.content {
+		z-index: 20;
+	}
+
 	.menu {
 		position: relative;
 		background-image: var(--clr-menu-bg);
@@ -49,7 +58,6 @@
 		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-lg);
-		z-index: 20;
 	}
 
 	.menu .title {

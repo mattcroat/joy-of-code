@@ -30,7 +30,12 @@
 </button>
 
 {#if open}
-	<div {...$content} use:content transition:fade={{ duration: 100 }}>
+	<div
+		{...$content}
+		use:content
+		transition:fade={{ duration: 100 }}
+		class="content"
+	>
 		<div class="preferences">
 			<svg
 				width="24"
@@ -65,6 +70,10 @@
 {/if}
 
 <style>
+	.content {
+		z-index: 20;
+	}
+
 	.preferences {
 		position: relative;
 		background-image: var(--clr-menu-bg);
@@ -73,7 +82,6 @@
 		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-lg);
-		z-index: 20;
 	}
 
 	.preferences .title {
