@@ -39,7 +39,9 @@
 		<p>Other</p>
 		<ul>
 			<li><a href="/about">About</a></li>
-			<li><a href="/uses">Uses</a></li>
+			<li>
+				<a href={config.uses} target="_blank" rel="noreferrer">Uses</a>
+			</li>
 		</ul>
 	</div>
 

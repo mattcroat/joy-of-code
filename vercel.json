@@ -4,6 +4,11 @@
 			"source": "/invite",
 			"destination": "https://discord.gg/k6ZpwAKwwZ",
 			"permanent": true
+		},
+		{
+			"source": "/uses",
+			"destination": "https://github.com/mattcroat/uses",
+			"permanent": true
 		}
 	]
 }
