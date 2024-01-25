@@ -351,7 +351,7 @@ The `event` contains `clientAddress`, `cookies`, `locals`, `platform` and `reque
 
 In the same way to get access to that information on the client you can use `$page.data` from the `$page` store that holds the combined data of all `load` functions.
 
-This might not make sense yet but our goal is to to populate `locals.user` and pass a `user` prop to the `$page` store.
+This might not make sense yet but our goal is to populate `locals.user` and pass a `user` prop to the `$page` store.
 
 First I'm going to create a `hooks.server.ts` at the root of the project.
 
