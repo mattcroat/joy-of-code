@@ -386,7 +386,7 @@ Add mdsvex as a preprocessor inside `svelte.config.js`.
 
 ```js:svelte.config.js {4, 6-9, 13-14} showLineNumbers
 import adapter from '@sveltejs/adapter-auto'
-import { vitePreprocess } from '@sveltejs/kit/vite'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex } from 'mdsvex'
 
