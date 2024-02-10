@@ -7,6 +7,6 @@ export async function load({ fetch }) {
 		const publishedPosts = posts.filter(({ draft }) => !draft)
 		return { posts: publishedPosts }
 	} catch (e) {
-		throw error(404, (e as Error).message)
+		error(404, (e as Error).message)
 	}
 }

@@ -6,6 +6,6 @@ export async function GET() {
 		const posts = await getPosts()
 		return json(posts)
 	} catch (e) {
-		throw error(404, 'Failed to load posts')
+		error(404, 'Failed to load posts')
 	}
 }

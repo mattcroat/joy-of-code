@@ -7,6 +7,6 @@ export async function load({ params }) {
 			post: await getPost(params.slug),
 		}
 	} catch (e) {
-		throw error(404, `Post does not exist`)
+		error(404, `Post does not exist`)
 	}
 }
