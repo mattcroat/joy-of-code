@@ -114,11 +114,11 @@ Create a new GitHub project and use `degit` to copy over the example project in 
 pnpx degit joysofcode/sveltekit-deploy
 ```
 
-- Install the dependencies with `pnpm i`
+- Install the dependencies with `npm i`
 - Rename `.env.example` to `.env` and put your connection string inside `DATABASE_URL`
 - Type `pnpx prisma db push` in your terminal and run it which is going to create the tables from your Prisma schema in Supabase
 
-If you run the development server with `pnpm run dev` you should only see the title on the page because we don't have any posts yet.
+If you run the development server with `npm run dev` you should only see the title on the page because we don't have any posts yet.
 
 The next step is hosting the SvelteKit app on Vercel.
 
@@ -127,7 +127,7 @@ SvelteKit has [official adapters](https://kit.svelte.dev/docs/adapters) for diff
 Using the Vercel adapter is optional but they recommend you do it.
 
 ```shell:terminal
-pnpm i -D @sveltejs/adapter-vercel
+npm i -D @sveltejs/adapter-vercel
 ```
 
 Then you just need to change the import.
@@ -136,7 +136,7 @@ Then you just need to change the import.
 import adapter from '@sveltejs/adapter-vercel'
 ```
 
-> 🐿️ Before you deploy to Vercel run `pnpm run build` and `pnpm run preview` in development which helps surface some problems like TypeScript errors even if the environment isn't the same.
+> 🐿️ Before you deploy to Vercel run `npm run build` and `npm run preview` in development which helps surface some problems like TypeScript errors even if the environment isn't the same.
 
 After you're done, deploying is easy:
 

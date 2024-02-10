@@ -23,7 +23,7 @@ You can find the finished project [on GitHub](https://github.com/joysofcode/svel
 Start by creating a new SvelteKit project.
 
 ```sh:terminal
-pnpm create svelte
+npm create svelte@latest
 ```
 
 I'm using **TypeScript** but **types are optional** and can be ignored, so use JavaScript if you prefer it. Use the **spacebar** to select **ESLint** to find problems in the code and **Prettier** to format the code.
@@ -52,10 +52,10 @@ Install the dependencies and run the development server at [http://localhost:517
 
 ```sh:terminal
 # install dependencies
-pnpm i
+npm i
 
 # run the development server
-pnpm run dev
+npm run dev
 ```
 
 ## Layout And Styles
@@ -67,7 +67,7 @@ I also want beautiful and consistent icons and [Lucide](https://lucide.dev/) is 
 For the fonts I'm going to use **Manrope** as the sans serif font for the entire site and **JetBrains Mono** as the monospace font for code blocks.
 
 ```sh:terminal
-pnpm i open-props lucide-svelte @fontsource/manrope @fontsource/jetbrains-mono
+npm i open-props lucide-svelte @fontsource/manrope @fontsource/jetbrains-mono
 ```
 
 Update the favicon inside `app.html` so everyone knows your site is blazingly fast.
@@ -379,7 +379,7 @@ Right now even if you don't have a theme toggle it's going to respect the user p
 To get started install mdsvex as a development dependency.
 
 ```sh:terminal
-pnpm i -D mdsvex
+npm i -D mdsvex
 ```
 
 Add mdsvex as a preprocessor inside `svelte.config.js`.
@@ -752,7 +752,7 @@ To use Shiki I'm going to create a custom highlighter which is only going to be 
 Install Shiki.
 
 ```sh:terminal
-pnpm i shiki
+npm i shiki
 ```
 
 Create a custom highlighter.
@@ -895,7 +895,7 @@ I'm going to show you a couple of plugins, so you get an idea how simple it is t
 Install the Markdown plugins.
 
 ```sh:terminal
-pnpm i remark-unwrap-images remark-toc rehype-slug
+npm i remark-unwrap-images remark-toc rehype-slug
 ```
 
 Add them to the config.
@@ -1182,7 +1182,7 @@ Let's customize the error page before we deploy the site by adding `+error.svelt
 
 For deployment I'm going to use [Vercel](https://vercel.com/) and prerender the content ahead of time before deploying it which means it's going to be blazingly fast. 🔥
 
-[Prerendering](https://kit.svelte.dev/docs/page-options#prerender) means creating the HTML files at build time (when you run `pnpm run build` or `vite build`).
+[Prerendering](https://kit.svelte.dev/docs/page-options#prerender) means creating the HTML files at build time (when you run `npm run build` or `vite build`).
 
 Prerendering your site takes one line of code.
 
@@ -1206,10 +1206,10 @@ I'm going to use the [Vercel adapter](https://kit.svelte.dev/docs/adapter-vercel
 
 ```sh:terminal
 # remove the default adapter
-pnpm remove @sveltejs/adapter-auto
+npm remove @sveltejs/adapter-auto
 
 # add Vercel adapter
-pnpm i -D @sveltejs/adapter-vercel
+npm i -D @sveltejs/adapter-vercel
 ```
 
 ```js:svelte.config.js showLineNumbers
@@ -1217,7 +1217,7 @@ import adapter from '@sveltejs/adapter-vercel'
 // ...
 ```
 
-> 🐿️ Before deploying run `pnpm run build` and `pnpm run preview` to check for any obvious errors instead of finding out about it during deployment. This is going to create a `.vercel` folder which should be added to `.gitignore`.
+> 🐿️ Before deploying run `npm run build` and `npm run preview` to check for any obvious errors instead of finding out about it during deployment. This is going to create a `.vercel` folder which should be added to `.gitignore`.
 
 Create a new project on GitHub and name it anything you want then push the code to GitHub.
 

@@ -324,10 +324,10 @@ This is the code in question before doing any animation.
 
 Using literal values `stack` and `grid` for the state instead of a boolean value makes it easy to style things using the `data-layout` attribute and makes even more sense with nesting.
 
-Go ahead and install GSAP alongside the types if you're using TypeScript. You can use any package manager but I prefer [pnpm](https://pnpm.io/).
+Go ahead and install GSAP alongside the types if you're using TypeScript.
 
 ```shell:terminal showLineNumbers
-pnpm add gsap @types/gsap
+npm i gsap @types/gsap
 ```
 
 Besides importing GSAP and the Flip plugin you also have to load the plugin.

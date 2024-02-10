@@ -28,10 +28,10 @@ I want you to be able to customize everything but not have to make a lot of deci
 
 ## SvelteKit And Tailwind Setup
 
-I'm using `pnpm` as the package manager and I'm going to set up a **skeleton** SvelteKit project with TypeScript (optional) including ESLint and Prettier for code formatting.
+I'm going to set up a **skeleton** SvelteKit project with TypeScript (optional) including ESLint and Prettier for code formatting.
 
 ```shell:terminal
-pnpm create svelte
+npm create svelte@latest
 ```
 
 ```shell:terminal
@@ -55,7 +55,7 @@ pnpm create svelte
 After it's done install the dependencies.
 
 ```shell:terminal
-pnpm i
+npm i
 ```
 
 Use the `svelte-add` package to add Tailwind CSS.
@@ -67,13 +67,13 @@ pnpx svelte-add tailwindcss
 Install Reveal.js including the optional types and fonts.
 
 ```shell:terminal showLineNumbers
-pnpm i reveal.js @types/reveal.js @fontsource/manrope @fontsource/jetbrains-mono
+npm i reveal.js @types/reveal.js @fontsource/manrope @fontsource/jetbrains-mono
 ```
 
 Start the development server.
 
 ```shell:terminal
-pnpm run dev
+npm run dev
 ```
 
 That's it! 😄

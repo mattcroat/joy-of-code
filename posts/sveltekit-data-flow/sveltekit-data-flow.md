@@ -150,7 +150,7 @@ export async function handle({ event, resolve }) {
 }
 ```
 
-Start the development server with `pnpm run dev` and open `http://localhost:5173/`.
+Start the development server with `npm run dev` and open `http://localhost:5173/`.
 
 First the **server-only** code runs which you can observe in the terminal.
 

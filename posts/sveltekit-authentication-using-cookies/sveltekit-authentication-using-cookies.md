@@ -126,10 +126,10 @@ I'm going to use `bcrypt` for hashing the password.
 
 ```shell:terminal
 # for hashing the password
-pnpm i bcrypt
+npm i bcrypt
 
 # optional bcrypt types
-pnpm i -D @types/bcrypt
+npm i -D @types/bcrypt
 ```
 
 If there are no validation errors I'm going to create the user by hashing the password, creating the user authentication token and assigning it a role after which I'm going to redirect the user.
