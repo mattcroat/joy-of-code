@@ -1,5 +1,5 @@
 ---
-title: Build a SvelteKit Markdown blog
+title: Build a SvelteKit Markdown Blog
 description: Learn how to build a blazingly fast and extendable SvelteKit Markdown blog for poets.
 slug: sveltekit-markdown-blog
 published: '2023-04-28'
@@ -634,7 +634,7 @@ export async function load({ params }) {
 			meta: post.metadata
 		}
 	} catch (e) {
-		throw error(404, `Could not find ${params.slug}`)
+		error(404, `Could not find ${params.slug}`)
 	}
 }
 ```
@@ -757,19 +757,22 @@ pnpm i shiki
 
 Create a custom highlighter.
 
-```js:svelte.config.js {2-3, 8-14} showLineNumbers
+```js:svelte.config.js {2-3, 8-17} showLineNumbers
 // ...
 import { mdsvex, escapeSvelte } from 'mdsvex'
-import shiki from 'shiki'
+import { getHighlighter } from 'shiki'
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
 	highlight: {
-		highlighter: async (code, lang = 'text') => {
-			const highlighter = await shiki.getHighlighter({ theme: 'poimandres' })
-			const html = escapeSvelte(highlighter.codeToHtml(code, { lang }))
-			return `{@html \`${html}\` }`
+     const highlighter = await getHighlighter({
+        themes: ['poimandres'],
+        langs: ['javascript', 'typescript']
+      })
+      await highlighter.loadLanguage('javascript', 'typescript')
+      const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }))
+      return `{@html \`${html}\` }`
 		}
 	},
 }
