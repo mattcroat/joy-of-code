@@ -451,7 +451,7 @@ export async function load({ params }) {
   })
 
   if (!post) {
-    throw error(404, 'Post not found')
+    error(404, 'Post not found')
   }
 
   return { post }
@@ -478,7 +478,7 @@ export async function load({ params }) {
   })
 
   if (!post) {
-    throw error(404, 'Post not found')
+    error(404, 'Post not found')
   }
 
   return { post }
@@ -832,7 +832,7 @@ export async function load({ params, parent }) {
   })
 
   if (!post) {
-    throw error(404, 'Post not found')
+    error(404, 'Post not found')
   }
 
   return { post }

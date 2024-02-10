@@ -788,7 +788,7 @@ export const actions = {
     }
 
     // redirect the user
-    throw redirect(303, '/todos')
+    redirect(303, '/todos')
   }
 }
 ```
@@ -865,7 +865,7 @@ export const actions = {
     }
 
     // redirect the user
-    throw redirect(303, '/todos')
+    redirect(303, '/todos')
   }
 }
 ```

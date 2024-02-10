@@ -766,13 +766,13 @@ import { getHighlighter } from 'shiki'
 const mdsvexOptions = {
 	extensions: ['.md'],
 	highlight: {
-     const highlighter = await getHighlighter({
-        themes: ['poimandres'],
-        langs: ['javascript', 'typescript']
-      })
-      await highlighter.loadLanguage('javascript', 'typescript')
-      const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }))
-      return `{@html \`${html}\` }`
+		const highlighter = await getHighlighter({
+			themes: ['poimandres'],
+			langs: ['javascript', 'typescript']
+		})
+		await highlighter.loadLanguage('javascript', 'typescript')
+		const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }))
+		return `{@html \`${html}\` }`
 		}
 	},
 }

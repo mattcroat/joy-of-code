@@ -81,7 +81,7 @@ export const POST: RequestHandler = async ({ request }) => {
   // do whatever you want
   console.log(data)
 
-  throw redirect(303, '/')
+  redirect(303, '/')
 }
 ```
 
@@ -168,7 +168,7 @@ export const actions: Actions = {
     // do whatever you want
     console.log(data)
 
-    throw redirect(303, '/')
+    redirect(303, '/')
   },
 }
 ```

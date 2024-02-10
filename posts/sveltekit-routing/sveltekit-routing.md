@@ -284,7 +284,7 @@ export async function load () {
   // expected errors are created using the `error` helper
   // which sets the status and renders a `+error.svelte` component
   // and returns the status and error message
-  throw error(404, { message: 'Yikes! 📢' })
+  error(404, { message: 'Yikes! 📢' })
 }
 
 ```

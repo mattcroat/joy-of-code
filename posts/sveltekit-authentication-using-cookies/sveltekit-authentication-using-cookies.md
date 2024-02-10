@@ -183,7 +183,7 @@ const register: Action = async ({ request }) => {
     },
   })
 
-  throw redirect(303, '/login')
+  redirect(303, '/login')
 }
 
 export const actions: Actions = { register }
@@ -291,7 +291,7 @@ const login: Action = async ({ cookies, request }) => {
   })
 
   // redirect the user
-  throw redirect(302, '/')
+  redirect(302, '/')
 }
 
 export const actions: Actions = { login }
@@ -312,7 +312,7 @@ import type { Actions, PageServerLoad } from './$types'
 export const load: PageServerLoad = async () => {
   // we only use this endpoint for the api
   // and don't need to see the page
-  throw redirect(302, '/')
+  redirect(302, '/')
 }
 
 export const actions: Actions = {
@@ -324,7 +324,7 @@ export const actions: Actions = {
     })
 
     // redirect the user
-    throw redirect(302, '/login')
+    redirect(302, '/login')
   },
 }
 ```
@@ -476,7 +476,7 @@ I'm also going to update the register and login page `load` functions.
 export const load: PageServerLoad = async ({ locals }) => {
   // redirect user if logged in
   if (locals.user) {
-    throw redirect(302, '/')
+    redirect(302, '/')
   }
 }
 
@@ -487,7 +487,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const load: PageServerLoad = async ({ locals }) => {
   // redirect user if logged in
   if (locals.user) {
-    throw redirect(302, '/')
+    redirect(302, '/')
   }
 }
 
@@ -521,7 +521,7 @@ import type { PageServerLoad } from './$types'
 export const load: PageServerLoad = async ({ locals }) => {
   // redirect user if not logged in
   if (!locals.user) {
-    throw redirect(302, '/')
+    redirect(302, '/')
   }
 }
 ```
