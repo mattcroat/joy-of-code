@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
-	import { Eye } from '$lib/icons'
 	import { fetchJSON } from '$lib/site/posts'
+	import { formatNumber } from '$lib/utils'
+	import { Eye } from '$lib/icons'
 	import type { Post } from '$lib/types'
 
 	export let posts: Post[]
@@ -34,7 +35,7 @@
 									{#await views}
 										⌛️
 									{:then views}
-										{views[post.slug].views}
+										{formatNumber(views[post.slug].views)}
 									{/await}
 								{/if}
 							</span>
