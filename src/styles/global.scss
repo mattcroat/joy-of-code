@@ -183,6 +183,11 @@ a:hover::before {
 	transform: scaleX(1);
 }
 
+a:focus {
+	padding: 0 var(--spacing-4);
+	margin: 0 var(--spacing-4);
+}
+
 table {
 	margin-bottom: var(--spacing-32);
 	border-collapse: collapse;

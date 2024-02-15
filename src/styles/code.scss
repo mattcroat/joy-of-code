@@ -6,7 +6,7 @@
 }
 
 .prose pre {
-	padding: var(--spacing-16) 0;
+	padding-bottom: var(--spacing-16);
 	line-height: 34px;
 	background-image: var(--clr-code-bg);
 	border-left: 1px solid var(--clr-code-border);
@@ -59,7 +59,7 @@ html[data-font='dyslexic'] .prose code {
 .prose .rehype-code-title {
 	display: flex;
 	justify-content: space-between;
-	padding: var(--spacing-16) var(--spacing-24) 0 var(--spacing-24);
+	padding: var(--spacing-16) var(--spacing-24);
 	font-size: var(--post-txt-size);
 	color: var(--clr-code-title);
 	background-color: var(--clr-code-title-bg);
@@ -68,6 +68,10 @@ html[data-font='dyslexic'] .prose code {
 	border-bottom: none;
 	border-top-left-radius: var(--rounded-20);
 	border-top-right-radius: var(--rounded-20);
+}
+
+.prose .copy > svg {
+	margin-bottom: 1px; // It balances the gap on top of icon (which causes visual asymmetry) caused by span.sr-only
 }
 
 .prose .line-number::before {

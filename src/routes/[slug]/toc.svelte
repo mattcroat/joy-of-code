@@ -83,7 +83,7 @@
 
 	.sidebar-toggle,
 	.table-of-contents {
-		padding: var(--spacing-24);
+		padding: var(--spacing-16);
 		background-color: var(--clr-bg);
 		border-top: 1px solid var(--clr-menu-border);
 		border-left: 1px solid var(--clr-menu-border);
@@ -105,12 +105,13 @@
 	}
 
 	:global(.table-of-contents ul) {
+		padding: var(--spacing-4) var(--spacing-8);
 		max-height: 400px;
 		overflow-y: scroll;
 	}
 
 	:global(.table-of-contents li) {
-		margin-top: var(--font-16);
+		margin-top: var(--spacing-8);
 		font-weight: 400;
 	}
 
@@ -124,5 +125,9 @@
 		all: unset;
 		counter-increment: section;
 		content: counter(section) '. ';
+	}
+
+	:global(.table-of-contents a:focus) {
+		margin: 0;
 	}
 </style>
