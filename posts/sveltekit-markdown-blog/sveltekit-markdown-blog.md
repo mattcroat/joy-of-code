@@ -766,15 +766,19 @@ import { getHighlighter } from 'shiki'
 const mdsvexOptions = {
 	extensions: ['.md'],
 	highlight: {
-		const highlighter = await getHighlighter({
-			themes: ['poimandres'],
-			langs: ['javascript', 'typescript']
-		})
-		await highlighter.loadLanguage('javascript', 'typescript')
-		const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }))
-		return `{@html \`${html}\` }`
+		highlighter: async (code, lang = 'text') => {
+			const highlighter = await getHighlighter({
+				theme: 'catppuccin-mocha',
+				langs: ['javascript', 'typescript']
+			});
+			await highlighter.loadTheme('catppuccin-mocha');
+
+			const html = escapeSvelte(
+				highlighter.codeToHtml(code, { lang, theme: 'catppuccin-mocha' })
+			);
+			return `{@html \`${html}\` }`;
 		}
-	},
+	}
 }
 
 // ...
