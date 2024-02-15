@@ -126,8 +126,4 @@
 		counter-increment: section;
 		content: counter(section) '. ';
 	}
-
-	:global(.table-of-contents a:focus) {
-		margin: 0;
-	}
 </style>

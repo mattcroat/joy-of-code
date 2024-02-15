@@ -70,10 +70,6 @@ html[data-font='dyslexic'] .prose code {
 	border-top-right-radius: var(--rounded-20);
 }
 
-.prose .copy > svg {
-	margin-bottom: 1px; // It balances the gap on top of icon (which causes visual asymmetry) caused by span.sr-only
-}
-
 .prose .line-number::before {
 	content: counter(step);
 	counter-increment: step;
