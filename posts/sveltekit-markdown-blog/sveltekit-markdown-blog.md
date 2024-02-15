@@ -757,7 +757,7 @@ npm i shiki
 
 Create a custom highlighter.
 
-```js:svelte.config.js {2-3, 8-17} showLineNumbers
+```js:svelte.config.js {2-3, 8-18} showLineNumbers
 // ...
 import { mdsvex, escapeSvelte } from 'mdsvex'
 import { getHighlighter } from 'shiki'
@@ -768,17 +768,14 @@ const mdsvexOptions = {
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
 			const highlighter = await getHighlighter({
-				theme: 'catppuccin-mocha',
+				themes: ['poimandres'],
 				langs: ['javascript', 'typescript']
-			});
-			await highlighter.loadTheme('catppuccin-mocha');
-
-			const html = escapeSvelte(
-				highlighter.codeToHtml(code, { lang, theme: 'catppuccin-mocha' })
-			);
-			return `{@html \`${html}\` }`;
+			})
+			await highlighter.loadLanguage('javascript', 'typescript')
+			const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'poimandres' }))
+			return `{@html \`${html}\` }`
 		}
-	}
+	},
 }
 
 // ...
