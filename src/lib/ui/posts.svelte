@@ -79,7 +79,7 @@
 	}
 
 	.card {
-		height: 480px;
+		height: 300px;
 		display: grid;
 		grid-template-rows: min-content;
 		padding: var(--spacing-16);
@@ -121,9 +121,9 @@
 
 	.card .title {
 		font-family: var(--font-sans);
-		font-size: var(--font-32);
+		font-size: var(--font-24);
 		font-weight: 700;
-		line-height: 48px;
+		line-height: 40px;
 		text-transform: capitalize;
 	}
 
