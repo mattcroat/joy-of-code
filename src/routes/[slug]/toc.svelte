@@ -3,7 +3,7 @@
 	import { fly } from 'svelte/transition'
 	import { ChevronDoubleLeft, ChevronDoubleRight } from '$lib/icons'
 
-	let tableOfContents = null
+	let tableOfContents = ''
 	let showSidebar = false
 
 	function getTableOfContents() {
@@ -14,7 +14,9 @@
 	}
 
 	function openSidebar() {
-		const targetEl = document.querySelector('#table-of-contents + ul')
+		const targetEl = document.querySelector(
+			'#table-of-contents + ul'
+		) as HTMLUListElement
 		const observer = new IntersectionObserver(([entry]) => {
 			entry.boundingClientRect.bottom < 0
 				? (showSidebar = true)
@@ -105,9 +107,10 @@
 	}
 
 	:global(.table-of-contents ul) {
-		padding: var(--spacing-4) var(--spacing-8);
 		max-height: 400px;
-		overflow-y: scroll;
+		padding: var(--spacing-4) var(--spacing-8);
+		overflow-y: auto;
+		scrollbar-width: thin;
 	}
 
 	:global(.table-of-contents li) {
