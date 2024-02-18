@@ -7,28 +7,28 @@
 		function copyToClipboard(event: Event) {
 			const buttonElement = event.currentTarget as HTMLButtonElement
 			const codeTitleElement = buttonElement.parentElement
-			const codeElement = codeTitleElement.nextElementSibling
-			navigator.clipboard.writeText(codeElement.textContent)
+			const text = codeTitleElement?.nextElementSibling?.textContent
+			text && navigator.clipboard.writeText(text)
 		}
 
 		copyBtnElement.forEach((btn) => {
 			btn.innerHTML = `
         <span class="sr-only">Copy</span>
-        <svg
-          width="24"
-          height="24"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-            />
-        </svg>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="lucide lucide-copy"
+				>
+					<rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+					<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+				</svg>
       `
 			btn.addEventListener('click', copyToClipboard)
 		})
