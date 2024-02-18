@@ -79,7 +79,7 @@
 	}
 
 	.card {
-		height: 300px;
+		height: 340px;
 		display: grid;
 		grid-template-rows: min-content;
 		padding: var(--spacing-16);
