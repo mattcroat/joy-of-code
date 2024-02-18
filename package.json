@@ -13,6 +13,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
+		"@melt-ui/pp": "^0.3.0",
 		"@playwright/test": "^1.41.2",
 		"@sveltejs/adapter-vercel": "^5.1.0",
 		"@sveltejs/kit": "2.5.0",

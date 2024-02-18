@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
-	import { createPopover } from '@melt-ui/svelte'
+	import { createPopover, melt } from '@melt-ui/svelte'
 	import { Cog } from '$lib/icons'
 	import { sounds } from '$lib/stores/sfx'
 
@@ -21,8 +21,7 @@
 </script>
 
 <button
-	{...$trigger}
-	use:trigger
+	use:melt={$trigger}
 	on:click={() => $sounds.click()}
 	aria-label="Categories"
 >

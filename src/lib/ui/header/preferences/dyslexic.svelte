@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
-	import { createSwitch } from '@melt-ui/svelte'
+	import { createSwitch, melt } from '@melt-ui/svelte'
 
 	let enabled = false
 
@@ -33,8 +33,7 @@
 		<label for="dyslexic-font"> Use font for dyslexia</label>
 
 		<button
-			{...$root}
-			use:root
+			use:melt={$root}
 			class="toggle"
 			aria-labelledby="dyslexic-font"
 			on:click={handleChange}
