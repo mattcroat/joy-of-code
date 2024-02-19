@@ -37,6 +37,7 @@
 	"dependencies": {
 		"@melt-ui/svelte": "^0.73.0",
 		"@supabase/supabase-js": "^2.39.3",
+		"flexsearch": "^0.7.43",
 		"gray-matter": "^4.0.3",
 		"lite-youtube-embed": "^0.3.0",
 		"rehype-code-titles": "^1.2.0",
