@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
-	import { createDialog, melt } from '@melt-ui/svelte'
 	import { browser } from '$app/environment'
+	import { createDialog, melt } from '@melt-ui/svelte'
 	import SearchIcon from './search-icon.svelte'
 	import SearchWorker from './search-worker?worker'
 	import { onNavigate } from '$app/navigation'
@@ -43,7 +43,7 @@
 
 	async function handleKeydown(e: KeyboardEvent) {
 		if (e.ctrlKey || e.metaKey) {
-			if (e.key === 'k') {
+			if (e.key === 'k' || e.key === 'K') {
 				e.preventDefault()
 				$open = !$open
 			}
