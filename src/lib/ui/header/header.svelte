@@ -45,10 +45,11 @@
 		top: 10px;
 		left: 50%;
 		translate: -50% 0;
-		background-color: var(--clr-bg);
+		background-color: var(--clr-header-bg);
 		color: var(--clr-primary);
 		box-shadow: var(--shadow-md);
 		box-shadow: 1px 1px 10px hsl(0 0% 0% / 40%);
+		backdrop-filter: blur(20px);
 	}
 
 	.container {

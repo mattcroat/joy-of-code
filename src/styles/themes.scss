@@ -7,6 +7,9 @@ html[data-theme='🌛 Night'] {
 	--bg: radial-gradient(hsl(173 100% 4%), var(--clr-bg));
 	--bg-opacity: 0.4;
 
+	/* Header */
+	--clr-header-bg: hsl(210 7% 11% / 80%);
+
 	/* Menu */
 	--clr-menu-text: hsl(0 0% 78%);
 	--clr-menu-bg: linear-gradient(
@@ -94,6 +97,9 @@ html[data-theme='☀️ Daylight'] {
 	--bg: radial-gradient(hsl(0 0% 98%), var(--clr-bg));
 	--bg-opacity: 0.6;
 
+	/* Header */
+	--clr-header-bg: hsl(0 0% 98% / 80%);
+
 	/* Menu */
 	--clr-menu-text: hsl(220 10% 10%);
 	--clr-menu-bg: linear-gradient(180deg, hsl(0 0% 98%) 0%, hsl(0 0% 94%) 100%);
@@ -168,6 +174,9 @@ html[data-theme='🐺 Night Howl'] {
 
 	--bg: radial-gradient(hsl(206 50% 11%), var(--clr-bg));
 	--bg-opacity: 0.6;
+
+	/* Header */
+	--clr-header-bg: hsl(210 47% 12% / 80%);
 
 	/* Menu */
 	--clr-menu-text: hsl(210 40% 80%);
@@ -255,6 +264,9 @@ html[data-theme='🧠 Night Mind'] {
 
 	--bg: radial-gradient(hsl(265 28% 20%), var(--clr-bg));
 	--bg-opacity: 0.6;
+
+	/* Header */
+	--clr-header-bg: hsl(265 28% 10% / 80%);
 
 	/* Menu */
 	--clr-menu-text: hsl(265 28% 98%);
