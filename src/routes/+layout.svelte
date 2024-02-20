@@ -12,7 +12,7 @@
 
 <LiteYouTubeEmbed />
 
-<div>
+<div class="container">
 	<Header />
 
 	<div class="layout">
@@ -27,9 +27,15 @@
 </div>
 
 <style>
+	.container {
+		height: 100%;
+	}
+
 	.layout {
+		height: 100%;
 		max-inline-size: 1200px;
 		display: grid;
+		grid-template-rows: 1fr auto;
 		column-gap: var(--spacing-24);
 		margin-inline: auto;
 		padding: 0 var(--spacing-16);
