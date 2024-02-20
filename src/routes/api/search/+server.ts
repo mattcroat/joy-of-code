@@ -22,19 +22,24 @@ const htmlEntities: Record<string, string> = {
 
 function stripMarkdown(markdown: string) {
 	for (const pattern in patterns) {
-		if (pattern === 'inline') {
-			markdown = markdown.replace(patterns[pattern], '$1')
-		} else if (pattern === 'tags') {
-			markdown = markdown.replace(
-				patterns[pattern],
-				(match) => htmlEntities[match]
-			)
-		} else if (pattern === 'link') {
-			markdown = markdown.replace(patterns[pattern], '$2')
-		} else if (pattern === 'italic') {
-			markdown = markdown.replace(patterns[pattern], '$1')
-		} else {
-			markdown = markdown.replace(patterns[pattern], '')
+		switch (pattern) {
+			case 'inline':
+				markdown = markdown.replace(patterns[pattern], '$1')
+				break
+			case 'tags':
+				markdown = markdown.replace(
+					patterns[pattern],
+					(match) => htmlEntities[match]
+				)
+				break
+			case 'link':
+				markdown = markdown.replace(patterns[pattern], '$2')
+				break
+			case 'italic':
+				markdown = markdown.replace(patterns[pattern], '$1')
+				break
+			default:
+				markdown = markdown.replace(patterns[pattern], '')
 		}
 	}
 

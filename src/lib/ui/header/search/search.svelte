@@ -8,6 +8,17 @@
 	import { onNavigate } from '$app/navigation'
 	import type { Result } from './search'
 
+	const {
+		elements: { trigger, portalled, overlay, content },
+		states: { open },
+	} = createDialog()
+	const platform = browser && window.navigator.platform
+
+	let search: 'idle' | 'load' | 'ready' = 'idle'
+	let searchTerm = ''
+	let results: Result[] = []
+	let searchWorker: Worker
+
 	onMount(() => {
 		searchWorker = new SearchWorker()
 		searchWorker.addEventListener('message', (e) => {
@@ -22,17 +33,6 @@
 		$open = false
 	})
 
-	const {
-		elements: { trigger, portalled, overlay, content },
-		states: { open },
-	} = createDialog()
-	const platform = browser && window.navigator.platform
-
-	let search: 'idle' | 'load' | 'ready' = 'idle'
-	let searchTerm = ''
-	let results: Result[] = []
-	let searchWorker: Worker
-
 	$: if (search === 'ready') {
 		searchWorker.postMessage({ type: 'search', payload: { searchTerm } })
 	}
@@ -40,18 +40,18 @@
 	$: if (searchTerm && !$open) {
 		searchTerm = ''
 	}
+</script>
 
-	async function handleKeydown(e: KeyboardEvent) {
+<svelte:window
+	on:keydown={(e) => {
 		if (e.ctrlKey || e.metaKey) {
 			if (e.key === 'k' || e.key === 'K') {
 				e.preventDefault()
 				$open = !$open
 			}
 		}
-	}
-</script>
-
-<svelte:window on:keydown={handleKeydown} />
+	}}
+/>
 
 <div use:melt={$portalled}>
 	{#if $open}
@@ -64,7 +64,6 @@
 				spellcheck="false"
 				type="search"
 			/>
-
 			<div class="results">
 				{#if results}
 					<ul>
@@ -112,8 +111,6 @@
 		top: 20%;
 		translate: -50% -0%;
 		border-radius: var(--rounded-4);
-		color: var(--clr-menu-text);
-		background-image: var(--clr-menu-bg);
 		box-shadow: 0px 0px 20px hsl(0 0% 0% / 40%);
 		overflow: hidden;
 		z-index: 40;
@@ -121,8 +118,8 @@
 		& input {
 			width: 100%;
 			padding: var(--spacing-16);
-			color: #fff;
-			background-color: hsl(216 7% 20%);
+			color: var(--clr-search-input-txt);
+			background-color: var(--clr-search-input-bg);
 
 			&:focus {
 				box-shadow: none;
@@ -134,6 +131,7 @@
 	.results {
 		max-height: 60vh;
 		padding: var(--spacing-16);
+		background-color: var(--clr-search-results-bg);
 		overflow-y: auto;
 		scrollbar-width: thin;
 
@@ -144,7 +142,7 @@
 		& li:not(:last-child) {
 			margin-block-end: var(--spacing-16);
 			padding-block-end: var(--spacing-16);
-			border-bottom: 1px solid #fff;
+			border-bottom: 1px solid var(--clr-results-border);
 		}
 
 		& a {
@@ -158,19 +156,19 @@
 		align-items: center;
 		gap: var(--spacing-8);
 		padding: var(--spacing-8) var(--spacing-16);
+		color: var(--clr-search-txt);
+		background-color: var(--clr-search-bg);
+		border-top: 1px solid var(--clr-search-border);
+		border-left: 1px solid var(--clr-search-border);
 		border-radius: var(--rounded-20);
-
-		color: var(--clr-menu-text);
-		background-image: var(--clr-menu-bg);
-		border-top: 1px solid var(--clr-menu-border);
-		border-left: 1px solid var(--clr-menu-border);
 		transition: color 0.3s ease;
 
 		& kbd {
 			padding: 4px 8px;
-			background-color: gray;
+			color: var(--clr-search-kbd-txt);
+			background-color: var(--clr-search-kbd-bg);
+			border: 1px solid var(--clr-search-kbd-border);
 			border-radius: var(--rounded-4);
-			background-color: hsl(216 7% 20%);
 		}
 
 		&:hover {
