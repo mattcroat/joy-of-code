@@ -112,6 +112,7 @@
 
 	.newsletter h2 {
 		font-size: var(--font-24);
+		line-height: 32px;
 	}
 
 	@media (min-width: 860px) {
