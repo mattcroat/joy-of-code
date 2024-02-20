@@ -125,6 +125,7 @@
 		font-weight: 700;
 		line-height: 40px;
 		text-transform: capitalize;
+		text-wrap: balance;
 	}
 
 	html[data-font='dyslexic'] .card .title {

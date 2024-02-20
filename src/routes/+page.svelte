@@ -66,7 +66,7 @@
 <style>
 	.hero {
 		margin-top: var(--spacing-64);
-		padding: var(--spacing-24);
+		padding: var(--spacing-32) var(--spacing-24);
 		background: var(--clr-hero-bg);
 		border-top: 1px solid var(--clr-menu-border);
 		border-left: 1px solid var(--clr-menu-border);
@@ -81,6 +81,7 @@
 
 	.latest-post .title {
 		padding: var(--spacing-8) 0 var(--spacing-16) 0;
+		font-size: clamp(var(--font-24), 4vw, var(--font-32));
 		color: var(--clr-primary);
 	}
 

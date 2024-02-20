@@ -163,6 +163,15 @@
 		border-radius: var(--rounded-20);
 		transition: color 0.3s ease;
 
+		& span,
+		.shortcut {
+			display: none;
+
+			@media (width >= 480px) {
+				display: block;
+			}
+		}
+
 		& kbd {
 			padding: 4px 8px;
 			color: var(--clr-search-kbd-txt);

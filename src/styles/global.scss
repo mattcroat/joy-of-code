@@ -113,6 +113,12 @@ html[data-font='dyslexic'] h2 {
 }
 
 h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+h1,
 h2 {
 	font-family: var(--font-sans);
 	text-transform: capitalize;
@@ -120,7 +126,7 @@ h2 {
 
 h1 {
 	font-size: clamp(var(--font-32), 4vw, var(--font-48));
-	line-height: clamp(48px, 6vw, 64px);
+	line-height: clamp(32px, 6vw, 48px);
 }
 
 h2 {
