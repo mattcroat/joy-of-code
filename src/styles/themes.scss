@@ -71,6 +71,18 @@ html[data-theme='🌛 Night'] {
 	--clr-token-3: hsl(173 100% 66%);
 	--clr-token-4: hsl(0 0% 98%);
 	--clr-token-5: hsl(173 10% 60%);
+
+	/* Search */
+	--clr-search-bg: hsl(216 7% 14%);
+	--clr-search-txt: hsl(216 7% 80%);
+	--clr-search-border: hsl(216 7% 19%);
+	--clr-search-kbd-bg: hsl(216 7% 18%);
+	--clr-search-kbd-txt: hsl(216 7% 90%);
+	--clr-search-kbd-border: hsl(216 7% 20%);
+	--clr-search-input-bg: hsl(216 7% 20%);
+	--clr-search-input-txt: hsl(216 7% 98%);
+	--clr-search-results-bg: hsl(216 7% 14%);
+	--clr-results-border: hsl(216 7% 20%);
 }
 
 html[data-theme='☀️ Daylight'] {
@@ -134,6 +146,18 @@ html[data-theme='☀️ Daylight'] {
 	--clr-token-3: hsl(220 100% 50%);
 	--clr-token-4: hsl(0 0% 20%);
 	--clr-token-5: hsl(0 0% 60%);
+
+	/* Search */
+	--clr-search-bg: hsl(0 0% 98%);
+	--clr-search-txt: hsl(0 0% 40%);
+	--clr-search-border: hsl(0 0% 86%);
+	--clr-search-kbd-bg: hsl(0 0% 94%);
+	--clr-search-kbd-txt: hsl(0 0% 20%);
+	--clr-search-kbd-border: hsl(0 0% 80%);
+	--clr-search-input-bg: hsl(0 0% 94%);
+	--clr-search-input-txt: hsl(0 0% 0%);
+	--clr-search-results-bg: hsl(0 0% 98%);
+	--clr-results-border: hsl(0 0% 90%);
 }
 
 html[data-theme='🐺 Night Howl'] {
@@ -209,6 +233,18 @@ html[data-theme='🐺 Night Howl'] {
 	--clr-token-3: hsl(180 100% 43%);
 	--clr-token-4: hsl(206 50% 98%);
 	--clr-token-5: hsl(217 10% 64%);
+
+	/* Search */
+	--clr-search-bg: hsl(210 47% 12%);
+	--clr-search-txt: hsl(210 47% 80%);
+	--clr-search-border: hsl(210 47% 14%);
+	--clr-search-kbd-bg: hsl(210 47% 14%);
+	--clr-search-kbd-txt: hsl(210 47% 90%);
+	--clr-search-kbd-border: hsl(210 47% 18%);
+	--clr-search-input-bg: hsl(210 47% 14%);
+	--clr-search-input-txt: hsl(210 47% 98%);
+	--clr-search-results-bg: hsl(210 47% 12%);
+	--clr-results-border: hsl(210 47% 18%);
 }
 
 html[data-theme='🧠 Night Mind'] {
@@ -284,4 +320,16 @@ html[data-theme='🧠 Night Mind'] {
 	--clr-token-3: hsl(358 80% 80%);
 	--clr-token-4: hsl(256 80% 98%);
 	--clr-token-5: hsl(265 10% 60%);
+
+	/* Search */
+	--clr-search-bg: hsl(265 28% 24%);
+	--clr-search-txt: hsl(265 28% 80%);
+	--clr-search-border: hsl(265 28% 28%);
+	--clr-search-kbd-bg: hsl(265 28% 28%);
+	--clr-search-kbd-txt: hsl(265 28% 90%);
+	--clr-search-kbd-border: hsl(265 28% 34%);
+	--clr-search-input-bg: hsl(265 28% 28%);
+	--clr-search-input-txt: hsl(265 28% 98%);
+	--clr-search-results-bg: hsl(265 28% 24%);
+	--clr-results-border: hsl(265 28% 28%);
 }

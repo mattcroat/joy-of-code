@@ -2,6 +2,8 @@
 	import Menu from './menu.svelte'
 	import Preferences from './preferences/index.svelte'
 	import * as config from '$lib/site/config'
+	import Logo from './logo.svelte'
+	import Search from './search'
 
 	let scrollY: number
 	$: sticky = scrollY > 0
@@ -12,8 +14,11 @@
 <header class:sticky>
 	<div class="container">
 		<div class="logo">
+			<Logo />
 			<a href="/">{config.siteName}</a>
 		</div>
+
+		<Search />
 
 		<nav>
 			<Preferences />
@@ -28,7 +33,7 @@
 		position: sticky;
 		top: 10px;
 		margin-inline: auto;
-		padding: var(--spacing-16);
+		padding: var(--spacing-16) var(--spacing-24);
 		border-radius: 1rem;
 		z-index: 20;
 		transition:
@@ -52,9 +57,9 @@
 	}
 
 	.logo {
-		flex: 1;
-		text-align: center;
-		text-transform: uppercase;
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-8);
 	}
 
 	.logo a::before {
