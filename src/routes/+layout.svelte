@@ -29,6 +29,7 @@
 <style>
 	.container {
 		height: 100%;
+		padding-block-start: var(--spacing-24);
 	}
 
 	.layout {

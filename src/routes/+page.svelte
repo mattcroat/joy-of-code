@@ -65,7 +65,7 @@
 
 <style>
 	.hero {
-		margin-top: var(--spacing-64);
+		margin-block-start: var(--spacing-64);
 		padding: var(--spacing-32) var(--spacing-24);
 		background: var(--clr-hero-bg);
 		border-top: 1px solid var(--clr-menu-border);

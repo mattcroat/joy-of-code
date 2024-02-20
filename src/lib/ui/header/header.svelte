@@ -6,12 +6,12 @@
 	import Search from './search'
 
 	let scrollY: number
-	$: sticky = scrollY > 0
+	$: fixed = scrollY > 0
 </script>
 
 <svelte:window bind:scrollY />
 
-<header class:sticky>
+<header class:fixed>
 	<div class="container">
 		<div class="logo">
 			<Logo />
@@ -29,9 +29,8 @@
 
 <style>
 	header {
+		width: 90%;
 		max-width: 800px;
-		position: sticky;
-		top: 10px;
 		margin-inline: auto;
 		padding: var(--spacing-16) var(--spacing-24);
 		border-radius: 1rem;
@@ -41,7 +40,11 @@
 			color 0.3s ease;
 	}
 
-	.sticky {
+	.fixed {
+		position: fixed;
+		top: 10px;
+		left: 50%;
+		translate: -50% 0;
 		background-color: var(--clr-bg);
 		color: var(--clr-primary);
 		box-shadow: var(--shadow-md);
@@ -52,8 +55,6 @@
 		max-inline-size: 1200px;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
-		margin-inline: auto;
 	}
 
 	.logo {
