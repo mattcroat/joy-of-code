@@ -8,6 +8,13 @@ const config = {
 	kit: {
 		adapter: adapter(),
 	},
+	vitePlugin: {
+		inspector: {
+			toggleKeyCombo: 'meta-shift',
+			showToggleButton: 'always',
+			toggleButtonPos: 'bottom-right',
+		},
+	},
 }
 
 export default config
