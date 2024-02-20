@@ -10,7 +10,7 @@ category: sveltekit
 
 ## Project Setup
 
-In this post I'm going to show you the basics of how you can use [FlexSearch](simple-but-fast-sveltekit-search) to make a simple, but powerful search inspired by the search from the [Svelte](https://svelte.dev/) site.
+In this post I'm going to show you the basics of how you can use [FlexSearch](https://github.com/nextapps-de/flexsearch) to make a simple, but powerful search inspired by the search from the [Svelte](https://svelte.dev/) site.
 
 {% embed src="https://stackblitz.com/github/joysofcode/sveltekit-flexsearch?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=SvelteKit Search" title="SvelteKit Search" %}
 
