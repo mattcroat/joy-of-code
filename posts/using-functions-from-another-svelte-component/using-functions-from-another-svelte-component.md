@@ -6,10 +6,6 @@ published: '2024-02-10'
 category: svelte
 ---
 
-## Table Of Contents
-
-## Export The Function
-
 If you want to use a function from another Svelte component, export the function, and then you can bind the component in the parent.
 
 ```html:video.svelte showLineNumbers
@@ -31,8 +27,6 @@ If you want to use a function from another Svelte component, export the function
 </video>
 ```
 
-## Bind The Component
-
 Bind the component using Svelte's `bind:` directive to get a reference to the component after which you can use the exported functions.
 
 ```html:app.svelte showLineNumbers
@@ -44,11 +38,13 @@ Bind the component using Svelte's `bind:` directive to get a reference to the co
 
 <Video bind:this={videoComponent} src="video.mp4" controls />
 
-<button onclick="{() => videoComponent.play()}">
+<button onclick={() => videoComponent.play()}>
   Play
 </button>
 
-<button onclick="{() => videoComponent.pause()}">
+<button onclick={() => videoComponent.pause()}>
   Stop
 </button>
 ```
+
+This works the same regardless what Svelte version you're using.
