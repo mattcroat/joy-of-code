@@ -115,6 +115,8 @@ export function searchPostsIndex(searchTerm: string) {
 }
 ```
 
+The `\\$&` expression returns the escaped character where `\\` represents the escape character, and `$&` is the matched string.
+
 ## Replacing Matches With A Marker
 
 To replace the matched words with a `<mark>` element, we need to find the word indexes for the match inside the post, and return them.
@@ -157,6 +159,8 @@ function replaceTextWithMarker(text: string, match: string) {
 	return text.replaceAll(regex, (match) => `<mark>${match}</mark>`)
 }
 ```
+
+I love to use `substring` over `slice` in this case because you don't have to worry if the index is out of bounds since a negative index is going to be `0`.
 
 The reason we create a dynamic regex using `new RegExp` is because you can't pass a variable to a regex literal `/searchTerm/gi`.
 
@@ -249,7 +253,7 @@ addEventListener('message', async (e) => {
 		const searchTerm = payload.searchTerm
     // search posts index
 		const results = searchPostsIndex(searchTerm)
-    // send message with resuls and search term
+    // send message with results and search term
 		postMessage({ type: 'results', payload: { results, searchTerm } })
 	}
 })
@@ -262,6 +266,9 @@ The computation now happens in a separate background thread, separate from the m
   // Vite has a special import for workers
   import SearchWorker from './search-worker?worker'
 
+	let search: 'idle' | 'load' | 'ready' = 'idle'
+	let searchTerm = ''
+	let results: Result[] = []
 	let searchWorker: Worker
 
   onMount(() => {
