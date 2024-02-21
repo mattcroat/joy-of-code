@@ -37,7 +37,7 @@ src/
 ```
 
 - `search.ts` is going to house our indexing and search logic
-- `search.json/+server.ts` is an endpoint that's going to serve the prerendered content as JSON for indexing (this avoids having to write a JSON file)
+- `search.json` is an endpoint that's going to serve the prerendered content as JSON for indexing (this avoids having to write to a JSON file)
 - `+page.svelte` is where the search UI lives
 
 The naming, and placement of these files is not important outside the usual SvelteKit conventions for creating routes.
@@ -46,11 +46,13 @@ The naming, and placement of these files is not important outside the usual Svel
 
 You can find [example posts](https://github.com/joysofcode/sveltekit-flexsearch/blob/main/src/routes/search.json/posts.json) in the repo if you want to try it out.
 
-Here I'm just importing the posts and serving them as JSON, but you probably have Markdown content that you want to import and strip into plain text.
+Here I'm just importing the posts and serving them as JSON, but you probably like me have Markdown content that you want to import and strip into plain text.
 
 ```ts:routes/search.json/+server.ts showLineNumbers
 import { json } from '@sveltejs/kit'
 import posts from './posts.json'
+
+export const prerender = true
 
 export async function GET() {
 	return json(posts)
@@ -61,9 +63,7 @@ If you need an example [here is how I've done it](https://github.com/mattcroat/j
 
 ## Creating The Search Index
 
-Most of the work is unrelated to search, and revolves around replacing the matched text with the `<mark>` element.
-
-Creating the search index is simple.
+Creating the search index is simple, and most of the work revolves around replacing the matched text with the `<mark>` element.
 
 ```ts:lib/search.ts showLineNumbers
 import FlexSearch from 'flexsearch'
@@ -86,7 +86,7 @@ export function createPostsIndex(data: Post[]) {
 }
 ```
 
-The `tokenize` option sets how strict you want the search to be. By default it's set to `strict`, so if you want to match the word `foobar`, you would have to type the entire word, but using the `forward` option it would match if you type `fo`.
+The `tokenize` option sets how strict you want the search to be. You would have to type `foobar` to match the entire word because it's `strict` by default. Using the `forward` option typing `fo` would match `fo`obar.
 
 ## Creating The Search Function
 
@@ -222,9 +222,11 @@ You can find the [search styles](https://github.com/joysofcode/sveltekit-flexsea
 
 ## Using A Web Worker
 
-If you have a lot of content, you might start to notice the UI not being as responsive because of the work you're doing. This is caused by blocking the main JavaScript thread, which is a perfect use case for the [Web Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
+If you have a lot of content, you might start to notice the UI starting to feel less responsive because the amount of work is blocking the main JavaScript thread, which is a perfect use case for the [Web Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
 
 A web worker (not to be confused with service worker) is a way to run your code in the background, separate from the main thread, and send and receive messages from the worker.
+
+Here is some example code.
 
 ```ts:search-worker.ts showLineNumbers
 import { createPostsIndex, searchPostsIndex } from './search'
@@ -260,6 +262,8 @@ The computation now happens in a separate background thread, separate from the m
   // Vite has a special import for workers
   import SearchWorker from './search-worker?worker'
 
+	let searchWorker: Worker
+
   onMount(() => {
     // create worker
     searchWorker = new SearchWorker()
@@ -272,6 +276,11 @@ The computation now happens in a separate background thread, separate from the m
     // initialize when the component mounts
     searchWorker.postMessage({ type: 'load' })
   })
+
+	$: if (search === 'ready') {
+		// update results
+		searchWorker.postMessage({ type: 'search', payload: { searchTerm } })
+	}
 </script>
 ```
 
