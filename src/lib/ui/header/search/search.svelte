@@ -167,7 +167,7 @@
 		.shortcut {
 			display: none;
 
-			@media (width >= 480px) {
+			@media (width >= 600px) {
 				display: block;
 			}
 		}
