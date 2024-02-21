@@ -16,7 +16,7 @@ export async function GET() {
 				<link>${config.siteUrl}</link>
 				<atom:link href="${
 					config.siteUrl
-				}/rss.xml" rel="self" type="application/rss+xml"/>
+				}rss.xml" rel="self" type="application/rss+xml"/>
 				${posts
 					.reverse()
 					.map(
