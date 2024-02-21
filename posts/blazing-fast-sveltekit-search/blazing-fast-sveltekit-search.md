@@ -1,6 +1,6 @@
 ---
-title: Blazing Fast SvelteKit Search With FlexSearch
-description: Simple but powerful search with zero network requests at no cost.
+title: How To Make A Blazing Fast SvelteKit Search
+description: Simple but powerful search with zero network requests at no cost using FlexSearch.
 slug: blazing-fast-sveltekit-search
 published: '2024-02-20'
 category: sveltekit
@@ -8,13 +8,15 @@ category: sveltekit
 
 ## Table of Contents
 
-## Project Setup
+## Introduction
 
-In this post I'm going to show you the basics of how you can use [FlexSearch](https://github.com/nextapps-de/flexsearch) to make a simple, but powerful search inspired by the search from the [Svelte](https://svelte.dev/) site.
+In this post I'm going to show you how you can easily create the same search I use on this site using [FlexSearch](https://github.com/nextapps-de/flexsearch) inspired by the search on the [Svelte](https://svelte.dev/) site.
 
-{% embed src="https://stackblitz.com/github/joysofcode/sveltekit-flexsearch?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=SvelteKit Search" title="SvelteKit Search" %}
+{% embed src="https://stackblitz.com/github/joysofcode/sveltekit-flexsearch?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&view=preview&title=SvelteKit Search" title="SvelteKit Search" %}
 
 You can find the code on [GitHub](https://github.com/joysofcode/sveltekit-flexsearch).
+
+## Project Setup
 
 The only dependency you need is `flexsearch` which is a light text search engine used to index, and search content.
 
@@ -36,15 +38,15 @@ src/
 
 - `search.ts` is going to house our indexing and search logic
 - `search.json/+server.ts` is an endpoint that's going to serve the prerendered content as JSON for indexing (this avoids having to write a JSON file)
-- `+page.svelte` is where our search lives
+- `+page.svelte` is where the search UI lives
 
 The naming, and placement of these files is not important outside the usual SvelteKit conventions for creating routes.
 
-## Prepare The Data
+## Preparing The Data
 
 You can find [example posts](https://github.com/joysofcode/sveltekit-flexsearch/blob/main/src/routes/search.json/posts.json) in the repo if you want to try it out.
 
-Here I'm just importing the posts and serving them as JSON, but you probably have Markdown content that you have to import and strip into plain text.
+Here I'm just importing the posts and serving them as JSON, but you probably have Markdown content that you want to import and strip into plain text.
 
 ```ts:routes/search.json/+server.ts showLineNumbers
 import { json } from '@sveltejs/kit'
@@ -55,36 +57,36 @@ export async function GET() {
 }
 ```
 
-Here's an example of [how I imported the posts and removed the Markdown](https://github.com/mattcroat/joy-of-code/blob/main/src/routes/api/search/%2Bserver.ts) but I suggest you use an existing package to strip the Markdown.
+If you need an example [here is how I've done it](https://github.com/mattcroat/joy-of-code/blob/main/src/routes/api/search/%2Bserver.ts), but I suggest you use a [npm package to remove Markdown](https://www.npmjs.com/search?q=remove%20markdown).
 
 ## Creating The Search Index
 
-This sounds spooky but it's a couple of lines of code.
+Most of the work is unrelated to search, and revolves around replacing the matched text with the `<mark>` element.
+
+Creating the search index is simple.
 
 ```ts:lib/search.ts showLineNumbers
 import FlexSearch from 'flexsearch'
 
-// create posts index
 let postsIndex: FlexSearch.Index
-// the posts
 let posts: Post[]
 
 export function createPostsIndex(data: Post[]) {
-  // create the posts index (matching every character)
+  // create the posts index
 	postsIndex = new FlexSearch.Index({ tokenize: 'forward' })
 
-  // loop over posts
 	data.forEach((post, i) => {
-    // I want to index the title and content together
+    // index the title and content together
 		const item = `${post.title} ${post.content}`
-    // add the item to the index
+    // add the item to the index 👍️
 		postsIndex.add(i, item)
 	})
 
-  // assign data to posts
 	posts = data
 }
 ```
+
+The `tokenize` option sets how strict you want the search to be. By default it's set to `strict`, so if you want to match the word `foobar`, you would have to type the entire word, but using the `forward` option it would match if you type `fo`.
 
 ## Creating The Search Function
 
@@ -92,10 +94,9 @@ Next let's write the search function.
 
 ```ts:lib/search.ts showLineNumbers
 export function searchPostsIndex(searchTerm: string) {
-  // we need to escape special regex characters
-  // I stole this shit like everyone else 😂
+  // escape special regex characters
 	const match = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  // search the index which returns matching indexes 💪
+  // return matching post indexes 💪
 	const results = postsIndex.search(match)
 
 	return results
@@ -119,31 +120,28 @@ export function searchPostsIndex(searchTerm: string) {
 To replace the matched words with a `<mark>` element, we need to find the word indexes for the match inside the post, and return them.
 
 ```ts:lib/search.ts showLineNumbers
-// if you return more than one match per post you can loop over them
 function getMatches(text: string, searchTerm: string, limit = 1) {
-	// `const regex = /${searchTerm}/gi` would not work
-  // so create dynamic regex 😎
+	// create dynamic regex 😎
 	const regex = new RegExp(searchTerm, 'gi')
-  // matched word indexes
+  // word indexes
 	const indexes = []
   // matches count
 	let matches = 0
   // current match in loop
 	let match
 
-  // this exact example is on MDN 📖
 	while ((match = regex.exec(text)) !== null && matches < limit) {
 		// push that shit
     indexes.push(match.index)
-    // increment matches count
+		// increment matches
 		matches++
 	}
 
-  // we take the word index...
+  // take the word index...
 	return indexes.map((index) => {
     // go back 20 characters
 		const start = index - 20
-    // go forwards 80 characters
+    // go forward 80 characters
 		const end = index + 80
     // yoink the text
 		const excerpt = text.substring(start, end).trim()
@@ -155,28 +153,32 @@ function getMatches(text: string, searchTerm: string, limit = 1) {
 function replaceTextWithMarker(text: string, match: string) {
   // create dynamic regex 😎
 	const regex = new RegExp(match, 'gi')
-  // this preserves the text casing 🤙
+  // preserves the text casing 🤙
 	return text.replaceAll(regex, (match) => `<mark>${match}</mark>`)
 }
 ```
 
-## Creating The Search
+The reason we create a dynamic regex using `new RegExp` is because you can't pass a variable to a regex literal `/searchTerm/gi`.
 
-The only thing left to do is put everything together (I'm going to skip the styles but you can find them in the example code).
+By default I return one match from the post, but you can return as many as you want, and loop over them.
+
+## Creating The Search UI
+
+The only thing left to do is put everything together.
 
 ```html:routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { createPostsIndex, searchPostsIndex, type Result } from '$lib/search'
+	import { createPostsIndex, searchPostsIndex } from '$lib/search'
 
 	let search: 'loading' | 'ready' = 'loading'
 	let searchTerm = ''
-	let results: Result[] = []
+	let results = []
 
 	onMount(async () => {
     // get the posts
 		const posts = await fetch('/search.json').then((res) => res.json())
-		// create index
+		// create search index
     createPostsIndex(posts)
     // we're in business 🤝
 		search = 'ready'
@@ -216,18 +218,15 @@ The only thing left to do is put everything together (I'm going to skip the styl
 {/if}
 ```
 
-That's it! 👏
+You can find the [search styles](https://github.com/joysofcode/sveltekit-flexsearch/blob/main/src/routes/%2Bpage.svelte) in the example repo but that's it! 👏
 
 ## Using A Web Worker
 
-You don't have to update the search that fast, and only run the search when the user performs an action, but there's another way.
+If you have a lot of content, you might start to notice the UI not being as responsive because of the work you're doing. This is caused by blocking the main JavaScript thread, which is a perfect use case for the [Web Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
 
-If you have a lot of content, you might start feeling the UI slow down because you're blocking the main JavaScript thread, which is a perfect use case for the [Web Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
-
-A web worker (not to be confused with service worker) is a way to run some code in the background, separate from the main thread, and send and receive messages from the worker.
+A web worker (not to be confused with service worker) is a way to run your code in the background, separate from the main thread, and send and receive messages from the worker.
 
 ```ts:search-worker.ts showLineNumbers
-// search logic is inside worker
 import { createPostsIndex, searchPostsIndex } from './search'
 
 // listen for messages
@@ -235,11 +234,11 @@ addEventListener('message', async (e) => {
 	const { type, payload } = e.data
 
 	if (type === 'load') {
-    // get the data
+    // get the posts data
 		const posts = await fetch('/api/search').then((res) => res.json())
-		// create index
+		// create search index
     createPostsIndex(posts)
-    // initialize 🤝
+    // we're in business 🤝
 		postMessage({ type: 'ready' })
 	}
 
