@@ -178,11 +178,11 @@ These are some lovely framework agnostic UI libraries:
 
 Interesting Svelte UI libraries that have potential, or don't fit a specific category:
 
-- [Attractions](illright.github.io/attractions)
+- [Attractions](https://illright.github.io/attractions/)
 - [Carbon Components](https://carbon-components-svelte.onrender.com/)
 - [Grail UI](https://grail-ui.vercel.app/)
 - [Kahi UI](https://kahi-ui.nbn.dev/)
-- [STWUI](stwui.vercel.app)
+- [STWUI](https://stwui.vercel.app/)
 - [Svelte Atoms](https://svelte-atoms.web.app/)
 - [Svelte Headless UI](https://svelte-headlessui.goss.io/)
 - [SvelteUI](https://svelteui.dev/)
