@@ -10,274 +10,181 @@ category: svelte
 
 ## Table of Contents
 
-## Pico.css
+## Headless Libraries
 
-[Pico.css](https://picocss.com/) is a minimal CSS framework with emphasis on semantic HTML and is framework agnostic. It quickly became my favorite UI library for Svelte because it's simple and elegant.
+These Svelte UI libraries provide you with the logic and required accessibility to make components. You have complete control over the styling method.
 
-The pros are that it makes your site look gorgeous and it's easy to theme thanks to CSS variables and includes a light and dark mode but the cons include having to implement logic yourself and it doesn't have a lot of components since it's minimal.
+[Bits UI](https://www.bits-ui.com/) uses Melt UI as the base, and is simple to use, customizable, and accessible, and includes a lot of components. You can use regular CSS, or Tailwind CSS to style the components.
 
-Here's an example of a modal.
-
-```html:+page.svelte showLineNumbers
+```html:example.svelte showLineNumbers
 <script lang="ts">
-  // ...
+	import { Select } from 'bits-ui'
+
+	const fruits = [
+		{ value: '🍎', label: 'Apple' },
+		{ value: '🍌', label: 'Banana' },
+		{ value: '🍊', label: 'Orange' },
+		{ value: '🍐', label: 'Pear' },
+	]
 </script>
 
-<dialog open>
-  <article>
-    <h3>Title</h3>
-    <p>Are you sure?</p>
+<Select.Root items={fruits}>
+	<Select.Trigger>
+		<Select.Value placeholder="Select a fruit" />
+	</Select.Trigger>
 
-    <footer>
-      <button>Close</button>
-    </footer>
-  </article>
-</dialog>
+	<Select.Content>
+		{#each fruits as fruit}
+			<Select.Item value={fruit.value} label={fruit.label}>
+				{fruit.label}
+			</Select.Item>
+		{/each}
+	</Select.Content>
+</Select.Root>
 ```
 
-## Headless UI
+[Melt UI](https://melt-ui.com/) is a low level API for creating your own components which can be intense if you only want a quick and simple component but that's the idea.
 
-[Headless UI](https://svelte-headlessui.goss.io/docs) is probably my favorite way of using UI components because it just gives you unstyled components and complete freedom how to style them and is mostly concerned about the logic and accessibility.
-
-The pros is that you have complete freedom over styling but the cons are that you have to style things yourself which you might not want to do.
-
-Here's an example of a modal.
-
-```html:+page.svelte showLineNumbers
+```html:example.svelte showLineNumbers
 <script lang="ts">
-  import {
-    Dialog,
-    DialogOverlay,
-    DialogTitle,
-    DialogDescription,
-  } from '@rgossiaux/svelte-headlessui'
+	import { createSelect, melt } from '@melt-ui/svelte'
 
-  let isOpen = true
+	const fruits = [
+		{ value: '🍎', label: 'Apple' },
+		{ value: '🍌', label: 'Banana' },
+		{ value: '🍊', label: 'Orange' },
+		{ value: '🍐', label: 'Pear' },
+	]
+
+	const {
+		elements: { trigger, menu, option },
+		states: { selectedLabel, open },
+	} = createSelect()
 </script>
 
-<Dialog open={isOpen} on:close={() => (isOpen = false)}>
-  <DialogOverlay />
+<div>
+	<button use:melt={$trigger}>
+		{$selectedLabel || 'Select a fruit'}
+	</button>
 
-  <DialogTitle>Title</DialogTitle>
-  <DialogDescription>Description</DialogDescription>
-
-  <p>Are you sure?</p>
-
-  <button on:click={() => (isOpen = false)}>Yes</button>
-  <button on:click={() => (isOpen = false)}>Cancel</button>
-</Dialog>
-```
-
-## Material UI
-
-[SMUI](https://sveltematerialui.com/) is a great Material UI library for Svelte if you're looking for something to get the work done.
-
-The pros is that it has a lot of components but cons might be the use of Material Design that doesn't look great in my opinion and it's weird you have to install each component you want to use.
-
-Here's an example of a modal.
-
-```html:+page.svelte showLineNumbers
-<script lang="ts">
-  import Dialog, { Title, Content, Actions } from '@smui/dialog'
-  import Button, { Label } from '@smui/button'
-
-  let isOpen = false
-</script>
-
-<Dialog bind:open>
-  <Title>Title</Title>
-  <Content>Content</Content>
-  <Actions>
-    <Button>
-      <Label>No</Label>
-    </Button>
-    <Button>
-      <Label>Yes</Label>
-    </Button>
-  </Actions>
-</Dialog>
-
-<Button on:click={() => (isOpen = true)}>
-  <Label>Open</Label>
-</Button>
-```
-
-## Carbon Components Svelte
-
-[Carbon Components Svelte](https://carbon-components-svelte.onrender.com/) is a UI library based on IBM's [Carbon Design System](https://www.carbondesignsystem.com/)
-
-The pros are that it has a lot of components but the cons are is that it's not the best looking and it's not easy to customize.
-
-Here's an example of a modal.
-
-```html:+page.svelte showLineNumbers
-<script lang="ts">
-  import {
-    ComposedModal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Checkbox,
-  } from 'carbon-components-svelte'
-
-  let checked = false
-</script>
-
-<ComposedModal open>
-  <ModalHeader label="Label" title="Title" />
-  <ModalBody hasForm>
-    <Checkbox labelText="Text" bind:checked />
-  </ModalBody>
-  <ModalFooter primaryButtonText="Yes" primaryButtonDisabled={!checked} />
-</ComposedModal>
-```
-
-## Svelte UI
-
-[Svelte UI](https://www.svelteui.org/) is based on [Mantine](https://mantine.dev/) and it's a decent UI library.
-
-The pros are that it has a lot of component and looks decent but the cons are that the API is not as nice and screams React having to wrap your app inside a provider.
-
-Here's an example of a modal.
-
-```html:+page.svelte showLineNumbers
-<script>
-  import { Modal, Group, Button } from '@svelteuidev/core'
-
-  let opened = false
-</script>
-
-<Modal {opened} on:close={closeModal} title="Title">
-  <!-- ... -->
-</Modal>
-
-<Group position="center">
-  <Button on:click={() => (opened = true)}>Open</Button>
-</Group>
-```
-
-## Attractions
-
-[Attractions](https://illright.github.io/attractions/) is a gorgeous UI library for Svelte.
-
-The pros is the gorgeous design and components to pick from but the cons are that it only works with Sass which is a shame.
-
-Here's an example of a modal.
-
-```html:+page.svelte showLineNumbers
-<script lang="ts">
-  import { Button, Dialog, Modal } from 'attractions'
-
-  let isOpen = false
-</script>
-
-<Button on:click={() => isOpen = true}>Open</Button>
-
-<Modal bind:open={isOpen} let:closeCallback>
-  <Dialog
-    title="Title"
-    danger
-  >
-    <div slot="title-icon">
-    <AlertTriangleIcon size="25" />
-    </div>
-    <p>Are you sure you want to exit?</p>
-    <Button>Yes</Button>
-  </Dialog>
-</Modal>
-```
-
-## daisyUI
-
-[daisyUI](https://daisyui.com/) is a framework agnostic UI library based on Tailwind CSS.
-
-The pros is that it's popular and has a lot of components but the cons is having to implement the component logic yourself.
-
-Here's an example of a modal.
-
-```html:+page.svelte showLineNumbers
-<script lang="ts">
-  // ...
-</script>
-
-<label for="my-modal" class="btn">Open</label>
-<input type="checkbox" id="my-modal" class="modal-toggle" />
-
-<div class="modal">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg">Title</h3>
-    <p class="py-4">Are you sure?</p>
-    <div class="modal-action">
-      <label for="my-modal" class="btn">Yes</label>
-    </div>
-  </div>
+	{#if $open}
+		<div use:melt={$menu}>
+			{#each fruits as fruit}
+				<div use:melt={$option({ ...fruit })}>
+					{fruit.value}
+				</div>
+			{/each}
+		</div>
+	{/if}
 </div>
 ```
 
-## Flowbite-Svelte
+## Tailwind Based Libraries
 
-[Flowbite-Svelte](https://flowbite-svelte.com/) is another UI component library based on Tailwind CSS but made for Svelte.
+These Svelte UI libraries use the utility-first CSS framework [Tailwind](https://tailwindcss.com/) for styling, and provide functional and accessible components.
 
-The pros are that it has great looking components but the con is that it's a work in progress at the time of writing.
+[Flowbite Svelte](https://flowbite-svelte.com/) is more opinionated, and comes with a lot of components you can use. Some components seem to use native elements making the design look less cohesive, and I would prefer if the examples used TypeScript but it's simple to use.
 
-```html:+page.svelte showLineNumbers
-<script>
-  import { Button, Modal } from 'flowbite-svelte'
+```html:example.svelte showLineNumbers
+<script lang="ts">
+	import { Select, Label } from 'flowbite-svelte'
 
-  let isOpen = false
+	let selected: string
+
+	const fruits = [
+		{ value: '🍎', name: 'Apple' },
+		{ value: '🍌', name: 'Banana' },
+		{ value: '🍊', name: 'Orange' },
+		{ value: '🍐', name: 'Pear' },
+	]
 </script>
 
-<Button on:click={() => isOpen = true}>Open</Button>
-
-<Modal bind:open={isOpen} size="xs" autoclose>
-  <div class="text-center">
-      <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure?</h3>
-      <Button color="red" class="mr-2">Yes</Button>
-      <Button color='alternative'>Cancel</Button>
-  </div>
-</Modal>
+<Label>
+	Select a fruit
+	<Select items={fruits} bind:value={selected} />
+</Label>
 ```
 
-## Skeleton
+[Skeleton UI](https://www.skeleton.dev/) is a UI toolkit for Svelte and comes with premade components and utilities. I would love to see more component variety but it has great docs, themes including a theme generator, and a Figma design kit.
 
-[Skeleton](https://www.skeleton.dev/) is another UI library for Svelte based on Tailwind CSS and one that's most promising and under active development.
-
-The pros is that it has great docs and components but cons are that some of the themes have contrast issues but it's a work in progress.
-
-Here's an example of a modal.
-
-```html:+page.svelte showLineNumbers
-// +layout.svelte
+```html:example.svelte showLineNumbers
 <script lang="ts">
-  import { Modal } from '@skeletonlabs/skeleton'
+	import { AppShell } from '@skeletonlabs/skeleton'
 </script>
 
-<Modal />
-
-// +page.svelte
-<script lang="ts">
-  import { modalStore, type ModalSettings } from '@skeletonlabs/skeleton'
-
-  function triggerConfirm(): void {
-    const confirm: ModalSettings = {
-      type: 'confirm',
-      title: 'Title',
-      body: 'Are you sure?',
-      response: (response: boolean) => console.log('response:', response),
-    }
-
-    modalStore.trigger(confirm)
-  }
-</script>
-
-<button on:click={triggerConfirm}>Open</button>
+<AppShell>
+	<svelte:fragment slot="header">Header</svelte:fragment>
+	<svelte:fragment slot="sidebarLeft">Sidebar Left</svelte:fragment>
+	<slot />
+	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
+</AppShell>
 ```
 
-## Honorable Mentions
+[shadcn-svelte](https://www.shadcn-svelte.com/) is an unofficial Svelte port of [shadcn/ui](https://ui.shadcn.com/) and it's unlike any other UI library because it's not a package, but a collection of reusable components that you can copy and paste, or use the CLI to add to your apps where the styles are decoupled from the implementation making it minimal.
 
-Here are some framework agnostic UI libraries that deserve a honorable mention:
+```html:example.svelte showLineNumbers
+<script lang="ts">
+	import * as Select from '$lib/components/ui/select'
 
-- [AgnosticUI](https://www.agnosticui.com/)
-- [Bootstrap](https://getbootstrap.com/)
-- [Bulma](https://bulma.io/)
-- [BeerCSS](https://www.beercss.com/)
+	const fruits = [
+		{ value: '🍎', label: 'Apple' },
+		{ value: '🍌', label: 'Banana' },
+		{ value: '🍊', label: 'Orange' },
+		{ value: '🍐', label: 'Pear' },
+	]
+</script>
+
+<Select.Root>
+	<Select.Trigger class="w-[180px]">
+		<Select.Value placeholder="Select a fruit" />
+	</Select.Trigger>
+	<Select.Content>
+		<Select.Group>
+			{#each fruits as fruit}
+				<Select.Item value={fruit.value} label={fruit.label}>
+					{fruit.label}
+				</Select.Item>
+			{/each}
+		</Select.Group>
+	</Select.Content>
+</Select.Root>
+```
+
+## Bootstrap Inspired Libraries
+
+Svelte UI libraries using Bootstrap design:
+
+- [Sveltestrap](https://sveltestrap.js.org/)
+- [AgnosUI](https://amadeusitgroup.github.io/AgnosUI/latest/)
+
+## Material Design Inspired Libraries
+
+Svelte UI libraries using Material Design:
+
+- [Smelte](https://smeltejs.com/)
+- [Svelte Material UI](https://sveltematerialui.com/)
+
+## Framework Agnostic Libraries
+
+These are some lovely framework agnostic UI libraries:
+
+- [Open Props](https://open-props.style/) (like Tailwind but uses CSS variables)
+- [Pico](https://picocss.com/) (CSS)
+- [Preline](https://preline.co/) (Tailwind CSS)
+- [Shoelace](https://shoelace.style/) (web components)
+- [daisyUI](https://daisyui.com/) (Tailwind CSS)
+
+## Other UI/UX Libraries
+
+Interesting Svelte UI libraries that have potential, or don't fit a specific category:
+
+- [Attractions](illright.github.io/attractions)
+- [Carbon Components](https://carbon-components-svelte.onrender.com/)
+- [Grail UI](https://grail-ui.vercel.app/)
+- [Kahi UI](https://kahi-ui.nbn.dev/)
+- [STWUI](stwui.vercel.app)
+- [Svelte Atoms](https://svelte-atoms.web.app/)
+- [Svelte Headless UI](https://svelte-headlessui.goss.io/)
+- [SvelteUI](https://svelteui.dev/)
+- [Svelte UX](https://svelte-ux.techniq.dev/)
+- [YeSvelte](https://www.yesvelte.com/)
