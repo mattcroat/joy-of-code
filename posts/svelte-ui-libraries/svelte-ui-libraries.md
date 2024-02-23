@@ -6,44 +6,15 @@ published: '2022-12-11'
 category: svelte
 ---
 
-{% youtube id="O0mNU0maItY" title="List Of Svelte UI Libraries" %}
+{% youtube id="qyG-xWjNZKU" title="List Of Svelte UI Libraries" %}
 
 ## Table of Contents
 
 ## Headless Libraries
 
-These Svelte UI libraries provide you with the logic and required accessibility to make components. You have complete control over the styling method.
+These Svelte UI libraries don't provide ready to use components, but provide the logic and accessibility for you to create your own components, where you have complete control over the styling.
 
-[Bits UI](https://www.bits-ui.com/) uses Melt UI as the base, and is simple to use, customizable, and accessible, and includes a lot of components. You can use regular CSS, or Tailwind CSS to style the components.
-
-```html:example.svelte showLineNumbers
-<script lang="ts">
-	import { Select } from 'bits-ui'
-
-	const fruits = [
-		{ value: '🍎', label: 'Apple' },
-		{ value: '🍌', label: 'Banana' },
-		{ value: '🍊', label: 'Orange' },
-		{ value: '🍐', label: 'Pear' },
-	]
-</script>
-
-<Select.Root items={fruits}>
-	<Select.Trigger>
-		<Select.Value placeholder="Select a fruit" />
-	</Select.Trigger>
-
-	<Select.Content>
-		{#each fruits as fruit}
-			<Select.Item value={fruit.value} label={fruit.label}>
-				{fruit.label}
-			</Select.Item>
-		{/each}
-	</Select.Content>
-</Select.Root>
-```
-
-[Melt UI](https://melt-ui.com/) is a low level API for creating your own components which can be intense if you only want a quick and simple component but that's the idea.
+[Melt UI](https://melt-ui.com/) is a low level API for creating your own components. It's probably my favorite, but it can be intense if you need a quick, and simple component. Their code examples provide regular CSS styles and Tailwind CSS versions you can use.
 
 ```html:example.svelte showLineNumbers
 <script lang="ts">
@@ -79,11 +50,55 @@ These Svelte UI libraries provide you with the logic and required accessibility 
 </div>
 ```
 
-## Tailwind Based Libraries
+[Bits UI](https://www.bits-ui.com/) uses Melt UI as the base, so it's accessible, customizable, and includes a lot of components. It's simple to use, and you can use regular CSS, or Tailwind CSS to style the components.
 
-These Svelte UI libraries use the utility-first CSS framework [Tailwind](https://tailwindcss.com/) for styling, and provide functional and accessible components.
+```html:example.svelte showLineNumbers
+<script lang="ts">
+	import { Select } from 'bits-ui'
 
-[Flowbite Svelte](https://flowbite-svelte.com/) is more opinionated, and comes with a lot of components you can use. Some components seem to use native elements making the design look less cohesive, and I would prefer if the examples used TypeScript but it's simple to use.
+	const fruits = [
+		{ value: '🍎', label: 'Apple' },
+		{ value: '🍌', label: 'Banana' },
+		{ value: '🍊', label: 'Orange' },
+		{ value: '🍐', label: 'Pear' },
+	]
+</script>
+
+<Select.Root items={fruits}>
+	<Select.Trigger>
+		<Select.Value placeholder="Select a fruit" />
+	</Select.Trigger>
+
+	<Select.Content>
+		{#each fruits as fruit}
+			<Select.Item value={fruit.value} label={fruit.label}>
+				{fruit.label}
+			</Select.Item>
+		{/each}
+	</Select.Content>
+</Select.Root>
+```
+
+## Tailwind CSS Libraries
+
+These Svelte UI libraries use the utility-first CSS framework [Tailwind](https://tailwindcss.com/) for styling, and provide functional, and accessible components.
+
+[Skeleton UI](https://www.skeleton.dev/) is a UI toolkit for Svelte that comes with premade components and utilities. It has great docs, themes, including a theme generator, and a Figma design kit. I would love to see more component variety.
+
+```html:example.svelte showLineNumbers
+<script lang="ts">
+	import { AppShell } from '@skeletonlabs/skeleton'
+</script>
+
+<AppShell>
+	<svelte:fragment slot="header">Header</svelte:fragment>
+	<svelte:fragment slot="sidebarLeft">Sidebar Left</svelte:fragment>
+	<slot />
+	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
+</AppShell>
+```
+
+[Flowbite Svelte](https://flowbite-svelte.com/) is opinionated but customizable, has great docs, RTL support, and comes with a lot of easy to use components. Some components seem to use native elements making the design look less cohesive, but it's simple to use.
 
 ```html:example.svelte showLineNumbers
 <script lang="ts">
@@ -105,22 +120,7 @@ These Svelte UI libraries use the utility-first CSS framework [Tailwind](https:/
 </Label>
 ```
 
-[Skeleton UI](https://www.skeleton.dev/) is a UI toolkit for Svelte and comes with premade components and utilities. I would love to see more component variety but it has great docs, themes including a theme generator, and a Figma design kit.
-
-```html:example.svelte showLineNumbers
-<script lang="ts">
-	import { AppShell } from '@skeletonlabs/skeleton'
-</script>
-
-<AppShell>
-	<svelte:fragment slot="header">Header</svelte:fragment>
-	<svelte:fragment slot="sidebarLeft">Sidebar Left</svelte:fragment>
-	<slot />
-	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
-</AppShell>
-```
-
-[shadcn-svelte](https://www.shadcn-svelte.com/) is an unofficial Svelte port of [shadcn/ui](https://ui.shadcn.com/) and it's unlike any other UI library because it's not a package, but a collection of reusable components that you can copy and paste, or use the CLI to add to your apps where the styles are decoupled from the implementation making it minimal.
+[shadcn-svelte](https://www.shadcn-svelte.com/) is an unofficial Svelte port of [shadcn/ui](https://ui.shadcn.com/) and it's unlike any other UI library because it's not a library, but a collection of reusable components that you can copy and paste, or use the CLI to add to your apps, where the styles are separate from the implementation which is genius but some people raise valid concerns about updates.
 
 ```html:example.svelte showLineNumbers
 <script lang="ts">
@@ -135,7 +135,7 @@ These Svelte UI libraries use the utility-first CSS framework [Tailwind](https:/
 </script>
 
 <Select.Root>
-	<Select.Trigger class="w-[180px]">
+	<Select.Trigger>
 		<Select.Value placeholder="Select a fruit" />
 	</Select.Trigger>
 	<Select.Content>
@@ -150,41 +150,41 @@ These Svelte UI libraries use the utility-first CSS framework [Tailwind](https:/
 </Select.Root>
 ```
 
-## Bootstrap Inspired Libraries
-
-Svelte UI libraries using Bootstrap design:
-
-- [Sveltestrap](https://sveltestrap.js.org/)
-- [AgnosUI](https://amadeusitgroup.github.io/AgnosUI/latest/)
-
-## Material Design Inspired Libraries
+## Material Design Libraries
 
 Svelte UI libraries using Material Design:
 
 - [Smelte](https://smeltejs.com/)
 - [Svelte Material UI](https://sveltematerialui.com/)
 
+## Bootstrap Libraries
+
+Svelte UI libraries using Bootstrap design:
+
+- [Sveltestrap](https://sveltestrap.js.org/)
+- [AgnosUI](https://amadeusitgroup.github.io/AgnosUI/latest/)
+
 ## Framework Agnostic Libraries
 
 These are some lovely framework agnostic UI libraries:
 
+- [daisyUI](https://daisyui.com/) (Tailwind CSS)
 - [Open Props](https://open-props.style/) (like Tailwind but uses CSS variables)
-- [Pico](https://picocss.com/) (CSS)
+- [Pico](https://picocss.com/) (minimal CSS framework)
 - [Preline](https://preline.co/) (Tailwind CSS)
 - [Shoelace](https://shoelace.style/) (web components)
-- [daisyUI](https://daisyui.com/) (Tailwind CSS)
 
 ## Other UI/UX Libraries
 
-Interesting Svelte UI libraries that have potential, or don't fit a specific category:
+Interesting Svelte UI libraries that have potential, or don't fit into a specific category:
 
-- [Attractions](https://illright.github.io/attractions/)
-- [Carbon Components](https://carbon-components-svelte.onrender.com/)
-- [Grail UI](https://grail-ui.vercel.app/)
-- [Kahi UI](https://kahi-ui.nbn.dev/)
-- [STWUI](https://stwui.vercel.app/)
-- [Svelte Atoms](https://svelte-atoms.web.app/)
-- [Svelte Headless UI](https://svelte-headlessui.goss.io/)
-- [SvelteUI](https://svelteui.dev/)
-- [Svelte UX](https://svelte-ux.techniq.dev/)
-- [YeSvelte](https://www.yesvelte.com/)
+- [Attractions](https://illright.github.io/attractions/) (UI kit)
+- [Carbon Components](https://carbon-components-svelte.onrender.com/) (Carbon design system)
+- [Grail UI](https://grail-ui.vercel.app/) (Headless)
+- [Kahi UI](https://kahi-ui.nbn.dev/) (rapid prototyping)
+- [STWUI](https://stwui.vercel.app/) (Tailwind CSS)
+- [Svelte Atoms](https://svelte-atoms.web.app/) (Atol design)
+- [Svelte Headless UI](https://svelte-headlessui.goss.io/) (Headless)
+- [SvelteUI](https://svelteui.dev/) (Mantine UI design system)
+- [Svelte UX](https://svelte-ux.techniq.dev/) (Collection of components, actions, stores, and utilities)
+- [YeSvelte](https://www.yesvelte.com/) (flexible and powerful Svelte UI library)
