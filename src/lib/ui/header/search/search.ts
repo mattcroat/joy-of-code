@@ -16,8 +16,6 @@ let postsIndex: FlexSearch.Index
 let posts: Post[]
 
 export function createPostsIndex(data: Post[]) {
-	console.log('initialize index')
-
 	postsIndex = new FlexSearch.Index({ tokenize: 'forward' })
 
 	data.forEach((post, i) => {

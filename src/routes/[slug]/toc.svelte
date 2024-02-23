@@ -10,7 +10,9 @@
 		const postTableOfContentsEl = document.querySelector(
 			'#table-of-contents + ul'
 		) as HTMLUListElement
-		tableOfContents = postTableOfContentsEl.outerHTML
+		if (postTableOfContentsEl) {
+			tableOfContents = postTableOfContentsEl.outerHTML
+		}
 	}
 
 	function openSidebar() {
@@ -44,34 +46,36 @@
 	}
 </script>
 
-<aside>
-	<section>
-		{#if !showSidebar}
-			<button
-				on:click={toggleSidebar}
-				in:fly={{ x: '100%', duration: 300, delay: 300 }}
-				class="sidebar-toggle"
-				aria-label="Show table of contents"
-			>
-				<ChevronDoubleLeft width={24} height={24} aria-hidden={true} />
-			</button>
-		{/if}
-
-		{#if showSidebar}
-			<div
-				class="table-of-contents"
-				transition:fly={{ x: '100%', duration: 300 }}
-			>
-				<button on:click={toggleSidebar} aria-label="Hide table of contents">
-					<ChevronDoubleRight width={24} height={24} aria-hidden={true} />
+{#if tableOfContents}
+	<aside>
+		<section>
+			{#if !showSidebar}
+				<button
+					on:click={toggleSidebar}
+					in:fly={{ x: '100%', duration: 300, delay: 300 }}
+					class="sidebar-toggle"
+					aria-label="Show table of contents"
+				>
+					<ChevronDoubleLeft width={24} height={24} aria-hidden={true} />
 				</button>
+			{/if}
 
-				<h2 class="table-of-contents-title">Table of contents</h2>
-				{@html tableOfContents}
-			</div>
-		{/if}
-	</section>
-</aside>
+			{#if showSidebar}
+				<div
+					class="table-of-contents"
+					transition:fly={{ x: '100%', duration: 300 }}
+				>
+					<button on:click={toggleSidebar} aria-label="Hide table of contents">
+						<ChevronDoubleRight width={24} height={24} aria-hidden={true} />
+					</button>
+
+					<h2 class="table-of-contents-title">Table of contents</h2>
+					{@html tableOfContents}
+				</div>
+			{/if}
+		</section>
+	</aside>
+{/if}
 
 <style>
 	aside {
