@@ -6,6 +6,8 @@ published: '2024-02-20'
 category: sveltekit
 ---
 
+{% youtube id="llGupgNwmIk" title="Blazing Fast SvelteKit Search" %}
+
 ## Table of Contents
 
 ## Introduction
