@@ -8,7 +8,7 @@ category: css
 
 Use CSS Grid instead of position absolute to stack items on top of each other.
 
-```html:grid.html showLineNumbers
+```html:html showLineNumbers
 <div class="stack">
   <div>1</div>
   <div>2</div>
@@ -17,9 +17,7 @@ Use CSS Grid instead of position absolute to stack items on top of each other.
 </div>
 ```
 
-Using the `grid-area` CSS [shorthand property](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties) the grid item starts at the first grid line of the grid row (`grid-row-start: 1`) and the first grid line of the grid column (`grid-column-start: 1`).
-
-```css:grid.css showLineNumbers
+```css:css showLineNumbers
 .stack {
   display: grid;
   place-content: center;
@@ -29,5 +27,7 @@ Using the `grid-area` CSS [shorthand property](https://developer.mozilla.org/en-
   }
 }
 ```
+
+Using the `grid-area` CSS [shorthand property](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties) the grid item starts at the first grid line of the grid row (`grid-row-start: 1`) and the first grid line of the grid column (`grid-column-start: 1`).
 
 Since the end lines for both rows and columns are not specified, they default to `auto`, which means the item will span one row, and one column from its starting position.
