@@ -8,7 +8,7 @@
 		'☀️ Daylight': { name: '☀️ Daylight' },
 		'🐺 Night Howl': { name: '🐺 Night Howl' },
 		'🧠 Night Mind': { name: '🧠 Night Mind' },
-	}
+	} as const
 
 	let selectedTheme = getTheme() ?? themes['🌛 Night']
 
@@ -16,7 +16,7 @@
 		if (!browser) return
 
 		const htmlElement = document.documentElement
-		const userTheme = localStorage.theme
+		const userTheme: Themes['name'] = localStorage.theme
 		const prefersDarkMode = window.matchMedia(
 			'prefers-color-scheme: dark'
 		).matches
