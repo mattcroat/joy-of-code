@@ -530,7 +530,7 @@ Awesome! You created an API endpoint for posts you can reuse across your app (yo
 
 Now you can use the posts endpoint you just created to server-side render the posts for the page.
 
-```ts:src/routes/+page.ts showLineNumbers
+```ts:src/routes/+page.server.ts showLineNumbers
 import type { Post } from '$lib/types'
 
 export async function load({ fetch }) {
