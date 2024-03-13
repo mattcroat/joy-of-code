@@ -233,8 +233,8 @@ hooks.server.ts
 
 ```shell:console showLineNumbers
 app.html
-+page.ts (load)
 +layout.ts (load)
++page.ts (load)
 +layout.svelte
 +page.svelte
 ```
