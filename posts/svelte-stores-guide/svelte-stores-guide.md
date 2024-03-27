@@ -435,7 +435,7 @@ Let's update the previous `counter` example.
 	import { counter } from '$lib/counter'
 </script>
 
-<button on:click={counter.rest}>
+<button on:click={counter.reset}>
 	Reset
 </button>
 ```
