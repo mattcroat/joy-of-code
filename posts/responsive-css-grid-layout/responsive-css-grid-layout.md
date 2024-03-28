@@ -13,7 +13,7 @@ If you're using [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_
 ```css:css {3} showLineNumbers
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 ```
 
