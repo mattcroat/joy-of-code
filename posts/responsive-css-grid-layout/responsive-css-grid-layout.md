@@ -20,7 +20,7 @@ If you're using [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_
 Let's break it down:
 
 - `repeat` uses `auto-fill` as the repeat count to repeat the grid item as many times as needed
-- `minmax` specifies a minimum size of `300px`, and maximum size of `1fr` for the grid item
+- `minmax` specifies a minimum size of `200px`, and maximum size of `1fr` for the grid item
 
 You could also use `auto-fit` instead of `auto-fill`, but what is the difference?
 
