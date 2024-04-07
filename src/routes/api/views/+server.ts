@@ -4,21 +4,20 @@ import { supabase } from '$lib/database'
 export const prerender = false
 
 export async function GET() {
-	const { data: posts, error } = await supabase
-		.from('views')
-		.select('slug, views')
+	const { data, error } = await supabase.from('views').select('slug, views')
 
 	if (error) {
 		return json({ error: error.message })
 	}
 
-	const headers = { 'Content-Type': 'application/json' }
+	const views = data.reduce((posts: any, post) => {
+		posts[post.slug] = { views: +post.views }
+		return posts
+	}, {})
 
-	const postViews = {}
+	const headers = {
+		'Content-Type': 'application/json',
+	}
 
-	posts.forEach(({ slug, views }) => {
-		postViews[slug] = { views }
-	})
-
-	return json(postViews, { headers })
+	return json(views, { headers })
 }

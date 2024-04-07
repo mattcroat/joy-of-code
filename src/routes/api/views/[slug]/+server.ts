@@ -10,7 +10,7 @@ export async function POST({ request }) {
 		.match({ slug })
 		.single()
 
-	if (!views.data) {
+	if (views.data === null) {
 		const { error } = await supabase.from('views').insert({
 			slug,
 			views: 1,
@@ -21,12 +21,10 @@ export async function POST({ request }) {
 		}
 	}
 
-	if (views.data) {
+	if (views.data !== null) {
 		const { error } = await supabase
 			.from('views')
-			.update({
-				views: views.data.views + 1,
-			})
+			.update({ views: +views.data.views + 1 })
 			.match({ slug })
 
 		if (error) {
