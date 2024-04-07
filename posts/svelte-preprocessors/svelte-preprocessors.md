@@ -1,6 +1,6 @@
 ---
 title: How To Make A Svelte Markdown Preprocessor
-description: Introduction to how Svelte preprocessors work by making a simple Markdown preprocessor.
+description: Introduction to Svelte preprocessors and how to make your own Markdown preprocessor.
 slug: svelte-preprocessors
 published: '2024-04-05'
 category: svelte
@@ -18,21 +18,19 @@ The Svelte documentation describes [preprocessors](https://kit.svelte.dev/docs/i
 
 > Preprocessors transform your `.svelte` files before passing them to the compiler.
 
-To understand what this means we first have to understand the three sections that make a Svelte component:
+To understand what this means, we first have to understand the three parts that make a Svelte component which are:
 
 - markup
 - `<script>`
 - `<style>`
 
-If your component uses TypeScript, it has to be transformed to JavaScript first, before it goes through the Svelte compiler.
+If your component uses TypeScript for example, it has to be transformed to JavaScript first, before it goes through the Svelte compiler — you're already using [vitePreprocess](https://kit.svelte.dev/docs/integrations#preprocessors-vitepreprocess) in your Svelte project for handling everything from TypeScript, to PostCSS through Vite.
 
-You're already using [vitePreprocess](https://kit.svelte.dev/docs/integrations#preprocessors-vitepreprocess) in your Svelte project for handling everything from TypeScript, to PostCSS through Vite.
-
-[Melt UI](https://melt-ui.com/) provides a [preprocessor](https://melt-ui.com/docs/preprocessor) to enhance the developer experience by reducing boilerplate.
+Another great example is [Melt UI](https://melt-ui.com/) which provides a custom [preprocessor](https://melt-ui.com/docs/preprocessor) to enhance the developer experience by reducing boilerplate.
 
 It takes the following code:
 
-```html:example.svelte showLineNumbers
+```html:example showLineNumbers
 <div use:melt={$root}>
   <button use:melt={$trigger}>...</button>
   <div use:melt={$content}>...</div>
@@ -41,7 +39,7 @@ It takes the following code:
 
 ...and transforms it to this:
 
-```html:example.svelte showLineNumbers
+```html:example showLineNumbers
 <div {...$root} use:$root.action>
   <button {...$trigger} use:$trigger.action>...</button>
   <div {...$content} use:$content.action>...</div>
@@ -61,9 +59,9 @@ The preprocessor includes `markup`, `script`, and `style` methods where the orde
 ```js:svelte.config.js {3-10,14} showLineNumbers
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
-function sveltePreprocessor() {
+function banana() {
   return {
-    name: 'sveltePreprocessor',
+    name: 'banana',
     markup({ content, filename }) {},
     script({ content, filename }) {},
     style({ content, filename }) {},
@@ -72,35 +70,35 @@ function sveltePreprocessor() {
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [vitePreprocess(), sveltePreprocessor()],
+	preprocess: [vitePreprocess(), banana()],
   // ...
 }
 
 export default config
 ```
 
-Keep in mind when you make changes to restart the Vite development server.
+You can name your preprocessor however you want, but keep in mind when you make changes to restart the Vite development server to see updates.
 
 ## Emoji Preprocessor
 
-Ever dreamed about using emojis to name your variables in Svelte but are held back by outdated societal norms and limitations of JavaScript? 😔
+Ever dreamed about using emojis to name your variables in Svelte, but are held back by outdated societal norms and limitations of JavaScript? 😔
 
 ```html:example showLineNumbers
 <script>
-	let 🔥 = 'lit'
+	let 🔥 = 'fire'
 </script>
 
 {🔥}
 ```
 
-You can stop dreaming and make a preprocessor to improve the developer experience because a picture is worth a thousand words.
+You can stop dreaming, and make a preprocessor to improve the developer experience because a picture is worth a thousand words.
 
 ```js:svelte.config.js {3-9,13} showLineNumbers
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
-function sveltemoji() {
+function emoji() {
 	return {
-		name: 'sveltemoji',
+		name: 'emoji',
 		markup: ({ content }) => ({ code: content.replaceAll('🔥', 'fire') }),
 		script: ({ content }) => ({ code: content.replaceAll('🔥', 'fire') }),
 	}
@@ -108,7 +106,7 @@ function sveltemoji() {
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [vitePreprocess(), sveltemoji()],
+	preprocess: [vitePreprocess(), emoji()],
   // ...
 }
 
@@ -121,7 +119,7 @@ Congrats on writing your first preprocessor! 🥳
 
 For the Markdown preprocessor the only part we're interested in is the `markup` method to transform Markdown to HTML in the Svelte component.
 
-You can also specify a list of file extensions that should be treated as Svelte files — I encourage you to make up your own extensions like `.banana`.
+You can also specify a list of file extensions that should be treated as Svelte files — you can use any extension like `.banana` if you want but I'm going to use `.md` for Markdown.
 
 ```js:svelte.config.js {3} showLineNumbers
 /** @type {import('@sveltejs/kit').Config} */
@@ -147,7 +145,7 @@ The idea behind the Markdown preprocessor is to take a Svelte component with a m
 <Counter />
 ```
 
-..and convert it to HTML:
+...and convert it to HTML:
 
 ```html:+page.md showLineNumbers
 <script>
@@ -159,7 +157,7 @@ The idea behind the Markdown preprocessor is to take a Svelte component with a m
 <Counter />
 ```
 
-The only part left to do is figure out how to convert Markdown to HTML and replace the content.
+The only part left to do is convert Markdown to HTML and replace the content.
 
 ## Transforming Markdown To HTML
 
@@ -168,7 +166,7 @@ I'm going to use [unified](https://github.com/unifiedjs/unified) which is an eco
 - [remark](https://github.com/remarkjs/remark) (Markdown processor)
 - [rehype](https://github.com/rehypejs/rehype) (HTML processor)
 
-It's helpful but you don't have to understand how abstract syntax trees work because these plugins do the work for us.
+It's helpful but you don't have to understand how abstract syntax trees work — they're just a data structure that uses nodes to represent code.
 
 Create the `markdown` preprocessor inside `src/lib/markdown.js` to keep things organized.
 
@@ -184,10 +182,11 @@ async function markdownToHtml(string) {
 		unified()
 			// turn Markdown into mdast
 			.use(remarkParse)
-			// turn mdast (Markdown) into hast (HTML)
+			// turn Markdown (mdast) into HTML (hast)
 			.use(remarkRehype, { allowDangerousHtml: true })
-			// turn hast (HTML) into HTML string to render
+			// turn HTML (hast) into HTML string
 			.use(rehypeStringify, { allowDangerousHtml: true })
+			// process the string
 			.process(string)
 	)
 }
@@ -221,7 +220,43 @@ Here's how it works:
 
 - `markdown` only transforms `.md` files
 - `html` turns the Svelte component into an abstract syntax tree, so we get the `start`, and `end` point of the markup to `slice`
-- `markdownToHtml` takes the Markdown and transforms Markdown > mdast (Markdown AST) > hast (HTML AST) > HTML string to render
-- we replace `string` with the transformed `html`
+- `markdownToHtml` transforms the Markdown:
+  - Markdown > mdast (Markdown AST) > hast (HTML AST) > HTML string
+- replace the Markdown `string` with the transformed `html`
+
+The reason for using `allowDangerousHtml` is because otherwise it would strip out things like the `<script>` tag.
+
+Not only can we combine preprocessors, but you can also pass options to them if you want.
+
+```js:svelte.config.js {3-4,9} showLineNumbers
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
+
+import emoji from './src/lib/emoji.js'
+import markdown from './src/lib/markdown.js'
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+	extensions: ['.svelte', '.md'],
+	preprocess: [vitePreprocess(), emoji(), markdown()],
+	kit: {
+		adapter: adapter(),
+	},
+}
+
+export default config
+```
+
+The Markdown preprocessor should transform Markdown in your Svelte components to regular HTML.
+
+```html:+page.md showLineNumbers
+<script>
+	import Counter from './counter.svelte'
+	let 🔥 = 'Counter'
+</script>
+
+# {🔥}
+
+<Counter />
+```
 
 That's it! 😄
