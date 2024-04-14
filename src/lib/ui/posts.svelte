@@ -8,7 +8,7 @@
 
 	export let posts: Post[]
 
-	let views: Promise<Response>
+	let views: Record<string, { views: number }>
 
 	onMount(async () => {
 		views = await fetchJSON('/api/views')
@@ -35,7 +35,7 @@
 									{#await views}
 										⌛️
 									{:then views}
-										{formatNumber(views[post.slug].views)}
+										{formatNumber(views[post.slug]?.views)}
 									{/await}
 								{/if}
 							</span>
