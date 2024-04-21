@@ -14,13 +14,13 @@ category: svelte
 
 {% embed src="https://stackblitz.com/github/joysofcode/shiki-magic-move?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&view=preview&title=Shiki Magic Move" title="Shiki Magic Move" %}
 
-You can click on the example page to see the code block animate, and the source code is available on [GitHub](https://github.com/joysofcode/shiki-magic-move).
+You can click on the example on the page to activate the code block animation. You can find the [source code](https://github.com/joysofcode/shiki-magic-move) on GitHub.
 
-[Shiki](https://shiki.style/) is a powerful, modern JavaScript syntax highlighter. [Shiki Magic Move](https://shiki-magic-move.netlify.app/) is a low-level framework agnostic library for animating code blocks which uses Shiki for syntax highlighting — it has framework wrappers for Vue and React but in this post I'm going to show you how to make a Svelte wrapper.
+[Shiki](https://shiki.style/) is a powerful, modern JavaScript syntax highlighter. [Shiki Magic Move](https://shiki-magic-move.netlify.app/) is a low-level framework agnostic library for animating code blocks which uses Shiki for syntax highlighting — it has framework wrappers for Vue and React, but in this post I'm going to show you how to make a Svelte renderer.
 
-You can read [The Magic In Shiki Magic Move](https://antfu.me/posts/shiki-magic-move) if you want to understand how Shiki Magic Move works, but the gist of it is that it uses text diffing, and the [FLIP animation technique](https://www.youtube.com/watch?v=idD9DA9eR_A) to animate the changes.
+You can read [The Magic In Shiki Magic Move](https://antfu.me/posts/shiki-magic-move) if you want to understand how Shiki Magic Move works, but the gist is that it uses text diffing, and the [FLIP animation technique](https://www.youtube.com/watch?v=idD9DA9eR_A) to animate the changes.
 
-Huge thanks to [@antfu](https://twitter.com/antfu7) for not only creating Shiki Magic Move, but also completely rewriting Shiki for the modern JavaScript age to use ESM and run anywhere where JavaScript runs.
+Huge thanks to [@antfu](https://twitter.com/antfu7) for not only creating Shiki Magic Move, but also completely rewriting Shiki for the modern JavaScript age to use ESM, and run anywhere where JavaScript runs.
 
 ## Project Setup
 
@@ -45,7 +45,7 @@ src/
 
 You can find the [types](https://github.com/joysofcode/shiki-magic-move/blob/main/src/lib/types.ts) I use throughout the examples on GitHub.
 
-You could put everything inside a single file, but I'm going to mirror the [setup they use](https://github.com/shikijs/shiki-magic-move/tree/main/src/vue) for the other framework wrappers.
+You could put everything inside a single file, but I'm going to mirror the setup for other [framework renderers](https://github.com/shikijs/shiki-magic-move/tree/main/src/vue).
 
 ```ts:src/lib/index.ts showLineNumbers
 import ShikiMagicMove from './ShikiMagicMove.svelte'
@@ -143,7 +143,7 @@ Inside the `<ShikiMagicMove>` component we have to create the `machine` to token
 
 ## Shiki Magic Move Renderer Component
 
-Inside the `<ShikiMagicMoveRenderer>` component we have to render the `<pre>` tag, create the `MagicMoveRenderer`, and invoke `renderer.render` using the tokens to start the animation, which is going to rerun the `$effect` each time `tokens` update.
+Inside the `<ShikiMagicMoveRenderer>` component we have to render the `<pre>` tag, create the `MagicMoveRenderer`, and invoke the `render()` method using the tokens to start the animation, which is going to rerun the `$effect` each time `tokens` update.
 
 ```html:src/lib/ShikiMagicMoveRenderer.svelte {2,7-8,16,42,54} showLineNumbers
 <script lang="ts">
@@ -202,8 +202,8 @@ Inside the `<ShikiMagicMoveRenderer>` component we have to render the `<pre>` ta
 </pre>
 ```
 
-You can ignore the server-side rendering code because it only serves as a placeholder until the component is ready, and I only included it to match their example.
+The server-side rendering code is unimportant because it only serves as a placeholder until the component is ready, and I only included it for posterity.
 
-Now you have smoothly animated code blocks in Svelte, but you can use the same principles to make it work in the framework of your choice. You can watch the video on YouTube where I do everything from scratch, and spend more time explaining things.
+You can watch the video on YouTube where I do everything from scratch, and spend more time explaining things.
 
 That's it! 😄

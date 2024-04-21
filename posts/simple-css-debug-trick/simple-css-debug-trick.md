@@ -8,7 +8,7 @@ category: css
 
 {% youtube id="5nrMpCWkncc" title="Debug Your CSS" %}
 
-## Table Of Contents
+## Table of Contents
 
 ## The Outline Trick
 
@@ -55,7 +55,7 @@ javascript: (function () {
 
   const debugElement = headElement.querySelector('[debug-css]');
   if (debugElement) return debugElement.remove();
-  
+
   headElement.append(styleElement);
 })();
 ```
