@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
-	import { createPopover, melt } from '@melt-ui/svelte'
+	import { createDropdownMenu, melt } from '@melt-ui/svelte'
 	import { Cog } from '$lib/icons'
 	import { sounds } from '$lib/stores/sfx'
 
@@ -10,54 +10,24 @@
 	import Reset from './reset.svelte'
 
 	const {
-		elements: { trigger, content },
+		elements: { trigger, menu, arrow },
 		states: { open },
-	} = createPopover({
-		arrowSize: 16,
-		positioning: {
-			gutter: 20,
-		},
-	})
+	} = createDropdownMenu({ arrowSize: 16 })
 </script>
 
 <button
 	use:melt={$trigger}
 	on:click={() => $sounds.click()}
-	aria-label="Categories"
+	aria-label="Preferences"
 >
 	<Cog width={24} height={24} aria-hidden={true} />
 </button>
 
 {#if open}
-	<div
-		{...$content}
-		use:content
-		transition:fade={{ duration: 100 }}
-		class="content"
-	>
+	<div class="menu" use:melt={$menu} transition:fade={{ duration: 100 }}>
+		<div use:melt={$arrow} />
 		<div class="preferences">
-			<svg
-				width="24"
-				height="24"
-				class="arrow"
-				viewBox="0 0 24 24"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					id="inside"
-					d="M23 24H1L11.0909 1.98341C11.4474 1.20562 12.5526 1.20562 12.9091 1.98341L23 24Z"
-					fill="none"
-				/>
-				<path
-					id="outside"
-					d="M12.8944 1.78885L24 24H23L12.9021 2.88628C12.5396 2.12822 11.4604 2.12822 11.0979 2.88628L1 24H0L11.1056 1.78885C11.4741 1.05181 12.5259 1.0518 12.8944 1.78885Z"
-					fill="none"
-				/>
-			</svg>
-
 			<span class="title">Preferences</span>
-
 			<div class="options">
 				<Themes />
 				<Reading />
@@ -69,8 +39,14 @@
 {/if}
 
 <style>
-	.content {
+	.menu {
 		z-index: 20;
+
+		& [data-melt-dropdown-menu-arrow] {
+			background-image: var(--clr-menu-bg);
+			border-top: 1px solid var(--clr-menu-border);
+			border-left: 1px solid var(--clr-menu-border);
+		}
 	}
 
 	.preferences {
@@ -81,49 +57,46 @@
 		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-lg);
-	}
 
-	.preferences .title {
-		display: block;
-		padding-bottom: var(--spacing-24);
-		font-size: var(--font-24);
-		font-weight: 700;
-		line-height: 32px;
-		border-bottom: 1px solid var(--clr-menu-border);
-	}
-
-	.preferences .options {
-		font-weight: 500;
-		color: var(--clr-menu-text);
-	}
-
-	.preferences .options > :global(*) {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: var(--spacing-32);
-		padding: var(--spacing-24) 0;
-	}
-
-	.preferences .options > :global(*:not(:last-child)) {
-		border-bottom: 1px solid var(--clr-menu-border);
-	}
-
-	.preferences .options > :global(*:last-child) {
-		padding-bottom: 0;
-	}
-
-	.preferences .options span {
-		max-width: 180px;
-	}
-
-	@media (min-width: 480px) {
-		.preferences {
+		@media (width >= 480px) {
 			width: 420px;
 		}
 
-		.preferences .options > :global(*) {
-			gap: var(--spacing-64);
+		& .title {
+			display: block;
+			padding-bottom: var(--spacing-24);
+			font-size: var(--font-24);
+			font-weight: 700;
+			line-height: 32px;
+			border-bottom: 1px solid var(--clr-menu-border);
+		}
+
+		& .options {
+			color: var(--clr-menu-text);
+
+			& > * {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: var(--spacing-32);
+				padding: var(--spacing-24) 0;
+
+				@media (width >= 480px) {
+					gap: var(--spacing-64);
+				}
+			}
+
+			& > *:not(:last-child) {
+				border-bottom: 1px solid var(--clr-menu-border);
+			}
+
+			& > *:last-child {
+				padding-bottom: 0;
+			}
+
+			& span {
+				max-width: 180px;
+			}
 		}
 	}
 </style>

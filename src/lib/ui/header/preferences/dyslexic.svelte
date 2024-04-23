@@ -41,7 +41,7 @@
 			<span class="thumb" />
 		</button>
 
-		<input {...$input} use:input id="dyslexic-font" />
+		<input use:melt={$input} use:input id="dyslexic-font" />
 	</div>
 </form>
 

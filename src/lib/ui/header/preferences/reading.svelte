@@ -12,17 +12,17 @@
 
 	function handleFontSizeChange() {
 		localStorage.textSize = `${textSize}px`
-		rootElement.style.setProperty('--post-txt-size', `${textSize}px`)
+		rootElement?.style.setProperty('--post-txt-size', `${textSize}px`)
 	}
 
 	function handleTextLengthChange() {
 		localStorage.textLength = `${textLength}ch`
-		rootElement.style.setProperty('--post-txt-length', `${textLength}ch`)
+		rootElement?.style.setProperty('--post-txt-length', `${textLength}ch`)
 	}
 
 	function handleTextHeightChange() {
 		localStorage.textHeight = `${textHeight}px`
-		rootElement.style.setProperty('--post-txt-height', `${textHeight}px`)
+		rootElement?.style.setProperty('--post-txt-height', `${textHeight}px`)
 	}
 </script>
 

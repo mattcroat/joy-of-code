@@ -1,16 +1,9 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition'
+	import { createSelect, melt } from '@melt-ui/svelte'
 	import { browser } from '$app/environment'
 
 	type Themes = { name: keyof typeof themes }
-
-	const themes = {
-		'🌛 Night': { name: '🌛 Night' },
-		'☀️ Daylight': { name: '☀️ Daylight' },
-		'🐺 Night Howl': { name: '🐺 Night Howl' },
-		'🧠 Night Mind': { name: '🧠 Night Mind' },
-	} as const
-
-	let selectedTheme = getTheme() ?? themes['🌛 Night']
 
 	function getTheme() {
 		if (!browser) return
@@ -49,41 +42,67 @@
 		return themes[userTheme]
 	}
 
-	function updateTheme(selectedTheme: Themes) {
-		if (browser) {
-			const htmlElement = document.documentElement
-			htmlElement.dataset.theme = selectedTheme.name
-			localStorage.theme = selectedTheme.name
-		}
+	function updateTheme(theme: string) {
+		if (!browser || !theme) return
+		const htmlElement = document.documentElement
+		htmlElement.dataset.theme = theme
+		localStorage.theme = theme
 	}
 
-	$: updateTheme(selectedTheme)
+	const themes = {
+		'🌛 Night': { name: '🌛 Night' },
+		'☀️ Daylight': { name: '☀️ Daylight' },
+		'🐺 Night Howl': { name: '🐺 Night Howl' },
+		'🧠 Night Mind': { name: '🧠 Night Mind' },
+	} as const
+
+	const selectedTheme = getTheme() ?? themes['🌛 Night']
+
+	const {
+		elements: { trigger, menu, option, label },
+		states: { open, selectedLabel },
+	} = createSelect()
+
+	$: updateTheme($selectedLabel)
 </script>
 
-<div>
-	<label for="theme">Theme</label>
-	<select bind:value={selectedTheme.name} name="theme" id="theme">
-		{#each Object.entries(themes) as [key, theme] (key)}
-			<option value={theme.name}>{theme.name}</option>
-		{/each}
-	</select>
+<div class="select">
+	<!-- svelte-ignore a11y-label-has-associated-control -->
+	<label use:melt={$label}>Theme</label>
+	<button use:melt={$trigger} class="trigger" aria-label="Theme">
+		{$selectedLabel || selectedTheme.name}
+	</button>
+	{#if $open}
+		<div use:melt={$menu} class="menu" transition:fade={{ duration: 100 }}>
+			{#each Object.entries(themes) as [key, theme] (key)}
+				<div use:melt={$option({ value: theme.name, label: theme.name })}>
+					{theme.name}
+				</div>
+			{/each}
+		</div>
+	{/if}
 </div>
 
 <style>
-	select {
-		padding: var(--spacing-16) var(--spacing-24);
-		font-weight: 700;
-		background-color: var(--clr-primary);
-		color: var(--clr-theme-txt);
-		border-radius: var(--rounded-4);
-		box-shadow: var(--shadow-sm);
+	.select {
+		& :where(.trigger, .menu) {
+			background-color: var(--clr-primary);
+			color: var(--clr-theme-txt);
+			border-radius: var(--rounded-4);
+			box-shadow: var(--shadow-sm);
+		}
 
-		& option {
-			font-weight: inherit;
+		& .trigger {
+			width: 180px;
+			padding: var(--spacing-16) var(--spacing-24);
+			font-weight: 700;
+		}
 
-			&:hover {
-				background-color: var(--clr-theme-active);
-			}
+		& .menu {
+			display: grid;
+			gap: var(--spacing-24);
+			padding: var(--spacing-16);
+			font-weight: 500;
 		}
 	}
 </style>
