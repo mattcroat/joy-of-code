@@ -149,6 +149,10 @@
 			display: block;
 			font-size: var(--font-24);
 		}
+
+		& mark {
+			background-color: var(--clr-primary);
+		}
 	}
 
 	.open-search {
