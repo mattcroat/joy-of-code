@@ -2,13 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import matter from 'gray-matter'
 import { markdownToHTML } from './markdown'
-import type { Fetch, Post } from '$lib/types'
-
-export async function fetchJSON(url: string, fetchFn: Fetch = fetch) {
-	const response = await fetchFn(url)
-	if (!response.ok) throw new Error(`Error fetching JSON from ${response.url}`)
-	return await response.json()
-}
+import type { Post } from '$lib/types'
 
 async function parseMarkdownFiles() {
 	try {

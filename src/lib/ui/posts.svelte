@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
-	import { fetchJSON } from '$lib/site/posts'
+	import { fetchJSON } from '$lib/utils'
 	import { formatNumber } from '$lib/utils'
 	import { Eye } from '$lib/icons'
 	import type { Post } from '$lib/types'

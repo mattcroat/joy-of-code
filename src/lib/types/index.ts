@@ -24,3 +24,5 @@ export type Fetch = (
 ) => Promise<Response>
 
 export type Categories = keyof typeof config.categories
+
+export type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
