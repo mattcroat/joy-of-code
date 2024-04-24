@@ -82,7 +82,7 @@ async function parseMarkdown(text: string, slug: string) {
 	return processor.value
 }
 
-export async function markdownToHTML(text: string) {
+export async function markdownToHtml(text: string) {
 	const { content, data } = matter(text)
 
 	return {

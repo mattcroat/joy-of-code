@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import matter from 'gray-matter'
-import { markdownToHTML } from './markdown'
+import { markdownToHtml } from './markdown'
 import type { Post } from '$lib/types'
 
 async function parseMarkdownFiles() {
@@ -27,7 +27,7 @@ async function parseMarkdownFile(slug: string) {
 	try {
 		const postPath = path.resolve(`posts/${slug}/${slug}.md`)
 		const markdownContent = await fs.readFile(postPath, 'utf-8')
-		return markdownToHTML(markdownContent)
+		return markdownToHtml(markdownContent)
 	} catch (e) {
 		throw new Error(`Could not parse ${slug}.md`)
 	}
