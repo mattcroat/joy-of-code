@@ -1,5 +1,5 @@
-import fs from 'fs/promises'
-import path from 'path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 import matter from 'gray-matter'
 import { markdownToHTML } from './markdown'
 import type { Fetch, Post } from '$lib/types'
@@ -20,7 +20,6 @@ async function parseMarkdownFiles() {
 			const markdownFilePath = path.join(postsPath, folder, `${folder}.md`)
 			const markdownContent = await fs.readFile(markdownFilePath, 'utf-8')
 			const { data } = matter(markdownContent)
-
 			posts.push(data as Post)
 		}
 
@@ -40,16 +39,15 @@ async function parseMarkdownFile(slug: string) {
 	}
 }
 
+function getTime(date: string) {
+	return new Date(date).getTime()
+}
+
 export async function getPosts() {
 	let posts = await parseMarkdownFiles()
-
-	posts = posts.sort((firstItem, secondItem) => {
-		return (
-			new Date(secondItem.published).getTime() -
-			new Date(firstItem.published).getTime()
-		)
+	posts = posts.sort((first, second) => {
+		return getTime(second.published) - getTime(first.published)
 	})
-
 	return posts
 }
 
