@@ -15,11 +15,6 @@ import { rehypeCopyCode, rehypeUnwrapImages } from './plugins'
 import * as config from './config'
 import type { Frontmatter } from '$lib/types'
 
-type ContentType = {
-	content: string
-	frontmatter: Frontmatter
-}
-
 function searchAndReplace(content: string, slug: string) {
 	const embed = /{% embed src="(.*?)" title="(.*?)" %}/g
 	const video = /{% video src="(.*?)" %}/g
