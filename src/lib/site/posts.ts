@@ -1,14 +1,8 @@
-import fs from 'fs/promises'
-import path from 'path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 import matter from 'gray-matter'
-import { markdownToHTML } from './markdown'
-import type { Fetch, Post } from '$lib/types'
-
-export async function fetchJSON(url: string, fetchFn: Fetch = fetch) {
-	const response = await fetchFn(url)
-	if (!response.ok) throw new Error(`Error fetching JSON from ${response.url}`)
-	return await response.json()
-}
+import { markdownToHtml } from './markdown'
+import type { Post } from '$lib/types'
 
 async function parseMarkdownFiles() {
 	try {
@@ -20,7 +14,6 @@ async function parseMarkdownFiles() {
 			const markdownFilePath = path.join(postsPath, folder, `${folder}.md`)
 			const markdownContent = await fs.readFile(markdownFilePath, 'utf-8')
 			const { data } = matter(markdownContent)
-
 			posts.push(data as Post)
 		}
 
@@ -34,22 +27,21 @@ async function parseMarkdownFile(slug: string) {
 	try {
 		const postPath = path.resolve(`posts/${slug}/${slug}.md`)
 		const markdownContent = await fs.readFile(postPath, 'utf-8')
-		return markdownToHTML(markdownContent)
+		return markdownToHtml(markdownContent)
 	} catch (e) {
 		throw new Error(`Could not parse ${slug}.md`)
 	}
 }
 
+function getTime(date: string) {
+	return new Date(date).getTime()
+}
+
 export async function getPosts() {
 	let posts = await parseMarkdownFiles()
-
-	posts = posts.sort((firstItem, secondItem) => {
-		return (
-			new Date(secondItem.published).getTime() -
-			new Date(firstItem.published).getTime()
-		)
+	posts = posts.sort((first, second) => {
+		return getTime(second.published) - getTime(first.published)
 	})
-
 	return posts
 }
 
