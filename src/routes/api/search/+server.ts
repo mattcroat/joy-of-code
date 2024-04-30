@@ -1,6 +1,8 @@
 import { json } from '@sveltejs/kit'
 import matter from 'gray-matter'
 
+export const prerender = true
+
 const patterns: Record<string, RegExp> = {
 	frontmatter: /---.*?---/gs,
 	code: /```.*?\n|```/gs,
@@ -66,5 +68,3 @@ export async function GET() {
 
 	return json(posts)
 }
-
-export const prerender = true

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
 	import { browser } from '$app/environment'
 	import { createDialog, melt } from '@melt-ui/svelte'
@@ -19,7 +18,9 @@
 	let results: Result[] = []
 	let searchWorker: Worker
 
-	onMount(() => {
+	function initialize() {
+		if (search === 'ready') return
+		search = 'load'
 		searchWorker = new SearchWorker()
 		searchWorker.addEventListener('message', (e) => {
 			const { type, payload } = e.data
@@ -27,7 +28,7 @@
 			type === 'results' && (results = payload.results)
 		})
 		searchWorker.postMessage({ type: 'load' })
-	})
+	}
 
 	onNavigate(() => {
 		$open = false
@@ -40,6 +41,8 @@
 	$: if (searchTerm && !$open) {
 		searchTerm = ''
 	}
+
+	$: console.log(search)
 </script>
 
 <svelte:window
@@ -53,6 +56,14 @@
 	}}
 />
 
+<button use:melt={$trigger} on:click={initialize} class="open-search">
+	<SearchIcon />
+	<span>Search</span>
+	<div class="shortcut">
+		<kbd>{platform === 'MacIntel' ? '⌘' : 'Ctrl'}</kbd> + <kbd>K</kbd>
+	</div>
+</button>
+
 <div use:melt={$portalled}>
 	{#if $open}
 		<div in:fade={{ duration: 200 }} use:melt={$overlay} class="overlay" />
@@ -65,6 +76,10 @@
 				type="search"
 			/>
 			<div class="results">
+				{#if search === 'load'}
+					<p>Loading...</p>
+				{/if}
+
 				{#if results}
 					<ul>
 						{#each results as result}
@@ -85,14 +100,6 @@
 		</div>
 	{/if}
 </div>
-
-<button use:melt={$trigger} class="open-search">
-	<SearchIcon />
-	<span>Search</span>
-	<div class="shortcut">
-		<kbd>{platform === 'MacIntel' ? '⌘' : 'Ctrl'}</kbd> + <kbd>K</kbd>
-	</div>
-</button>
 
 <style>
 	.overlay {
