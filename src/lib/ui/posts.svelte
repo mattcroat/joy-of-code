@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	// import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
-	import { fetchJSON } from '$lib/utils'
-	import { formatNumber } from '$lib/utils'
+	// import { fetchJSON } from '$lib/utils'
+	// import { formatNumber } from '$lib/utils'
 	import { Eye } from '$lib/icons'
 	import type { Post } from '$lib/types'
 
 	export let posts: Post[]
 
-	let views: Record<string, { views: number }>
+	// let views: Record<string, { views: number }>
 
-	onMount(async () => {
-		views = await fetchJSON('/api/views')
-	})
+	// onMount(async () => {
+	// 	views = await fetchJSON('/api/views')
+	// })
 </script>
 
 <section>
@@ -30,7 +30,7 @@
 					<article class="card">
 						<span class="views">
 							<Eye width={24} height={24} aria-hidden={true} />
-							<span>
+							<!-- <span>
 								{#if views}
 									{#await views}
 										⌛️
@@ -38,7 +38,7 @@
 										{formatNumber(views[post.slug]?.views)}
 									{/await}
 								{/if}
-							</span>
+							</span> -->
 						</span>
 
 						<div class="details">
