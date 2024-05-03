@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { browser, dev } from '$app/environment'
-
-	import { updateViews } from '$lib/database'
 	import { formatDate } from '$lib/utils'
 	import * as config from '$lib/site/config'
 
@@ -14,10 +11,6 @@
 
 	let editUrl = `${config.fileUrl}/${data.frontmatter.slug}/${data.frontmatter.slug}.md`
 	let image = `${config.postImage}${encodeURIComponent(data.frontmatter.title)}.png`
-
-	if (!dev && browser) {
-		updateViews(data.frontmatter.slug)
-	}
 </script>
 
 <svelte:head>

@@ -41,8 +41,6 @@
 	$: if (searchTerm && !$open) {
 		searchTerm = ''
 	}
-
-	$: console.log(search)
 </script>
 
 <svelte:window
