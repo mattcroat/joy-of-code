@@ -37,14 +37,15 @@
 		max-inline-size: 1200px;
 		display: grid;
 		grid-template-rows: 1fr auto;
-		column-gap: var(--spacing-24);
+		gap: var(--spacing-24);
 		margin-inline: auto;
-		padding: 0 var(--spacing-16);
-	}
 
-	@media (min-width: 1240px) {
-		.layout {
-			padding: 0;
+		@media (width >= 300px) {
+			padding: 0px var(--spacing-16);
+		}
+
+		@media (min-width: 1240px) {
+			padding: 0px;
 		}
 	}
 </style>

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 	import Heading from '$lib/ui/heading.svelte'
-	import { PencilSquare } from '$lib/icons'
 
 	export let data
 </script>
@@ -31,10 +30,6 @@
 			>
 				<a href="/drafts/{post.slug}">
 					<article class="card">
-						<span class="views">
-							<PencilSquare width={24} height={24} aria-hidden={true} /> Draft
-						</span>
-
 						<div class="details">
 							<span class="title">{post.title}</span>
 							<p class="description">{post.description}</p>
@@ -50,40 +45,37 @@
 	.container {
 		display: flex;
 		justify-content: space-between;
-	}
 
-	.results {
-		font-weight: 700;
+		& .results {
+			font-weight: 700;
+		}
 	}
-
 	section {
 		margin-top: var(--spacing-64);
 	}
 
 	.cards {
 		display: grid;
-		gap: var(--spacing-24);
+		gap: var(--spacing-32);
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		margin-top: var(--spacing-32);
-	}
 
-	.cards a {
-		display: block;
-		color: inherit;
-		font-weight: inherit;
-		text-decoration: none;
-		transition: color 0.3s ease;
-	}
+		& a {
+			display: block;
+			color: inherit;
+			font-weight: inherit;
+			text-decoration: none;
+			transition: color 0.3s ease;
 
-	.cards a::before {
-		content: none;
+			&::before {
+				content: none;
+			}
+		}
 	}
 
 	.card {
-		height: 480px;
-		display: grid;
-		grid-template-rows: min-content;
-		padding: var(--spacing-16);
+		height: 420px;
+		padding: var(--spacing-32);
 		background-image: var(--clr-card-bg);
 		border-top: 1px solid var(--clr-menu-border);
 		border-left: 1px solid var(--clr-menu-border);
@@ -93,44 +85,38 @@
 			transform 0.2s ease-in-out,
 			box-shadow 0.3s ease,
 			outline 0.1s ease;
-		transform: translateZ(0);
-	}
 
-	.card:hover {
-		transform: scale(1.02);
-		box-shadow:
-			var(--shadow-md),
-			0 0 0 4px var(--clr-primary);
-	}
+		&:hover {
+			transform: scale(1.02);
+			box-shadow:
+				var(--shadow-md),
+				0 0 0 4px var(--clr-primary);
+		}
 
-	.card .views {
-		display: flex;
-		align-items: center;
-		gap: var(--spacing-4);
-		font-weight: 500;
-		color: var(--clr-card-txt);
-	}
+		& .details {
+			height: 100%;
+			display: grid;
+		}
 
-	.card .details {
-		align-self: end;
-	}
+		& .title {
+			font-family: var(--font-sans);
+			font-size: clamp(var(--font-24), 4vw, var(--font-32));
+			font-weight: 700;
+			line-height: 40px;
+			text-transform: capitalize;
+			text-wrap: balance;
+		}
 
-	.card .title {
-		font-family: var(font-sans);
-		font-size: var(--font-32);
-		font-weight: 700;
-		line-height: 48px;
-		text-transform: capitalize;
+		& .description {
+			margin-top: var(--spacing-8);
+			color: var(--clr-card-txt);
+			align-self: end;
+		}
 	}
 
 	html[data-font='dyslexic'] .card .title {
 		font-family: var(--font-dyslexic);
 		font-size: var(--font-24);
 		line-height: 32px;
-	}
-
-	.card .description {
-		margin-top: var(--spacing-8);
-		color: var(--clr-card-txt);
 	}
 </style>
