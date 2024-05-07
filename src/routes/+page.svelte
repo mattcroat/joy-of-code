@@ -72,73 +72,75 @@
 		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-sm);
-	}
 
-	.latest-post .kicker {
-		font-weight: 500;
-		color: var(--clr-hero-txt);
-	}
-
-	.latest-post .title {
-		padding: var(--spacing-8) 0 var(--spacing-16) 0;
-		font-size: clamp(var(--font-24), 4vw, var(--font-32));
-		color: var(--clr-primary);
-	}
-
-	.latest-post .description {
-		color: var(--clr-hero-txt);
-	}
-
-	.latest-post .continue-reading {
-		width: max-content;
-		display: flex;
-		align-items: center;
-		margin-top: var(--spacing-32);
-	}
-
-	.latest-post a {
-		display: flex;
-		gap: var(--spacing-16);
-	}
-
-	.divider {
-		border-bottom: 1px solid var(--clr-hero-divider-bg);
-		margin: var(--spacing-32) 0;
-	}
-
-	.newsletter p {
-		color: var(--clr-hero-txt);
-	}
-
-	.newsletter h2 {
-		font-size: var(--font-24);
-		line-height: 32px;
-	}
-
-	@media (min-width: 860px) {
-		.hero {
+		@media (width >= 860px) {
 			display: grid;
 			grid-template-columns: repeat(12, [column-start] 1fr);
 			column-gap: var(--spacing-24);
 		}
 
-		.latest-post {
+		& .divider {
+			border-bottom: 1px solid var(--clr-hero-divider-bg);
+			margin: var(--spacing-32) 0;
+
+			@media (width >= 860px) {
+				grid-column: column-start 7 / span 1;
+				justify-self: center;
+				margin: 0;
+				border-left: 1px solid var(--clr-hero-divider-bg);
+				border-bottom: none;
+			}
+		}
+	}
+
+	.latest-post {
+		@media (width >= 860px) {
 			grid-column: column-start 2 / span 4;
 		}
 
-		.divider {
-			grid-column: column-start 7 / span 1;
-			justify-self: center;
-			margin: 0;
-			border-left: 1px solid var(--clr-hero-divider-bg);
-			border-bottom: none;
+		& .kicker {
+			font-weight: 500;
+			color: var(--clr-hero-txt);
 		}
 
-		.newsletter {
+		& .title {
+			padding: var(--spacing-8) 0 var(--spacing-16) 0;
+			font-size: clamp(var(--font-24), 4vw, var(--font-32));
+			color: var(--clr-primary);
+		}
+
+		& .description {
+			color: var(--clr-hero-txt);
+		}
+
+		& .continue-reading {
+			width: max-content;
+			display: flex;
+			align-items: center;
+			margin-top: var(--spacing-32);
+		}
+
+		& a {
+			display: flex;
+			gap: var(--spacing-16);
+		}
+	}
+
+	.newsletter {
+		@media (width >= 860px) {
 			display: grid;
 			place-content: center;
 			grid-auto-rows: min-content;
 			grid-column: column-start 8 / span 4;
+		}
+
+		& p {
+			color: var(--clr-hero-txt);
+		}
+
+		& h2 {
+			font-size: var(--font-24);
+			line-height: 32px;
 		}
 	}
 </style>

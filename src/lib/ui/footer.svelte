@@ -44,105 +44,48 @@
 			</li>
 		</ul>
 	</div>
-
-	<figure>
-		<blockquote>
-			<span>
-				“Talent is a pursued interest. Anything that you're willing to practice,
-				you can do.”
-			</span>
-		</blockquote>
-		<figcaption>— Bob Ross</figcaption>
-	</figure>
 </footer>
 
 <style>
 	footer {
-		display: grid;
-		grid-template-columns: repeat(12, [column-start] 1fr);
-		column-gap: var(--spacing-24);
-		row-gap: var(--spacing-32);
-		margin-top: var(--spacing-64);
+		--gap: var(--spacing-64);
+
+		display: flex;
+		flex-direction: column;
+		gap: var(--gap);
+		margin-block-start: var(--spacing-64);
 		padding: var(--spacing-32);
 		background-color: var(--clr-footer-bg);
 		border-top: 1px solid var(--clr-menu-border);
 		border-left: 1px solid var(--clr-menu-border);
-		border-radius: var(--rounded-20) var(--rounded-20) 0 0;
-	}
+		border-radius: var(--rounded-20) var(--rounded-20) 0px 0px;
 
-	footer > * {
-		grid-column: column-start 1 / span 12;
-	}
-
-	footer p {
-		font-weight: 700;
-	}
-
-	footer ul {
-		width: max-content;
-		display: grid;
-		grid-template-rows: repeat(5, 1fr);
-		grid-auto-flow: column;
-		column-gap: var(--spacing-32);
-		row-gap: var(--spacing-16);
-		margin-top: var(--spacing-16);
-	}
-
-	footer li a {
-		font-weight: inherit;
-		color: var(--clr-footer-txt);
-	}
-
-	footer li a:hover {
-		color: var(--clr-primary);
-	}
-
-	footer figure {
-		max-width: 400px;
-		display: grid;
-		align-items: center;
-		justify-self: center;
-	}
-
-	footer blockquote {
-		font-size: clamp(var(--font-24), 3vw, var(--font-32));
-		font-family: var(--font-sans);
-		color: var(--clr-card-txt);
-		text-shadow: 2px 2px 10px hsl(0 0% 0% / 10%);
-	}
-
-	html[data-font='dyslexic'] footer blockquote {
-		font-family: var(--font-dyslexic);
-		font-size: var(--font-24);
-		line-height: 32px;
-	}
-
-	footer figcaption {
-		align-self: end;
-	}
-
-	@media (min-width: 860px) {
-		footer figure {
-			grid-column: column-start 9 / -1;
+		@media (width >= 600px) {
+			--gap: var(--spacing-128);
+			flex-direction: row;
 		}
 
-		footer .categories {
-			grid-column: column-start 1 / span 4;
+		& p {
+			font-weight: 700;
 		}
 
-		footer .follow {
-			grid-column: column-start 5 / span 2;
+		& ul {
+			width: max-content;
+			display: grid;
+			grid-template-rows: repeat(5, 1fr);
+			grid-auto-flow: column;
+			column-gap: var(--spacing-32);
+			row-gap: var(--spacing-16);
+			margin-top: var(--spacing-16);
 		}
 
-		footer .other {
-			grid-column: column-start 7 / span 2;
-		}
-	}
+		& li a {
+			font-weight: inherit;
+			color: var(--clr-footer-txt);
 
-	@media (min-width: 1240px) {
-		footer ul {
-			width: auto;
-			column-gap: 0;
+			& a:hover {
+				color: var(--clr-primary);
+			}
 		}
 	}
 </style>
