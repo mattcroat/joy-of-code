@@ -46,11 +46,6 @@
 		<div class="newsletter">
 			<h2>Subscribe for updates</h2>
 			<Newsletter />
-			<p>
-				Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a>
-				or
-				<a href={config.twitter} target="_blank" rel="noreferrer">Twitter</a> instead.
-			</p>
 		</div>
 	</section>
 
@@ -132,10 +127,6 @@
 			place-content: center;
 			grid-auto-rows: min-content;
 			grid-column: column-start 8 / span 4;
-		}
-
-		& p {
-			color: var(--clr-hero-txt);
 		}
 
 		& h2 {

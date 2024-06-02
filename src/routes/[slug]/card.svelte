@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Newsletter from '$lib/ui/newsletter.svelte'
 	import { ArrowRight, Envelope, PencilSquare, Heart } from '$lib/icons'
-	import * as config from '$lib/site/config'
 
 	export let preset: 'support' | 'edit' | 'newsletter'
 	export let editUrl = ''
@@ -53,10 +52,6 @@
 		</div>
 		<span class="title">Subscribe For Updates</span>
 		<Newsletter />
-		<span class="subscribe">
-			Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a> or
-			<a href={config.twitter} target="_blank" rel="noreferrer">Twitter</a> instead.
-		</span>
 	</div>
 {/if}
 

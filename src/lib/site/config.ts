@@ -7,8 +7,8 @@ export const siteImage = `${siteUrl}social.png`
 export const postImage = 'https://social-share-images.vercel.app/'
 
 export const twitterHandle = '@joyofcodedev'
-export const twitter = 'https://twitter.com/joyofcodedev'
-export const youtube = 'https://www.youtube.com/c/joyofcodedev'
+export const twitter = 'https://x.com/joyofcodedev'
+export const youtube = 'https://www.youtube.com/@joyofcodedev'
 export const github = 'https://github.com/mattcroat'
 export const uses = 'https://github.com/mattcroat/uses'
 

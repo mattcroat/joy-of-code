@@ -1860,8 +1860,6 @@ The `max-age` response directive informs the browser to not cache the page and `
 
 The `load` function in your page also has a [maxage](https://kit.svelte.dev/docs/loading#output-maxage) option you can set.
 
-</blockquote>
-
 ## Compose Tweet
 
 In this section you're going to learn how to add a tweet using the **POST** request.

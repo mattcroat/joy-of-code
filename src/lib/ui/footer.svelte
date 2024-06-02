@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+	import { GitHub, Mail, RSS, X, YouTube } from '$lib/icons'
 	import * as config from '$lib/site/config'
 </script>
 
@@ -18,19 +19,34 @@
 		<p>Follow</p>
 		<ul>
 			<li>
-				<a href="/newsletter">Newsletter</a>
+				<a href="/newsletter">
+					<Mail width={20} height={20} aria-hidden={true} />
+					<span>Newsletter</span>
+				</a>
 			</li>
 			<li>
-				<a href="/rss.xml" target="_blank">RSS</a>
+				<a href="/rss.xml" target="_blank">
+					<RSS width={20} height={20} aria-hidden={true} />
+					<span>RSS</span>
+				</a>
 			</li>
 			<li>
-				<a href={config.youtube} target="_blank" rel="noreferrer">YouTube</a>
+				<a href={config.youtube} target="_blank" rel="noreferrer">
+					<YouTube width={20} height={20} aria-hidden={true} />
+					<span>YouTube</span>
+				</a>
 			</li>
 			<li>
-				<a href={config.twitter} target="_blank" rel="noreferrer">Twitter</a>
+				<a href={config.twitter} target="_blank" rel="noreferrer">
+					<X width={20} height={20} aria-hidden={true} />
+					<span>Twitter</span>
+				</a>
 			</li>
 			<li>
-				<a href={config.github} target="_blank" rel="noreferrer">GitHub</a>
+				<a href={config.github} target="_blank" rel="noreferrer">
+					<GitHub width={20} height={20} aria-hidden={true} />
+					<span>GitHub</span>
+				</a>
 			</li>
 		</ul>
 	</div>
@@ -77,6 +93,12 @@
 			column-gap: var(--spacing-32);
 			row-gap: var(--spacing-16);
 			margin-top: var(--spacing-16);
+
+			& li a {
+				display: flex;
+				align-items: center;
+				gap: var(--spacing-8);
+			}
 		}
 
 		& li a {
