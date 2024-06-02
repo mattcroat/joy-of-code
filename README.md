@@ -10,7 +10,6 @@
 
 ## ▶️ YouTube ![YouTube Subscribers](https://img.shields.io/youtube/channel/subscribers/UC6wpjLSLn2dhlaDjn6_V0rw)
 
-
 You can find my videos on [YouTube](https://www.youtube.com/@joyofcodedev).
 
 ## 🙏 Support
@@ -27,13 +26,7 @@ At the end of each post there's a direct link to the **Markdown** file of the po
 
 - The project is hosted on [Vercel](https://vercel.com/)
 
-- The tests use [Playwright](https://playwright.dev/) for end-to-end testing and [Vitest](https://vitest.dev/) for unit tests
-
 - I use [Buttondown](https://buttondown.email/) for the newsletter when I remember to send one 🤭
-
-- I'm using [Supabase](https://supabase.com/) to track post views
-
-- I use [social-share-images](https://github.com/mattcroat/social-share-images) to create dynamic social share images (I plan on using `@vercel/og` instead)
 
 ## 📜 Setup
 
@@ -52,10 +45,6 @@ git clone https://github.com/mattcroat/joy-of-code.git
 ```text
 # Private
 BUTTONDOWN_API_KEY=API_KEY
-
-# Public
-PUBLIC_SUPABASE_ANON_KEY=SUPABASE_KEY
-PUBLIC_SUPABASE_URL=SUPABASE_URL
 ```
 
 ### 📦️ Install the dependencies

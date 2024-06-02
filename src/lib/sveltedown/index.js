@@ -2,7 +2,6 @@ import matter from 'gray-matter'
 import { unified } from 'unified'
 import toMarkdownAST from 'remark-parse'
 import toHtmlAST from 'remark-rehype'
-// import parseHtmlAndMarkdown from 'rehype-raw'
 import toHtmlString from 'rehype-stringify'
 import remarkGfm from 'remark-gfm'
 import remarkSmartypants from 'remark-smartypants'
@@ -87,7 +86,6 @@ async function parseMarkdown(content, slug) {
 		.use([rehypeSlug, rehypeAutolinkHeadings])
 		.use(rehypeCodeTitles)
 		.use(rehypePrism)
-		// .use(parseHtmlAndMarkdown)
 		.use(rehypeUnwrapImages)
 		.use(rehypeCopyCode)
 		.use(toHtmlString, { allowDangerousHtml: true })
@@ -100,8 +98,6 @@ async function parseMarkdown(content, slug) {
  * @param {string} content
  */
 function escapeHtml(content) {
-	// return content.replaceAll('{', '&#123;').replaceAll('}', '&#125;')
-
 	content = content.replace(/{/g, '&#123;').replace(/}/g, '&#125;')
 
 	const componentRegex = /<[A-Z].*/g
