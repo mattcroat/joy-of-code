@@ -129,9 +129,9 @@ function frontmatter(content) {
  * Markdown to HTML before it's compiled by Svelte
  * so we can use Svelte components inside Markdown.
  */
-function sveltedown() {
+function markdown() {
 	return {
-		name: 'sveltedown',
+		name: 'markdown',
 		/**
 		 * Convert Markdown to HTML.
 		 * @param {Object} params
@@ -150,4 +150,4 @@ function sveltedown() {
 	}
 }
 
-export default sveltedown
+export default markdown
