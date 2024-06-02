@@ -1,12 +1,12 @@
 import adapter from '@sveltejs/adapter-vercel'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { sequence, preprocessMeltUI } from '@melt-ui/pp'
-import sveltemark from './src/lib/preprocessor/index.js'
+import sveltedown from './src/lib/sveltedown/index.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
-	preprocess: sequence([sveltemark(), vitePreprocess(), preprocessMeltUI()]),
+	preprocess: sequence([sveltedown(), vitePreprocess(), preprocessMeltUI()]),
 	kit: {
 		adapter: adapter(),
 	},

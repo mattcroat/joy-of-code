@@ -19,7 +19,7 @@ const images = `https://raw.githubusercontent.com/mattcroat/joy-of-code/main/pos
  * Returns post slug.
  * @param {string} filename
  */
-function slugFromFilename(filename) {
+function getSlug(filename) {
 	return filename.split('/').at(-1)?.replace('.md', '') ?? ''
 }
 
@@ -29,14 +29,12 @@ function slugFromFilename(filename) {
  * @param {string} slug
  */
 function searchAndReplace(content, slug) {
-	const frontmatter = /^---\n.*?\n---/s
 	const embed = /{% embed src="(.*?)" title="(.*?)" %}/g
 	const video = /{% video src="(.*?)" %}/g
 	const image = /{% img src="(.*?)" alt="(.*?)" %}/g
 	const youtube = /{% youtube id="(.*?)" title="(.*?)" %}/g
 
 	return content
-		.replace(frontmatter, '')
 		.replace(embed, (_, src, title) => {
 			return `
         <iframe
@@ -74,10 +72,10 @@ function searchAndReplace(content, slug) {
 
 /**
  * Markdown preprocessor.
- * @param {string} text
+ * @param {string} content
  * @param {string} slug
  */
-async function parseMarkdown(text, slug) {
+async function parseMarkdown(content, slug) {
 	const processor = await unified()
 		.use(toMarkdownAST)
 		.use([
@@ -93,7 +91,7 @@ async function parseMarkdown(text, slug) {
 		.use(rehypeUnwrapImages)
 		.use(rehypeCopyCode)
 		.use(toHtmlString, { allowDangerousHtml: true })
-		.process(searchAndReplace(text, slug))
+		.process(searchAndReplace(content, slug))
 	return processor.toString()
 }
 
@@ -101,8 +99,19 @@ async function parseMarkdown(text, slug) {
  * Replace special Svelte characters.
  * @param {string} content
  */
-function replaceSpecialSvelteChars(content) {
-	return content.replaceAll('{', '&#123;').replaceAll('}', '&#125;')
+function escapeHtml(content) {
+	// return content.replaceAll('{', '&#123;').replaceAll('}', '&#125;')
+
+	content = content.replace(/{/g, '&#123;').replace(/}/g, '&#125;')
+
+	const componentRegex = /<[A-Z].*/g
+	const components = content.match(componentRegex)
+	components?.forEach((component) => {
+		const replaced = component.replace('&#123;', '{').replace('&#125;', '}')
+		content = content.replace(component, replaced)
+	})
+
+	return content
 }
 
 /**
@@ -110,9 +119,13 @@ function replaceSpecialSvelteChars(content) {
  * @param {string} content
  */
 function frontmatter(content) {
-	const { data } = matter(content, { excerpt: false })
-	const metadata = `export const metadata = ${JSON.stringify(data)}`
-	return `<script context="module">${metadata}</script>`
+	const { content: markdown, data } = matter(content)
+	const meta = `
+		<script context="module">
+			export const metadata = ${JSON.stringify(data)}
+		</script>
+	`
+	return { markdown, meta }
 }
 
 /**
@@ -120,9 +133,9 @@ function frontmatter(content) {
  * Markdown to HTML before it's compiled by Svelte
  * so we can use Svelte components inside Markdown.
  */
-function sveltemark() {
+function sveltedown() {
 	return {
-		name: 'sveltemark',
+		name: 'sveltedown',
 		/**
 		 * Convert Markdown to HTML.
 		 * @param {Object} params
@@ -131,14 +144,14 @@ function sveltemark() {
 		 */
 		async markup({ content, filename }) {
 			if (filename.endsWith('.md')) {
-				const slug = slugFromFilename(filename)
-				const html = await parseMarkdown(content, slug)
-				const code = replaceSpecialSvelteChars(html)
-				const metadata = frontmatter(content)
-				return { code: `${metadata}\n${code}` }
+				const slug = getSlug(filename)
+				const { markdown, meta } = frontmatter(content)
+				const html = await parseMarkdown(markdown, slug)
+				const code = escapeHtml(html)
+				return { code: meta + code }
 			}
 		},
 	}
 }
 
-export default sveltemark
+export default sveltedown

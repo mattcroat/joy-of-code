@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { visit, SKIP } from 'unist-util-visit'
 
 export function rehypeUnwrapImages() {
