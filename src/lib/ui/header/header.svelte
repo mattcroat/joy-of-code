@@ -1,9 +1,10 @@
 <script lang="ts">
-	import Menu from './menu.svelte'
-	import Preferences from './preferences/index.svelte'
-	import * as config from '$lib/site/config'
 	import Logo from './logo.svelte'
 	import Search from './search'
+	import Socials from './socials.svelte'
+	import Preferences from './preferences/index.svelte'
+	import Menu from './menu.svelte'
+	import * as config from '$lib/site/config'
 
 	let scrollY: number
 	$: fixed = scrollY > 0
@@ -21,6 +22,7 @@
 		<Search />
 
 		<nav>
+			<Socials />
 			<Preferences />
 			<Menu />
 		</nav>

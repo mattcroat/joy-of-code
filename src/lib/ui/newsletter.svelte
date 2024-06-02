@@ -33,7 +33,7 @@
 		type="email"
 		id="email"
 		name="email"
-		placeholder="you@email.com"
+		placeholder="giga@chad.com"
 		autocomplete="on"
 	/>
 	<button type="submit">
