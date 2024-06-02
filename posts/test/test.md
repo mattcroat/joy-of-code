@@ -11,15 +11,7 @@ draft: true
   import Counter from './counter.svelte'
 </script>
 
-{% youtube id="1234" title="Title" %}
-
 ## Table of Contents
-
-## Embeds
-
-Even embeds work.
-
-{% youtube id="1234" title="Title" %}
 
 ## Components
 
@@ -29,20 +21,12 @@ You can use components inside Markdown.
 
 ## Code
 
-```ts:example showLineNumbers
-function add(a, b) {
-  return a + b
-}
-```
-
-## Images
-
-![Image](social.png)
-
-## Pointy Boys
-
-```html:svelte showLineNumbers
+```html:example showLineNumbers
 <script>
-  let count = 0
+  let count = $state(0)
 </script>
+
+<button onclick={() => count++}>
+  {count}
+</button>
 ```
