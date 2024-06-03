@@ -77,7 +77,7 @@ Here's an example how this works using `Socket.io` on the client.
 
 If you start the development server with `npm run dev` it should work and you should see the `Hello, World 👋` message in the console.
 
-If you want to emmit a message when a value changes don't forget you can use a reactive declaration block.
+If you want to emit a message when a value changes don't forget you can use a reactive declaration block.
 
 ```html:+page.svelte showLineNumbers
 <script lang="ts">
