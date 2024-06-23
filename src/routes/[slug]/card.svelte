@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Newsletter from '$lib/ui/newsletter.svelte'
-	import { ArrowRight, Envelope, PencilSquare, Heart } from '$lib/icons'
+	import { ArrowRight, PencilSquare, Heart } from '$lib/icons'
 
-	export let preset: 'support' | 'edit' | 'newsletter'
+	export let preset: 'support' | 'edit'
 	export let editUrl = ''
 </script>
 
@@ -13,8 +12,8 @@
 		</div>
 		<span class="title">Support</span>
 		<p class="text">
-			If you want to support the content you're reading or watching on YouTube
-			consider becoming a patreon starting low as <b>1$ per month</b>.
+			You can subscribe on YouTube, or consider becoming a patron if you want to
+			support my work.
 		</p>
 		<a
 			class="link"
@@ -22,7 +21,7 @@
 			target="_blank"
 			rel="noreferrer"
 		>
-			<span>Become a patreon</span>
+			<span>Patreon</span>
 			<ArrowRight width={24} height={24} aria-hidden={true} />
 		</a>
 	</div>
@@ -42,16 +41,6 @@
 			<span>Edit on GitHub</span>
 			<ArrowRight width={24} height={24} aria-hidden={true} />
 		</a>
-	</div>
-{/if}
-
-{#if preset === 'newsletter'}
-	<div class="card">
-		<div class="decorative">
-			<Envelope width={24} height={24} aria-hidden={true} />
-		</div>
-		<span class="title">Subscribe For Updates</span>
-		<Newsletter />
 	</div>
 {/if}
 
