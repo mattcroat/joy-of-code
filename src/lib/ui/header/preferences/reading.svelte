@@ -1,29 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
-
-	const rootElement = browser ? document.documentElement : null
-	const userTextSize = browser && localStorage.textSize
-	const userTextLength = browser && localStorage.textLength
-	const userTextHeight = browser && localStorage.textHeight
-
-	let textSize = userTextSize ? userTextSize.replace('px', '') : 18
-	let textLength = userTextLength ? userTextLength.replace('ch', '') : 90
-	let textHeight = userTextHeight ? userTextHeight.replace('px', '') : 40
-
-	function handleFontSizeChange() {
-		localStorage.textSize = `${textSize}px`
-		rootElement?.style.setProperty('--post-txt-size', `${textSize}px`)
-	}
-
-	function handleTextLengthChange() {
-		localStorage.textLength = `${textLength}ch`
-		rootElement?.style.setProperty('--post-txt-length', `${textLength}ch`)
-	}
-
-	function handleTextHeightChange() {
-		localStorage.textHeight = `${textHeight}px`
-		rootElement?.style.setProperty('--post-txt-height', `${textHeight}px`)
-	}
+	import { textSize, textLength, textHeight } from './preferences'
 </script>
 
 <div class="reading-size">
@@ -31,10 +7,9 @@
 		<span>Reading size</span>
 	</label>
 	<div class="slider">
-		<span>{textSize}px</span>
+		<span>{$textSize}px</span>
 		<input
-			on:change={handleFontSizeChange}
-			bind:value={textSize}
+			bind:value={$textSize}
 			type="range"
 			name="text-size"
 			id="text-size"
@@ -50,10 +25,9 @@
 		<span>Reading length</span>
 	</label>
 	<div class="slider">
-		<span>{textLength}ch</span>
+		<span>{$textLength}ch</span>
 		<input
-			on:change={handleTextLengthChange}
-			bind:value={textLength}
+			bind:value={$textLength}
 			type="range"
 			name="text-length"
 			id="text-length"
@@ -69,10 +43,9 @@
 		<span>Reading line height</span>
 	</label>
 	<div class="slider">
-		<span>{textHeight}px</span>
+		<span>{$textHeight}px</span>
 		<input
-			on:change={handleTextHeightChange}
-			bind:value={textHeight}
+			bind:value={$textHeight}
 			type="range"
 			name="text-height"
 			id="text-height"

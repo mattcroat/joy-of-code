@@ -9,17 +9,17 @@
 	}
 
 	function handleChange() {
-		const htmlElement = document.documentElement
+		const html = document.documentElement
 		enabled = !enabled
 
 		if (enabled) {
 			localStorage.font = 'dyslexic'
-			htmlElement.dataset.font = 'dyslexic'
+			html.dataset.font = 'dyslexic'
 		}
 
 		if (!enabled) {
 			localStorage.removeItem('font')
-			delete htmlElement.dataset.font
+			delete html.dataset.font
 		}
 	}
 
@@ -30,13 +30,13 @@
 
 <form>
 	<div class="container">
-		<label for="dyslexic-font"> Use font for dyslexia</label>
+		<label for="dyslexic-font">Use font for dyslexia</label>
 
 		<button
+			on:click={handleChange}
 			use:melt={$root}
 			class="toggle"
 			aria-labelledby="dyslexic-font"
-			on:click={handleChange}
 		>
 			<span class="thumb" />
 		</button>

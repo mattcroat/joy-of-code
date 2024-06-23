@@ -8,7 +8,7 @@
 	function getTheme() {
 		if (!browser) return
 
-		const htmlElement = document.documentElement
+		const html = document.documentElement
 		const userTheme: Themes['name'] = localStorage.theme
 		const prefersDarkMode = window.matchMedia(
 			'prefers-color-scheme: dark'
@@ -19,23 +19,23 @@
 
 		// check if the user set a theme
 		if (userTheme) {
-			htmlElement.dataset.theme = userTheme
+			html.dataset.theme = userTheme
 			return themes[userTheme]
 		}
 
 		// otherwise check for user preference
 		if (!userTheme && prefersDarkMode) {
-			htmlElement.dataset.theme = '🌛 Night'
+			html.dataset.theme = '🌛 Night'
 			localStorage.theme = '🌛 Night'
 		}
 		if (!userTheme && prefersLightMode) {
-			htmlElement.dataset.theme = '☀️ Daylight'
+			html.dataset.theme = '☀️ Daylight'
 			localStorage.theme = '☀️ Daylight'
 		}
 
 		// if nothing is set default to dark mode
 		if (!userTheme && !prefersDarkMode && !prefersLightMode) {
-			htmlElement.dataset.theme = '🌛 Night'
+			html.dataset.theme = '🌛 Night'
 			localStorage.theme = '🌛 Night'
 		}
 
