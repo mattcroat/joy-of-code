@@ -105,6 +105,7 @@
 		}
 
 		& .description {
+			font-size: var(--font-20);
 			color: var(--clr-hero-txt);
 		}
 

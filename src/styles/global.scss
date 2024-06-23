@@ -6,6 +6,7 @@
 	--font-dyslexic-mono: 'OpenDyslexic Mono', monospace;
 
 	--font-16: 1.6rem;
+	--font-20: 2rem;
 	--font-24: 2.4rem;
 	--font-32: 3.2rem;
 	--font-48: 4.8rem;
@@ -72,8 +73,7 @@ body {
 	}
 }
 
-/* fixes issue where safari applies focus to body  */
-body *:focus {
+*:focus {
 	outline: none;
 	box-shadow: 0 0 0 4px var(--clr-primary);
 	border-radius: var(--rounded-20);

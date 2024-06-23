@@ -86,7 +86,7 @@
 		& .title {
 			font-family: var(--font-sans);
 			font-size: clamp(var(--font-24), 4vw, var(--font-32));
-			font-weight: 700;
+			font-weight: 500;
 			line-height: 40px;
 			text-transform: capitalize;
 			text-wrap: balance;
@@ -94,6 +94,7 @@
 
 		& .description {
 			margin-top: var(--spacing-8);
+			font-size: var(--font-20);
 			color: var(--clr-card-txt);
 			align-self: end;
 		}
