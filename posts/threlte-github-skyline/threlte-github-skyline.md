@@ -36,7 +36,7 @@ I'm going to start from scratch and remove everything inside `lib` and `routes`.
 
 Inside `routes/+page.svelte` I'm going to set up a 3D scene.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { Canvas } from '@threlte/core'
 	import Scene from './scene.svelte'
@@ -84,7 +84,7 @@ export type Contributions = Array<Day | null>
 
 I'm going to fetch the data on the client because there's no need for server-side rendering.
 
-```html:src/routes/scene.svelte showLineNumbers
+```svelte:src/routes/scene.svelte showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import type { Contributions } from '$lib/types'
@@ -102,7 +102,7 @@ I'm going to add a grid, camera, lights, and iterate over the contribution rows 
 
 Everything in Threlte extends Three.js from the `<T>` component.
 
-```html:src/routes/scene.svelte {3,4} showLineNumbers
+```svelte:src/routes/scene.svelte {3,4} showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
   import { T } from '@threlte/core'
@@ -153,7 +153,7 @@ Everything in Threlte extends Three.js from the `<T>` component.
 
 Right now the cubes are white, but I'm going to create a `getColor()` function to get the color based on the day level from the API.
 
-```html:src/routes/scene.svelte {23,28} showLineNumbers
+```svelte:src/routes/scene.svelte {23,28} showLineNumbers
 <script lang="ts">
 	function getColor(level: number) {
 		switch (level) {
@@ -194,7 +194,7 @@ Right now the cubes are white, but I'm going to create a `getColor()` function t
 
 I want to make the visualization more interesting by having a base height for the contributions, multiply the existing height for more visual interest, and set a limit for the height.
 
-```html:src/routes/scene.svelte {20,23,24} showLineNumbers
+```svelte:src/routes/scene.svelte {20,23,24} showLineNumbers
 <script lang="ts">
 	function normalize(count: number, base = 4, offset = 2) {
 		switch (true) {
@@ -234,7 +234,7 @@ To animate the cube height we can use the `tweened` store from Svelte and interp
 
 If you try and set the scale on the mesh itself it's going to scale from the center, and for that reason we set it on the group.
 
-```html:src/routes/scene.svelte {3,4,9,11-13,24} showLineNumbers
+```svelte:src/routes/scene.svelte {3,4,9,11-13,24} showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { tweened } from 'svelte/motion'

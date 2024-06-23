@@ -62,7 +62,7 @@ export default config
 
 Don't forget to include the `lang="postcss"` attribute inside the `<style>` tag.
 
-```html:+page.svelte
+```svelte:+page.svelte
 <style lang="postcss">
   @custom-media --md (min-width: 768px);
 

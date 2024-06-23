@@ -18,7 +18,7 @@ category: svelte
 
 You can find the repo with the examples on [GitHub](https://github.com/joysofcode/svelte-actions).
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
 	function greet(element: HTMLElement) {
 		// logs when element is created
@@ -52,7 +52,7 @@ You can find the repo with the examples on [GitHub](https://github.com/joysofcod
 
 You can optionally return a `destroy` method after the element is removed for cleanup, and an `update` method for updating the parameters.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
 	function greet(element: HTMLElement, content: string) {
     // ...
@@ -79,7 +79,7 @@ You can optionally return a `destroy` method after the element is removed for cl
 
 You can also dispatch [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) using Svelte actions.
 
-```html:.example.svelte showLineNumbers
+```svelte:.example.svelte showLineNumbers
 <script lang="ts">
 	function greet(element: HTMLElement) {
 		const greetEvent = new CustomEvent('greet', { detail: 'hi' })
@@ -111,7 +111,7 @@ Let's go over some examples first, and then I'm also going to show you how to ty
 
 The next example uses [Tippy.js](https://atomiks.github.io/tippyjs/) to make a reusable tooltip with Svelte actions.
 
-```html:src/routes/tooltip/+page.svelte showLineNumbers
+```svelte:src/routes/tooltip/+page.svelte showLineNumbers
 <script lang="ts">
   import tippy, { type Props } from 'tippy.js'
   import 'tippy.js/dist/tippy.css'
@@ -148,7 +148,7 @@ There is nothing wrong with using a `<Tooltip />` component if you want but in t
 
 Most of the time you're going to need a simple action where you need a bit of JavaScript to do something like knowing when a user clicks outside of an element.
 
-```html:src/routes/modal/+page.svelte showLineNumbers
+```svelte:src/routes/modal/+page.svelte showLineNumbers
 <script lang="ts">
   import { scale } from 'svelte/transition'
   import type { Action } from 'svelte/action'
@@ -241,7 +241,7 @@ Knowing how to make a quick Svelte action like this is always useful, regardless
 
 The next example uses the JavaScript animation library [Motion One](https://motion.dev/) to create a reusable `use:text` Svelte action to create elements as letters from any text, and animate it on the screen.
 
-```html:src/routes/motion/+page.svelte showLineNumbers
+```svelte:src/routes/motion/+page.svelte showLineNumbers
 <script lang="ts">
   import { animate, stagger, type AnimationOptions, type AnimationControls } from 'motion'
   import type { Action } from 'svelte/action'
@@ -333,7 +333,7 @@ Svelte actions are great for progressive enhancement.
 
 SvelteKit already has an [action for progressive form enhancement](https://kit.svelte.dev/docs/form-actions#progressive-enhancement-use-enhance) but here is how it works.
 
-```html:src/routes/forms/+page.svelte showLineNumbers
+```svelte:src/routes/forms/+page.svelte showLineNumbers
 <script lang="ts">
   // please use this instead
   // import { enhance } from '$app/forms'

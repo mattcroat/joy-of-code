@@ -46,7 +46,7 @@ After you get the **Measurement ID** from Google Analytics create a simple `<Ana
 
 > ⚠️ You might not need the reactive statement because by default Google Analytics is going to count the page view when the browser history changes.
 
-```html:src/lib/analytics.svelte showLineNumbers
+```svelte:src/lib/analytics.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
 
@@ -88,7 +88,7 @@ Because it's using a store value whenever the page gets updated inside the `$: {
 
 Include the `<Analytics />` component inside your main layout `__layout.svelte` making it available on every page.
 
-```html:routes/__layout.svelte
+```svelte:routes/__layout.svelte
 <script lang="ts">
   import Analytics from '$lib/analytics.svelte'
 </script>

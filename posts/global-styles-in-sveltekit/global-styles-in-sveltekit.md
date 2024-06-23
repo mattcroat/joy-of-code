@@ -14,7 +14,7 @@ category: sveltekit
 
 You can include your global styles inside `app.html` in SvelteKit but then you can't take advantage of [HMR (hot module replacement)](https://vitejs.dev/guide/features.html#hot-module-replacement) since SvelteKit has no idea the file got updated.
 
-```html:src/app.html showLineNumbers
+```svelte:src/app.html showLineNumbers
 <!-- ... -->
   <head>
     <style>
@@ -36,7 +36,7 @@ h1 {
 }
 ```
 
-```html:routes/+layout.svelte showLineNumbers
+```svelte:routes/+layout.svelte showLineNumbers
 <script>
   import '../app.css'
 </script>
@@ -52,7 +52,7 @@ Svelte ignores styles that aren't part of your template which sucks when you don
 
 In that case you can use `:global`.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script>
   export let data
 </script>
@@ -70,7 +70,7 @@ In that case you can use `:global`.
 
 You can scope `.prose` to the component if you want.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <!-- ... -->
 
 <style>
@@ -82,7 +82,7 @@ You can scope `.prose` to the component if you want.
 
 SvelteKit by default comes with the [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) preprocessor where you can use the `global` attribute on the `<style>` tag to avoid typing `:global` everywhere if you're not using SASS.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <!-- ... -->
 
 <style global>

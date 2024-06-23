@@ -20,7 +20,7 @@ export let counter = 0
 
 Even if you import `count` and try to change it, you can't because imports are read-only.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { counter } from '$lib/counter'
 
@@ -62,7 +62,7 @@ This is also known as the [observer pattern](https://www.patterns.dev/posts/obse
 
 You can subscribe to the `counter` inside a component or regular JavaScript module.
 
-```html:+page.svelte {2,8,10,13} showLineNumbers
+```svelte:+page.svelte {2,8,10,13} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 
@@ -84,7 +84,7 @@ You can subscribe to the `counter` inside a component or regular JavaScript modu
 
 You can update the `count` value from anywhere, and it's going to be reactive.
 
-```html:increment.svelte showLineNumbers
+```svelte:increment.svelte showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 
@@ -96,7 +96,7 @@ You can update the `count` value from anywhere, and it's going to be reactive.
 <button on:click={increment}>+</button>
 ```
 
-```html:decrement.svelte showLineNumbers
+```svelte:decrement.svelte showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 
@@ -108,7 +108,7 @@ You can update the `count` value from anywhere, and it's going to be reactive.
 <button on:click={decrement}>-</button>
 ```
 
-```html:reset.svelte showLineNumbers
+```svelte:reset.svelte showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 
@@ -295,7 +295,7 @@ console.log(count) // 10
 
 Stores are awesome, but having to subscribe and do cleanup for every store is tedious. 🥱
 
-```html:+page.svelte {2,7,9} showLineNumbers
+```svelte:+page.svelte {2,7,9} showLineNumbers
 <script lang="ts">
 	import { onDestroy } from 'svelte'
 	import { counter } from '$lib/counter'
@@ -310,7 +310,7 @@ Stores are awesome, but having to subscribe and do cleanup for every store is te
 
 Inside Svelte components, you can reference a store using the `$` prefix which subscribes and unsubscribes to the store for you.
 
-```html:+page.svelte {9} showLineNumbers
+```svelte:+page.svelte {9} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 
@@ -326,7 +326,7 @@ Inside Svelte components, you can reference a store using the `$` prefix which s
 <Reset />
 ```
 
-```html:increment.svelte {5} showLineNumbers
+```svelte:increment.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 
@@ -338,7 +338,7 @@ Inside Svelte components, you can reference a store using the `$` prefix which s
 <button on:click={increment}>+</button>
 ```
 
-```html:decrement.svelte {5} showLineNumbers
+```svelte:decrement.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 
@@ -350,7 +350,7 @@ Inside Svelte components, you can reference a store using the `$` prefix which s
 <button on:click={decrement}>-</button>
 ```
 
-```html:reset.svelte {5} showLineNumbers
+```svelte:reset.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 
@@ -366,7 +366,7 @@ Inside Svelte components, you can reference a store using the `$` prefix which s
 
 You can also bind the store value if it's writable.
 
-```html:+page.svelte {5} showLineNumbers
+```svelte:+page.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 </script>
@@ -414,7 +414,7 @@ export const counter = createCounter(0)
 
 Let's update the previous `counter` example.
 
-```html:increment.svelte {5} showLineNumbers
+```svelte:increment.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 </script>
@@ -422,7 +422,7 @@ Let's update the previous `counter` example.
 <button on:click={counter.increment}>+</button>
 ```
 
-```html:decrement.svelte {5} showLineNumbers
+```svelte:decrement.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 </script>
@@ -430,7 +430,7 @@ Let's update the previous `counter` example.
 <button on:click={counter.decrement}>-</button>
 ```
 
-```html:reset.svelte {5} showLineNumbers
+```svelte:reset.svelte {5} showLineNumbers
 <script lang="ts">
 	import { counter } from '$lib/counter'
 </script>
@@ -468,7 +468,7 @@ export async function load() {
 
 Instead of using stores on the server, pass the data to the component that needs it, or use the `$page` store.
 
-```html:routes/server/+page.svelte showLineNumbers
+```svelte:routes/server/+page.svelte showLineNumbers
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { counter } from '$lib/counter'
@@ -491,7 +491,7 @@ Importing `$page.data` is useful if you have a component on the page that needs 
 
 Stores have great interoperability with most libraries that use observables like [XState](https://xstate.js.org/), or [RxJS](https://rxjs.dev/).
 
-```html:example.html {22-25,31,35} showLineNumbers
+```svelte:example.html {22-25,31,35} showLineNumbers
 <script lang="ts">
 	import { createMachine, interpret } from 'xstate'
 
@@ -540,7 +540,7 @@ I wanted to explain how stores work, so you understand in the future that signal
 
 Here is how the previous `useCounter` custom store looks using signals.
 
-```html:runes.svelte showLineNumbers
+```svelte:runes.svelte showLineNumbers
 <script>
 	function createCounter(initialCount) {
 		let count = $state(initialCount)

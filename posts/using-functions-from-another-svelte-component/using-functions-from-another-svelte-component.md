@@ -8,7 +8,7 @@ category: svelte
 
 If you want to use a function from another Svelte component, export the function, and then you can bind the component in the parent.
 
-```html:video.svelte showLineNumbers
+```svelte:video.svelte showLineNumbers
 <script>
   let { src, ...props } = $props()
   let videoEl
@@ -29,7 +29,7 @@ If you want to use a function from another Svelte component, export the function
 
 Bind the component using Svelte's `bind:` directive to get a reference to the component after which you can use the exported functions.
 
-```html:app.svelte showLineNumbers
+```svelte:app.svelte showLineNumbers
 <script>
   import Video from './video.svelte'
 

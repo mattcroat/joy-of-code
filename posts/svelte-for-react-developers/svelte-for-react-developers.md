@@ -47,7 +47,7 @@ You're not going to use inline styles in most cases as in the example and that's
 
 Here's the same example in Svelte.
 
-```html:Components.svelte showLineNumbers
+```svelte:Components.svelte showLineNumbers
 <script>
 	let count = 0
 </script>
@@ -106,7 +106,7 @@ In the example we're passing an optional `count` property to `<CounterWithProps>
 
 Here's the same example in Svelte.
 
-```html:Props.svelte showLineNumbers
+```svelte:Props.svelte showLineNumbers
 <script>
 	export let count = 0
 </script>
@@ -117,14 +117,14 @@ Here's the same example in Svelte.
 
 In Svelte you define a prop using the `export` keyword that you can also set a default value for if you want to.
 
-```html:Example.svelte showLineNumbers
+```svelte:Example.svelte showLineNumbers
 <CounterWithProps count={10} /> // count is 10
 <CounterWithProps />  // count is 0
 ```
 
 If the value you're passing has the same name as the prop you can make it more concise.
 
-```html:Example.svelte showLineNumbers
+```svelte:Example.svelte showLineNumbers
 <script>
 	let count = 10
 </script>
@@ -168,7 +168,7 @@ To pass elements to components you use `children` from `props` and we can use `c
 
 Here is the same example in Svelte.
 
-```html:Children.svelte showLineNumbers
+```svelte:Children.svelte showLineNumbers
 <script>
 	export let columns
 </script>
@@ -227,7 +227,7 @@ export function Todos() {
 
 Here's the same example in Svelte.
 
-```html:Logic.svelte showLineNumbers
+```svelte:Logic.svelte showLineNumbers
 <script>
 	const todos = [
 		{ id: 1, text: 'Todo 1', completed: true },
@@ -298,7 +298,7 @@ React doesn't have a way to bind the value of the input to `value` in state, so 
 
 Here is the same example in Svelte.
 
-```html:Events.svelte showLineNumbers
+```svelte:Events.svelte showLineNumbers
 <script>
 	let value = ''
 
@@ -370,7 +370,7 @@ Thanks to `useEffect` we can move it outside rendering and synchronize state eac
 
 This is the same example in Svelte.
 
-```html:Synchronization.svelte showLineNumbers
+```svelte:Synchronization.svelte showLineNumbers
 <script>
 	import ein from '../assets/video.mp4'
 
@@ -403,7 +403,7 @@ It's much simpler and you don't have to think about `useEffect` and dependencies
 
 Here's an example of using the Canvas API in Svelte.
 
-```html:Example.svelte showLineNumbers
+```svelte:Example.svelte showLineNumbers
 <script>
 	import { onMount } from 'svelte'
 
@@ -549,7 +549,7 @@ Here's the same example in Svelte.
 <details>
   <summary>Derived.svelte</summary>
 
-```html:Derived.svelte showLineNumbers
+```svelte:Derived.svelte showLineNumbers
 <script>
   let todos = [
     { id: 1, text: 'Todo 1', completed: false },
@@ -751,7 +751,7 @@ In Svelte you can do the same thing using the [Context API](https://learn.svelte
 <details>
   <summary>Context API</summary>
 
-```html:List.svelte showLineNumbers
+```svelte:List.svelte showLineNumbers
 <script>
   import { setContext } from 'svelte'
   import { writable } from 'svelte/store'
@@ -777,7 +777,7 @@ In Svelte you can do the same thing using the [Context API](https://learn.svelte
 </ul>
 ```
 
-```html:Items.svelte showLineNumbers
+```svelte:Items.svelte showLineNumbers
 <script>
   import { getContext } from 'svelte'
 
@@ -789,7 +789,7 @@ In Svelte you can do the same thing using the [Context API](https://learn.svelte
 {/each}
 ```
 
-```html:AddItem.svelte showLineNumbers
+```svelte:AddItem.svelte showLineNumbers
 <script lang="ts">
   import { getContext } from 'svelte'
 
@@ -799,7 +799,7 @@ In Svelte you can do the same thing using the [Context API](https://learn.svelte
 <button on:click={addItem}>Add</button>
 ```
 
-```html:RemoveItem.svelte showLineNumbers
+```svelte:RemoveItem.svelte showLineNumbers
 <script>
   import { getContext } from 'svelte'
 
@@ -811,7 +811,7 @@ In Svelte you can do the same thing using the [Context API](https://learn.svelte
 
 As before we can import the components and use them.
 
-```html:index.svelte showLineNumbers
+```svelte:index.svelte showLineNumbers
 <script>
   import List from './List.svelte'
   import Items from './Items.svelte'
@@ -840,7 +840,7 @@ A store is just an object you can subscribe so you get notified when the store v
 
 The `$` syntax in `$count` is just for Svelte to understand to subscribe and unsubscribe to a store making you write less boilerplate code and it's awesome.
 
-```html:Example.svelte showLineNumbers
+```svelte:Example.svelte showLineNumbers
 <script>
 	import { useReducer } from './hooks'
 
@@ -888,7 +888,7 @@ Animations are just part of Svelte and you can start from simple transitions to 
 
 This is the same todo example as before but it uses a different `fly` transition when the todo item is added with `in:fly` and removed with `out:fly` and a `flip` function to animate the elements when they change position.
 
-```html:Example.svelte {2-3, 9-11} showLineNumbers
+```svelte:Example.svelte {2-3, 9-11} showLineNumbers
 <script>
 	import { flip } from 'svelte/animate'
 	import { fly } from 'svelte/transition'

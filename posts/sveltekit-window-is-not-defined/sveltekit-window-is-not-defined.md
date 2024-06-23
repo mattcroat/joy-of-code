@@ -26,7 +26,7 @@ export function greet() {
 
 If you import it everything works fine until you try to invoke the function. Refreshing the page causes an error because it tries to run the code on the server.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { greet } from 'greet'
 
@@ -36,7 +36,7 @@ If you import it everything works fine until you try to invoke the function. Ref
 
 You can use the `onMount` lifecycle function or the `browser` module from SvelteKit to make sure the code runs in the browser and only then run it.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { browser } from '$app/environment'
   import { greet } from 'greet'
@@ -49,7 +49,7 @@ You can use the `onMount` lifecycle function or the `browser` module from Svelte
 
 You could also use [Svelte actions](https://learn.svelte.dev/tutorial/actions) since they're element-level lifecycle functions.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script>
   import { greet } from 'greet'
 </script>
@@ -73,7 +73,7 @@ This is the issue I ran into and the answer is [dynamic imports](https://develop
 
 Dynamic imports let you load a module asynchronously using the `import` keyword and it returns a promise which fulfills to an object containing all the exports from the module.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { onMount } from 'svelte'
 

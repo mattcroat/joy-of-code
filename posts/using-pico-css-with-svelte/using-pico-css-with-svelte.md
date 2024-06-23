@@ -22,7 +22,7 @@ npm i @picocss/pico
 
 Import it inside your layout.
 
-```html:+layout.svelte showLineNumbers
+```svelte:+layout.svelte showLineNumbers
 <script lang="ts">
   import '@picocss/pico'
   import '../app.css'
@@ -33,7 +33,7 @@ Import it inside your layout.
 
 This is how simple it to turn a checkbox into a switch.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <input type="checkbox" role="switch" />
 ```
 

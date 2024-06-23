@@ -86,7 +86,7 @@ button {
 
 Make sure you add the `#app` id to the `<div>` inside `app.html` to inherit the height.
 
-```html:src/app.html {11} showLineNumbers
+```svelte:src/app.html {11} showLineNumbers
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -104,7 +104,7 @@ Make sure you add the `#app` id to the `<div>` inside `app.html` to inherit the 
 
 Second let's add a layout file to import the styles and define a layout.
 
-```html:routes/+layout.svelte showLineNumbers
+```svelte:routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import '../styles/app.scss'
 </script>
@@ -143,7 +143,7 @@ Second let's add a layout file to import the styles and define a layout.
 
 The rest of the post is going to be inside `+page.svelte` so you can clear it out and add a `<style>` tag.
 
-```html:routes/+page.svelte showLineNumbers
+```svelte:routes/+page.svelte showLineNumbers
 <style lang="scss">
   /* ... */
 <style>
@@ -187,7 +187,7 @@ Our game is going to have three states which I'm going to express as explicit st
 
 For now let's start simple until we have the logic working and later we're going to replace the placeholder words with our own word API.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   type Game = 'waiting for input' | 'in progress' | 'game over'
   type Word = string
@@ -245,7 +245,7 @@ I love to use [data attributes](https://developer.mozilla.org/en-US/docs/Learn/H
 
 Let's start with `handleKeydown`.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   function handleKeydown(event: KeyboardEvent) {
     if (event.code === 'Space') {
@@ -265,7 +265,7 @@ I want to prevent the default behaviour when the player presses <kbd>Space</kbd>
 
 The `startGame` should update the game state and I'm going to create a `setGameState` function to set it just because it's nicer to use.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   function startGame() {
     setGameState('in progress')
@@ -288,7 +288,7 @@ Each time the player inputs a letter it's going to run `updateGameState` that sh
 - go to the next letter
 - clear the input because I only want to compare the current letter
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   function updateGameState() {
     setLetter()
@@ -303,7 +303,7 @@ Each time the player inputs a letter it's going to run `updateGameState` that sh
 
 Before I set the letter I want to check if the word is done by checking if the `letterIndex` is higher than the length of the word.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   function setLetter() {
     const isWordCompleted = letterIndex > words[wordIndex].length - 1
@@ -325,7 +325,7 @@ I'm going to compare the typed letter to the current letter. You can get the let
 
 If the typed letter equals the current letter I'm going to increase the score and set a data attribute `data-letter='correct'` on the `<span>` element for styling.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   function checkLetter() {
     const currentLetter = words[wordIndex][letterIndex]
@@ -350,7 +350,7 @@ If the typed letter equals the current letter I'm going to increase the score an
 
 Also we need to set the next letter and reset the input.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   function nextLetter() {
     letterIndex += 1
@@ -370,7 +370,7 @@ The simplest solution I found to having a specific number of lines is multiplyin
 
 The use of `:global` for the data attributes is required because Svelte removes unused classes if they're not used in the template and it doesn't know they exist.
 
-```html:+page.svelte {5, 6, 9, 23, 27} showLineNumbers
+```svelte:+page.svelte {5, 6, 9, 23, 27} showLineNumbers
 <!-- ... -->
 
 <style lang="scss">
@@ -414,7 +414,7 @@ The player could skip words on accident, so I want to make sure it doesn't happe
 
 Thanks to using explicit state I can make sure this only happens when the game is in progress.
 
-```html:+page.svelte {2-11, 19-21} showLineNumbers
+```svelte:+page.svelte {2-11, 19-21} showLineNumbers
 <script lang="ts">
   function nextWord() {
     const isNotFirstLetter = letterIndex !== 0
@@ -457,7 +457,7 @@ We're going to get a reference to the current word `wordEl`, the `Y` position fo
 
 If `wordY > wordsY` we can use the handy [`scrollIntoView`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) method and pass it an argument for vertical alignment.
 
-```html:+page.svelte {4, 15} showLineNumbers
+```svelte:+page.svelte {4, 15} showLineNumbers
 <script lang="ts">
   function updateGameState() {
     // ...
@@ -494,7 +494,7 @@ Moving the caret is going to be simple as updating the `top` and `left` position
 
 Don't forget to invoke `moveCaret` when updating the game state and going to the next word.
 
-```html:+page.svelte {2, 6, 16, 22-26, 32} showLineNumbers
+```svelte:+page.svelte {2, 6, 16, 22-26, 32} showLineNumbers
 <script lang="ts">
   let caretEl: HTMLDivElement
 
@@ -567,7 +567,7 @@ To uphold a healthy keyboard environment I'm going to make a game last 30 second
 
 Remember the `startGame` function way back? I'll meet you there for a secret rendezvous.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   let seconds = 30
 
@@ -649,7 +649,7 @@ The accuracy equation is simple as taking the amount of correct letters and divi
 
 To get the total amount of letters I use `reduce` to get the total value by going over each word and adding `words.length` to `count`.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { tweened } from 'svelte/motion'
 
@@ -751,7 +751,7 @@ export const GET: RequestHandler = ({ url }) => {
 
 Let's use our new power and replace the placeholder text. You need to do it when the page loads though inside `onMount`.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { onMount } from 'svelte'
 
@@ -780,7 +780,7 @@ I want to give the player a way to reset the game if they don't like the words o
 
 I'm also going to include a `toggleReset` so you can use a [`{#key ...}`](https://learn.svelte.dev/tutorial/key-blocks) block to play a transition when it happens.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { blur } from 'svelte/transition'
 
@@ -868,7 +868,7 @@ You can learn everything I know about [animation with Svelte](https://joyofcode.
 
 I'm going to hide the input since you no longer need it and I want to focus the input when the page loads.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   // ...
 

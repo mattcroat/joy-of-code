@@ -40,7 +40,7 @@ document.body.append(titleEl)
 
 Using **declarative** code you just state the desired outcome.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <h1>Hello</h1>
 ```
 
@@ -90,7 +90,7 @@ You can play around with the default example but I'm going to delete the `lib` f
 
 Inside `routes` create a `+layout.svelte` file.
 
-```html:src/roues/+layout.svelte showLineNumbers
+```svelte:src/roues/+layout.svelte showLineNumbers
 <div class="scene">
 	<slot />
 </div>
@@ -112,7 +112,7 @@ Using a wrapper element `.scene` is important because the dimensions of `<canvas
 
 Inside `+page.svelte` I'm going to set up the scene.
 
-```html:src/routes/+page.svelte
+```svelte:src/routes/+page.svelte
 <script lang="ts">
 	import { Canvas } from '@threlte/core'
 	import Scene from './scene.svelte'
@@ -125,7 +125,7 @@ Inside `+page.svelte` I'm going to set up the scene.
 
 Create a `scene.svelte` component where the magic is going to happen and add a camera, lights and a mesh to your scene.
 
-```html:src/routes/scene.svelte
+```svelte:src/routes/scene.svelte
 <script lang="ts">
 	import { T } from '@threlte/core'
 	import { Grid, OrbitControls, TransformControls } from '@threlte/extras'
@@ -181,7 +181,7 @@ There's a bunch of helpers from `@threlte/extras`. You can render a grid with th
 
 Threlte has an intuitive API.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script>
   import { T } from '@threlte/core'
 </script>
@@ -218,7 +218,7 @@ There's a lot of options for 3D file formats but you want [GLB](https://www.wiki
 
 Threlte makes it easy to import a 3D model using the `useGltf` hook, and you can even control animations with the [`useGltfAnimations`](https://threlte.xyz/docs/reference/extras/use-gltf-animations) hook.
 
-```html:src/routes/scene.svelte showLineNumbers
+```svelte:src/routes/scene.svelte showLineNumbers
 <script lang="ts">
 	import { T, useFrame } from '@threlte/core'
 	import { OrbitControls, useGltf } from '@threlte/extras'

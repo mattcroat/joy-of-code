@@ -36,7 +36,7 @@ npm run dev
 
 I'm going to add a root layout with some global styles using [Pico](https://picocss.com/).
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <slot />
 
 <style>
@@ -97,7 +97,7 @@ export function clearTodos() {
 
 A `form` is a way to exchange information between the browser and server — it's just a container for form controls with some optional attributes to configure how the form behaves.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <form method="GET" action="/login">
   <input type="text" name="user" />
   <input type="password" name="password" />
@@ -109,7 +109,7 @@ The `action` attribute defines the location (URL) where the form's collected dat
 
 The `GET` method requests a resource from the server and appends the form data at the end of the URL like `http://example.com/?user=test&password=1234` since the body is empty and it not great for sending a large amount of data and is not secure.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <form method="POST" action="/login">
   <input type="text" name="user" />
   <input type="password" name="password" />
@@ -157,7 +157,7 @@ export async function load() {
 
 Let's loop over the to-do items and add the form.
 
-```html:src/routes/todos/+page.svelte showLineNumbers
+```svelte:src/routes/todos/+page.svelte showLineNumbers
 <script lang="ts">
   export let data
 
@@ -261,7 +261,7 @@ For the `todoId` I used a hidden input field to get the id for the to-do when lo
 
 Let's go back to `+page.svelte` and create `addTodo` and `removeTodo` functions and update the UI based on the response.
 
-```html:src/routes/todos/+page.svelte showLineNumbers
+```svelte:src/routes/todos/+page.svelte showLineNumbers
 <script lang="ts">
   import { invalidateAll } from '$app/navigation'
 
@@ -367,7 +367,7 @@ export const actions = {
 
 If you don't define an `action` attribute you can use the `default` method but for multiple actions it's replaced by **named actions** like `action="?/addTodo"`.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <form method="POST">
   <!-- ... -->
 </form>
@@ -375,7 +375,7 @@ If you don't define an `action` attribute you can use the `default` method but f
 
 Actions always use `POST` requests because `GET` requests shouldn't have side-effects and they can be invoked from other pages.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <form method="POST" action="/todos?/addTodo">
   <!-- ... -->
 </form>
@@ -383,7 +383,7 @@ Actions always use `POST` requests because `GET` requests shouldn't have side-ef
 
 If you need to `POST` the same form data to a different action you can also use the `formaction` attribute.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <form method="POST" action="?/addTodo">
   <!-- ... -->
   <button>+ Add todo</button>
@@ -445,7 +445,7 @@ You can already see how much less code you have to write and SvelteKit handles r
 
 The action responds with data that's available through the `form` property and `$page.form` store and reruns the `load` function for the page.
 
-```html:src/routes/todos/+page.svelte showLineNumbers
+```svelte:src/routes/todos/+page.svelte showLineNumbers
 <script lang="ts">
   export let data
   export let form
@@ -523,7 +523,7 @@ You're going to notice each time you add or remove a to-do the page reloads. Thi
 
 Remember the first example how we had to do everything by hand? SvelteKit does that for you and wraps everything in a neat `use:enhance` [Svelte action](https://learn.svelte.dev/tutorial/actions) (unrelated to form actions) that does the same thing.
 
-```html:src/routes/todos/+page.svelte {2, 12, 20} showLineNumbers
+```svelte:src/routes/todos/+page.svelte {2, 12, 20} showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
 
@@ -577,7 +577,7 @@ If you want to learn how it works you can look at [form.js](https://github.com/s
 
 You can customize the behavior of `use:enhance` by providing a submit function that runs before the form is submitted and can return a callback that has access to the result.
 
-```html:src/routes/todos/+page.svelte showLineNumbers
+```svelte:src/routes/todos/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance, type SubmitFunction } from '$app/forms'
 
@@ -659,7 +659,7 @@ export const actions = {
 
 Using what we know I'm going to set `loading = true` before the form submits and when it's done we can set `loading = false`.
 
-```html:src/routes/todos/+page.svelte {7, 10, 12-15, 37-39} showLineNumbers
+```svelte:src/routes/todos/+page.svelte {7, 10, 12-15, 37-39} showLineNumbers
 <script lang="ts">
   import { enhance, type SubmitFunction } from '$app/forms'
 
@@ -722,7 +722,7 @@ I'm going to show you how you can validate a form using the popular schema valid
 
 I'm going to create a `routes/login` route using the first example but I'm going to add the `required` attribute for the input fields.
 
-```html:src/routes/login/+page.svelte showLineNumbers
+```svelte:src/routes/login/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
 </script>
@@ -795,7 +795,7 @@ export const actions = {
 
 This can now we be used in the template.
 
-```html:src/routes/login/+page.svelte showLineNumbers
+```svelte:src/routes/login/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
 
@@ -895,7 +895,7 @@ I mentioned how actions can be invoked from other pages and in this example I wa
 
 If you submit the form it kinda works but you don't get the validation data back because `form` is never updated.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
 
@@ -925,7 +925,7 @@ If you submit the form it kinda works but you don't get the validation data back
 
 Let's try using the `update` method and see if it works.
 
-```html:src/routes/+page.svelte {2, 6-10, 13} showLineNumbers
+```svelte:src/routes/+page.svelte {2, 6-10, 13} showLineNumbers
 <script lang="ts">
   import { enhance, type SubmitFunction } from '$app/forms'
 
@@ -945,7 +945,7 @@ Let's try using the `update` method and see if it works.
 
 That won't work because `update` can't update `form` and `$form.page` from anywhere else but you can use `applyAction` and pass it `result` to customize the `use:enhance` behavior further.
 
-```html:src/routes/+page.svelte {2, 7-9} showLineNumbers
+```svelte:src/routes/+page.svelte {2, 7-9} showLineNumbers
 <script lang="ts">
   import { applyAction, enhance, type SubmitFunction } from '$app/forms'
 

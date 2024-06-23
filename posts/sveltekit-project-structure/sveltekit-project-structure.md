@@ -121,7 +121,7 @@ An adapter is used to **adapt** 🥁 your SvelteKit app to the deployment target
 
 Next I'm going to add the HTML page template with placeholders SvelteKit uses and replaces for your pages.
 
-```html:src/app.html showLineNumbers
+```svelte:src/app.html showLineNumbers
 <head>
   %sveltekit.head%
 </head>
@@ -135,7 +135,7 @@ The markup might be questionable but the browser is going to construct a proper 
 
 As the last step I'm going to add a route that's going to be the first page someone sees when they visit the site.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <h1>Hello</h1>
 ```
 

@@ -90,7 +90,7 @@ export const ssr = false
 
 Inside `+page.svelte` I'm going to import a `<Slides />` component and global styles.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import Slides from '$lib/deck/slides.svelte'
 	import '../app.postcss'
@@ -147,7 +147,7 @@ The styles include some [CSS variables for theming from Reveal.js](https://githu
 
 Inside the `<Slides />` component initialize Reveal.js.
 
-```html:src/lib/decks/slides.svelte showLineNumbers
+```svelte:src/lib/decks/slides.svelte showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 
@@ -189,7 +189,7 @@ You can use other [included Reveal.js themes](https://revealjs.com/themes/) and 
 
 I encourage you to read the [Reveal.js docs](https://revealjs.com/) to know what you can customize but here is a basic idea how you do slides.
 
-```html:example.html showLineNumbers
+```svelte:example.html showLineNumbers
 <div class="reveal">
   <div class="slides">
     <section>Slide 1</section>
@@ -202,7 +202,7 @@ It can't be any simpler.
 
 One of the best features of Reveal.js is [auto-animate](https://revealjs.com/auto-animate/) which automatically animates elements across slides using the [FLIP animation technique](https://aerotwist.com/blog/flip-your-animations/).
 
-```html:example.html showLineNumbers
+```svelte:example.html showLineNumbers
 <section data-auto-animate>
   <p>Auto-Animate</p>
 </section>
@@ -216,7 +216,7 @@ You can learn more about how Reveal.js matches elements from reading the documen
 
 Because the contents of the `<p>` tag are the same Reveal.js knows it should auto-animate it but you can also specify a data attribute `data-id` id for elements that aren't the same but should be animated.
 
-```html:example.html showLineNumbers
+```svelte:example.html showLineNumbers
 <section data-auto-animate>
   <div data-id="box" class="w-[200px] bg-teal-400"></div>
 </section>
@@ -228,7 +228,7 @@ Because the contents of the `<p>` tag are the same Reveal.js knows it should aut
 
 I'm going to create reusable components which you can use to make a presentation inside the `<Presentation />` component.
 
-```html:src/lib/deck/presentation.svelte showLineNumbers
+```svelte:src/lib/deck/presentation.svelte showLineNumbers
 <script lang="ts">
 	import Slide from './slide.svelte'
 	import Code from './code.svelte'
@@ -242,7 +242,7 @@ I'm going to create reusable components which you can use to make a presentation
 
 Let's start with creating the `<Slide />` component.
 
-```html:src/lib/deck/slide.svelte showLineNumbers
+```svelte:src/lib/deck/slide.svelte showLineNumbers
 <script lang="ts">
 	export let id: string | null = null
 	export let animate = false
@@ -266,7 +266,7 @@ Using `null` is crucial otherwise the data attribute is always going to be prese
 
 With this simple `<Slide />` component you can already do a lot.
 
-```html:src/lib/deck/presentation.svelte showLineNumbers
+```svelte:src/lib/deck/presentation.svelte showLineNumbers
 <script lang="ts">
 	import Slide from './slide.svelte'
 </script>
@@ -303,7 +303,7 @@ How awesome is that? 😄
 
 The code component is straightforward.
 
-```html:src/lib/deck/code.svelte showLineNumbers
+```svelte:src/lib/deck/code.svelte showLineNumbers
 <script lang="ts">
 	export let id: string | null = null
 	export let lines: string | boolean | null = null
@@ -328,7 +328,7 @@ The code component is straightforward.
 
 Here is how you can use the `<Code />` component to animate a code block.
 
-```html:src/lib/deck/presentation.svelte showLineNumbers
+```svelte:src/lib/deck/presentation.svelte showLineNumbers
 <script lang="ts">
 	import Code from './code.svelte'
 </script>
@@ -364,7 +364,7 @@ You might want to author your slides with Markdown and you can use HTML and Mark
 
 These should be two separate components to be honest but I've decided to be crafty and use an `external` prop to decide which component to render.
 
-```html:src/lib/deck/markdown.svelte showLineNumbers
+```svelte:src/lib/deck/markdown.svelte showLineNumbers
 <script lang="ts">
 	export let name = 'example.md'
 	export let external = false
@@ -383,7 +383,7 @@ These should be two separate components to be honest but I've decided to be craf
 
 Here is how you can use the `<Markdown />` component.
 
-```html:src/lib/deck/presentation.svelte showLineNumbers
+```svelte:src/lib/deck/presentation.svelte showLineNumbers
 <script lang="ts">
 	import Markdown from './markdown.svelte'
 </script>
@@ -422,7 +422,7 @@ You can always find more information in the Reveal.js documentation and just bec
 
 Speaker notes are only visible to you and they're useful to include notes for the slide and to prepare you for the next slide.
 
-```html:src/lib/deck/notes.svelte showLineNumbers
+```svelte:src/lib/deck/notes.svelte showLineNumbers
 <aside class="notes">
 	<slot />
 </aside>
@@ -430,7 +430,7 @@ Speaker notes are only visible to you and they're useful to include notes for th
 
 You can include a node inside your slide.
 
-```html:src/lib/deck/presentation.svelte showLineNumbers
+```svelte:src/lib/deck/presentation.svelte showLineNumbers
 <script lang="ts">
 	import Slide from './slide.svelte'
 	import Code from './code.svelte'

@@ -36,7 +36,7 @@ export function greet() {
 }
 ```
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { greet } from '$lib'
 
@@ -46,7 +46,7 @@ export function greet() {
 
 You can use `onMount` to wait for the DOM to load and run the code.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { onMount } from 'svelte'
   import { greet } from '$lib'
@@ -67,7 +67,7 @@ export function greet() {
 window.alert('setup')
 ```
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { greet } from '$lib' // oops! 💩
 </script>
@@ -75,7 +75,7 @@ window.alert('setup')
 
 To solve this problem you can use a [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) inside `onMount`.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 
@@ -104,7 +104,7 @@ I'm going to use the framework agnostic JavaScript animation library [Motion One
 
 Most JavaScript libraries need to query the DOM for an element to perform a task — if you just read the docs for your library and try it out, you're going to see it just works.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { animate, stagger } from 'motion'
@@ -149,7 +149,7 @@ This works, but querying the DOM yourself is not a great idea and I advise again
 
 Instead of querying the DOM yourself, you can use the `bind:this` element directive to get a reference to a DOM node.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
   let letter: HTMLSpanElement
 </script>
@@ -161,7 +161,7 @@ Instead of querying the DOM yourself, you can use the `bind:this` element direct
 
 This works great for a single element but in this case we need to use an array.
 
-```html:+page.svelte {5,9,18} showLineNumbers
+```svelte:+page.svelte {5,9,18} showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { animate, stagger } from 'motion'
@@ -195,7 +195,7 @@ That being said I would love to make the code reusable. Instead of creating a co
 
 A Svelte action is just a reusable piece of code used to attach some behavior to an element.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <h1 use:animateText>
 	Svelte
 </h1>
@@ -203,7 +203,7 @@ A Svelte action is just a reusable piece of code used to attach some behavior to
 
 I'm going to create an `animateText` action and use it on the container with `use:animateText`.
 
-```html:+page.svelte {4-10,13} showLineNumbers
+```svelte:+page.svelte {4-10,13} showLineNumbers
 <script lang="ts">
 	import { animate, stagger } from 'motion'
 
@@ -226,7 +226,7 @@ I'm going to create an `animateText` action and use it on the container with `us
 
 You can take this a step further and have the entire logic inside the `animateText` Svelte action since it's just JavaScript.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	import { animate, stagger } from 'motion'
 
@@ -257,7 +257,7 @@ You can take this a step further and have the entire logic inside the `animateTe
 
 You can also pass parameters to the Svelte action.
 
-```html:+page.svelte {6,20,27} showLineNumbers
+```svelte:+page.svelte {6,20,27} showLineNumbers
 <script lang="ts">
 	import { animate, stagger } from 'motion'
 

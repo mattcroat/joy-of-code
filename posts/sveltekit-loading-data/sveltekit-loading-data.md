@@ -35,7 +35,7 @@ npm run dev
 
 I'm going to add a root layout with some navigation.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <nav>
   <ul>
     <li>
@@ -208,7 +208,7 @@ In this example I'm using an API endpoint for a newsletter form but SvelteKit ha
 
 When the user submits the form it's going to make a `POST` request to `/api/newsletter`.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   async function subscribe(event: Event) {
     const form = event.target as HTMLFormElement
@@ -296,7 +296,7 @@ First let's learn how to show the data on the page.
 
 This way of showing data on the page where you fetch the data on the client and show a loading state until you have the data might look familiar.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import type { Post } from '@prisma/client'
 
@@ -363,7 +363,7 @@ Remember how I said you're going to see the `event` argument everywhere? Same st
 
 Here is how you get the data for the page.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   export let data
 </script>
@@ -385,7 +385,7 @@ If you look at the network tab you're going to see the entire HTML document for 
 
 If you view the page source you can see how SvelteKit saves the data in the HTML because you used `event.fetch`.
 
-```html:example.html showLineNumbers
+```svelte:example.html showLineNumbers
 <script type="application/json" data-sveltekit-fetched data-url="/api/posts">
   // here is the page data as JSON
 </script>
@@ -393,7 +393,7 @@ If you view the page source you can see how SvelteKit saves the data in the HTML
 
 Using `data.whatever` can be tedious, so here's a neat trick you can use to pluck values from `data` and update the value using a reactive declaration.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   export let data
 
@@ -421,7 +421,7 @@ The `+page.ts` file is great for fetching data for the page but because it runs 
 
 I'm going to create a `routes/posts/[slug]/+page.svelte` route that should get the post from the database using the `slug` parameter.
 
-```html:src/routes/posts/[slug]/+page.svelte showLineNumbers
+```svelte:src/routes/posts/[slug]/+page.svelte showLineNumbers
 <script lang="ts">
   export let data
 
@@ -526,7 +526,7 @@ routes
 
 This is what you see when you visit `/posts`.
 
-```html:src/routes/posts/+page.svelte showLineNumbers
+```svelte:src/routes/posts/+page.svelte showLineNumbers
 <h1>Posts</h1>
 
 <p>You can browse posts here.</p>
@@ -552,7 +552,7 @@ export async function load() {
 
 This data is now available inside `/posts/+layout.svelte` and `/posts/+page.svelte` but also any child routes through the `data` prop.
 
-```html:src/routes/posts/+layout.svelte showLineNumbers
+```svelte:src/routes/posts/+layout.svelte showLineNumbers
 <script lang="ts">
   export let data
 </script>
@@ -589,7 +589,7 @@ This data is now available inside `/posts/+layout.svelte` and `/posts/+page.svel
 
 The same `posts` data is available inside the `/posts/[slug]/+page.svelte` child route.
 
-```html:src/routes/posts/[slug]/+page.svelte showLineNumbers
+```svelte:src/routes/posts/[slug]/+page.svelte showLineNumbers
 <script lang="ts">
   export let data
   // ...
@@ -622,7 +622,7 @@ So far we've seen how data flows in one direction but the `$page` store makes yo
 
 You could use the `$page` store to set the title for the page inside `routes/+layout.svelte`.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
 
@@ -653,7 +653,7 @@ export async function load(event) {
 
 If there's a session show the user information.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { page } from "$app/stores"
 </script>
@@ -704,7 +704,7 @@ You're used to having component state for something like search but you can't sh
 
 In SvelteKit you can use `goto` to update the search params which is also going to rerun the `load` function for the page.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { goto } from '$app/navigation'
 
@@ -738,7 +738,7 @@ If this sparked your interest here's the entire [working example on StackBlitz](
 
 There's also packages that make this a lot easier such as [sveltekit-search-params]([https://github.com/paoloricciuti/sveltekit-search-params](https://github.com/paoloricciuti/sveltekit-search-params 'https://github.com/paoloricciuti/sveltekit-search-params') which you should check out if you're going to do any URL fu.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
     import { queryParam } from 'sveltekit-search-params'
 
@@ -889,7 +889,7 @@ export async function load({ fetch, depends }) {
 
 If you use a random URL then option `b` won't work because you can't invalidate a random URL using that method.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { invalidate, invalidateAll } from '$app/navigation'
 

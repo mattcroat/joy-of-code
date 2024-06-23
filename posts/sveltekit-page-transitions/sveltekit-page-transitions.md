@@ -28,7 +28,7 @@ If you're curious why I'm not using the `$page` store you can watch the video wh
 
 Inside the root layout you can wrap `<slot/>` with a `#key ...` block which takes a value that when changed destroys and recreates the contents and plays the transition.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import { fly } from 'svelte/transition'
 
@@ -55,7 +55,7 @@ You can spice up your transition by creating a custom transition in Svelte which
 
 I'm going to create a `transition.svelte` component that uses a `flush` transition.
 
-```html:src/lib/transition.svelte showLineNumbers
+```svelte:src/lib/transition.svelte showLineNumbers
 <script lang="ts">
   import { cubicIn } from 'svelte/easing'
   import type { EasingFunction, TransitionConfig } from 'svelte/transition'
@@ -121,7 +121,7 @@ You can think of `t` as **time** but it's **not the duration** of the transition
 
 This is also how the [default Svelte transitions](https://svelte.dev/docs#run-time-svelte-transition) are implemented which you can find in the documentation.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import PageTransition from '$lib/transition.svelte'
 

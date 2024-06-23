@@ -196,7 +196,7 @@ As you might expect `+layout.ts` should run before `+page.ts` and `+layout.svelt
 
 If you're curious this is an approximation of how a layout and components work in SvelteKit.
 
-```html:example.html showLineNumbers
+```svelte:example.html showLineNumbers
 <Layout {data}>
   <!-- 🔥 if no error render child route -->
   <Page {data} />
@@ -416,7 +416,7 @@ If you navigate to `/error` you can see the entire output for `$page`.
 
 We can use this to customize the error page.
 
-```html:src/routes/+error.svelte. showLineNumbers
+```svelte:src/routes/+error.svelte. showLineNumbers
 <script lang="ts">
 	import { page } from '$app/stores'
 </script>
@@ -527,7 +527,7 @@ export const actions = {
 
 You can use a `form` prop to handle errors but I'm going to keep it simple.
 
-```html:src/routes/actions/+page.svelte showLineNumbers
+```svelte:src/routes/actions/+page.svelte showLineNumbers
 <script lang="ts">
 	import { enhance } from '$app/forms'
 

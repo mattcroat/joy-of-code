@@ -34,7 +34,7 @@ Svelte exposes seven transition functions `fade`, `blur`, `fly`, `slide`, `scale
 
 You can use the same intro and outro transition with `transition:fade` but if you want to use different intro and outro transitions use `in:` and `out:`.
 
-```html:+page.svelte {2, 13-15} showLineNumbers
+```svelte:+page.svelte {2, 13-15} showLineNumbers
 <script lang="ts">
   import { fade } from 'svelte/transition'
 
@@ -78,7 +78,7 @@ I want to animate a title and need to split the lines which is simple using Svel
 - To get a stagger effect where the next element animating in is delayed you can multiply the `index` of the element by some time `300ms` for the `delay`
 - I want the text to appear from the bottom of the element instead of fading in from the starting `y` position, so I set `overflow: hidden` on the parent
 
-```html:+page.svelte {2, 3, 5-12, 24-37} showLineNumbers
+```svelte:+page.svelte {2, 3, 5-12, 24-37} showLineNumbers
 <script lang="ts">
   import { fly } from 'svelte/transition'
   import { backOut } from 'svelte/easing'
@@ -152,7 +152,7 @@ If you use `transition:fly` the transition would play in reverse when the compon
 
 You can also use [transition events](https://svelte.dev/docs#template-syntax-element-directives-transition-fn-transition-events) and other standard DOM events.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 {#if animate}
   <p
     transition:fade
@@ -170,7 +170,7 @@ Some of the transitions are specific to certain things like `draw` for animating
 
 Here's how you can animate an SVG of a circle with a check mark in Svelte for delightful interactions.
 
-```html:+page.svelte {2, 24, 28} showLineNumbers
+```svelte:+page.svelte {2, 24, 28} showLineNumbers
 <script lang="ts">
   import { draw } from 'svelte/transition'
 
@@ -214,7 +214,7 @@ Local transitions only play when the block they belong to is created or destroye
 
 You're not going to encounter this problem often but when you do it's useful to know about and you only have to add the `local` modifier to your transition.
 
-```html:+page.svelte {23} showLineNumbers
+```svelte:+page.svelte {23} showLineNumbers
 <script lang="ts">
   import { fade, slide } from 'svelte/transition'
 
@@ -292,7 +292,7 @@ Sometimes you want to play a transition whenever a value changes and the `{#key 
 
 Let's say I have notifications and I want to animate the count when it updates.
 
-```html:+page.svelte {3, 5, 8, 15-17} showLineNumbers
+```svelte:+page.svelte {3, 5, 8, 15-17} showLineNumbers
 <script lang="ts">
   import { onMount } from 'svelte'
   import { scale } from 'svelte/transition'
@@ -362,7 +362,7 @@ Because SvelteKit is the default way to build Svelte apps you might want to know
 
 To start create a `<PageTransition>` component that accepts a `key` so it knows when the page changes to play the transition and `duration` as the props.
 
-```html:transition.svelte showLineNumbers
+```svelte:transition.svelte showLineNumbers
 <script lang="ts">
   import { slide } from 'svelte/transition'
 
@@ -401,7 +401,7 @@ export const load: LayoutLoad = ({ url }) => {
 
 Inside `+layout.svelte` receive and pass the prop to the component.
 
-```html:+layout.svelte showLineNumbers
+```svelte:+layout.svelte showLineNumbers
 <script lang="ts">
   import PageTransition from './transition.svelte'
   import type { PageData } from './$types'
@@ -453,7 +453,7 @@ I have a simple modal I want to spice up when a user opens it by scaling and tra
 
 > 🐿️ The easiest way to think about `t` is that it animates **TO** the value you specified and `u` animates **FROM** the value you specified — if you animate `scale` with `t` it goes from `0` to `1` being the normal state but using `u` it would go from `1` to `0`.
 
-```html:modal.svelte {3, 12-29, 37} showLineNumbers
+```svelte:modal.svelte {3, 12-29, 37} showLineNumbers
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import { quintOut } from 'svelte/easing'
@@ -530,7 +530,7 @@ I have a simple modal I want to spice up when a user opens it by scaling and tra
 
 Time to use the best modal ever.
 
-```html:+page.svelte {2, 13-18} showLineNumbers
+```svelte:+page.svelte {2, 13-18} showLineNumbers
 <script lang="ts">
   import Modal from './modal.svelte'
 
@@ -564,7 +564,7 @@ The Svelte documentation advises to use `css` when possible because of performan
 
 {% video src="transitions-custom-js.mp4" %}
 
-```html:+page.svelte {10-24, 35-37} showLineNumbers
+```svelte:+page.svelte {10-24, 35-37} showLineNumbers
 <script lang="ts">
   import type { TransitionConfig } from 'svelte/transition'
 
@@ -634,7 +634,7 @@ The `crossfade` function creates a pair of transitions called `send` and `receiv
 
 I have some items I'm sending from one element to another and I want to animate that change using `crossfade` and provide a fallback when the item is removed.
 
-```html:+page.svelte {2-3, 6-23, 48-49, 62-63} showLineNumbers
+```svelte:+page.svelte {2-3, 6-23, 48-49, 62-63} showLineNumbers
 <script lang="ts">
   import { crossfade } from 'svelte/transition'
   import { quintOut } from 'svelte/easing'
@@ -772,7 +772,7 @@ In the previous example if you remove an element it just leaves an empty space b
 
 {% video src="animate-flip.mp4" %}
 
-```html:+page.svelte {2, 11, 27} showLineNumbers
+```svelte:+page.svelte {2, 11, 27} showLineNumbers
 <script lang="ts">
   import { flip } from 'svelte/animate'
   // ...
@@ -831,7 +831,7 @@ In the next example I made a Pokémon game simulator where the Pokémon receives
 
 {% video src="motion-tweened.mp4" %}
 
-```html:+page.svelte {3, 12, 18, 26, 49-50, 54} showLineNumbers
+```svelte:+page.svelte {3, 12, 18, 26, 49-50, 54} showLineNumbers
 <script lang="ts">
   import { onMount } from 'svelte'
   import { tweened } from 'svelte/motion'
@@ -991,7 +991,7 @@ I have a simple box I want to animate using spring physics and I'm going to use 
 
 {% video src="motion-spring.mp4" %}
 
-```html:+page.svelte {2, 11-35, 40} showLineNumbers
+```svelte:+page.svelte {2, 11-35, 40} showLineNumbers
 <script lang="ts">
   import { spring } from 'svelte/motion'
   import type { Action } from 'svelte/action'
@@ -1059,7 +1059,7 @@ I'm working on a card game and want to animate placing cards from your hand to t
 
 There's other problems when it comes to FLIP animations like nested transforms (rotations are evil okay) but GSAP provides a [Flip plugin](https://greensock.com/docs/v3/Plugins/Flip/) that takes care of everything for you.
 
-```html:+page.svelte {2-3, 5, 23-33, 54, 62, 74, 88} showLineNumbers
+```svelte:+page.svelte {2-3, 5, 23-33, 54, 62, 74, 88} showLineNumbers
 <script lang="ts">
   import { gsap } from 'gsap'
   import Flip from 'gsap/dist/Flip'
@@ -1266,7 +1266,7 @@ export const springIn: SpringInAction = (node, params) => {
 
 You can import and use the action anywhere on any element.
 
-```html:+page.svelte {2, 7} showLineNumbers
+```svelte:+page.svelte {2, 7} showLineNumbers
 <script lang="ts">
   import { springIn } from './animations'
 </script>
@@ -1316,7 +1316,7 @@ export function getPrefersReducedMotion() {
 }
 ```
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { getPrefersReducedMotion } from './media'
 

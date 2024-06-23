@@ -114,7 +114,7 @@ export async function load({ locals }) {
 
 In a previous part we learned that data sent from a layout `load` function gets merged with `data` in child routes but it also becomes available inside the `$page.data` store.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
 </script>
@@ -132,7 +132,7 @@ If you're looking for a SvelteKit auth library that just works I recommend tryin
 
 If you do internalization you want to be able to change the `<html>` language attribute to the user locale.
 
-```html:src/app.html showLineNumbers
+```svelte:src/app.html showLineNumbers
 <html lang="%lang%">
 ```
 
@@ -293,7 +293,7 @@ export async function handle({ event, resolve }) {
 
 Use a form the same as you would before and keep in mind the `name` attribute is important for the values.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
 </script>

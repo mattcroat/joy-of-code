@@ -56,7 +56,7 @@ Let's look at a problem and how it's solved using the Svelte context API with Sv
 
 You have probably seen an example that uses component composition in Svelte before.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { Grandparent, Parent, Child } from '$lib/components'
 </script>
@@ -70,7 +70,7 @@ You have probably seen an example that uses component composition in Svelte befo
 
 Inside the `<Grandparent />` component there's a count variable that's updated by using the mouse scroll wheel.
 
-```html:src/lib/components/grandparent.svelte showLineNumbers
+```svelte:src/lib/components/grandparent.svelte showLineNumbers
 <script lang="ts">
   export let count
 
@@ -87,7 +87,7 @@ Inside the `<Grandparent />` component there's a count variable that's updated b
 
 If you want to show the `count` value in the child components you have to pass it to every child component.
 
-```html:src/routes/+page.svelte {4, 7-9} showLineNumbers
+```svelte:src/routes/+page.svelte {4, 7-9} showLineNumbers
 <script lang="ts">
 	import { Grandparent, Parent, Child } from '$lib/components'
 
@@ -103,7 +103,7 @@ If you want to show the `count` value in the child components you have to pass i
 
 The `<Parent />` and `<Child />` components are identical.
 
-```html:src/lib/components/parent.svelte showLineNumbers
+```svelte:src/lib/components/parent.svelte showLineNumbers
 <script lang="ts">
   export let count
 </script>
@@ -114,7 +114,7 @@ The `<Parent />` and `<Child />` components are identical.
 </div>
 ```
 
-```html:src/lib/components/child.svelte showLineNumbers
+```svelte:src/lib/components/child.svelte showLineNumbers
 <script lang="ts">
   export let count
 </script>
@@ -139,7 +139,7 @@ export const count = writable(0)
 
 This cleans up the code nicely.
 
-```html:src/routes/+page.svelte {2, 5-7} showLineNumbers
+```svelte:src/routes/+page.svelte {2, 5-7} showLineNumbers
 <script lang="ts">
 	import { Grandparent, Parent, Child } from '$lib/components'
 </script>
@@ -151,7 +151,7 @@ This cleans up the code nicely.
 </Grandparent>
 ```
 
-```html:src/lib/components/grandparent.svelte {2,5,10} showLineNumbers
+```svelte:src/lib/components/grandparent.svelte {2,5,10} showLineNumbers
 <script lang="ts">
   import { count } from './store'
 
@@ -166,7 +166,7 @@ This cleans up the code nicely.
 </div>
 ```
 
-```html:src/lib/components/parent.svelte {2,6} showLineNumbers
+```svelte:src/lib/components/parent.svelte {2,6} showLineNumbers
 <script lang="ts">
     import { count } from './store'
 </script>
@@ -177,7 +177,7 @@ This cleans up the code nicely.
 </div>
 ```
 
-```html:src/lib/components/child.svelte {2,6} showLineNumbers
+```svelte:src/lib/components/child.svelte {2,6} showLineNumbers
 <script lang="ts">
   import { count } from './store'
 </script>
@@ -190,7 +190,7 @@ This cleans up the code nicely.
 
 So what is the downside?
 
-```html:src/routes/+page.svelte {11-15} showLineNumbers
+```svelte:src/routes/+page.svelte {11-15} showLineNumbers
 <script lang="ts">
 	import { Grandparent, Parent, Child } from '$lib/components'
 </script>
@@ -241,7 +241,7 @@ Make sure you don't define the `count` store outside the `setCount` function bec
 
 The data from context is **only** available to the **component** and its **descendants**.
 
-```html:src/lib/components/grandparent.svelte {2,5,8,16} showLineNumbers
+```svelte:src/lib/components/grandparent.svelte {2,5,8,16} showLineNumbers
 <script lang="ts">
 	import { setCount, getCount } from './context'
 
@@ -262,7 +262,7 @@ The data from context is **only** available to the **component** and its **desce
 </div>
 ```
 
-```html:src/lib/components/parent.svelte {2,4,8} showLineNumbers
+```svelte:src/lib/components/parent.svelte {2,4,8} showLineNumbers
 <script lang="ts">
 	import { getCount } from './context'
 
@@ -275,7 +275,7 @@ The data from context is **only** available to the **component** and its **desce
 </div>
 ```
 
-```html:src/lib/components/child.svelte {2,4,8} showLineNumbers
+```svelte:src/lib/components/child.svelte {2,4,8} showLineNumbers
 <script lang="ts">
 	import { getCount } from './context'
 

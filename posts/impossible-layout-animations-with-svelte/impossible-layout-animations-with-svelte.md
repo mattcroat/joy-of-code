@@ -57,7 +57,7 @@ The FLIP animation technique looks like magic but it's simple math and you're go
 
 In the example I'm listening for clicks on the document to swap the container that holds the circle element.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	// reference to the circle element
 	let circleEl: HTMLDivElement
@@ -129,7 +129,7 @@ You don't have to name the function `flip()` but can use a more descriptive name
 
 The important part of understanding how to use FLIP is to not think about FLIP and just do the changes to the UI as usual.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	function flip() {
     // make change
@@ -140,7 +140,7 @@ The important part of understanding how to use FLIP is to not think about FLIP a
 
 After you're done apply the FLIP animation technique.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	function flip() {
     // get the FIRST position
@@ -157,7 +157,7 @@ After you're done apply the FLIP animation technique.
 
 I'm going to use `getBoundingClientRect()` to get the measurements for the elements and calculate the difference — to animate the change I'm going to use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   function flip() {
 		// get the FIRST position
@@ -194,7 +194,7 @@ That being said it's not going to work yet because Svelte batches updates and yo
 
 You can solve this problem by using the `requestAnimationFrame()` method or the built-in `tick()` lifecycle function from Svelte.
 
-```html:+page.svelte {2,12} showLineNumbers
+```svelte:+page.svelte {2,12} showLineNumbers
 <script lang="ts">
 	import { tick } from 'svelte'
 
@@ -251,7 +251,7 @@ This demonstrates how GSAP handles animating values like the border radius and r
 
 This is the code in question before doing any animation.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	function flip() {
 		// change layout
@@ -332,7 +332,7 @@ npm i gsap @types/gsap
 
 Besides importing GSAP and the Flip plugin you also have to load the plugin.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	import { tick } from 'svelte'
 	import { gsap } from 'gsap/dist/gsap'
@@ -345,7 +345,7 @@ Besides importing GSAP and the Flip plugin you also have to load the plugin.
 
 Using the FLIP animation technique with GSAP works the same way but it does everything for you.
 
-```html:+page.svelte {2-4,6,10,16,19-26} showLineNumbers
+```svelte:+page.svelte {2-4,6,10,16,19-26} showLineNumbers
 <script lang="ts">
 	import { tick } from 'svelte'
 	import { gsap } from 'gsap/dist/gsap'
@@ -392,7 +392,7 @@ You're not animating CSS Grid values of course but using the FLIP animation tech
 
 The example uses a simple grid and uses the `.details` class which makes the image span two rows and two columns.
 
-```html:+page.svelte {3,7,13,18,70-73} showLineNumbers
+```svelte:+page.svelte {3,7,13,18,70-73} showLineNumbers
 <script lang="ts">
 	// selected image
 	let selected = 0
@@ -484,7 +484,7 @@ The example uses a simple grid and uses the `.details` class which makes the ima
 
 Let's FLIP it!
 
-```html:+page.svelte {2-4,6,13,19,22-26} showLineNumbers
+```svelte:+page.svelte {2-4,6,13,19,22-26} showLineNumbers
 <script lang="ts">
 	import { tick } from 'svelte'
 	import { gsap } from 'gsap/dist/gsap'
@@ -517,7 +517,7 @@ Let's FLIP it!
 
 The `Flip` method returns a GSAP timeline you can use to fade in the title and I'm also going to use the `onStart()` callback to fade out any other titles.
 
-```html:+page.svelte {9-16,19-23} showLineNumbers
+```svelte:+page.svelte {9-16,19-23} showLineNumbers
 <script lang="ts">
 	// ...
 	async function flip(id: number) {
@@ -559,7 +559,7 @@ For this example I have a `/movies` and `/movies/movie/[id]` route and I want to
 
 The routes have a shared layout I'm going to use to do the FLIP animation and I also need to know when the page is about to transition to measure the elements.
 
-```html:movies/+layout.svelte {2,8,10-12,14-21} showLineNumbers
+```svelte:movies/+layout.svelte {2,8,10-12,14-21} showLineNumbers
 <script lang="ts">
 	import { afterNavigate, beforeNavigate } from '$app/navigation'
 	import { gsap } from 'gsap/dist/gsap'
@@ -590,7 +590,7 @@ You can also query more elements than one as I'm doing for the cover and title i
 
 This won't work yet because GSAP needs more help to understand what elements it should animate which is what the special `data-flip-id` attribute is for.
 
-```html:movies/+page.svelte {14,22} showLineNumbers
+```svelte:movies/+page.svelte {14,22} showLineNumbers
 <script lang="ts">
 	export let data
 </script>
@@ -623,7 +623,7 @@ This won't work yet because GSAP needs more help to understand what elements it 
 <!-- ... -->
 ```
 
-```html:movies/movies/[id]/+page.svelte {17,25} showLineNumbers
+```svelte:movies/movies/[id]/+page.svelte {17,25} showLineNumbers
 <script lang="ts">
 	import { page } from '$app/stores'
 

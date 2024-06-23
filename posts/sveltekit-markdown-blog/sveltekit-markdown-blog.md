@@ -72,7 +72,7 @@ npm i open-props lucide-svelte @fontsource/manrope @fontsource/jetbrains-mono
 
 Update the favicon inside `app.html` so everyone knows your site is blazingly fast.
 
-```html:src/app.html {6} showLineNumbers
+```svelte:src/app.html {6} showLineNumbers
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -101,7 +101,7 @@ export const url = dev ? 'http://localhost:5173/' : 'https://joyofcode.xyz/'
 
 Add a root layout inside `src/routes/+layout.svelte` which is going to include the **header**, **footer** and **styles** for the site.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
@@ -148,7 +148,7 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 </style>
 ```
 
-```html:src/routes/header.svelte showLineNumbers
+```svelte:src/routes/header.svelte showLineNumbers
 <script lang="ts">
 	import * as config from '$lib/config'
 </script>
@@ -205,7 +205,7 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 </style>
 ```
 
-```html:src/routes/footer.svelte showLineNumbers
+```svelte:src/routes/footer.svelte showLineNumbers
 <script lang="ts">
 	import * as config from '$lib/config'
 </script>
@@ -544,7 +544,7 @@ export async function load({ fetch }) {
 
 At this point you just need to loop over the posts and that's it.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { formatDate } from '$lib/utils'
 	import * as config from '$lib/config'
@@ -641,7 +641,7 @@ export async function load({ params }) {
 
 Because the Markdown file is imported as a module and processed by mdsvex you can pass `data.content` as a Svelte component to `<svelte:component this={data.content} />`.
 
-```html:src/routes/[slug]/+page.svelte showLineNumbers
+```svelte:src/routes/[slug]/+page.svelte showLineNumbers
 <script lang="ts">
 	import { formatDate } from '$lib/utils'
 
@@ -794,7 +794,7 @@ You can do a lot more with Shiki by reading their docs but if you want line numb
 
 You can import regular Svelte components inside Markdown from interactive data visualizations to working code examples.
 
-```html:src/posts/counter.svelte showLineNumbers
+```svelte:src/posts/counter.svelte showLineNumbers
 <script lang="ts">
 	let count = 0
 
@@ -838,7 +838,7 @@ const mdsvexOptions = {
 
 I'm going to create a custom `img.svelte` component but I'm going to use `index.ts` to export every custom component from `lib/components/custom` making it easier to use when you add more components in the future.
 
-```html:src/lib/components/custom/img.svelte showLineNumbers
+```svelte:src/lib/components/custom/img.svelte showLineNumbers
 <script lang="ts">
 	export let src: string
 	export let alt: string
@@ -856,7 +856,7 @@ The custom component receives the attributes of the element you want to replace 
 
 Inside the layout you have to import and export the custom component **with the same name** as the element you want to replace.
 
-```html:src/mdsvex.svelte showLineNumbers
+```svelte:src/mdsvex.svelte showLineNumbers
 <script lang="ts" context="module">
 	import { img } from '$lib/components/custom'
 	export { img }
@@ -929,7 +929,7 @@ I'm going to write the code that checks for the theme in `app.html` because it's
 
 Flashing happens when JavaScript is not loaded on the page and because of it when your component mounts it only then goes to `localStorage` to check if you set a theme.
 
-```html:src/app.html {5-11} showLineNumbers
+```svelte:src/app.html {5-11} showLineNumbers
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -982,7 +982,7 @@ export function setTheme(newTheme: Theme) {
 
 I'm going to create a `toggle.svelte` component and use it inside `header.svelte`.
 
-```html:src/routes/toggle.svelte showLineNumbers
+```svelte:src/routes/toggle.svelte showLineNumbers
 <script lang="ts">
 	import { fly } from 'svelte/transition'
 	import { Moon, Sun } from 'lucide-svelte'
@@ -1020,7 +1020,7 @@ I'm going to create a `toggle.svelte` component and use it inside `header.svelte
 </style>
 ```
 
-```html:header.svelte {2, 8} showLineNumbers
+```svelte:header.svelte {2, 8} showLineNumbers
 <script lang="ts">
 	import Toggle from './toggle.svelte'
 	// ...
@@ -1050,7 +1050,7 @@ export async function load({ url }) {
 }
 ```
 
-```html:src/routes/transition.svelte showLineNumbers
+```svelte:src/routes/transition.svelte showLineNumbers
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 
@@ -1070,7 +1070,7 @@ export async function load({ url }) {
 </style>
 ```
 
-```html:src/routes/+layout.svelte {4, 6, 13-15} showLineNumbers
+```svelte:src/routes/+layout.svelte {4, 6, 13-15} showLineNumbers
 <script lang="ts">
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
@@ -1144,7 +1144,7 @@ This is the least XML required for an RSS feed which you can validate with [W3C 
 
 You can include this markup in `app.html` so when people input your website URL in their RSS reader it's going to pick it up.
 
-```html:src/app.html {4} showLineNumbers
+```svelte:src/app.html {4} showLineNumbers
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -1161,7 +1161,7 @@ Let's customize the error page before we deploy the site by adding `+error.svelt
 
 > 🐿️ You can add `+error.svelte` inside other routes if you want but since we don't have a lot of nested layouts this is fine.
 
-```html:src/routes/+error.svelte showLineNumbers
+```svelte:src/routes/+error.svelte showLineNumbers
 <script>
 	import { page } from '$app/stores'
 </script>

@@ -56,7 +56,7 @@ export { ShikiMagicMove, ShikiMagicMoveRenderer }
 
 You should copy over these [Shiki Magic Move styles](https://github.com/joysofcode/shiki-magic-move/blob/main/src/routes/app.css) inside `app.css`, and include it inside your root layout.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
 	import './app.css'
 
@@ -74,7 +74,7 @@ You should copy over these [Shiki Magic Move styles](https://github.com/joysofco
 
 Inside `+page.svelte` create the Shiki highlighter and pass it to the `<ShikiMagicMove>` component.
 
-```html:src/routes/+pages.svelte {2,8-11,21-32} showLineNumbers
+```svelte:src/routes/+pages.svelte {2,8-11,21-32} showLineNumbers
 <script lang="ts">
 	import { getHighlighter } from 'shiki'
 	import ShikiMagicMove from '$lib/ShikiMagicMove.svelte'
@@ -112,7 +112,7 @@ Inside `+page.svelte` create the Shiki highlighter and pass it to the `<ShikiMag
 
 Inside the `<ShikiMagicMove>` component we have to create the `machine` to tokenize the code, derive the result each time the reactive `code` value updates using Svelte's `$derived` rune, and pass the props to the `<ShikiMagicMoveRenderer>` component.
 
-```html:src/lib/ShikiMagicMove.svelte {2,8-16,21,22} showLineNumbers
+```svelte:src/lib/ShikiMagicMove.svelte {2,8-16,21,22} showLineNumbers
 <script lang="ts">
 	import { codeToKeyedTokens, createMagicMoveMachine } from 'shiki-magic-move/core'
 	import ShikiMagicMoveRenderer from './ShikiMagicMoveRenderer.svelte'
@@ -145,7 +145,7 @@ Inside the `<ShikiMagicMove>` component we have to create the `machine` to token
 
 Inside the `<ShikiMagicMoveRenderer>` component we have to render the `<pre>` tag, create the `MagicMoveRenderer`, and invoke the `render()` method using the tokens to start the animation, which is going to rerun the `$effect` each time `tokens` update.
 
-```html:src/lib/ShikiMagicMoveRenderer.svelte {2,7-8,16,42,54} showLineNumbers
+```svelte:src/lib/ShikiMagicMoveRenderer.svelte {2,7-8,16,42,54} showLineNumbers
 <script lang="ts">
 	import { MagicMoveRenderer } from 'shiki-magic-move/renderer'
 	import type { ShikiMagicMoveRendererProps } from './types'

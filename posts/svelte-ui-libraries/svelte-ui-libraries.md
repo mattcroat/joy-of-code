@@ -16,7 +16,7 @@ These Svelte UI libraries don't provide ready to use components, but provide the
 
 [Melt UI](https://melt-ui.com/) is a low level API for creating your own components. It's probably my favorite, but it can be intense if you need a quick, and simple component. Their code examples provide regular CSS styles and Tailwind CSS versions you can use.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
 	import { createSelect, melt } from '@melt-ui/svelte'
 
@@ -52,7 +52,7 @@ These Svelte UI libraries don't provide ready to use components, but provide the
 
 [Bits UI](https://www.bits-ui.com/) uses Melt UI as the base, so it's accessible, customizable, and includes a lot of components. It's simple to use, and you can use regular CSS, or Tailwind CSS to style the components.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
 	import { Select } from 'bits-ui'
 
@@ -85,7 +85,7 @@ These Svelte UI libraries use the utility-first CSS framework [Tailwind](https:/
 
 [Skeleton UI](https://www.skeleton.dev/) is a UI toolkit for Svelte that comes with premade components and utilities. It has great docs, themes, including a theme generator, and a Figma design kit. I would love to see more component variety.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
 	import { AppShell } from '@skeletonlabs/skeleton'
 </script>
@@ -100,7 +100,7 @@ These Svelte UI libraries use the utility-first CSS framework [Tailwind](https:/
 
 [Flowbite Svelte](https://flowbite-svelte.com/) is opinionated but customizable, has great docs, RTL support, and comes with a lot of easy to use components. Some components seem to use native elements making the design look less cohesive, but it's simple to use.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
 	import { Select, Label } from 'flowbite-svelte'
 
@@ -122,7 +122,7 @@ These Svelte UI libraries use the utility-first CSS framework [Tailwind](https:/
 
 [shadcn-svelte](https://www.shadcn-svelte.com/) is an unofficial Svelte port of [shadcn/ui](https://ui.shadcn.com/) and it's unlike any other UI library because it's not a library, but a collection of reusable components that you can copy and paste, or use the CLI to add to your apps, where the styles are separate from the implementation which is genius but some people raise valid concerns about updates.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
 	import * as Select from '$lib/components/ui/select'
 

@@ -614,7 +614,7 @@ I prefer not to use semicolons and have the line length be shorter so it's easie
 
 🖌️ First let's update the favicon so it's more appropriate and you can also remove the one inside the `static` folder.
 
-```html:src/app.html {6} showLineNumbers
+```svelte:src/app.html {6} showLineNumbers
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -776,7 +776,7 @@ ol {
 
 🖌️ To start let's add a simple landing page so open `index.svelte` and update it.
 
-```html:routes/index.svelte showLineNumbers
+```svelte:routes/index.svelte showLineNumbers
 <script lang="ts">
 	import { fly } from 'svelte/transition'
 </script>
@@ -853,7 +853,7 @@ Let's see how this looks in practice!
 
 🖌️ Inside `routes` add `__layout.svelte`.
 
-```html:routes/__layout.svelte showLineNumbers
+```svelte:routes/__layout.svelte showLineNumbers
 <script lang="ts">
 	import '$root/styles/global.css'
 </script>
@@ -877,7 +877,7 @@ SvelteKit provides a default error page but it's hard to read so we can do bette
 
 🖌️ Let's add `__error.svelte` inside `routes` to handle errors.
 
-```html:routes/__error.svelte showLineNumbers
+```svelte:routes/__error.svelte showLineNumbers
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit'
 
@@ -934,7 +934,7 @@ In this section you're going to add the home layout for the navigation, main con
 
 🖌️ Create a `home` folder inside `routes` with `index.svelte` inside which should make it available at [http://localhost:3000/home](http://localhost:3000/home).
 
-```html:routes/home/index.svelte showLineNumbers
+```svelte:routes/home/index.svelte showLineNumbers
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
@@ -959,7 +959,7 @@ I created an `<Icon>` component for SVGs to make the code more readable but I re
 <details>
   <summary>icon.svelte</summary>
 
-```html:components/icon.svelte showLineNumbers
+```svelte:components/icon.svelte showLineNumbers
 <script lang="ts">
 	export let name: IconType
 	export let width: string
@@ -1085,7 +1085,7 @@ Before we add the layout we need to add the `<Navigation>` and `<Trending>` comp
 <details>
   <summary>navigation.svelte</summary>
 
-```html:components/navigation.svelte showLineNumbers
+```svelte:components/navigation.svelte showLineNumbers
 <script lang="ts">
 	import { page } from '$app/stores'
 	import Icon from '$root/components/icon.svelte'
@@ -1210,7 +1210,7 @@ The tweet button is just a placeholder so it matches the original design. 😅
 <details>
   <summary>trending.svelte</summary>
 
-```html:components/trending.svelte showLineNumbers
+```svelte:components/trending.svelte showLineNumbers
 <aside>
 	<div class="container">
 		<div class="placeholder" />
@@ -1278,7 +1278,7 @@ Now we can create another nested layout and it's going to inherit the global sty
 
 🖌️ Create a `__layout.svelte` in the `home` folder.
 
-```html:routes/home/__layout.svelte showLineNumbers
+```svelte:routes/home/__layout.svelte showLineNumbers
 <script lang="ts">
 	import Navigation from '$root/components/navigation.svelte'
 	import Trending from '$root/components/trending.svelte'
@@ -1325,7 +1325,7 @@ I want to show you the real power of nested layouts — if a part of your site e
 
 🖌️ Let's add an error page which is going to be used by the other pages.
 
-```html:routes/home/__error.svelte showLineNumbers
+```svelte:routes/home/__error.svelte showLineNumbers
 <script lang="ts" context="module">
 	import type { Load } from '@sveltejs/kit'
 
@@ -1374,7 +1374,7 @@ SvelteKit endpoints are just files that export [request handler](https://kit.sve
 
 A `<form>` has an `action` that's the destination that processes the form submission and a `method` to submit the form with.
 
-```html:example.html showLineNumbers
+```svelte:example.html showLineNumbers
 <form action="/api/items" method="GET">
   <button>Get Items</button>
 </form>
@@ -1406,7 +1406,7 @@ If you use a `loader` function inside a component using `fetch` you can expose t
 
 If the endpoint has the same name as the component you can just use the `items` prop from the [shadow endpoint](https://github.com/sveltejs/kit/issues/3532).
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script context="module">
 	// you don't have to do this part!
 	export function loader({ fetch }) {
@@ -1557,7 +1557,7 @@ Back in `index.svelte` we can use the `tweets` prop. You can log it if you want 
 
 You can print information to the screen using `JSON.stringify` because sometimes it's easier to look at than using the console.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script>
 	export let tweets
 </script>
@@ -1587,7 +1587,7 @@ We're going to pass each tweet as a prop to a `<Tweet>` component mostly because
 
 🖌️ Update `index.svelte`.
 
-```html:routes/home/index.svelte showLineNumbers
+```svelte:routes/home/index.svelte showLineNumbers
 <script lang="ts">
 	import Tweet from '$root/components/tweet.svelte'
 	import type { TweetType } from '$root/types'
@@ -1613,7 +1613,7 @@ We're going to pass each tweet as a prop to a `<Tweet>` component mostly because
 <details>
 	<summary>tweet.svelte</summary>
 
-```html:components/tweet.svelte
+```svelte:components/tweet.svelte
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition'
 
@@ -1868,7 +1868,7 @@ So far we can only read hot takes but we can't post any! 😱 This requires urge
 
 🖌️ Create a `compose.svelte` component inside `components` and import it inside `home/index.svelte`.
 
-```html:components/compose.svelte showLineNumbers
+```svelte:components/compose.svelte showLineNumbers
 <script lang="ts">
 	let tweet = ''
 	let maxCharacters = 140
@@ -1938,7 +1938,7 @@ So far we can only read hot takes but we can't post any! 😱 This requires urge
 </style>
 ```
 
-```html:routes/home/index.svelte {2,8} showLineNumbers
+```svelte:routes/home/index.svelte {2,8} showLineNumbers
 <script lang="ts">
 	import Compose from '$root/components/compose.svelte'
 	// ...
@@ -2010,7 +2010,7 @@ SvelteKit lets you override HTTP methods just by changing the config and for the
 
 This is our form inside `tweet.svelte` for removing a tweet. We're using a 🥷 sneaky hidden input to send the tweet id.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <form action="/home?_method=delete" method="post">
 	<input type="hidden" name="id" value={tweet.id} />
 	<button
@@ -2145,7 +2145,7 @@ You can use `[parameter]` for naming your folder and files to get a dynamic para
 
 🖌️ Add a `[user].svelte` file inside `home/profile/[user].svelte`.
 
-```html:routes/home/profile/[user].svelte showLineNumbers
+```svelte:routes/home/profile/[user].svelte showLineNumbers
 <script lang="ts">
 	import type { User } from '@prisma/client'
 
@@ -2345,7 +2345,7 @@ Inside the endpoint you can get the user and the tweet id that's the special url
 
 🖌️ Create the `home/profile/[user]/status/[tweetId]/index.svelte` path.
 
-```html:home/profile/[user]/status/[tweetId]/index.svelte showLineNumbers
+```svelte:home/profile/[user]/status/[tweetId]/index.svelte showLineNumbers
 <h1>Profile</h1>
 ```
 
@@ -2395,7 +2395,7 @@ export const GET: RequestHandler = async ({ params }) => {
 
 🖌️ Update `index.svelte`.
 
-```html:home/profile/[user]/status/[tweetId]/index.svelte showLineNumbers
+```svelte:home/profile/[user]/status/[tweetId]/index.svelte showLineNumbers
 <script lang="ts">
 	import Tweet from '$root/components/tweet.svelte'
 	import type { TweetType } from '$root/types'
@@ -2425,7 +2425,7 @@ I want to show you how awesome nested layouts are inspired by the [Twitter setti
 
 🖌️ First start by creating `index.svelte` inside `home/settings` which is going to be empty.
 
-```html:routes/home/settings/index.svelte showLineNumbers
+```svelte:routes/home/settings/index.svelte showLineNumbers
 <svelte:head>
 	<title>Settings</title>
 </svelte:head>
@@ -2436,7 +2436,7 @@ I want to show you how awesome nested layouts are inspired by the [Twitter setti
 <details>
   <summary>personalization.svelte</summary>
 
-```html:routes/home/settings/personalization.svelte showLineNumbers
+```svelte:routes/home/settings/personalization.svelte showLineNumbers
 <svelte:head>
 	<title>Settings | Personalization</title>
 </svelte:head>
@@ -2449,7 +2449,7 @@ I want to show you how awesome nested layouts are inspired by the [Twitter setti
 <details>
   <summary>data.svelte</summary>
 
-```html:routes/home/settings/data.svelte showLineNumbers
+```svelte:routes/home/settings/data.svelte showLineNumbers
 <svelte:head>
 	<title>Settings | Data</title>
 </svelte:head>
@@ -2462,7 +2462,7 @@ I want to show you how awesome nested layouts are inspired by the [Twitter setti
 <details>
   <summary>cookies.svelte</summary>
 
-```html:routes/home/settings/cookies.svelte showLineNumbers
+```svelte:routes/home/settings/cookies.svelte showLineNumbers
 <svelte:head>
 	<title>Settings | Cookies</title>
 </svelte:head>
@@ -2475,7 +2475,7 @@ I want to show you how awesome nested layouts are inspired by the [Twitter setti
 <details>
   <summary>resources.svelte</summary>
 
-```html:routes/home/settings/resources.svelte showLineNumbers
+```svelte:routes/home/settings/resources.svelte showLineNumbers
 <svelte:head>
 	<title>Settings | Resources</title>
 </svelte:head>
@@ -2491,13 +2491,13 @@ SvelteKit has the concept of [named layouts](https://kit.svelte.dev/docs/layouts
 
 🖌️ Create a named layout in `routes`.
 
-```html:routes/__layout-reset.svelte showLineNumbers
+```svelte:routes/__layout-reset.svelte showLineNumbers
 <slot />
 ```
 
 To reset the layout create `__layout@reset.svelte` inside `settings`.
 
-```html:routes/home/settings/__layout@reset.svelte showLineNumbers
+```svelte:routes/home/settings/__layout@reset.svelte showLineNumbers
 <script lang="ts">
 	import { page } from '$app/stores'
 	import Navigation from '$root/components/navigation.svelte'
@@ -2630,7 +2630,7 @@ If you don't need JavaScript for a simple page you know doesn't change often you
 
 🖌️ Create `index.svelte` inside `home/about`.
 
-```html:routes/home/about/index.svelte showLineNumbers
+```svelte:routes/home/about/index.svelte showLineNumbers
 <script context="module" lang="ts">
 	import { dev } from '$app/env'
 
@@ -2696,7 +2696,7 @@ Let's pretend that actions don't exist. In that case we just need to prevent the
 
 I simplified the form inside `compose.svelte` for this example.
 
-```html:example.svelte {2-12,16} showLineNumbers
+```svelte:example.svelte {2-12,16} showLineNumbers
 <script lang="ts">
 	async function handleSubmit(event: SubmitEvent) {
 		const form = event.target as HTMLFormElement
@@ -2769,7 +2769,7 @@ export const enhance = (form: HTMLFormElement) => {
 
 🖌️ Update `compose.svelte` to use the action.
 
-```html:components/compose.svelte {2,13} showLineNumbers
+```svelte:components/compose.svelte {2,13} showLineNumbers
 <script lang="ts">
 	import { enhance } from '$root/lib/form'
 
@@ -2898,7 +2898,7 @@ export const enhance: Enhance = (form, { result } = {}) => {
 
 🖌️ Update one line inside `compose.svelte`.
 
-```html:components/compose.svelte {6} showLineNumbers
+```svelte:components/compose.svelte {6} showLineNumbers
 <!-- ... -->
 <form
 	action="/home"
@@ -2913,7 +2913,7 @@ It might seem like a lot but it's just one file we can reuse thanks to actions s
 
 🖌️ The only file we need to update is `tweet.svelte` because we're reusing it for the user profile and the permalink.
 
-```html:components/tweet.svelte {4,36,79} showLineNumbers
+```svelte:components/tweet.svelte {4,36,79} showLineNumbers
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition'
 
@@ -3026,7 +3026,7 @@ This is another benefit of code splitting because every route has its own data a
 
 🖌️ Let's change `navigation.svelte` to take advantage of prefetching.
 
-```html:components/navigation.svelte {11,16,21,26} showLineNumbers
+```svelte:components/navigation.svelte {11,16,21,26} showLineNumbers
 <!-- ... -->
 
 <aside>
@@ -3080,7 +3080,7 @@ One thing we need to know is when the URL changes so we can use the `page` store
 
 🖌️ Create the `transition.svelte` component inside `components`.
 
-```html:components/transition.svelte showLineNumbers
+```svelte:components/transition.svelte showLineNumbers
 <script lang="ts">
 	import { fly } from 'svelte/transition'
 
@@ -3101,7 +3101,7 @@ One thing we need to know is when the URL changes so we can use the `page` store
 
 🖌️ Update `__layout.svelte` inside `home`.
 
-```html:home/__layout.svelte {2,6,12-14} showLineNumbers
+```svelte:home/__layout.svelte {2,6,12-14} showLineNumbers
 <script lang="ts">
 	import { page } from '$app/stores'
 

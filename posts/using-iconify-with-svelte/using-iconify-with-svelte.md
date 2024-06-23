@@ -20,7 +20,7 @@ To use the icons you can use the component wrapper for your framework but the re
 npm i iconify-icon
 ```
 
-```html:+layout.svelte showLineNumbers
+```svelte:+layout.svelte showLineNumbers
 <script lang="ts">
   import 'iconify-icon'
 </script>
@@ -28,7 +28,7 @@ npm i iconify-icon
 
 After you find the icon copy the generated code.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <iconify-icon icon="mdi:home"></iconify-icon>
 ```
 

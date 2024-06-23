@@ -20,7 +20,7 @@ The code is available on [GitHub](https://github.com/joysofcode/svelte-gui).
 
 In Svelte we can use the `bind:` directive to bind a value of an input to a variable.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
   let cx = 200
   let cy = 200
@@ -55,7 +55,7 @@ Instead of doing this nonsense yourself, I would prefer to describe the values a
 
 I want Svelte GUI to be simple, and interpret the type of input based on the value.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   const gui = {
     x: 200,
@@ -66,7 +66,7 @@ I want Svelte GUI to be simple, and interpret the type of input based on the val
 
 I'm going to use a `writable` Svelte store to make the values reactive. You can read, or watch the [Svelte stores guide](https://joyofcode.xyz/svelte-stores-guide) if you're not familiar with stores.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { writable } from 'svelte/store'
 
@@ -89,7 +89,7 @@ export function guiControls(values: any) {
 
 I'm going to create a `gui.svelte` component, which takes a store prop named `controls`, and export everything from a `index.ts` file.
 
-```html:src/lib/gui/gui.svelte showLineNumbers
+```svelte:src/lib/gui/gui.svelte showLineNumbers
 <script lang="ts">
   export let controls
 </script>
@@ -106,7 +106,7 @@ export { GUI, guiControls }
 
 I'm going to use `Object.entries($controls)`, which returns an array of `[key, value]` pairs from an object.
 
-```html:src/lib/gui/gui.svelte {4} showLineNumbers
+```svelte:src/lib/gui/gui.svelte {4} showLineNumbers
 <script lang="ts">
   export let controls
 
@@ -117,7 +117,7 @@ I'm going to use `Object.entries($controls)`, which returns an array of `[key, v
 
 This is great because we can destructure `['x', 200]` as `[label, value]`, which you can name anything, but I'm going to use the object key as the label description.
 
-```html:src/lib/gui/gui.svelte {5} showLineNumbers
+```svelte:src/lib/gui/gui.svelte {5} showLineNumbers
 <script lang="ts">
   export let controls
 
@@ -136,7 +136,7 @@ This is great because we can destructure `['x', 200]` as `[label, value]`, which
 
 I'm going to create an `is` object, with methods to check what type of `value` has been passed since the value can be anything.
 
-```html:src/lib/gui/gui.svelte showLineNumbers
+```svelte:src/lib/gui/gui.svelte showLineNumbers
 <script lang="ts">
   <!-- ... -->
   const is = {
@@ -153,7 +153,7 @@ Cool beans! 🫘
 
 Let's add the inputs and event listeners. I want to listen for the `change` and `wheel` event on the input to use the mouse scroll wheel to update the values.
 
-```html:src/lib/gui/gui.svelte showLineNumbers
+```svelte:src/lib/gui/gui.svelte showLineNumbers
 <script lang="ts">
   <!-- ... -->
   function updateControls(e: Event) {
@@ -237,7 +237,7 @@ Let's add the inputs and event listeners. I want to listen for the `change` and 
 
 The `updateControls` function is used to update the store.
 
-```html:src/lib/gui/gui.svelte showLineNumbers
+```svelte:src/lib/gui/gui.svelte showLineNumbers
 <script lang="ts">
   function updateControls(e: Event) {
     // slurp up the values
@@ -283,7 +283,7 @@ The `updateControls` function is used to update the store.
 
 You can `subscribe` to the store, or use a [reactive statement](https://learn.svelte.dev/tutorial/reactive-statements) inside Svelte components, if you want to do something when a value changes.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { GUI, guiControls } from '$lib/gui'
 
@@ -310,7 +310,7 @@ You can `subscribe` to the store, or use a [reactive statement](https://learn.sv
 
 You can expose [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) if you plan to release a library to let the user control the look and position of the element.
 
-```html:src/lib/gui/gui.svelte showLineNumbers
+```svelte:src/lib/gui/gui.svelte showLineNumbers
 <!-- ... -->
 <style>
   .gui {
@@ -356,7 +356,7 @@ You can expose [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/
 
 Here is how you can use Svelte GUI.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   import { GUI, guiControls } from '$lib/gui'
 

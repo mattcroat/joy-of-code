@@ -42,7 +42,7 @@ This is fine for state transitions but to animate page transitions we have to kn
 
 To know when the page changed we can use the [onNavigate](https://kit.svelte.dev/docs/modules#$app-navigation-onnavigate) lifecycle function in SvelteKit.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
 	import { onNavigate } from '$app/navigation'
 
@@ -116,7 +116,7 @@ This is how simple it is to animate the active page marker.
 
 You can also animate different DOM elements between page transitions like the planet title and image.
 
-```html:src/routes/+page.svelte {4,5,17,30} showLineNumbers
+```svelte:src/routes/+page.svelte {4,5,17,30} showLineNumbers
 <div class="planets">
   {#each planets as { name, image }}
     <a href="planets/{name.toLowerCase()}" class="planet">
@@ -161,7 +161,7 @@ You need to give the `view-transition-name` a unique name to know what changed w
 
 The same goes for the new elements your old elements are going to transition to.
 
-```html:src/routes/planets/[planet]/+page.svelte {3-7,9,35,46} showLineNumbers
+```svelte:src/routes/planets/[planet]/+page.svelte {3-7,9,35,46} showLineNumbers
 <div class="container">
   <div class="description">
 		<img
@@ -220,7 +220,7 @@ The View Transitions API is not only useful for animating page transitions but a
 
 Let's use the View Transitions API to animate the state change when a user does a reservation for a flight to some planet.
 
-```html:src/routes/[planet]/button.svelte {5-11,16,19,20,22,41-46,60} showLineNumbers
+```svelte:src/routes/[planet]/button.svelte {5-11,16,19,20,22,41-46,60} showLineNumbers
 <script lang="ts">
 	type State = 'idle' | 'loading' | 'success' | 'error'
 	let state: State = 'idle'

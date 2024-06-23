@@ -104,7 +104,7 @@ export const GET: RequestHandler = async () => {
 
 Anyone can use the API at [example.com/photos.json](http://example.com/photos.json) if that's what you want but we can also consume it on the frontend using the `load` function that runs before the page is created and returns the page `props`.
 
-```html:photos/index.svelte showLineNumbers
+```svelte:photos/index.svelte showLineNumbers
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit'
 
@@ -186,7 +186,7 @@ export const GET: RequestHandler = async () => {
 
 Anything you return from the page endpoint inside `body` is going to get passed as props to the page.
 
-```html:photos/index.svelte showLineNumbers
+```svelte:photos/index.svelte showLineNumbers
 <script lang="ts">
 	import type { Photo } from '$lib/types'
 
@@ -218,7 +218,7 @@ Page endpoints are powerful because they enable progressive enhancement for form
 
 The `action` attribute isn't required on the form because it shares the same endpoint.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 import { enhanceForm } from '$lib/actions/form'
 
 <form method="post" use:enhanceForm>
@@ -260,7 +260,7 @@ export const GET: RequestHandler = async ({ params }) => {
 }
 ```
 
-```html:photos/[id].svelte ShowLineNumbers
+```svelte:photos/[id].svelte ShowLineNumbers
 <script lang="ts">
 	import type { Photo } from '$lib/types'
 
@@ -277,7 +277,7 @@ If you visit [example.com/photos/1](http://example.com/photos/1) it works great 
 
 You can pass the `props` from the page endpoint to the `load` function and load the image before navigating to the page — pretend `loadImage` is some function imported from utils.
 
-```html:photos/[id].svelte
+```svelte:photos/[id].svelte
 <script context="module" lang="ts">
 	import { browser } from '$app/env'
 	import type { Load } from '@sveltejs/kit'
@@ -339,7 +339,7 @@ export const GET: RequestHandler = async ({ params }) => {
 
 This is going to cache the HTML document.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit'
 

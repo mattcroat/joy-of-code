@@ -41,7 +41,7 @@ You might be familiar with the next example if you ever worked on a single page 
 This is a typical single-page application style which uses JavaScript
 to render content also known as client-side rendering.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	async function getPosts() {
 		const response = await fetch('https://jsonplaceholder.typicode.com/posts')
@@ -100,7 +100,7 @@ The page component gets rendered twice:
 - second time on the client to restore JavaScript on the page
   in a process called hydration
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script>
   export let data
 </script>
@@ -131,7 +131,7 @@ export async function load({ params }) {
 }
 ```
 
-```html:src/routes/[id]/+page.svelte showLineNumbers
+```svelte:src/routes/[id]/+page.svelte showLineNumbers
 <script>
 	export let data
 </script>
@@ -158,7 +158,7 @@ export async function load() {
 }
 ```
 
-```html:src/routes/images/+page.svelte showLineNumbers
+```svelte:src/routes/images/+page.svelte showLineNumbers
 <script lang="ts">
 	export let data
 </script>
@@ -219,7 +219,7 @@ export async function load({ data }) {
 }
 ```
 
-```html:src/routes/images/[id]/+page.svelte showLineNumbers
+```svelte:src/routes/images/[id]/+page.svelte showLineNumbers
 <script lang="ts">
 	export let data
 </script>
@@ -236,7 +236,7 @@ This is important because they return different things:
 
 This is awesome because besides returning regular data you can use `+page.ts` to return a Svelte component over the server if you need to.
 
-```html:src/routes/counter.svelte showLineNumbers
+```svelte:src/routes/counter.svelte showLineNumbers
 <script lang="ts">
 	let count = 0
 	let increment = () => count += 1
@@ -258,7 +258,7 @@ export async function load() {
 }
 ```
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	export let data
 </script>
@@ -296,7 +296,7 @@ export async function load() {
 }
 ```
 
-```html:src/routes/child/+page.svelte showLineNumbers
+```svelte:src/routes/child/+page.svelte showLineNumbers
 <script>
 	export let data
 </script>
@@ -305,7 +305,7 @@ export async function load() {
 <p>{data.description}</p>
 ```
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script>
 	import { page } from '$app/stores'
 </script>
@@ -341,7 +341,7 @@ export const actions = {
 }
 ```
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { enhance } from '$app/forms'
 
@@ -402,7 +402,7 @@ export async function GET({ url }) {
 
 You can pass the max range you want like `/api/random-number?max=10` or it defaults to `1`.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	let randomNumber = 0
 

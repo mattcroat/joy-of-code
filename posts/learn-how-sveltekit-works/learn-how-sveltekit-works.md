@@ -207,7 +207,7 @@ const config = {
 export default config
 ```
 
-```html:app.html showLineNumbers
+```svelte:app.html showLineNumbers
 <head>
   %sveltekit.head%
 </head>
@@ -217,7 +217,7 @@ export default config
 </body>
 ```
 
-```html:index.svelte showLineNumbers
+```svelte:index.svelte showLineNumbers
 <h1>Home</h1>
 ```
 
@@ -404,7 +404,7 @@ This shows the benefit of having a backend because you can cherry-pick data you 
 
 You might be used to doing something like this in a traditional single page application regardless where you fetch the data from.
 
-```html:index.svelte showLineNumbers
+```svelte:index.svelte showLineNumbers
 <script>
 	// client-side rendered
 	async function getPokemon() {
@@ -438,7 +438,7 @@ Easy enough, right?
 
 There's one problem when I go and **view page source**.
 
-```html:source showLineNumbers
+```svelte:source showLineNumbers
 <head>
 	<style data-sveltekit>
 		li.s-Uap-jPRb-uiE {
@@ -475,7 +475,7 @@ To server-side render the Pokemon data we need to fetch the Pokemon on the serve
 
 You've probably done it before.
 
-```html:index.svelte showLineNumbers
+```svelte:index.svelte showLineNumbers
 <script context="module">
 	// server-side rendered
 	export async function load({ fetch }) {
@@ -547,7 +547,7 @@ Long story short **—** everything happens on the server.
 
 If you open the page it's going to be server-side rendered meaning if you look at the HTML document that the server responds with you're going to see the data.
 
-```html:source showLineNumbers
+```svelte:source showLineNumbers
 <head>
 	<style data-sveltekit>
 		li.s-Uap-jPRb-uiE {
@@ -595,7 +595,7 @@ Another interesting aside is what SvelteKit does with the `fetch` response:
 - During server-side rendering the response will be captured and inlined into the rendered HTML
 - During hydration the response will be read from the HTML preventing an additional network request
 
-```html:source showLineNumbers
+```svelte:source showLineNumbers
 <!-- ... -->
 
 <script
@@ -618,13 +618,13 @@ I'm going to explain hydration later.
 
 Loading a SvelteKit page for the first is going to use **server-side rendering** (SSR) but after the SvelteKit router gets initialized, any further navigations are going to use JavaScript for **client-side rendering** (CSR) like a regular **single page application** (SPA).
 
-```html:index.svelte showLineNumbers
+```svelte:index.svelte showLineNumbers
 <a href="/pikachu">Pikachu</a>
 ```
 
 You might want to have a special page for every Pokemon so I created `[pokemon].svelte` as an example route that doesn't do anything.
 
-```html:[pokemon].svelte showLineNumbers
+```svelte:[pokemon].svelte showLineNumbers
 <a href="/">Home</a>
 ```
 
@@ -668,7 +668,7 @@ Knowing this makes reading the warning from the SvelteKit documentation for [loa
 
 Let's look at an example of how this works.
 
-```html:counter.svelte showLineNumbers
+```svelte:counter.svelte showLineNumbers
 <script>
 	let count = 0
 </script>
@@ -829,7 +829,7 @@ It's not that hard to read to at least get an idea of what's going on and it loo
 
 If you **view page source** you can see the hydrate script added by SvelteKit.
 
-```html:source showLineNumbers
+```svelte:source showLineNumbers
 <body>
 	<button>0</button>
 

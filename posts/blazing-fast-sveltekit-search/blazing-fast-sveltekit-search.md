@@ -172,7 +172,7 @@ By default I return one match from the post, but you can return as many as you w
 
 The only thing left to do is put everything together.
 
-```html:routes/+page.svelte showLineNumbers
+```svelte:routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { createPostsIndex, searchPostsIndex } from '$lib/search'
@@ -263,7 +263,7 @@ addEventListener('message', async (e) => {
 
 The computation now happens in a separate background thread, separate from the main thread of our app.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
   // Vite has a special import for workers
   import SearchWorker from './search-worker?worker'

@@ -69,7 +69,7 @@ export async function load({ params }) {
 
 Render the HTML on the page:
 
-```html:routes/[slug]/+page.svelte showLineNumbers
+```svelte:routes/[slug]/+page.svelte showLineNumbers
 <script lang="ts">
 	let { data } = $props()
 </script>
@@ -116,7 +116,7 @@ If you log `content.children` you get a renderable tree:
 
 To create a custom renderer we just need to loop over the renderable tree, and render elements based on the name of the child node.
 
-```html:routes/[slug]/+page.svelte {2,7} showLineNumbers
+```svelte:routes/[slug]/+page.svelte {2,7} showLineNumbers
 <script lang="ts">
 	import MarkdocRenderer from '$lib/markdoc/renderer.svelte'
 
@@ -132,7 +132,7 @@ For this we can use special Svelte elements:
 - `<svelte:element>` to render regular HTML elements
 - `<svelte:self>` to recursively use the `renderer.svelte` component, and pass the `children` prop until there are no more children
 
-```html:$lib/markdoc/renderer.svelte showLineNumbers
+```svelte:$lib/markdoc/renderer.svelte showLineNumbers
 <script lang="ts">
 	import Callout from './components/callout.svelte'
 	import Counter from './components/counter.svelte'

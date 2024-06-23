@@ -94,7 +94,7 @@ export const db = new prisma.PrismaClient()
 
 To register the user I'm going to use [form actions](https://kit.svelte.dev/docs/form-actions) that's an easy way to write an action you want your form to take once you submit it and return form validation errors.
 
-```html:register/+page.svelte showLineNumbers
+```svelte:register/+page.svelte showLineNumbers
 <script lang="ts">
   import type { ActionData } from './$types'
 
@@ -197,7 +197,7 @@ The user login is similar to the user registration for the page.
 
 > 🐿️ If you have sensitive information be vague with the error messages to not help bad actors who might be trying to abuse it.
 
-```html:login/+page.svelte showLineNumbers
+```svelte:login/+page.svelte showLineNumbers
 <script lang="ts">
   import type { ActionData } from './$types'
 
@@ -441,7 +441,7 @@ declare namespace App {
 
 You can use the `$page` store on the client to know if the user is authenticated.
 
-```html:routes/+layout.svelte showLineNumbers
+```svelte:routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
 </script>
@@ -496,7 +496,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 Here's how you create a protected route.
 
-```html:admin/+page.svelte showLineNumbers
+```svelte:admin/+page.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
 </script>
@@ -536,7 +536,7 @@ Your app is going to be more resilient and using progressive enhancement we can 
 
 The only thing you have to do is import the `enhance` action from SvelteKit and it's going to progressively enhance the form and use JavaScript when it can.
 
-```html:register/+page.svelte showLineNumbers
+```svelte:register/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
   // ...
@@ -549,7 +549,7 @@ The only thing you have to do is import the `enhance` action from SvelteKit and 
 
 For the login page we need to rerun the `load` function for the page to update it.
 
-```html:login/+page.svelte showLineNumbers
+```svelte:login/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
   // ...
@@ -564,7 +564,7 @@ For the login page we need to rerun the `load` function for the page to update i
 
 The same goes for logout.
 
-```html:routes/+layout.svelte showLineNumbers
+```svelte:routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
   // ...

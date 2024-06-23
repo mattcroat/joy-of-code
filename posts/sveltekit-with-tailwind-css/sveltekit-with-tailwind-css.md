@@ -22,7 +22,7 @@ You're done! 😄
 
 This creates a `app.postcss` file which is imported inside the root layout.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script>
 	import '../app.postcss'
 </script>
@@ -53,7 +53,7 @@ npm i -D prettier-plugin-tailwindcss
 
 After you save it should sort the classes.
 
-```html:routes/+page.svelte showLineNumbers
+```svelte:routes/+page.svelte showLineNumbers
 <!-- Before -->
 <button class="text-white px-4 sm:px-8 py-2 sm:py-3 bg-sky-700 hover:bg-sky-800">
   ...

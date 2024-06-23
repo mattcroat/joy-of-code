@@ -79,7 +79,7 @@ button {
 }
 ```
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
 	import '../app.css'
 </script>
@@ -99,7 +99,7 @@ export const emoji = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "�
 
 The rest of the game is going to be inside `+page.svelte`.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { emoji } from './emoji'
 </script>
@@ -123,7 +123,7 @@ You can also have intermediatary state like `playing.matching` which becomes eve
 
 I'm going to translate this into code using a type alias but you can use a JavaScript object, or TypeScript enum.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { emoji } from './emoji'
 
@@ -141,7 +141,7 @@ I want to make a dynamic grid to offer more variety which is simpler than you mi
 
 I'm going to insert a random unique emoji inside a `Set` depending on the grid size, and then duplicate them and shuffle them around.
 
-```html:src/routes/+page.svelte {7,8,10,26} showLineNumbers
+```svelte:src/routes/+page.svelte {7,8,10,26} showLineNumbers
 <script lang="ts">
 	import { emoji } from './emoji'
 
@@ -175,7 +175,7 @@ I'm going to insert a random unique emoji inside a `Set` depending on the grid s
 
 I'm going to add more things to track the state of the game including the HTML and card styles.
 
-```html:src/routes/+page.svelte {11,13,15} showLineNumbers
+```svelte:src/routes/+page.svelte {11,13,15} showLineNumbers
 <script lang="ts">
   type State = 'start' | 'playing' | 'paused' | 'won' | 'lost'
 
@@ -250,7 +250,7 @@ Using `selected` we can keep track of the selected variables and trigger `matchC
 
 If the cards match we can update `matches` and if `maxMatches === matches.length` then the game is won.
 
-```html:src/routes/+page.svelte {3,7,19,23,24,30-32,36-38,40,47} showLineNumbers
+```svelte:src/routes/+page.svelte {3,7,19,23,24,30-32,36-38,40,47} showLineNumbers
 <script lang="ts">
 	// ...
 	function selectCard(cardIndex: number) {
@@ -311,7 +311,7 @@ If the cards match we can update `matches` and if `maxMatches === matches.length
 
 Let's show the matched cards.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 {#if state === 'playing'}
 	<div class="matches">
 		{#each matches as match}
@@ -336,7 +336,7 @@ Let's show the matched cards.
 
 Let's add a game timer — when it reaches zero, the game is over.
 
-```html:src/routes/+page.svelte {3-4,7,14,21,24,28-30,36-49} showLineNumbers
+```svelte:src/routes/+page.svelte {3-4,7,14,21,24,28-30,36-49} showLineNumbers
 <script lang="ts">
 	// ...
 	let timerId: number | null = null
@@ -393,7 +393,7 @@ Let's add a game timer — when it reaches zero, the game is over.
 
 Regardless if you win or lose the game we have to reset the board.
 
-```html:src/routes/+page.svelte {3-11,15,20} showLineNumbers
+```svelte:src/routes/+page.svelte {3-11,15,20} showLineNumbers
 <script lang="ts">
 	// ...
 	function resetGame() {
@@ -422,7 +422,7 @@ Regardless if you win or lose the game we have to reset the board.
 
 To achieve the card flip animation we can use a CSS 3D transform.
 
-```html:src/routes/+page.svelte {4,8,19-20,26-29,31-38} showLineNumbers
+```svelte:src/routes/+page.svelte {4,8,19-20,26-29,31-38} showLineNumbers
 <button
 	class="card"
 	class:selected={isSelected}
@@ -474,7 +474,7 @@ To achieve the card flip animation we can use a CSS 3D transform.
 
 To pause the game we can listen for a keypress on the window and toggle the paused state.
 
-```html:src/routes/+page.svelte {3-14,17,19-21} showLineNumbers
+```svelte:src/routes/+page.svelte {3-14,17,19-21} showLineNumbers
 <script lang="ts">
 	// ...
 	function pauseGame(e: KeyboardEvent) {

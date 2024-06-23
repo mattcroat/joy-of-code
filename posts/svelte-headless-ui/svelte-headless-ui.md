@@ -53,7 +53,7 @@ Let's look at a regular boring `<select>` menu inside Svelte that holds some sho
 <details>
   <summary>select.svelte</summary>
 
-```html:select.svelte showLineNumbers
+```svelte:select.svelte showLineNumbers
 <script lang="ts">
 	const shows = [
 		{ id: 1, name: 'Cowboy Bebop', completed: false },
@@ -113,7 +113,7 @@ I created a `listbox.svelte` component for this example but it's not important. 
 <details>
   <summary>listbox.svelte</summary>
 
-```html:listbox.svelte showLineNumbers
+```svelte:listbox.svelte showLineNumbers
 <script lang="ts">
 	import {
 		Listbox,
@@ -173,7 +173,7 @@ I stole the SVG for the arrows from the example in the documenation and I'm goin
 <details>
   <summary>listbox.svelte</summary>
 
-```html:listbox.svelte {10-24, 33-34, 36} showLineNumbers
+```svelte:listbox.svelte {10-24, 33-34, 36} showLineNumbers
 <!-- ... -->
 
 <div class="listbox">
@@ -224,7 +224,7 @@ It's just regular HTML at the end of the day so let's style it.
 <details>
   <summary>listbox.svelte</summary>
 
-```html:listbox.svelte showLineNumbers
+```svelte:listbox.svelte showLineNumbers
 <!-- ... -->
 
 <style>
@@ -308,7 +308,7 @@ To do so we need to take control of if the `<Listbox>` is open or not by adding 
 <details>
   <summary>listbox.svelte</summary>
 
-```html:listbox.svelte {2, 12, 16-17, 31-32} showLineNumbers
+```svelte:listbox.svelte {2, 12, 16-17, 31-32} showLineNumbers
 <script lang="ts">
 	import { fade } from 'svelte/transition'
   // ...

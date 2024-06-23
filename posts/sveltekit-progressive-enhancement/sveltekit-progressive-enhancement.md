@@ -20,7 +20,7 @@ Do you know the default behavior of a form?
 
 I encourage you to try it out yourself inside a SvelteKit project and see what happens.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <form>
   <input type="email" name="email" />
   <input type="password" name="password" />
@@ -34,7 +34,7 @@ If you used any modern frontend JavaScript framework in the last couple of years
 
 JavaScript was meant to enhance the user experience but instead it became mandatory using [`event.preventDefault()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) that prevents the default form behavior and puts reimplementing the browser behavior on you.
 
-```html:routes/+page.svelte showLineNumbers
+```svelte:routes/+page.svelte showLineNumbers
 <script lang="ts">
   async function handleSubmit(event: SubmitEvent) {
     const form = event.target as HTMLFormElement
@@ -116,7 +116,7 @@ export function enhance(form: HTMLFormElement) {
 }
 ```
 
-```html:+page.svelte {2, 8} showLineNumbers
+```svelte:+page.svelte {2, 8} showLineNumbers
 <script lang="ts">
   import { enhance } from '$lib/form'
 </script>
@@ -175,7 +175,7 @@ export const actions: Actions = {
 
 Try using the form without JavaScript! After you're done add progressive enhancement from SvelteKit.
 
-```html:+page.svelte {2, 9-13} showLineNumbers
+```svelte:+page.svelte {2, 9-13} showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
   import type { PageServerData } from './$types'
@@ -209,7 +209,7 @@ SvelteKit also makes [validating form errors](https://kit.svelte.dev/docs/form-a
 
 You can also learn how to customize this behavior and manage pending UI state in the [SvelteKit docs](https://kit.svelte.dev/docs/form-actions#progressive-enhancement).
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <form
   method="POST"
   use:enhance={({ form, data, action, cancel }) => {

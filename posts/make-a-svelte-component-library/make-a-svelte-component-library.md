@@ -36,13 +36,13 @@ I'm more excited about building things and coming up with ideas for how I would 
 
 Before I write any code I love to think about how I would want to use the component.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Accordion {items} />
 ```
 
 You could make an `<Accordion />` component and pass it `items` as prop which you could loop over and do your thing.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Accordion {title} {content} />
 ```
 
@@ -52,7 +52,7 @@ The exploration and thinking about how to solve a problem like this is heaps of 
 
 That being said I would love to be in charge of the rendering and use a `<slot />` to pass whatever I want to the accordion.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Accordion>
   <slot />
 </Accordion>
@@ -60,7 +60,7 @@ That being said I would love to be in charge of the rendering and use a `<slot /
 
 Instead of passing whatever we can compose Svelte components with ease.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Accordion>
   <AccordionItem>
     <h3>Item 1<h3>
@@ -75,7 +75,7 @@ If you're just learning Svelte you're not going to know what you don't know but 
 
 Another feature I want is to be able to pass a `collapse` prop to the `<Accordion />` component if I want one `<AccordionItem />` open at a time, and I want to be able to pass an `open` prop to the `<AccordionItem />` item I want to be open by default.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Accordion collapse>
   <AccordionItem open>
     <!-- ... -->
@@ -110,7 +110,7 @@ export { default as Accordion } from './accordion.svelte'
 export { default as AccordionItem } from './accordion-item.svelte'
 ```
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { Accordion, AccordionItem } from '$lib/components/accordion'
 
@@ -140,7 +140,7 @@ The special Svelte element `<svelte:fragment>` looks spooky but it just allows y
 
 First edit the `<Accordion />` component.
 
-```html:src/lib/components/accordion/accordion.svelte showLineNumbers
+```svelte:src/lib/components/accordion/accordion.svelte showLineNumbers
 <script lang="ts">
 	// by default more than one accordion can be open
 	export let collapse = false
@@ -166,7 +166,7 @@ I use CSS variables with a hardcoded fallback value but I would prefer to use an
 
 Edit the `<AccordionItem />` component.
 
-```html:src/lib/components/accordion/accordion-item.svelte showLineNumbers
+```svelte:src/lib/components/accordion/accordion-item.svelte showLineNumbers
 <script lang="ts">
 	// by default the accordion item is closed
   export let open
@@ -224,7 +224,7 @@ That's not so bad, right? 😄
 
 If you want one accordion item open at a time you have to pass `collapse` to every `<AccordionItem />` component. 😅
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Accordion>
   <AccordionItem collapse />
   <AccordionItem collapse />
@@ -237,7 +237,7 @@ To avoid passing data as props to every child component you can use the [context
 
 The way how the context API works is instead of passing props, you set the context inside a parent component which only the child components can access.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Accordion collapse>
   <AccordionItem />
   <AccordionItem />
@@ -314,7 +314,7 @@ This is why using the context API directly in the components would be annoying b
 
 Set the context inside the `<Accordion />` component.
 
-```html:src/lib/components/accordion/accordion.svelte {2,7} showLineNumbers
+```svelte:src/lib/components/accordion/accordion.svelte {2,7} showLineNumbers
 <script lang="ts">
 	import { setAccordionOptions } from './context'
 
@@ -327,7 +327,7 @@ Set the context inside the `<Accordion />` component.
 
 Get the context values inside `<AccordionItem />` but we also need to give the component a unique id.
 
-```html:src/lib/components/accordion/accordion-item.svelte showLineNumbers
+```svelte:src/lib/components/accordion/accordion-item.svelte showLineNumbers
 <script lang="ts">
 	import { getAccordionOptions } from './context'
 
@@ -345,7 +345,7 @@ Get the context values inside `<AccordionItem />` but we also need to give the c
 
 I'm going to update the logic inside the `<AccordionItem />` component.
 
-```html:src/lib/components/accordion/accordion-item.svelte {26,32} showLineNumbers
+```svelte:src/lib/components/accordion/accordion-item.svelte {26,32} showLineNumbers
 <script lang="ts">
 	function setActive() {
 		// update the store value in the context
@@ -389,7 +389,7 @@ That's it! 🎉
 
 The Svelte `class:name` directive is an easy way to add, or remove a class for animation.
 
-```html:src/lib/components/accordion/accordion-item.svelte showLineNumbers
+```svelte:src/lib/components/accordion/accordion-item.svelte showLineNumbers
 <div
   class="accordion-caret"
   class:open={isOpen}
@@ -410,7 +410,7 @@ The Svelte `class:name` directive is an easy way to add, or remove a class for a
 
 To animate the height of the accordion item I'm going to use the `slide` transition from Svelte.
 
-```html:src/lib/components/accordion/accordion-item.svelte showLineNumbers
+```svelte:src/lib/components/accordion/accordion-item.svelte showLineNumbers
 <script lang="ts">
 	import { slide } from 'svelte/transition'
   // ...
@@ -442,7 +442,7 @@ Accessibility is a large subject and I'm the first to admit I don't know much ab
 
 That being said it's only a couple of lines of code if you look at the guidelines.
 
-```html:src/lib/components/accordion/accordion-item.svelte {5-6, 16-17} showLineNumbers
+```svelte:src/lib/components/accordion/accordion-item.svelte {5-6, 16-17} showLineNumbers
 <div class="accordion-item">
 	<button
 		on:click={handleClick}

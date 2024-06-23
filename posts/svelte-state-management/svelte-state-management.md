@@ -30,7 +30,7 @@ The next example uses a parent `<Counter>` component to pass the `count`, `incre
 
 The common state is lifted up to the parent component.
 
-```html:index.svelte {6, 8, 9, 13, 14, 15} showLineNumbers
+```svelte:index.svelte {6, 8, 9, 13, 14, 15} showLineNumbers
 <script lang="ts">
   import Count from './count.svelte'
   import Increment from './increment.svelte'
@@ -51,7 +51,7 @@ The common state is lifted up to the parent component.
 
 The props are received by the children.
 
-```html:count.svelte {2, 5} showLineNumbers
+```svelte:count.svelte {2, 5} showLineNumbers
 <script lang="ts">
   export let count: number
 </script>
@@ -59,7 +59,7 @@ The props are received by the children.
 <p>{count}</p>
 ```
 
-```html:increment.svelte {2, 5} showLineNumbers
+```svelte:increment.svelte {2, 5} showLineNumbers
 <script lang="ts">
   export let increment: () => void
 </script>
@@ -67,7 +67,7 @@ The props are received by the children.
 <button on:click={increment}>+</button>
 ```
 
-```html:decrement.svelte {2, 5} showLineNumbers
+```svelte:decrement.svelte {2, 5} showLineNumbers
 <script lang="ts">
   export let decrement: () => void
 </script>
@@ -87,7 +87,7 @@ If TypeScript spooks you, it's optional! 😄
 
 If you had to pass input from one component to another and update it when it changes your code might look like this.
 
-```html:index.svelte {8} showLineNumbers
+```svelte:index.svelte {8} showLineNumbers
 <script lang="ts">
   import Input from './input.svelte'
   import Output from './output.svelte'
@@ -105,7 +105,7 @@ I've mentioned how data flows down but using the `bind:property` directive we ca
 
 In Svelte you can bind values to properties of DOM elements but also to component props meaning your child component can talk to the parent component.
 
-```html:index.svelte {5, 8} showLineNumbers
+```svelte:index.svelte {5, 8} showLineNumbers
 <script lang="ts">
   import Input from './input.svelte'
   import Output from './output.svelte'
@@ -119,7 +119,7 @@ In Svelte you can bind values to properties of DOM elements but also to componen
 
 To bind the prop we can export it from the component and bind it to the input.
 
-```html:input.svelte {2, 5} showLineNumbers
+```svelte:input.svelte {2, 5} showLineNumbers
 <script lang="ts">
   export let input: string
 </script>
@@ -129,7 +129,7 @@ To bind the prop we can export it from the component and bind it to the input.
 
 The output is going to update after a change.
 
-```html:output.svelte {2, 5} showLineNumbers
+```svelte:output.svelte {2, 5} showLineNumbers
 <script lang="ts">
   export let input: string
 </script>
@@ -159,7 +159,7 @@ In Svelte you dispatch the custom event from a child component and listen for it
 
 I want to track the `x` and `y` mouse coordinates when the user moves the mouse and on the `<Mouse>` component I'm listening for an `updatePosition` event.
 
-```html:index.svelte {17} showLineNumbers
+```svelte:index.svelte {17} showLineNumbers
  <script lang="ts">
   import Mouse from './mouse.svelte'
 
@@ -185,7 +185,7 @@ I want to track the `x` and `y` mouse coordinates when the user moves the mouse 
 
 Inside the child component is where you dispatch the event.
 
-```html:mouse.svelte {2, 4, 7} showLineNumbers
+```svelte:mouse.svelte {2, 4, 7} showLineNumbers
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
@@ -211,7 +211,7 @@ Component events are awesome but they don't [bubble](https://javascript.info/bub
 
 Lets start with the most basic example and then I'm excited to show you how simple it is to make a toast notification system.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
   // you can "store" it inside a file 🥁
   import { writable } from 'svelte/store'
@@ -255,7 +255,7 @@ The convenient `$notifications` syntax doesn't work outside Svelte components, s
 
 The `<Toast>` component is responsible for showing the notifications.
 
-```html:toast.svelte showLineNumbers
+```svelte:toast.svelte showLineNumbers
 <script lang="ts">
   import { fade } from 'svelte/transition'
   import { notifications } from './notifications'
@@ -278,7 +278,7 @@ The `<Toast>` component is responsible for showing the notifications.
 
 We just need to import the `<Toast>` component and the `toast` method from the store to trigger a notification.
 
-```html:index.svelte showLineNumbers
+```svelte:index.svelte showLineNumbers
 <script lang="ts">
   import Toast from './toast.svelte'
   import { toast } from './notifications'
@@ -305,7 +305,7 @@ The [Context API](https://learn.svelte.dev/tutorial/context-api) is useful when 
 
 Let's say I want to use the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) in a more declarative way.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Canvas width={600} height={400}>
   <Circle x={300} y={200} radius={40} ... />
 </Canvas>
@@ -325,7 +325,7 @@ ctx.fill()
 
 I'm happy with the API and I go implement it but there's one problem and it's passing the reference to the `<canvas>` element around which is tedious. 😮‍💨
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <Canvas {canvas}>
   <Circle {canvas} />
 </Canvas>
@@ -335,7 +335,7 @@ This is where the Context API can help us because instead of passing the referen
 
 Inside the parent we import the components.
 
-```html:index.svelte showLineNumbers
+```svelte:index.svelte showLineNumbers
 <script lang="ts">
   import Canvas from './canvas.svelte'
   import Circle from './circle.svelte'
@@ -358,7 +358,7 @@ Inside the parent we import the components.
 
 Inside the `<Canvas>` component I use `setContext` with a key `canvas` to access it later and I defined a `getCanvas` method to get the reference to the canvas element.
 
-```html:canvas.svelte {2, 4-6} showLineNumbers
+```svelte:canvas.svelte {2, 4-6} showLineNumbers
 <script lang="ts">
   import { setContext } from 'svelte'
 
@@ -379,7 +379,7 @@ Inside the `<Canvas>` component I use `setContext` with a key `canvas` to access
 
 To get the reference to the canvas element I use `getContext` using the key from before and now I have a reference to the canvas.
 
-```html:circle.svelte {2, 4, 14} showLineNumbers
+```svelte:circle.svelte {2, 4, 14} showLineNumbers
 <script lang="ts">
   import { getContext, onMount } from 'svelte'
 
@@ -409,7 +409,7 @@ That's it! 😄
 
 If you need reactive values **you can pass a store to context**, so it's only available to that component and it's descendants.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
   import { setContext } from 'svelte'
   import { writable } from 'svelte/store'
@@ -460,7 +460,7 @@ Let's say you run some banana processing plants and each time you add or remove 
 
 Because we're inside a module context the value isn't going to be reactive but we can use a store.
 
-```html:production.svelte {1-5} showLineNumbers
+```svelte:production.svelte {1-5} showLineNumbers
 <script context="module" lang="ts">
   import { writable } from 'svelte/store'
 
@@ -487,7 +487,7 @@ Because we're inside a module context the value isn't going to be reactive but w
 
 Regardless from what processing plant you add or remove the banana it's going to update the produce.
 
-```html:index.svelte showLineNumbers
+```svelte:index.svelte showLineNumbers
 import Production, { banana } from './production.svelte'
 
 <Production />
@@ -512,7 +512,7 @@ Let's pretend you have some list sorted by ascending order but want to link it t
 
 Using [SvelteKit](https://kit.svelte.dev/) you can get the parsed query string of the URL from the `$page` store over `$page.url.searchParams` and if it doesn't exist defaults to ascending order.
 
-```html:index.svelte {2, 8} showLineNumbers
+```svelte:index.svelte {2, 8} showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
 

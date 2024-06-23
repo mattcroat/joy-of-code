@@ -30,7 +30,7 @@ Another great example is [Melt UI](https://melt-ui.com/) which provides a custom
 
 It takes the following code:
 
-```html:example showLineNumbers
+```svelte:example showLineNumbers
 <div use:melt={$root}>
   <button use:melt={$trigger}>...</button>
   <div use:melt={$content}>...</div>
@@ -39,7 +39,7 @@ It takes the following code:
 
 ...and transforms it to this:
 
-```html:example showLineNumbers
+```svelte:example showLineNumbers
 <div {...$root} use:$root.action>
   <button {...$trigger} use:$trigger.action>...</button>
   <div {...$content} use:$content.action>...</div>
@@ -83,7 +83,7 @@ You can name your preprocessor however you want, but keep in mind when you make 
 
 Ever dreamed about using emojis to name your variables in Svelte, but are held back by outdated societal norms and limitations of JavaScript? 😔
 
-```html:example showLineNumbers
+```svelte:example showLineNumbers
 <script>
 	let 🔥 = 'fire'
 </script>
@@ -135,7 +135,7 @@ Rename `+page.svelte` to `+page.md` in your route because we're going to look fo
 
 The idea behind the Markdown preprocessor is to take a Svelte component with a mix of HTML and Markdown:
 
-```html:+page.md showLineNumbers
+```svelte:+page.md showLineNumbers
 <script>
   import Counter from './counter.svelte'
 </script>
@@ -147,7 +147,7 @@ The idea behind the Markdown preprocessor is to take a Svelte component with a m
 
 ...and convert it to HTML:
 
-```html:+page.md showLineNumbers
+```svelte:+page.md showLineNumbers
 <script>
   import Counter from './counter.svelte'
 </script>
@@ -248,7 +248,7 @@ export default config
 
 The Markdown preprocessor should transform Markdown in your Svelte components to regular HTML.
 
-```html:+page.md showLineNumbers
+```svelte:+page.md showLineNumbers
 <script>
 	import Counter from './counter.svelte'
 	let 🔥 = 'Counter'

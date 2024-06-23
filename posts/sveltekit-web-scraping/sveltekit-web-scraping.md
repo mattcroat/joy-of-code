@@ -30,7 +30,7 @@ No big deal.
 
 To figure out how to scrape the data we need to examine the contributions inside the elements tab. The GitHub contributions are a table with seven rows. Each row represents days in the week from Sunday to Saturday.
 
-```html:example.html showLineNumbers
+```svelte:example.html showLineNumbers
 <table>
   <!-- Sundays -->
   <tr>
@@ -60,7 +60,7 @@ I prefer the second option, because it gives us only what we care about, there's
 
 If you try fetching the data on the client the request is going to be blocked by [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) for security reasons.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script>
 	import { onMount } from 'svelte'
 
@@ -195,7 +195,7 @@ export async function load({ fetch }) {
 
 The only thing left to do is loop over the contributions.
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	export let data
 </script>

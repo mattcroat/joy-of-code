@@ -98,7 +98,7 @@ To fix the **admin layout** I'm going to create an `(app)` and `(dashboard)` gro
 
 I'm going to keep the global styles inside `/routes/+layout.svelte` but move everything else which is going to leave us with a **blank root layout**.
 
-```html:src/routes/+layout.svelte showLineNumbers
+```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import '@picocss/pico'
   import '../app.css'

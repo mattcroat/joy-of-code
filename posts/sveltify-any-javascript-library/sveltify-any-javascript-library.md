@@ -32,7 +32,7 @@ You might look at the code of some **sveltified** libraries and think it looks c
 
 Here is the regular code required for creating a Floating UI tooltip using the `bind` directive to get a reference to the element.
 
-```html:src/routes/tooltip/tooltip.svelte showLineNumbers
+```svelte:src/routes/tooltip/tooltip.svelte showLineNumbers
 <script lang="ts">
   import { computePosition, offset, type ComputePositionConfig } from '@floating-ui/dom'
 
@@ -97,7 +97,7 @@ Here is the regular code required for creating a Floating UI tooltip using the `
 
 You can import is any other component, and perhaps even pass arguments to change the values to make it more flexible.
 
-```html:src/routes/tooltip/+page.svelte showLineNumbers
+```svelte:src/routes/tooltip/+page.svelte showLineNumbers
 <script lang="ts">
   import Tooltip from './tooltip.svelte'
 </script>
@@ -181,7 +181,7 @@ export function tooltip(targetEl: HTMLElement, options?: TooltipOptions) {
 
 Looking at the example you can see we're using regular JavaScript which is incredibly powerful.
 
-```html:src/routes/tooltip/+page.svelte showLineNumbers
+```svelte:src/routes/tooltip/+page.svelte showLineNumbers
 <script lang="ts">
   import { tooltip } from '$lib/tooltip'
 </script>
@@ -203,7 +203,7 @@ If you use TypeScript, besides the name of the package you can see Leaflet has t
 
 Here is how you use Leaflet in Svelte.
 
-```html:src/routes/map/map.svelte showLineNumbers
+```svelte:src/routes/map/map.svelte showLineNumbers
 <script lang="ts">
   import { onMount } from 'svelte'
   import 'leaflet/dist/leaflet.css'
@@ -244,7 +244,7 @@ Here is how you use Leaflet in Svelte.
 
 This gives us a nice map.
 
-```html:src/routes/map/+page.svelte showLineNumbers
+```svelte:src/routes/map/+page.svelte showLineNumbers
 <script lang="ts">
   import LeafletMap from './map.svelte'
 </script>
@@ -255,7 +255,7 @@ This gives us a nice map.
 
 This is great but what if we wanted to create a map in a more declarative way?
 
-```html:src/routes/map/+page.svelte showLineNumbers
+```svelte:src/routes/map/+page.svelte showLineNumbers
 <script lang="ts">
   import { Map, Marker } from '$lib/map'
 </script>
@@ -271,7 +271,7 @@ This already looks a lot nicer! To achieve this we can use component composition
 
 Inside `lib` I'm going to create a `map` folder with a `<Map />` and `<Marker />` component.
 
-```html:src/lib/map/map.svelte showLineNumbers
+```svelte:src/lib/map/map.svelte showLineNumbers
 <script lang="ts">
   import { onMount, setContext } from 'svelte'
   import type L from 'leaflet'
@@ -317,7 +317,7 @@ The reason we use the Context API is because we need to pass the `leaflet` and `
 
 The reason we use a `getLeaflet()` and `getMap()` function is because we always want the latest `leaflet` and `map` value, otherwise it would be `undefined` because that's the initial value.
 
-```html:src/lib/map/marker.svelte showLineNumbers
+```svelte:src/lib/map/marker.svelte showLineNumbers
 <script lang="ts">
   import { createEventDispatcher, getContext } from 'svelte'
   import { key, type MapContext } from '$lib/map'
@@ -365,7 +365,7 @@ export const key = Symbol()
 
 You can dispatch custom events by using the [createEventDispatcher](https://svelte.dev/docs/svelte#createeventdispatcher) from Svelte.
 
-```html:src/lib/map/marker.svelte showLineNumbers
+```svelte:src/lib/map/marker.svelte showLineNumbers
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
@@ -378,7 +378,7 @@ You can dispatch custom events by using the [createEventDispatcher](https://svel
 
 You can listen for the custom event using the [on:eventname](https://svelte.dev/docs/element-directives#on-eventname) directive.
 
-```html:src/routes/map/+page.svelte {7-8} showLineNumbers
+```svelte:src/routes/map/+page.svelte {7-8} showLineNumbers
 <script lang="ts">
   import { Map, Marker } from '$lib/map'
 </script>
@@ -397,7 +397,7 @@ You can listen for the custom event using the [on:eventname](https://svelte.dev/
 
 You can also dispatch [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) from Svelte actions using regular JavaScript, and pass any data alongside the event.
 
-```html:example.svelte showLineNumbers
+```svelte:example.svelte showLineNumbers
 <script lang="ts">
   function action(element: HTMLElement) {
     element.addEventListener('click', () => {

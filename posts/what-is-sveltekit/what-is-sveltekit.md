@@ -77,7 +77,7 @@ export function load() {
 }
 ```
 
-```html:src/routes/+page.svelte showLineNumbers
+```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
   export let data // 👈️ typed
 </script>
@@ -132,7 +132,7 @@ SvelteKit apps are server-side rendered by default for speed and SEO (search eng
 
 There's no weird wrappers for links because it's just regular HTML.
 
-```html:src/routes/about/+page.svelte showLineNumbers
+```svelte:src/routes/about/+page.svelte showLineNumbers
 <a href="/about">About</a>
 ```
 
@@ -140,7 +140,7 @@ You're going to spend more time on the [MDN Web Docs](https://developer.mozilla.
 
 SvelteKit uses the web platform meaning you're not learning some framework specific abstraction but using web standards like the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects, [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) and [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) for working with forms.
 
-```html:src/routes/login/+page.svelte showLineNumbers
+```svelte:src/routes/login/+page.svelte showLineNumbers
 <h1>Login</h1>
 
 <form method="POST" action="?/login">
@@ -174,7 +174,7 @@ SvelteKit apps are more resilient because they work before JavaScript if you use
 
 Instead of disabling the default form behavior and implementing what the browser does yourself SvelteKit makes it simple to use the web platform and progressively enhance the user experience when JavaScript is available on the page.
 
-```html:src/routes/login/+page.svelte showLineNumbers
+```svelte:src/routes/login/+page.svelte showLineNumbers
 <script lang="ts">
   import { enhance } from '$app/forms'
 </script>

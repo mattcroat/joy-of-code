@@ -56,7 +56,7 @@ Motion Canvas uses the [Canvas API](https://developer.mozilla.org/en-US/docs/Web
 
 Svelte already has a `tweened` and `spring` [Svelte store](https://joyofcode.xyz/svelte-stores-guide) to define values that change over time.
 
-```html:example showLineNumbers
+```svelte:example showLineNumbers
 <script>
 	import { tweened } from 'svelte/motion'
 
@@ -78,7 +78,7 @@ You can't interpolate strings, but Svelte gives you the option to pass in your o
 
 This means you can use the [d3-interpolate](https://github.com/d3/d3-interpolate) package to interpolate between numbers, colors, strings, arrays, and objects.
 
-```html:example {4,9} showLineNumbers
+```svelte:example {4,9} showLineNumbers
 <script>
 	import { tweened } from 'svelte/motion'
 	import { cubicInOut } from 'svelte/easing'
@@ -100,7 +100,7 @@ This means you can use the [d3-interpolate](https://github.com/d3/d3-interpolate
 
 The `tweened` store returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), which means you can use the `await` keyword to wait until the animation is done.
 
-```html:example {14-15} showLineNumbers
+```svelte:example {14-15} showLineNumbers
 <script>
 	import { onMount } from 'svelte'
 	import { tweened } from 'svelte/motion'
@@ -141,7 +141,7 @@ This is great, but doing any slightly more complex animation is going to be tedi
 
 I want to be able to define values that change over time, and chain animations together using a `.to` method inspired by the [GSAP](https://gsap.com/) animation library.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	import { onMount } from 'svelte'
 
@@ -161,7 +161,7 @@ The `animate` function is just a wrapper around `onMount` to make things prettie
 
 I'm going to wrap the `tweened` store inside of a `signal` function, creating a custom Svelte store you can subscribe to.
 
-```html:+page.svelte {6-15,17,20} showLineNumbers
+```svelte:+page.svelte {6-15,17,20} showLineNumbers
 <script lang="ts">
 	import { tweened } from 'svelte/motion'
 	import { cubicInOut } from 'svelte/easing'
@@ -201,7 +201,7 @@ To solve this problem I'm going to create a `tasks` queue, and push the animatio
 
 Using `.to` we push animations into a queue, and then we can run them in sequence using `await` because the object is thenable.
 
-```html:+page.svelte {5,8,12-17,19} showLineNumbers
+```svelte:+page.svelte {5,8,12-17,19} showLineNumbers
 <script lang="ts">
 	function signal(values, options = { duration: 1000, interpolate: interpolate, easing: cubicInOut }) {
 		const { subscribe, update } = tweened(values, options)
@@ -285,7 +285,7 @@ That's it! 😄
 
 To play animations at the same time, we can use the [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method, which takes an array of promises, and returns a single Promise.
 
-```html:+page.svelte {6-9} showLineNumbers
+```svelte:+page.svelte {6-9} showLineNumbers
 <script lang="ts">
 	const circle = signal({ cx: -300, r: 40, fill: '#fff' })
 	const text = signal({ opacity: 0 })
@@ -315,7 +315,7 @@ To play animations at the same time, we can use the [Promise.all()](https://deve
 
 This is tedious to write, so we can create a helper function.
 
-```html:+page.svelte showLineNumbers
+```svelte:+page.svelte showLineNumbers
 <script lang="ts">
 	function all(...animations) {
   	return Promise.all(animations)
