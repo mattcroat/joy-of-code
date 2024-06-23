@@ -9,7 +9,8 @@ import remarkTableofContents from 'remark-toc'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCodeTitles from 'rehype-code-titles'
-import rehypePrism from 'rehype-prism-plus'
+import rehypeShiki from '@shikijs/rehype'
+import { transformerMetaHighlight } from '@shikijs/transformers'
 import { rehypeCopyCode, rehypeUnwrapImages } from './plugins.js'
 
 const images = `https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts`
@@ -85,7 +86,10 @@ async function parseMarkdown(content, slug) {
 		.use(toHtmlAST, { allowDangerousHtml: true })
 		.use([rehypeSlug, rehypeAutolinkHeadings])
 		.use(rehypeCodeTitles)
-		.use(rehypePrism)
+		.use(rehypeShiki, {
+			theme: 'poimandres',
+			transformers: [transformerMetaHighlight()],
+		})
 		.use(rehypeUnwrapImages)
 		.use(rehypeCopyCode)
 		.use(toHtmlString, { allowDangerousHtml: true })

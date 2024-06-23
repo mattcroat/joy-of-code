@@ -69,12 +69,6 @@ html[data-theme='🌛 Night'] {
 	--clr-code-inline-txt: hsl(173 100% 94%);
 	--clr-code-inline-bg: hsl(173 60% 4%);
 
-	--clr-token-1: hsl(173 100% 66%);
-	--clr-token-2: hsl(180 60% 80%);
-	--clr-token-3: hsl(173 100% 66%);
-	--clr-token-4: hsl(0 0% 98%);
-	--clr-token-5: hsl(173 10% 60%);
-
 	/* Search */
 	--clr-search-bg: hsl(216 7% 14%);
 	--clr-search-txt: hsl(216 7% 80%);
@@ -138,20 +132,14 @@ html[data-theme='☀️ Daylight'] {
 	--post-blockquote-bg: hsl(0 0% 98%);
 	--post-blockquote-border: hsl(0 0% 84%);
 
-	--clr-code-bg: linear-gradient(hsl(0 0% 94%), hsl(0 0% 98%));
-	--clr-code-title: hsl(0 0% 40%);
-	--clr-code-title-bg: hsl(0 0% 94%);
-	--clr-code-border: hsl(0 0% 84%);
-	--clr-code-line-number: hsl(0 0% 60%);
-	--clr-code-line-highlight: hsl(0 0% 90%);
-	--clr-code-inline-txt: hsl(0 0% 98%);
-	--clr-code-inline-bg: hsl(0 0% 20%);
-
-	--clr-token-1: hsl(220 100% 50%);
-	--clr-token-2: hsl(220 60% 50%);
-	--clr-token-3: hsl(220 100% 50%);
-	--clr-token-4: hsl(0 0% 20%);
-	--clr-token-5: hsl(0 0% 60%);
+	--clr-code-bg: linear-gradient(hsl(226, 19%, 13%), hsl(226, 19%, 16%));
+	--clr-code-title: hsl(226, 19%, 80%);
+	--clr-code-title-bg: hsl(226, 19%, 13%);
+	--clr-code-border: hsl(226, 19%, 16%);
+	--clr-code-line-number: hsl(226, 19%, 40%);
+	--clr-code-line-highlight: hsl(226, 19%, 18%);
+	--clr-code-inline-txt: hsl(173 100% 94%);
+	--clr-code-inline-bg: hsl(173 60% 4%);
 
 	/* Search */
 	--clr-search-bg: hsl(0 0% 98%);
@@ -237,12 +225,6 @@ html[data-theme='🐺 Night Howl'] {
 	--clr-code-inline-txt: hsl(210 47% 98%);
 	--clr-code-inline-bg: hsl(210 47% 10%);
 
-	--clr-token-1: hsl(180 100% 43%);
-	--clr-token-2: hsl(197 100% 49%);
-	--clr-token-3: hsl(180 100% 43%);
-	--clr-token-4: hsl(206 50% 98%);
-	--clr-token-5: hsl(217 10% 64%);
-
 	/* Search */
 	--clr-search-bg: hsl(210 47% 12%);
 	--clr-search-txt: hsl(210 47% 80%);
@@ -326,12 +308,6 @@ html[data-theme='🧠 Night Mind'] {
 	--clr-code-line-highlight: hsl(265 28% 18%);
 	--clr-code-inline-txt: hsl(265 28% 98%);
 	--clr-code-inline-bg: hsl(265 28% 10%);
-
-	--clr-token-1: hsl(238 80% 80%);
-	--clr-token-2: hsl(205 80% 80%);
-	--clr-token-3: hsl(358 80% 80%);
-	--clr-token-4: hsl(256 80% 98%);
-	--clr-token-5: hsl(265 10% 60%);
 
 	/* Search */
 	--clr-search-bg: hsl(265 28% 24%);

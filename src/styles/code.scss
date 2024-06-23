@@ -1,12 +1,11 @@
-.prose code[class*='language-'],
-.prose pre[class*='language-'] {
+.prose code[class*='shiki'],
+.prose pre[class*='shiki'] {
 	font-size: var(--post-txt-size);
-	color: var(--clr-txt);
 	tab-size: 2;
 }
 
 .prose pre {
-	padding-bottom: var(--spacing-16);
+	padding-block: var(--spacing-16);
 	line-height: 34px;
 	background-image: var(--clr-code-bg);
 	border-left: 1px solid var(--clr-code-border);
@@ -14,19 +13,6 @@
 	border-bottom-left-radius: var(--rounded-20);
 	border-bottom-right-radius: var(--rounded-20);
 	overflow-x: auto;
-}
-
-.prose pre .code-line {
-	padding-left: var(--spacing-24);
-}
-
-.prose pre .line-number {
-	padding: 0;
-}
-
-.prose pre > code {
-	counter-reset: step;
-	counter-increment: step 0;
 }
 
 .prose code:not(pre > code) {
@@ -69,78 +55,16 @@ html[data-font='dyslexic'] .prose code {
 	border-top-right-radius: var(--rounded-20);
 }
 
-.prose .line-number::before {
-	content: counter(step);
-	counter-increment: step;
-	width: 1rem;
+.prose code .line:not(:last-of-type) {
 	display: inline-block;
-	margin-right: var(--spacing-16);
-	padding: 0 var(--spacing-16);
-	color: var(--clr-code-line-number);
-	text-align: right;
+	padding-inline: var(--spacing-24);
 }
 
-.prose .highlight-line {
-	display: block;
+.prose code .highlighted {
+	width: 100%;
 	background-color: var(--clr-code-line-highlight);
 }
 
-.prose .code-line.inserted {
-	display: block;
-	background-color: hsl(160 84% 39% / 20%);
-}
-
-.prose .code-line.deleted {
-	display: block;
-	background-color: hsl(0 84% 60% / 20%);
-}
-
-.prose .token.regex,
-.prose .token.important,
-.prose .token.variable,
-.prose .token.function,
-.prose .token.class-name,
-.prose .language-css .token.rule {
-	color: var(--clr-token-1);
-}
-
-.prose .token.keyword,
-.prose .language-css .token.variable,
-.prose .language-css .token.selector,
-.prose .language-css .token.pseudo-element {
-	color: var(--clr-token-2);
-}
-
-.prose .token.tag,
-.prose .token.boolean,
-.prose .token.constant,
-.prose .token.symbol,
-.prose .token.deleted,
-.prose .token.entity,
-.prose .token.url,
-.prose .style .token.string {
-	color: var(--clr-token-3);
-}
-
-.prose .token.operator,
-.prose .token.punctuation,
-.prose .literal-property.property,
-.prose .token.property,
-.prose .token.attr-name,
-.prose .token.string,
-.prose .token.char,
-.prose .token.builtin,
-.prose .token.inserted,
-.prose .language-css .unit,
-.prose .language-css .token.function,
-.prose .token.atrule .token.property,
-.prose .token.atrule .token.rule {
-	color: var(--clr-token-4);
-}
-
-.prose .token.comment,
-.prose .token.prolog,
-.prose .token.doctype,
-.prose .token.cdata {
-	color: var(--clr-token-5);
+.prose code span {
+	font-style: normal !important;
 }
