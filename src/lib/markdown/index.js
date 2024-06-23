@@ -15,6 +15,20 @@ import { rehypeCopyCode, rehypeUnwrapImages } from './plugins.js'
 
 const images = `https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts`
 
+const markdownProcessor = unified()
+	.use(toMarkdownAST)
+	.use([remarkGfm, remarkSmartypants, [remarkTableofContents, { tight: true }]])
+	.use(toHtmlAST, { allowDangerousHtml: true })
+	.use([rehypeSlug, rehypeAutolinkHeadings])
+	.use(rehypeCodeTitles)
+	.use(rehypeShiki, {
+		theme: 'poimandres',
+		transformers: [transformerMetaHighlight()],
+	})
+	.use(rehypeUnwrapImages)
+	.use(rehypeCopyCode)
+	.use(toHtmlString, { allowDangerousHtml: true })
+
 /**
  * Returns post slug.
  * @param {string} filename
@@ -76,25 +90,9 @@ function searchAndReplace(content, slug) {
  * @param {string} slug
  */
 async function parseMarkdown(content, slug) {
-	const processor = await unified()
-		.use(toMarkdownAST)
-		.use([
-			remarkGfm,
-			remarkSmartypants,
-			[remarkTableofContents, { tight: true }],
-		])
-		.use(toHtmlAST, { allowDangerousHtml: true })
-		.use([rehypeSlug, rehypeAutolinkHeadings])
-		.use(rehypeCodeTitles)
-		.use(rehypeShiki, {
-			theme: 'poimandres',
-			transformers: [transformerMetaHighlight()],
-		})
-		.use(rehypeUnwrapImages)
-		.use(rehypeCopyCode)
-		.use(toHtmlString, { allowDangerousHtml: true })
-		.process(searchAndReplace(content, slug))
-	return processor.toString()
+	const replacedContent = searchAndReplace(content, slug)
+	const parsedMarkdown = await markdownProcessor.process(replacedContent)
+	return parsedMarkdown.toString()
 }
 
 /**
