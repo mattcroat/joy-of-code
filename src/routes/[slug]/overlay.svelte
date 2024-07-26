@@ -6,6 +6,7 @@
 
 	onMount(() => {
 		const headingElement = document.querySelector('h1')
+		if (!headingElement) return
 
 		const options = {
 			root: null,
@@ -13,11 +14,9 @@
 			threshold: 0, // invoke when element is not visible
 		}
 
-		function handleIntersect([entry]) {
+		const observer = new IntersectionObserver(([entry]) => {
 			!entry.isIntersecting ? (overlay = true) : (overlay = false)
-		}
-
-		const observer = new IntersectionObserver(handleIntersect, options)
+		})
 		observer.observe(headingElement)
 
 		return () => observer.unobserve(headingElement)
