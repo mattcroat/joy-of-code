@@ -6,28 +6,28 @@
 	let tableOfContents = ''
 	let showSidebar = false
 
+	const TOC = '#table-of-contents + ul'
+
 	function getTableOfContents() {
-		const postTableOfContentsEl = document.querySelector(
-			'#table-of-contents + ul'
-		) as HTMLUListElement
-		if (postTableOfContentsEl) {
-			tableOfContents = postTableOfContentsEl.outerHTML
+		const tocEl = document.querySelector(TOC) as HTMLUListElement
+		if (tocEl) {
+			tableOfContents = tocEl.outerHTML
 		}
 	}
 
 	function openSidebar() {
-		const targetEl = document.querySelector(
-			'#table-of-contents + ul'
-		) as HTMLUListElement
+		const tocEl = document.querySelector(TOC) as HTMLUListElement
+		if (!tocEl) return
+
 		const observer = new IntersectionObserver(([entry]) => {
 			entry.boundingClientRect.bottom < 0
 				? (showSidebar = true)
 				: (showSidebar = false)
 		})
-		observer.observe(targetEl)
+		observer.observe(tocEl)
 
 		return () => {
-			observer.unobserve(targetEl)
+			observer.unobserve(tocEl)
 		}
 	}
 
