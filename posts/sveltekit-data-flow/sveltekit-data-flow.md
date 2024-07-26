@@ -384,7 +384,7 @@ If you use `await parent()` inside `load` functions for `+page|layout.ts` you're
 
 ```ts:src/routes/nested/route/+page.ts showLineNumbers
 export async function load({ parent }) {
-	// parent `+layout.server.ts` data
+	// parent `+layout.ts` data
 	const data = await parent()
 	console.log(data) // { a: 1, b: 2 }
 }
