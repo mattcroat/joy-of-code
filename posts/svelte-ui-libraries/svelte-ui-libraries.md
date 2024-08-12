@@ -188,3 +188,5 @@ Interesting Svelte UI libraries that have potential, or don't fit into a specifi
 - [SvelteUI](https://svelteui.dev/) (Mantine UI design system)
 - [Svelte UX](https://svelte-ux.techniq.dev/) (Collection of components, actions, stores, and utilities)
 - [YeSvelte](https://www.yesvelte.com/) (flexible and powerful Svelte UI library)
+- [SVAR Svelte Core](https://svar.dev/svelte/core/) (20+ Svelte UI components and form controls)
+- [STDF](https://stdf.design/) (Mobile component library based on Svelte and Tailwind)
