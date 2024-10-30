@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
 	import { fly } from 'svelte/transition'
 	import { ChevronDoubleLeft, ChevronDoubleRight } from '$lib/icons'
 
-	let tableOfContents = ''
-	let showSidebar = false
+	let tableOfContents = $state('')
+	let showSidebar = $state(false)
 
 	const TOC = '#table-of-contents + ul'
 
@@ -31,7 +30,7 @@
 		}
 	}
 
-	onMount(() => {
+	$effect(() => {
 		getTableOfContents()
 
 		const isLargeScreen = window.innerWidth >= 1440
@@ -51,7 +50,7 @@
 		<section>
 			{#if !showSidebar}
 				<button
-					on:click={toggleSidebar}
+					onclick={toggleSidebar}
 					in:fly={{ x: '100%', duration: 300, delay: 300 }}
 					class="sidebar-toggle"
 					aria-label="Show table of contents"
@@ -65,7 +64,7 @@
 					class="table-of-contents"
 					transition:fly={{ x: '100%', duration: 300 }}
 				>
-					<button on:click={toggleSidebar} aria-label="Hide table of contents">
+					<button onclick={toggleSidebar} aria-label="Hide table of contents">
 						<ChevronDoubleRight width={24} height={24} aria-hidden={true} />
 					</button>
 
@@ -99,38 +98,39 @@
 
 	.table-of-contents {
 		counter-reset: section;
-	}
 
-	.table-of-contents button {
-		padding-block: var(--spacing-8);
+		button {
+			padding-block: var(--spacing-8);
+		}
+
+		:global {
+			ul {
+				max-height: 400px;
+				padding: var(--spacing-4) var(--spacing-8);
+				overflow-y: auto;
+				scrollbar-width: thin;
+			}
+
+			li {
+				margin-top: var(--spacing-8);
+				font-weight: 400;
+			}
+
+			a {
+				display: inline-block;
+				font-weight: 400;
+
+				&::before {
+					all: unset;
+					counter-increment: section;
+					content: counter(section) '. ';
+				}
+			}
+		}
 	}
 
 	.table-of-contents-title {
 		font-size: var(--font-16);
 		text-transform: uppercase;
-	}
-
-	:global(.table-of-contents ul) {
-		max-height: 400px;
-		padding: var(--spacing-4) var(--spacing-8);
-		overflow-y: auto;
-		scrollbar-width: thin;
-	}
-
-	:global(.table-of-contents li) {
-		margin-top: var(--spacing-8);
-		font-weight: 400;
-	}
-
-	:global(.table-of-contents a) {
-		display: inline-block;
-		color: var(--clr-menu-text);
-		font-weight: 400;
-	}
-
-	:global(.table-of-contents a::before) {
-		all: unset;
-		counter-increment: section;
-		content: counter(section) '. ';
 	}
 </style>

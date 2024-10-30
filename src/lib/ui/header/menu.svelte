@@ -13,7 +13,7 @@
 
 <button
 	use:melt={$trigger}
-	on:click={() => $sounds.click()}
+	onclick={() => $sounds.click()}
 	aria-label="Categories"
 >
 	<Menu width={24} height={24} aria-hidden={true} />
@@ -21,7 +21,7 @@
 
 {#if open}
 	<div class="menu" use:melt={$menu} transition:fade={{ duration: 100 }}>
-		<div use:melt={$arrow} />
+		<div use:melt={$arrow}></div>
 		<span class="title">Categories</span>
 		<ul>
 			{#each Object.entries(config.categories) as [slug, category]}
@@ -44,13 +44,13 @@
 		box-shadow: var(--shadow-lg);
 		z-index: 20;
 
-		& [data-melt-dropdown-menu-arrow] {
+		[data-melt-dropdown-menu-arrow] {
 			background-image: var(--clr-menu-bg);
 			border-top: 1px solid var(--clr-menu-border);
 			border-left: 1px solid var(--clr-menu-border);
 		}
 
-		& .title {
+		.title {
 			display: block;
 			padding-bottom: var(--spacing-24);
 			font-size: var(--font-24);
@@ -59,16 +59,16 @@
 			border-bottom: 1px solid var(--clr-menu-border);
 		}
 
-		& a {
+		a {
 			font-weight: inherit;
 			color: var(--clr-menu-text);
+
+			&:hover {
+				color: var(--clr-primary);
+			}
 		}
 
-		& a:hover {
-			color: var(--clr-primary);
-		}
-
-		& ul {
+		ul {
 			display: grid;
 			grid-template-rows: repeat(6, 1fr);
 			row-gap: var(--spacing-24);

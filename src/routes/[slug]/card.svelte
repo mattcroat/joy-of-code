@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { ArrowRight, PencilSquare, Heart } from '$lib/icons'
 
-	export let preset: 'support' | 'edit'
-	export let editUrl = ''
+	interface Props {
+		preset: 'support' | 'edit'
+		editUrl?: string
+	}
+
+	let { preset, editUrl = '' }: Props = $props()
 </script>
 
 {#if preset === 'support'}
@@ -50,44 +54,45 @@
 		padding: var(--spacing-32);
 		border: 4px solid var(--clr-primary);
 		border-radius: var(--rounded-20);
-	}
 
-	.card .decorative {
-		display: grid;
-		place-content: center;
-		width: 48px;
-		height: 48px;
-		position: absolute;
-		top: 0;
-		left: 0;
-		transform: translateX(-50%) translateY(-50%);
-		border-radius: 50%;
-		background-color: var(--clr-bg);
-	}
+		.decorative {
+			display: grid;
+			place-content: center;
+			width: 48px;
+			height: 48px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: translateX(-50%) translateY(-50%);
+			border-radius: 50%;
+			background-color: var(--clr-bg);
 
-	.card .decorative :global(svg) {
-		color: var(--clr-primary);
-	}
+			:global(svg) {
+				color: var(--clr-primary);
+			}
+		}
 
-	.card .title {
-		font-size: var(--font-24);
-		font-weight: 700;
-		line-height: 32px;
-	}
+		.title {
+			font-size: var(--font-24);
+			font-weight: 700;
+			line-height: 32px;
+		}
 
-	.card .text {
-		color: var(--clr-card-txt);
-		margin-top: var(--spacing-8);
-		margin-bottom: var(--spacing-32);
-	}
+		.text {
+			color: var(--clr-card-txt);
+			margin-top: var(--spacing-8);
+			margin-bottom: var(--spacing-32);
+		}
 
-	.card .link {
-		width: max-content;
-		display: flex;
-		gap: var(--spacing-16);
-	}
+		.link {
+			width: max-content;
+			display: flex;
+			gap: var(--spacing-16);
+		}
 
-	.card :global(form) {
-		margin: var(--spacing-16) 0;
+		:global(form) {
+			margin: var(--spacing-16) 0;
+			background: red;
+		}
 	}
 </style>

@@ -413,7 +413,7 @@ Svelte is able to show `+page.md` as a page but **you need mdsvex to preprocess 
 
 You have to specify the extension inside the `extensions` array for `mdsvexOptions` which you name name whatever you want like `.md`, `.svx` or `.banana`.
 
-Instead of using `+page.md` files you can import a Markdown post as a module and render it as a regular Svelte component with [<svelte:component>](https://learn.svelte.dev/tutorial/svelte-component) which is what I'm going to do later.
+Instead of using `+page.md` files you can import a Markdown post as a module and render it as a regular Svelte component with [&lt;svelte:component&gt;](https://learn.svelte.dev/tutorial/svelte-component) which is what I'm going to do later.
 
 I'm going to add some posts in `/src/posts`.
 

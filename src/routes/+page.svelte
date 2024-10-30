@@ -4,7 +4,7 @@
 	import { ArrowRight } from '$lib/icons'
 	import * as config from '$lib/site/config'
 
-	export let data
+	let { data } = $props()
 
 	const { posts } = data
 </script>
@@ -41,7 +41,7 @@
 			</a>
 		</div>
 
-		<div class="divider" />
+		<div class="divider"></div>
 
 		<div class="newsletter">
 			<h2>Subscribe for updates</h2>
@@ -50,11 +50,16 @@
 	</section>
 
 	<Posts {posts}>
-		<h3 class="latest" slot="title">Latest</h3>
-		<a slot="see-more" href="/archive">
-			<span>See more posts</span>
-			<ArrowRight width="24" height="24" aria-hidden="true" />
-		</a>
+		{#snippet title()}
+			<h3 class="latest">Latest</h3>
+		{/snippet}
+
+		{#snippet more()}
+			<a href="/archive">
+				<span>See more posts</span>
+				<ArrowRight width="24" height="24" aria-hidden="true" />
+			</a>
+		{/snippet}
 	</Posts>
 </main>
 
@@ -74,7 +79,7 @@
 			column-gap: var(--spacing-24);
 		}
 
-		& .divider {
+		.divider {
 			border-bottom: 1px solid var(--clr-hero-divider-bg);
 			margin: var(--spacing-32) 0;
 
@@ -93,30 +98,30 @@
 			grid-column: column-start 2 / span 4;
 		}
 
-		& .kicker {
+		.kicker {
 			font-weight: 500;
 			color: var(--clr-hero-txt);
 		}
 
-		& .title {
-			padding: var(--spacing-8) 0 var(--spacing-16) 0;
-			font-size: clamp(var(--font-24), 4vw, var(--font-32));
+		.title {
+			padding: var(--spacing-16) 0 var(--spacing-8) 0;
+			font-size: clamp(var(--font-24), 4vw, 40px);
 			color: var(--clr-primary);
 		}
 
-		& .description {
+		.description {
 			font-size: var(--font-20);
 			color: var(--clr-hero-txt);
 		}
 
-		& .continue-reading {
+		.continue-reading {
 			width: max-content;
 			display: flex;
 			align-items: center;
 			margin-top: var(--spacing-32);
 		}
 
-		& a {
+		a {
 			display: flex;
 			gap: var(--spacing-16);
 		}
@@ -130,7 +135,7 @@
 			grid-column: column-start 8 / span 4;
 		}
 
-		& h2 {
+		h2 {
 			font-size: var(--font-24);
 			line-height: 32px;
 		}

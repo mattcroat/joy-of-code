@@ -21,10 +21,8 @@
 	.newsletter {
 		display: grid;
 		justify-items: center;
-	}
 
-	@media (min-width: 860px) {
-		.newsletter {
+		@media (min-width: 860px) {
 			display: grid;
 			justify-items: center;
 			margin-bottom: var(--spacing-128);

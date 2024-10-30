@@ -11,13 +11,13 @@
 		height: 100%;
 		display: grid;
 		place-content: center;
-	}
 
-	h1 {
-		margin-top: var(--spacing-64);
-		font-family: var(--font-sans);
-		font-size: var(--font-32);
-		text-align: center;
-		text-transform: none;
+		h1 {
+			margin-top: var(--spacing-64);
+			font-family: var(--font-sans);
+			font-size: var(--font-32);
+			text-align: center;
+			text-transform: none;
+		}
 	}
 </style>

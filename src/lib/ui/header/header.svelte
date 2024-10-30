@@ -6,8 +6,8 @@
 	import Menu from './menu.svelte'
 	import * as config from '$lib/site/config'
 
-	let scrollY: number
-	$: fixed = scrollY > 0
+	let scrollY = $state(0)
+	let fixed = $derived(scrollY > 0)
 </script>
 
 <svelte:window bind:scrollY />
@@ -59,17 +59,17 @@
 		display: flex;
 		justify-content: space-between;
 
-		& .logo {
+		.logo {
 			display: flex;
 			align-items: center;
 			gap: var(--spacing-8);
 
-			& a::before {
+			a::before {
 				content: none;
 			}
 		}
 
-		& nav {
+		nav {
 			display: flex;
 			gap: var(--spacing-16);
 		}

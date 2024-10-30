@@ -1,0 +1,131 @@
+.prose {
+	display: grid;
+	grid-template-columns:
+		1fr
+		[gutter-start]
+		40px
+		[content-start]
+		minmax(0px, var(--post-txt-length))
+		[content-end]
+		40px
+		[gutter-end]
+		1fr;
+
+	> * {
+		grid-column: content-start / content-end;
+	}
+
+	header {
+		margin: var(--spacing-128) 0 var(--spacing-64) 0;
+		text-align: center;
+	}
+
+	h1 {
+		color: var(--clr-primary);
+		line-height: clamp(32px, 6vw, 48px);
+	}
+
+	h2 {
+		margin-top: var(--spacing-64);
+		margin-bottom: var(--spacing-24);
+		color: var(--clr-primary);
+	}
+
+	/* no one has to know 🤫 */
+	#table-of-contents + ul a {
+		text-decoration: none;
+		font-weight: inherit;
+	}
+
+	p > a,
+	li > a {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+
+	p,
+	li {
+		font-size: var(--post-txt-size);
+		line-height: var(--post-txt-height);
+	}
+
+	@media (width >= 800px) {
+		& :where(iframe, video, img, pre, .rehype-code-title) {
+			grid-column: gutter-start / gutter-end;
+		}
+	}
+
+	img {
+		justify-self: center;
+	}
+
+	img,
+	iframe,
+	video,
+	p,
+	ul,
+	ol,
+	pre,
+	blockquote,
+	details {
+		margin-bottom: var(--spacing-32);
+	}
+
+	li > ul {
+		margin-bottom: 0;
+	}
+
+	ul,
+	ol {
+		display: grid;
+		row-gap: var(--spacing-8);
+		list-style-type: none;
+		list-style-position: inside;
+	}
+
+	ul li::before {
+		content: '🔥';
+		padding-right: var(--spacing-8);
+	}
+
+	li > ul {
+		margin-top: var(--spacing-8);
+		padding-left: var(--spacing-16);
+	}
+
+	li > ul > li {
+		list-style-type: circle;
+	}
+
+	li > ul > li::before {
+		content: none;
+	}
+
+	ol {
+		list-style-type: decimal;
+	}
+
+	li > ol {
+		margin-top: var(--spacing-8);
+		padding-left: var(--spacing-16);
+	}
+
+	blockquote {
+		padding: var(--spacing-32);
+		color: var(--post-blockquote-txt);
+		background-color: var(--post-blockquote-bg);
+		border: 1px solid var(--post-blockquote-border);
+		border-top: 4px solid var(--clr-primary);
+		border-radius: var(--rounded-20);
+		box-shadow: var(--shadow-sm);
+
+		p {
+			margin-bottom: 0;
+		}
+	}
+
+	details summary {
+		margin-bottom: var(--spacing-8);
+		font-weight: 700;
+	}
+}

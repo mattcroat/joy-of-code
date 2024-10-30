@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition'
-	import { browser } from '$app/environment'
 	import { createDialog, melt } from '@melt-ui/svelte'
+	import { fade } from 'svelte/transition'
+	import { onNavigate } from '$app/navigation'
+	import { browser } from '$app/environment'
+
 	import SearchIcon from './search-icon.svelte'
 	import SearchWorker from './search-worker?worker'
-	import { onNavigate } from '$app/navigation'
 	import type { Result } from './search'
 
 	const {
@@ -13,10 +14,10 @@
 	} = createDialog()
 	const platform = browser && window.navigator.platform
 
-	let search: 'idle' | 'load' | 'ready' = 'idle'
-	let searchTerm = ''
-	let results: Result[] = []
-	let searchWorker: Worker
+	let search: 'idle' | 'load' | 'ready' = $state('idle')
+	let searchTerm = $state('')
+	let results: Result[] = $state([])
+	let searchWorker: Worker | undefined = $state()
 
 	function initialize() {
 		if (search === 'ready') return
@@ -34,27 +35,32 @@
 		$open = false
 	})
 
-	$: if (search === 'ready') {
-		searchWorker.postMessage({ type: 'search', payload: { searchTerm } })
-	}
+	$effect(() => {
+		if (search === 'ready') {
+			searchWorker?.postMessage({ type: 'search', payload: { searchTerm } })
+		}
+	})
 
-	$: if (searchTerm && !$open) {
-		searchTerm = ''
-	}
+	$effect(() => {
+		if (searchTerm && !$open) {
+			searchTerm = ''
+		}
+	})
 </script>
 
 <svelte:window
-	on:keydown={(e) => {
+	onkeydown={(e) => {
 		if (e.ctrlKey || e.metaKey) {
 			if (e.key === 'k' || e.key === 'K') {
 				e.preventDefault()
+				if (search === 'idle') initialize()
 				$open = !$open
 			}
 		}
 	}}
 />
 
-<button use:melt={$trigger} on:click={initialize} class="open-search">
+<button use:melt={$trigger} onclick={initialize} class="open-search">
 	<SearchIcon />
 	<span>Search</span>
 	<div class="shortcut">
@@ -64,7 +70,7 @@
 
 <div use:melt={$portalled}>
 	{#if $open}
-		<div in:fade={{ duration: 200 }} use:melt={$overlay} class="overlay" />
+		<div in:fade={{ duration: 200 }} use:melt={$overlay} class="overlay"></div>
 		<div use:melt={$content} class="content">
 			<input
 				bind:value={searchTerm}
@@ -120,7 +126,7 @@
 		overflow: hidden;
 		z-index: 40;
 
-		& input {
+		input {
 			width: 100%;
 			padding: var(--spacing-16);
 			color: var(--clr-search-input-txt);
@@ -140,22 +146,22 @@
 		overflow-y: auto;
 		scrollbar-width: thin;
 
-		& ol {
+		ol {
 			margin-block-start: var(--spacing-8);
 		}
 
-		& li:not(:last-child) {
+		li:not(:last-child) {
 			margin-block-end: var(--spacing-16);
 			padding-block-end: var(--spacing-16);
 			border-bottom: 1px solid var(--clr-results-border);
 		}
 
-		& a {
+		a {
 			display: block;
 			font-size: var(--font-24);
 		}
 
-		& mark {
+		:global(mark) {
 			background-color: var(--clr-primary);
 		}
 	}
@@ -172,7 +178,11 @@
 		border-radius: var(--rounded-20);
 		transition: color 0.3s ease;
 
-		& span,
+		&:hover {
+			color: var(--clr-primary);
+		}
+
+		span,
 		.shortcut {
 			display: none;
 
@@ -181,16 +191,12 @@
 			}
 		}
 
-		& kbd {
+		kbd {
 			padding: 4px 8px;
 			color: var(--clr-search-kbd-txt);
 			background-color: var(--clr-search-kbd-bg);
 			border: 1px solid var(--clr-search-kbd-border);
 			border-radius: var(--rounded-4);
-		}
-
-		&:hover {
-			color: var(--clr-primary);
 		}
 	}
 </style>

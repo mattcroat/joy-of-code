@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import * as config from '$lib/site/config'
-
 	import Heading from '$lib/ui/heading.svelte'
 	import Posts from '$lib/ui/posts.svelte'
+	import * as config from '$lib/site/config'
+	import type { Categories } from '$lib/types'
 
-	export let data
+	let { data } = $props()
 
 	const { posts } = data
-	const category = $page.params.category
+	const category = $page.params.category as Categories
 </script>
 
 <svelte:head>
@@ -19,31 +19,33 @@
 <Heading>{config.categories[category]}</Heading>
 
 <Posts {posts}>
-	<div class="container" slot="title">
-		<div>
-			<span class="tag">{category}</span>
+	{#snippet title()}
+		<div class="container">
+			<div>
+				<span class="tag">{category}</span>
+			</div>
+			<div>
+				<span class="results">{posts.length}</span> results
+			</div>
 		</div>
-		<div>
-			<span class="results">{posts.length}</span> results
-		</div>
-	</div>
+	{/snippet}
 </Posts>
 
 <style>
 	.container {
 		display: flex;
 		justify-content: space-between;
-	}
 
-	.tag {
-		padding: var(--spacing-16);
-		font-weight: 700;
-		background-color: var(--clr-bg);
-		border-radius: var(--rounded-20);
-		box-shadow: var(--shadow-sm);
-	}
+		.tag {
+			padding: var(--spacing-16);
+			font-weight: 700;
+			background-color: var(--clr-bg);
+			border-radius: var(--rounded-20);
+			box-shadow: var(--shadow-sm);
+		}
 
-	.results {
-		font-weight: 700;
+		.results {
+			font-weight: 700;
+		}
 	}
 </style>

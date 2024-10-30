@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-
-	onMount(() => {
+	$effect(() => {
 		const copyBtnElement = document.querySelectorAll('.copy')
 
 		function copyToClipboard(event: Event) {

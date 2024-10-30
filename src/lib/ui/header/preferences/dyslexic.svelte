@@ -33,12 +33,12 @@
 		<label for="dyslexic-font">Use font for dyslexia</label>
 
 		<button
-			on:click={handleChange}
+			onclick={handleChange}
 			use:melt={$root}
 			class="toggle"
 			aria-labelledby="dyslexic-font"
 		>
-			<span class="thumb" />
+			<span class="thumb"></span>
 		</button>
 
 		<input use:melt={$input} use:input id="dyslexic-font" />
@@ -64,7 +64,7 @@
 		border-radius: 9999px;
 		transition: background-color 0.15s ease;
 
-		& .thumb {
+		.thumb {
 			--size: 3.4rem;
 
 			display: block;
@@ -78,7 +78,7 @@
 		&[data-state='checked'] {
 			--background: var(--clr-switch-on-bg);
 
-			& .thumb {
+			.thumb {
 				translate: calc(var(--width) - var(--size)) 0px;
 			}
 		}

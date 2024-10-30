@@ -1,8 +1,7 @@
 export const siteName = 'Joy of Code'
 export const siteUrl = 'https://joyofcode.xyz/'
 export const siteTitle = 'Joy of Code'
-export const siteDescription =
-	'Joy of Code is a digital garden growing curious minds with content related to web development, and design.'
+export const siteDescription = 'Web development and design-focused content'
 export const siteImage = `${siteUrl}social.png`
 export const postImage = 'https://social-share-images.vercel.app/'
 

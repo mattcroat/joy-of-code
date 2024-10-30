@@ -63,11 +63,13 @@
 		states: { open, selectedLabel },
 	} = createSelect()
 
-	$: updateTheme($selectedLabel)
+	$effect(() => {
+		updateTheme($selectedLabel)
+	})
 </script>
 
 <div class="select">
-	<!-- svelte-ignore a11y-label-has-associated-control -->
+	<!-- svelte-ignore a11y_label_has_associated_control -->
 	<label use:melt={$label}>Theme</label>
 	<button use:melt={$trigger} class="trigger" aria-label="Theme">
 		{$selectedLabel || selectedTheme.name}
@@ -85,20 +87,20 @@
 
 <style>
 	.select {
-		& :where(.trigger, .menu) {
+		:where(.trigger, .menu) {
 			background-color: var(--clr-primary);
 			color: var(--clr-theme-txt);
 			border-radius: var(--rounded-4);
 			box-shadow: var(--shadow-sm);
 		}
 
-		& .trigger {
+		.trigger {
 			width: 180px;
 			padding: var(--spacing-16) var(--spacing-24);
 			font-weight: 700;
 		}
 
-		& .menu {
+		.menu {
 			display: grid;
 			gap: var(--spacing-24);
 			padding: var(--spacing-16);

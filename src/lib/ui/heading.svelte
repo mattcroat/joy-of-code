@@ -1,5 +1,9 @@
+<script lang="ts">
+	let props = $props()
+</script>
+
 <h1>
-	<slot />
+	{@render props.children?.()}
 </h1>
 
 <style>
@@ -9,10 +13,8 @@
 		line-height: clamp(48px, 10vw, 112px);
 		color: var(--clr-primary);
 		text-align: center;
-	}
 
-	@media (min-width: 860px) {
-		h1 {
+		@media (width >= 860px) {
 			margin: var(--spacing-128) 0;
 		}
 	}

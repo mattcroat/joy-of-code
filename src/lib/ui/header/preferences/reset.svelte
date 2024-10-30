@@ -1,23 +1,10 @@
 <script lang="ts">
-	import { textSize, textLength, textHeight } from './preferences'
-
-	function reset() {
-		textSize.set(18)
-		textLength.set(90)
-		textHeight.set(40)
-
-		const html = document.documentElement
-		html.dataset.theme = '🌛 Night'
-		delete html.dataset.font
-
-		localStorage.theme = '🌛 Night'
-		localStorage.removeItem('font')
-	}
+	import { preferences } from './preferences.svelte'
 </script>
 
 <div class="reset-preferences">
 	<span>Use default settings</span>
-	<button on:click={reset}>Reset</button>
+	<button onclick={() => preferences.reset()}>Reset</button>
 </div>
 
 <style>
