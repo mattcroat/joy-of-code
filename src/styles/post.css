@@ -22,6 +22,7 @@
 
 	h1 {
 		color: var(--clr-primary);
+		line-height: clamp(32px, 6vw, 48px);
 	}
 
 	h2 {
@@ -77,7 +78,7 @@
 	ul,
 	ol {
 		display: grid;
-		row-gap: var(--spacing-16);
+		row-gap: var(--spacing-8);
 		list-style-type: none;
 		list-style-position: inside;
 	}

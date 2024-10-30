@@ -104,8 +104,8 @@
 		}
 
 		.title {
-			padding: var(--spacing-8) 0 var(--spacing-16) 0;
-			font-size: clamp(var(--font-24), 4vw, var(--font-32));
+			padding: var(--spacing-16) 0 var(--spacing-8) 0;
+			font-size: clamp(var(--font-24), 4vw, 40px);
 			color: var(--clr-primary);
 		}
 

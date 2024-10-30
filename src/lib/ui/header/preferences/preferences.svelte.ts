@@ -1,8 +1,8 @@
 import { browser } from '$app/environment'
 
 class Preferences {
-	#textSize = $state(18)
-	#textLength = $state(90)
+	#textSize = $state(20)
+	#textLength = $state(70)
 	#textHeight = $state(40)
 	#htmlEl: HTMLElement | undefined
 
@@ -49,8 +49,8 @@ class Preferences {
 	}
 
 	reset() {
-		this.textSize = 18
-		this.textLength = 90
+		this.textSize = 20
+		this.textLength = 70
 		this.textHeight = 40
 
 		this.#htmlEl!.dataset.theme = '🌛 Night'

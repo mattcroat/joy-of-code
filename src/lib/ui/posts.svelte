@@ -99,7 +99,7 @@
 		.title {
 			font-family: var(--font-sans);
 			font-size: clamp(var(--font-24), 4vw, var(--font-32));
-			font-weight: 500;
+			font-weight: 700;
 			line-height: 40px;
 			text-transform: capitalize;
 			text-wrap: balance;

@@ -1,6 +1,6 @@
 :root {
 	/* font */
-	--font-sans: 'Poppins', sans-serif;
+	--font-sans: 'Atkinson Hyperlegible', sans-serif;
 	--font-mono: 'JetBrains Mono', monospace;
 	--font-dyslexic: 'OpenDyslexic', sans-serif;
 	--font-dyslexic-mono: 'OpenDyslexic Mono', monospace;
@@ -22,8 +22,8 @@
 	--spacing-128: 12.8rem;
 
 	/* post */
-	--post-txt-size: 18px;
-	--post-txt-length: 90ch;
+	--post-txt-size: 20px;
+	--post-txt-length: 70ch;
 	--post-txt-height: 40px;
 
 	/* scrollbar */
@@ -54,7 +54,7 @@ body {
 
 body {
 	font-family: var(--font-sans);
-	font-size: var(--font-16);
+	font-size: var(--post-txt-size);
 	color: var(--clr-txt);
 	background-color: var(--clr-bg);
 
@@ -107,7 +107,7 @@ h2 {
 
 h1 {
 	font-size: clamp(var(--font-32), 4vw, var(--font-48));
-	line-height: clamp(32px, 6vw, 48px);
+	line-height: clamp(32px, 6vw, 40px);
 }
 
 h2 {
