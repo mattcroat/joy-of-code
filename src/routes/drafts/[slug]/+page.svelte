@@ -7,7 +7,7 @@
 	import Overlay from '../../[slug]/overlay.svelte'
 	import TableOfContents from '../../[slug]/toc.svelte'
 
-	export let data
+	let { data } = $props()
 
 	let editUrl = `${config.fileUrl}/${data.frontmatter.slug}/${data.frontmatter.slug}.md`
 	let image = `${config.postImage}${encodeURIComponent(data.frontmatter.title)}.png`
@@ -45,12 +45,11 @@
 			</p>
 		</header>
 
-		<svelte:component this={data.component} />
+		<data.component />
 	</article>
 
 	<div class="cards">
 		<Card preset="support" />
-		<Card preset="newsletter" />
 		<Card preset="edit" {editUrl} />
 	</div>
 </main>

@@ -81,11 +81,11 @@
 			flex-direction: row;
 		}
 
-		& p {
+		p {
 			font-weight: 700;
 		}
 
-		& ul {
+		ul {
 			width: max-content;
 			display: grid;
 			grid-template-rows: repeat(5, 1fr);
@@ -94,18 +94,18 @@
 			row-gap: var(--spacing-16);
 			margin-top: var(--spacing-16);
 
-			& li a {
+			li a {
 				display: flex;
 				align-items: center;
 				gap: var(--spacing-8);
 			}
 		}
 
-		& li a {
+		li a {
 			font-weight: inherit;
 			color: var(--clr-footer-txt);
 
-			& a:hover {
+			&:hover {
 				color: var(--clr-primary);
 			}
 		}

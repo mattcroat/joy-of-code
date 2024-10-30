@@ -21,6 +21,7 @@ const markdownProcessor = unified()
 	.use(toHtmlAST, { allowDangerousHtml: true })
 	.use([rehypeSlug, rehypeAutolinkHeadings])
 	.use(rehypeCodeTitles)
+	// @ts-ignore
 	.use(rehypeShiki, {
 		theme: 'poimandres',
 		transformers: [transformerMetaHighlight()],

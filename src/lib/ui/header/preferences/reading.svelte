@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { textSize, textLength, textHeight } from './preferences'
+	import { preferences } from './preferences.svelte'
 </script>
 
 <div class="reading-size">
@@ -7,9 +7,9 @@
 		<span>Reading size</span>
 	</label>
 	<div class="slider">
-		<span>{$textSize}px</span>
+		<span>{preferences.textSize}px</span>
 		<input
-			bind:value={$textSize}
+			bind:value={preferences.textSize}
 			type="range"
 			name="text-size"
 			id="text-size"
@@ -25,9 +25,9 @@
 		<span>Reading length</span>
 	</label>
 	<div class="slider">
-		<span>{$textLength}ch</span>
+		<span>{preferences.textLength}ch</span>
 		<input
-			bind:value={$textLength}
+			bind:value={preferences.textLength}
 			type="range"
 			name="text-length"
 			id="text-length"
@@ -43,9 +43,9 @@
 		<span>Reading line height</span>
 	</label>
 	<div class="slider">
-		<span>{$textHeight}px</span>
+		<span>{preferences.textHeight}px</span>
 		<input
-			bind:value={$textHeight}
+			bind:value={preferences.textHeight}
 			type="range"
 			name="text-height"
 			id="text-height"
@@ -68,25 +68,25 @@
 		height: 4px;
 		background-color: hsl(0 0% 24%);
 		border-radius: var(--rounded-20);
-	}
 
-	input[type='range']::-webkit-slider-thumb {
-		appearance: none;
-		width: 16px;
-		height: 16px;
-		background-color: var(--clr-primary);
-		border-radius: 50%;
-		box-shadow: var(--shadow-sm);
-		cursor: pointer;
-	}
+		&::-webkit-slider-thumb {
+			appearance: none;
+			width: 16px;
+			height: 16px;
+			background-color: var(--clr-primary);
+			border-radius: 50%;
+			box-shadow: var(--shadow-sm);
+			cursor: pointer;
+		}
 
-	input[type='range']::-moz-range-thumb {
-		appearance: none;
-		width: 16px;
-		height: 16px;
-		background-color: var(--clr-primary);
-		border-radius: 50%;
-		box-shadow: var(--shadow-sm);
-		cursor: pointer;
+		&::-moz-range-thumb {
+			appearance: none;
+			width: 16px;
+			height: 16px;
+			background-color: var(--clr-primary);
+			border-radius: 50%;
+			box-shadow: var(--shadow-sm);
+			cursor: pointer;
+		}
 	}
 </style>

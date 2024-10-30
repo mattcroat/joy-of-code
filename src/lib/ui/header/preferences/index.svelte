@@ -17,7 +17,7 @@
 
 <button
 	use:melt={$trigger}
-	on:click={() => $sounds.click()}
+	onclick={() => $sounds.click()}
 	aria-label="Preferences"
 >
 	<Cog width={24} height={24} aria-hidden={true} />
@@ -25,7 +25,7 @@
 
 {#if open}
 	<div class="menu" use:melt={$menu} transition:fade={{ duration: 100 }}>
-		<div use:melt={$arrow} />
+		<div use:melt={$arrow}></div>
 		<div class="preferences">
 			<span class="title">Preferences</span>
 			<div class="options">
@@ -42,7 +42,7 @@
 	.menu {
 		z-index: 20;
 
-		& [data-melt-dropdown-menu-arrow] {
+		[data-melt-dropdown-menu-arrow] {
 			background-image: var(--clr-menu-bg);
 			border-top: 1px solid var(--clr-menu-border);
 			border-left: 1px solid var(--clr-menu-border);
@@ -62,7 +62,7 @@
 			width: 420px;
 		}
 
-		& .title {
+		.title {
 			display: block;
 			padding-bottom: var(--spacing-24);
 			font-size: var(--font-24);
@@ -71,31 +71,33 @@
 			border-bottom: 1px solid var(--clr-menu-border);
 		}
 
-		& .options {
+		.options {
 			color: var(--clr-menu-text);
 
-			& > * {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				gap: var(--spacing-32);
-				padding: var(--spacing-24) 0;
+			:global {
+				> * {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					gap: var(--spacing-32);
+					padding: var(--spacing-24) 0;
 
-				@media (width >= 480px) {
-					gap: var(--spacing-64);
+					@media (width >= 480px) {
+						gap: var(--spacing-64);
+					}
 				}
-			}
 
-			& > *:not(:last-child) {
-				border-bottom: 1px solid var(--clr-menu-border);
-			}
+				> *:not(:last-child) {
+					border-bottom: 1px solid var(--clr-menu-border);
+				}
 
-			& > *:last-child {
-				padding-bottom: 0;
-			}
+				> *:last-child {
+					padding-bottom: 0;
+				}
 
-			& span {
-				max-width: 180px;
+				span {
+					max-width: 180px;
+				}
 			}
 		}
 	}

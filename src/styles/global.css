@@ -1,5 +1,5 @@
 :root {
-	/* Font */
+	/* font */
 	--font-sans: 'Poppins', sans-serif;
 	--font-mono: 'JetBrains Mono', monospace;
 	--font-dyslexic: 'OpenDyslexic', sans-serif;
@@ -12,7 +12,7 @@
 	--font-48: 4.8rem;
 	--font-96: 9.6rem;
 
-	/* Spacing */
+	/* spacing */
 	--spacing-4: 0.4rem;
 	--spacing-8: 0.8rem;
 	--spacing-16: 1.6rem;
@@ -21,20 +21,20 @@
 	--spacing-64: 6.4rem;
 	--spacing-128: 12.8rem;
 
-	/* Post */
+	/* post */
 	--post-txt-size: 18px;
 	--post-txt-length: 90ch;
 	--post-txt-height: 40px;
 
-	/* Scrollbar */
+	/* scrollbar */
 	--clr-scrollbar-thumb: hsl(173 10% 20%);
 
-	/* Shadows */
+	/* shadows */
 	--shadow-sm: 0px 0px 4px 4px hsl(0 0% 0% / 4%);
 	--shadow-md: 0px 0px 10px 4px hsl(0 0% 0% / 10%);
 	--shadow-lg: 0px 0px 20px 8px hsl(0 0% 0% / 20%);
 
-	/* Border radius */
+	/* border radius */
 	--rounded-4: 4px;
 	--rounded-20: 20px;
 }
@@ -79,10 +79,7 @@ body {
 	border-radius: var(--rounded-20);
 }
 
-html[data-font='dyslexic'] body,
-html[data-font='dyslexic'] h1,
-html[data-font='dyslexic'] h2,
-html[data-font='dyslexic'] h3 {
+html[data-font='dyslexic'] :is(body, h1, h2, h3) {
 	font-family: var(--font-dyslexic);
 }
 
@@ -133,30 +130,30 @@ a {
 	font-weight: 700;
 	text-decoration: none;
 	transition: color 0.3s ease;
-}
 
-a:hover {
-	color: var(--clr-primary);
-}
+	&:hover {
+		color: var(--clr-primary);
 
-a::before {
-	content: '';
-	width: 100%;
-	height: 100%;
-	display: block;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	transform: scaleX(0);
-	transform-origin: left;
-	transition: transform 0.3s ease;
-	background-color: var(--clr-link-background);
-	border-radius: 4px;
-	z-index: -1;
-}
+		&::before {
+			transform: scaleX(1);
+		}
+	}
 
-a:hover::before {
-	transform: scaleX(1);
+	&::before {
+		content: '';
+		width: 100%;
+		height: 100%;
+		display: block;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.3s ease;
+		background-color: var(--clr-link-background);
+		border-radius: 4px;
+		z-index: -1;
+	}
 }
 
 table {

@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition'
 	import Heading from '$lib/ui/heading.svelte'
 
-	export let data
+	let { data } = $props()
 </script>
 
 <svelte:head>
@@ -46,11 +46,11 @@
 		margin-inline: auto;
 		margin-block-start: var(--spacing-64);
 
-		& .container {
+		.container {
 			display: flex;
 			justify-content: space-between;
 
-			& .results {
+			.results {
 				font-weight: 700;
 			}
 		}
@@ -59,16 +59,22 @@
 	.posts {
 		margin-top: var(--spacing-64);
 
-		& a::before {
+		a::before {
 			content: none;
 		}
 
-		& .post {
+		.post {
 			margin-block-start: var(--spacing-32);
 			padding-block-end: var(--spacing-32);
 			border-bottom: 1px solid var(--clr-menu-border);
 
-			& .title {
+			:global(html[data-font='dyslexic']) & .title {
+				font-family: var(--font-dyslexic);
+				font-size: var(--font-24);
+				line-height: 32px;
+			}
+
+			.title {
 				font-family: var(--font-sans);
 				font-size: clamp(var(--font-24), 4vw, var(--font-32));
 				font-weight: 500;
@@ -76,11 +82,5 @@
 				text-transform: capitalize;
 			}
 		}
-	}
-
-	html[data-font='dyslexic'] .post .title {
-		font-family: var(--font-dyslexic);
-		font-size: var(--font-24);
-		line-height: 32px;
 	}
 </style>

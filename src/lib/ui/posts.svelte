@@ -1,12 +1,19 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
+	import type { Snippet } from 'svelte'
 	import type { Post } from '$lib/types'
 
-	export let posts: Post[]
+	type Props = {
+		posts: Post[]
+		title?: Snippet
+		more?: Snippet
+	}
+
+	let { posts, title, more }: Props = $props()
 </script>
 
 <section>
-	<slot name="title" />
+	{@render title?.()}
 
 	<div class="cards">
 		{#each posts as post, i}
@@ -28,7 +35,7 @@
 		{/each}
 	</div>
 
-	<slot name="see-more" />
+	{@render more?.()}
 </section>
 
 <style>
@@ -45,7 +52,7 @@
 			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		}
 
-		& a {
+		a {
 			display: block;
 			color: inherit;
 			font-weight: inherit;
@@ -78,12 +85,18 @@
 				0 0 0 4px var(--clr-primary);
 		}
 
-		& .details {
+		.details {
 			height: 100%;
 			display: grid;
 		}
 
-		& .title {
+		:global(html[data-font='dyslexic']) & .title {
+			font-family: var(--font-dyslexic);
+			font-size: var(--font-24);
+			line-height: 32px;
+		}
+
+		.title {
 			font-family: var(--font-sans);
 			font-size: clamp(var(--font-24), 4vw, var(--font-32));
 			font-weight: 500;
@@ -92,7 +105,7 @@
 			text-wrap: balance;
 		}
 
-		& .description {
+		.description {
 			margin-top: var(--spacing-8);
 			font-size: var(--font-20);
 			color: var(--clr-card-txt);
@@ -100,13 +113,7 @@
 		}
 	}
 
-	html[data-font='dyslexic'] .card .title {
-		font-family: var(--font-dyslexic);
-		font-size: var(--font-24);
-		line-height: 32px;
-	}
-
-	:global([slot='see-more']) {
+	:global(a[href='/archive']) {
 		width: max-content;
 		display: flex;
 		gap: var(--spacing-16);

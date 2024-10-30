@@ -2,11 +2,13 @@
 	import { fade } from 'svelte/transition'
 	import { Envelope } from '$lib/icons'
 
-	let email = ''
-	let error = ''
-	let success = ''
+	let email = $state('')
+	let error = $state('')
+	let success = $state('')
 
-	async function subscribe() {
+	async function onsubmit(e: SubmitEvent) {
+		e.preventDefault()
+
 		const response = await fetch('/api/subscribe', {
 			method: 'post',
 			body: JSON.stringify(email),
@@ -26,7 +28,7 @@
 	}
 </script>
 
-<form on:submit|preventDefault={subscribe}>
+<form {onsubmit}>
 	<label for="email" class="sr-only">Enter your email</label>
 	<input
 		bind:value={email}
@@ -61,54 +63,52 @@
 		border-radius: var(--rounded-4);
 		border: 1px solid var(--clr-input-border);
 		box-shadow: var(--shadow-sm);
-	}
 
-	input {
-		width: 100%;
-		padding: var(--spacing-8) var(--spacing-16);
-		background-color: var(--clr-input-bg);
-		border-radius: var(--rounded-4) 0 0 var(--rounded-4);
-		flex: 1;
-	}
+		input {
+			width: 100%;
+			padding: var(--spacing-8) var(--spacing-16);
+			background-color: var(--clr-input-bg);
+			border-radius: var(--rounded-4) 0 0 var(--rounded-4);
+			flex: 1;
 
-	input::placeholder {
-		color: var(--clr-input-placeholder-txt);
-	}
+			&::placeholder {
+				color: var(--clr-input-placeholder-txt);
+			}
+		}
 
-	button {
-		padding: var(--spacing-8);
-		color: var(--clr-input-txt);
-		background-color: var(--clr-primary);
-		font-weight: 700;
-		border-radius: 0 var(--rounded-4) var(--rounded-4) 0;
-	}
+		button {
+			padding: var(--spacing-8);
+			color: var(--clr-input-txt);
+			background-color: var(--clr-primary);
+			font-weight: 700;
+			border-radius: 0 var(--rounded-4) var(--rounded-4) 0;
 
-	button :global(svg) {
-		display: none;
+			@media (width >= 860px) {
+				display: flex;
+				align-items: center;
+				gap: var(--spacing-4);
+			}
+
+			:global(svg) {
+				display: none;
+
+				@media (width >= 860px) {
+					display: block;
+				}
+			}
+		}
 	}
 
 	.message {
 		margin-bottom: var(--spacing-16);
 		font-weight: 700;
-	}
 
-	.message .error {
-		color: hsl(9 100% 64%);
-	}
-
-	.message .success {
-		color: var(--clr-primary);
-	}
-
-	@media (min-width: 860px) {
-		button {
-			display: flex;
-			align-items: center;
-			gap: var(--spacing-4);
+		.error {
+			color: hsl(9 100% 64%);
 		}
 
-		button :global(svg) {
-			display: block;
+		.success {
+			color: var(--clr-primary);
 		}
 	}
 </style>

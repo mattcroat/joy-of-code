@@ -5,9 +5,9 @@
 	import Footer from '$lib/ui/footer.svelte'
 	import LiteYouTubeEmbed from '$lib/embed/youtube.svelte'
 
-	import '../styles/styles.scss'
+	import '../styles/styles.css'
 
-	export let data
+	let { data, children } = $props()
 </script>
 
 <LiteYouTubeEmbed />
@@ -18,7 +18,7 @@
 	<div class="layout">
 		{#key data.url}
 			<div in:fly={{ y: -50, duration: 250 }}>
-				<slot />
+				{@render children?.()}
 			</div>
 		{/key}
 
@@ -44,7 +44,7 @@
 			padding: 0px var(--spacing-16);
 		}
 
-		@media (min-width: 1240px) {
+		@media (width >= 1240px) {
 			padding: 0px;
 		}
 	}

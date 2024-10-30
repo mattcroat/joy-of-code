@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
 
-	let overlay = false
+	let overlay = $state(false)
 
-	onMount(() => {
+	$effect(() => {
 		const headingElement = document.querySelector('h1')
 		if (!headingElement) return
 
@@ -24,7 +23,7 @@
 </script>
 
 {#if overlay}
-	<div transition:fade={{ duration: 300 }} class="overlay" />
+	<div transition:fade={{ duration: 300 }} class="overlay"></div>
 {/if}
 
 <style>
