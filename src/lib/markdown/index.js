@@ -11,7 +11,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCodeTitles from 'rehype-code-titles'
 import rehypeShiki from '@shikijs/rehype'
 import { transformerMetaHighlight } from '@shikijs/transformers'
-import { rehypeCopyCode, rehypeUnwrapImages } from './plugins.js'
+import { rehypeCopyCode } from './plugins.js'
 
 const images = `https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts`
 
@@ -26,7 +26,6 @@ const markdownProcessor = unified()
 		theme: 'poimandres',
 		transformers: [transformerMetaHighlight()],
 	})
-	.use(rehypeUnwrapImages)
 	.use(rehypeCopyCode)
 	.use(toHtmlString, { allowDangerousHtml: true })
 

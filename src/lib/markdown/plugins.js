@@ -1,28 +1,6 @@
 // @ts-nocheck
 
-import { visit, SKIP } from 'unist-util-visit'
-
-export function rehypeUnwrapImages() {
-	function containsImage(node) {
-		return (
-			node.tagName === 'p' &&
-			node.children.some((child) => {
-				if (child.type === 'element') {
-					return child.tagName === 'img'
-				}
-			})
-		)
-	}
-
-	return (tree) => {
-		visit(tree, containsImage, (node, index, parent) => {
-			if (node.type === 'element') {
-				parent.children.splice(index, 1, ...node.children)
-				return [SKIP, index]
-			}
-		})
-	}
-}
+import { visit } from 'unist-util-visit'
 
 export function rehypeCopyCode() {
 	function codeTitle(node) {

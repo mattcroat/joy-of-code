@@ -49,6 +49,10 @@
 		line-height: var(--post-txt-height);
 	}
 
+	p:has(img) {
+		display: contents;
+	}
+
 	@media (width >= 800px) {
 		& :where(iframe, video, img, pre, .rehype-code-title) {
 			grid-column: gutter-start / gutter-end;
