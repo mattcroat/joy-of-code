@@ -7,7 +7,7 @@
 
 	pre {
 		padding-block: var(--spacing-16);
-		line-height: 34px;
+		line-height: var(--post-txt-height);
 		background-image: var(--clr-code-bg);
 		border-left: 1px solid var(--clr-code-border);
 		border-top: none;

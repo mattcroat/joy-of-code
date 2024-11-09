@@ -35,6 +35,7 @@
 		max-width: 800px;
 		margin-inline: auto;
 		padding: var(--spacing-16) var(--spacing-24);
+		font-size: var(--font-18);
 		border-radius: 1rem;
 		z-index: 20;
 		transition:

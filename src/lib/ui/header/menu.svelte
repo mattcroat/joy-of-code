@@ -32,8 +32,9 @@
 <style>
 	.menu {
 		position: relative;
-		background-image: var(--clr-menu-bg);
 		padding: var(--spacing-24);
+		font-size: var(--font-18);
+		background-image: var(--clr-menu-bg);
 		border-top: 1px solid var(--clr-menu-border);
 		border-left: 1px solid var(--clr-menu-border);
 		border-radius: var(--rounded-20);

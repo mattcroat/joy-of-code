@@ -25,7 +25,7 @@
 	/* post */
 	--post-txt-size: 20px;
 	--post-txt-length: 70ch;
-	--post-txt-height: 40px;
+	--post-txt-height: 32px;
 
 	/* scrollbar */
 	--clr-scrollbar-thumb: hsl(173 10% 20%);
