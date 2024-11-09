@@ -12,7 +12,9 @@ category: sveltekit
 
 ## Setting Up The Database
 
-If you want to follow along I'm using a regular SvelteKit project with TypeScript you can set up with `npm create svelte`.
+> 🔥 The post has been updated for Svelte 5.
+
+If you want to follow along I'm using a regular SvelteKit project with TypeScript you can set up with `npx sv create`.
 
 > 🧪 You can find the project files on [GitHub](https://github.com/joysofcode/sveltekit-auth-cookies).
 
@@ -96,9 +98,7 @@ To register the user I'm going to use [form actions](https://kit.svelte.dev/docs
 
 ```svelte:register/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { ActionData } from './$types'
-
-  export let form: ActionData
+  let { form } = $props()
 </script>
 
 <h1>Register</h1>
@@ -136,7 +136,6 @@ If there are no validation errors I'm going to create the user by hashing the pa
 
 ```ts:register/+page.server.ts showLineNumbers
 import { fail, redirect } from '@sveltejs/kit'
-import type { Action, Actions, PageServerLoad } from './$types'
 import bcrypt from 'bcrypt'
 
 import { db } from '$lib/database'
@@ -148,11 +147,11 @@ enum Roles {
   USER = 'USER',
 }
 
-export const load: PageServerLoad = async () => {
+export const load = async () => {
   // todo
 }
 
-const register: Action = async ({ request }) => {
+const register = async ({ request }) => {
   const data = await request.formData()
   const username = data.get('username')
   const password = data.get('password')
@@ -186,7 +185,7 @@ const register: Action = async ({ request }) => {
   redirect(303, '/login')
 }
 
-export const actions: Actions = { register }
+export const actions = { register }
 ```
 
 You should be able to register a user with a role but the redirect doesn't work yet because the login page doesn't exist yet.
@@ -199,9 +198,7 @@ The user login is similar to the user registration for the page.
 
 ```svelte:login/+page.svelte showLineNumbers
 <script lang="ts">
-  import type { ActionData } from './$types'
-
-  export let form: ActionData
+  let { form } = $props()
 </script>
 
 <h1>Login</h1>
@@ -236,15 +233,14 @@ SvelteKit provides a nice API for interacting with cookies, so you don't have to
 ```ts:login/+page.server.ts showLineNumbers
 import { fail, redirect } from '@sveltejs/kit'
 import bcrypt from 'bcrypt'
-import type { Action, Actions, PageServerLoad } from './$types'
 
 import { db } from '$lib/database'
 
-export const load: PageServerLoad = async () => {
+export const load = async () => {
   // todo
 }
 
-const login: Action = async ({ cookies, request }) => {
+const login = async ({ cookies, request }) => {
   const data = await request.formData()
   const username = data.get('username')
   const password = data.get('password')
@@ -294,7 +290,7 @@ const login: Action = async ({ cookies, request }) => {
   redirect(302, '/')
 }
 
-export const actions: Actions = { login }
+export const actions = { login }
 ```
 
 You can see the cookie if you go to your developer tools in the **Application** tab under **Storage** > **Cookies** and you can see it has the name **session** and the value of the **auth token** which if someone copied becomes you and that's why it's important to change it.
@@ -307,15 +303,14 @@ To make the user logout work you only need to eat the cookie and redirect the us
 
 ```ts:logout/+page.server.ts showLineNumbers
 import { redirect } from '@sveltejs/kit'
-import type { Actions, PageServerLoad } from './$types'
 
-export const load: PageServerLoad = async () => {
+export const load = async () => {
   // we only use this endpoint for the api
   // and don't need to see the page
   redirect(302, '/')
 }
 
-export const actions: Actions = {
+export const actions = {
   default({ cookies }) {
     // eat the cookie
     cookies.set('session', '', {
@@ -340,7 +335,7 @@ So far everything works great but we need to somehow pass data to pages to know 
 Each page has a `load` option that has an `event` argument.
 
 ```ts:+page.server.ts showLineNumbers
-export const load: PageServerLoad = async (event) => {
+export const load = async (event) => {
   console.log(event)
 }
 ```
@@ -410,10 +405,8 @@ After the user is authenticated and the cookie is created we can populate `event
 Since the `locals.user` is populated we can pass it to the `$page` store from `+layout.server.ts`.
 
 ```ts:routes/+layout.server.ts showLineNumbers
-import type { LayoutServerLoad } from './$types'
-
 // get `locals.user` and pass it to the `page` store
-export const load: LayoutServerLoad = async ({ locals }) => {
+export const load = async ({ locals }) => {
   return {
     user: locals.user,
   }
@@ -430,10 +423,6 @@ declare namespace App {
       role: string
     }
   }
-
-  // interface PageData {}
-
-  // interface Platform {}
 }
 ```
 
@@ -444,6 +433,8 @@ You can use the `$page` store on the client to know if the user is authenticated
 ```svelte:routes/+layout.svelte showLineNumbers
 <script lang="ts">
   import { page } from '$app/stores'
+
+  let { children } = $props()
 </script>
 
 <svelte:head>
@@ -466,14 +457,14 @@ You can use the `$page` store on the client to know if the user is authenticated
 </nav>
 
 <main>
-  <slot />
+  {@render children?.()}
 </main>
 ```
 
 I'm also going to update the register and login page `load` functions.
 
 ```ts:register/+page.server.ts showLineNumbers
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = async ({ locals }) => {
   // redirect user if logged in
   if (locals.user) {
     redirect(302, '/')
@@ -484,7 +475,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 ```
 
 ```ts:login/+page.server.ts showLineNumbers
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = async ({ locals }) => {
   // redirect user if logged in
   if (locals.user) {
     redirect(302, '/')
@@ -516,9 +507,8 @@ Here's how you create a protected route.
 
 ```ts:admin/+page.server.ts showLineNumbers
 import { redirect } from '@sveltejs/kit'
-import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = async ({ locals }) => {
   // redirect user if not logged in
   if (!locals.user) {
     redirect(302, '/')
