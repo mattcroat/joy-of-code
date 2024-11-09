@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition'
 	import { createDropdownMenu, melt } from '@melt-ui/svelte'
 	import { Menu } from '$lib/icons'
-	import { sounds } from '$lib/stores/sfx'
+	import { sfx } from '$lib/sfx'
 	import * as config from '$lib/site/config'
 
 	const {
@@ -11,11 +11,7 @@
 	} = createDropdownMenu({ arrowSize: 16 })
 </script>
 
-<button
-	use:melt={$trigger}
-	onclick={() => $sounds.click()}
-	aria-label="Categories"
->
+<button use:melt={$trigger} onclick={() => sfx.click()} aria-label="Categories">
 	<Menu width={24} height={24} aria-hidden={true} />
 </button>
 

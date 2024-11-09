@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition'
 	import { createDropdownMenu, melt } from '@melt-ui/svelte'
 	import { Cog } from '$lib/icons'
-	import { sounds } from '$lib/stores/sfx'
+	import { sfx } from '$lib/sfx'
 
 	import Themes from './themes.svelte'
 	import Reading from './reading.svelte'
@@ -17,7 +17,7 @@
 
 <button
 	use:melt={$trigger}
-	onclick={() => $sounds.click()}
+	onclick={() => sfx.click()}
 	aria-label="Preferences"
 >
 	<Cog width={24} height={24} aria-hidden={true} />
