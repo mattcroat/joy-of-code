@@ -1,15 +1,27 @@
 <script lang="ts">
+	function copyToClipboard(event: Event) {
+		const buttonEl = event.currentTarget as HTMLButtonElement
+		const codeTitleEl = buttonEl.parentElement
+		const text = codeTitleEl?.nextElementSibling?.textContent
+		text && navigator.clipboard.writeText(text)
+		showCopiedMessage(buttonEl)
+	}
+
+	function showCopiedMessage(el: HTMLElement) {
+		let contents = el.innerHTML
+		el.innerHTML = 'Copied'
+		setTimeout(() => (el.innerHTML = contents), 1000)
+	}
+
 	$effect(() => {
-		const copyBtnElement = document.querySelectorAll('.copy')
+		// fixes "noninteractive element cannot have nonnegative tabIndex value" warning
+		document
+			.querySelectorAll('.shiki')
+			.forEach((code) => code.removeAttribute('tabindex'))
 
-		function copyToClipboard(event: Event) {
-			const buttonElement = event.currentTarget as HTMLButtonElement
-			const codeTitleElement = buttonElement.parentElement
-			const text = codeTitleElement?.nextElementSibling?.textContent
-			text && navigator.clipboard.writeText(text)
-		}
+		const copyBtnEl = document.querySelectorAll('.copy')
 
-		copyBtnElement.forEach((btn) => {
+		copyBtnEl.forEach((btn) => {
 			btn.innerHTML = `
         <span class="sr-only">Copy</span>
 				<svg
@@ -32,8 +44,8 @@
 		})
 
 		return () =>
-			copyBtnElement.forEach((btn) =>
+			copyBtnEl.forEach((btn) => {
 				btn.removeEventListener('click', copyToClipboard)
-			)
+			})
 	})
 </script>
