@@ -19,7 +19,7 @@ In this post I'm going to go over the different ways you can export and share re
 
 ## Global State
 
-This is a simple counter example that declares a reactive piece of state using the `$state` rune and increments it using a button:
+This is a simple counter example that declares a reactive value `count` using the `$state` rune and increments it using a button:
 
 ```svelte:+page.svelte
 <script lang="ts">
@@ -54,16 +54,18 @@ This is because **Svelte doesn't change how JavaScript works** and [imported val
 In older versions of Svelte you would use a `writable` store to export the value which works because stores are objects:
 
 ```ts:counter.ts
+// writable store
 export const count = writable(0)
 ```
 
 In Svelte 5, you can pass an object to `$state` and Svelte is going to use a Proxy object to make the properties reactive:
 
 ```ts:counter.svelte.ts
+// reactive object using a Proxy
 export const count = $state({ value: 0 })
 ```
 
-You can't reassign imports but you can update objects, so updating `count.value` works:
+You can't reassign imports, but you can update objects so updating `count.value` works:
 
 ```svelte:+page.svelte
 <script lang="ts">
@@ -102,7 +104,7 @@ export function setCount(value: number) {
 }
 ```
 
-This comes at the cost of the developer experience because now you have more verbose code:
+This comes at the cost of developer experience since you have to write more verbose code:
 
 ```svelte:+page.svelte
 <script lang="ts">
@@ -140,14 +142,14 @@ export const counter = {
 }
 ```
 
-Using property accessors you can read and write to count using `counter.count`:
+Using property accessors you can read and write to count using `counter.count` or `increment`:
 
 ```svelte:+page.svelte
 <script lang="ts">
   import { counter } from './counter.svelte'
 </script>
 
-<button onclick={counter.increment}>
+<button onclick={() => counter.count++}>
   {counter.count}
 </button>
 ```
@@ -225,7 +227,7 @@ Which method you prefer is up to you:
   import { createCounterProxy, createCounterFunction } from './counter.svelte'
 
   const { count, increment } = createCounterProxy()
-  const { count, increment } = createCounterFunction()
+  const { count, setCount, increment } = createCounterFunction()
 </script>
 
 <button onclick={() => count.value++}>
@@ -251,7 +253,7 @@ export class Counter {
 }
 ```
 
-You can wrap the class inside a function if you want to hide the `new` keyword, but I'm just going to instantiate the class directly:
+You can tuck the class inside a function if you want to hide the `new` keyword, but I'm just going to instantiate the class directly:
 
 ```svelte:+page.svelte
 <script lang="ts">
@@ -265,18 +267,20 @@ You can wrap the class inside a function if you want to hide the `new` keyword, 
 </button>
 ```
 
-Notice how you don't have to specify a getter and setter for the class because Svelte does that for you under the hood unless you want control:
+Notice how you don't have to specify a getter and setter for `count` since Svelte does that for you unless you want to:
 
 ```ts:counter.svelte.ts
 export class Counter {
+  // make count private
   #count = $state(0)
 
-  get count() { return this.#count }
+  // create property accessors
+  get count() {return this.#count }
   set count(value) { this.#count = value }
 }
 ```
 
-If you have trouble typing the reactive value inside a class you can use type assertion:
+If you're using TypeScript you can use type assertion to type a reactive value inside a class:
 
 ```ts:example.svelte.ts
 export class Example {
@@ -310,7 +314,7 @@ export class Counter {
 }
 ```
 
-You should be careful when using functions and classes with effects outside Svelte components because they have to be inside a parent effect:
+You should be careful when using functions and classes with effects inside a module outside a Svelte component because effects must have a parent effect for cleanup:
 
 ```ts:example.svelte.ts
 function createCounter() {
@@ -323,7 +327,9 @@ function createCounter() {
   return { count }
 }
 
-const counter = createCounter() // ⛔️
+// ⛔️ `$effect` can only be used inside an effect
+// (e.g. during component initialisation)
+const counter = createCounter()
 ```
 
 If you run into that problem you have to wrap the effect with a [root effect](https://svelte.dev/docs/svelte/$effect#$effect.root):
@@ -341,10 +347,11 @@ function createCounter() {
   return { count }
 }
 
-const counter = createCounter() // 👍️
+// 👍️ no problem
+const counter = createCounter()
 ```
 
-If you want to avoid this problem you can do side effects when you read or write to the reactive value:
+You can avoid this problem and do side effects when you read and write to the reactive value:
 
 ```ts:example.svelte.ts
 export class Counter {
@@ -364,37 +371,43 @@ export class Counter {
 
 ## Shared State On The Server
 
-If you're using SvelteKit you should [avoid shared state on the server](https://svelte.dev/docs/kit/state-management#Avoid-shared-state-on-the-server) and [side-effects in load](https://svelte.dev/docs/kit/state-management#No-side-effects-in-load) because it could be shared by your users:
+If you're using SvelteKit and SSR (server-side rendering) [avoid side-effects in load](https://svelte.dev/docs/kit/state-management#No-side-effects-in-load) like using shared state to update a value in your components because it could be shared by your users:
 
-```ts:+page.server.ts
-import { user } from '$lib/user'
+```ts:+layout.ts
+import { state } from '$lib/state'
 
 export async function load({ fetch }) {
-	const response = await fetch('/api/user')
-	user.set(await response.json()) // ⛔️
+	const response = await fetch('/api/data')
+  const data = await response.json()
+
+  // ⛔️ don't do this
+	state.set(data)
 }
 ```
 
-You should instead return the data and use [$page.data](https://svelte.dev/docs/kit/load#$page.data) or pass it around to the components that need it using the context API as said in the docs:
+The SvelteKit docs advise you return the data and pass it around to the components that need it using the context API or use [$page.data](https://svelte.dev/docs/kit/load#$page.data):
 
-```ts:+page.server.ts
-import { user } from '$lib/user'
-
+```ts:+layout.ts
 export async function load({ fetch }) {
-	const response = await fetch('/api/user')
-  return { user: await response.json() }
+	const response = await fetch('/api/data')
+
+  return {
+    user: await response.json()
+  }
 }
 ```
+
+You can spread `data.user` to create a reactive `user` object that can be passed to `setContext`:
 
 ```svelte:src/routes/+layout.svelte
 <script lang="ts">
 	import { setContext } from 'svelte'
 
 	let { data } = $props()
+	let user = $state({ ...data.user })
 
-	const user = $state({ ...data.user })
 	$effect(() => {
-    user = { ...data.user }
+		user = { ...data.user }
 	})
 
 	setContext('user', user)
