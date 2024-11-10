@@ -12,6 +12,8 @@ category: sveltekit
 
 ## Project Setup
 
+> 🔥 The post has been updated for Svelte 5.
+
 You're going to make a blazingly fast and extendable SvelteKit Markdown blog you can be proud of and deploy it to Vercel at no cost.
 
 {% embed src="https://stackblitz.com/github/joysofcode/sveltekit-markdown-blog?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=SvelteKit Markdown Blog" title="SvelteKit Markdown Blog" %}
@@ -20,57 +22,54 @@ You can find the finished project [on GitHub](https://github.com/joysofcode/svel
 
 > 🔥 If you want to learn SvelteKit you can watch [The Complete SvelteKit Course For Building Modern Web Apps](https://www.youtube.com/watch?v=MoGkX4RvZ38) on YouTube.
 
-Start by creating a new SvelteKit project.
+Start by creating a new SvelteKit project:
 
 ```sh:terminal
-npm create svelte@latest
+npx sv create
 ```
 
-I'm using **TypeScript** but **types are optional** and can be ignored, so use JavaScript if you prefer it. Use the **spacebar** to select **ESLint** to find problems in the code and **Prettier** to format the code.
+Use the <kbd>Enter</kbd> key to select the **SvelteKit minimal** template and **TypeScript**. You can use the <kbd>Space</kbd> key to select **ESLint** to lint your code for errors and **Prettier** to format the code:
 
 ```sh:terminal
-┌  Welcome to SvelteKit!
+┌  Welcome to the Svelte CLI!
 │
-◆ Where should we create your project?
+◇  Where would you like your project to be created?
 │  sveltekit-blog
 │
-◇  Which Svelte app template?
-│  Skeleton project
+◇  Which template would you like?
+│  SvelteKit minimal
 │
-◇  Add type checking with TypeScript?
-│  Yes, using TypeScript syntax
+◇  Add type checking with Typescript?
+│  Yes, using Typescript syntax
 │
-◆  Select additional options (use arrow keys/space bar)
-│  ◼ Add ESLint for code linting
-│  ◼ Add Prettier for code formatting
-│  ◻ Add Playwright for browser testing
-│  ◻ Add Vitest for unit testing
-└
+◆  Project created
+│
+◇  What would you like to add to your project? (use arrow keys / space bar)
+│  prettier, eslint
+│
+◇  Which package manager do you want to install dependencies with?
+│  npm
 ```
 
-Install the dependencies and run the development server at [http://localhost:5173/](http://localhost:5173/).
+Open the development server at [http://localhost:5173/](http://localhost:5173/):
 
 ```sh:terminal
-# install dependencies
-npm i
-
-# run the development server
 npm run dev
 ```
 
 ## Layout And Styles
 
-For styling I'm using [Open Props](https://open-props.style/) which provides design tokens as CSS variables — it's like Tailwind CSS but instead of utility classes you get CSS variables.
+Here's what I'm going to use:
 
-I also want beautiful and consistent icons and [Lucide](https://lucide.dev/) is my favorite choice.
-
-For the fonts I'm going to use **Manrope** as the sans serif font for the entire site and **JetBrains Mono** as the monospace font for code blocks.
+- [Open Props](https://open-props.style/) for styling using CSS variables instead of utility classes like Tailwind
+- [Lucide](https://lucide.dev/) for icons
+- **Atkinson Hyperlegible** for text and **JetBrains Mono** for the code
 
 ```sh:terminal
-npm i open-props lucide-svelte @fontsource/manrope @fontsource/jetbrains-mono
+npm i open-props lucide-svelte @fontsource/atkinson-hyperlegible @fontsource/jetbrains-mono
 ```
 
-Update the favicon inside `app.html` so everyone knows your site is blazingly fast.
+Let's update the favicon inside `app.html`:
 
 ```svelte:src/app.html {6} showLineNumbers
 <!DOCTYPE html>
@@ -87,7 +86,7 @@ Update the favicon inside `app.html` so everyone knows your site is blazingly fa
 </html>
 ```
 
-I'm going to add a **config** file for the site which is going to make it easy to update it in the future since everything is in one place.
+Let's also add a **config** file for the blog:
 
 ```ts:src/lib/config.ts showLineNumbers
 import { dev } from '$app/environment'
@@ -97,9 +96,7 @@ export const description = 'SvelteKit blog for poets'
 export const url = dev ? 'http://localhost:5173/' : 'https://joyofcode.xyz/'
 ```
 
-> 🐿️ If SvelteKit doesn't detect the `$lib` alias after you added it restart the development server.
-
-Add a root layout inside `src/routes/+layout.svelte` which is going to include the **header**, **footer** and **styles** for the site.
+Add a root layout inside `src/routes/+layout.svelte` that includes the **header**, **footer** and **styles** for the blog:
 
 ```svelte:src/routes/+layout.svelte showLineNumbers
 <script lang="ts">
@@ -109,20 +106,18 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 	import 'open-props/style'
 	import 'open-props/normalize'
 	import 'open-props/buttons'
-
 	import '../app.css'
+
+	let { children, data } = $props()
 </script>
 
 <div class="layout">
-  <!-- Header -->
 	<Header />
 
 	<main>
-		<!-- Black hole for other content -->
-		<slot />
+		{@render children?.()}
 	</main>
 
-  <!-- Footer -->
 	<Footer />
 </div>
 
@@ -134,15 +129,13 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 		grid-template-rows: auto 1fr auto;
 		margin-inline: auto;
 		padding-inline: var(--size-7);
-	}
 
-	main {
-		padding-block: var(--size-9);
-	}
-
-	@media (min-width: 1440px) {
-		.layout {
+		@media (min-width: 1440px) {
 			padding-inline: 0;
+		}
+
+		main {
+			padding-block: var(--size-9);
 		}
 	}
 </style>
@@ -154,12 +147,10 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 </script>
 
 <nav>
-  <!-- Title -->
 	<a href="/" class="title">
 		<b>{config.title}</b>
 	</a>
 
-  <!-- Navigation -->
 	<ul class="links">
 		<li>
 			<a href="/about">About</a>
@@ -172,34 +163,31 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 		</li>
 	</ul>
 
-  <!-- Theme -->
-  <button>Toggle</button>
+	<button>Toggle</button>
 </nav>
 
 <style>
 	nav {
 		padding-block: var(--size-7);
-	}
 
-	.links {
-		margin-block: var(--size-7);
-	}
-
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
-
-	@media (min-width: 768px) {
-		nav {
+		@media (min-width: 768px) {
 			display: flex;
 			justify-content: space-between;
 		}
 
 		.links {
-			display: flex;
-			gap: var(--size-7);
-			margin-block: 0;
+			margin-block: var(--size-7);
+
+			@media (min-width: 768px) {
+				display: flex;
+				gap: var(--size-7);
+				margin-block: 0;
+			}
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
 		}
 	}
 </style>
@@ -210,7 +198,6 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 	import * as config from '$lib/config'
 </script>
 
-<!-- Footer -->
 <footer>
 	<p>{config.title} &copy {new Date().getFullYear()}</p>
 </footer>
@@ -219,22 +206,22 @@ Add a root layout inside `src/routes/+layout.svelte` which is going to include t
 	footer {
 		padding-block: var(--size-7);
 		border-top: 1px solid var(--border);
-	}
 
-	p {
-		color: var(--text-2);
+		p {
+			color: var(--text-2);
+		}
 	}
 </style>
 ```
 
 ```css:src/app.css showLineNumbers
-@import '@fontsource/manrope';
+@import '@fontsource/atkinson-hyperlegible';
 @import '@fontsource/jetbrains-mono';
 
 html {
 	/* font */
-	--font-sans: 'Manrope', sans-serif;
-	--font-mono: 'JetBrains Mono', monospace;
+	--font-system-ui: 'Atkinson Hyperlegible', sans-serif;
+	--font-monospace-code: 'JetBrains Mono', monospace;
 
 	/* dark */
 	--brand-dark: var(--orange-3);
@@ -368,21 +355,19 @@ li {
 
 > 💪 As an exercise try adding the `/about` and `/contact` routes yourself since they're mostly used as placeholders.
 
-This sets us up nicely for the rest of the post and I'm going to show you how simple it's going to be to implement a theme switcher because we already set everything up with CSS variables.
-
-Right now even if you don't have a theme toggle it's going to respect the user preference because of the `prefers-color-scheme` media query.
+This sets us up nicely and later we're going to implement a theme switcher. Even without a theme toggle it should respect the user preference thanks to the `prefers-color-scheme` media query.
 
 ## Setting Up Mdsvex
 
-[mdsvex](https://mdsvex.pngwn.io/) is like [MDX](https://mdxjs.com/) for React but it's a preprocessor for Svelte which lets you have interactive Svelte components inside Markdown and has extra options and extensions for using Markdown plugins.
+[mdsvex](https://mdsvex.pngwn.io/) is a Markdown preprocessor for Svelte that also lets you have interactive Svelte components inside Markdown like [MDX](https://mdxjs.com/) for React.
 
-To get started install mdsvex as a development dependency.
+To get started install mdsvex:
 
 ```sh:terminal
 npm i -D mdsvex
 ```
 
-Add mdsvex as a preprocessor inside `svelte.config.js`.
+Add mdsvex as a preprocessor inside `svelte.config.js`:
 
 ```js:svelte.config.js {4, 6-9, 13-14} showLineNumbers
 import adapter from '@sveltejs/adapter-auto'
@@ -407,15 +392,9 @@ const config = {
 export default config
 ```
 
-Svelte by default handles `.svelte` files but adding `.md` to `extensions` inside `config` lets you treat `+page.md` as a page alongside `+page.svelte`.
+Svelte by default processes `.svelte` files, but adding `.md` to `extensions` inside `config` lets you treat `+page.md` as Svelte components.
 
-Svelte is able to show `+page.md` as a page but **you need mdsvex to preprocess Markdown**.
-
-You have to specify the extension inside the `extensions` array for `mdsvexOptions` which you name name whatever you want like `.md`, `.svx` or `.banana`.
-
-Instead of using `+page.md` files you can import a Markdown post as a module and render it as a regular Svelte component with [&lt;svelte:component&gt;](https://learn.svelte.dev/tutorial/svelte-component) which is what I'm going to do later.
-
-I'm going to add some posts in `/src/posts`.
+Let's add some posts in `/src/posts`:
 
 ````md:src/posts/first-post.md
 ---
@@ -459,9 +438,7 @@ Media inside the **static** folder is served from `/`.
 
 ## Posts API Endpoint
 
-You could write the logic to get the posts data for each page in their respective `+page.ts` or `+page.server.ts` file but you would end up duplicating the logic.
-
-I'm going to create a `routes/api/posts/+server.ts` endpoint instead where I'm going to write the logic once I can use anywhere in the app.
+Let's create an endpoint for the posts in `routes/api/posts/+server.ts` so it can be used anywhere in the app:
 
 ```ts:src/routes/api/posts/+server.ts showLineNumbers
 import { json } from '@sveltejs/kit'
@@ -496,14 +473,16 @@ export async function GET() {
 }
 ```
 
-- `import.meta.glob` is a useful Vite feature to get all the posts using a glob (`eager` reads the contents of the file avoiding `await paths[path]()`)
-- I loop over the `paths` and get the slug `post.md` but replace `.md` since we only want the slug
-- I'm checking if `file` has a `metadata` property inside of it and if the `slug` exists to be safe and then I'm going to get the `metadata` or **frontmatter** from the post
-- I'm creating a `post` that includes `metadata` and the `slug`
-- I only want to add the post if `published` is set to `true`
-- sort `posts` by date and return them
+Here's the breakdown:
 
-If you're using TypeScript here are the types.
+- `import.meta.glob` is a useful Vite feature to get all the posts using a glob (`eager` reads the contents of the file avoiding `await paths[path]()`)
+- Loop over the `paths` and get the slug `post.md` but replace `.md` since we only want the slug
+- Check if `file` has a `metadata` property inside of it and if the `slug` exists to be safe and then I'm going to get the `metadata` or **frontmatter** from the post
+- Create a `post` that includes `metadata` and the `slug`
+- Only add the post if `published` is set to `true`
+- Sort `posts` by date and return them
+
+If you're using TypeScript here are the types:
 
 ```ts:src/lib/types.ts showLineNumbers
 export type Categories = 'sveltekit' | 'svelte'
@@ -518,17 +497,19 @@ export type Post = {
 }
 ```
 
-I often see developers split everything into separate files but I prefer to keep the logic where it's used unless it's used in multiple places in which case I would put the `getPosts` function inside `lib/posts.ts`.
+You can navigate to [http://localhost:5173/api/posts](http://localhost:5173/api/posts) to see the JSON response:
 
 {% img src="endpoint.webp" alt="API endpoint for posts" %}
 
 > 🐿️ You can use the [JSON Viewer](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh?hl=en-US) Chrome extension for the highlighting.
 
-Awesome! You created an API endpoint for posts you can reuse across your app (you can even make it public for others to consume). 🔥
+Awesome! 🥳
 
-## Showing Posts
+You created a posts API you can reuse across your app or make it public for others to consume.
 
-Now you can use the posts endpoint you just created to server-side render the posts for the page.
+## Rendering The Posts
+
+Time to use the posts API you just created to fetch and server-side render the posts for the page:
 
 ```ts:src/routes/+page.server.ts showLineNumbers
 import type { Post } from '$lib/types'
@@ -542,21 +523,20 @@ export async function load({ fetch }) {
 
 > 🐿️ The `fetch` function from `load` has superpowers like being able to resolve the relative URL `api/posts` which would not work using regular `fetch`.
 
-At this point you just need to loop over the posts and that's it.
+You can now get the data and render the posts:
 
 ```svelte:src/routes/+page.svelte showLineNumbers
 <script lang="ts">
 	import { formatDate } from '$lib/utils'
 	import * as config from '$lib/config'
 
-	export let data
+	let { data } = $props()
 </script>
 
 <svelte:head>
 	<title>{config.title}</title>
 </svelte:head>
 
-<!-- Posts -->
 <section>
 	<ul class="posts">
 		{#each data.posts as post}
@@ -572,34 +552,34 @@ At this point you just need to loop over the posts and that's it.
 <style>
 	.posts {
 		display: grid;
-		gap: 2rem;
-	}
+		gap: var(--size-7);
 
-	.post {
-		max-inline-size: var(--size-content-3);
-	}
+		.post {
+			max-inline-size: var(--size-content-3);
 
-	.post:not(:last-child) {
-		border-bottom: 1px solid var(--border);
-		padding-bottom: var(--size-7);
-	}
+			&:not(:last-child) {
+				border-bottom: 1px solid var(--border);
+				padding-bottom: var(--size-7);
+			}
 
-	.title {
-		font-size: var(--font-size-fluid-3);
-		text-transform: capitalize;
-	}
+			.title {
+				font-size: var(--font-size-fluid-3);
+				text-transform: capitalize;
+			}
 
-	.date {
-		color: var(--text-2);
-	}
+			.date {
+				color: var(--text-2);
+			}
 
-	.description {
-		margin-top: var(--size-3);
+			.description {
+				margin-top: var(--size-3);
+			}
+		}
 	}
 </style>
 ```
 
-I love using this function which uses the built-in browser API to format dates.
+Here's the function I use to format the date:
 
 ```ts:src/lib/utils.ts showLineNumbers
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
@@ -612,15 +592,17 @@ export function formatDate(date: string, dateStyle: DateStyle = 'medium', locale
 }
 ```
 
+Let's take a look at the result:
+
 {% img src="posts.webp" alt="Posts" %}
 
-Things are coming together! 💪
+Things are coming together. 💪
 
-## Showing A Single Post
+## Rendering A Single Post
 
-Instead of doing `routes/post/+page.md|svelte` for every post I'm going to use a dynamic route `routes/[slug]/+page.svelte` that's going to slurp up the post based on the slug.
+Creating a route for every post would be annoying, so I'm going to use a dynamic route like `routes/[slug]/+page.svelte` that's going to slurp up the post based on the `[slug]` in the URL.
 
-Here is where picking mdsvex shines because I'm going to use a dynamic import to get the post which is going to have the content and metadata.
+Let's use a dynamic import for the post and get the **content** and **metadata** data for the component:
 
 ```ts:src/routes/[slug]/+page.ts showLineNumbers
 import { error } from '@sveltejs/kit'
@@ -639,16 +621,15 @@ export async function load({ params }) {
 }
 ```
 
-Because the Markdown file is imported as a module and processed by mdsvex you can pass `data.content` as a Svelte component to `<svelte:component this={data.content} />`.
+This lets us render `data.content` as a Svelte component:
 
 ```svelte:src/routes/[slug]/+page.svelte showLineNumbers
 <script lang="ts">
 	import { formatDate } from '$lib/utils'
 
-	export let data
+	let { data } = $props()
 </script>
 
-<!-- SEO -->
 <svelte:head>
 	<title>{data.meta.title}</title>
 	<meta property="og:type" content="article" />
@@ -656,22 +637,19 @@ Because the Markdown file is imported as a module and processed by mdsvex you ca
 </svelte:head>
 
 <article>
-  <!-- Title -->
 	<hgroup>
 		<h1>{data.meta.title}</h1>
 		<p>Published at {formatDate(data.meta.date)}</p>
 	</hgroup>
 
-  <!-- Tags -->
 	<div class="tags">
 		{#each data.meta.categories as category}
 			<span class="surface-4">&num;{category}</span>
 		{/each}
 	</div>
 
-  <!-- Post -->
 	<div class="prose">
-		<svelte:component this={data.content} />
+		<data.content />
 	</div>
 </article>
 
@@ -679,95 +657,100 @@ Because the Markdown file is imported as a module and processed by mdsvex you ca
 	article {
 		max-inline-size: var(--size-content-3);
 		margin-inline: auto;
-	}
 
-	h1 {
-		text-transform: capitalize;
-	}
+		h1 {
+			text-transform: capitalize;
+		}
 
-	h1 + p {
-		margin-top: var(--size-2);
-		color: var(--text-2);
-	}
+		h1 + p {
+			margin-top: var(--size-2);
+			color: var(--text-2);
+		}
 
-	.tags {
-		display: flex;
-		gap: var(--size-3);
-		margin-top: var(--size-7);
-	}
+		.tags {
+			display: flex;
+			gap: var(--size-3);
+			margin-top: var(--size-7);
 
-	.tags > * {
-		padding: var(--size-2) var(--size-3);
-		border-radius: var(--radius-round);
+			> * {
+				padding: var(--size-2) var(--size-3);
+				border-radius: var(--radius-round);
+			}
+		}
 	}
 </style>
 ```
 
-Let's add some styles for the post which I'm going to do inside `app.css` because we don't have control over the markup.
+Let's add some global styles for the post inside `app.css` since we don't have control over the markup:
 
 ```css:src/app.css showLineNumbers
 /* ... */
 
-.prose :is(h2, h3, h4, h5, h6) {
-	margin-top: var(--size-8);
-	margin-bottom: var(--size-3);
-}
+.prose {
+	p {
+		:not(:is(h2, h3, h4, h5, h6) + p) {
+			margin-top: var(--size-7);
+		}
 
-.prose p:not(:is(h2, h3, h4, h5, h6) + p) {
-	margin-top: var(--size-7);
-}
+		/* ignore paragraph tag around images */
+		&:has(img) {
+			display: contents;
+		}
+	}
 
-.prose :is(ul, ol) {
-	list-style-type: '🔥';
-	padding-left: var(--size-5);
-}
+	:is(h2, h3, h4, h5, h6) {
+		margin-top: var(--size-8);
+		margin-bottom: var(--size-3);
+	}
 
-.prose :is(ul, ol) li {
-	margin-block: var(--size-2);
-	padding-inline-start: var(--size-2);
-}
+	:is(ul, ol) {
+		list-style-type: '🔥';
+		padding-left: var(--size-5);
+	}
 
-.prose pre {
-	max-inline-size: 100%;
-	padding: 1rem;
-	border-radius: 8px;
-	tab-size: 2;
+	:is(ul, ol) li {
+		margin-block: var(--size-2);
+		padding-inline-start: var(--size-2);
+	}
+
+	pre {
+		max-inline-size: 100%;
+		padding: var(--size-3);
+		border-radius: 8px;
+		tab-size: 2;
+	}
 }
 ```
 
+Everything looks great:
+
 {% img src="post.webp" alt="Post" %}
 
-> 💪 Right now the tags are just using a `<span>` but can you turn them into links `<a href="/category/{category}>{category}</a>` so they point to a `/category/[category]` page that shows the posts based on the name of the category?
-
-Everything looks great!
+> 💪 Turn the tags into links that point to a `/category/[category]` page that shows the posts based on the name of the category.
 
 ## Syntax Highlighting
 
-mdsvex uses [Prism](https://prismjs.com/) by default for syntax highlighting and you can have a look at [Prism themes](https://github.com/PrismJS/prism-themes) which you can include in your styles.
+You can use a [Prism](https://prismjs.com/) theme, but I want to use a modern syntax highlighter like [Shiki](https://github.com/shikijs/shiki) that uses the same highlighter as VS Code.
 
-You can use a Prism theme and be done but I want to use a modern syntax highlighter like [Shiki](https://github.com/shikijs/shiki) that uses the same highlighter as VS Code which means you can use real themes.
-
-To use Shiki I'm going to create a custom highlighter which is only going to be a couple of lines of code.
-
-Install Shiki.
+Let's install Shiki:
 
 ```sh:terminal
 npm i shiki
 ```
 
-Create a custom highlighter.
+Create a custom Shiki highlighter:
 
 ```js:svelte.config.js {2-3, 8-18} showLineNumbers
 // ...
 import { mdsvex, escapeSvelte } from 'mdsvex'
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
-			const highlighter = await getHighlighter({
+			const highlighter = await createHighlighter({
 				themes: ['poimandres'],
 				langs: ['javascript', 'typescript']
 			})
@@ -781,27 +764,27 @@ const mdsvexOptions = {
 // ...
 ```
 
-- first I create the highlighter using `shiki.getHighlighter` and pass one of the [VS Code themes](https://github.com/shikijs/shiki/blob/main/docs/themes.md) you want (you can also give it a path to your theme)
-- you have to use `escapeSvelte` to escape some characters like `{` that are going to cause a problem in Svelte
+Here's the breakdown:
+
+- Create the highlighter using `createHighlighter` and pass one of the [VS Code themes](https://github.com/shikijs/shiki/blob/main/docs/themes.md) you want (you can also give it a path to your theme)
+- Use `escapeSvelte` to escape characters like `{` that are going to cause a problem in Svelte
 - Shiki is going to generate HTML that looks like your code in VS Code using the `code` and `lang` you passed
-- I want to insert `{@html html}` in the Svelte component to output the code block but we need to escape the backticks with `\`
+- Insert `{@html html}` in the Svelte component to output the code block, but we need to escape the backticks with `\`
 
-I would love to take credit as a genius but I figured everything out by [reading this response](https://github.com/pngwn/MDsveX/issues/212#issuecomment-937548885) inside an mdsvex GitHub issue.
-
-You can do a lot more with Shiki by reading their docs but if you want line numbers and highligthing you're going to have to [look through the Shiki issues on GitHub](https://github.com/shikijs/shiki/issues).
+I figured this out from a [GitHub issue](https://github.com/pngwn/MDsveX/issues/212#issuecomment-937548885) in the mdsvex repo.
 
 ## Using Components Inside Markdown
 
-You can import regular Svelte components inside Markdown from interactive data visualizations to working code examples.
+You can use Svelte components inside Markdown from interactive data visualizations to working code examples:
 
 ```svelte:src/posts/counter.svelte showLineNumbers
 <script lang="ts">
-	let count = 0
+	let count = $state(0)
 
-	const increment = () => (count += 1)
+	const increment = () => count++
 </script>
 
-<button on:click={increment}>
+<button onclick={increment}>
 	{count}
 </button>
 ```
@@ -819,11 +802,9 @@ The counter is rendered inside Markdown.
 <Counter />
 ```
 
-Another great mdsvex feature is being able to replace elements with [custom components](https://mdsvex.pngwn.io/docs#custom-components).
+You can also replace HTML elements with [custom components](https://mdsvex.pngwn.io/docs#custom-components) in mdsvex. For example you might want to lazy load images using `loading="lazy"` since you can't set attributes on images inside Markdown.
 
-One example where this is useful is for the `<img>` or `<iframe>` element where you might want set `loading="lazy"` to only load it when it's in view but you can't set attributes on an image like `![Text](image.webp)` inside Markdown.
-
-First you need to create a default [mdsvex layout](https://mdsvex.pngwn.io/docs#layout) that's going to wrap the Markdown files and you can name it anything but I'm going to name it `mdsvex.svelte` to avoid confusion with `+layout.svelte`.
+Let's create a default [mdsvex layout](https://mdsvex.pngwn.io/docs#layout) that's going to wrap everything and name it `mdsvex.svelte` to avoid confusion with `+layout.svelte`:
 
 ```js:svelte.config.js {4-6} showLineNumbers
 /** @type {import('mdsvex').MdsvexOptions} */
@@ -836,101 +817,92 @@ const mdsvexOptions = {
 }
 ```
 
-I'm going to create a custom `img.svelte` component but I'm going to use `index.ts` to export every custom component from `lib/components/custom` making it easier to use when you add more components in the future.
+The custom component receives the attributes of the element you want to replace like `src` and `alt` as props:
 
 ```svelte:src/lib/components/custom/img.svelte showLineNumbers
 <script lang="ts">
-	export let src: string
-	export let alt: string
+	type Props = {
+		src: string
+		alt: string
+	}
+
+	let { src, alt }: Props = $props()
 </script>
 
 <img {src} {alt} loading="lazy" />
 ```
 
+Let's export everything from `index.ts`:
+
 ```ts:src/lib/components/custom/index.ts showLineNumbers
 import img from './img.svelte'
+
 export { img }
 ```
 
-The custom component receives the attributes of the element you want to replace like `src` and `alt` as props.
-
-Inside the layout you have to import and export the custom component **with the same name** as the element you want to replace.
+Inside the layout you have to import and export the custom component with the same name as the element you want to replace:
 
 ```svelte:src/mdsvex.svelte showLineNumbers
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import { img } from '$lib/components/custom'
 	export { img }
 </script>
 
-<slot />
+<script lang="ts">
+	let props = $props()
+</script>
+
+{@render props.children?.()}
 ```
 
 Images and other media should be placed inside the `static` folder at the root of your project.
 
-You can use images inside Markdown with `![Text](image.webp)` and you should see that it was replaced with the custom component.
-
-You can [explore more of the options](https://mdsvex.pngwn.io/docs#options) mdsvex offers like **smartypants** that replaces quotes with **“real typographic punctuation”**.
-
 ## Using Markdown Plugins
 
-There's an entire world of [abstract syntax trees](https://www.wikiwand.com/en/Abstract_syntax_tree) (ASTs) which is what HTML or Markdown get turned into to be easily manipulated instead of using regular expressions.
-
-For **transforming HTML** with plugins you can use [rehype](https://github.com/rehypejs/rehype) and for **transforming Markdown** with plugins you use [remark](https://github.com/remarkjs/remark).
-
-I'm going to refer to them as **Markdown plugins** even if they're general plugins for transforming HTML and Markdown.
-
-mdsvex first parses the Markdown into a Markdown AST (MDAST) where **remark** plugins run and then it converts it into a HTML AST (HAST) where **rehype** plugins run.
+mdsvex first parses the Markdown into a Markdown tree (MDAST) where **remark** plugins run and then it converts it into a HTML tree (HAST) where **rehype** plugins run.
 
 You don't have to understand ASTs but I recommend reading [How to Modify Nodes in an Abstract Syntax Tree](https://css-tricks.com/how-to-modify-nodes-in-an-abstract-syntax-tree/) if you want to learn the fundamentals and write your own plugin which is just a JavaScript function.
 
-[mdsvex makes it easy to use these plugins](https://mdsvex.pngwn.io/docs#remarkplugins--rehypeplugins) and you only have to install the desired plugin then pass it into the `remarkPlugins` or `rehypePlugins` options array.
+You can use [rehype](https://github.com/rehypejs/rehype) plugins to transform HTML and [remark](https://github.com/remarkjs/remark) plugins for transforming Markdown — I'm going to refer to them as **Markdown plugins** even if they're general plugins for transforming HTML and Markdown.
 
-You can find these plugins on [npm](https://www.npmjs.com/) and in the [repository for remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md) or [repository for rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md).
+Using these plugins it's very simple to extend the functionality of your Markdown blog:
 
-I'm going to show you a couple of plugins, so you get an idea how simple it is to extend your Markdown blog:
+- `rehype-slug` is used to add slugs to headings like `<h2 id="section">` and link to a section of your post like `example.com/post#section`
+- `remark-toc` is used to generate a table of contents based on the headings
 
-- I'm going to use `remark-unwrap-images` to remove `<p>` tags around images because they're annoying for styling
-- I want to add slugs to headings like `<h2 id="section">` to make it linkable as `example.com/post#section` using `rehype-slug`
-- I want to generate a table of contents based on the headings using `remark-toc`
-
-Install the Markdown plugins.
+Install the Markdown plugins:
 
 ```sh:terminal
-npm i remark-unwrap-images remark-toc rehype-slug
+npm i remark-toc rehype-slug
 ```
 
 Add them to the config.
 
-```js:svelte.config.js {2-4, 9-10} showLineNumbers
+```js:svelte.config.js {1,3,8,9} showLineNumbers
 // ...
-import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkToc from 'remark-toc'
 import rehypeSlug from 'rehype-slug'
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	// ...
-	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }]],
+	remarkPlugins: [[remarkToc, { tight: true }]],
 	rehypePlugins: [rehypeSlug]
 }
 ```
 
-> 🐿️ You can pass options for the plugin like `[plugin, { options }]` which you can find in their docs. In this case `{ tight: true }` removes `<p>` tags around `<li>`.
+> 🐿️ You can pass options for the plugin like `[plugin, { options }]` which you can find in their docs.
 
-That's how easy that was! 😄
+That's how you stay plugged in. 🔌
 
 ## Light And Dark Mode Toggle
 
-Earlier we set ourselves up for success by using CSS variables which respects the users preference by using the `prefers-color-scheme` media query but we also included selectors when `<html>` has a `color-scheme="dark"` and `color-scheme="light"` attribute.
+I want to check if the user has set a theme in [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) before the page loads to prevent flashing and set the attribute on `<html>` based on their preference otherwise default to using a dark theme.
 
-To make a theme toggle we need to write some JavaScript that's going to check when the page loads if the user has a theme set in [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) and set the attribute on `<html>` based on their preference and if not default to using the dark theme.
-
-I'm going to write the code that checks for the theme in `app.html` because it's going to load first and prevent issues like flashing.
-
-Flashing happens when JavaScript is not loaded on the page and because of it when your component mounts it only then goes to `localStorage` to check if you set a theme.
+A good place to start is inside `app.html` since it loads first:
 
 ```svelte:src/app.html {5-11} showLineNumbers
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<!-- ... -->
@@ -946,51 +918,38 @@ Flashing happens when JavaScript is not loaded on the page and because of it whe
 </html>
 ```
 
-I'm going to make a simple [Svelte store](https://learn.svelte.dev/tutorial/writable-stores) that's going to export the active `theme` so you can subscribe to it anywhere and get notified when it changes including `toggleTheme` to update it and `setTheme` to set the theme in case you want to use it.
+Let's create a simple theme toggle:
 
-```ts:src/lib/theme.ts showLineNumbers
-import { writable } from 'svelte/store'
+```ts:src/lib/theme.svelte.ts showLineNumbers
 import { browser } from '$app/environment'
 
-type Theme = 'light' | 'dark'
+class Theme {
+	current = $state(browser && localStorage.getItem('color-scheme'))
 
-// we set the theme in `app.html` to prevent flashing
-const userTheme = browser && localStorage.getItem('color-scheme')
-
-// create the store
-export const theme = writable(userTheme ?? 'dark')
-
-// update the theme
-export function toggleTheme() {
-	theme.update((currentTheme) => {
-		const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
-
-		document.documentElement.setAttribute('color-scheme', newTheme)
-		localStorage.setItem('color-scheme', newTheme)
-
-		return newTheme
-	})
+	toggle = () => {
+		const theme = this.current === 'dark' ? 'light' : 'dark'
+		document.documentElement.setAttribute('color-scheme', theme)
+		localStorage.setItem('color-scheme', theme)
+		this.current = theme
+	}
 }
 
-// set the theme
-export function setTheme(newTheme: Theme) {
-	theme.set(newTheme)
-}
+export const theme = new Theme()
 ```
 
-> 💪 If you want to improve this I would use JavaScript to check the user preference with `const preference = window.matchMedia('(prefers-color-scheme: dark)').matches` and then use an event listener `preference.addEventListener('change', (mediaQuery) => ...)` to update the store value if it changes
+> 💪 Use JavaScript to check the user preference with `const preference = window.matchMedia('(prefers-color-scheme: dark)').matches` and then use an event listener `preference.addEventListener('change', (mediaQuery) => ...)` to update the theme.
 
-I'm going to create a `toggle.svelte` component and use it inside `header.svelte`.
+Let's create a `<Toggle>` component:
 
 ```svelte:src/routes/toggle.svelte showLineNumbers
 <script lang="ts">
 	import { fly } from 'svelte/transition'
 	import { Moon, Sun } from 'lucide-svelte'
-	import { theme, toggleTheme } from '$lib/theme'
+	import { theme } from '$lib/theme.svelte'
 </script>
 
-<button on:click={toggleTheme} aria-label="Toggle theme">
-	{#if $theme === 'dark'}
+<button on:click={theme.toggle} aria-label="Toggle theme">
+	{#if theme.current === 'dark'}
 		<div in:fly={{ y: 10 }}>
 			<Sun />
 			<span>Light</span>
@@ -1011,14 +970,16 @@ I'm going to create a `toggle.svelte` component and use it inside `header.svelte
 		border: none;
 		box-shadow: none;
 		overflow: hidden;
-	}
 
-	button > * {
-		display: flex;
-		gap: var(--size-2);
+		> * {
+			display: flex;
+			gap: var(--size-2);
+		}
 	}
 </style>
 ```
+
+Import the `<Toggle>` component inside the `<Header>` component:
 
 ```svelte:header.svelte {2, 8} showLineNumbers
 <script lang="ts">
@@ -1032,15 +993,11 @@ I'm going to create a `toggle.svelte` component and use it inside `header.svelte
 </nav>
 ```
 
-That's it! 😎
+I wear my sunglasses at night. 😎
 
 ## Page Transitions
 
-Adding some simple page transitions is going to give your site an air of whimsy and sophistication.
-
-I have an entire post on [SvelteKit Page Transitions](https://joyofcode.xyz/sveltekit-page-transitions) but the gist is that we need to know when the url changed to destroy and recreate the page which is going to play the transition.
-
-> 🐿️ You could use the `$navigates` store from SvelteKit as the key for the transition but it's going to cause problems on slower connections if the page isn't ready to load and play the transition for the current page since the navigation occured.
+To transition a page we need to know when the url changed to destroy and recreate the page which is going to play the transition:
 
 ```ts:src/routes/+layout.ts. showLineNumbers
 export async function load({ url }) {
@@ -1052,14 +1009,20 @@ export async function load({ url }) {
 
 ```svelte:src/routes/transition.svelte showLineNumbers
 <script lang="ts">
+	import type { Snippet } from 'svelte'
 	import { fade } from 'svelte/transition'
 
-	export let url: string
+	type Props = {
+		children: Snippet
+		url: string
+	}
+
+	let { children, url }: Props = $props()
 </script>
 
 {#key url}
 	<div class="transition" in:fade>
-		<slot />
+		{@render children?.()}
 	</div>
 {/key}
 
@@ -1076,7 +1039,7 @@ export async function load({ url }) {
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
 	// ...
-	export let data
+	let { children, data } = $props()
 </script>
 
 <div class="layout">
@@ -1084,7 +1047,7 @@ export async function load({ url }) {
 
 	<main>
 		<PageTransition url={data.url}>
-			<slot />
+			{@render children?.()}
 		</PageTransition>
 	</main>
 
@@ -1092,13 +1055,11 @@ export async function load({ url }) {
 </div>
 ```
 
-The site is a smooth operator! 🎷
+The blog is a smooth operator. 🎷
 
 ## RSS Feed
 
-A lot of people prefer to get notified about updates in their RSS reader.
-
-Creating an RSS feed in SvelteKit is simple as creating an API endpoint that returns XML.
+Creating an RSS feed in SvelteKit is simple as creating an API endpoint that returns XML:
 
 ```ts:src/routes/rss.xml/+server.ts showLineNumbers
 import * as config from '$lib/config'
@@ -1138,11 +1099,11 @@ export async function GET({ fetch }) {
 }
 ```
 
-> 🐿️ The `rss.xml` extension is optional. You could also name the posts endpoint `posts.json` if you wanted which is preferred if you use prerendering and have clashing route names.
+> 🐿️ The endpoint extensions like `.xml` and `.json` are optional unless you use prerendering and have clashing route names.
 
 This is the least XML required for an RSS feed which you can validate with [W3C Feed Validation Service](https://validator.w3.org/feed/) when you deploy the site.
 
-You can include this markup in `app.html` so when people input your website URL in their RSS reader it's going to pick it up.
+You can include this markup in `app.html` so when people input your website URL in their RSS reader it's going to pick it up:
 
 ```svelte:src/app.html {4} showLineNumbers
 <!DOCTYPE html>
@@ -1157,9 +1118,7 @@ You can include this markup in `app.html` so when people input your website URL 
 
 ## Custom Error Page
 
-Let's customize the error page before we deploy the site by adding `+error.svelte` in `routes`.
-
-> 🐿️ You can add `+error.svelte` inside other routes if you want but since we don't have a lot of nested layouts this is fine.
+Let's customize the default error page by creating `+error.svelte` in `routes`:
 
 ```svelte:src/routes/+error.svelte showLineNumbers
 <script>
@@ -1181,29 +1140,29 @@ Let's customize the error page before we deploy the site by adding `+error.svelt
 
 ## Deployment
 
-For deployment I'm going to use [Vercel](https://vercel.com/) and prerender the content ahead of time before deploying it which means it's going to be blazingly fast. 🔥
+I'm going to prerender everything so it's blazingly fast and deploy the blog to [Vercel](https://vercel.com/) since they have a generous free tier. 🔥
 
 [Prerendering](https://kit.svelte.dev/docs/page-options#prerender) means creating the HTML files at build time (when you run `npm run build` or `vite build`).
 
-Prerendering your site takes one line of code.
+This is one line of code:
 
 ```ts:src/routes/+layout.ts showLineNumbers
 export const prerender = true
 // ...
 ```
 
-You also need to prerender the RSS feed.
+Let's also prerender the RSS feed:
 
 ```ts:src/routes/rss.xml/+server.ts showLineNumbers
 export const prerender = true
 // ...
 ```
 
-If you use the `prerender` SvelteKit page option in the root layout SvelteKit is going to crawl the links in your site and prerender the pages (`+page.svelte`) and server routes (`+server.ts`).
+SvelteKit is going to crawl the links in your site and prerender the pages (`+page.svelte`) and server routes (`+server.ts`) when you use the `prerender` page option in the root layout.
 
-If you have pages with [form actions](https://kit.svelte.dev/docs/form-actions) they can't be prerendered because you need a server but SvelteKit is flexible and you can disable prerendering for that page.
+> ⚠️ If you have pages with [form actions](https://kit.svelte.dev/docs/form-actions) they can't be prerendered because you need a server but SvelteKit is flexible and you can disable prerendering for that page.
 
-I'm going to use the [Vercel adapter](https://kit.svelte.dev/docs/adapter-vercel) and update the config.
+I'm going to use the [Vercel adapter](https://kit.svelte.dev/docs/adapter-vercel) for deployment:
 
 ```sh:terminal
 # remove the default adapter
@@ -1218,9 +1177,9 @@ import adapter from '@sveltejs/adapter-vercel'
 // ...
 ```
 
-> 🐿️ Before deploying run `npm run build` and `npm run preview` to check for any obvious errors instead of finding out about it during deployment. This is going to create a `.vercel` folder which should be added to `.gitignore`.
+> 🐿️ You can run `npm run build` and `npm run preview` to check for any obvious errors instead of finding out about it during deployment. The build command is going to create a `.vercel` folder which should be added to your `.gitignore` file.
 
-Create a new project on GitHub and name it anything you want then push the code to GitHub.
+Create a new project on GitHub and push the code:
 
 ```sh:terminal
 # initialize Git repository
@@ -1244,12 +1203,8 @@ git push -u origin main
 
 [Add a new project on Vercel](https://vercel.com/new) and **import** your repository. You can leave the default options and press **deploy** which should take a minute.
 
-Look at the **Building** output in case you run into errors in which case just stay calm and read the error like you would in local development because you probably forgot something or made a typo.
+> 🐿️ You can change the name of the URL Vercel assigned to your project if you go to **Settings** > **Domains**.
 
-You should be greeted by a celebratory screen 🎉 where you can tap **Continue to Dashboard** and then tap **Visit** to see the site.
+Each time you push to your GitHub repository Vercel is going to redeploy and run the build since it's integrated with GitHub.
 
-If you don't like the name of the random URL Vercel assigned to your project go to **Settings** > **Domains** and tap **Edit** and give it a new domain name that ends with **.vercel.app** like **shakespeare.vercel.app** which is a great name already without having to use a custom domain name.
-
-Each time you push to the GitHub repository Vercel is going to **redeploy** and **run the build** and **bust the cache** because it's integrated with GitHub.
-
-That's it! 🎉
+Congrats! 🎉
