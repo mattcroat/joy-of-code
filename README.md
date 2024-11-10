@@ -6,7 +6,7 @@
 
 ## Joy of Code
 
-[Joy of Code](https://joyofcode.xyz/) is a digital garden growing curious minds focused on web development and web design.
+Web development and design-focused content.
 
 ## ▶️ YouTube ![YouTube Subscribers](https://img.shields.io/youtube/channel/subscribers/UC6wpjLSLn2dhlaDjn6_V0rw)
 
