@@ -4,7 +4,6 @@ description: Learn different ways you can export and share reactive state in Sve
 slug: how-to-share-state-in-svelte-5
 published: '2024-11-08'
 category: svelte
-draft: false
 ---
 
 {% youtube id="qI31XOrBuY0" title="Different Ways To Share State In Svelte 5" %}
@@ -47,7 +46,7 @@ export let count = $state(0)
 </button>
 ```
 
-You might have expected this to work but instead you get an error that says: **"Cannot assign to import."**
+You might have expected this to work, but instead you get an error that says: **"Cannot assign to import."**
 
 This is because **Svelte doesn't change how JavaScript works** and [imported values can only be modified by the exporter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#imported_values_can_only_be_modified_by_the_exporter).
 

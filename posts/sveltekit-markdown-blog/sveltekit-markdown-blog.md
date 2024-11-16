@@ -18,7 +18,7 @@ You're going to make a blazingly fast and extendable SvelteKit Markdown blog you
 
 {% embed src="https://stackblitz.com/github/joysofcode/sveltekit-markdown-blog?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=SvelteKit Markdown Blog" title="SvelteKit Markdown Blog" %}
 
-You can find the finished project [on GitHub](https://github.com/joysofcode/sveltekit-markdown-blog).
+You can find the finished project on [GitHub](https://github.com/joysofcode/sveltekit-markdown-blog).
 
 > 🔥 If you want to learn SvelteKit you can watch [The Complete SvelteKit Course For Building Modern Web Apps](https://www.youtube.com/watch?v=MoGkX4RvZ38) on YouTube.
 
@@ -351,11 +351,13 @@ li {
 }
 ```
 
+Here's the result:
+
 {% img src="setup.webp" alt="Start of the SvelteKit blog" %}
 
 > 💪 As an exercise try adding the `/about` and `/contact` routes yourself since they're mostly used as placeholders.
 
-This sets us up nicely and later we're going to implement a theme switcher. Even without a theme toggle it should respect the user preference thanks to the `prefers-color-scheme` media query.
+This sets us up nicely for implementing a theme switcher later. Even without a theme toggle it should respect the user preference thanks to the `prefers-color-scheme` media query.
 
 ## Setting Up Mdsvex
 
@@ -482,7 +484,7 @@ Here's the breakdown:
 - Only add the post if `published` is set to `true`
 - Sort `posts` by date and return them
 
-If you're using TypeScript here are the types:
+If you're using TypeScript, here are the types:
 
 ```ts:src/lib/types.ts showLineNumbers
 export type Categories = 'sveltekit' | 'svelte'
@@ -505,7 +507,7 @@ You can navigate to [http://localhost:5173/api/posts](http://localhost:5173/api/
 
 Awesome! 🥳
 
-You created a posts API you can reuse across your app or make it public for others to consume.
+You created an API for posts you can reuse across your app or make it public for others to consume.
 
 ## Rendering The Posts
 
@@ -579,7 +581,7 @@ You can now get the data and render the posts:
 </style>
 ```
 
-Here's the function I use to format the date:
+Here's the function used to format the date:
 
 ```ts:src/lib/utils.ts showLineNumbers
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
@@ -771,7 +773,7 @@ Here's the breakdown:
 - Shiki is going to generate HTML that looks like your code in VS Code using the `code` and `lang` you passed
 - Insert `{@html html}` in the Svelte component to output the code block, but we need to escape the backticks with `\`
 
-I figured this out from a [GitHub issue](https://github.com/pngwn/MDsveX/issues/212#issuecomment-937548885) in the mdsvex repo.
+I found this solution from a [GitHub issue](https://github.com/pngwn/MDsveX/issues/212#issuecomment-937548885) in the mdsvex repo.
 
 ## Using Components Inside Markdown
 
@@ -876,9 +878,9 @@ Install the Markdown plugins:
 npm i remark-toc rehype-slug
 ```
 
-Add them to the config.
+Add the plugins to the config:
 
-```js:svelte.config.js {1,3,8,9} showLineNumbers
+```js:svelte.config.js {2,3,8,9} showLineNumbers
 // ...
 import remarkToc from 'remark-toc'
 import rehypeSlug from 'rehype-slug'
@@ -997,7 +999,7 @@ I wear my sunglasses at night. 😎
 
 ## Page Transitions
 
-To transition a page we need to know when the url changed to destroy and recreate the page which is going to play the transition:
+To transition a page we need to know when the URL changed to destroy and recreate the page which is going to play the transition:
 
 ```ts:src/routes/+layout.ts. showLineNumbers
 export async function load({ url }) {
@@ -1055,7 +1057,7 @@ export async function load({ url }) {
 </div>
 ```
 
-The blog is a smooth operator. 🎷
+He's a smooth operator. 🎷
 
 ## RSS Feed
 
@@ -1205,6 +1207,6 @@ git push -u origin main
 
 > 🐿️ You can change the name of the URL Vercel assigned to your project if you go to **Settings** > **Domains**.
 
-Each time you push to your GitHub repository Vercel is going to redeploy and run the build since it's integrated with GitHub.
+Each time you push to the GitHub repository, Vercel is going to redeploy and run the build since it's integrated with GitHub.
 
 Congrats! 🎉
