@@ -121,12 +121,13 @@ Let's mount the React app inside the root element, and we have to use a dynamic 
 	let props: ExcalidrawProps = $props()
 	let rootEl: HTMLElement
 
-	// @ts-ignore
-	$effect(async () => {
-		const { Excalidraw } = await import('@excalidraw/excalidraw')
-
+	$effect(() => {
 		const root = createRoot(rootEl)
-		root.render(createElement(Excalidraw, { ...props }))
+
+		import('@excalidraw/excalidraw').then(({ Excalidraw }) => {
+			const excalidraw = createElement(Excalidraw, { ...props })
+			root.render(excalidraw)
+		})
 
 		return () => root.unmount()
 	})
@@ -141,30 +142,30 @@ Let's mount the React app inside the root element, and we have to use a dynamic 
 </style>
 ```
 
+> ⚠️ The reason we don't use `await` inside `$effect` is because if you pass an async function to `$effect`, the cleanup is never going to be called.
+
 ## Nesting Elements In React
 
 You can pass an array of children to a React element if you want to nest elements. Let's customize Excalidraw by including a welcome screen and changing the main menu:
 
 ```ts:src/routes/Excalidraw.svelte
-// @ts-ignore
-$effect(async () => {
-  const { Excalidraw, WelcomeScreen, MainMenu } = await import('@excalidraw/excalidraw')
+$effect(() => {
+	const root = createRoot(rootEl)
 
-  const root = createRoot(rootEl)
-  root.render(
-    createElement(Excalidraw, { ...props }, [
-      createElement(WelcomeScreen, { key: 'WelcomeScreen' }),
-      createElement(MainMenu, { key: 'MainMenu' }, [
-        createElement(MainMenu.DefaultItems.LoadScene, { key: 'LoadScene' }),
-        createElement(MainMenu.DefaultItems.SaveAsImage, { key: 'SaveAsImage' }),
-        createElement(MainMenu.DefaultItems.Export, { key: 'Export' }),
-        createElement(MainMenu.Separator, { key: 'Separator' }),
-        createElement(MainMenu.DefaultItems.ChangeCanvasBackground, { key: 'ChangeCanvasBackground' }),
-      ]),
-    ])
-  )
+	import('@excalidraw/excalidraw').then(({ Excalidraw, WelcomeScreen, MainMenu }) => {
+		const welcome = createElement(WelcomeScreen, { key: 'WelcomeScreen' })
+		const menu = createElement(MainMenu, { key: 'MainMenu' }, [
+			createElement(MainMenu.DefaultItems.LoadScene, { key: 'LoadScene' }),
+			createElement(MainMenu.DefaultItems.SaveAsImage, { key: 'SaveAsImage' }),
+			createElement(MainMenu.DefaultItems.Export, { key: 'Export' }),
+			createElement(MainMenu.Separator, { key: 'Separator' }),
+			createElement(MainMenu.DefaultItems.ChangeCanvasBackground, { key: 'ChangeCanvasBackground' }),
+		])
+		const excalidraw = createElement(Excalidraw, { ...props }, [welcome, menu])
+		root.render(excalidraw)
+	})
 
-  return () => root.unmount()
+	return () => root.unmount()
 })
 ```
 
