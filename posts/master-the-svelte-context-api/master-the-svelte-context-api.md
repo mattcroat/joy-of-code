@@ -1,6 +1,6 @@
 ---
 title: Sharing State Without Props And Events In Svelte
-description: Learn how to share state components in Svelte without using props and events.
+description: Learn how to share state without props and events using the Svelte Context API.
 slug: master-the-svelte-context-api
 published: '2024-11-22'
 category: svelte
@@ -165,7 +165,7 @@ This is how the Context API works at a basic level, and you can see it's not mag
 
 To use Svelte's Context API, the only thing we have to change is the import:
 
-```svelte:svelte-context {3,8,15,17,20}
+```svelte:svelte-context {3,15}
 <!-- src/routes/A.svelte -->
 <script lang="ts">
   import { setContext } from 'svelte'
