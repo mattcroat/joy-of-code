@@ -120,7 +120,7 @@ This is only a naive implementation of how Svelte implements the Context API, bu
 
 The major difference is that **Svelte scopes the context to the component tree**, so it's only available to the parent and its children.
 
-There is no reason to pass the `prop` anymore through the child components. Instead, we can set the context in the parent component `<A>` and get the context in the deeply nested child component `<D>`:
+Let's set the context in the parent component `<A>` and get the context in the deeply nested child component `<D>` removing the need for passing `prop` to child components:
 
 ```svelte:using-context {3,8,29,31,34}
 <!-- src/routes/A.svelte -->
@@ -225,7 +225,7 @@ In our example, the `prop` is already reactive because Svelte uses a [Proxy](htt
 <ComponentB />
 ```
 
-As you can see, this is just JavaScript so the same rules apply. If you pass a string primitive, it won't be magically reactive because it's going to use the value at the time it was created, but you can use functions or accessors to read and write to it:
+If you pass a string primitive, it won't be magically reactive:
 
 ```svelte:src/routes/A.svelte
 <script lang="ts">
@@ -236,12 +236,40 @@ As you can see, this is just JavaScript so the same rules apply. If you pass a s
 
   // 👎️ this won't work
   setContext('banana', prop)
+</script>
+
+<ComponentB />
+```
+
+This is because it's going to use the value at the time it was created if we look at the compiled Svelte code:
+
+```js
+// signal
+let prop = state('🍌')
+// get the value of the signal
+setContext('key', get(prop))
+```
+
+You can pass functions, classes or accessors to read and write to the value:
+
+```svelte:src/routes/A.svelte
+<script lang="ts">
+	import { setContext } from 'svelte'
+	import ComponentB from './B.svelte'
+
+	let prop = $state('🍌')
 
 	// 👍 using functions
 	setContext('banana', {
 		getBanana() { return prop },
 		updateBanana(value) { prop = value },
 	})
+
+	// 👍 using classes
+	class Banana {
+		value = $state('🍌')
+	}
+	setContext('banana', { banana: new Banana() })
 
 	// 👍 using accesors
 	setContext('banana', {
