@@ -267,7 +267,7 @@ Now you can access these methods in child components and update the context:
 {context.banana}
 ```
 
-## Use A Unique Key For The Context
+## Use A Unique Key For Context
 
 Let's look at why using a string for the context key could get you into trouble and why you should use a unique key.
 
