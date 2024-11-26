@@ -15,25 +15,25 @@ category: svelte
 You might have heard of the term "prop drilling", which describes sending the same data from a parent component through every child component even if only one component cares about it:
 
 ```svelte:example
-<ComponentA>
-  <ComponentB {prop}>
-    <ComponentC {prop}>
-      <ComponentD {prop} /> <!-- only this component cares about `prop` -->
-    </ComponentC>
-  </ComponentB>
-</ComponentA>
+<A>
+  <B {prop}>
+    <C {prop}>
+      <D {prop} /> <!-- only this component cares about `prop` -->
+    </C>
+  </B>
+</A>
 ```
 
 This is tedious, but Svelte provides the [Context API](https://svelte.dev/docs/svelte/context) to share state between components without using props and events which looks like this:
 
 ```svelte:example
-<ComponentA> <!-- set context in parent -->
-  <ComponentB>
-    <ComponentC>
-      <ComponentD /> <!-- get context in child -->
-    </ComponentC>
-  </ComponentB>
-</ComponentA>
+<A> <!-- set context in parent -->
+  <B>
+    <C>
+      <D /> <!-- get context in child -->
+    </C>
+  </B>
+</A>
 ```
 
 In this post, we're going to create a naive implementation of the Context API from scratch to understand how it works at a basic level, and then we're going to learn how the Svelte Context API works.
@@ -42,49 +42,49 @@ In this post, we're going to create a naive implementation of the Context API fr
 
 Let's pretend the Context API doesn't exist.
 
-In this example, we want to pass `prop` from component `<A>` to component `<D>`, but unfortunately we also have to pass `prop` through every nested child component `<B>` and `<C>`:
+In this example, we want to pass `banana` from component `<A>` to component `<D>`, but unfortunately we also have to pass `prop` through every nested child component `<B>` and `<C>`:
 
 ```svelte:passing-props
 <!-- src/routes/+page.svelte -->
 <script lang="ts">
-	import ComponentA from '/A.svelte'
+	import A from '/A.svelte'
 </script>
 
-<ComponentA />
+<A />
 
 <!-- src/routes/A.svelte -->
 <script lang="ts">
-	import ComponentB from './B.svelte'
+	import B from './B.svelte'
 
-	let prop = $state({ banana: '🍌' })
+	const banana = $state({ value: '🍌' })
 </script>
 
-<ComponentB {prop} />
+<B {banana} />
 
 <!-- src/routes/B.svelte -->
 <script lang="ts">
-	import ComponentC from './C.svelte'
+	import C from './C.svelte'
 
-	let { prop } = $props()
+	let { banana } = $props()
 </script>
 
-<ComponentC {prop} />
+<C {banana} />
 
 <!-- src/routes/C.svelte -->
 <script lang="ts">
-	import ComponentD from './D.svelte'
+	import D from './D.svelte'
 
-	let { prop } = $props()
+	let { banana } = $props()
 </script>
 
-<ComponentD {prop} />
+<D {banana} />
 
 <!-- src/routes/D.svelte -->
 <script lang="ts">
-	let { prop } = $props()
+	let { banana } = $props()
 </script>
 
-<pre>{JSON.stringify(prop, null, 2)}</pre>
+<pre>{JSON.stringify(banana, null, 2)}</pre>
 ```
 
 Let's create the same functions the Svelte Context API provides, which are `setContext`, `getContext`, `hasContext`, and `getAllContexts`:
@@ -126,34 +126,34 @@ Let's set the context in the parent component `<A>` and get the context in the d
 <!-- src/routes/A.svelte -->
 <script lang="ts">
   import { setContext } from './context-at-home'
-	import ComponentB from './B.svelte'
+	import B from './B.svelte'
 
-	let prop = $state({ banana: '🍌' })
+	const banana = $state({ value: '🍌' })
 
-  setContext('banana', prop)
+  setContext('banana', banana)
 </script>
 
-<ComponentB />
+<B />
 
 <!-- src/routes/B.svelte -->
 <script lang="ts">
-	import ComponentC from './C.svelte'
+	import C from './C.svelte'
 </script>
 
-<ComponentC />
+<C />
 
 <!-- src/routes/C.svelte -->
 <script lang="ts">
-	import ComponentD from './D.svelte'
+	import D from './D.svelte'
 </script>
 
-<ComponentD />
+<D />
 
 <!-- src/routes/D.svelte -->
 <script lang="ts">
   import { getContext, getAllContexts } from './context-at-home'
 
-  console.log(getContext('banana')) // Proxy(Object) {banana: '🍌'}
+  console.log(getContext('banana')) // Proxy(Object) {value: '🍌'}
 </script>
 
 <pre>{JSON.stringify([...getAllContexts()], null, 2)}</pre>
@@ -169,20 +169,20 @@ To use Svelte's Context API, the only thing we have to change is the import:
 <!-- src/routes/A.svelte -->
 <script lang="ts">
   import { setContext } from 'svelte'
-	import ComponentB from './B.svelte'
+	import B from './B.svelte'
 
-	let prop = $state({ banana: '🍌' })
+	const banana = $state({ value: '🍌' })
 
-  setContext('banana', prop)
+  setContext('banana', banana)
 </script>
 
-<ComponentB />
+<B />
 
 <!-- src/routes/D.svelte -->
 <script lang="ts">
   import { getContext, getAllContexts } from 'svelte'
 
-  console.log(getContext('banana')) // Proxy(Object) {banana: '🍌'}
+  console.log(getContext('banana')) // Proxy(Object) {value: '🍌'}
 </script>
 
 <pre>{JSON.stringify([...getAllContexts()], null, 2)}</pre>
@@ -198,7 +198,7 @@ In this example, we set the context inside component `<A>` and ask for it in com
 
 **The context is scoped to the component tree**, so it's only available to the parent and its children, where global state makes more sense for state used by the entire app:
 
-```ts:example.ts
+```ts:config.ts
 // global state
 export const config = $state({ theme: 'dark' })
 ```
@@ -212,17 +212,17 @@ In our example, the `prop` is already reactive because Svelte uses a [Proxy](htt
 ```svelte:src/routes/A.svelte
 <script lang="ts">
 	import { setContext } from 'svelte'
-	import ComponentB from './B.svelte'
+	import B from './B.svelte'
 
 	// Proxy
-	let prop = $state({ banana: '🍌' })
+	const banana = $state({ value: '🍌' })
 
-	setContext('banana', prop)
+	setContext('banana', banana)
 </script>
 
-<input type="text" bind:value={prop.banana} />
+<input type="text" bind:value={banana.value} />
 
-<ComponentB />
+<B />
 ```
 
 If you pass a string primitive, it won't be magically reactive:
@@ -230,24 +230,24 @@ If you pass a string primitive, it won't be magically reactive:
 ```svelte:src/routes/A.svelte
 <script lang="ts">
 	import { setContext } from 'svelte'
-	import ComponentB from './B.svelte'
+	import B from './B.svelte'
 
-	let prop = $state('🍌')
+	let banana = $state('🍌')
 
   // 👎️ this won't work
-  setContext('banana', prop)
+  setContext('banana', banana)
 </script>
 
-<ComponentB />
+<B />
 ```
 
 This is because it's going to use the value at the time it was created if we look at the compiled Svelte code:
 
 ```js
 // signal
-let prop = state('🍌')
+let banana = state('🍌')
 // get the value of the signal
-setContext('key', get(prop))
+setContext('key', get(banana))
 ```
 
 You can pass functions, classes or accessors to read and write to the value:
@@ -255,14 +255,14 @@ You can pass functions, classes or accessors to read and write to the value:
 ```svelte:src/routes/A.svelte
 <script lang="ts">
 	import { setContext } from 'svelte'
-	import ComponentB from './B.svelte'
+	import B from './B.svelte'
 
-	let prop = $state('🍌')
+	let banana = $state('🍌')
 
 	// 👍 using functions
 	setContext('banana', {
-		getBanana() { return prop },
-		updateBanana(value) { prop = value },
+		getBanana() { return banana },
+		updateBanana(value) { banana = value },
 	})
 
 	// 👍 using classes
@@ -273,12 +273,12 @@ You can pass functions, classes or accessors to read and write to the value:
 
 	// 👍 using accesors
 	setContext('banana', {
-		get banana() { return prop },
-		set banana(value) { prop = value },
+		get banana() { return banana },
+		set banana(value) { banana = value },
 	})
 </script>
 
-<ComponentB />
+<B />
 ```
 
 Now you can access these methods in child components and update the context:
@@ -287,6 +287,7 @@ Now you can access these methods in child components and update the context:
 <script lang="ts">
 	import { getContext } from 'svelte'
 
+	// 👍 using accesors
 	const context = getContext<{ banana: string }>('banana')
 </script>
 
@@ -301,11 +302,11 @@ Let's look at why using a string for the context key could get you into trouble 
 
 Here's an example of using a string for the context key:
 
-```svelte:example.svelte
+```svelte:example
 <script lang="ts">
 	import { getAllContexts, setContext } from 'svelte'
 
-	// 💣️ ticking time bomb
+	// 💣️
 	const key = 'fruit'
 	setContext(key, '🍌')
 
@@ -315,7 +316,7 @@ Here's an example of using a string for the context key:
 
 The problem with using a string for the context key is if you set the context with the same key from another library or your own code, it's going to overwrite the value:
 
-```svelte:example.svelte
+```svelte:example
 <script lang="ts">
 	import { getAllContexts, setContext } from 'svelte'
 
@@ -334,7 +335,7 @@ The problem with using a string for the context key is if you set the context wi
 
 To avoid this, use a [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) object to create a unique key:
 
-```svelte:example.svelte
+```svelte:example
 <script lang="ts">
 	import { getAllContexts, setContext } from 'svelte'
 
@@ -353,7 +354,7 @@ To avoid this, use a [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 This works because no two objects or Symbols are the same in JavaScript, but Symbols are more appropriate because they were made for this reason:
 
-```ts
+```ts:example
 const objA = { key: 'fruit' }
 const objB = { key: 'fruit' }
 
