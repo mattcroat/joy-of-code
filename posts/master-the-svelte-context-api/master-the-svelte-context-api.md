@@ -245,7 +245,7 @@ This is because it's going to use the value at the time it was created if we loo
 
 ```js
 // signal
-let banana = state('🍌')
+let banana = $state('🍌')
 // get the value of the signal
 setContext('key', get(banana))
 ```
