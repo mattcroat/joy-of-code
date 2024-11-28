@@ -42,7 +42,7 @@ In this post, we're going to create a naive implementation of the Context API fr
 
 Let's pretend the Context API doesn't exist.
 
-In this example, we want to pass `banana` from component `<A>` to component `<D>`, but unfortunately we also have to pass `prop` through every nested child component `<B>` and `<C>`:
+In this example, we want to pass `banana` from component `<A>` to component `<D>`, but unfortunately we also have to pass it through every nested child component `<B>` and `<C>`:
 
 ```svelte:passing-props
 <!-- src/routes/+page.svelte -->
@@ -120,7 +120,7 @@ This is only a naive implementation of how Svelte implements the Context API, bu
 
 The major difference is that **Svelte scopes the context to the component tree**, so it's only available to the parent and its children.
 
-Let's set the context in the parent component `<A>` and get the context in the deeply nested child component `<D>` removing the need for passing `prop` to child components:
+Let's set the context in the parent component `<A>` and get the context in the deeply nested child component `<D>` removing the need for passing `banana` to child components:
 
 ```svelte:using-context {3,8,29,31,34}
 <!-- src/routes/A.svelte -->
@@ -207,7 +207,7 @@ Using global state is unsafe on the server if you're using SvelteKit because it 
 
 ## Passing Reactive State To Context
 
-In our example, the `prop` is already reactive because Svelte uses a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object under the hood for objects and arrays that turns properties into signals:
+In our example, the `banana` is already reactive because Svelte uses a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object under the hood for objects and arrays that turns properties into signals:
 
 ```svelte:src/routes/A.svelte
 <script lang="ts">
@@ -243,11 +243,13 @@ If you pass a string primitive, it won't be magically reactive:
 
 This is because it's going to use the value at the time it was created if we look at the compiled Svelte code:
 
-```js
+```js:output
+import * as $ from 'internals'
+
 // signal
-let banana = state('🍌')
+let banana = $.state('🍌')
 // get the value of the signal
-setContext('key', get(banana))
+setContext('key', $.get(banana))
 ```
 
 You can pass functions, classes or accessors to read and write to the value:
