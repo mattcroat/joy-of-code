@@ -260,7 +260,8 @@ Then you can set the context higher up in the parent layout and access the conte
 
 	$effect(() => {
     // update signal when data changes
-		user = data.user
+    user.id = data.user.id
+    user.name = data.user.name
 	})
 
   // set context with reactive state
