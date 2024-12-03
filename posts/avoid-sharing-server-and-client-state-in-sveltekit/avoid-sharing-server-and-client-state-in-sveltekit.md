@@ -12,7 +12,9 @@ category: sveltekit
 
 ## Sharing Server And Client State In SvelteKit
 
-I often see someone ask if you can share data returned from a `load` function in a route between unrelated components in SvelteKit:
+Frontend developers aren't used to working with a server, which makes it more confusing when they start using a meta-framework like SvelteKit that blurs the line between the server and client.
+
+One thing I often see people ask is if you can share the page data returned from a `load` function between unrelated components in SvelteKit:
 
 ```ts:routes/user/+page.ts
 export async function load() {
@@ -21,7 +23,7 @@ export async function load() {
 }
 ```
 
-You might have some deeply nested components in the same route where you don't want to manually pass the props:
+For example, you might have some deeply nested components in the same route where you don't want to manually pass the props:
 
 ```svelte:routes/user/+page.svelte
 <script lang="ts">
@@ -122,14 +124,14 @@ shared by everyone accessing the page.
 
 Naturally, you might try using reactive state as a potential solution to the problem:
 
-```svelte:lib/user.svelte.ts
+```ts:lib/user.svelte.ts
 type User = { id: number | null; username: string | null }
 
 // using a reactive Proxy
 export const user = $state<User>({ id: null, username: null })
 ```
 
-In theory, instead of returning `user` you only have to update the state and now you can access it in your app:
+In theory, instead of returning `user` you only have to update the state and now you can access it in your component:
 
 ```ts:routes/user/+page.ts
 import { user } from '$lib/user.svelte'
@@ -161,7 +163,7 @@ It works, but it's only abusing the fact the `load` function runs on the server 
 
 ## Always Return The Data From Load Functions
 
-You should **always return the data from a `load` function** and pass it to components that need it:
+**You should always return the data from a `load` function** and pass it to components that need it:
 
 ```ts:routes/user/+page.ts
 export async function load({ url }) {
@@ -185,7 +187,7 @@ export async function load({ url }) {
 
 There are other methods you can use to pass the data returned from `load` functions around components we're going to explore next.
 
-## Using The Page Store To Acess Data From Load Functions
+## Using The Page Store To Access Data From Load Functions
 
 You can use the `page` store from SvelteKit to access the page data returned from `load` functions in the current route and the parent layout.
 
@@ -227,15 +229,15 @@ You can also access the page data from a parent layout:
 <header>
 ```
 
-## Using The Context API To Safely Pass Data To Children
+## Using The Context API To Safely Pass Page Data
 
 SvelteKit uses the Context API on the server to safely scope state to the component tree. You can create your own `page` store like SvelteKit by using the Context API to safely pass data to child components.
 
-> 🐿️ SvelteKit uses stores, which is an older system of reactivity until they update it, but we're using [Svelte 5 runes](https://svelte.dev/docs/svelte/what-are-runes).
+> 🐿️ SvelteKit uses stores, which is an older system of reactivity until they update it, but we're using [Svelte 5 runes](https://svelte.dev/docs/svelte/what-are-runes) for reactivity.
 
 Let's get the user data from the layout `load` function higher up in the component tree so we can access it in the layout:
 
-```svelte:routes/+layout.ts
+```ts:routes/+layout.ts
 export async function load({ url }) {
 	const user = {
 		id: url.searchParams.get('id'),
@@ -251,18 +253,19 @@ Then you can set the context higher up in the parent layout and access the conte
 <script lang="ts">
 	import { setContext } from 'svelte'
 
-	let { data, children } = $props()
+	let { data } = $props()
 
+  // create signal
 	let user = $state(data.user)
 
 	$effect(() => {
+    // update signal when data changes
 		user = data.user
 	})
 
+  // set context with reactive state
 	setContext('user', user)
 </script>
-
-{@render children?.()}
 ```
 
 Let's say you're using the `<Avatar>` component inside `/user/+page.svelte`, so now you can access the context inside of it:
@@ -280,8 +283,6 @@ Let's say you're using the `<Avatar>` component inside `/user/+page.svelte`, so 
 </div>
 ```
 
-If you're not using SSR this is not a problem, but [the docs recommend you avoid keeping state in a shared module](https://svelte.dev/docs/kit/state-management#Using-stores-with-context) and use the Context API.
-
-If you want to learn more about the Context API, I wrote [Sharing State Without Props And Events In Svelte](https://joyofcode.xyz/master-the-svelte-context-api).
+If you're not using SSR this is not a problem, but [the docs recommend you avoid keeping state in a shared module](https://svelte.dev/docs/kit/state-management#Using-stores-with-context) and use the Context API. If you want to learn more about the Context API, I wrote [Sharing State Without Props And Events In Svelte](https://joyofcode.xyz/master-the-svelte-context-api).
 
 In conclusion, **always return the data from the `load` function and update the state on the client.**
