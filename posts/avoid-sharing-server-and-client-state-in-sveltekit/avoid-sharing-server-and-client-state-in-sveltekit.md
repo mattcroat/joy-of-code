@@ -59,7 +59,7 @@ You might get the idea to use reactive state to solve the problem by updating th
 import { user } from '$lib/user.svelte'
 
 export async function load() {
-  // don't do this
+  // ⛔️ don't do this
   user.set(user)
 }
 ```
@@ -137,7 +137,7 @@ In theory, instead of returning `user` you only have to update the state and now
 import { user } from '$lib/user.svelte'
 
 export async function load({ url }) {
-  // don't do this
+  // ⛔️ don't do this
 	user.id = url.searchParams.get('id')
 	user.name = url.searchParams.get('name')
 
