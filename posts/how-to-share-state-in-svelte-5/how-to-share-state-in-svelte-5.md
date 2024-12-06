@@ -403,10 +403,10 @@ You can spread `data.user` to create a reactive `user` object that can be passed
 	import { setContext } from 'svelte'
 
 	let { data } = $props()
-	let user = $state({ ...data.user })
+	let user = $state(...data.user)
 
 	$effect(() => {
-		user = { ...data.user }
+    user.name = data.user.name
 	})
 
 	setContext('user', user)
