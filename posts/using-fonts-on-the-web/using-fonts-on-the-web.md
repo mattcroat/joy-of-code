@@ -223,7 +223,7 @@ We're going to get into some [Command-line interface (CLI)](https://en.wikipedia
 
 ## @font-face
 
-I found [Google Webfonts Helper](https://google-webfonts-helper.herokuapp.com/fonts) to be great since it generates the styles for you, lets you specify the character sets, and gives you many formats.
+I found [Google Webfonts Helper](https://gwfh.mranftl.com/fonts) to be great since it generates the styles for you, lets you specify the character sets, and gives you many formats.
 
 Assuming you have your font downloaded already which you can do from [Google Fonts](https://fonts.google.com/), [Font Squirrel](https://www.fontsquirrel.com/), or [DaFont](https://www.dafont.com/) the simplest way to declare a font is:
 
