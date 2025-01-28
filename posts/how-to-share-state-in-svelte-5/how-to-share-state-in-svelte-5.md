@@ -173,7 +173,7 @@ Then you would initialize the counter inside the component:
 
 ```svelte:+page.svelte
 <script lang="ts">
-  import { counter } from './counter.svelte'
+  import { createCounter } from './counter.svelte'
 
   const counter = createCounter()
 </script>
