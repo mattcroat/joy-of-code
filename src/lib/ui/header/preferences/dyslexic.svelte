@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
 	import { createSwitch, melt } from '@melt-ui/svelte'
+	import { preferences } from './preferences.svelte'
 
 	let enabled = false
 
@@ -25,7 +26,14 @@
 
 	const {
 		elements: { root, input },
+		states: { checked },
 	} = createSwitch()
+
+	$effect(() => {
+		preferences.resetTheme
+		checked.set(false)
+		enabled = false
+	})
 </script>
 
 <form>

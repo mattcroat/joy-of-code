@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition'
 	import { createSelect, melt } from '@melt-ui/svelte'
 	import { browser } from '$app/environment'
+	import { preferences } from './preferences.svelte'
 
 	type Themes = { name: keyof typeof themes }
 
@@ -60,11 +61,16 @@
 
 	const {
 		elements: { trigger, menu, option, label },
-		states: { open, selectedLabel },
+		states: { open, selected, selectedLabel },
 	} = createSelect()
 
 	$effect(() => {
 		updateTheme($selectedLabel)
+	})
+
+	$effect(() => {
+		preferences.resetTheme
+		selected.set({ value: '🌛 Night', label: '🌛 Night' })
 	})
 </script>
 

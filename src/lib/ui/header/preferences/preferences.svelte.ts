@@ -5,6 +5,7 @@ class Preferences {
 	#textLength = $state(70)
 	#textHeight = $state(32)
 	#htmlEl: HTMLElement | undefined
+	resetTheme = $state(false)
 
 	get textSize() {
 		return this.#textSize
@@ -58,6 +59,8 @@ class Preferences {
 
 		localStorage.theme = '🌛 Night'
 		localStorage.removeItem('font')
+
+		this.resetTheme = !this.resetTheme
 	}
 }
 
