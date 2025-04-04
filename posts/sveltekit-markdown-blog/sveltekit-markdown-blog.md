@@ -1191,7 +1191,7 @@ git init
 git add .
 
 # add commit
-git commmit -m "Add project"
+git commit -m "Add project"
 
 # add remote repository
 git remote add origin https://github.com/you/sveltekit-blog.git
