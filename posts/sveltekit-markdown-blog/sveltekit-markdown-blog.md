@@ -517,13 +517,13 @@ Time to use the posts API you just created to fetch and server-side render the p
 import type { Post } from '$lib/types'
 
 export async function load({ fetch }) {
-	const response = await fetch('api/posts')
+	const response = await fetch('/api/posts')
 	const posts: Post[] = await response.json()
 	return { posts }
 }
 ```
 
-> 🐿️ The `fetch` function from `load` has superpowers like being able to resolve the relative URL `api/posts` which would not work using regular `fetch`.
+> 🐿️ The `fetch` function from `load` has superpowers like being able to resolve the relative URL `/api/posts` which would not work using regular `fetch`.
 
 You can now get the data and render the posts:
 
@@ -1068,7 +1068,7 @@ import * as config from '$lib/config'
 import type { Post } from '$lib/types'
 
 export async function GET({ fetch }) {
-	const response = await fetch('api/posts')
+	const response = await fetch('/api/posts')
 	const posts: Post[] = await response.json()
 
 	const headers = { 'Content-Type': 'application/xml' }
