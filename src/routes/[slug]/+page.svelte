@@ -39,7 +39,9 @@
 
 	<article class="prose">
 		<header>
-			<h1 class="title">{data.frontmatter.title}</h1>
+			<h1 class="title" style:view-transition-name={data.frontmatter.slug}>
+				{data.frontmatter.title}
+			</h1>
 			<p class="published">
 				Published {formatDate(data.frontmatter.published)}
 			</p>

@@ -31,7 +31,9 @@
 				<a href="/{post.slug}">
 					<article class="post">
 						<div class="details">
-							<span class="title">{post.title}</span>
+							<span class="title" style:--view-transition-name={post.slug}>
+								{post.title}
+							</span>
 						</div>
 					</article>
 				</a>

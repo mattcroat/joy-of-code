@@ -46,6 +46,7 @@ html {
 	scroll-behavior: smooth;
 	scrollbar-width: thin;
 	scrollbar-color: var(--clr-scrollbar-thumb) transparent;
+	view-transition-name: none;
 }
 
 html,
@@ -194,4 +195,12 @@ lite-youtube::before {
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border-width: 0;
+}
+
+@media (prefers-reduced-motion) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
 }
