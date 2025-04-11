@@ -16,8 +16,11 @@
 		</div>
 		<span class="title">Support</span>
 		<p class="text">
-			You can subscribe on YouTube, or consider becoming a patron if you want to
-			support my work.
+			You can <a
+				href="https://www.youtube.com/@JoyofCodeDev?sub_confirmation=1"
+			>
+				subscribe on YouTube
+			</a>, or consider becoming a patron if you want to support my work.
 		</p>
 		<a
 			class="link"
@@ -82,6 +85,10 @@
 			color: var(--clr-card-txt);
 			margin-top: var(--spacing-8);
 			margin-bottom: var(--spacing-32);
+
+			a {
+				text-decoration: underline;
+			}
 		}
 
 		.link {
