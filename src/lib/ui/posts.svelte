@@ -68,7 +68,7 @@
 	}
 
 	.card {
-		height: 420px;
+		height: 400px;
 		padding: var(--spacing-32);
 		background-image: var(--clr-card-bg);
 		border-top: 1px solid var(--clr-menu-border);
@@ -87,11 +87,6 @@
 				0 0 0 4px var(--clr-primary);
 		}
 
-		.details {
-			height: 100%;
-			display: grid;
-		}
-
 		:global(html[data-font='dyslexic']) & .title {
 			font-family: var(--font-dyslexic);
 			font-size: var(--font-24);
@@ -99,16 +94,16 @@
 		}
 
 		.title {
+			width: fit-content;
 			font-family: var(--font-sans);
 			font-size: clamp(var(--font-24), 4vw, var(--font-32));
-			font-weight: 700;
 			line-height: 40px;
 			text-transform: capitalize;
 			text-wrap: balance;
 		}
 
 		.description {
-			margin-top: var(--spacing-8);
+			margin-top: var(--spacing-16);
 			font-size: var(--font-20);
 			color: var(--clr-card-txt);
 			align-self: end;

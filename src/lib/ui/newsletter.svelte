@@ -80,8 +80,11 @@
 			padding: var(--spacing-8);
 			color: var(--clr-input-txt);
 			background-color: var(--clr-primary);
-			font-weight: 700;
 			border-radius: 0 var(--rounded-4) var(--rounded-4) 0;
+
+			span {
+				text-box: trim-both cap alphabetic;
+			}
 
 			@media (width >= 860px) {
 				display: flex;

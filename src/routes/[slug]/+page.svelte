@@ -66,7 +66,7 @@
 	}
 
 	.title {
-		max-width: 600px;
+		width: fit-content;
 		margin-inline: auto;
 	}
 

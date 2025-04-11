@@ -98,7 +98,7 @@ html[data-font='dyslexic'] h2 {
 h1,
 h2,
 h3 {
-	text-wrap: balance;
+	font-weight: 400;
 }
 
 h1,
@@ -110,11 +110,11 @@ h2 {
 h1 {
 	font-size: clamp(var(--font-32), 4vw, var(--font-48));
 	line-height: clamp(32px, 6vw, 40px);
+	text-wrap: balance;
 }
 
 h2 {
 	font-size: clamp(var(--font-24), 4vw, var(--font-32));
-	line-height: clamp(32px, 6vw, 48px);
 }
 
 h3 {
@@ -129,7 +129,6 @@ p {
 a {
 	position: relative;
 	color: var(--clr-link-txt);
-	font-weight: 700;
 	text-decoration: none;
 	transition: color 0.3s ease;
 

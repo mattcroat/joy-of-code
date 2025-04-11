@@ -68,7 +68,7 @@
 						<ChevronDoubleRight width={24} height={24} aria-hidden={true} />
 					</button>
 
-					<h2 class="table-of-contents-title">Table of contents</h2>
+					<h2 class="table-of-contents-title">Contents</h2>
 					{@html tableOfContents}
 				</div>
 			{/if}
@@ -106,7 +106,7 @@
 		:global {
 			ul {
 				max-height: 400px;
-				padding: var(--spacing-4) var(--spacing-8);
+				padding: var(--spacing-4);
 				overflow-y: auto;
 				scrollbar-width: thin;
 			}
@@ -130,7 +130,6 @@
 	}
 
 	.table-of-contents-title {
-		font-size: var(--font-16);
-		text-transform: uppercase;
+		font-size: var(--font-24);
 	}
 </style>

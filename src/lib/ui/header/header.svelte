@@ -65,6 +65,10 @@
 			align-items: center;
 			gap: var(--spacing-8);
 
+			a {
+				text-box: trim-both cap alphabetic;
+			}
+
 			a::before {
 				content: none;
 			}
