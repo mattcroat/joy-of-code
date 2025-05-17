@@ -30,7 +30,6 @@
 <main>
 	<section class="hero">
 		<div class="latest-post">
-			<span class="kicker">Latest post</span>
 			<h1 class="title">{posts[0].title}</h1>
 			<p class="description">{posts[0].description}</p>
 			<a class="continue-reading" href={posts[0].slug}>
@@ -96,15 +95,9 @@
 			grid-column: column-start 2 / span 4;
 		}
 
-		.kicker {
-			font-weight: 500;
-			color: var(--clr-hero-txt);
-		}
-
 		.title {
 			padding: var(--spacing-16) 0 var(--spacing-8) 0;
 			font-size: clamp(var(--font-24), 4vw, 40px);
-			color: var(--clr-primary);
 		}
 
 		.description {
@@ -121,7 +114,7 @@
 
 		a {
 			display: flex;
-			gap: var(--spacing-16);
+			gap: var(--spacing-4);
 		}
 	}
 
@@ -137,5 +130,9 @@
 			font-size: var(--font-24);
 			line-height: 32px;
 		}
+	}
+
+	.latest {
+		font-weight: 700;
 	}
 </style>

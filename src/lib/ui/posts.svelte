@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition'
 	import type { Snippet } from 'svelte'
+	import { fade } from 'svelte/transition'
+
+	import { formatDate } from '$lib/utils'
 	import type { Post } from '$lib/types'
 
 	type Props = {
@@ -23,16 +25,15 @@
 					delay: i < 4 ? 100 * i : 100 * 4,
 				}}
 			>
-				<a href="/{post.slug}">
-					<article class="card">
-						<div class="details">
-							<span class="title" style:view-transition-name={post.slug}>
-								{post.title}
-							</span>
-							<p class="description">{post.description}</p>
+				<article class="card">
+					<a href="/{post.slug}">
+						<div class="title" style:view-transition-name={post.slug}>
+							{post.title}
 						</div>
-					</article>
-				</a>
+					</a>
+					<div class="published">Published {formatDate(post.published)}</div>
+					<p class="description">{post.description}</p>
+				</article>
 			</div>
 		{/each}
 	</div>
@@ -42,49 +43,18 @@
 
 <style>
 	section {
+		max-width: 960px;
+		margin-inline: auto;
 		margin-top: var(--spacing-64);
 	}
 
-	.cards {
-		display: grid;
-		gap: var(--spacing-32);
-		margin-top: var(--spacing-32);
-
-		@media (width >= 600px) {
-			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		}
+	.card {
+		padding-block: var(--spacing-32);
+		border-bottom: 1px solid var(--clr-menu-border);
 
 		a {
-			display: block;
-			color: inherit;
-			font-weight: inherit;
-			text-decoration: none;
-			transition: color 0.3s ease;
-
-			&::before {
-				content: none;
-			}
-		}
-	}
-
-	.card {
-		height: 400px;
-		padding: var(--spacing-32);
-		background-image: var(--clr-card-bg);
-		border-top: 1px solid var(--clr-menu-border);
-		border-left: 1px solid var(--clr-menu-border);
-		border-radius: var(--rounded-20);
-		box-shadow: var(--shadow-sm);
-		transition:
-			transform 0.2s ease-in-out,
-			box-shadow 0.3s ease,
-			outline 0.1s ease;
-
-		&:hover {
-			transform: scale(1.02);
-			box-shadow:
-				var(--shadow-md),
-				0 0 0 4px var(--clr-primary);
+			--color: #fff;
+			display: inline-block;
 		}
 
 		:global(html[data-font='dyslexic']) & .title {
@@ -94,7 +64,6 @@
 		}
 
 		.title {
-			width: fit-content;
 			font-family: var(--font-sans);
 			font-size: clamp(var(--font-24), 4vw, var(--font-32));
 			line-height: 40px;
@@ -102,18 +71,23 @@
 			text-wrap: balance;
 		}
 
+		.published {
+			font-size: var(--font-18);
+			color: var(--clr-card-txt);
+		}
+
 		.description {
+			max-width: 60ch;
 			margin-top: var(--spacing-16);
 			font-size: var(--font-20);
-			color: var(--clr-card-txt);
-			align-self: end;
+			/* color: var(--clr-card-txt); */
 		}
 	}
 
 	:global(a[href='/archive']) {
 		width: max-content;
 		display: flex;
-		gap: var(--spacing-16);
+		gap: var(--spacing-4);
 		margin-top: var(--spacing-32);
 	}
 </style>

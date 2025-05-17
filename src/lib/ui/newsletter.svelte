@@ -35,7 +35,7 @@
 		type="email"
 		id="email"
 		name="email"
-		placeholder="giga@chad.com"
+		placeholder="svelte@love.com"
 		autocomplete="on"
 	/>
 	<button type="submit">
@@ -83,6 +83,8 @@
 			border-radius: 0 var(--rounded-4) var(--rounded-4) 0;
 
 			span {
+				font-size: var(--font-16);
+				font-weight: 700;
 				text-box: trim-both cap alphabetic;
 			}
 
