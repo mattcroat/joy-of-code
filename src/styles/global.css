@@ -128,8 +128,10 @@ p {
 }
 
 a {
+	--color: var(--clr-link-txt);
+
 	position: relative;
-	color: var(--clr-link-txt);
+	color: var(--color);
 	text-decoration: none;
 	transition: color 0.3s ease;
 

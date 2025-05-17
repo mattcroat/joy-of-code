@@ -13,12 +13,14 @@
 		border-top: none;
 		border-bottom-left-radius: var(--rounded-20);
 		border-bottom-right-radius: var(--rounded-20);
+		box-shadow: var(--shadow-md);
 		overflow-x: auto;
 	}
 
 	code {
 		&:not(pre > code) {
 			padding: var(--spacing-4) var(--spacing-8);
+			font-size: var(--font-16);
 			color: var(--clr-code-inline-txt);
 			background-color: var(--clr-code-inline-bg);
 			border-radius: var(--rounded-4);

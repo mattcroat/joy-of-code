@@ -66,9 +66,9 @@
 				>
 					<button onclick={toggleSidebar} aria-label="Hide table of contents">
 						<ChevronDoubleRight width={24} height={24} aria-hidden={true} />
+						<h2 class="table-of-contents-title">Sections</h2>
 					</button>
 
-					<h2 class="table-of-contents-title">Contents</h2>
 					{@html tableOfContents}
 				</div>
 			{/if}
@@ -78,7 +78,7 @@
 
 <style>
 	aside {
-		max-width: 280px;
+		max-width: 400px;
 		position: fixed;
 		top: 50%;
 		right: 8px;
@@ -101,6 +101,9 @@
 
 		button {
 			padding-block: var(--spacing-8);
+			display: flex;
+			align-items: center;
+			gap: var(--spacing-4);
 		}
 
 		:global {
@@ -112,8 +115,12 @@
 			}
 
 			li {
-				margin-top: var(--spacing-8);
-				font-weight: 400;
+				padding-block: var(--spacing-16);
+				font-size: var(--font-18);
+
+				&:not(:last-of-type) {
+					border-bottom: 0.5px solid var(--clr-menu-border);
+				}
 			}
 
 			a {
@@ -127,9 +134,23 @@
 				}
 			}
 		}
+
+		.table-of-contents-title {
+			font-size: var(--font-24);
+		}
 	}
 
-	.table-of-contents-title {
-		font-size: var(--font-24);
+	:global {
+		[data-theme='🌛 Night'] .table-of-contents a {
+			--color: hsl(0 0% 80%);
+		}
+
+		[data-theme='☀️ Daylight'] .table-of-contents a {
+			--color: hsl(0 0% 40%);
+		}
+
+		[data-theme='🧠 Night Mind'] .table-of-contents a {
+			--color: hsl(280 20% 80%);
+		}
 	}
 </style>

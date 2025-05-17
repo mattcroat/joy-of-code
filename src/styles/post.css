@@ -31,6 +31,19 @@
 		color: var(--clr-primary);
 	}
 
+	#table-of-contents,
+	#table-of-contents + ul {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
+
 	/* no one has to know 🤫 */
 	#table-of-contents + ul a {
 		text-decoration: none;
