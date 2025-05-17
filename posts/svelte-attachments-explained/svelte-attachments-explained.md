@@ -316,7 +316,7 @@ That's it! Let's recap:
 <Component {@attach fn} />
 ```
 
-I didn't show every example, but you can [read the docs](<[@attach](https://svelte.dev/docs/svelte/@attach)>) to learn more, like how to create attachments programmatically.
+I didn't show every example, but you can [read the docs](https://svelte.dev/docs/svelte/@attach) to learn more, like how to create attachments programmatically.
 
 If you need ideas, how about an attachment for links that opens an `<iframe>` with the preview on hover, or an attachment that tracks the cursor position inside an element?
 
