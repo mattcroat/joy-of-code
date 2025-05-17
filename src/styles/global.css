@@ -24,7 +24,7 @@
 
 	/* post */
 	--post-txt-size: 20px;
-	--post-txt-length: 70ch;
+	--post-txt-length: 60ch;
 	--post-txt-height: 32px;
 
 	/* scrollbar */
@@ -109,12 +109,13 @@ h2 {
 
 h1 {
 	font-size: clamp(var(--font-32), 4vw, var(--font-48));
+	font-weight: 700;
 	line-height: clamp(32px, 6vw, 40px);
 	text-wrap: balance;
 }
 
 h2 {
-	font-size: clamp(var(--font-24), 4vw, var(--font-32));
+	font-size: clamp(var(--font-24), 4vw, var(--font-48));
 }
 
 h3 {
