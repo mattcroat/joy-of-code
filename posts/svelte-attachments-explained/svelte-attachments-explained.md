@@ -305,9 +305,7 @@ These are just functions, so you can do whatever you want in theory. Here I crea
 <button onclick={() => play()}>Play</button>
 ```
 
-This is very cool for something like a UI library where you want to easily add some behaviour to elements.
-
-One idea I want to try out involves an attachment that animates UI changes using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API).
+This is very cool for something like a UI library where you want to easily add some behaviour to elements. One idea I want to try out involves an attachment that animates UI changes using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API).
 
 I was also thinking if you could use Svelte attachments to create an animation timeline with GSAP?
 
