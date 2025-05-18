@@ -224,9 +224,9 @@ You can have multiple attachments. In this example we're using the `Draggable` p
 >
 ```
 
-Attachments are part of the template tracking context. This means if you read a reactive value inside the attachment, it's going to rerun each time the value changes (you can use a nested `$effect` if you don't want that):
+Attachments are part of the template tracking context. This means if you read a reactive value inside the attachment, it's going to rerun each time the value changes (you can use a nested `$effect` to only rerun that):
 
-```app.svelte
+```svelte:app.svelte
 <script>
   let value = $state(0)
 	setInterval(() => value++, 1000)
