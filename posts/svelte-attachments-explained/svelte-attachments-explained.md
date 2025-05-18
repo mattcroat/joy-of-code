@@ -16,7 +16,9 @@ Svelte released a new [@attach](https://svelte.dev/docs/svelte/@attach) feature 
 
 I like to think of them as `onMount` functions for elements, and in this post I'm going to show you why you would use them.
 
-A common use for lifecycle functions is integrating a third-party JavaScript library, so I'm going to use the JavaScript animation library [GSAP](https://gsap.com/) in the examples. You can try the examples in the [Svelte playground](https://svelte.dev/playground).
+A common use for lifecycle functions is integrating a third-party JavaScript library, so I'm going to use the JavaScript animation library [GSAP](https://gsap.com/) in the examples.
+
+You can try the examples in the [Svelte playground](https://svelte.dev/playground).
 
 Let's start by creating a box:
 
@@ -37,7 +39,7 @@ Let's start by creating a box:
 </style>
 ```
 
-To box element is not yet created in the DOM, so we have to pass a callback to the `onMount` component lifecycle function which will be called when the element is created.
+To box element doesn't exist yet in the DOM, so we have to pass a callback to the `onMount` component lifecycle function which runs after the element is created.
 
 Then we can query the element and animate it using GSAP:
 
@@ -92,9 +94,7 @@ You can also use an `$effect` to animate the element. Effects run after the comp
 <div bind:this={box} class="box"></div>
 ```
 
-Effects aren't a component-level lifecycle function like `onMount` and they rerun each time the value changes.
-
-This is just so you know what methods are available to you. To be honest, I use `$effect` most of the time, because I know how it works.
+Using `$effect` isn't the same as `onMount` even if they look similar. Effects and their cleanup function rerun each time the value updates. This is just so you know what methods are available to you. To be honest, I use `$effect` most of the time, because I know how it works.
 
 ## Svelte Actions (Element-Level Lifecycle Functions)
 
@@ -147,7 +147,7 @@ Let's look at how the `@attach` feature solves these problems.
 
 A Svelte attachment is also just a normal JavaScript function that runs when then element is created, and optionally runs a cleanup function when it's removed.
 
-This example creates a `to` function, and then uses it with the `@attach` directive:
+This example creates a `banana` function to show the naming is not important, and then uses it with the `@attach` directive:
 
 ```svelte:app.svelte
 <script>
@@ -160,7 +160,7 @@ This example creates a `to` function, and then uses it with the `@attach` direct
 <div {@attach banana}></div>
 ```
 
-You can use **inline attachments** if you want a quick reference to an element, avoiding the entire ceremony around creating a function:
+You can use **inline attachments** for a quick reference to an element, avoiding the entire ceremony around creating a function:
 
 ```svelte:app.svelte
 <div {@attach (element) => console.log(element)}>
@@ -196,7 +196,7 @@ If you want to pass your own arguments like `options`, you can return the attach
 <div {@attach to({ rotation: 360, duration: 2 })} class="box"></div>
 ```
 
-> 🧠 This pattern is also called a thunk. A thunk is a function that delays some work until it's needed, rather than performing it immediately.
+> 🐿️ This pattern is also called a thunk. A thunk is a function that delays some work until it's needed, rather than performing it immediately.
 
 You can also have multiple attachments. In this example we're using the `Draggable` plugin from GSAP to make the box draggable:
 
@@ -222,7 +222,9 @@ You can also have multiple attachments. In this example we're using the `Draggab
 >
 ```
 
-Passing reactive state also just works. You don't have to wrap the reactive value, because attachments are part of the template tracking context.
+Passing reactive state also just works. You don't have to wrap the reactive value in the attachment, because attachments are part of the template tracking context.
+
+> 🐿️ You can't just pass a reactive value `let value = $state(0)` to a function `fn(value)`. You're only passing the value `get(value)`. You have to either wrap the value using a function `() => value`, using a Proxy `$state({ current: 0 })`, or creating a wrapper like `let value = box(value)` that returns `value.current`.
 
 This means if you're reading a reactive value inside the attachment, it's going to rerun each time the value changes.
 
@@ -254,9 +256,7 @@ Let's use the `ScrambleTextPlugin` from GSAP to create a `scramble` function tha
 <div {@attach scramble(text)}></div>
 ```
 
-Keep in mind these are just functions, so you can do whatever you want in theory.
-
-Here I created a typed `createAnimation` function which returns a `to` attachment with the GSAP animation, and a `play` function to play the animation:
+These are just functions, so you can do whatever you want in theory. Here I created a typed `createAnimation` function which returns a `to` attachment with the GSAP animation, and a `play` function to play the animation:
 
 ```svelte:app.svelte
 <script lang="ts">
@@ -291,6 +291,61 @@ Here I created a typed `createAnimation` function which returns a `to` attachmen
 
 This is very cool for something like a UI library where you want to easily add some behaviour to elements. One idea I want to try out involves an attachment that animates UI changes using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API).
 
+I was also thinking if you could use Svelte attachments to create an animation timeline with GSAP?
+
+```svelte:app.svelte
+<script>
+  import { gsap } from 'gsap'
+
+  function createTimeline(options) {
+    let timeline = gsap.timeline({ paused: true, ...options })
+		let position = $state(0)
+
+		$effect(() => {
+			timeline.seek(position)
+		})
+
+		timeline.eventCallback('onUpdate', () => {
+	    position = timeline.time()
+	  })
+
+    return {
+      add(options) {
+        return (element) => {
+          timeline.to(element, options)
+        }
+      },
+      get controls() { return timeline },
+			get position() { return position },
+			set position(v) { position = v },
+    }
+  }
+
+  const timeline = createTimeline()
+</script>
+
+<div {@attach timeline.add({ x: 400, background: 'magenta', duration: 1 })}></div>
+<div {@attach timeline.add({ x: 400, background: 'yellow', duration: 2 })}></div>
+<div {@attach timeline.add({ x: 400, background: 'white', duration: 1 })}></div>
+
+<button onclick={() => timeline.controls.play()}>Play</button>
+
+<label>
+	<input type="range" bind:value={timeline.position} min={0} max={4} step={0.1} />
+	{timeline.position.toFixed(1)}s
+</label>
+
+<style>
+	div {
+		width: 100px;
+		aspect-ratio: 1;
+		margin-block-end: 0.5rem;
+		background: aqua;
+		border-radius: 8px;
+	}
+</style>
+```
+
 That's it! Let's recap:
 
 ```svelte:attachments
@@ -318,6 +373,6 @@ That's it! Let's recap:
 
 I didn't show every example, but you can [read the docs](https://svelte.dev/docs/svelte/@attach) to learn more, like how to create attachments programmatically.
 
-If you need ideas, how about an attachment for links that opens an `<iframe>` with the preview on hover, or an attachment that tracks the cursor position inside an element?
+If you need ideas, how about a link attachment that opens an `<iframe>` with the preview on hover, or an attachment that tracks the cursor position inside an element?
 
-I hope you stay inspired.
+Stay inspired! 😄
