@@ -41,6 +41,7 @@
 		"flexsearch": "^0.7.43",
 		"gray-matter": "^4.0.3",
 		"lite-youtube-embed": "^0.3.0",
+		"posthog-js": "^1.242.2",
 		"rehype-autolink-headings": "^7.1.0",
 		"rehype-code-titles": "^1.2.0",
 		"rehype-slug": "^6.0.0",

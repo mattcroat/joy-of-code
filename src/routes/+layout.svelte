@@ -4,10 +4,12 @@
 	import Header from '$lib/ui/header/header.svelte'
 	import Footer from '$lib/ui/footer.svelte'
 	import LiteYouTubeEmbed from '$lib/embed/youtube.svelte'
+	import { useAnalytics } from '$lib/analytics'
 	import { setupViewTransition } from '$lib/utils'
 
 	import '../styles/styles.css'
 
+	useAnalytics()
 	setupViewTransition()
 
 	let { data, children } = $props()
