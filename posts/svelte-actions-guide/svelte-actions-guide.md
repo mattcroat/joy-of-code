@@ -12,6 +12,8 @@ category: svelte
 
 ## Svelte Actions
 
+> ⚠️ Svelte actions are now replaced by [attachments](https://joyofcode.xyz/svelte-attachments-explained). You can still use actions, but they are not recommended anymore and might be deprecated in the future.
+
 [Svelte actions](https://svelte.dev/docs/svelte-action) are just regular JavaScript functions that are called when an element is created, and give you a reference to the element itself, so you can attach any behavior to that element using regular JavaScript.
 
 {% embed src="https://stackblitz.com/github/joysofcode/svelte-actions?ctl=1&embed=1&file=src%2Froutes%2F%2Bpage.svelte&title=Svelte Actions Guide" title="Svelte Actions Guide" %}
