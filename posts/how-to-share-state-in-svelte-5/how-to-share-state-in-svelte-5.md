@@ -12,9 +12,9 @@ category: svelte
 
 ## Universal Reactivity
 
-[Svelte 5](https://svelte.dev/blog/svelte-5-is-alive) introduced a new universal system of reactivity named runes which means that you can use the same reactivity system inside and outside Svelte components as long as the file name includes the `.svelte` extension.
+In [Svelte 5](https://svelte.dev/blog/svelte-5-is-alive) you can use the same reactivity system (signals) inside and outside Svelte components thanks to the new [rune](https://svelte.dev/docs/svelte/what-are-runes) syntax.
 
-In this post I'm going to go over the different ways you can export and share reactive state in Svelte 5 using functions, classes and property accessors.
+In this post I'm going to go over the different ways you can export and share reactive state in Svelte 5 using **functions**, **classes** and **property accessors**.
 
 ## Global State
 
@@ -46,7 +46,7 @@ export let count = $state(0)
 </button>
 ```
 
-You might have expected this to work, but instead you get an error that says: **"Cannot assign to import."**
+You might expect this to work, but instead you get an error that says: **"Cannot assign to import."**
 
 This is because **Svelte doesn't change how JavaScript works** and [imported values can only be modified by the exporter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#imported_values_can_only_be_modified_by_the_exporter).
 
@@ -153,7 +153,7 @@ Using property accessors you can read and write to count using `counter.count` o
 </button>
 ```
 
-Of course, you would not export an object like this directly from the module but from a function instead:
+You can encapsulate your logic inside a function and initialize the counter inside the component:
 
 ```ts:counter.svelte.ts
 export function createCounter() {
@@ -169,8 +169,6 @@ export function createCounter() {
 }
 ```
 
-Then you would initialize the counter inside the component:
-
 ```svelte:+page.svelte
 <script lang="ts">
   import { createCounter } from './counter.svelte'
@@ -183,9 +181,16 @@ Then you would initialize the counter inside the component:
 </button>
 ```
 
+If you want to share state, you can define and export it from the module (this is also known as a **singleton** if you're using a class):
+
+```ts:counter.svelte.ts
+// ...
+export const counter = createCounter()
+```
+
 ## Destructuring Reactive Values
 
-You might want to destructure `count` and `increment` from `counter` but as you're going to see it won't work as expected when using property accessors:
+You might want to destructure `count` and `increment` from `counter`, but as you're going to see it won't work as expected when using property accessors:
 
 ```svelte:+page.svelte
 <script lang="ts">
@@ -199,9 +204,9 @@ You might want to destructure `count` and `increment` from `counter` but as you'
 </button>
 ```
 
-This is because when you destructure `count` you're going to get the value at the time it was created instead of the reactive value.
+When you destructure `count`, you're going to get the value at the time it was created instead of the reactive value.
 
-You can get around this by using proxied state to "wrap" the value or by returning a function:
+You can get around this by using **proxied** state to "wrap" the value or by returning a function:
 
 ```ts:counter.svelte.ts
 export function createCounterProxy() {
@@ -225,8 +230,8 @@ Which method you prefer is up to you:
 <script lang="ts">
   import { createCounterProxy, createCounterFunction } from './counter.svelte'
 
-  const { count, increment } = createCounterProxy()
-  const { count, setCount, increment } = createCounterFunction()
+  const { count } = createCounterProxy()
+  const { count, setCount } = createCounterFunction()
 </script>
 
 <button onclick={() => count.value++}>
@@ -252,7 +257,7 @@ export class Counter {
 }
 ```
 
-You can tuck the class inside a function if you want to hide the `new` keyword, but I'm just going to instantiate the class directly:
+You can tuck the class inside a function if you want to hide the `new` keyword, but I'm going to instantiate the class directly:
 
 ```svelte:+page.svelte
 <script lang="ts">
@@ -266,7 +271,7 @@ You can tuck the class inside a function if you want to hide the `new` keyword, 
 </button>
 ```
 
-Notice how you don't have to specify a getter and setter for `count` since Svelte does that for you unless you want to:
+Notice how you don't have to specify a getter and setter for `count`, since Svelte does that for you:
 
 ```ts:counter.svelte.ts
 export class Counter {
@@ -279,7 +284,7 @@ export class Counter {
 }
 ```
 
-If you're using TypeScript you can use type assertion to type a reactive value inside a class:
+If you're using TypeScript, you can use type assertion to type a reactive value inside a class:
 
 ```ts:example.svelte.ts
 export class Example {
@@ -289,7 +294,7 @@ export class Example {
 
 ## Doing Side Effects
 
-If you need to do a side effect like writing to local storage or updating the DOM you can use `$effect` to track when a value updates:
+If you need to do any side effects like writing to local storage or updating the DOM, you can use `$effect` to track when a value updates:
 
 ```ts:example.svelte.ts
 export function createCounter() {
@@ -313,7 +318,7 @@ export class Counter {
 }
 ```
 
-You should be careful when using functions and classes with effects inside a module outside a Svelte component because effects must have a parent effect for cleanup:
+Be careful when initializing functions and classes with effects outside the component initialization because effects must have a root effect for cleanup:
 
 ```ts:example.svelte.ts
 function createCounter() {
@@ -331,16 +336,18 @@ function createCounter() {
 const counter = createCounter()
 ```
 
-If you run into that problem you have to wrap the effect with a [root effect](https://svelte.dev/docs/svelte/$effect#$effect.root):
+It's discouraged, but you can create a [root effect](https://svelte.dev/docs/svelte/$effect#$effect.root) using the `$effect.root` rune:
 
 ```ts:example.svelte.ts
 function createCounter() {
   count = $state({ value: 0 })
 
-  $effect.root(() => {
+  // manual cleanup
+  const cleanup = $effect.root(() => {
     $effect(() => {
       console.log(count.value)
     })
+    return () => /* ... */
   })
 
   return { count }
@@ -350,7 +357,7 @@ function createCounter() {
 const counter = createCounter()
 ```
 
-You can avoid this problem and do side effects when you read and write to the reactive value:
+The proper way is doing side effects when you read and write to a reactive value:
 
 ```ts:example.svelte.ts
 export class Counter {
@@ -368,9 +375,11 @@ export class Counter {
 }
 ```
 
+Svelte even has a special [createSubscriber](https://svelte.dev/docs/svelte/svelte-reactivity#createSubscriber) API for easily making third-party library and browser APIs reactive.
+
 ## Shared State On The Server
 
-If you're using SvelteKit and SSR (server-side rendering) [avoid side-effects in load](https://svelte.dev/docs/kit/state-management#No-side-effects-in-load) like using shared state to update a value in your components because it could be shared by your users:
+If you're using SvelteKit and server-side rendering (SSR), you should [avoid side effects in load](https://svelte.dev/docs/kit/state-management#No-side-effects-in-load) since your users could share the data:
 
 ```ts:+layout.ts
 import { state } from '$lib/state'
@@ -423,6 +432,6 @@ You can spread `data.user` to create a reactive `user` object that can be passed
 <p>Welcome {user.name}</p>
 ```
 
-That's it! 🎉
+This should give you enough knowledge on how to share state in Svelte, but I encourage you try things out and see how they work for you. I'll update this post, as more patterns emerge.
 
-I hope this was helpful and you learned something new about Svelte 5.
+Thanks for reading! 😄
