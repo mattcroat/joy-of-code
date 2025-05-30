@@ -53,7 +53,7 @@
 		border-bottom: 1px solid var(--clr-menu-border);
 
 		a {
-			--color: #fff;
+			--color: inherit;
 			display: inline-block;
 		}
 
@@ -64,7 +64,7 @@
 		}
 
 		.title {
-			font-family: var(--font-sans);
+			font-family: var(--font-serif);
 			font-size: clamp(var(--font-24), 4vw, var(--font-32));
 			line-height: 40px;
 			text-transform: capitalize;
@@ -72,6 +72,7 @@
 		}
 
 		.published {
+			margin-block-start: var(--spacing-4);
 			font-size: var(--font-18);
 			color: var(--clr-card-txt);
 		}
@@ -80,7 +81,7 @@
 			max-width: 60ch;
 			margin-top: var(--spacing-16);
 			font-size: var(--font-20);
-			/* color: var(--clr-card-txt); */
+			color: var(--clr-card-txt);
 		}
 	}
 

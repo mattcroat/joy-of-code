@@ -1,7 +1,8 @@
 :root {
 	/* font */
 	--font-sans: 'Atkinson Hyperlegible', sans-serif;
-	--font-mono: 'JetBrains Mono', monospace;
+	--font-serif: 'DM Serif', serif;
+	--font-mono: 'Monaspace Neon', monospace;
 	--font-dyslexic: 'OpenDyslexic', sans-serif;
 	--font-dyslexic-mono: 'OpenDyslexic Mono', monospace;
 
@@ -103,13 +104,12 @@ h3 {
 
 h1,
 h2 {
-	font-family: var(--font-sans);
+	font-family: var(--font-serif);
 	text-transform: capitalize;
 }
 
 h1 {
 	font-size: clamp(var(--font-32), 4vw, var(--font-48));
-	font-weight: 700;
 	line-height: clamp(32px, 6vw, 40px);
 	text-wrap: balance;
 }

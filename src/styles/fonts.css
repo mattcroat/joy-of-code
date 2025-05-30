@@ -3,7 +3,7 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/atkinson-hyperlegible/Atkinson-Hyperlegible-Regular.woff2')
+	src: url('/fonts/atkinson-hyperlegible/atkinson-hyperlegible-400.woff2')
 		format('woff2');
 }
 
@@ -12,7 +12,7 @@
 	font-style: italic;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/atkinson-hyperlegible/Atkinson-Hyperlegible-Italic.woff2')
+	src: url('/fonts/atkinson-hyperlegible/atkinson-hyperlegible-400i.woff2')
 		format('woff2');
 }
 
@@ -21,7 +21,7 @@
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
-	src: url('/fonts/atkinson-hyperlegible/Atkinson-Hyperlegible-Bold.woff2')
+	src: url('/fonts/atkinson-hyperlegible/atkinson-hyperlegible-700.woff2')
 		format('woff2');
 }
 
@@ -30,48 +30,32 @@
 	font-style: italic;
 	font-weight: 700;
 	font-display: swap;
-	src: url('/fonts/atkinson-hyperlegible/Atkinson-Hyperlegible-BoldItalic.woff2')
+	src: url('/fonts/atkinson-hyperlegible/atkinson-hyperlegible-700i.woff2')
 		format('woff2');
 }
 
 @font-face {
-	font-family: 'Poppins';
+	font-family: 'DM Serif';
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/poppins/Poppins-Regular.woff2') format('woff2');
+	src: url('/fonts/dm-serif/dm-serif-400.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: url('/fonts/poppins/Poppins-Medium.woff2') format('woff2');
-}
-
-@font-face {
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 700;
-	font-display: swap;
-	src: url('/fonts/poppins/Poppins-Bold.woff2') format('woff2');
-}
-
-@font-face {
-	font-family: 'JetBrains Mono';
+	font-family: 'Monaspace Neon';
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2');
+	src: url('/fonts/monaspace-neon/monaspace-neon-400.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: 'JetBrains Mono';
+	font-family: 'Monaspace Neon';
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
-	src: url('/fonts/jetbrains-mono/JetBrainsMono-Bold.woff2') format('woff2');
+	src: url('/fonts/monaspace-neon/monaspace-neon-700.woff2') format('woff2');
 }
 
 @font-face {
@@ -79,7 +63,7 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/openDyslexic/OpenDyslexic-Regular.woff2') format('woff2');
+	src: url('/fonts/openDyslexic/openDyslexic-400.woff2') format('woff2');
 }
 
 @font-face {
@@ -87,7 +71,7 @@
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
-	src: url('/fonts/openDyslexic/OpenDyslexic-Bold.woff2') format('woff2');
+	src: url('/fonts/openDyslexic/openDyslexic-700.woff2') format('woff2');
 }
 
 @font-face {
@@ -95,5 +79,5 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/openDyslexic/OpenDyslexicMono-Regular.woff2') format('woff2');
+	src: url('/fonts/openDyslexic/openDyslexicMono-400.woff2') format('woff2');
 }
