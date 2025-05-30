@@ -4,17 +4,6 @@
 </script>
 
 <footer>
-	<div class="categories">
-		<p>Categories</p>
-		<ul>
-			{#each Object.entries(config.categories) as [slug, category]}
-				<li>
-					<a href="/categories/{slug}">{category}</a>
-				</li>
-			{/each}
-		</ul>
-	</div>
-
 	<div class="follow">
 		<p>Follow</p>
 		<ul>
@@ -79,6 +68,7 @@
 		@media (width >= 600px) {
 			--gap: var(--spacing-128);
 			flex-direction: row;
+			padding-inline: var(--spacing-128);
 		}
 
 		p {
