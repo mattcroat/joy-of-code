@@ -50,6 +50,7 @@
 		font-weight: inherit;
 	}
 
+	a,
 	p > a,
 	li > a {
 		text-decoration: underline;
