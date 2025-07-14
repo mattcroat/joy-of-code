@@ -12,6 +12,8 @@ category: svelte
 
 ## Learning Svelte
 
+{% warning text="This is an outdated guide for an older version of Svelte I decided to leave up for reference. You can <a href='https://joyofcode.xyz/svelte-5-for-beginners'>read the updated Svelte 5 version</a> here." %}
+
 The best way to learn Svelte is to go through the [Svelte tutorial](https://learn.svelte.dev/) which is great but also contains information overload if you just want to get started writing Svelte. I'm going to show you everything you should know for the majority of things you're going to build.
 
 I'm not going to assume your knowledge and try to explain everything along the way so if you're new to JavaScript frameworks or Svelte you should learn a lot.
