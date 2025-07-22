@@ -1,7 +1,7 @@
 .prose {
 	code[class*='shiki'],
 	pre[class*='shiki'] {
-		font-size: var(--font-18);
+		font-size: var(--font-16);
 		tab-size: 2;
 	}
 

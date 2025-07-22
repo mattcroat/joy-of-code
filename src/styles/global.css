@@ -139,7 +139,7 @@ a {
 		color: var(--clr-primary);
 
 		&::before {
-			transform: scaleX(1);
+			/* transform: scaleX(1); */
 		}
 	}
 

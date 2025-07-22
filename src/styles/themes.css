@@ -61,13 +61,13 @@ html[data-theme='🌛 Night'] {
 	--post-blockquote-border: hsl(173 10% 10%);
 
 	--clr-code-bg: linear-gradient(hsl(226, 19%, 13%), hsl(226, 19%, 16%));
-	--clr-code-title: hsl(226, 19%, 80%);
-	--clr-code-title-bg: hsl(226, 19%, 13%);
-	--clr-code-border: hsl(226, 19%, 16%);
-	--clr-code-line-number: hsl(226, 19%, 40%);
-	--clr-code-line-highlight: hsl(226, 19%, 18%);
-	--clr-code-inline-txt: hsl(173 100% 94%);
-	--clr-code-inline-bg: hsl(173 60% 4%);
+	--clr-code-title: hsl(226 19% 80%);
+	--clr-code-title-bg: hsl(226 19% 13%);
+	--clr-code-border: hsl(226 19% 16%);
+	--clr-code-line-number: hsl(226 19% 40%);
+	--clr-code-line-highlight: hsl(226 19% 18%);
+	--clr-code-inline-txt: hsl(170 100% 80%);
+	--clr-code-inline-bg: hsl(170 100% 8%);
 
 	/* search */
 	--clr-search-bg: hsl(216 7% 14%);
@@ -132,12 +132,12 @@ html[data-theme='☀️ Daylight'] {
 	--post-blockquote-bg: hsl(0 0% 98%);
 	--post-blockquote-border: hsl(0 0% 84%);
 
-	--clr-code-bg: linear-gradient(hsl(226, 19%, 13%), hsl(226, 19%, 16%));
-	--clr-code-title: hsl(226, 19%, 80%);
-	--clr-code-title-bg: hsl(226, 19%, 13%);
-	--clr-code-border: hsl(226, 19%, 16%);
-	--clr-code-line-number: hsl(226, 19%, 40%);
-	--clr-code-line-highlight: hsl(226, 19%, 18%);
+	--clr-code-bg: linear-gradient(hsl(226 19% 13%), hsl(226 19% 16%));
+	--clr-code-title: hsl(226 19% 80%);
+	--clr-code-title-bg: hsl(226 19% 13%);
+	--clr-code-border: hsl(226 19% 16%);
+	--clr-code-line-number: hsl(226 19% 40%);
+	--clr-code-line-highlight: hsl(226 19% 18%);
 	--clr-code-inline-txt: hsl(173 100% 94%);
 	--clr-code-inline-bg: hsl(173 60% 4%);
 

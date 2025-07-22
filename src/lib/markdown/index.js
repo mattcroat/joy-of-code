@@ -17,7 +17,11 @@ const images = `https://raw.githubusercontent.com/mattcroat/joy-of-code/main/pos
 
 const markdownProcessor = unified()
 	.use(toMarkdownAST)
-	.use([remarkGfm, remarkSmartypants, [remarkTableofContents, { tight: true }]])
+	.use([
+		remarkGfm,
+		remarkSmartypants,
+		[remarkTableofContents, { maxDepth: 2, tight: true }],
+	])
 	.use(toHtmlAST, { allowDangerousHtml: true })
 	.use([rehypeSlug, rehypeAutolinkHeadings])
 	.use(rehypeCodeTitles)

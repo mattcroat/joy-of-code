@@ -31,6 +31,32 @@
 		color: var(--clr-primary);
 	}
 
+	h3 {
+		margin-bottom: var(--spacing-16);
+		font-size: var(--font-32);
+		font-family: var(--font-serif);
+		color: var(--clr-primary);
+	}
+
+	a {
+		.icon-link::before {
+			--left: -32px;
+
+			content: '#';
+			position: absolute;
+			left: var(--left);
+			color: var(--clr-primary);
+		}
+
+		&:has(> .icon-link)::before:hover {
+			transform: none;
+		}
+	}
+
+	h3 .icon-link::before {
+		--left: -24px;
+	}
+
 	#table-of-contents,
 	#table-of-contents + ul {
 		position: absolute;
