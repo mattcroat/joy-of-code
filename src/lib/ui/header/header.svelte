@@ -20,9 +20,9 @@
 		</div>
 
 		<Search />
+		<Socials />
 
 		<nav>
-			<Socials />
 			<Preferences />
 			<Menu />
 		</nav>
@@ -76,7 +76,7 @@
 
 		nav {
 			display: flex;
-			gap: var(--spacing-16);
+			gap: var(--spacing-8);
 		}
 	}
 </style>

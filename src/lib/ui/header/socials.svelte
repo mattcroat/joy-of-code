@@ -11,7 +11,7 @@
 		<X width={24} height={24} aria-label="Twitter" />
 	</a>
 	<a href={config.bluesky} target="_blank" rel="noreferrer">
-		<Bluesky width={24} height={24} aria-label="Bluesky" />
+		<Bluesky width={20} height={20} aria-label="Bluesky" />
 	</a>
 	<a href="/rss.xml" target="_blank">
 		<RSS width={24} height={24} aria-label="RSS feed" />
