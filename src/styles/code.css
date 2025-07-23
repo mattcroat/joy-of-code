@@ -6,6 +6,7 @@
 	}
 
 	pre {
+		max-height: 800px;
 		padding-block: var(--spacing-16);
 		line-height: var(--post-txt-height);
 		background-image: var(--clr-code-bg);
@@ -26,7 +27,7 @@
 			border-radius: var(--rounded-4);
 		}
 
-		.line:not(:last-of-type) {
+		.line {
 			display: inline-block;
 			padding-inline: var(--spacing-24);
 		}
@@ -38,6 +39,21 @@
 
 		span {
 			font-style: normal !important;
+		}
+	}
+
+	code {
+		counter-reset: step;
+		counter-increment: step 0;
+
+		.line::before {
+			content: counter(step);
+			counter-increment: step;
+			display: inline-block;
+			width: 1rem;
+			margin-right: 4rem;
+			text-align: right;
+			opacity: 0.4;
 		}
 	}
 
