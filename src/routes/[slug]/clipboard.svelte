@@ -14,11 +14,6 @@
 	}
 
 	$effect(() => {
-		// fixes "noninteractive element cannot have nonnegative tabIndex value" warning
-		// document
-		// 	.querySelectorAll('.shiki')
-		// 	.forEach((code) => code.removeAttribute('tabindex'))
-
 		const copyBtnEl = document.querySelectorAll('.copy')
 
 		copyBtnEl.forEach((btn) => {

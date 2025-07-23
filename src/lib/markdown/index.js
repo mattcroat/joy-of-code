@@ -25,10 +25,17 @@ const markdownProcessor = unified()
 	.use(toHtmlAST, { allowDangerousHtml: true })
 	.use([rehypeSlug, rehypeAutolinkHeadings])
 	.use(rehypeCodeTitles)
-	// @ts-ignore
 	.use(rehypeShiki, {
 		theme: 'poimandres',
-		transformers: [transformerMetaHighlight()],
+		transformers: [
+			{
+				pre(node) {
+					// remove `tabindex` from `pre` elements to avoid warnings
+					node.properties.tabindex && delete node.properties.tabindex
+				},
+			},
+			transformerMetaHighlight(),
+		],
 	})
 	.use(rehypeCopyCode)
 	.use(toHtmlString, { allowDangerousHtml: true })
@@ -160,7 +167,7 @@ function escapeHtml(content) {
 function frontmatter(content) {
 	const { content: markdown, data } = matter(content)
 	const meta = `
-		<script context="module">
+		<script module>
 			export const metadata = ${JSON.stringify(data)}
 		</script>
 	`
