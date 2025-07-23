@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RSS, X, YouTube } from '$lib/icons'
+	import { Bluesky, RSS, X, YouTube } from '$lib/icons'
 	import * as config from '$lib/site/config'
 </script>
 
@@ -9,6 +9,9 @@
 	</a>
 	<a href={config.twitter} target="_blank" rel="noreferrer">
 		<X width={24} height={24} aria-label="Twitter" />
+	</a>
+	<a href={config.bluesky} target="_blank" rel="noreferrer">
+		<Bluesky width={24} height={24} aria-label="Bluesky" />
 	</a>
 	<a href="/rss.xml" target="_blank">
 		<RSS width={24} height={24} aria-label="RSS feed" />

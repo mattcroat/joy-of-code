@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GitHub, Mail, RSS, X, YouTube } from '$lib/icons'
+	import { Bluesky, Mail, RSS, X, YouTube } from '$lib/icons'
 	import * as config from '$lib/site/config'
 </script>
 
@@ -11,12 +11,6 @@
 				<a href="/newsletter">
 					<Mail width={20} height={20} aria-hidden={true} />
 					<span>Newsletter</span>
-				</a>
-			</li>
-			<li>
-				<a href="/rss.xml" target="_blank">
-					<RSS width={20} height={20} aria-hidden={true} />
-					<span>RSS</span>
 				</a>
 			</li>
 			<li>
@@ -32,9 +26,15 @@
 				</a>
 			</li>
 			<li>
-				<a href={config.github} target="_blank" rel="noreferrer">
-					<GitHub width={20} height={20} aria-hidden={true} />
-					<span>GitHub</span>
+				<a href={config.bluesky} target="_blank" rel="noreferrer">
+					<Bluesky width={20} height={20} aria-hidden={true} />
+					<span>Bluesky</span>
+				</a>
+			</li>
+			<li>
+				<a href="/rss.xml" target="_blank">
+					<RSS width={20} height={20} aria-hidden={true} />
+					<span>RSS</span>
 				</a>
 			</li>
 		</ul>

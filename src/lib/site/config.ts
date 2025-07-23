@@ -7,6 +7,7 @@ export const postImage = 'https://social-share-images.vercel.app/'
 
 export const twitterHandle = '@joyofcodedev'
 export const twitter = 'https://x.com/joyofcodedev'
+export const bluesky = 'https://bsky.app/profile/joyofcode.xyz'
 export const youtube = 'https://www.youtube.com/@joyofcodedev'
 export const github = 'https://github.com/mattcroat'
 export const uses = 'https://github.com/mattcroat/uses'

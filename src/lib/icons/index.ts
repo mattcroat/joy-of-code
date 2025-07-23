@@ -11,10 +11,12 @@ import Menu from './menu.svelte'
 import PencilSquare from './pencil-square.svelte'
 import RSS from './rss.svelte'
 import X from './x.svelte'
+import Bluesky from './bluesky.svelte'
 import YouTube from './youtube.svelte'
 
 export {
 	ArrowRight,
+	Bluesky,
 	ChevronDoubleLeft,
 	ChevronDoubleRight,
 	Cog,
