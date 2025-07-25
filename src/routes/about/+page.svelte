@@ -11,7 +11,7 @@
 <main>
 	<p>Hey! 👋</p>
 	<p>
-		I'm <b>Matija</b> from 🇭🇷 <b>Croatia</b> and I'm infinitely curious at how
+		I'm <b>Matia</b> from 🇭🇷 <b>Croatia</b> and I'm infinitely curious at how
 		things work but I'm mostly passionate about ☕
 		<b>JavaScript and</b>
 		🎨
@@ -34,7 +34,7 @@
 
 <style>
 	main {
-		max-width: 60ch;
+		max-width: 50ch;
 		margin-inline: auto;
 		display: grid;
 		row-gap: var(--spacing-32);
