@@ -1,43 +1,55 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
 	import { fly } from 'svelte/transition'
 	import { ChevronDoubleLeft, ChevronDoubleRight } from '$lib/icons'
 
-	let tableOfContents = $state('')
+	type TableOfContentsItem = {
+		active: boolean
+		title: string
+		href: string
+	}
+
+	const TABLE_OF_CONTENTS = '#table-of-contents + ul'
+
+	let tableOfContents = $state<TableOfContentsItem[]>([])
 	let showSidebar = $state(false)
 
-	const TOC = '#table-of-contents + ul'
+	onMount(() => {
+		const toc = document.querySelector(TABLE_OF_CONTENTS) as HTMLUListElement
+		if (!toc) return
 
-	function getTableOfContents() {
-		const tocEl = document.querySelector(TOC) as HTMLUListElement
-		if (tocEl) {
-			tableOfContents = tocEl.outerHTML
+		tableOfContents = [...toc.querySelectorAll('a')].map((a, i) => ({
+			title: a.textContent!,
+			href: a.getAttribute('href')!,
+			active: false,
+		}))
+
+		if (window.innerWidth >= 1440) {
+			const observer = new IntersectionObserver(([entry]) => {
+				showSidebar = entry.boundingClientRect.bottom < 0
+			})
+			observer.observe(toc)
+			return () => observer.unobserve(toc)
 		}
-	}
+	})
 
-	function openSidebar() {
-		const tocEl = document.querySelector(TOC) as HTMLUListElement
-		if (!tocEl) return
-
-		const observer = new IntersectionObserver(([entry]) => {
-			entry.boundingClientRect.bottom < 0
-				? (showSidebar = true)
-				: (showSidebar = false)
-		})
-		observer.observe(tocEl)
-
-		return () => {
-			observer.unobserve(tocEl)
-		}
-	}
-
-	$effect(() => {
-		getTableOfContents()
-
-		const isLargeScreen = window.innerWidth >= 1440
-
-		if (isLargeScreen) {
-			return openSidebar()
-		}
+	onMount(() => {
+		const headings = document.querySelectorAll('h2')
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					tableOfContents.forEach((i) => (i.active = false))
+					const title = entry.target.textContent
+					const index = tableOfContents.findIndex((i) => i.title === title)
+					if (index >= 0) tableOfContents[index].active = true
+				}
+			},
+			{
+				rootMargin: '0px 0px -90% 0px',
+			}
+		)
+		headings.forEach((heading) => observer.observe(heading))
+		return () => observer.disconnect()
 	})
 
 	function toggleSidebar() {
@@ -48,29 +60,33 @@
 {#if tableOfContents}
 	<aside>
 		<section>
-			{#if !showSidebar}
-				<button
-					onclick={toggleSidebar}
-					in:fly={{ x: '100%', duration: 300, delay: 300 }}
-					class="sidebar-toggle"
-					aria-label="Show table of contents"
-				>
-					<ChevronDoubleLeft width={24} height={24} aria-hidden={true} />
-				</button>
-			{/if}
-
 			{#if showSidebar}
 				<div
-					class="table-of-contents"
 					transition:fly={{ x: '100%', duration: 300 }}
+					class="table-of-contents"
 				>
 					<button onclick={toggleSidebar} aria-label="Hide table of contents">
 						<ChevronDoubleRight width={24} height={24} aria-hidden={true} />
 						<h2 class="table-of-contents-title">Sections</h2>
 					</button>
 
-					{@html tableOfContents}
+					<ul>
+						{#each tableOfContents as { active, title, href }}
+							<li>
+								<a {href} data-active={active}>{title}</a>
+							</li>
+						{/each}
+					</ul>
 				</div>
+			{:else}
+				<button
+					in:fly={{ x: '100%', duration: 300, delay: 300 }}
+					onclick={toggleSidebar}
+					class="sidebar-toggle"
+					aria-label="Show table of contents"
+				>
+					<ChevronDoubleLeft width={24} height={24} aria-hidden={true} />
+				</button>
 			{/if}
 		</section>
 	</aside>
@@ -106,38 +122,40 @@
 			gap: var(--spacing-4);
 		}
 
-		:global {
-			ul {
-				max-height: 400px;
-				padding: var(--spacing-4);
-				overflow-y: auto;
-				scrollbar-width: thin;
-			}
+		ul {
+			max-height: 400px;
+			padding: var(--spacing-4);
+			overflow-y: auto;
+			scrollbar-width: thin;
+		}
 
-			li {
-				padding-block: var(--spacing-16);
-				font-size: var(--font-18);
+		li {
+			padding-block: var(--spacing-16);
+			font-size: var(--font-18);
 
-				&:not(:last-of-type) {
-					border-bottom: 0.5px solid var(--clr-menu-border);
-				}
-			}
-
-			a {
-				display: inline-block;
-				font-weight: 400;
-
-				&::before {
-					all: unset;
-					counter-increment: section;
-					content: counter(section) '. ';
-				}
+			&:not(:last-of-type) {
+				border-bottom: 0.5px solid var(--clr-menu-border);
 			}
 		}
 
-		.table-of-contents-title {
-			font-size: var(--font-24);
+		a {
+			display: inline-block;
+			font-weight: 400;
+
+			&[data-active='true'] {
+				color: var(--clr-primary);
+			}
+
+			&::before {
+				all: unset;
+				counter-increment: section;
+				content: counter(section) '. ';
+			}
 		}
+	}
+
+	.table-of-contents-title {
+		font-size: var(--font-24);
 	}
 
 	:global {
