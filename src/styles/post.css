@@ -155,13 +155,28 @@
 	}
 
 	blockquote {
+		position: relative;
+		margin-block-end: var(--spacing-32);
 		padding: var(--spacing-32);
-		color: var(--post-blockquote-txt);
-		background-color: var(--post-blockquote-bg);
-		border: 1px solid var(--post-blockquote-border);
-		border-top: 4px solid var(--clr-primary);
+		background: none;
+		border: 4px solid var(--clr-primary);
 		border-radius: var(--rounded-20);
-		box-shadow: var(--shadow-sm);
+
+		&::before {
+			content: '“';
+			width: 48px;
+			height: 48px;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			translate: -50% -50%;
+			padding-top: 8px;
+			font-size: 48px;
+			text-align: center;
+			color: black;
+			background: var(--clr-primary);
+			border-radius: 50%;
+		}
 
 		p {
 			margin-bottom: 0;
@@ -178,8 +193,8 @@
 		margin-block-end: var(--spacing-32);
 		padding: var(--spacing-32);
 		background: none;
-		border: 4px solid var(--border-color, #fff);
-		border-radius: var(--rounded-20, #fff);
+		border: 4px solid var(--border-color);
+		border-radius: var(--rounded-20);
 
 		.icon {
 			width: 48px;
