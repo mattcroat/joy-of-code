@@ -92,25 +92,33 @@
 </div>
 
 <style>
-	.select {
-		:where(.trigger, .menu) {
-			background-color: var(--clr-primary);
-			color: var(--clr-theme-txt);
-			border-radius: var(--rounded-4);
-			box-shadow: var(--shadow-sm);
-		}
+	.trigger,
+	.menu {
+		background-color: var(--clr-primary);
+		color: var(--clr-theme-txt);
+		border-radius: var(--rounded-4);
+		box-shadow: var(--shadow-sm);
+	}
 
-		.trigger {
-			width: 180px;
-			padding: var(--spacing-16) var(--spacing-24);
-			font-weight: 700;
-		}
+	.trigger {
+		width: 180px;
+		padding: var(--spacing-16) var(--spacing-24);
+		font-weight: 700;
+	}
 
-		.menu {
-			display: grid;
-			gap: var(--spacing-24);
+	.menu {
+		display: grid;
+		overflow: hidden;
+		z-index: 1000;
+
+		> * {
 			padding: var(--spacing-16);
-			font-weight: 500;
+			transition: background 0.1s ease;
+
+			&:hover {
+				background-color: #fff;
+				cursor: pointer;
+			}
 		}
 	}
 </style>
