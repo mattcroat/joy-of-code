@@ -5,6 +5,7 @@ export async function load({ params: { slug } }) {
 		const module = await import(`../../../posts/${slug}/${slug}.md`)
 		return { component: module.default, frontmatter: module.metadata }
 	} catch (e) {
-		error(404, `Post does not exist`)
+		console.error(e)
+		throw new Error()
 	}
 }
