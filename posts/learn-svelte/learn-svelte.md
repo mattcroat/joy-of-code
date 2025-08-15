@@ -2463,7 +2463,7 @@ In reality, you don't have to do this. It makes more sense to move the `todo` st
 
 ```svelte:Todos.svelte
 <script lang="ts">
-	function addTodo(todo: Todo) {
+	function addTodo(todo: string) {
 		todos.push({
 			id: crypto.randomUUID(),
 			text: todo,
