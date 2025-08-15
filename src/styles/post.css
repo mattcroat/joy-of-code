@@ -94,7 +94,7 @@
 	}
 
 	@media (width >= 800px) {
-		& :where(iframe, video, img, pre, .rehype-code-title) {
+		& :where(iframe, video, img, pre, .rehype-code-title, .example) {
 			grid-column: gutter-start / gutter-end;
 		}
 	}

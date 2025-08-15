@@ -9,6 +9,7 @@ category: svelte
 <script lang="ts">
 	import Card from '$lib/components/card.svelte'
 	import YouTube from '$lib/components/youtube.svelte'
+	import Example from './examples/example-loader.svelte'
 </script>
 
 ## Table of Contents
@@ -55,13 +56,11 @@ function App($$anchor) {
 }
 ```
 
-In fact, Svelte's reactivity is just based on [signals](https://www.youtube.com/watch?v=1TSLEzNzGQM)! There's nothing magical about it. You could write a basic version of Svelte by hand without using a compiler.
-
-<!-- <YouTube id="1TSLEzNzGQM" title="Signals" /> -->
+Svelte's reactivity is based on [signals](https://www.youtube.com/watch?v=1TSLEzNzGQM), so there's nothing magical about it — you could write Svelte code without a compiler, but it would be tedious like writing [JSX](https://react.dev/learn/writing-markup-with-jsx) by hand using functions.
 
 Just by reading the output code, you can start to understand how Svelte works. There's no virtual DOM, or rerendering the component when state updates like in React — Svelte only updates the part of the DOM that changed.
 
-This is what "does minimal work in the browser" means!
+This is what **"does minimal work in the browser"** means!
 
 Svelte also has a more opinionated application framework called [SvelteKit](https://svelte.dev/docs/kit/introduction) (equivalent to [Next.js](https://nextjs.org/) for React) if you need routing, server-side rendering, adapters to deploy to different platforms and so on.
 
@@ -70,7 +69,7 @@ Svelte also has a more opinionated application framework called [SvelteKit](http
 You can try Svelte in the browser using the [Svelte Playground](https://svelte.dev/playground) and follow along without having to set up anything.
 
 <Card type="warning">
-	Some of the examples use browser APIs like <code>localStorage</code> that aren't supported in the Svelte Playground.
+	Some of the examples use browser APIs like the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" target="_blank">Web Storage API</a> that aren't supported in the Svelte Playground.
 </Card>
 
 If you're a creature of comfort and prefer your development environment, you can scaffold a Vite project and pick Svelte as the option from the CLI if you run `npm create vite@latest` in a terminal — you're going to need [Node.js](https://nodejs.org/) for that.
@@ -126,6 +125,8 @@ Here's an example of a Svelte component:
 </style>
 ```
 
+<Example name="single-file-component" />
+
 A Svelte component can only have one top-level `<script>` and `<style>` block and is unique for every component instance. A code formatter like Prettier might arrange the blocks for you, but **the order of the blocks doesn't matter**.
 
 There's also a special `<script module>` block used for sharing code across component instances we'll learn about later.
@@ -156,14 +157,16 @@ In Svelte, anything that's outside the `<script>` and `<style>` blocks is consid
 You can use JavaScript expressions in the template using curly braces and Svelte is going to evalute it:
 
 ```svelte:App.svelte
-<script>
+<script lang="ts">
 	let banana = 1
 </script>
 
 <p>There's {banana} {banana === 1 ? 'banana' : 'bananas'} left</p>
 ```
 
-Later we're going to learn about logic blocks like `if` and `each` to conditionally render content.
+<Example name="expressions" />
+
+Later we're going to learn about logic blocks like `{#if ...}` and `{#each ...}` to conditionally render content.
 
 Tags with lowercase names are treated like regular HTML elements by Svelte and accept normal attributes:
 
@@ -181,6 +184,8 @@ You can pass values to attributes using curly braces:
 
 <img src={src} alt={alt} />
 ```
+
+<Example name="attributes" />
 
 If the attribute name and value are the same, you can use a shorthand attribute:
 
@@ -204,7 +209,7 @@ Attributes can have expressions inside the curly braces:
 <img {src} {alt} loading={lazy ? 'lazy' : 'eager'} />
 ```
 
-If you want to conditionally render attributes, don't use `&&` for short-circuit evaluation or empty strings. Instead, use `null` or `undefined` as the value:
+Don't use `&&` for short-circuit evaluation, or empty strings to conditionally render attributes. Instead, use `null` or `undefined` as the value:
 
 ```svelte:App.svelte
 <script lang="ts">
@@ -213,11 +218,11 @@ If you want to conditionally render attributes, don't use `&&` for short-circuit
 	let lazy = false
 </script>
 
-<!-- ⛔️ -->
+<!-- ⛔️ orphan attributes -->
 <img {src} {alt} loading={lazy && 'lazy'} />
 <img {src} {alt} loading={lazy ? 'lazy' : ''} />
 
-<!-- 👍 -->
+<!-- 👍 works as intended -->
 <img {src} {alt} loading={lazy ? 'lazy' : null} />
 <img {src} {alt} loading={lazy ? 'lazy' : undefined} />
 ```
@@ -490,7 +495,7 @@ If you're using Tailwind, this is very useful when you need to apply a bunch of 
 <div class={['transition-transform', { '-rotate-90': open }]}>👈️</div>
 ```
 
-You can also use [data attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes) to make the transition state more explicit, instead of using a bunch of classes:
+Also consider using [data attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes) for explicit transition states for easier orchestration, instead of using a bunch of classes:
 
 ```svelte:App.svelte {2,5,12-14,16-18}
 <script lang="ts">
@@ -516,8 +521,6 @@ You can also use [data attributes](https://developer.mozilla.org/en-US/docs/Web/
 ```
 
 ## Svelte Reactivity
-
-What is state?
 
 In the context of JavaScript frameworks, **application state** refers to values that are essential to your application working and cause the framework to update the UI when changed.
 
@@ -554,17 +557,19 @@ The `$state` rune marks a variable as reactive. Svelte's reactivity is based on 
 
 <!-- reactive assignment -->
 <button onclick={() => count += 1}>
-	{count}
+	Count: {count}
 </button>
 ```
+
+<Example name="counter" />
 
 You can open the developer tools and see that Svelte only updated the part of the DOM that changed.
 
 <Card type="info">
-	I used <code>count += 1</code> to emphasize assignment, but you can use <code>count++</code> to increment the value.
+	The example uses <code>count += 1</code> to emphasize assignment, but using <code>count++</code> to increment the value also works.
 </Card>
 
-The `$state(...)` syntax is called a **rune** and is part of the language. It looks like a function, but it's only a hint to Svelte what to do with it. This means as far as TypeScript is concerned, it's just a function:
+The `$state(...)` syntax is called a **rune** and is part of the language. It looks like a function, but it's only a hint for the Svelte compiler to know what to do with it. This also means as far as TypeScript is concerned, it's just a function:
 
 ```ts:example
 let value = $state<Type>(...)
@@ -595,15 +600,19 @@ For example, changing `editor.content` is going to update the UI in every place 
 
 <style>
 	textarea {
-		width: 100%;
+		width: 600px;
 		height: 200px;
+		padding: 1rem;
+		border-radius: 1rem;
 	}
 </style>
 ```
 
+<Example name="editor" />
+
 ### $state.raw
 
-You might not want deeply reactive state where pushing to an array or updating the object would cause an update. In that case, you can use `$state.raw` so state only updates when you reassign it:
+You might not want deeply reactive state, where pushing to an array or updating the object would cause an update. In that case, you can use `$state.raw` so state only updates when you reassign it:
 
 ```svelte:App.svelte {3-6,13,16-19}
 <script lang="ts">
@@ -687,17 +696,19 @@ You can derive state from other state using the `$derived` rune and it's going t
 	let result = $derived(count * factor)
 </script>
 
+<p>{count} * {factor} = {result}</p>
+
 <button onclick={() => count++}>Count: {count}</button>
 <button onclick={() => factor++}>Factor: {factor}</button>
-
-<p>{count} * {factor} = {result}</p>
 ```
 
-### Deriveds Are Lazy
+<Example name="derived" />
 
-Derived values **only run when they're read** and are **lazy evaluted** which means they only update when they change and not when their dependencies change to avoid unnecessary work.
+### Deriveds Update When They Change
 
-In this example, even if `max` depends on `count`, it only updates when `max` updates:
+Derived values **only run when they're read** and are **lazy evaluted** which means they only update when they change, and **not** when their dependencies change to avoid unnecessary work.
+
+Here even if `max` depends on `count`, it only updates when `max` updates:
 
 ```svelte:App.svelte {3,6,9}
 <script lang="ts">
@@ -719,7 +730,7 @@ In this example, even if `max` depends on `count`, it only updates when `max` up
 
 ### Derived Dependency Tracking
 
-You can pass a function to a derived without losing reactivity, because a signal only has to be read to become a dependency:
+You can pass a function with state to a derived without losing reactivity, because a signal only has to be read inside of an effect to be tracked:
 
 ```svelte:App.svelte {3,5-7}
 <script lang="ts">
@@ -736,7 +747,7 @@ You can pass a function to a derived without losing reactivity, because a signal
 </button>
 ```
 
-This might sound like magic, but the only magic here is the system of signals and runtime reactivity! 🪄
+This might sound like magic, but the only magic here is the system of signals and runtime reactivity! 🪄 In a later section, we're going to learn how this exactly works.
 
 The reason you don't have to pass state to the function — unless you want to be explicit — is because signals only care where they're read, as highlighted in the compiled output.
 
@@ -762,7 +773,7 @@ function limit(count) {
 
 ### $derived.by
 
-The `$derived` rune only accepts an expression by default, but you can use the `$derived.by` rune for a more complex derivation:
+The `$derived` rune only accepts an expression by default, but you can use the `$derived.by` rune for more complex derivations:
 
 ```svelte:App.svelte {6-12}
 <script lang="ts">
@@ -781,6 +792,8 @@ The `$derived` rune only accepts an expression by default, but you can use the `
 
 <p>Total: {total}€</p>
 ```
+
+<Example name="derived-by" />
 
 Svelte recommends you keep deriveds free of side-effects. You can't update state inside of deriveds to protect you from unintended side-effects:
 
@@ -838,7 +851,7 @@ State that is **read** inside of an effect will be tracked:
 
 **Values are only tracked if they're read.**
 
-Here if `condition` is `true`, then `condition` and `count` are going to be tracked. If `condition` is false, then the effect only reruns when `condition` changes:
+Here if `condition` is `true`, then `condition` and `count` are going to be tracked — if `condition` is false, then the effect only reruns when `condition` changes:
 
 ```svelte:App.svelte {3,6-8}
 <script lang="ts">
@@ -920,12 +933,13 @@ When it comes to deeply reactive state, effects only rerun when the object it re
 		// you have to track the property
 		console.log(obj.current)
 	})
+
+	// later
+	obj.current++
 </script>
 ```
 
-There are ways around it though! 🤫
-
-You can use `JSON.stringify`, `$state.snapshot`, or the `$inspect` rune to react when the object properties change. The `save` function could be some external API used to save the data:
+There are ways around it though! 🤫 You can use `JSON.stringify`, `$state.snapshot`, or the `$inspect` rune to react when the object properties change:
 
 ```svelte:App.svelte {5,10,15}
 <script lang="ts">
@@ -933,24 +947,26 @@ You can use `JSON.stringify`, `$state.snapshot`, or the `$inspect` rune to react
 
 	$effect(() => {
 		JSON.stringify(obj) // 👍️ tracked
-		save(obj)
+		// ...
 	})
 
 	$effect(() => {
 		$state.snapshot(obj) // 👍️ tracked
-		save(obj)
+		// ...
 	})
 
 	$effect(() => {
 		$inspect(obj) // 👍️ tracked
-		save(obj)
+		// ...
 	})
 </script>
 ```
 
 ### When Not To Use Effects
 
-**Don't use effects to synchronize state** because Svelte queues your effects and runs them last. Using effects to synchronize state can cause unexpected behavior like state being out of sync:
+**Don't use effects to synchronize state**, because Svelte queues your effects to ensure they run in the correct order and runs them last.
+
+Using effects to synchronize state can cause unexpected behavior like state being out of sync:
 
 ```svelte:App.svelte {7,12-13}
 <script lang="ts">
@@ -1044,13 +1060,29 @@ In this example, we're using the Pokemon API and `getAbortSignal` from Svelte to
 	oninput={(e) => pokemon = (e.target as HTMLInputElement).value}
 />
 <img src={image} alt={pokemon} />
+
+<style>
+	input {
+		padding: 1rem;
+		border-radius: 1rem;
+	}
+
+	img {
+		width: 200px;
+		display: block;
+		margin-top: 1rem;
+		image-rendering: pixelated;
+	}
+</style>
 ```
+
+<Example name="pokemon-search" />
 
 ### $effect.pre
 
 Your effects run after the DOM updates in a [microtask](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide), but sometimes you might need to do work before the DOM updates like measuring an element, or scroll position — in that case, you can use the `$effect.pre` rune.
 
-A great example is the [GSAP Flip plugin](https://gsap.com/docs/v3/Plugins/Flip/) for animating view changes when you update the DOM. It needs to measure the position, size, and rotation of elements before and after the DOM update.
+A great example is the [GSAP Flip plugin](https://gsap.com/docs/v3/Plugins/Flip/) for animating view transitions when you update the DOM. It needs to measure the position, size, and rotation of elements before, and after the DOM update.
 
 In this example, we measure the elements before the DOM updates, and use `tick` to wait for the DOM update:
 
@@ -1062,7 +1094,7 @@ In this example, we measure the elements before the DOM updates, and use `tick` 
 
 	gsap.registerPlugin(Flip)
 
-	let items = $state([...Array(20).keys()])
+	let items = $state([...Array(10).keys()])
 
 	$effect.pre(() => {
 		// track `items` as a dependency
@@ -1116,6 +1148,8 @@ In this example, we measure the elements before the DOM updates, and use `tick` 
 	}
 </style>
 ```
+
+<Example name="gsap-flip" />
 
 `tick` is a useful lifecyle function that schedules a task to run in the next microtask when all the work is done, and before the DOM updates.
 
@@ -1346,7 +1380,7 @@ The only downside with arrow functions is that you're creating a new function ev
 
 Because state is a regular value, it loses reactivity when you pass it into a function or a class.
 
-In this example, we pass `count` to a `Doubler` class to double the value when `count` updates. However, it's not reactive since `count` is a regular value:
+In this example, we pass `count` into `Doubler` to double the value when `count` updates. However, it's not reactive since `count` is a regular value:
 
 ```svelte:App.svelte {2-6,9}
 <script lang="ts">
@@ -1413,7 +1447,7 @@ You could use the reactive utility from before! Let's use a class version this t
 </button>
 ```
 
-Runes are reactive primitives that give you the flexibility to create your own reactivity system.
+Runes are **reactive primitives** that give you the flexibility to create your own reactivity system.
 
 ## Reactive Global State
 
@@ -1493,12 +1527,11 @@ function createSignal(value) {
 
 That's how Svelte updates the DOM by compiling your template into effects. This is referred to as a **tracking context**:
 
-```svelte:example
-<!-- template_effect(() => set_text(text, get(value))) -->
-{value}
+```ts:example
+template_effect(() => set_text(text, get(value)))
 ```
 
-Everything starts with a root effect and your component is a nested effect inside of it. This way, Svelte can keep track of effects for cleanup.
+Everything starts with a root effect and your component is a nested effect inside of it. This way, Svelte can keep track of effects for cleanup when it runs their teardown functions.
 
 When the effect runs, it invokes the callback function and sets it as the active effect in some variable:
 
@@ -1514,6 +1547,7 @@ function template_effect(fn) {
 The magic happens when you read a signal inside of an effect. When `value` is read, it adds the active effect as a subscriber:
 
 ```ts:example
+// the active effect
 let effect = fn
 
 function get(signal) {
@@ -1539,7 +1573,7 @@ This is oversimplified, but it happens every update and that's why it's called *
 
 **Svelte doesn't compile reactivity**, it only compiles the implementation details. That's how you can use signals like a regular value. In other frameworks, you always have to read and write them using functions, or accessors.
 
-Deriveds are also effects that track their own dependencies and return a signal. You can pass a function with state inside to a derived, and it's tracked when it's read inside like an effect:
+Deriveds are effects that track their own dependencies and return a signal — you can pass a function with state inside to a derived, and it's tracked when it's read inside like an effect:
 
 ```svelte:example {7,14}
 <script lang="ts">
@@ -1560,7 +1594,7 @@ Deriveds are also effects that track their own dependencies and return a signal.
 
 I want to emphasize how `$state` is not some magic reactive container, but a regular value; which is why you need a function or a getter to get the latest value when the effect reruns — unless you're using deep state.
 
-If `emoji.code` was a regular value and not a getter, then the effect would always return the same value, even though it reacts to the change:
+Here if `emoji.code` was a regular value and not a getter, the text inside the button would never update:
 
 ```svelte:example {5-6,15}
 <script lang="ts">
@@ -1573,11 +1607,12 @@ If `emoji.code` was a regular value and not a getter, then the effect would alwa
 	}
 
 	const emoji = new Emoji('🍎')
-	emoji.current = '🍌'
 </script>
 
-<!-- template_effect(() => set_text(text, emoji.code)) -->
-{emoji.code}
+<button onclick={() => emoji.current = '🍌'}>
+	<!-- template_effect(() => set_text(text, emoji.code)) -->
+	{emoji.code}
+</button>
 ```
 
 As the React people love to say, "it's just JavaScript!" 😄
@@ -1588,7 +1623,9 @@ I don't want to scare you from using effects. Honestly, it's not a big deal if y
 
 The problem is that it's easy to overcomplicate your code with effects, because it seems like the right thing to do.
 
-In this example, I have a `counter` value I want to read and write using the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) each time it updates. That's a side-effect! It seems resonable to use an effect:
+This example has a `counter` I want to read and write using the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) each time it updates.
+
+Hey, that's a side-effect! It seems resonable to use an effect:
 
 ```ts:counter.svelte.ts
 class Counter {
@@ -1651,13 +1688,14 @@ class Counter {
 }
 ```
 
-Then you learn about the `$effect.tracking` rune used to know if you're inside a **tracking context** like the effect in your template, so maybe that's it:
+Awkward! 😄 Then you learn about the `$effect.tracking` rune, used to know if you're inside a **tracking context** like the effect in your template, so maybe that's the solution?
 
 ```ts:counter.svelte.ts
 class Counter {
 	constructor(initial: number) {
 		this.count = $state(initial)
 
+		// feeling like a genius at this point
 		if ($effect.tracking()) {
 			$effect(() => {
 				const savedCount = localStorage.getItem('count')
@@ -1672,7 +1710,7 @@ class Counter {
 }
 ```
 
-But there's **another** problem! The effect is never going to run when the counter is created because you're not inside a tracking context. 😩
+But there's **another** problem! The effect is never going to run when the counter is created, because you're not inside a tracking context. 😩
 
 It would make more sense to move the effect where you read the value — this way, it's read inside of a tracking context like the template effect:
 
@@ -1701,7 +1739,7 @@ export class Counter {
 
 There's **another** problem...
 
-Each time we read the value, we're creating an effect! 😱 Alright, that's a simple fix. We can use a variable to track if we already ran the effect:
+Each time we read the value, we're creating an effect! 😨 Alright, that's a simple fix — we can use a variable to track if we already ran the effect:
 
 ```ts:counter.svelte.ts {2,11,14}
 export class Counter {
@@ -1730,7 +1768,7 @@ export class Counter {
 }
 ```
 
-The point I want to make is that none of this is necessary, and you can make everything simpler by doing side-effects inside event handlers like `onclick` instead of using effects:
+The point I want to make is that none of this is necessary — you can make everything simpler by doing side-effects inside event handlers like `onclick` instead of using effects:
 
 ```ts:counter.svelte.ts
 export class Counter {
