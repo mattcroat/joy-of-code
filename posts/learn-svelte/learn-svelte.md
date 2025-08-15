@@ -2916,7 +2916,7 @@ You can define and render a snippet in your component for markup reuse, or deleg
 {/snippet}
 
 <Accordion>
-	</AccordionItem {accordionItem}>
+	<AccordionItem {accordionItem} />
 </Accordion>
 ```
 
