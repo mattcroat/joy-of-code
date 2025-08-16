@@ -3730,7 +3730,7 @@ The `Tween` class accepts a target value and options. You can use the `current` 
 </svg>
 ```
 
-The `Tween` class has the same methods as `Tween`, but uses spring physics and doesn't have a duration. Instead, it has `stiffness`, `damping`, and `precision` options:
+The `Spring` class has the same methods as `Tween`, but uses spring physics and doesn't have a duration. Instead, it has `stiffness`, `damping`, and `precision` options:
 
 ```svelte:App.svelte {2,4,7,11,21}
 <script lang="ts">
