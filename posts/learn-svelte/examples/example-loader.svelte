@@ -31,9 +31,11 @@
 
 <div class="example">
 	{#if status === 'load'}
-		<button onclick={load}>Show example</button>
+		<div class="container">
+			<button onclick={load}>Show example</button>
+		</div>
 	{:else}
-		<div transition:fade>
+		<div class="content" transition:fade>
 			<Component />
 		</div>
 	{/if}
@@ -42,24 +44,35 @@
 <style>
 	.example {
 		height: 400px;
-		display: grid;
-		place-content: center;
 		margin-bottom: var(--spacing-32);
-		padding: var(--spacing-24);
 		background: var(--clr-code-bg);
 		border-radius: var(--rounded-20);
 		text-align: center;
 		box-shadow: var(--shadow-md);
+		overflow: hidden scroll;
 
-		:global(button) {
-			padding: var(--spacing-16);
-			border: 4px solid var(--clr-primary);
-			border-radius: var(--rounded-20);
-			text-transform: capitalize;
-			transition: scale 0.15s ease-out;
+		.content {
+			height: 100%;
+		}
 
-			&:active {
-				scale: 0.9;
+		:global {
+			.container {
+				height: 100%;
+				display: grid;
+				place-content: center;
+				padding: var(--spacing-24);
+			}
+
+			button {
+				padding: var(--spacing-16);
+				border: 4px solid var(--clr-primary);
+				border-radius: var(--rounded-20);
+				text-transform: capitalize;
+				transition: scale 0.15s ease-out;
+
+				&:active {
+					scale: 0.9;
+				}
 			}
 		}
 	}

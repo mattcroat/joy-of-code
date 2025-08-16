@@ -2,7 +2,9 @@
 	let title = 'Svelte'
 </script>
 
-<h1>{title}</h1>
+<div class="container">
+	<h1>{title}</h1>
+</div>
 
 <style>
 	h1 {

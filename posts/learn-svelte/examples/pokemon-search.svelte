@@ -20,13 +20,15 @@
 	})
 </script>
 
-<div>
-	<input
-		type="search"
-		placeholder="Enter Pokemon name"
-		oninput={(e) => (pokemon = (e.target as HTMLInputElement).value)}
-	/>
-	<img src={image} alt={pokemon} />
+<div class="container">
+	<div>
+		<input
+			type="search"
+			placeholder="Enter Pokemon name"
+			oninput={(e) => (pokemon = (e.target as HTMLInputElement).value)}
+		/>
+		<img src={image} alt={pokemon} />
+	</div>
 </div>
 
 <style>

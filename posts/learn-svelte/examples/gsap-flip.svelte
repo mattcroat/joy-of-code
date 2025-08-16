@@ -4,7 +4,6 @@
 	gsap.registerPlugin(Flip)
 
 	let items = $state([...Array(10).keys()])
-	let ready = $state(false)
 
 	$effect.pre(() => {
 		// track `items` as a dependency
@@ -24,15 +23,19 @@
 </script>
 
 <div class="container">
-	{#each items as item (item)}
-		<div class="item">{item}</div>
-	{/each}
+	<div>
+		<div class="items">
+			{#each items as item (item)}
+				<div class="item">{item}</div>
+			{/each}
+		</div>
+
+		<button onclick={shuffle}>Shuffle</button>
+	</div>
 </div>
 
-<button onclick={shuffle}>Shuffle</button>
-
 <style>
-	.container {
+	.items {
 		width: 600px;
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);

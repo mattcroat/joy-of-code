@@ -3,4 +3,6 @@
 	let alt = 'Person dancing'
 </script>
 
-<img {src} {alt} />
+<div class="container">
+	<img {src} {alt} />
+</div>

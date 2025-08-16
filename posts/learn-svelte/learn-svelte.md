@@ -1386,12 +1386,12 @@ In this example, we pass `count` into `Doubler` to double the value when `count`
 <script lang="ts">
 	class Doubler {
 		constructor(count: number) {
-			this.current = $derived(count * 2) // 0 * 2
+			this.current = $derived(count * 2) // get(count) * 2
 		}
 	}
 
 	let count = $state(0)
-	const double = new Doubler(count) // 0
+	const double = new Doubler(count) // get(count)
 </script>
 
 <button onclick={() => count++}>
@@ -1644,7 +1644,7 @@ class Counter {
 }
 ```
 
-The problem only arises if you create the counter outside the component initialization phase:
+The problem only arises if you create the counter outside the component initialization phase (in a separate module, or inside of an event handler):
 
 ```ts:counter.svelte.ts
 export const counter = new Counter(0)
@@ -1695,7 +1695,6 @@ class Counter {
 	constructor(initial: number) {
 		this.count = $state(initial)
 
-		// feeling like a genius at this point
 		if ($effect.tracking()) {
 			$effect(() => {
 				const savedCount = localStorage.getItem('count')
@@ -1768,7 +1767,7 @@ export class Counter {
 }
 ```
 
-The point I want to make is that none of this is necessary — you can make everything simpler by doing side-effects inside event handlers like `onclick` instead of using effects:
+In reality, none of this is necessary — you can make everything simpler by doing side-effects inside event handlers like `onclick` instead of using effects. In fact, we can just remove the effect and everything works:
 
 ```ts:counter.svelte.ts
 export class Counter {
@@ -1848,7 +1847,7 @@ To loop over a list of items, you use the `{#each ...}` block:
 </ul>
 ```
 
-You can [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the items values you're iterating over, get the current item index and provide a key, so Svelte can keep track of changes:
+You can [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value you're iterating over, get the current item index, and provide a unique key so Svelte can keep track of changes:
 
 ```svelte:App.svelte {2}
 <ul>
@@ -1861,7 +1860,7 @@ You can [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Re
 </ul>
 ```
 
-You can omit the `as` part inside the `{#each ...}` block if you just want to loop over an arbitrary amount of items to create a grid for example:
+You can omit the `as` part inside the `{#each ...}` block when you just want to loop over an arbitrary amount of items. In this example, we're creating a basic grid:
 
 ```svelte:App.svelte
 <div class="grid">
@@ -2018,7 +2017,7 @@ You can use the `$effect.pending` rune to show a loading state:
 {/if}
 ```
 
-SvelteKit takes this even further with [remote functions](https://svelte.dev/docs/kit/remote-functions), where you can fetch data from a server by invoking a function on the client.
+SvelteKit takes this even further with [remote functions](https://svelte.dev/docs/kit/remote-functions) where you can call remote functions like regular functions in the client, with type-safety across the server and client.
 
 ### Recreating Elements
 
@@ -2058,7 +2057,7 @@ In this example, we can destructure `text` and `done` from the `todo` object whi
 </ul>
 ```
 
-In this example, we're creating a SVG grid of squares using local constants to keep everything organized and legible:
+In this example, we're creating a SVG grid using local constants to keep everything organized and legible:
 
 ```svelte:App.svelte
 <script lang="ts">
@@ -2080,6 +2079,8 @@ In this example, we're creating a SVG grid of squares using local constants to k
 	{/each}
 </svg>
 ```
+
+<Example name="svg-grid" />
 
 ## Listening To Events
 
@@ -2140,6 +2141,8 @@ This example uses the `onmousemove` event to update the mouse position:
 </style>
 ```
 
+<Example name="mouse-position" />
+
 You can prevent the default behavior by using `e.preventDefault()`. This is useful for things like when you want to control a form with JavaScript and avoid a page reload:
 
 ```svelte:App.svelte {3}
@@ -2166,15 +2169,16 @@ In JavaScript, it's common to listen for the user input on the `<input>` element
 
 Having to do `value={search}` and `oninput={(e) => search = e.target.value}` on the `<input>` element to update `search` is mundane for something you do often:
 
-```svelte:App.svelte {3,4,9,10,14}
+```svelte:App.svelte {3,4,10,11,15}
 <script lang="ts">
 	let list = $state(['angular', 'react', 'svelte', 'vue'])
-	let filteredList = $derived(list.filter(item => item.includes(search)))
+	let filteredList = $derived(list.filter((item) => item.includes(search)))
 	let search = $state('')
 </script>
 
 <input
 	type="search"
+	placeholder="Search"
 	value={search}
 	oninput={(e) => search = (e.target as HTMLInputElement).value}
 />
@@ -2182,14 +2186,18 @@ Having to do `value={search}` and `oninput={(e) => search = e.target.value}` on 
 <ul>
 	{#each filteredList as item}
 		<li>{item}</li>
+	{:else}
+		<p>No results</p>
 	{/each}
 </ul>
 ```
 
+<Example name="input-binding" />
+
 Thankfully, Svelte supports two-way data binding using the `bind:` directive. If you update the value, it updates the input and vice versa:
 
 ```svelte:App.svelte
-<input type="search" bind:value={search} />
+<input type="search" bind:value={search} ... />
 ```
 
 One of the more useful bindings is `bind:this` to get a reference to a DOM node such as the `<canvas>` element for example:
@@ -2235,7 +2243,18 @@ This example transforms the text the user types into the [Mocking SpongeBob](htt
 		text = toSpongeBobCase((e.target as HTMLInputElement).value)
 	}}
 ></textarea>
+
+<style>
+	textarea {
+		width: 600px;
+		height: 300px;
+		padding: 1rem;
+		border-radius: 0.5rem;
+	}
+</style>
 ```
+
+<Example name="spongebob-case" />
 
 Instead of passing an expression like `bind:property={expression}`, you can pass a function binding like `bind:property={get, set}` to have more control over what happens when you read and write a value:
 
@@ -2296,6 +2315,8 @@ There are media bindings for `<audio>`, `<video>`, and `<img>` elements:
 </style>
 ```
 
+<Example name="video-bindings" />
+
 There are also readonly bindings for visible elements that use [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) to measure any dimension changes:
 
 ```svelte:App.svelte {2-3,6}
@@ -2334,6 +2355,8 @@ There are also readonly bindings for visible elements that use [ResizeObserver](
 	}
 </style>
 ```
+
+<Example name="readonly-bindings" />
 
 In the next section we're going to learn about components and how we can also bind the properties we pass to them, making the data flow from child to parent.
 
@@ -2394,7 +2417,7 @@ Let's use a basic todo list app as an example:
 </script>
 
 <form onsubmit={addTodo}>
-	<input type="text" bind:value={todo} />
+	<input type="text" bind:value={todo} placeholder="Add todo" />
 </form>
 
 <ul>
@@ -2417,6 +2440,8 @@ Let's use a basic todo list app as an example:
 	<button onclick={clearCompleted}>Clear completed</button>
 </div>
 ```
+
+<Example name="todo-list" />
 
 Let's take the contents of the `Todos.svelte` file and break it into multiple components. You can keep everything organized and place the files inside a `todos` folder:
 
@@ -2446,7 +2471,7 @@ To receive the props, we use the `$props` rune:
 </script>
 
 <form onsubmit={props.addTodo}>
-	<input type="text" bind:value={props.todo} />
+	<input type="text" bind:value={props.todo} placeholder="Add todo" />
 </form>
 ```
 
@@ -2463,7 +2488,7 @@ You can destructure props, rename them, set a default value, and spread the rest
 </script>
 
 <form onsubmit={addTodo} {...props}>
-	<input type="text" bind:value={todo} />
+	<input type="text" bind:value={todo} placeholder="Add todo" />
 </form>
 ```
 
@@ -2480,7 +2505,7 @@ To update `todo` from the child component, we have to let Svelte know it's okay 
 </script>
 
 <form onsubmit={addTodo}>
-	<input type="text" bind:value={todo} />
+	<input type="text" bind:value={todo} placeholder="Add todo" />
 </form>
 ```
 
@@ -2533,7 +2558,7 @@ Let's update the `<AddTodo>` component:
 </script>
 
 <form {onsubmit}>
-	<input type="text" bind:value={todo} />
+	<input type="text" bind:value={todo} placeholder="Add todo" />
 </form>
 ```
 
@@ -3348,7 +3373,7 @@ Let's say you have an `{#each ...}` block that renders a list of items using a s
 
 {#if play}
 	<div class="grid">
-		{#each { length: 50 }, i}
+		{#each Array(50), i}
 			<div transition:fade={{ delay: i * 100 }}>
 				{i + 1}
 			</div>

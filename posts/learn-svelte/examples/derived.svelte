@@ -4,10 +4,14 @@
 	let result = $derived(count * factor)
 </script>
 
-<p>{count} * {factor} = {result}</p>
+<div class="container">
+	<div>
+		<p>{count} * {factor} = {result}</p>
 
-<button onclick={() => count++}>Count: {count}</button>
-<button onclick={() => factor++}>Factor: {factor}</button>
+		<button onclick={() => count++}>Count: {count}</button>
+		<button onclick={() => factor++}>Factor: {factor}</button>
+	</div>
+</div>
 
 <style>
 	p {
