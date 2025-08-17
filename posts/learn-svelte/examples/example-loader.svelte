@@ -43,6 +43,8 @@
 
 <style>
 	.example {
+		accent-color: orangered;
+
 		height: 400px;
 		margin-bottom: var(--spacing-32);
 		background: var(--clr-code-bg);

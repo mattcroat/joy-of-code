@@ -4,8 +4,8 @@
 
 <div class="container">
 	<canvas
-		width={400}
-		height={400}
+		width={200}
+		height={200}
 		{@attach (canvas) => {
 			const context = canvas.getContext('2d')!
 

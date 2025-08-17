@@ -16,7 +16,6 @@
 		if (!response.ok) throw new Error('💣️ oops!')
 		const data = await response.json()
 
-		// add to cache
 		pokemon.set(name, data)
 	}
 
