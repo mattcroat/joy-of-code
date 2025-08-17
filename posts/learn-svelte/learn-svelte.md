@@ -461,7 +461,7 @@ You can use an expression to apply a dynamic class, but it's tedious and easy to
 <style>
 	.trigger {
 		display: inline-block;
-		transition: all 0.2s ease;
+		transition: rotate 0.2s ease;
 
 		&.open {
 			rotate: -90deg;
@@ -2811,7 +2811,7 @@ In HTML, you can nest elements inside other elements:
 	<div class="accordion-item">
 		<button>
 			<div>Item A</div>
-			<div class="accordion-icon">👈️</div>
+			<div class="accordion-trigger">👈️</div>
 		</button>
 		<div class="accordion-content">Content</div>
 	</div>
@@ -2872,7 +2872,7 @@ You can get the `children` from the props, and render them using the `@render` t
 </div>
 ```
 
-The `<AccordionItem>` accepts a `label` prop, and we can show the accordion item content using the `children` prop which acts like a catch-all for any content inside the component:
+The `<AccordionItem>` accepts a `title` prop, and we can show the accordion item content using the `children` prop which acts like a catch-all for any content inside the component:
 
 ```svelte:AccordionItem.svelte {10,21,27}
 <script lang="ts">
@@ -2880,11 +2880,11 @@ The `<AccordionItem>` accepts a `label` prop, and we can show the accordion item
 	import { slide } from 'svelte/transition'
 
 	interface Props {
-		label: string
+		title: string
 		children: Snippet
 	}
 
-	let { label, children }: Props = $props()
+	let { title, children }: Props = $props()
 
 	let open = $state(false)
 
@@ -2895,8 +2895,8 @@ The `<AccordionItem>` accepts a `label` prop, and we can show the accordion item
 
 <div class="accordion-item">
 	<button onclick={toggle} class="accordion-heading">
-		<div>{label}</div>
-		<div class="accordion-icon">👈️</div>
+		<div>{title}</div>
+		<div class="accordion-trigger" class:open>👈️</div>
 	</button>
 
 	{#if open}
@@ -2905,7 +2905,36 @@ The `<AccordionItem>` accepts a `label` prop, and we can show the accordion item
 		</div>
 	{/if}
 </div>
+
+<style>
+	.accordion-item {
+		&:not(:last-child) {
+			margin-bottom: var(--spacing-24);
+		}
+
+		.accordion-heading {
+			display: flex;
+			gap: 2rem;
+			padding: 0;
+			border: none;
+		}
+
+		.accordion-trigger {
+			transition: rotate 0.2s ease;
+
+			&.open {
+				rotate: -90deg;
+			}
+		}
+
+		.accordion-content {
+			margin-top: 0.5rem;
+		}
+	}
+</style>
 ```
+
+<Example name="accordion" />
 
 That's it! 😄 You can now use the `<Accordion>` component in your app.
 
@@ -2968,7 +2997,7 @@ You can define and render a snippet in your component for markup reuse, or deleg
 {#snippet accordionItem({ open, toggle })}
 	<button onclick={toggle} class="accordion-heading">
 		<div>Item A</div>
-		<div class"accordion-icon">👈️</div>
+		<div class="accordion-trigger" class:open>👈️</div>
 	</button>
 
 	{#if open}
@@ -2996,7 +3025,7 @@ You can create an implicit prop by using a snippet inside the component tags. In
 		{#snippet accordionItem({ open, toggle })}
 			<button onclick={toggle} class="accordion-heading">
 				<div>Item A</div>
-				<div class"accordion-icon">👈️</div>
+				<div class"accordion-trigger" class:open>👈️</div>
 			</button>
 
 			{#if open}
@@ -3264,37 +3293,49 @@ You can also share state between instances:
 <button onclick={() => count++}>{count}</button>
 ```
 
-This could be useful to control media playback across instances, or exporting snippets and functions the module:
+You can control media playback across component instances, or export functions and snippets from the module:
 
-```svelte:Counter.svelte {7-9}
+```svelte:Counter.svelte {7-9,11}
 <script lang="ts" module>
 	// outputs different random number for every instance
 	let uid = crypto.randomUUID()
 	// state
 	let count = $state(0)
-	// export
+	// exporting functions
 	export function reset() {
 		count = 0
 	}
+	// exporting snippets
+	export { icon }
 </script>
 
 <p>{uid}</p>
 <button onclick={() => count++}>{count}</button>
+
+{#snippet icon(width = 24, height = 24)}
+	<svg xmlns="http://www.w3.org/2000/svg" {width} {height} viewBox="0 0 24 24">
+		<circle cx="50%" cy="50%" r="50%" fill="orangered" />
+	</svg>
+{/snippet}
 ```
 
 This works great for sharing state across component instances, or just exporting some functions from the module:
 
 ```svelte:App.svelte
 <script>
-	import Counter, { reset } from './Counter.svelte'
+	import Counter, { icon, reset } from './Counter.svelte'
 </script>
 
 <Counter />
 <Counter />
 <Counter />
 <Counter />
-
 <button onclick={() => reset()}>Reset</button>
+
+{@render icon()}
+{@render icon(50, 50)}
+{@render icon(100, 100)}
+{@render icon(200, 200)}
 ```
 
 You can also have a regular script block, and a `module` script block in the same component.
@@ -3305,7 +3346,7 @@ In this section, I'm going to show you how you can use Svelte's built-in transit
 
 ### Transitions
 
-To use a transition, you use the `transition:` directive on an element. Transitions play when the element is added to the DOM, and in reverse when the element is removed from the DOM.
+To use a transition, you use the `transition:` directive on an element. Transitions play when the element is added to the DOM, and play in reverse when the element is removed from the DOM.
 
 This example uses the `fade` transition from Svelte to fade in and out two elements. The first element has a `duration` option of `600` milliseconds, and the second element has a `delay` option of `600` milliseconds:
 
@@ -3314,17 +3355,25 @@ This example uses the `fade` transition from Svelte to fade in and out two eleme
 	import { fade } from 'svelte/transition'
 
 	let play = $state(false)
+
+	setInterval(() => (play = !play), 2000)
 </script>
 
-<button onclick={() => (play = !play)}>Play</button>
-
 {#if play}
-	<div>
+	<div class="message">
 		<span transition:fade={{ duration: 600 }}>Hello</span>
 		<span transition:fade={{ delay: 600 }}>World</span>
 	</div>
 {/if}
+
+<style>
+	.message {
+		font-size: 4rem;
+	}
+</style>
 ```
+
+<Example name="fade-transition" />
 
 You can have separate intro and outro transitions using the `in:` and `out:` directives:
 
@@ -3334,12 +3383,12 @@ You can have separate intro and outro transitions using the `in:` and `out:` dir
 	import { cubicInOut } from 'svelte/easing'
 
 	let play = $state(false)
+
+	setInterval(() => (play = !play), 2000)
 </script>
 
-<button onclick={() => (play = !play)}>Play</button>
-
 {#if play}
-	<div>
+	<div class="message">
 		<span
 			in:fly={{ x: -10, duration: 600, easing: cubicInOut }}
 			out:fade
@@ -3354,6 +3403,12 @@ You can have separate intro and outro transitions using the `in:` and `out:` dir
 		</span>
 	</div>
 {/if}
+
+<style>
+	.message {
+		font-size: 4rem;
+	}
+</style>
 ```
 
 Svelte also has a lot of [built-in easing functions](https://svelte.dev/docs/svelte/svelte-easing) you can use to make a transition feel more natural, or give it more character.
@@ -3372,14 +3427,23 @@ Let's say you have an `{#each ...}` block that renders a list of items using a s
 </script>
 
 {#if play}
-	<div class="grid">
+	<div class="items">
 		{#each Array(50), i}
-			<div transition:fade={{ delay: i * 100 }}>
+			<div in:fade={{ delay: i * 100 }}>
 				{i + 1}
 			</div>
 		{/each}
 	</div>
 {/if}
+
+<style>
+	.items {
+		width: 400px;
+		display: grid;
+		grid-template-columns: repeat(10, 1fr);
+		gap: 1rem;
+	}
+</style>
 ```
 
 It doesn't work, but why?
@@ -3389,10 +3453,12 @@ It doesn't work, but why?
 The solution is to use the `global` modifier:
 
 ```svelte:App.svelte
-<div transition:fade|global={{ delay: i * 100 }}>
+<div in:fade|global={{ delay: i * 100 }}>
 	{i + 1}
 </div>
 ```
+
+<Example name="global-transitions" />
 
 Transitions were global by default in older versions of Svelte, so keep that in mind if you come across older Svelte code.
 
@@ -3435,7 +3501,7 @@ Now you can use the `<Fade>` component in your app:
 </script>
 
 <Fade options={{ duration: 2000 }}>
-	Isn't this cool?
+	Boo! 👻
 </Fade>
 ```
 
@@ -3447,25 +3513,22 @@ You can find more built-in transitions in the [Svelte documentation](https://sve
 
 Custom transitions are regular function which have to return an object with the transition options and a `css`, or `tick` function:
 
-```svelte:App.svelte {10-20,28}
+```svelte:App.svelte {5-17,25}
 <script lang="ts">
 	import { elasticOut } from 'svelte/easing'
+	import type { TransitionConfig } from 'svelte/transition'
 
-	interface Options {
-		delay?: number
-		duration?: number
-		easing?: (t: number) => number
-	}
+	function customTransition(node: HTMLElement, options?: TransitionConfig) {
+		const { duration = 2000, delay = 0, easing = elasticOut } = options
 
-	function customTransition(node: HTMLElement, options: Options = {}) {
 		return {
-			delay: options.delay || 0,
-			duration: options.duration || 2000,
-			easing: options.easing || elasticOut,
+			duration,
+			delay,
+			easing,
 			css: (t: number) => `
 				color: hsl(${360 * t} , 100%, 80%);
 				transform: scale(${t});
-			`
+			`,
 		}
 	}
 
@@ -3479,6 +3542,8 @@ Custom transitions are regular function which have to return an object with the 
 {/if}
 ```
 
+<Example name="custom-transition" />
+
 You should always return a `css` function, because Svelte is going to create keyframes using the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) which is always more performant.
 
 The `t` argument is the transition progress from `0` to `1` after the easing has been applied — if you have a transition that lasts `2` seconds, where you move an item from `0` pixels to `100` pixels, it's going to start from `0` pixels and end at `100` pixels.
@@ -3487,11 +3552,9 @@ You can reverse the transition by using the `u` argument which is a transition p
 
 Alternatively, you can return a `tick` function when you need to use JavaScript for a transition and Svelte is going to use the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) API:
 
-```svelte:App.svelte {12-30,38}
+```svelte:App.svelte {10-29,37}
 <script lang="ts">
-	interface Options {
-		duration?: number
-	}
+	import { TransitionConfig } from 'svelte/transition'
 
 	const chars = '!@#$%&*1234567890-=_+[]{}|;:,.<>/?'
 
@@ -3499,13 +3562,14 @@ Alternatively, you can return a `tick` function when you need to use JavaScript 
 		return chars[Math.floor(Math.random() * chars.length)]
 	}
 
-	function scrambleText(node: HTMLElement, options: Options = {}) {
+	function scrambleText(node: HTMLElement, options?: TransitionConfig) {
+		const { duration = 4000 } = options
 		const finalText = node.textContent
 		const length = finalText.length
 
 		return {
-			duration: options.duration || 2000,
-			tick: (t) => {
+			duration,
+			tick: (t: number) => {
 				let output = ''
 				for (let i = 0; i < length; i++) {
 					if (t > i / length) {
@@ -3515,21 +3579,29 @@ Alternatively, you can return a `tick` function when you need to use JavaScript 
 					}
 				}
 				node.textContent = output
-			}
+			},
 		}
 	}
 
 	let play = $state(false)
 </script>
 
+{#key play}
+	<p in:scrambleText>Scrambling Text Effect</p>
+{/key}
+
 <button onclick={() => (play = !play)}>Scramble text</button>
 
-{#if play}
-	<p transition:scrambleText>Scrambling Text Effect</p>
-{/if}
+<style>
+	p {
+		font-family: monospace;
+	}
+</style>
 ```
 
-You would of course define these custom transitions using whichever method you prefer in a separate file and import them in your app.
+<Example name="scramble-text" />
+
+You can define custom transitions in a separate file and import them in your app.
 
 ### Coordinating Transitions Between Different Elements
 
@@ -3547,7 +3619,7 @@ In this example, we have a section for published posts and archived posts where 
 	let posts = $state<Post[]>([
 		{
 			id: 1,
-			title: 'Title',
+			title: 'Post',
 			description: 'Content',
 			published: true,
 		},
@@ -3598,6 +3670,34 @@ In this example, we have a section for published posts and archived posts where 
 		{/each}
 	</section>
 </div>
+
+<style>
+	.posts {
+		display: flex;
+
+		section {
+			display: grid;
+			grid-template-columns: repeat(2, 240px);
+			gap: 2rem;
+		}
+	}
+
+	.archive {
+		section {
+			display: block;
+			width: 200px;
+			margin-top: 1rem;
+
+			article:not(:last-child) {
+				margin-bottom: 1rem;
+			}
+		}
+	}
+
+	p {
+		margin-bottom: 0.5rem;
+	}
+</style>
 ```
 
 This works, but the user experience is not great!
@@ -3628,6 +3728,8 @@ The `crossfade` transition creates two transitions named `send` and `receive` wh
 >
 <!-- ... -->
 ```
+
+<Example name="crossfade" />
 
 You can also pass `duration` and a custom `fallback` transition options when there are no matching transitions:
 
@@ -3682,6 +3784,8 @@ We can fix this by using Svelte's `animate:` directive and the `flip` function, 
 >
 <!-- ... -->
 ```
+
+<Example name="crossfade-flip" />
 
 Isn't it magical? 🪄
 
@@ -3755,6 +3859,8 @@ The `Tween` class accepts a target value and options. You can use the `current` 
 </svg>
 ```
 
+<Example name="tween" />
+
 The `Spring` class has the same methods as `Tween`, but uses spring physics and doesn't have a duration. Instead, it has `stiffness`, `damping`, and `precision` options:
 
 ```svelte:App.svelte {2,4,7,11,21}
@@ -3783,6 +3889,8 @@ The `Spring` class has the same methods as `Tween`, but uses spring physics and 
 	/>
 </svg>
 ```
+
+<Example name="spring" />
 
 They both have a `set` function, which returns a promise and lets you override the options:
 
@@ -3865,6 +3973,8 @@ For this reason, Svelte provides an `onMount` lifecycle function. The "lifecyle"
 </style>
 ```
 
+<Example name="gsap-box" />
+
 This works! That being said, it's not ideal that we query any element with a `.box` class on the page.
 
 Using Svelte, we should get a reference to the element instead. You can also return a function from `onMount`, or use the `onDestroy` lifecycle function for any cleanup when the component is removed:
@@ -3933,7 +4043,7 @@ So why do both of them exist?
 
 Effects aren't component lifecycle functions, because their "lifecycle" depends on the value inside of them updating.
 
-You could end up tracking some state inside of the effect and then have to [untrack](https://svelte.dev/docs/svelte/svelte#untrack) the value:
+Using `onMount` makes more sense if you don't care about tracking state — you might track state inside of the effect on accident, and then have to [untrack](https://svelte.dev/docs/svelte/svelte#untrack) the value:
 
 ```ts:example
 import { untrack } from 'svelte'
@@ -3943,7 +4053,7 @@ let value_you_want_to_track = $state('')
 
 $effect(() => {
 	untrack(() => value_you_dont_want_to_track)
-	console.log(value_you_want_to_track)
+	value_you_want_to_track
 })
 ```
 
@@ -3995,7 +4105,7 @@ This gives us a generic animation component we can pass any element to, and bind
 	.box {
 		width: 100px;
 		height: 100px;
-		background-color: #ff4500;
+		background-color: orangered;
 		border-radius: 1rem;
 	}
 </style>
@@ -4027,6 +4137,8 @@ Attachments are functions you can "attach" to regular elements that run when the
 	}}
 ></canvas>
 ```
+
+<Example name="attachment" />
 
 Instead of the animation component, we can create an attachment function which can be used on any element.
 
@@ -4137,11 +4249,13 @@ In this example, we use the reactive version of the built-in `Map` object in Jav
 
 		.details {
 			max-height: 400px;
-			overflow: hidden scroll;
+			overflow: hidden;
 		}
 	}
 </style>
 ```
+
+<Example name="reactive-map" />
 
 You can find more [reactive built-ins](https://svelte.dev/docs/svelte/svelte-reactivity) like `MediaQuery` and `prefersReducedMotion` with examples in the Svelte documentation.
 
@@ -4294,7 +4408,7 @@ Thankfully, Svelte has a [createSubscriber](https://svelte.dev/docs/svelte/svelt
 
 The `createSubscriber` function provides a callback, which gives you an `update` function. When `update` is invoked, it reruns the subscriber. In our example, the subscriber is the `time` method:
 
-```svelte:App.svelte {10,14-17,28-31,33-35}
+```svelte:App.svelte {10,14-17,28-32,34-36}
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { createSubscriber } from 'svelte/reactivity'
@@ -4323,6 +4437,7 @@ The `createSubscriber` function provides a callback, which gives you an `update`
 		}
 
 		get time() {
+			// makes it reactive when read inside an effect
 			this.#subscribe()
 			return this.#timeline.time()
 		}
@@ -4338,23 +4453,32 @@ The `createSubscriber` function provides a callback, which gives you an `update`
 	])
 </script>
 
+<div class="box box1"></div>
+<div class="box box2"></div>
+
 <label>
 	<p>Time:</p>
 	<input bind:value={tl.time} type="range" min={0} max={2} step={0.01} />
 </label>
 
-<div class="box box1"></div>
-<div class="box box2"></div>
-
 <style>
 	.box {
 		aspect-ratio: 1;
 		width: 100px;
+		margin-bottom: 0.5rem;
 		background-color: orangered;
 		border-radius: 1rem;
 	}
+
+	label {
+		display: flex;
+		gap: 0.5rem;
+		margin-top: 1rem;
+	}
 </style>
 ```
+
+<Example name="reactive-events" />
 
 This makes our code much simpler. 🧘
 
@@ -4392,7 +4516,7 @@ This can also be made simpler by using `createSubscriber`.
 
 You only have to listen for the `storage` event on the `window` and run `update` when it changes to notify subscribers, so you don't even need to use state:
 
-```ts:counter.svelte.ts {5,8-14,17-20,22-24}
+```ts:counter.svelte.ts {5,8-14,17-21,23-25}
 import { createSubscriber } from 'svelte/reactivity'
 import { on } from 'svelte/events'
 
@@ -4410,6 +4534,7 @@ class Counter {
 	}
 
 	get count() {
+		// makes it reactive when read inside an effect
 		this.#subscribe()
 		return parseInt(localStorage.getItem('count') ?? '0')
 	}

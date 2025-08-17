@@ -49,7 +49,7 @@
 		border-radius: var(--rounded-20);
 		text-align: center;
 		box-shadow: var(--shadow-md);
-		overflow: hidden scroll;
+		overflow: hidden auto;
 
 		.content {
 			height: 100%;
