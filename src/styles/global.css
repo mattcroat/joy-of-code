@@ -125,6 +125,7 @@ h3 {
 
 p {
 	line-height: 32px;
+	text-wrap: pretty;
 }
 
 a {
