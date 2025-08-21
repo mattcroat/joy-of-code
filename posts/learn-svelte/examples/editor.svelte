@@ -9,6 +9,7 @@
 	<textarea
 		value={editor.content}
 		oninput={(e) => (editor.content = (e.target as HTMLTextAreaElement).value)}
+		spellcheck="false"
 	></textarea>
 
 	{@html editor.content}

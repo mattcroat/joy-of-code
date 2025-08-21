@@ -209,25 +209,7 @@ Attributes can have expressions inside the curly braces:
 <img {src} {alt} loading={lazy ? 'lazy' : 'eager'} />
 ```
 
-Don't use `&&` for short-circuit evaluation, or empty strings to conditionally render attributes. Instead, use `null` or `undefined` as the value:
-
-```svelte:App.svelte
-<script lang="ts">
-	let src = 'image.gif'
-	let alt = 'Person dancing'
-	let lazy = false
-</script>
-
-<!-- ⛔️ orphan attributes -->
-<img {src} {alt} loading={lazy && 'lazy'} />
-<img {src} {alt} loading={lazy ? 'lazy' : ''} />
-
-<!-- 👍 works as intended -->
-<img {src} {alt} loading={lazy ? 'lazy' : null} />
-<img {src} {alt} loading={lazy ? 'lazy' : undefined} />
-```
-
-You can spread attributes on elements:
+You can spread objects on elements:
 
 ```svelte:App.svelte
 <script lang="ts">
@@ -238,6 +220,26 @@ You can spread attributes on elements:
 </script>
 
 <img {...obj} />
+```
+
+To conditionally render attributes, use `null` or `undefined` instead of `&&` for short-circuit evaluation and empty strings:
+
+```svelte:App.svelte
+<script lang="ts">
+	let src = 'image.gif'
+	let alt = 'Person dancing'
+	let lazy = false
+</script>
+
+<!-- ⛔️ loading is `false` -->
+<img {src} {alt} loading={lazy && 'lazy'} />
+<!-- ⛔️ orphan attribute -->
+<img {src} {alt} loading={lazy ? 'lazy' : ''} />
+
+<!-- 👍 using `null` -->
+<img {src} {alt} loading={lazy ? 'lazy' : null} />
+<!-- 👍 using `undefined` -->
+<img {src} {alt} loading={lazy ? 'lazy' : undefined} />
 ```
 
 ## Component Styles
@@ -328,7 +330,7 @@ Svelte has to "see" the styles in the component, so it doesn't know they exist a
 ```svelte:App.svelte {15-17,20-22}
 <script lang="ts">
 	let content = `
-		<h1>Big Banana Exposed</h1>
+		<h1>Big banana exposed</h1>
 		<p>The gorillas inside the banana cartel speak out</p>
 	`
 </script>
@@ -341,12 +343,12 @@ Svelte has to "see" the styles in the component, so it doesn't know they exist a
 	article {
 		/* ⚠️ Unused CSS selector "h1" */
 		h1 {
-			font-size: 48px;
+			text-transform: capitalize;
 		}
 
 		/* ⚠️ Unused CSS selector "p" */
 		p {
-			font-size: 20px;
+			text-wrap: pretty;
 		}
 	}
 </style>
@@ -363,11 +365,11 @@ In that case, you can make the styles global by using the `:global(selector)` mo
 <style>
 	article {
 		:global(h1) {
-			font-size: 48px;
+			text-transform: capitalize;
 		}
 
 		:global(p) {
-			font-size: 20px;
+			text-wrap: pretty;
 		}
 	}
 </style>
@@ -381,11 +383,11 @@ Having to use `:global` on every selector is tedious! Thankfully, you can nest g
 	:global {
 		article {
 			h1 {
-				font-size: 48px;
+				text-transform: capitalize;
 			}
 
 			p {
-				font-size: 20px;
+				text-wrap: pretty;
 			}
 		}
 	}
@@ -399,11 +401,11 @@ You can also have "global scoped styles" where the styles inside the `:global` b
 <style>
 	article :global {
 		h1 {
-			font-size: 48px;
+			text-transform: capitalize;
 		}
 
 		p {
-			font-size: 20px;
+			text-wrap: pretty;
 		}
 	}
 </style>
@@ -414,11 +416,11 @@ Here's the compiled CSS output:
 ```css:output
 article.svelte-ju1yn8 {
 	h1 {
-		font-size: 48px;
+		text-transform: capitalize;
 	}
 
 	p {
-		font-size: 20px;
+		text-wrap: pretty;
 	}
 }
 ```
@@ -451,12 +453,15 @@ These days you probably don't need SCSS anymore, since a lot of features such as
 
 You can use an expression to apply a dynamic class, but it's tedious and easy to make mistakes:
 
-```svelte:App.svelte {2,5,12-14}
+```svelte:App.svelte {2,7,15-17}
 <script lang="ts">
-	let open = false
+	let open = $state(false)
 </script>
 
-<div class="trigger {open ? 'open' : ''}">👈️</div>
+<button onclick={() => open = !open}>
+	<span>Accordion</span>
+	<span class="trigger {open ? 'open' : ''}">👈️</span>
+</button>
 
 <style>
 	.trigger {
@@ -470,29 +475,31 @@ You can use an expression to apply a dynamic class, but it's tedious and easy to
 </style>
 ```
 
+<Example name='dynamic-classes' />
+
 Thankfully, Svelte can helps us out here. You can use the `class:` directive to conditionally apply a class:
 
 ```svelte:App.svelte
-<div class="trigger" class:open>👈️</div>
+<span class="trigger" class:open>👈️</span>
 ```
 
 You can also pass an object, array, or both to the `class` attribute and Svelte is going to use [clsx](https://github.com/lukeed/clsx) under the hood to merge the classes:
 
 ```svelte:App.svelte
 <!-- 👍️ passing an object -->
-<div class={{ trigger: true, open }}>👈️</div>
+<span class={{ trigger: true, open }}>👈️</span>
 
 <!-- 👍️ passing an array -->
-<div class={['trigger', open && 'open']}>👈️</div>
+<span class={['trigger', open && 'open']}>👈️</span>
 
 <!-- 👍️ passing an array and object -->
-<div class={['trigger', { open }]}>👈️</div>
+<span class={['trigger', { open }]}>👈️</span>
 ```
 
 If you're using Tailwind, this is very useful when you need to apply a bunch of classes:
 
 ```svelte:App.svelte
-<div class={['transition-transform', { '-rotate-90': open }]}>👈️</div>
+<span class={['transition-transform', { '-rotate-90': open }]}>👈️</span>
 ```
 
 Also consider using [data attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes) for explicit transition states for easier orchestration, instead of using a bunch of classes:
@@ -507,7 +514,7 @@ Also consider using [data attributes](https://developer.mozilla.org/en-US/docs/W
 <style>
 	.trigger {
 		display: inline-block;
-		transition: rotate 2s ease;
+		transition: rotate 0.2s ease;
 
 		&[data-status="closed"] {
 			rotate: 0deg;
@@ -583,7 +590,7 @@ If you pass an array, or object to `$state` it becomes a deeply reactive [Proxy]
 
 For example, changing `editor.content` is going to update the UI in every place where it's used:
 
-```svelte:App.svelte {2-5,10,13}
+```svelte:App.svelte {2-5,10,14}
 <script lang="ts">
 	let editor = $state({
 		theme: 'dark',
@@ -594,6 +601,7 @@ For example, changing `editor.content` is going to update the UI in every place 
 <textarea
 	value={editor.content}
 	oninput={(e) => editor.content = (e.target as HTMLTextAreaElement).value}
+	spellcheck="false"
 ></textarea>
 
 {@html editor.content}
@@ -603,7 +611,7 @@ For example, changing `editor.content` is going to update the UI in every place 
 		width: 600px;
 		height: 200px;
 		padding: 1rem;
-		border-radius: 1rem;
+		border-radius: 0.5rem;
 	}
 </style>
 ```
@@ -635,6 +643,7 @@ You might not want deeply reactive state, where pushing to an array or updating 
 			content: e.target.value
 		}
 	}}
+	spellcheck="false"
 ></textarea>
 
 {@html editor.content}
@@ -1541,6 +1550,8 @@ let effect = null
 function template_effect(fn) {
 	// set active effect
 	effect = fn
+	// run the effect
+	fn()
 }
 ```
 
