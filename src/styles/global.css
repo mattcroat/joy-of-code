@@ -138,10 +138,6 @@ a {
 
 	&:hover {
 		color: var(--clr-primary);
-
-		&::before {
-			/* transform: scaleX(1); */
-		}
 	}
 
 	&::before {
