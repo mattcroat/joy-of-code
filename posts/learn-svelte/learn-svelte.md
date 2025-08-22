@@ -69,7 +69,7 @@ Svelte also has a more opinionated application framework called [SvelteKit](http
 You can try Svelte in the browser using the [Svelte Playground](https://svelte.dev/playground) and follow along without having to set up anything.
 
 <Card type="warning">
-	Some of the examples use browser APIs like the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" target="_blank">Web Storage API</a> that won't work in the Svelte Playground, but you can use an online IDE like [SvelteLab](https://www.sveltelab.dev/).
+	Some of the examples use browser APIs like the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" target="_blank">Web Storage API</a> that won't work in the Svelte Playground, but you can use an online IDE like <a href="https://www.sveltelab.dev/" target="_blank">SvelteLab</a>.
 </Card>
 
 If you're a creature of comfort and prefer your development environment, you can scaffold a Vite project and pick Svelte as the option from the CLI if you run `npm create vite@latest` in a terminal — you're going to need [Node.js](https://nodejs.org/) for that.
