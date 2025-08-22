@@ -69,7 +69,7 @@ Svelte also has a more opinionated application framework called [SvelteKit](http
 You can try Svelte in the browser using the [Svelte Playground](https://svelte.dev/playground) and follow along without having to set up anything.
 
 <Card type="warning">
-	Some of the examples use browser APIs like the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" target="_blank">Web Storage API</a> that aren't supported in the Svelte Playground.
+	Some of the examples use browser APIs like the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" target="_blank">Web Storage API</a> that won't work in the Svelte Playground, but you can use an online IDE like [SvelteLab](https://www.sveltelab.dev/).
 </Card>
 
 If you're a creature of comfort and prefer your development environment, you can scaffold a Vite project and pick Svelte as the option from the CLI if you run `npm create vite@latest` in a terminal — you're going to need [Node.js](https://nodejs.org/) for that.
@@ -143,7 +143,7 @@ Your component logic goes inside the `<script>` tag. Since Svelte 5, TypeScript 
 <h1>{title as string}</h1>
 ```
 
-Later we're going to learn how you can even define values inside your markup which can be helpful in some cases.
+Later we're going to learn how you can even define values inside your markup, which can be helpful in some cases.
 
 ## Markup Poetry
 
@@ -233,11 +233,13 @@ To conditionally render attributes, use `null` or `undefined` instead of `&&` fo
 
 <!-- ⛔️ loading is `false` -->
 <img {src} {alt} loading={lazy && 'lazy'} />
+
 <!-- ⛔️ orphan attribute -->
 <img {src} {alt} loading={lazy ? 'lazy' : ''} />
 
 <!-- 👍 using `null` -->
 <img {src} {alt} loading={lazy ? 'lazy' : null} />
+
 <!-- 👍 using `undefined` -->
 <img {src} {alt} loading={lazy ? 'lazy' : undefined} />
 ```
@@ -506,10 +508,10 @@ Also consider using [data attributes](https://developer.mozilla.org/en-US/docs/W
 
 ```svelte:App.svelte {2,5,12-14,16-18}
 <script lang="ts">
-	let status = 'closed'
+	let status = $state('closed')
 </script>
 
-<div class="trigger" data-status={status}>👈️</div>
+<span class="trigger" data-status={status}>👈️</span>
 
 <style>
 	.trigger {
@@ -624,7 +626,7 @@ You might not want deeply reactive state, where pushing to an array or updating 
 
 ```svelte:App.svelte {3-6,13,16-19}
 <script lang="ts">
-	// this could be a complex object
+	// this could be a complex data structure
 	let editor = $state.raw({
 		theme: 'dark',
 		content: '<h1>Svelte</h1>'
@@ -667,6 +669,9 @@ function saveEditorState(editor) {
 	// 👍️ normal object
 	const editorState = structuredClone($state.snapshot(editor))
 }
+
+// later
+saveEditorState(editor)
 ```
 
 <Card type="info">
@@ -760,6 +765,16 @@ This might sound like magic, but the only magic here is the system of signals an
 
 The reason you don't have to pass state to the function — unless you want to be explicit — is because signals only care where they're read, as highlighted in the compiled output.
 
+Passing state as argument:
+
+```ts:output {1}
+let disabled = derived(() => limit(get(count))) // 📖
+
+function limit(count) {
+	return count > 4
+}
+```
+
 Not passing any arguments:
 
 ```ts:output {4}
@@ -770,15 +785,7 @@ function limit() {
 }
 ```
 
-Passing `count` as argument:
-
-```ts:output {1}
-let disabled = derived(() => limit(get(count))) // 📖
-
-function limit(count) {
-	return count > 4
-}
-```
+The only thing that matters is that `count` is read and tracked inside of an effect, so the `limit` function reruns when it updates.
 
 ### $derived.by
 
@@ -839,9 +846,9 @@ Going back to a previous example, you can also use derived state to keep reactiv
 
 ## Effects
 
-The last main rune you should know about is the `$effect` rune.
+The last rune in the holy trinity of reactivity in Svelte you should know about is the `$effect` rune.
 
-Effects are functions that run when the component is added to the DOM and when their dependencies change.
+Effects are functions that run **when the component is added** to the DOM and **when their dependencies change**.
 
 State that is **read** inside of an effect will be tracked:
 
@@ -874,12 +881,36 @@ Here if `condition` is `true`, then `condition` and `count` are going to be trac
 	})
 </script>
 
-<button onclick={() => condition = !condition}>Toggle</button>
 <button onclick={() => count++}>Click</button>
+<button onclick={() => condition = !condition}>Toggle</button>
 ```
 
 <Card type="info">
 	Use the <a href="https://svelte.dev/docs/svelte/$inspect" target="_blank">$inspect</a> rune instead of effects to log when a reactive value updates.
+</Card>
+
+You can return a function from the effect callback, which reruns when the effect **dependencies change**, or when the component is **removed** from the DOM:
+
+```svelte:App.svelte {9}
+<script lang="ts">
+	let count = $state(0)
+	let delay = $state(1000)
+
+	$effect(() => {
+		// 🕵️ only `delay` is tracked
+		const interval = setInterval(() => count++, delay)
+		// 🧹 clear interval every update
+		return () => clearInterval(interval)
+	})
+</script>
+
+<button onclick={() => delay *= 2}>slower</button>
+<span>{count}</span>
+<button onclick={() => delay /= 2}>faster</button>
+```
+
+<Card type="warning">
+	Values that are read <b>asynchronously</b> inside promises and timers are <b>not tracked</b> inside effects.
 </Card>
 
 Svelte provides an `untrack` function if you don't want to track the state:
@@ -901,72 +932,48 @@ Svelte provides an `untrack` function if you don't want to track the state:
 <button onclick={() => b++}>B</button>
 ```
 
-You can return a function from the effect callback, which reruns when the effect **dependencies change**, or when the component is **removed** from the DOM:
-
-```svelte:App.svelte {9}
-<script lang="ts">
-	let count = $state(0)
-	let delay = $state(1000)
-
-	$effect(() => {
-		// 🕵️ only `delay` is tracked
-		const interval = setInterval(() => count++, delay)
-		// 🧹 clear interval every update
-		return () => clearInterval(interval)
-	})
-</script>
-
-<button onclick={() => delay *= 2}>+</button>
-<span>{count}</span>
-<button onclick={() => delay /= 2}>-</button>
-```
-
-<Card type="warning">
-	Values that are read <b>asynchronously</b> inside promises and timers are <b>not tracked</b> inside effects.
-</Card>
-
 ### Effect Dependency Tracking
 
 When it comes to deeply reactive state, effects only rerun when the object it reads changes and not its properties:
 
-```svelte:App.svelte {6,11}
+```svelte:App.svelte
 <script lang="ts">
 	let obj = $state({ current: 0 })
+	let arr = $state([])
 
 	$effect(() => {
-		// doesn't run if property changes
+		// ⛔️ not tracked
 		console.log(obj)
+		// 👍️ tracked
+		console.log(obj.current)
 	})
 
 	$effect(() => {
-		// you have to track the property
-		console.log(obj.current)
+		// ⛔️ not tracked
+		console.log(arr)
+		// 👍️ tracked
+		console.log(arr.length)
 	})
 
 	// later
 	obj.current++
+	arr.push(1)
 </script>
 ```
 
-There are ways around it though! 🤫 You can use `JSON.stringify`, `$state.snapshot`, or the `$inspect` rune to react when the object properties change:
+There are exceptions to the rule! If you use `JSON.stringify`, `$state.snapshot`, or `$inspect` then everything is tracked:
 
-```svelte:App.svelte {5,10,15}
+```svelte:App.svelte {6,10}
 <script lang="ts">
 	let obj = $state({ current: 0 })
+	let arr = $state([])
 
 	$effect(() => {
 		JSON.stringify(obj) // 👍️ tracked
-		// ...
 	})
 
 	$effect(() => {
-		$state.snapshot(obj) // 👍️ tracked
-		// ...
-	})
-
-	$effect(() => {
-		$inspect(obj) // 👍️ tracked
-		// ...
+		JSON.stringify(arr) // 👍️ tracked
 	})
 </script>
 ```
