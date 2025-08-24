@@ -848,9 +848,9 @@ Going back to a previous example, you can also use derived state to keep reactiv
 
 The last rune in the holy trinity of reactivity in Svelte you should know about is the `$effect` rune.
 
-Effects are functions that run **when the component is added** to the DOM and **when their dependencies change**.
+Effects are functions that run **when the component is added** to the DOM and **when their dependencies change**. State that is **read** inside of an effect will be tracked.
 
-State that is **read** inside of an effect will be tracked:
+Here `count` is going to be logged when it updates, since it's read inside of the effect and tracked as a dependency:
 
 ```svelte:App.svelte {2,6}
 <script lang="ts">
@@ -865,9 +865,7 @@ State that is **read** inside of an effect will be tracked:
 <button onclick={() => count++}>Click</button>
 ```
 
-**Values are only tracked if they're read.**
-
-Here if `condition` is `true`, then `condition` and `count` are going to be tracked — if `condition` is false, then the effect only reruns when `condition` changes:
+Values are only tracked if they're **read** — here if `condition` is `true`, then `condition` and `count` are going to be tracked, but if `condition` is false, then the effect only reruns when `condition` changes:
 
 ```svelte:App.svelte {3,6-8}
 <script lang="ts">
@@ -913,7 +911,7 @@ You can return a function from the effect callback, which reruns when the effect
 	Values that are read <b>asynchronously</b> inside promises and timers are <b>not tracked</b> inside effects.
 </Card>
 
-Svelte provides an `untrack` function if you don't want to track the state:
+Svelte provides an `untrack` function if you don't want state to be tracked:
 
 ```svelte:App.svelte {2,9}
 <script lang="ts">
@@ -923,7 +921,7 @@ Svelte provides an `untrack` function if you don't want to track the state:
 	let b = $state(0)
 
 	$effect(() => {
-		// ⛔️ only runs when `b` changes
+		// ⛔️ only logs when `b` changes
 		console.log(untrack(() => a) + b)
 	})
 </script>
@@ -1023,7 +1021,7 @@ Using effects to synchronize state can cause unexpected behavior like state bein
 	Deriveds are effects under the hood, but they rerun immediately when their dependencies change.
 </Card>
 
-If you don't want to track values, you can use the `onMount` lifecycle function instead of an effect:
+If you want to do something when the component is added to the DOM and don't care about tracking state, you can use the `onMount` lifecycle function instead of an effect:
 
 ```svelte:App.svelte
 <script lang="ts">
@@ -1044,7 +1042,7 @@ If you don't want to track values, you can use the `onMount` lifecycle function 
 
 **Effects should be a last resort** when you have to synchronize with an external system that doesn't understand Svelte's reactivity. They should only be used for side-effects like fetching data from an API, or working with the DOM directly.
 
-In this example, we're using the Pokemon API and `getAbortSignal` from Svelte to avoid making a bunch of requests when doing a search:
+In this example, we're using the Pokemon API and `getAbortSignal` from Svelte to avoid making a bunch of requests when searching for a Pokemon:
 
 ```svelte:App.svelte {17-21}
 <script lang="ts">
@@ -1098,7 +1096,7 @@ In this example, we're using the Pokemon API and `getAbortSignal` from Svelte to
 
 Your effects run after the DOM updates in a [microtask](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide), but sometimes you might need to do work before the DOM updates like measuring an element, or scroll position — in that case, you can use the `$effect.pre` rune.
 
-A great example is the [GSAP Flip plugin](https://gsap.com/docs/v3/Plugins/Flip/) for animating view transitions when you update the DOM. It needs to measure the position, size, and rotation of elements before, and after the DOM update.
+Let's look at an example that uses the [GSAP Flip plugin](https://gsap.com/docs/v3/Plugins/Flip/) to animate changes in the DOM and needs to measure the position, size, and rotation of elements before, and after the DOM update.
 
 In this example, we measure the elements before the DOM updates, and use `tick` to wait for the DOM update:
 
@@ -1169,30 +1167,195 @@ In this example, we measure the elements before the DOM updates, and use `tick` 
 
 `tick` is a useful lifecyle function that schedules a task to run in the next microtask when all the work is done, and before the DOM updates.
 
+## Why You Should Avoid Effects
+
+I don't want to scare you from using effects. Honestly, it's not a big deal if you **sometimes** use effects when you shouldn't.
+
+You're not going to make your app worse by using effects — the actual problem is that it's easy to overcomplicate your code with effects, because it seems like the right thing to do.
+
+In this example, we're using the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) to read and write the `counter` value each time it updates. Hey, that's a side-effect! Using an effect seems resonable:
+
+```ts:counter.svelte.ts
+class Counter {
+	constructor(initial: number) {
+		this.count = $state(initial)
+
+		$effect(() => {
+			const savedCount = localStorage.getItem('count')
+			if (savedCount) this.count = parseInt(savedCount)
+		})
+
+		$effect(() => {
+			localStorage.setItem('count', this.count.toString())
+		})
+	}
+}
+```
+
+The problem only arises if you create the counter outside the component initialization phase (in a separate module, or inside of an event handler):
+
+```ts:counter.svelte.ts
+export const counter = new Counter(0)
+```
+
+Oops! Immediately, there's an error:
+
+> effect_orphan `$effect` can only be used inside an effect (e.g. during component initialisation).
+
+In the previous section we learned that everything starts with a root effect, so Svelte can run the teardown logic for nested effects when the component is removed.
+
+In this case, you're trying to create an effect outside that root effect, which is not allowed.
+
+Svelte provides an advanced `$effect.root` rune to create your own root effect, but now you have to run the cleanup manually:
+
+```ts:counter.svelte.ts {2,8-19,22-24}
+class Counter {
+	#cleanup
+
+	constructor(initial: number) {
+		this.count = $state(initial)
+
+		// manual cleanup 😮‍💨
+		this.cleanup = $effect.root(() => {
+			$effect(() => {
+				const savedCount = localStorage.getItem('count')
+				if (savedCount) this.count = parseInt(savedCount)
+			})
+
+			$effect(() => {
+				localStorage.setItem('count', this.count.toString())
+			})
+
+			return () => console.log('🧹 cleanup')
+		})
+	}
+
+	destroy() {
+		this.#cleanup()
+	}
+}
+```
+
+Awkward! 😄 Then you learn about the `$effect.tracking` rune, used to know if you're inside a **tracking context** like the effect in your template, so maybe that's the solution?
+
+```ts:counter.svelte.ts {5-14}
+class Counter {
+	constructor(initial: number) {
+		this.count = $state(initial)
+
+		if ($effect.tracking()) {
+			$effect(() => {
+				const savedCount = localStorage.getItem('count')
+				if (savedCount) this.count = parseInt(savedCount)
+			})
+
+			$effect(() => {
+				localStorage.setItem('count', this.count.toString())
+			})
+		}
+	}
+}
+```
+
+But there's **another** problem! The effect is never going to run when the counter is created, because you're not inside a tracking context. 😩
+
+It would make more sense to move the effect where you read the value — this way, it's read inside of a tracking context like the template effect:
+
+```ts:counter.svelte.ts {7-12,17}
+export class Counter {
+	constructor(initial: number) {
+		this.#count = $state(initial)
+	}
+
+	get count() {
+		if ($effect.tracking()) {
+			$effect(() => {
+				const savedCount = localStorage.getItem('count')
+				if (savedCount) this.#count = parseInt(savedCount)
+			})
+		}
+		return this.#count
+	}
+
+	set count(v: number) {
+		localStorage.setItem('count', v.toString())
+		this.#count = v
+	}
+}
+```
+
+There's **another** problem. Each time we read the value, we're creating an effect! 😨 That's a simple fix — we can use a variable to track if we already ran the effect:
+
+```ts:counter.svelte.ts {2,11,14}
+export class Counter {
+	#first = true
+
+	constructor(initial: number) {
+		this.#count = $state(initial)
+	}
+
+	get count() {
+		if ($effect.tracking()) {
+			$effect(() => {
+				if (!this.#first) return
+				const savedCount = localStorage.getItem('count')
+				if (savedCount) this.#count = parseInt(savedCount)
+				this.#first = false
+			})
+		}
+		return this.#count
+	}
+
+	set count(v: number) {
+		localStorage.setItem('count', v.toString())
+		this.#count = v
+	}
+}
+```
+
+In reality, none of this is necessary — you can make everything simpler by doing side-effects inside event handlers like `onclick` instead of using effects. In fact, we can just remove the effect and everything works:
+
+```ts:counter.svelte.ts
+export class Counter {
+	#first = true
+
+	constructor(initial: number) {
+		this.#count = $state(initial)
+	}
+
+	get count() {
+		if (this.#first) {
+			const savedCount = localStorage.getItem('count')
+			if (savedCount) this.#count = parseInt(savedCount)
+			this.#first = false
+		}
+		return this.#count
+	}
+
+	set count(v: number) {
+		localStorage.setItem('count', v.toString())
+		this.#count = v
+	}
+}
+```
+
+Unless you know what you're doing — if you catch yourself using advanced runes like `$effect.root` or `$effect.tracking`, you're doing something wrong.
+
 ## State In Functions And Classes
 
 So far, we only used runes at the top-level of our components, but you can use state, deriveds, and effects inside functions and classes.
 
 You can use runes in a JavaScript module by using the `.svelte.js` or `.svelte.ts` extension to tell Svelte that it's a special file, so it doesn't have to check every file for runes.
 
-In this example, we're creating a `createCounter` function that holds the `count` value and returns a `increment` and `decrement` function:
+Here's a `createCounter` function that holds and returns the `count` state:
 
 ```ts:counter.svelte.ts
 export function createCounter(initial: number) {
 	let count = $state(initial)
 
-	$effect(() => {
-		console.log(count)
-	})
-
-	const increment = () => count++
-	const decrement = () => count--
-
 	return {
 		get count() { return count },
-		set count(v) { count = v },
-		increment,
-		decrement
+		set count(v) { count = v }
 	}
 }
 ```
@@ -1206,9 +1369,9 @@ Here's how it's used inside of a Svelte component:
 	const counter = createCounter(0)
 </script>
 
-<button onclick={counter.decrement}>-</button>
+<button onclick={() => counter.count--}>-</button>
 <span>{counter.count}</span>
-<button onclick={counter.increment}>+</button>
+<button onclick={() => counter.count++}>+</button>
 ```
 
 ### Reactive Properties
@@ -1219,18 +1382,13 @@ Those are called **getters and setters**, and they create **accessor properties*
 
 They're just part of JavaScript, and you could use functions instead:
 
-```ts:counter.svelte.ts {8-9}
+```ts:counter.svelte.ts
 export function createCounter(initial: number) {
 	let count = $state(initial)
 
-	const increment = () => count++
-	const decrement = () => count--
-
 	return {
 		count() { return count },
-		setCount(v: number) { count = v },
-		increment,
-		decrement
+		setCount(v: number) { count = v }
 	}
 }
 ```
@@ -1265,7 +1423,7 @@ The accessor syntax looks a lot nicer! 😄 You might be wondering, can't you ju
 export function createCounter(initial: number) {
 	let count = $state(initial)
 	// ⛔️ this doesn't work
-	return count
+	return { count }
 }
 ```
 
@@ -1273,47 +1431,43 @@ The reason this doesn't work is because **state is just a regular value**. It's 
 
 ```ts:counter.svelte.ts
 export function createCounter(initial: number) {
-	let count = $state({ current: initial })
+	let counter = $state({ count: initial })
 	// 👍️ proxied state
-	return count
+	return counter
 }
 ```
 
-You can create a reactive container yourself if you want:
+You can create a reactive container if you want:
 
 ```ts:counter.svelte.ts {2-5,9}
 // reactive container utility
-export function reactive<T>(initial: T) {
-	let value = $state<{ current: T }>({ current: initial })
-	return value
+export function reactive<T>(value: T) {
+	let state = $state<T>(value)
+	return state
 }
 
 export function createCounter(initial: number) {
 	// reactive container
-	let count = reactive(initial)
-
-	const increment = () => count.current++
-	const decrement = () => count.current--
-
-	return { count, increment, decrement }
+	let counter = reactive({ count: initial })
+	return { counter }
 }
 ```
 
-Even destructuring works, since `count` is not just a regular value:
+Even destructuring works, since `counter` is not just a regular value:
 
 ```svelte:App.svelte {4}
 <script lang="ts">
 	import { createCounter } from './counter.svelte'
 
-	const { count } = createCounter(0)
+	const { counter } = createCounter(0)
 </script>
 
-<button onclick={() => count.current++}>
-	{count.current}
+<button onclick={() => counter.count++}>
+	{counter.count}
 </button>
 ```
 
-That seems super useful...so why doesn't Svelte provide this utility?
+That seems super useful, so why doesn't Svelte provide this utility?
 
 It's mostly because it's a few lines of code, but another reason is **classes**. If you use state inside classes, you get extra benefits which you don't get using functions.
 
@@ -1402,7 +1556,7 @@ In this example, we pass `count` into `Doubler` to double the value when `count`
 <script lang="ts">
 	class Doubler {
 		constructor(count: number) {
-			this.current = $derived(count * 2) // get(count) * 2
+			this.count = $derived(count * 2) // get(count) * 2
 		}
 	}
 
@@ -1411,7 +1565,7 @@ In this example, we pass `count` into `Doubler` to double the value when `count`
 </script>
 
 <button onclick={() => count++}>
-	{double.current}
+	{double.count}
 </button>
 ```
 
@@ -1425,41 +1579,41 @@ To get the latest `count` value, we can pass a function instead:
 <script lang="ts">
 	class Doubler {
 		constructor(count: () => number) {
-			this.value = $derived(count() * 2) // () => get(count) * 2
+			this.count = $derived(count() * 2) // () => get(count) * 2
 		}
 	}
 
 	let count = $state(0)
-	const doubler = new Doubler(() => count) // () => get(count)
+	const double = new Doubler(() => count) // () => get(count)
 </script>
 
 <button onclick={() => count++}>
-	{doubler.value}
+	{double.count}
 </button>
 ```
 
-You could use the reactive utility from before! Let's use a class version this time:
+Also, we already have a reactive `Counter` class we can use:
 
 ```svelte:App.svelte {2-6,9-11,14-15}
 <script lang="ts">
-	class Reactive<T> {
-		constructor(initial: T) {
-			this.current = $state<T>(initial)
+	class Counter {
+		constructor(initial: number) {
+			this.count = $state(initial)
 		}
 	}
 
 	class Doubler {
-		constructor(count: Reactive<number>) {
-			this.current = $derived(count.current * 2)
+		constructor(counter: Counter) {
+			this.count = $derived(counter.count * 2)
 		}
 	}
 
-	const count = new Reactive(0)
-	const double = new Doubler(count)
+	const counter = new Counter(0)
+	const double = new Doubler(counter)
 </script>
 
-<button onclick={() => count.current++}>
-	{double.current}
+<button onclick={() => counter.count++}>
+	{double.count}
 </button>
 ```
 
@@ -1530,11 +1684,8 @@ So far we learned that assignments cause updates in Svelte. There's nothing spec
 A signal is just a container that holds a value and subscribers that are notified when that value updates, so it doesn't do anything on its own:
 
 ```ts:example
-function createSignal(value) {
-	const signal = {
-		value,
-		subscribers: new Set()
-	}
+function state(value) {
+	const signal = { value, subscribers: new Set() }
 	return signal
 }
 ```
@@ -1552,11 +1703,11 @@ Everything starts with a root effect and your component is a nested effect insid
 When the effect runs, it invokes the callback function and sets it as the active effect in some variable:
 
 ```ts:example
-let effect = null
+let activeEffect = null
 
-function template_effect(fn) {
+function effect(fn) {
 	// set active effect
-	effect = fn
+	activeEffect = fn
 	// run the effect
 	fn()
 }
@@ -1566,11 +1717,11 @@ The magic happens when you read a signal inside of an effect. When `value` is re
 
 ```ts:example
 // the active effect
-let effect = fn
+let activeEffect = fn
 
 function get(signal) {
 	// add effect to subscribers
-	signal.subscribers.add(effect)
+	signal.subscribers.add(activeEffect)
 	// return value
 	return signal.value
 }
@@ -1587,6 +1738,26 @@ function set(signal, value) {
 }
 ```
 
+Here's a counter example using our basic signals implementation inside a regular `.html` file:
+
+```html:example
+<script>
+	import { state, set, get, effect } from './signals.js'
+
+	// create signal
+	const count = state(0)
+
+	// hook into DOM elements
+	const btn = document.querySelector('button')
+	btn.onclick = () => set(count, get(count) + 1)
+
+	// create template effect
+	effect(() => btn.textContent = get(count))
+</script>
+
+<button>0</button>
+```
+
 This is oversimplified, but it happens every update and that's why it's called **runtime reactivity**, because it happens as your code runs!
 
 **Svelte doesn't compile reactivity**, it only compiles the implementation details. That's how you can use signals like a regular value. In other frameworks, you always have to read and write them using functions, or accessors.
@@ -1599,14 +1770,14 @@ Deriveds are effects that track their own dependencies and return a signal — y
 	let code = $derived(getCodePoint())
 
 	function getCodePoint() {
-		// `value` is read inside derived effect
+		// `value` is read inside the derived effect
 		return value.codePointAt(0).toString(16)
 	}
 
 	value = '🍌'
 </script>
 
-<!-- `code` is read inside template effect -->
+<!-- `code` is read inside the template effect -->
 {code}
 ```
 
@@ -1634,184 +1805,6 @@ Here if `emoji.code` was a regular value and not a getter, the text inside the b
 ```
 
 As the React people love to say, "it's just JavaScript!" 😄
-
-## Why You Should Avoid Effects
-
-I don't want to scare you from using effects. Honestly, it's not a big deal if you **sometimes** use effects when you shouldn't.
-
-The problem is that it's easy to overcomplicate your code with effects, because it seems like the right thing to do.
-
-This example has a `counter` I want to read and write using the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) each time it updates.
-
-Hey, that's a side-effect! It seems resonable to use an effect:
-
-```ts:counter.svelte.ts
-class Counter {
-	constructor(initial: number) {
-		this.count = $state(initial)
-
-		$effect(() => {
-			const savedCount = localStorage.getItem('count')
-			if (savedCount) this.count = parseInt(savedCount)
-		})
-
-		$effect(() => {
-			localStorage.setItem('count', this.count.toString())
-		})
-	}
-}
-```
-
-The problem only arises if you create the counter outside the component initialization phase (in a separate module, or inside of an event handler):
-
-```ts:counter.svelte.ts
-export const counter = new Counter(0)
-```
-
-Oops! Immediately, there's an error:
-
-> effect_orphan `$effect` can only be used inside an effect (e.g. during component initialisation).
-
-In the previous section we learned that everything starts with a root effect, so Svelte can run the teardown logic for nested effects when the component is removed.
-
-In this case, you're trying to create an effect outside that root effect, which is not allowed.
-
-Svelte provides an advanced `$effect.root` rune to create your own root effect, but now you have to run the cleanup manually:
-
-```ts:counter.svelte.ts
-class Counter {
-	#cleanup
-
-	constructor(initial: number) {
-		this.count = $state(initial)
-
-		// manual cleanup 😮‍💨
-		this.cleanup = $effect.root(() => {
-			$effect(() => {
-				const savedCount = localStorage.getItem('count')
-				if (savedCount) this.count = parseInt(savedCount)
-			})
-
-			$effect(() => {
-				localStorage.setItem('count', this.count.toString())
-			})
-
-			return () => console.log('🧹 cleanup')
-		})
-	}
-
-	destroy() {
-		this.#cleanup()
-	}
-}
-```
-
-Awkward! 😄 Then you learn about the `$effect.tracking` rune, used to know if you're inside a **tracking context** like the effect in your template, so maybe that's the solution?
-
-```ts:counter.svelte.ts
-class Counter {
-	constructor(initial: number) {
-		this.count = $state(initial)
-
-		if ($effect.tracking()) {
-			$effect(() => {
-				const savedCount = localStorage.getItem('count')
-				if (savedCount) this.count = parseInt(savedCount)
-			})
-
-			$effect(() => {
-				localStorage.setItem('count', this.count.toString())
-			})
-		}
-	}
-}
-```
-
-But there's **another** problem! The effect is never going to run when the counter is created, because you're not inside a tracking context. 😩
-
-It would make more sense to move the effect where you read the value — this way, it's read inside of a tracking context like the template effect:
-
-```ts:counter.svelte.ts {7-12,17}
-export class Counter {
-	constructor(initial: number) {
-		this.#count = $state(initial)
-	}
-
-	get count() {
-		if ($effect.tracking()) {
-			$effect(() => {
-				const savedCount = localStorage.getItem('count')
-				if (savedCount) this.#count = parseInt(savedCount)
-			})
-		}
-		return this.#count
-	}
-
-	set count(v: number) {
-		localStorage.setItem('count', v.toString())
-		this.#count = v
-	}
-}
-```
-
-There's **another** problem...
-
-Each time we read the value, we're creating an effect! 😨 Alright, that's a simple fix — we can use a variable to track if we already ran the effect:
-
-```ts:counter.svelte.ts {2,11,14}
-export class Counter {
-	#first = true
-
-	constructor(initial: number) {
-		this.#count = $state(initial)
-	}
-
-	get count() {
-		if ($effect.tracking()) {
-			$effect(() => {
-				if (!this.#first) return
-				const savedCount = localStorage.getItem('count')
-				if (savedCount) this.#count = parseInt(savedCount)
-				this.#first = false
-			})
-		}
-		return this.#count
-	}
-
-	set count(v: number) {
-		localStorage.setItem('count', v.toString())
-		this.#count = v
-	}
-}
-```
-
-In reality, none of this is necessary — you can make everything simpler by doing side-effects inside event handlers like `onclick` instead of using effects. In fact, we can just remove the effect and everything works:
-
-```ts:counter.svelte.ts
-export class Counter {
-	#first = true
-
-	constructor(initial: number) {
-		this.#count = $state(initial)
-	}
-
-	get count() {
-		if (this.#first) {
-			const savedCount = localStorage.getItem('count')
-			if (savedCount) this.#count = parseInt(savedCount)
-			this.#first = false
-		}
-		return this.#count
-	}
-
-	set count(v: number) {
-		localStorage.setItem('count', v.toString())
-		this.#count = v
-	}
-}
-```
-
-Unless you know what you're doing — if you catch yourself using advanced runes like `$effect.root` or `$effect.tracking`, you're doing something wrong.
 
 ## Using Template Logic
 
