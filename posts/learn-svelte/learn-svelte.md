@@ -959,7 +959,7 @@ When it comes to deeply reactive state, effects only rerun when the object it re
 </script>
 ```
 
-There are exceptions to the rule! If you use `JSON.stringify`, `$state.snapshot`, or `$inspect` then everything is tracked:
+There are exceptions to the rule! If you use `JSON.stringify`, `$state.snapshot` then everything is tracked:
 
 ```svelte:App.svelte {6,10}
 <script lang="ts">
