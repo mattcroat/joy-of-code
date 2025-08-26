@@ -8,14 +8,15 @@
 
 <div class="container">
 	<div class="example">
+		<!-- svelte-ignore a11y_media_has_caption -->
 		<video src={clip} bind:currentTime bind:duration bind:paused></video>
 
 		<div class="controls">
 			<button onclick={() => (paused = !paused)}>
-				{paused ? 'Play' : 'Pause'}
+				{paused ? '▶️' : '⏸️'}
 			</button>
-			<span>{currentTime.toFixed()}/{duration.toFixed()}</span>
-			<input type="range" bind:value={currentTime} max={duration} />
+			<span>{currentTime.toFixed(1)}/{duration.toFixed(1)}</span>
+			<input type="range" bind:value={currentTime} max={duration} step={0.1} />
 		</div>
 	</div>
 </div>

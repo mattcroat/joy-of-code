@@ -1,5 +1,5 @@
 <script lang="ts">
-	let list = $state(['Angular', 'React', 'Svelte', 'Vue'])
+	let list = $state(['Angular', 'React', 'Solid', 'Svelte', 'Vue', 'Qwik'])
 	let filteredList = $derived(
 		list.filter((item) => item.toLowerCase().includes(search.toLowerCase()))
 	)

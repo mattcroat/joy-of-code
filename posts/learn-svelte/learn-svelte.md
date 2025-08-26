@@ -2182,7 +2182,7 @@ Having to do `value={search}` and `oninput={(e) => search = e.target.value}` on 
 
 ```svelte:App.svelte {3,4,10,11,15}
 <script lang="ts">
-	let list = $state(['angular', 'react', 'svelte', 'vue'])
+	let list = $state(['Angular', 'React', 'Solid', 'Svelte', 'Vue', 'Qwik'])
 	let filteredList = $derived(list.filter((item) => item.includes(search)))
 	let search = $state('')
 </script>
@@ -2298,10 +2298,10 @@ There are media bindings for `<audio>`, `<video>`, and `<img>` elements:
 
 	<div class="controls">
 		<button onclick={() => paused = !paused}>
-			{paused ? 'Play' : 'Pause'}
+			{paused ? '▶️' : '⏸️'}
 		</button>
-		<span>{currentTime.toFixed()}/{duration.toFixed()}</span>
-		<input type="range" bind:value={currentTime} max={duration} />
+		<span>{currentTime.toFixed(1)}/{duration.toFixed(1)}</span>
+		<input type="range" bind:value={currentTime} max={duration} step={0.1} />
 	</div>
 </div>
 
