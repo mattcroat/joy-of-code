@@ -2428,11 +2428,11 @@ Let's use a basic todo list app as an example:
 </script>
 
 <form onsubmit={addTodo}>
-	<input type="text" bind:value={todo} placeholder="Add todo" />
+	<input type="text" placeholder="Add todo" bind:value={todo} />
 </form>
 
 <ul>
-	{#each filteredTodos as todo (todo.id)}
+	{#each filteredTodos as todo (todo)}
 		<li transition:slide>
 			<input type="checkbox" bind:checked={todo.completed} />
 			<input type="text" bind:value={todo.text} />
@@ -2444,11 +2444,13 @@ Let's use a basic todo list app as an example:
 <div>
 	<p>{remaining} {remaining === 1 ? 'item' : 'items'} left</p>
 
-	{#each ['all', 'active', 'completed'] as const as filter}
-		<button onclick={() => setFilter(filter)}>{filter}</button>
-	{/each}
+	<div class="filters">
+		{#each ['all', 'active', 'completed'] as const as filter}
+			<button onclick={() => setFilter(filter)}>{filter}</button>
+		{/each}
 
-	<button onclick={clearCompleted}>Clear completed</button>
+		<button onclick={clearCompleted}>Clear completed</button>
+	</div>
 </div>
 ```
 
@@ -2482,7 +2484,7 @@ To receive the props, we use the `$props` rune:
 </script>
 
 <form onsubmit={props.addTodo}>
-	<input type="text" bind:value={props.todo} placeholder="Add todo" />
+	<input type="text" placeholder="Add todo" bind:value={props.todo} />
 </form>
 ```
 
@@ -2495,11 +2497,11 @@ You can destructure props, rename them, set a default value, and spread the rest
 		addTodo: () => void
 	}
 
-	let { todo = 'Fallback', addTodo, ...props }: Props = $props()
+	let { addTodo, todo = 'Fallback', ...props }: Props = $props()
 </script>
 
 <form onsubmit={addTodo} {...props}>
-	<input type="text" bind:value={todo} placeholder="Add todo" />
+	<input type="text" placeholder="Add todo" bind:value={todo} />
 </form>
 ```
 
@@ -2512,11 +2514,11 @@ To update `todo` from the child component, we have to let Svelte know it's okay 
 		addTodo: () => void
 	}
 
-	let { todo = $bindable('Fallback'), addTodo } = $props()
+	let { addTodo, todo = $bindable('Fallback') } = $props()
 </script>
 
 <form onsubmit={addTodo}>
-	<input type="text" bind:value={todo} placeholder="Add todo" />
+	<input type="text" placeholder="Add todo" bind:value={todo} />
 </form>
 ```
 
@@ -2530,7 +2532,7 @@ You can now safely bind the `todo` prop:
 	// ...
 </script>
 
-<AddTodo bind:todo {addTodo} />
+<AddTodo {addTodo} bind:todo />
 ```
 
 In reality, you don't have to do this. It makes more sense to move the `todo` state inside `<AddTodo>`and use a callback prop to change it:
@@ -2569,7 +2571,7 @@ Let's update the `<AddTodo>` component:
 </script>
 
 <form {onsubmit}>
-	<input type="text" bind:value={todo} placeholder="Add todo" />
+	<input type="text" placeholder="Add todo" bind:value={todo} />
 </form>
 ```
 
@@ -2602,10 +2604,11 @@ Let's create the `<TodoList>` component to render the list of todos, and use a S
 
 Let's pass the `filteredTodos` and `removeTodo` props:
 
-```svelte:Todos.svelte {3,7}
+```svelte:Todos.svelte {3,8}
 <script lang="ts">
 	import AddTodo from './AddTodo.svelte'
 	import TodoList from './TodoList.svelte'
+	// ...
 </script>
 
 <AddTodo {todo} {addTodo} />
@@ -2630,21 +2633,24 @@ Let's create the `<TodoFilter>` component to filter the todos:
 <div>
 	<p>{remaining} {remaining === 1 ? 'item' : 'items'} left</p>
 
-	{#each ['all', 'active', 'completed'] as const as filter}
-		<button onclick={() => setFilter(filter)}>{filter}</button>
-	{/each}
+	<div class="filters">
+		{#each ['all', 'active', 'completed'] as const as filter}
+			<button onclick={() => setFilter(filter)}>{filter}</button>
+		{/each}
 
-	<button onclick={clearCompleted}>Clear completed</button>
+		<button onclick={clearCompleted}>Clear completed</button>
+	</div>
 </div>
 ```
 
 Let's pass the `remaining`, `setFilter`, and `clearCompleted` props:
 
-```svelte:Todos.svelte {4,9}
+```svelte:Todos.svelte {4,10}
 <script lang="ts">
 	import AddTodo from './AddTodo.svelte'
 	import TodoList from './TodoList.svelte'
 	import TodoFilter from './TodoFilter.svelte'
+	// ...
 </script>
 
 <AddTodo {todo} {addTodo} />
@@ -2675,11 +2681,12 @@ I left the `<TodoItem>` component for last to show the downside of abusing bindi
 
 This works, but you're going to get warnings for mutating `todos` in the parent state if you don't make `todos` bindable:
 
-```svelte:Todos.svelte {8}
+```svelte:Todos.svelte {9}
 <script lang="ts">
 	import AddTodo from './AddTodo.svelte'
 	import TodoList from './TodoList.svelte'
 	import TodoFilter from './TodoFilter.svelte'
+	// ...
 </script>
 
 <AddTodo {todo} {addTodo} />
@@ -2719,7 +2726,7 @@ Let's update the `<Todos>` component to use callback props:
 			text: formData.get('todo'),
 			completed: false
 		})
-		form.reset()
+		this.reset()
 	}
 
 	function toggleTodo(todo: Todo) {
@@ -2731,6 +2738,8 @@ Let's update the `<Todos>` component to use callback props:
 		const index = todos.findIndex((t) => t.id === todo.id)
 		todos[index].text = todo.text
 	}
+
+	// ...
 </script>
 
 <AddTodo {addTodo} />
@@ -2747,7 +2756,7 @@ The last thing to do is to update the rest of the components to accept callback 
 </script>
 
 <form onsubmit={addTodo}>
-	<input type="text" name="todo" />
+	<input type="text" placeholder="Add todo" name="todo" />
 </form>
 ```
 
@@ -2775,13 +2784,13 @@ The last thing to do is to update the rest of the components to accept callback 
 <li transition:slide>
 	<input
 		type="checkbox"
-		onchange={() => toggleTodo(todo)}
 		checked={todo.completed}
+		onchange={() => toggleTodo(todo)}
 	/>
 	<input
 		type="text"
+		value={todo.text}
 		oninput={() => updateTodo(todo)}
-		bind:value={todo.text}
 	/>
 	<button onclick={() => removeTodo(todo)}>🗙</button>
 </li>
