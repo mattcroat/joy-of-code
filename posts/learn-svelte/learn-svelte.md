@@ -959,7 +959,7 @@ When it comes to deeply reactive state, effects only rerun when the object it re
 </script>
 ```
 
-There are exceptions to the rule! If you use `JSON.stringify`, `$state.snapshot` then everything is tracked:
+There are exceptions to the rule! If you use `JSON.stringify` or `$state.snapshot`, then everything is tracked:
 
 ```svelte:App.svelte {6,10}
 <script lang="ts">
@@ -2592,7 +2592,7 @@ Let's create the `<TodoList>` component to render the list of todos, and use a S
 </script>
 
 <ul>
-	{#each todos as todo, i (todo.id)}
+	{#each todos as todo, i (todo)}
 		<li transition:slide>
 			<input type="checkbox" bind:checked={todo.completed} />
 			<input type="text" bind:value={todo.text} />
@@ -2704,7 +2704,7 @@ You have to bind each `todo` to the `todos` array:
 </script>
 
 <ul>
-	{#each todos as todo, i (todo.id)}
+	{#each todos as todo, i (todo)}
 		<li transition:slide>
 			<TodoItem bind:todo={todos[i]} {removeTodo} />
 		</li>
@@ -2768,7 +2768,7 @@ The last thing to do is to update the rest of the components to accept callback 
 </script>
 
 <ul>
-	{#each todos as todo (todo.id)}
+	{#each todos as todo (todo)}
 		<TodoItem {todo} {toggleTodo} {updateTodo} {removeTodo} />
 	{/each}
 </ul>
@@ -2796,7 +2796,7 @@ The last thing to do is to update the rest of the components to accept callback 
 </li>
 ```
 
-In my opinion, **you should avoid creating components**. If you're not sure what to turn into a component — don't. Instead, write everything inside a single component until it gets complicated, or the reusable parts become obvious.
+**You should avoid creating components** if you're not sure what to turn into a component. Instead, write everything inside a single component until it gets complicated, or the reusable parts become obvious.
 
 Later we're going to learn how to talk between components without props, using the context API.
 
@@ -2805,24 +2805,6 @@ Later we're going to learn how to talk between components without props, using t
 You can compose components through **nesting** and **snippets** which hold content that can be passed as props to components similar to slots. Components can also talk to each other through the context API without props or events.
 
 ### Component Nesting
-
-To show component composition in Svelte, let's create an accordion component that can have many accordion items.
-
-You can create these files inside an `accordion` folder:
-
-```console:files
-accordion/
-├── Accordion.svelte
-├── AccordionItem.svelte
-└── index.ts
-```
-
-Let's export the accordion components from the `index.ts` file:
-
-```ts:index.ts
-export { default as Accordion } from './Accordion.svelte'
-export { default as AccordionItem } from './AccordionItem.svelte'
-```
 
 In HTML, you can nest elements inside other elements:
 
@@ -2838,27 +2820,38 @@ In HTML, you can nest elements inside other elements:
 </div>
 ```
 
-The fun part of using a framework like Svelte is that you get to decide how you want to compose components.
+The fun part of using a framework like Svelte is that you get to decide how you want to compose components. To show component composition in Svelte, let's create an accordion component that can have many accordion items.
 
-The `<Accordion>` and `<AccordionItem>` components can accept children like regular HTML elements using a `children` snippet:
+Let's create these files inside an `accordion` folder:
 
-```svelte:App.svelte {6-12}
+```console:files
+accordion/
+├── Accordion.svelte
+├── AccordionItem.svelte
+└── index.ts
+```
+
+Let's export the accordion components from the `index.ts` file:
+
+```ts:index.ts
+export { default as Accordion } from './Accordion.svelte'
+export { default as AccordionItem } from './AccordionItem.svelte'
+```
+
+Components accept attributes like regular HTML elements called properties, or **props\*** for short. Any content inside the component tags becomes part of the implicit `children` prop:
+
+```svelte:App.svelte {6-7}
 <script lang="ts">
 	import { Accordion, AccordionItem } from './accordion'
 </script>
 
 <Accordion>
-	{#snippet children()}
-		<AccordionItem title="Item A">
-			{#snippet children()}
-				Content
-			{/snippet}
-		</AccordionItem>
-	{/snippet}
+	<!-- children -->
+	<p>Accordion item</p>
 </Accordion>
 ```
 
-This is tedious, so every component has an implicit `children` prop. Any content inside the component tags becomes part of the `children` snippet:
+The `children` prop is actually a snippet which you can define yourself:
 
 ```svelte:App.svelte {6-8}
 <script lang="ts">
@@ -2866,13 +2859,15 @@ This is tedious, so every component has an implicit `children` prop. Any content
 </script>
 
 <Accordion>
-	<AccordionItem title="Item A">
-		Content
-	</AccordionItem>
+	{#snippet children()}
+		<p>Accordion item</p>
+	{/snippet}
 </Accordion>
 ```
 
-You can get the `children` from the props, and render them using the `@render` tag:
+Snippets are great for reusing markup, or delegating rendering to a child component.
+
+You can get the `children` from the `$props` rune, and render them using the `@render` tag using an `{#if ...}` block with a fallback, or optional chaining:
 
 ```svelte:Accordion.svelte {7-11,14}
 <script lang="ts">
@@ -2896,8 +2891,8 @@ The `<AccordionItem>` accepts a `title` prop, and we can show the accordion item
 
 ```svelte:AccordionItem.svelte {10,21,27}
 <script lang="ts">
-	import type { Snippet } from 'svelte'
 	import { slide } from 'svelte/transition'
+	import type { Snippet } from 'svelte'
 
 	interface Props {
 		title: string
