@@ -3477,11 +3477,9 @@ The solution is to use the `global` modifier:
 
 Transitions were global by default in older versions of Svelte, so keep that in mind if you come across older Svelte code.
 
-### Playing Transitions Immediately
+### Autoplaying Transitions Aside
 
-You might have noticed that transitions don't play immediately when you open a page.
-
-If you want that behavior, you can create a component with an effect to trigger the transition when it's added to the DOM:
+If you're using SvelteKit, transitions might not play immediately since the first page load is server-side rendered. If you want that behavior, you can create a component with an effect to trigger the transition when it's added to the DOM:
 
 ```svelte:Fade.svelte {11,13-15}
 <script lang="ts">
@@ -3502,7 +3500,7 @@ If you want that behavior, you can create a component with an effect to trigger 
 </script>
 
 {#if play}
-	<div transition:fade={options}>
+	<div transition:fade|global={options}>
 		{@render children?.()}
 	</div>
 {/if}
@@ -3520,7 +3518,13 @@ Now you can use the `<Fade>` component in your app:
 </Fade>
 ```
 
-You could create a more general `<Transition>` component that conditionally renders the type of transition you want like `<Transition type="fade">`.
+You can create a generic `<Transition>` component to conditionally render a transition, and use a prop to autoplay the transition:
+
+```svelte:example
+<Transition type="fade" play>
+	Boo! 👻
+</Transition>
+```
 
 ### Custom Transitions
 
