@@ -4282,7 +4282,7 @@ Svelte also provides a convenient way to make external APIs reactive, which we'r
 
 ## Reactive Events
 
-An external event is any event you can subscribe to and listen for changes. This is a more advanced topic, but I think it's useful to know whenever you're trying to make an external event-based system reactive in Svelte.
+This is a more advanced topic, but I think it's useful to know whenever you're trying to make an external event-based system reactive in Svelte — an external event is any event you can subscribe to and listen for changes.
 
 ### Web Storage API Example
 
@@ -4312,7 +4312,9 @@ export class Counter {
 }
 ```
 
-This can be made simpler using the [createSubscriber](https://svelte.dev/docs/svelte/svelte-reactivity#createSubscriber) function from Svelte. You only have to listen for the `storage` event on the `window` and run `update` when it changes to notify subscribers, so you don't even need to use state:
+This can be made simpler using the [createSubscriber](https://svelte.dev/docs/svelte/svelte-reactivity#createSubscriber) function from Svelte.
+
+Instead of using state, you only have to listen for the `storage` event on the `window` and run `update` when it changes to notify subscribers:
 
 ```ts:counter.svelte.ts {5,8-14,17-21,23-25}
 import { createSubscriber } from 'svelte/reactivity'
@@ -4393,7 +4395,7 @@ Let's say you have a GSAP animation timeline you want to be able to control:
 </style>
 ```
 
-Let's use `eventCallback` from GSAP to subscribe to updates and use an effect to update the playhead when we update `time`:
+Let's use `eventCallback` from GSAP to subscribe to updates and use an effect to update the playhead when `time` updates:
 
 ```svelte:App.svelte {9,14-16,18-20,31-33,35-37,48}
 <script lang="ts">
@@ -4533,9 +4535,7 @@ This can also be made simpler with `createSubscriber` and using the `update` fun
 
 <Example name="reactive-events" />
 
-This makes our code much simpler. 🧘
-
-You also don't need extra state to keep track of the time! Instead, we can just return, and set the current time for the timeline using the methods it provides, and easily do the cleanup. 🧹
+This makes our code much simpler! 🧘
 
 ## Special Elements
 
