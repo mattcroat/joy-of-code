@@ -718,7 +718,7 @@ You can derive state from other state using the `$derived` rune and it's going t
 
 <Example name="derived" />
 
-### Deriveds Update When They Change
+### Deriveds Only Update When They Change
 
 Derived values **only run when they're read** and are **lazy evaluted** which means they only update when they change, and **not** when their dependencies change to avoid unnecessary work.
 
@@ -744,7 +744,7 @@ Here even if `max` depends on `count`, it only updates when `max` updates:
 
 ### Derived Dependency Tracking
 
-You can pass a function with state to a derived without losing reactivity, because a signal only has to be read inside of an effect to be tracked:
+You can pass a function with state to a derived without losing reactivity:
 
 ```svelte:App.svelte {3,5-7}
 <script lang="ts">
@@ -778,7 +778,7 @@ function limit(count) {
 Not passing any arguments:
 
 ```ts:output {4}
-let disabled = derived(limit)
+let disabled = derived(limit())
 
 function limit() {
 	return get(count) > 4 // 📖
@@ -806,12 +806,12 @@ The `$derived` rune only accepts an expression by default, but you can use the `
 	})
 </script>
 
-<p>Total: {total}€</p>
+<p>Total: {total}</p>
 ```
 
 <Example name="derived-by" />
 
-Svelte recommends you keep deriveds free of side-effects. You can't update state inside of deriveds to protect you from unintended side-effects:
+Svelte recommends you keep deriveds free of side-effects and you can't update state inside of deriveds to protect you from unintended side-effects:
 
 ```svelte:App.svelte {5}
 <script lang="ts">
@@ -825,7 +825,7 @@ Svelte recommends you keep deriveds free of side-effects. You can't update state
 
 ### Destructuring From Deriveds
 
-Going back to a previous example, you can also use derived state to keep reactivity when using destructuring:
+Going back to the previous example, you can also use derived state to keep reactivity when using destructuring:
 
 ```svelte:App.svelte {8,11}
 <script lang="ts">
@@ -867,14 +867,16 @@ Here `count` is going to be logged when it updates, since it's read inside of th
 
 Values are only tracked if they're **read** — here if `condition` is `true`, then `condition` and `count` are going to be tracked, but if `condition` is false, then the effect only reruns when `condition` changes:
 
-```svelte:App.svelte {3,6-8}
+```svelte:App.svelte {3,7,9}
 <script lang="ts">
 	let count = $state(0)
 	let condition = $state(false)
 
 	$effect(() => {
+		// 👍️ tracked
 		if (condition) {
-			console.log(count) // 📖
+			// ⛔️ not tracked
+			console.log(count)
 		}
 	})
 </script>
@@ -887,7 +889,9 @@ Values are only tracked if they're **read** — here if `condition` is `true`, t
 	Use the <a href="https://svelte.dev/docs/svelte/$inspect" target="_blank">$inspect</a> rune instead of effects to log when a reactive value updates.
 </Card>
 
-You can return a function from the effect callback, which reruns when the effect **dependencies change**, or when the component is **removed** from the DOM:
+You can return a function from the effect callback, which reruns when the effect **dependencies change**, or when the component is **removed** from the DOM.
+
+Values that are read **asynchronously** like inside promises and timers are **not tracked** inside effects:
 
 ```svelte:App.svelte {9}
 <script lang="ts">
@@ -907,10 +911,6 @@ You can return a function from the effect callback, which reruns when the effect
 <button onclick={() => delay /= 2}>faster</button>
 ```
 
-<Card type="warning">
-	Values that are read <b>asynchronously</b> inside promises and timers are <b>not tracked</b> inside effects.
-</Card>
-
 Svelte provides an `untrack` function if you don't want state to be tracked:
 
 ```svelte:App.svelte {2,9}
@@ -921,7 +921,7 @@ Svelte provides an `untrack` function if you don't want state to be tracked:
 	let b = $state(0)
 
 	$effect(() => {
-		// ⛔️ only logs when `b` changes
+		// ⚠️ only logs when `b` changes
 		console.log(untrack(() => a) + b)
 	})
 </script>
@@ -978,7 +978,7 @@ There are exceptions to the rule! If you use `JSON.stringify` or `$state.snapsho
 
 ### When Not To Use Effects
 
-**Don't use effects to synchronize state**, because Svelte queues your effects to ensure they run in the correct order and runs them last.
+In general, you should **always** avoid effects and **never use effects to synchronize state**, because Svelte queues your effects to ensure they run in the correct order and runs them last.
 
 Using effects to synchronize state can cause unexpected behavior like state being out of sync:
 
@@ -1165,11 +1165,13 @@ In this example, we measure the elements before the DOM updates, and use `tick` 
 
 <Example name="gsap-flip" />
 
-`tick` is a useful lifecyle function that schedules a task to run in the next microtask when all the work is done, and before the DOM updates.
+<Card type="info">
+	The <code>tick</code> function is a lifecyle function that uses the <code>queueMicrotask</code> method to schedule a task to run in the next microtask when all the work is done, and before the DOM updates.
+</Card>
 
 ## State In Functions And Classes
 
-So far, we only used runes at the top-level of our components, but you can use state, deriveds, and effects inside functions and classes.
+So far, we only used runes at the top-level of the component, but you can use state, deriveds, and effects inside functions and classes.
 
 You can use runes in a JavaScript module by using the `.svelte.js` or `.svelte.ts` extension to tell Svelte that it's a special file, so it doesn't have to check every file for runes.
 
@@ -1219,17 +1221,11 @@ export function createCounter(initial: number) {
 }
 ```
 
-You could return a tuple instead to make the API nicer and destructure the read and write functions like `[count, setCount] = createCounter(0)`.
+You could return a tuple instead to make the API nicer and destructure the read and write functions like `let [count, setCount] = createCounter(0)`.
 
 As you can see, the syntax is not as nice compared to using accessors, since you have to use functions everywhere:
 
 ```svelte:App.svelte
-<script lang="ts">
-	import { createCounter } from './counter.svelte'
-
-	const counter = createCounter(0)
-</script>
-
 <!-- using functions -->
 <button onclick={() => counter.setCurrent(counter.count() + 1)}>
 	{counter.count()}
@@ -1253,7 +1249,7 @@ export function createCounter(initial: number) {
 }
 ```
 
-The reason this doesn't work is because **state is just a regular value**. It's **not** some magic reactive container. If you want something like that, you could return deeply reactive proxied state:
+The reason this doesn't work is because **state is just a regular value** and **not** some magic reactive container. If you want something like that, you could return deeply reactive proxied state:
 
 ```ts:counter.svelte.ts
 export function createCounter(initial: number) {
@@ -1267,12 +1263,12 @@ You can create a reactive container if you want:
 
 ```ts:counter.svelte.ts {2-5,9}
 // reactive container utility
-export function reactive<T>(value: T) {
+function reactive<T>(value: T) {
 	let state = $state<T>(value)
 	return state
 }
 
-export function createCounter(initial: number) {
+function createCounter(initial: number) {
 	// reactive container
 	let counter = reactive({ count: initial })
 	return { counter }
@@ -1302,7 +1298,7 @@ Svelte turns any class fields declared with state into private fields with match
 ```ts:counter.svelte.ts {4}
 export class Counter {
 	constructor(initial: number) {
-		// turned into `get` and `set` methods
+		// turned into `get`/`set` methods
 		this.count = $state(initial)
 	}
 
@@ -1493,7 +1489,7 @@ It doesn't matter if you use functions or classes, as long as you understand how
 
 I don't want to scare you from using effects. Honestly, it's not a big deal if you **sometimes** use effects when you shouldn't.
 
-You're not going to make your app worse by using effects — the actual problem is that it's easy to overcomplicate your code with effects, because it seems like the right thing to do.
+It's unlikely your app would be worse just by using effects — the actual problem is that it's easy to overcomplicate your code with effects, because it seems like the right thing to do.
 
 In this example, we're using the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) to read and write the `counter` value each time it updates. Hey, that's a side-effect! Using an effect seems resonable:
 
@@ -1520,13 +1516,11 @@ The problem only arises if you create the counter outside the component initiali
 export const counter = new Counter(0)
 ```
 
-Oops! Immediately, there's an error:
+Oops! Immediately, there's an `effect_orphan` error:
 
-> effect_orphan `$effect` can only be used inside an effect (e.g. during component initialisation).
+> `$effect` can only be used inside an effect (e.g. during component initialisation).
 
-In the previous section we learned that everything starts with a root effect, so Svelte can run the teardown logic for nested effects when the component is removed.
-
-In this case, you're trying to create an effect outside that root effect, which is not allowed.
+Your entire app is a root effect with other nested effects, so Svelte can run the teardown logic for them when the component is removed — in this case, you're trying to create an effect outside that root effect, so Svelte can't keep track of it.
 
 Svelte provides an advanced `$effect.root` rune to create your own root effect, but now you have to run the cleanup manually:
 
@@ -1669,7 +1663,7 @@ I believe that understanding how something works gives you greater enjoyment in 
 
 I mentioned how Svelte uses signals for reactivity, but so do many other frameworks like Angular, Solid, Vue, and Qwik. There's even a [proposal to add signals to JavaScript](https://github.com/tc39/proposal-signals) itself.
 
-So far we learned that assignments cause updates in Svelte. There's nothing special about `=` though! It just creates a function call to update the value:
+So far we learned that reassignments cause updates in Svelte. There's nothing special about `=` though! It just creates a function call to update the value:
 
 ```svelte:example {3}
 <script lang="ts">
@@ -1683,7 +1677,7 @@ So far we learned that assignments cause updates in Svelte. There's nothing spec
 
 A signal is just a container that holds a value and subscribers that are notified when that value updates, so it doesn't do anything on its own:
 
-```ts:example
+```ts:signals.ts
 function state(value) {
 	const signal = { value, subscribers: new Set() }
 	return signal
@@ -1698,11 +1692,9 @@ That's how Svelte updates the DOM by compiling your template into effects. This 
 template_effect(() => set_text(text, get(value)))
 ```
 
-Everything starts with a root effect and your component is a nested effect inside of it. This way, Svelte can keep track of effects for cleanup when it runs their teardown functions.
+Your entire app is a root effect with nested effects inside of it, so Svelte can keep track of your effects for cleanup. When the effect runs, it invokes the callback function and sets it as the active effect in some variable:
 
-When the effect runs, it invokes the callback function and sets it as the active effect in some variable:
-
-```ts:example
+```ts:signals.ts
 let activeEffect = null
 
 function effect(fn) {
@@ -1715,7 +1707,7 @@ function effect(fn) {
 
 The magic happens when you read a signal inside of an effect. When `value` is read, it adds the active effect as a subscriber:
 
-```ts:example
+```ts:signals.ts
 // the active effect
 let activeEffect = fn
 
@@ -1729,7 +1721,7 @@ function get(signal) {
 
 Later, when you write to `count` it notifies the subscribers and recreates the dependency graph when it reads the signal inside the effect:
 
-```ts:example
+```ts:signals.ts
 function set(signal, value) {
 	// update signal
 	signal.value = value
@@ -1737,6 +1729,8 @@ function set(signal, value) {
 	signal.subscribers.forEach(effect => effect())
 }
 ```
+
+You can just update state and it's going to update the UI anywhere where it's used. If you're familiar with the observer pattern, signals are observables on steroids and frameworks like Svelte do a lot of work under the hood to make them performant.
 
 Here's a counter example using our basic signals implementation inside a regular `.html` file:
 
@@ -3273,10 +3267,10 @@ So far, we used the regular script block for component logic that's unique for e
 ```svelte:Counter.svelte {3}
 <script lang="ts">
 	// unique for every instance
-	let uid = crypto.randomUUID()
+	let id = crypto.randomUUID()
 </script>
 
-<p>{uid}</p>
+<p>{id}</p>
 ```
 
 If you want to share code across component instances, you can use the `module` script block:
@@ -3284,10 +3278,10 @@ If you want to share code across component instances, you can use the `module` s
 ```svelte:Counter.svelte {1,3}
 <script lang="ts" module>
 	// same for every instance
-	let uid = crypto.randomUUID()
+	let id = crypto.randomUUID()
 </script>
 
-<p>{uid}</p>
+<p>{id}</p>
 ```
 
 <Card type="info">
@@ -3299,12 +3293,12 @@ You can also share state between instances:
 ```svelte:Counter.svelte {5}
 <script lang="ts" module>
 	// same for every instance
-	let uid = crypto.randomUUID()
+	let id = crypto.randomUUID()
 	// state
 	let count = $state(0)
 </script>
 
-<p>{uid}</p>
+<p>{id}</p>
 <button onclick={() => count++}>{count}</button>
 ```
 
@@ -3313,7 +3307,7 @@ You can control media playback across component instances, or export functions a
 ```svelte:Counter.svelte {7-9,11}
 <script lang="ts" module>
 	// outputs different random number for every instance
-	let uid = crypto.randomUUID()
+	let id = crypto.randomUUID()
 	// state
 	let count = $state(0)
 	// exporting functions
@@ -3324,7 +3318,7 @@ You can control media playback across component instances, or export functions a
 	export { icon }
 </script>
 
-<p>{uid}</p>
+<p>{id}</p>
 <button onclick={() => count++}>{count}</button>
 
 {#snippet icon(width = 24, height = 24)}
@@ -3479,7 +3473,9 @@ Transitions were global by default in older versions of Svelte, so keep that in 
 
 ### Autoplaying Transitions Aside
 
-If you're using SvelteKit, transitions might not play immediately since the first page load is server-side rendered. If you want that behavior, you can create a component with an effect to trigger the transition when it's added to the DOM:
+If you're using SvelteKit, transitions might not play immediately since the first page load is server-side rendered.
+
+If you want that behavior, you can create a component with an effect to trigger the transition when it's added to the DOM:
 
 ```svelte:Fade.svelte {11,13-15}
 <script lang="ts">
@@ -3571,7 +3567,7 @@ You can reverse the transition by using the `u` argument which is a transition p
 
 Alternatively, you can return a `tick` function when you need to use JavaScript for a transition and Svelte is going to use the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) API:
 
-```svelte:App.svelte {10-29,37}
+```svelte:App.svelte {10-29,35}
 <script lang="ts">
 	import { TransitionConfig } from 'svelte/transition'
 
@@ -3624,6 +3620,8 @@ You can define custom transitions in a separate file and import them in your app
 
 ### Coordinating Transitions Between Different Elements
 
+Sometimes you want to coordinate a transition between different elements when the DOM changes.
+
 In this example, we have a section for published posts and archived posts where you can archive and unarchive post:
 
 ```svelte:App.svelte
@@ -3656,7 +3654,7 @@ In this example, we have a section for published posts and archived posts where 
 	}
 </script>
 
-<div>
+<div class="posts">
 	<h2>Posts</h2>
 	<section>
 		{#each posts.filter((posts) => posts.published) as post (post)}
@@ -3674,7 +3672,7 @@ In this example, we have a section for published posts and archived posts where 
 	</section>
 </div>
 
-<div>
+<div class="archive">
 	<h2>Archive</h2>
 	<section>
 		{#each posts.filter((posts) => !posts.published) as post (post)}
@@ -3770,11 +3768,11 @@ const [send, receive] = crossfade({
 
 That's it! 😄
 
-These days there are web APIs to transition view changes like the [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API), but they're not supported in all browsers yet.
+These days there are web APIs to transition view changes like the [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API), but they can be limiting and might not be supported in all browsers.
 
 ### FLIP Animations
 
-In the previous example, we used the `crossfade` transition to coordinate transitions between different elements, but it's not perfect. When you move a post between being archived and published, all the items "wait" for the transition to end before they "snap" into their new position.
+In the previous example, we used the `crossfade` transition to coordinate transitions between different elements, but it's not perfect. When a post is archived or published, all the items "wait" for the transition to end before they "snap" into their new position.
 
 We can fix this by using Svelte's `animate:` directive and the `flip` function, which calculates the start and end position of an element and animates between them:
 
@@ -3806,13 +3804,13 @@ We can fix this by using Svelte's `animate:` directive and the `flip` function, 
 
 <Example name="crossfade-flip" />
 
-Isn't it magical? 🪄
+Isn't that magical? 🤩🪄
 
-[FLIP](https://aerotwist.com/blog/flip-your-animations/) is an animation technique for buttery smooth layout animations. In Svelte, you can only FLIP items inside of an `each` block. **It's not** reliant on `crossfade`, but they work great together.
+[FLIP](https://aerotwist.com/blog/flip-your-animations/) is an animation technique for buttery smooth layout animations. In Svelte, you can only FLIP items inside of an `each` block. It's **not** reliant on `crossfade`, but they work great together.
 
 You can make your own custom animation functions! Animations are triggered only when the contents of an `each` block change. You get a reference to the `node`, a `from` and `to` [DOMRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect#Properties) which has the size and position of the element before and after the change and `parameters`.
 
-Here's a simplified version of a custom FLIP animation I _yoinked_ from the Svelte source code:
+Here's a custom FLIP animation I _yoinked_ from the Svelte source code:
 
 ```ts:animations.ts
 interface Options {
@@ -3824,13 +3822,15 @@ function flip(
 	{ from, to }: { from: DOMRect; to: DOMRect },
 	options: Options = {}
 ) {
+	const { duration = 2000 } = options
+
 	const dx = from.left - to.left
 	const dy = from.top - to.top
 	const dsx = from.width / to.width
 	const dsy = from.height / to.height
 
 	return {
-		duration: options.duration || 2000,
+		duration,
 		css: (t: number, u: number) => {
 			const x = dx * u
 			const y = dy * u
@@ -4282,11 +4282,74 @@ Svelte also provides a convenient way to make external APIs reactive, which we'r
 
 ## Reactive Events
 
-This is a more advanced topic, but I think it's useful to know whenever you're trying to make an external event-based system reactive in Svelte.
+An external event is any event you can subscribe to and listen for changes. This is a more advanced topic, but I think it's useful to know whenever you're trying to make an external event-based system reactive in Svelte.
 
-An external event is any event you can subscribe to and listen for changes. For example, let's say I want to create a GSAP animation timeline that I can control with state.
+### Web Storage API Example
 
-Let's start by creating the GSAP timeline:
+Let's look at the counter example from before:
+
+```ts:counter.svelte.ts
+export class Counter {
+	#first = true
+
+	constructor(initial: number) {
+		this.#count = $state(initial)
+	}
+
+	get count() {
+		if (this.#first) {
+			const savedCount = localStorage.getItem('count')
+			if (savedCount) this.#count = parseInt(savedCount)
+			this.#first = false
+		}
+		return this.#count
+	}
+
+	set count(v: number) {
+		localStorage.setItem('count', v.toString())
+		this.#count = v
+	}
+}
+```
+
+This can be made simpler using the [createSubscriber](https://svelte.dev/docs/svelte/svelte-reactivity#createSubscriber) function from Svelte. You only have to listen for the `storage` event on the `window` and run `update` when it changes to notify subscribers, so you don't even need to use state:
+
+```ts:counter.svelte.ts {5,8-14,17-21,23-25}
+import { createSubscriber } from 'svelte/reactivity'
+import { on } from 'svelte/events'
+
+class Counter {
+	#subscribe
+
+	constructor(initial: number) {
+		this.#subscribe = createSubscriber((update) => {
+			if (!localStorage.getItem('count')) {
+				localStorage.setItem('count', initial.toString())
+			}
+			const off = on(window, 'storage', update)
+			return () => off()
+		})
+	}
+
+	get count() {
+		// makes it reactive when read inside an effect
+		this.#subscribe()
+		return parseInt(localStorage.getItem('count') ?? '0')
+	}
+
+	set count(v: number) {
+		localStorage.setItem('count', v.toString())
+	}
+}
+```
+
+The `createSubscriber` function uses an effect that tracks a value that increments when `update` runs, and reruns subscribers while keeping track of the active effects.
+
+In this example, we also use the `on` event from Svelte rather than `addEventListener`, because it returns a cleanup function that removes the handler for convenience.
+
+### GSAP Animation Timeline Example
+
+Let's say you have a GSAP animation timeline you want to be able to control:
 
 ```svelte:App.svelte
 <script lang="ts">
@@ -4330,9 +4393,7 @@ Let's start by creating the GSAP timeline:
 </style>
 ```
 
-The next step is to subscribe for updates using the `eventCallback` from GSAP.
-
-Here we're using an effect to synchronize with an external system, so when we update the time, it updates the playhead and causes `onUpdate` to fire:
+Let's use `eventCallback` from GSAP to subscribe to updates and use an effect to update the playhead when we update `time`:
 
 ```svelte:App.svelte {9,14-16,18-20,31-33,35-37,48}
 <script lang="ts">
@@ -4398,34 +4459,7 @@ Here we're using an effect to synchronize with an external system, so when we up
 </style>
 ```
 
-So what is the downside of this approach?
-
-If you create an effect outside of a Svelte component, you might run into an effect orphan error in the constructor:
-
-```ts:timeline.ts
-export const tl = new Timeline(...) // ⚠️ effect orphan
-```
-
-The reason this happens is because effects need to be created inside a parent root effect. This is how Svelte keeps track of effects, and runs the cleanup when the component is removed from the DOM.
-
-Previously, we learned that you can use the `$effect.root` rune and why you should avoid using it.
-
-We also learned how it makes more sense to create the effect when we read the value, but then we're creating an effect each time we read the value:
-
-```ts:example
-// ...
-get time() {
-	// oops 😅
-	$effect(() => {
-		this.#timeline.seek(this.#time)
-	})
-	return this.#time
-}
-```
-
-Thankfully, Svelte has a [createSubscriber](https://svelte.dev/docs/svelte/svelte-reactivity#createSubscriber) function you can use to create a subscriber to subscribe to.
-
-The `createSubscriber` function provides a callback, which gives you an `update` function. When `update` is invoked, it reruns the subscriber. In our example, the subscriber is the `time` method:
+This can also be made simpler with `createSubscriber` and using the `update` function to rerun the subscriber. In this example, the subscriber is the `time` method:
 
 ```svelte:App.svelte {10,14-17,28-32,34-36}
 <script lang="ts">
@@ -4501,70 +4535,7 @@ The `createSubscriber` function provides a callback, which gives you an `update`
 
 This makes our code much simpler. 🧘
 
-We also don't need extra state to keep track of the time! Instead, we can just return, and set the current time for the timeline using the methods it provides and easily do a cleanup. 🧹
-
-The `createSubscriber` function uses an effect that tracks a value that increments when `update` runs, and reruns subscribers while keeping track of the active effects.
-
-Do you remember the counter example from before, when we learned how you don't need effects, and you can do side-effects inside event handlers?
-
-```ts:counter.svelte.ts
-export class Counter {
-	#first = true
-
-	constructor(initial: number) {
-		this.#count = $state(initial)
-	}
-
-	get count() {
-		if (this.#first) {
-			const savedCount = localStorage.getItem('count')
-			if (savedCount) this.#count = parseInt(savedCount)
-			this.#first = false
-		}
-		return this.#count
-	}
-
-	set count(v: number) {
-		localStorage.setItem('count', v.toString())
-		this.#count = v
-	}
-}
-```
-
-This can also be made simpler by using `createSubscriber`.
-
-You only have to listen for the `storage` event on the `window` and run `update` when it changes to notify subscribers, so you don't even need to use state:
-
-```ts:counter.svelte.ts {5,8-14,17-21,23-25}
-import { createSubscriber } from 'svelte/reactivity'
-import { on } from 'svelte/events'
-
-class Counter {
-	#subscribe
-
-	constructor(initial: number) {
-		this.#subscribe = createSubscriber((update) => {
-			if (!localStorage.getItem('count')) {
-				localStorage.setItem('count', initial.toString())
-			}
-			const off = on(window, 'storage', update)
-			return () => off()
-		})
-	}
-
-	get count() {
-		// makes it reactive when read inside an effect
-		this.#subscribe()
-		return parseInt(localStorage.getItem('count') ?? '0')
-	}
-
-	set count(v: number) {
-		localStorage.setItem('count', v.toString())
-	}
-}
-```
-
-In this example, we also use the `on` event from Svelte rather than `addEventListener`, because it returns a cleanup function that removes the handler for convenience.
+You also don't need extra state to keep track of the time! Instead, we can just return, and set the current time for the timeline using the methods it provides, and easily do the cleanup. 🧹
 
 ## Special Elements
 
