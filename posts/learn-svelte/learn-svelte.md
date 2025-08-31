@@ -3951,7 +3951,7 @@ Here's a basic GSAP example for creating a tween animation:
 <script type="module">
 	import gsap from 'gsap'
 
-	gsap.to('.box', { rotation: 180, x: 100, duration: 1 })
+	gsap.to('.box', { rotation: 360, x: 200, duration: 2 })
 </script>
 
 <div class="box"></div>
@@ -3976,7 +3976,7 @@ For this reason, Svelte provides an `onMount` lifecycle function. The "lifecyle"
 	import gsap from 'gsap'
 
 	onMount(() => {
-		gsap.to('.box', { rotation: 180, x: 100, duration: 1 })
+		gsap.to('.box', { rotation: 360, x: 200, duration: 2 })
 	})
 </script>
 
@@ -4041,7 +4041,7 @@ You can also use effects to achieve the same thing:
 	let target: HTMLElement
 
 	$effect(() => {
-		tween = gsap.to(target, { rotation: 180, x: 100, duration: 1 })
+		tween = gsap.to(target, { rotation: 360, x: 200, duration: 2 })
 		return () => tween.kill()
 	})
 </script>
@@ -4114,7 +4114,7 @@ This gives us a generic animation component we can pass any element to, and bind
 	let animation: gsap.core.Tween
 </script>
 
-<Tween bind:tween={animation} vars={{ rotation: 180, x: 100, duration: 1 }}>
+<Tween bind:tween={animation} vars={{ rotation: 360, x: 200, duration: 2 }}>
 	<div class="box"></div>
 </Tween>
 
@@ -4138,23 +4138,26 @@ What if you had `onMount` for elements instead of components? You would have att
 
 Attachments are functions you can "attach" to regular elements that run when the element is added to the DOM, or when state inside of them updates:
 
-```svelte:example {2,8-15}
+```svelte:example {7-9}
 <script lang="ts">
-	let color = $state('orangered')
+	import gsap from 'gsap'
 </script>
 
-<canvas
-	width={200}
-	height={200}
-	{@attach (canvas) => {
-		const context = canvas.getContext('2d')!
-
-		$effect(() => {
-			context.fillStyle = color
-			context.fillRect(0, 0, canvas.width, canvas.height)
-		})
+<div
+	class="box"
+	{@attach (box) => {
+		gsap.to(box, { rotation: 360, x: 200, duration: 2 })
 	}}
-></canvas>
+></div>
+
+<style>
+	.box {
+		width: 100px;
+		height: 100px;
+		background-color: orangered;
+		border-radius: 1rem;
+	}
+</style>
 ```
 
 <Example name="attachment" />
@@ -4182,7 +4185,7 @@ In this example, the `tween` function accept the animations options and an optio
 
 <div
 	{@attach tween(
-		{ rotation: 180, x: 100, duration: 1 },
+		{ rotation: 360, x: 200, duration: 2 },
 		(tween) => animation = tween
 	)}
 	class="box"
@@ -4230,45 +4233,49 @@ In this example, we use the reactive version of the built-in `Map` object in Jav
 </script>
 
 <div class="container">
-	<div class="actions">
-		<input type="search" bind:value={name} placeholder="Enter Pokemon name" />
-		<button onclick={() => pokemon.clear()}>🧹 Clear</button>
+	<input type="search" bind:value={name} placeholder="Enter Pokemon name" />
+
+	<div class="pokemon">
+		{#each pokemon as [name, details]}
+			<details>
+				<summary>{name}</summary>
+				<div class="data">
+					<pre>{JSON.stringify(details, null, 2)}</pre>
+				</div>
+			</details>
+		{/each}
 	</div>
 
-	{#each pokemon as [name, details]}
-		<details>
-			<summary>{name}</summary>
-			<div class="details">
-				<pre>{JSON.stringify(details, null, 2)}</pre>
-			</div>
-		</details>
-	{/each}
+	<button onclick={() => pokemon.clear()}>🧹 Clear</button>
 </div>
 
 <style>
 	.container {
-		width: 800px;
-		height: 600px;
+		width: 400px;
+	}
 
-		.actions {
-			display: flex;
-			justify-content: center;
-			gap: 0.5rem;
-			margin-inline: auto;
-			margin-bottom: 2rem;
+	input,
+	button {
+		width: 100%;
+	}
 
-			input {
-				padding: 1rem;
-			}
-		}
+	input {
+		margin-bottom: 2rem;
+		padding: 1rem;
+		color: #000;
+		border-radius: 1rem;
+	}
 
-		summary {
-			text-transform: capitalize;
-		}
+	summary {
+		text-transform: capitalize;
+	}
 
-		.details {
-			max-height: 400px;
-			overflow: hidden;
+	details {
+		overflow: hidden;
+		margin-bottom: 2rem;
+
+		.data {
+			height: 200px;
 		}
 	}
 </style>
@@ -4535,7 +4542,7 @@ This can also be made simpler with `createSubscriber` and using the `update` fun
 
 <Example name="reactive-events" />
 
-This makes our code much simpler! 🧘
+Using `createSubscriber` can make your code much simpler, and the `update` function also gives you control **when** to run the update.
 
 ## Special Elements
 

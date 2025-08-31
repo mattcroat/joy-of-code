@@ -1,18 +1,15 @@
-<script lang="ts">
-	let color = $state('orangered')
-</script>
+<div
+	class="box"
+	{@attach (box) => {
+		window.gsap.to(box, { rotation: 360, x: 200, duration: 2 })
+	}}
+></div>
 
-<div class="container">
-	<canvas
-		width={200}
-		height={200}
-		{@attach (canvas) => {
-			const context = canvas.getContext('2d')!
-
-			$effect(() => {
-				context.fillStyle = color
-				context.fillRect(0, 0, canvas.width, canvas.height)
-			})
-		}}
-	></canvas>
-</div>
+<style>
+	.box {
+		width: 100px;
+		height: 100px;
+		background-color: orangered;
+		border-radius: 1rem;
+	}
+</style>

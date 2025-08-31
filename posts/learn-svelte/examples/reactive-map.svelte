@@ -26,19 +26,20 @@
 
 <div class="container">
 	<div style:width="400px">
-		<div class="actions">
-			<input type="search" bind:value={name} placeholder="Enter Pokemon name" />
-			<button onclick={() => pokemon.clear()}>🧹 Clear</button>
+		<input type="search" bind:value={name} placeholder="Enter Pokemon name" />
+
+		<div class="pokemon">
+			{#each pokemon as [name, details]}
+				<details>
+					<summary>{name}</summary>
+					<div class="data">
+						<pre>{JSON.stringify(details, null, 2)}</pre>
+					</div>
+				</details>
+			{/each}
 		</div>
 
-		{#each pokemon as [name, details]}
-			<details>
-				<summary>{name}</summary>
-				<div class="details">
-					<pre>{JSON.stringify(details, null, 2)}</pre>
-				</div>
-			</details>
-		{/each}
+		<button onclick={() => pokemon.clear()}>🧹 Clear</button>
 	</div>
 </div>
 
@@ -47,26 +48,28 @@
 		text-align: left;
 	}
 
-	.actions {
-		display: flex;
-		justify-content: center;
-		gap: 0.5rem;
-		margin-inline: auto;
-		margin-bottom: 2rem;
+	input,
+	button {
+		width: 100%;
+	}
 
-		input {
-			padding: 1rem;
-			color: #000;
-			border-radius: var(--rounded-20);
-		}
+	input {
+		margin-bottom: var(--spacing-32);
+		padding: var(--spacing-16);
+		color: #000;
+		border-radius: var(--rounded-20);
 	}
 
 	summary {
 		text-transform: capitalize;
 	}
 
-	.details {
-		max-height: 400px;
+	details {
 		overflow: hidden;
+		margin-bottom: var(--spacing-32);
+
+		.data {
+			height: 200px;
+		}
 	}
 </style>
