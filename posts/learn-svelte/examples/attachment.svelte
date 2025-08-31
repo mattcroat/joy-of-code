@@ -1,9 +1,11 @@
-<div
-	class="box"
-	{@attach (box) => {
-		window.gsap.to(box, { rotation: 360, x: 200, duration: 2 })
-	}}
-></div>
+<div class="container">
+	<div
+		class="box"
+		{@attach (box) => {
+			window.gsap.to(box, { rotation: 360, x: 200, duration: 2 })
+		}}
+	></div>
+</div>
 
 <style>
 	.box {
