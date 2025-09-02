@@ -3873,7 +3873,7 @@ The `Tween` class accepts a target value and options. You can use the `current` 
 		cx="200"
 		cy="200"
 		r={size.current}
-		fill="aqua"
+		fill="orangered"
 	/>
 </svg>
 ```
@@ -3904,7 +3904,7 @@ The `Spring` class has the same methods as `Tween`, but uses spring physics and 
 		cx="200"
 		cy="200"
 		r={size.current}
-		fill="aqua"
+		fill="orangered"
 	/>
 </svg>
 ```
@@ -3947,8 +3947,8 @@ Let's look at how we can use the popular [GSAP](https://gsap.com/) JavaScript an
 
 Here's a basic GSAP example for creating a tween animation:
 
-```html:index.html
-<script type="module">
+```svelte:App.svelte
+<script lang="ts">
 	import gsap from 'gsap'
 
 	gsap.to('.box', { rotation: 360, x: 200, duration: 2 })
@@ -3966,9 +3966,9 @@ Here's a basic GSAP example for creating a tween animation:
 </style>
 ```
 
-If you tried this example in Svelte, you would get a `GSAP target .box not found.` warning. This is because the `<script>` part runs first in Svelte, before the component is added to the DOM.
+If you try this example in Svelte, you get a `GSAP target .box not found.` warning. This is because the `<script>` part runs first in Svelte, before the component is added to the DOM.
 
-For this reason, Svelte provides an `onMount` lifecycle function. The "lifecyle" part refers to the life of the component, since it accepts a callback that runs when it's added and removed:
+For this reason, Svelte provides an `onMount` lifecycle function. The "lifecyle" part refers to the life of the component, since it runs when the component is added and removed if you return a cleanup function:
 
 ```svelte:App.svelte {2,5-7}
 <script lang="ts">
@@ -3996,7 +3996,7 @@ For this reason, Svelte provides an `onMount` lifecycle function. The "lifecyle"
 
 This works! That being said, it's not ideal that we query any element with a `.box` class on the page.
 
-Using Svelte, we should get a reference to the element instead. You can also return a function from `onMount`, or use the `onDestroy` lifecycle function for any cleanup when the component is removed:
+Using Svelte, we should use a reference to the element instead. You can also return a cleanup function from `onMount`, or use the `onDestroy` lifecycle function for any cleanup when the component is removed:
 
 ```svelte:App.svelte {2,5,10,13-16,19}
 <script lang="ts">
@@ -4071,7 +4071,7 @@ let value_you_dont_want_to_track = $state('')
 let value_you_want_to_track = $state('')
 
 $effect(() => {
-	untrack(() => value_you_dont_want_to_track)
+	untrack(() => value_you_dont_want_to_track) // 🙈 oops!
 	value_you_want_to_track
 })
 ```
@@ -4085,7 +4085,7 @@ Alright, our code works! Let's go a step further and create a `<Tween>` componen
 	import gsap from 'gsap'
 	import type { Snippet } from 'svelte'
 
-	type Props = {
+	interface Props = {
 		tween: gsap.core.Tween
 		vars: gsap.TweenVars
 		children: Snippet
@@ -4115,10 +4115,8 @@ This gives us a generic animation component we can pass any element to, and bind
 </script>
 
 <Tween bind:tween={animation} vars={{ rotation: 360, x: 200, duration: 2 }}>
-	<div class="box"></div>
+	<button onclick={() => animation.restart()} class="box">Play</button>
 </Tween>
-
-<button onclick={() => animation.restart()}>Play</button>
 
 <style>
 	.box {
@@ -4183,15 +4181,16 @@ In this example, the `tween` function accept the animations options and an optio
 	let animation: gsap.core.Tween
 </script>
 
-<div
+<button
+	class="box"
 	{@attach tween(
 		{ rotation: 360, x: 200, duration: 2 },
 		(tween) => animation = tween
 	)}
-	class="box"
-></div>
-
-<button onclick={() => animation.restart()}>Play</button>
+	onclick={() => animation.restart()}
+>
+	Play
+</button>
 ```
 
 The fun comes from picking the API shape you want that works in harmony with Svelte — for example, it would be cool to have different attachments like `{@attach tween.from(...)}` or `{@attach tween.to(...)}`.

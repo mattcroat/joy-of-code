@@ -15,13 +15,14 @@
 
 <div class="container">
 	<svg width="400" height="400" viewBox="0 0 400 400">
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<circle
 			{onmousedown}
 			{onmouseup}
 			cx="200"
 			cy="200"
 			r={size.current}
-			fill="aqua"
+			fill="orangered"
 		/>
 	</svg>
 </div>
