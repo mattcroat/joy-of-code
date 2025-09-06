@@ -5,6 +5,9 @@
 	}
 
 	let { id, title }: Props = $props()
+	console.log({ id, title })
 </script>
 
-<lite-youtube videoid={id} playlabel={title}></lite-youtube>
+<div>
+	<lite-youtube videoid={id} playlabel={title}></lite-youtube>
+</div>

@@ -1,6 +1,6 @@
 ---
-title: The Complete Svelte 5 Guide
-description: The ultimate guide for the most beloved JavaScript framework.
+title: The Complete Svelte 5 Course
+description: Beginner to advanced course for the most beloved JavaScript framework.
 slug: learn-svelte
 published: '2025-8-14'
 category: svelte
@@ -12,11 +12,13 @@ category: svelte
 	import Example from './examples/example-loader.svelte'
 </script>
 
+<YouTube id="B2MhkPtBWs4" title="Learn Svelte 5 Course" />
+
 ## Table of Contents
 
 ## What is Svelte?
 
-If we look at the definition from the [Svelte](https://svelte.dev/) website, it says:
+If we read the definition from the [Svelte](https://svelte.dev/) website, it says:
 
 > Svelte is a UI framework that uses a compiler to let you write breathtakingly concise components that do minimal work in the browser, using languages you already know — HTML, CSS and JavaScript.
 
@@ -4195,6 +4197,82 @@ In this example, the `tween` function accept the animations options and an optio
 
 The fun comes from picking the API shape you want that works in harmony with Svelte — for example, it would be cool to have different attachments like `{@attach tween.from(...)}` or `{@attach tween.to(...)}`.
 
+## Special Elements
+
+Svelte has special elements you can use at the top-level of your component like `<svelte:window>` to add event listeners on the `window` without having to do the cleanup yourself, `<svelte:head>` to add things to the `<head>` element for things like SEO, or `<svelte:element>` to dynamically render elements and more.
+
+This is how it would look like if you had to add and take care of event listeners on the `window` object, `<document>`, or `<body>` element yourself:
+
+```svelte:App.svelte {6-8,11-12}
+<script lang="ts">
+	import { onMount } from 'svelte'
+
+	let scrollY = $state(0)
+
+	function handleScroll() {
+		scrollY = window.scrollY
+	}
+
+	onMount(() => {
+		window.addEventListener('scroll', handleScroll)
+		return () => window.removeEventListener('scroll', handleScroll)
+	})
+</script>
+
+<div>{scrollY}px</div>
+
+<style>
+	:global(body) {
+		height: 8000px;
+	}
+
+	div {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		font-size: 8vw;
+		font-weight: 700;
+	}
+</style>
+```
+
+Thankfully, Svelte makes this easy with special elements like `<svelte:window>` and it does the cleanup for you:
+
+```svelte:App.svelte {9}
+<script lang="ts">
+	let scrollY = $state(0)
+
+	function handleScroll() {
+		scrollY = window.scrollY
+	}
+</script>
+
+<svelte:window onscroll={handleScroll} />
+
+<div>{scrollY}px</div>
+```
+
+There are also bindings for properties like the scroll position:
+
+```svelte:App.svelte {2,5}
+<script lang="ts">
+	let scrollY = $state(0)
+</script>
+
+<svelte:window bind:scrollY />
+```
+
+Svelte also exports reactive `window` values from `reactivity/window` so you don't even have to use a special element and bind the property to a value:
+
+```svelte:App.svelte
+<script lang="ts">
+	import { scrollY } from 'svelte/reactivity/window'
+</script>
+
+<div>{scrollY.current}px</div>
+```
+
 ## Reactive Data Structures And Utilities
 
 Svelte has reactive versions of JavaScript built-in objects like `Map`, `Set`, `Date`, and `URL`.
@@ -4370,10 +4448,10 @@ Let's say you have a GSAP animation timeline you want to be able to control:
 		#timeline = gsap.timeline()
 
 		constructor(tweens: Tween[]) {
-			this.populateTimeline(tweens)
+			this.createTimeline(tweens)
 		}
 
-		populateTimeline(tweens: Tween[]) {
+		createTimeline(tweens: Tween[]) {
 			onMount(() => {
 				tweens.forEach(([element, vars]) => {
 					this.#timeline.to(element, vars)
@@ -4415,7 +4493,7 @@ Let's use `eventCallback` from GSAP to subscribe to updates and use an effect to
 		#time = $state(0)
 
 		constructor(tweens: Tween[]) {
-			this.populateTimeline(tweens)
+			this.createTimeline(tweens)
 
 			$effect(() => {
 				this.#timeline.seek(this.#time)
@@ -4426,7 +4504,7 @@ Let's use `eventCallback` from GSAP to subscribe to updates and use an effect to
 			})
 		}
 
-		populateTimeline(tweens: Tween[]) {
+		createTimeline(tweens: Tween[]) {
 			onMount(() => {
 				tweens.forEach(([element, vars]) => {
 					this.#timeline.to(element, vars)
@@ -4482,14 +4560,14 @@ This can also be made simpler with `createSubscriber` and using the `update` fun
 		#subscribe
 
 		constructor(tweens: Tween[]) {
-			this.populateTimeline(tweens)
+			this.createTimeline(tweens)
 			this.#subscribe = createSubscriber((update) => {
 				this.#timeline.eventCallback('onUpdate', update)
 				return () => this.#timeline.eventCallback('onUpdate', null)
 			})
 		}
 
-		populateTimeline(tweens: Tween[]) {
+		createTimeline(tweens: Tween[]) {
 			onMount(() => {
 				tweens.forEach(([element, vars]) => {
 					this.#timeline.to(element, vars)
@@ -4542,82 +4620,6 @@ This can also be made simpler with `createSubscriber` and using the `update` fun
 <Example name="reactive-events" />
 
 Using `createSubscriber` can make your code much simpler, and the `update` function also gives you control **when** to run the update.
-
-## Special Elements
-
-Svelte has special elements you can use at the top-level of your component like `<svelte:window>` to add event listeners on the `window` without having to do the cleanup yourself, `<svelte:head>` to add things to the `<head>` element for things like SEO, or `<svelte:element>` to dynamically render elements and more.
-
-This is how it would look like if you had to add and take care of event listeners on the `window` object, `<document>`, or `<body>` element yourself:
-
-```svelte:App.svelte {6-8,11-12}
-<script lang="ts">
-	import { onMount } from 'svelte'
-
-	let scrollY = $state(0)
-
-	function handleScroll() {
-		scrollY = window.scrollY
-	}
-
-	onMount(() => {
-		window.addEventListener('scroll', handleScroll)
-		return () => window.removeEventListener('scroll', handleScroll)
-	})
-</script>
-
-<div>{scrollY}px</div>
-
-<style>
-	:global(body) {
-		height: 8000px;
-	}
-
-	div {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		translate: -50% -50%;
-		font-size: 8vw;
-		font-weight: 700;
-	}
-</style>
-```
-
-Thankfully, Svelte makes this easy with special elements like `<svelte:window>` and it does the cleanup for you:
-
-```svelte:App.svelte {9}
-<script lang="ts">
-	let scrollY = $state(0)
-
-	function handleScroll() {
-		scrollY = window.scrollY
-	}
-</script>
-
-<svelte:window onscroll={handleScroll} />
-
-<div>{scrollY}px</div>
-```
-
-There are also bindings for properties like the scroll position:
-
-```svelte:App.svelte {2,5}
-<script lang="ts">
-	let scrollY = $state(0)
-</script>
-
-<svelte:window bind:scrollY />
-```
-
-Svelte also exports reactive `window` values from `reactivity/window` so you don't even have to use a special element and bind the property to a value:
-
-```svelte:App.svelte
-<script lang="ts">
-	import { scrollY } from 'svelte/reactivity/window'
-</script>
-
-<div>{scrollY.current}px</div>
-```
 
 ## Legacy Svelte
 
