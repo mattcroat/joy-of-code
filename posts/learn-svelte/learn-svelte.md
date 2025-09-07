@@ -1229,7 +1229,7 @@ As you can see, the syntax is not as nice compared to using accessors, since you
 
 ```svelte:App.svelte
 <!-- using functions -->
-<button onclick={() => counter.setCurrent(counter.count() + 1)}>
+<button onclick={() => counter.setCount(counter.count() + 1)}>
 	{counter.count()}
 </button>
 
