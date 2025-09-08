@@ -29,7 +29,11 @@
 
 		.line {
 			display: inline-block;
-			padding-inline: var(--spacing-24);
+			padding-inline: var(--spacing-16);
+
+			@media (width > 640px) {
+				padding-inline: var(--spacing-24);
+			}
 		}
 
 		.highlighted {
@@ -42,18 +46,20 @@
 		}
 	}
 
-	code {
-		counter-reset: step;
-		counter-increment: step 0;
+	@media (width > 640px) {
+		code {
+			counter-reset: step;
+			counter-increment: step 0;
 
-		.line::before {
-			content: counter(step);
-			counter-increment: step;
-			display: inline-block;
-			width: 1rem;
-			margin-right: 4rem;
-			text-align: right;
-			opacity: 0.4;
+			.line::before {
+				content: counter(step);
+				counter-increment: step;
+				display: inline-block;
+				width: 1rem;
+				margin-right: 4rem;
+				text-align: right;
+				opacity: 0.4;
+			}
 		}
 	}
 
