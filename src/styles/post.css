@@ -1,15 +1,21 @@
 .prose {
+	--padding: 0px;
+
 	display: grid;
 	grid-template-columns:
 		1fr
 		[gutter-start]
-		40px
+		var(--padding)
 		[content-start]
 		minmax(0px, var(--post-txt-length))
 		[content-end]
-		40px
+		var(--padding)
 		[gutter-end]
 		1fr;
+
+	@media (width > 640px) {
+		--padding: 40px;
+	}
 
 	> * {
 		grid-column: content-start / content-end;
