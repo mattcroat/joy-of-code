@@ -5,7 +5,6 @@
 	}
 
 	let { id, title }: Props = $props()
-	console.log({ id, title })
 </script>
 
 <div>
