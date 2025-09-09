@@ -9,6 +9,7 @@ category: svelte
 <script lang="ts">
 	import Card from '$lib/components/card.svelte'
 	import YouTube from '$lib/components/youtube.svelte'
+	import Image from '$lib/components/image.svelte'
 	import Example from './examples/example-loader.svelte'
 </script>
 
@@ -1523,6 +1524,8 @@ Oops! Immediately, there's an `effect_orphan` error:
 > `$effect` can only be used inside an effect (e.g. during component initialisation).
 
 Your entire app is a root effect with other nested effects, so Svelte can run the teardown logic for them when the component is removed — in this case, you're trying to create an effect outside that root effect, so Svelte can't keep track of it.
+
+<Image src="effects.webp" alt="Tree diagram showing a root effect connected to other nested effects" />
 
 Svelte provides an advanced `$effect.root` rune to create your own root effect, but now you have to run the cleanup manually:
 
