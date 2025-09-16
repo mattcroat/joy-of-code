@@ -1,12 +1,15 @@
 <script lang="ts">
+	import { page } from '$app/state'
+
 	type Props = {
 		src: string
 		slug: string
 	}
 
-	let { src, slug }: Props = $props()
+	let { src }: Props = $props()
 
 	const images = `https://raw.githubusercontent.com/mattcroat/joy-of-code/main/posts`
+	const slug = page.params.slug
 </script>
 
 <!-- svelte-ignore a11y_media_has_caption -->
