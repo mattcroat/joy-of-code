@@ -18,9 +18,6 @@
 	let editUrl = $derived(
 		`${config.fileUrl}/${data.frontmatter.slug}/${data.frontmatter.slug}.md`
 	)
-	let image = $derived(
-		`${config.postImage}${encodeURIComponent(data.frontmatter.title)}.png`
-	)
 </script>
 
 <svelte:head>
@@ -29,7 +26,7 @@
 	<meta content={data.frontmatter.description} name="description" />
 
 	<meta content={data.frontmatter.title} property="og:title" />
-	<meta content={image} property="og:image" />
+	<meta content={config.postImage} property="og:image" />
 	<meta content={config.siteUrl} property="og:url" />
 	<meta content={data.frontmatter.description} property="og:description" />
 	<meta content={config.siteName} property="og:site_name" />
@@ -38,7 +35,7 @@
 	<meta content="summary_large_image" name="twitter:card" />
 	<meta content={data.frontmatter.title} name="twitter:title" />
 	<meta content={data.frontmatter.description} name="twitter:description" />
-	<meta content={image} name="twitter:image" />
+	<meta content={config.postImage} name="twitter:image" />
 </svelte:head>
 
 <Clipboard />

@@ -3,7 +3,7 @@ export const siteUrl = 'https://joyofcode.xyz/'
 export const siteTitle = 'Joy of Code'
 export const siteDescription = 'Web development and design-focused content'
 export const siteImage = `${siteUrl}social.png`
-export const postImage = 'https://social-share-images.vercel.app/'
+export const postImage = siteImage
 
 export const twitterHandle = '@joyofcodedev'
 export const twitter = 'https://x.com/joyofcodedev'
